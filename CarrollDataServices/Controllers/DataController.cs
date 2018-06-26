@@ -181,5 +181,28 @@ namespace Carroll.Data.Services.Controllers
 
 
         }
+
+        [ActionName("GetEquityPartners")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<KeyValuePair> GetEquityPartners()
+        {
+            var _partners = _service.GetRecords(EntityType.Partner);
+            List<KeyValuePair> _equityPartners = new List<KeyValuePair>();
+            foreach(EquityPartner _partner in _partners)
+            {
+                _equityPartners.Add(new KeyValuePair(_partner.EquityPartnerId.ToString(), _partner.PartnerName));
+            }
+
+            _partners = null;
+
+              //us
+
+
+
+            return _equityPartners;
+
+
+        }
     }
 }

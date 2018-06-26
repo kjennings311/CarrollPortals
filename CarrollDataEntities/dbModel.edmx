@@ -141,6 +141,7 @@
           <Property Name="IsOwned" Type="bit" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="EquityPartnerSiteCode" Type="varchar" MaxLength="10" />
+          <Property Name="EquityPartner" Type="uniqueidentifier" />
           <Property Name="VicePresident" Type="uniqueidentifier" />
           <Property Name="PropertyManager" Type="uniqueidentifier" />
           <Property Name="AssetManager1" Type="uniqueidentifier" />
@@ -470,6 +471,7 @@
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="Property" ToRole="UserInProperty" />
           <Property Name="ConstructionManager" Type="Guid" />
+          <Property Name="EquityPartner" Type="Guid" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -744,6 +746,7 @@
           <EntitySetMapping Name="Properties">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.Property">
               <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
                 <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

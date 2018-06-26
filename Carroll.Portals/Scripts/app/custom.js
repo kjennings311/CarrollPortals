@@ -857,6 +857,16 @@ function LoadProperties() {
                             { "data": "zipCode", "name": "zipCode", "autoWidth": false },
                             { "data": "phoneNumber", "name": "phoneNumber", "autoWidth": false },
                             { "data": "emailAddress", "name": "emailAddress", "autoWidth": false },
+                            {
+                                //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
+                                data: 'equityPartner',
+                                render: function (data, type, row) {
+                                    if (data != null) {
+                                        var result = JSON.parse(data);
+                                        return '<a href="/equitypartner?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                    } else return '';
+                                }
+                            },
                             //{ "data": "vicePresident", "name": "vicePresident", "autoWidth": false },
                             {
                                 //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
