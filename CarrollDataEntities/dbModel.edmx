@@ -1,0 +1,890 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Carroll.Data.Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="15" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="17" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ContactPhoto" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="EquityPartners">
+          <Key>
+            <PropertyRef Name="EquityPartnerId" />
+          </Key>
+          <Property Name="EquityPartnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PartnerName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="25" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="25" />
+          <Property Name="City" Type="varchar" MaxLength="25" />
+          <Property Name="State" Type="char" MaxLength="2" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+          <Property Name="ContactId" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormGeneralLiabilityClaims">
+          <Key>
+            <PropertyRef Name="GLLId" />
+          </Key>
+          <Property Name="GLLId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IncidentDateTime" Type="datetime" />
+          <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentDescription" Type="varchar(max)" />
+          <Property Name="AuthoritiesContacted" Type="bit" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+          <Property Name="ClaimantName" Type="varchar" MaxLength="50" />
+          <Property Name="ClaimantAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ClaimantPhone1" Type="varchar" MaxLength="17" />
+          <Property Name="ClaimantPhone2" Type="varchar" MaxLength="17" />
+          <Property Name="AnyInjuries" Type="bit" />
+          <Property Name="InjuryDescription" Type="varchar" MaxLength="250" />
+          <Property Name="WitnessPresent" Type="bit" />
+          <Property Name="WitnessName" Type="varchar" MaxLength="50" />
+          <Property Name="WitnessPhone" Type="varchar" MaxLength="17" />
+          <Property Name="WitnessAddress" Type="varchar" MaxLength="100" />
+          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="100" />
+          <Property Name="DescriptionOfDamage" Type="varchar" MaxLength="100" />
+          <Property Name="ReportedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DateReported" Type="datetime" />
+          <Property Name="ReportedPhone" Type="varchar" MaxLength="17" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="FormMoldDamageClaims">
+          <Key>
+            <PropertyRef Name="MDLId" />
+          </Key>
+          <Property Name="MDLId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DiscoveryDate" Type="datetime" />
+          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="SuspectedCause" Type="varchar(max)" />
+          <Property Name="AreBuildingMaterialsStillWet" Type="bit" />
+          <Property Name="IsStandingWaterPresent" Type="bit" />
+          <Property Name="HowMuchWater" Type="varchar" MaxLength="20" />
+          <Property Name="EstimatedSurfaceAreaAffected" Type="varchar" MaxLength="20" />
+          <Property Name="EstimatedTimeDamagePresent" Type="varchar" MaxLength="20" />
+          <Property Name="CorrectiveActionsTaken" Type="varchar" MaxLength="50" />
+          <Property Name="PlannedActions" Type="varchar" MaxLength="50" />
+          <Property Name="AdditionalComments" Type="varchar(max)" />
+          <Property Name="ReportedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DateReported" Type="datetime" />
+          <Property Name="ReportedPhone" Type="varchar" MaxLength="17" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="FormPropertyDamageClaims">
+          <Key>
+            <PropertyRef Name="PDLId" />
+          </Key>
+          <Property Name="PDLId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IncidentDateTime" Type="datetime" Nullable="false" />
+          <Property Name="WeatherConditions" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
+          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="100" />
+          <Property Name="IncidentDescription" Type="varchar(max)" />
+          <Property Name="EstimateOfDamage" Type="nvarchar" MaxLength="10" />
+          <Property Name="AuthoritiesContacted" Type="bit" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+          <Property Name="ReportNumber" Type="varchar" MaxLength="10" />
+          <Property Name="LossOfRevenues" Type="bit" />
+          <Property Name="WitnessPresent" Type="bit" />
+          <Property Name="WitnessName" Type="varchar" MaxLength="50" />
+          <Property Name="WitnessPhone" Type="varchar" MaxLength="17" />
+          <Property Name="WitnessAddress" Type="varchar" MaxLength="100" />
+          <Property Name="IncidentReportedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ReportedPhone" Type="varchar" MaxLength="17" />
+          <Property Name="DateReported" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="PropertyId" />
+          </Key>
+          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PropertyNumber" Type="int" />
+          <Property Name="LegalName" Type="varchar" MaxLength="50" />
+          <Property Name="Units" Type="int" />
+          <Property Name="TaxId" Type="varchar" MaxLength="50" />
+          <Property Name="PropertyAddress" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="char" MaxLength="2" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="17" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="AcquisitionDate" Type="datetime" />
+          <Property Name="DispositionDate" Type="datetime" />
+          <Property Name="IsOwned" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EquityPartnerSiteCode" Type="varchar" MaxLength="10" />
+          <Property Name="VicePresident" Type="uniqueidentifier" />
+          <Property Name="PropertyManager" Type="uniqueidentifier" />
+          <Property Name="AssetManager1" Type="uniqueidentifier" />
+          <Property Name="AssetManager2" Type="uniqueidentifier" />
+          <Property Name="RegionalManager" Type="uniqueidentifier" />
+          <Property Name="ConstructionManager" Type="uniqueidentifier" />
+          <Property Name="Field1" Type="varchar" MaxLength="50" />
+          <Property Name="Field2" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="SiteUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="20" />
+          <Property Name="LastName" Type="varchar" MaxLength="20" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="PropertyId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="UserPhoto" Type="varchar(max)" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="UserObjectId" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="UserInProperty">
+          <Key>
+            <PropertyRef Name="UserInPropertyId" />
+          </Key>
+          <Property Name="UserInPropertyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyId" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_UserInProperty_Properties">
+          <End Role="Properties" Type="Self.Properties" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInProperty" Type="Self.UserInProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="UserInProperty">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInProperty_SiteUsers">
+          <End Role="SiteUsers" Type="Self.SiteUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInProperty" Type="Self.UserInProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInProperty">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRole_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRole_SiteUsers">
+          <End Role="SiteUsers" Type="Self.SiteUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInRole" Type="Self.UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="CarrollDataEntitiesStoreContainer">
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquityPartners" EntityType="Self.EquityPartners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormGeneralLiabilityClaims" EntityType="Self.FormGeneralLiabilityClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormMoldDamageClaims" EntityType="Self.FormMoldDamageClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormPropertyDamageClaims" EntityType="Self.FormPropertyDamageClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteUsers" EntityType="Self.SiteUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInProperty" EntityType="Self.UserInProperty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInRole" EntityType="Self.UserInRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_UserInProperty_Properties" Association="Self.FK_UserInProperty_Properties">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="UserInProperty" EntitySet="UserInProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInProperty_SiteUsers" Association="Self.FK_UserInProperty_SiteUsers">
+            <End Role="SiteUsers" EntitySet="SiteUsers" />
+            <End Role="UserInProperty" EntitySet="UserInProperty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRole_Roles" Association="Self.FK_UserInRole_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserInRole" EntitySet="UserInRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRole_SiteUsers" Association="Self.FK_UserInRole_SiteUsers">
+            <End Role="SiteUsers" EntitySet="SiteUsers" />
+            <End Role="UserInRole" EntitySet="UserInRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Carroll.Data.Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CarrollFormsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="Carroll.Data.Entities.Contact" />
+          <EntitySet Name="EquityPartners" EntityType="Carroll.Data.Entities.EquityPartner" />
+          <EntitySet Name="FormGeneralLiabilityClaims" EntityType="Carroll.Data.Entities.FormGeneralLiabilityClaim" />
+          <EntitySet Name="FormMoldDamageClaims" EntityType="Carroll.Data.Entities.FormMoldDamageClaim" />
+          <EntitySet Name="FormPropertyDamageClaims" EntityType="Carroll.Data.Entities.FormPropertyDamageClaim" />
+          <EntitySet Name="Properties" EntityType="Carroll.Data.Entities.Property" />
+          <EntitySet Name="Roles" EntityType="Carroll.Data.Entities.Role" />
+          <EntitySet Name="SiteUsers" EntityType="Carroll.Data.Entities.SiteUser" />
+          <EntitySet Name="UserInProperties" EntityType="Carroll.Data.Entities.UserInProperty" />
+          <EntitySet Name="UserInRoles" EntityType="Carroll.Data.Entities.UserInRole" />
+          <AssociationSet Name="FK_UserInProperty_Properties" Association="Carroll.Data.Entities.FK_UserInProperty_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="UserInProperty" EntitySet="UserInProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRole_Roles" Association="Carroll.Data.Entities.FK_UserInRole_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserInRole" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInProperty_SiteUsers" Association="Carroll.Data.Entities.FK_UserInProperty_SiteUsers">
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+            <End Role="UserInProperty" EntitySet="UserInProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInRole_SiteUsers" Association="Carroll.Data.Entities.FK_UserInRole_SiteUsers">
+            <End Role="SiteUser" EntitySet="SiteUsers" />
+            <End Role="UserInRole" EntitySet="UserInRoles" />
+          </AssociationSet>
+          <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
+        </EntityContainer>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ContactPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="EquityPartner">
+          <Key>
+            <PropertyRef Name="EquityPartnerId" />
+          </Key>
+          <Property Name="EquityPartnerId" Type="Guid" Nullable="false" />
+          <Property Name="PartnerName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ContactId" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormGeneralLiabilityClaim">
+          <Key>
+            <PropertyRef Name="GLLId" />
+          </Key>
+          <Property Name="GLLId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyId" Type="Guid" Nullable="false" />
+          <Property Name="IncidentDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AuthoritiesContacted" Type="Boolean" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimantName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimantAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimantPhone1" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimantPhone2" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="AnyInjuries" Type="Boolean" />
+          <Property Name="InjuryDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="WitnessPresent" Type="Boolean" />
+          <Property Name="WitnessName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WitnessPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="WitnessAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfProperty" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfDamage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateReported" Type="DateTime" Precision="3" />
+          <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+        </EntityType>
+        <EntityType Name="FormMoldDamageClaim">
+          <Key>
+            <PropertyRef Name="MDLId" />
+          </Key>
+          <Property Name="MDLId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyId" Type="Guid" Nullable="false" />
+          <Property Name="DiscoveryDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SuspectedCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AreBuildingMaterialsStillWet" Type="Boolean" />
+          <Property Name="IsStandingWaterPresent" Type="Boolean" />
+          <Property Name="HowMuchWater" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedSurfaceAreaAffected" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedTimeDamagePresent" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CorrectiveActionsTaken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PlannedActions" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateReported" Type="DateTime" Precision="3" />
+          <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+        </EntityType>
+        <EntityType Name="FormPropertyDamageClaim">
+          <Key>
+            <PropertyRef Name="PDLId" />
+          </Key>
+          <Property Name="PDLId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyId" Type="Guid" Nullable="false" />
+          <Property Name="IncidentDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WeatherConditions" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfProperty" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EstimateOfDamage" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AuthoritiesContacted" Type="Boolean" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReportNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LossOfRevenues" Type="Boolean" />
+          <Property Name="WitnessPresent" Type="Boolean" />
+          <Property Name="WitnessName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WitnessPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="WitnessAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="DateReported" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyId" />
+          </Key>
+          <Property Name="PropertyId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyNumber" Type="Int32" />
+          <Property Name="LegalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AcquisitionDate" Type="DateTime" Precision="3" />
+          <Property Name="DispositionDate" Type="DateTime" Precision="3" />
+          <Property Name="IsOwned" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EquityPartnerSiteCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VicePresident" Type="Guid" />
+          <Property Name="PropertyManager" Type="Guid" />
+          <Property Name="AssetManager1" Type="Guid" />
+          <Property Name="AssetManager2" Type="Guid" />
+          <Property Name="RegionalManager" Type="Guid" />
+          <Property Name="Field1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Field2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="Property" ToRole="UserInProperty" />
+          <Property Name="ConstructionManager" Type="Guid" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="UserInRoles" Relationship="Carroll.Data.Entities.FK_UserInRole_Roles" FromRole="Role" ToRole="UserInRole" />
+        </EntityType>
+        <EntityType Name="SiteUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="PropertyId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="UserPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="UserObjectId" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_SiteUsers" FromRole="SiteUser" ToRole="UserInProperty" />
+          <NavigationProperty Name="UserInRoles" Relationship="Carroll.Data.Entities.FK_UserInRole_SiteUsers" FromRole="SiteUser" ToRole="UserInRole" />
+        </EntityType>
+        <EntityType Name="UserInProperty">
+          <Key>
+            <PropertyRef Name="UserInPropertyId" />
+          </Key>
+          <Property Name="UserInPropertyId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyId" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <NavigationProperty Name="Property" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="UserInProperty" ToRole="Property" />
+          <NavigationProperty Name="SiteUser" Relationship="Carroll.Data.Entities.FK_UserInProperty_SiteUsers" FromRole="UserInProperty" ToRole="SiteUser" />
+        </EntityType>
+        <EntityType Name="UserInRole">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <NavigationProperty Name="Role" Relationship="Carroll.Data.Entities.FK_UserInRole_Roles" FromRole="UserInRole" ToRole="Role" />
+          <NavigationProperty Name="SiteUser" Relationship="Carroll.Data.Entities.FK_UserInRole_SiteUsers" FromRole="UserInRole" ToRole="SiteUser" />
+        </EntityType>
+        <Association Name="FK_UserInProperty_Properties">
+          <End Type="Carroll.Data.Entities.Property" Role="Property" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Carroll.Data.Entities.UserInProperty" Role="UserInProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="UserInProperty">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRole_Roles">
+          <End Type="Carroll.Data.Entities.Role" Role="Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Carroll.Data.Entities.UserInRole" Role="UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInProperty_SiteUsers">
+          <End Type="Carroll.Data.Entities.SiteUser" Role="SiteUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Carroll.Data.Entities.UserInProperty" Role="UserInProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInProperty">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInRole_SiteUsers">
+          <End Type="Carroll.Data.Entities.SiteUser" Role="SiteUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Carroll.Data.Entities.UserInRole" Role="UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spProperties_Result">
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="LegalName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Units" Nullable="true" />
+          <Property Type="String" Name="TaxId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="AcquisitionDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DispositionDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsOwned" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="EquityPartnerSiteCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="VicePresident" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="AssetManager2" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="AssetManager1" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="RegionalManager" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="ConstructionManager" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="Field1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Field2" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarrollDataEntitiesStoreContainer" CdmEntityContainer="CarrollFormsEntities">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="ContactPhoto" ColumnName="ContactPhoto" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquityPartners">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.EquityPartner">
+              <MappingFragment StoreEntitySet="EquityPartners">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="PartnerName" ColumnName="PartnerName" />
+                <ScalarProperty Name="EquityPartnerId" ColumnName="EquityPartnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormGeneralLiabilityClaims">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.FormGeneralLiabilityClaim">
+              <MappingFragment StoreEntitySet="FormGeneralLiabilityClaims">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DescriptionOfDamage" ColumnName="DescriptionOfDamage" />
+                <ScalarProperty Name="DescriptionOfProperty" ColumnName="DescriptionOfProperty" />
+                <ScalarProperty Name="WitnessAddress" ColumnName="WitnessAddress" />
+                <ScalarProperty Name="WitnessPhone" ColumnName="WitnessPhone" />
+                <ScalarProperty Name="WitnessName" ColumnName="WitnessName" />
+                <ScalarProperty Name="WitnessPresent" ColumnName="WitnessPresent" />
+                <ScalarProperty Name="InjuryDescription" ColumnName="InjuryDescription" />
+                <ScalarProperty Name="AnyInjuries" ColumnName="AnyInjuries" />
+                <ScalarProperty Name="ClaimantPhone2" ColumnName="ClaimantPhone2" />
+                <ScalarProperty Name="ClaimantPhone1" ColumnName="ClaimantPhone1" />
+                <ScalarProperty Name="ClaimantAddress" ColumnName="ClaimantAddress" />
+                <ScalarProperty Name="ClaimantName" ColumnName="ClaimantName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="AuthoritiesContacted" ColumnName="AuthoritiesContacted" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="GLLId" ColumnName="GLLId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormMoldDamageClaims">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.FormMoldDamageClaim">
+              <MappingFragment StoreEntitySet="FormMoldDamageClaims">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="AdditionalComments" ColumnName="AdditionalComments" />
+                <ScalarProperty Name="PlannedActions" ColumnName="PlannedActions" />
+                <ScalarProperty Name="CorrectiveActionsTaken" ColumnName="CorrectiveActionsTaken" />
+                <ScalarProperty Name="EstimatedTimeDamagePresent" ColumnName="EstimatedTimeDamagePresent" />
+                <ScalarProperty Name="EstimatedSurfaceAreaAffected" ColumnName="EstimatedSurfaceAreaAffected" />
+                <ScalarProperty Name="HowMuchWater" ColumnName="HowMuchWater" />
+                <ScalarProperty Name="IsStandingWaterPresent" ColumnName="IsStandingWaterPresent" />
+                <ScalarProperty Name="AreBuildingMaterialsStillWet" ColumnName="AreBuildingMaterialsStillWet" />
+                <ScalarProperty Name="SuspectedCause" ColumnName="SuspectedCause" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="DiscoveryDate" ColumnName="DiscoveryDate" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="MDLId" ColumnName="MDLId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormPropertyDamageClaims">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.FormPropertyDamageClaim">
+              <MappingFragment StoreEntitySet="FormPropertyDamageClaims">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="IncidentReportedBy" ColumnName="IncidentReportedBy" />
+                <ScalarProperty Name="WitnessAddress" ColumnName="WitnessAddress" />
+                <ScalarProperty Name="WitnessPhone" ColumnName="WitnessPhone" />
+                <ScalarProperty Name="WitnessName" ColumnName="WitnessName" />
+                <ScalarProperty Name="WitnessPresent" ColumnName="WitnessPresent" />
+                <ScalarProperty Name="LossOfRevenues" ColumnName="LossOfRevenues" />
+                <ScalarProperty Name="ReportNumber" ColumnName="ReportNumber" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="AuthoritiesContacted" ColumnName="AuthoritiesContacted" />
+                <ScalarProperty Name="EstimateOfDamage" ColumnName="EstimateOfDamage" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="DescriptionOfProperty" ColumnName="DescriptionOfProperty" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="WeatherConditions" ColumnName="WeatherConditions" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PDLId" ColumnName="PDLId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.Property">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Field2" ColumnName="Field2" />
+                <ScalarProperty Name="Field1" ColumnName="Field1" />
+                <ScalarProperty Name="RegionalManager" ColumnName="RegionalManager" />
+                <ScalarProperty Name="AssetManager2" ColumnName="AssetManager2" />
+                <ScalarProperty Name="AssetManager1" ColumnName="AssetManager1" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
+                <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
+                <ScalarProperty Name="DispositionDate" ColumnName="DispositionDate" />
+                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteUsers">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.SiteUser">
+              <MappingFragment StoreEntitySet="SiteUsers">
+                <ScalarProperty Name="UserObjectId" ColumnName="UserObjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInProperties">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.UserInProperty">
+              <MappingFragment StoreEntitySet="UserInProperty">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserInPropertyId" ColumnName="UserInPropertyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInRoles">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.UserInRole">
+              <MappingFragment StoreEntitySet="UserInRole">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spProperties" FunctionName="Carroll.Data.Entities.Store.spProperties">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.spProperties_Result">
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
+                <ScalarProperty Name="DispositionDate" ColumnName="DispositionDate" />
+                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
+                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="AssetManager2" ColumnName="AssetManager2" />
+                <ScalarProperty Name="AssetManager1" ColumnName="AssetManager1" />
+                <ScalarProperty Name="RegionalManager" ColumnName="RegionalManager" />
+                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
+                <ScalarProperty Name="Field1" ColumnName="Field1" />
+                <ScalarProperty Name="Field2" ColumnName="Field2" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

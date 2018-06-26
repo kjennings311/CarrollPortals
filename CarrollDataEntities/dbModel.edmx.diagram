@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1001967d2bb841b888833d61ed522c31" Name="Diagram1">
+        <EntityTypeShape EntityType="Carroll.Data.Entities.Contact" Width="1.5" PointX="2.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.EquityPartner" Width="1.5" PointX="4.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.FormGeneralLiabilityClaim" Width="1.5" PointX="6.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.FormMoldDamageClaim" Width="1.5" PointX="8.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.FormPropertyDamageClaim" Width="1.5" PointX="8.75" PointY="8.625" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.Property" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.Role" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.SiteUser" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.UserInProperty" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.UserInRole" Width="1.5" PointX="6" PointY="4.625" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_UserInProperty_Properties" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_UserInRole_Roles" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_UserInProperty_SiteUsers" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_UserInRole_SiteUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
