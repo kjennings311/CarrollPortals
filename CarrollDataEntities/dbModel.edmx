@@ -169,19 +169,18 @@
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserEmail" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="20" />
           <Property Name="LastName" Type="varchar" MaxLength="20" />
           <Property Name="Phone" Type="varchar" MaxLength="20" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="PropertyId" Type="int" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="IsApproved" Type="bit" Nullable="false" />
           <Property Name="UserPhoto" Type="varchar(max)" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
-          <Property Name="UserObjectId" Type="varchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="UserInProperty">
           <Key>
@@ -216,20 +215,6 @@
             </Principal>
             <Dependent Role="UserInProperty">
               <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserInProperty_SiteUsers">
-          <End Role="SiteUsers" Type="Self.SiteUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserInProperty" Type="Self.UserInProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SiteUsers">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserInProperty">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -277,10 +262,6 @@
             <End Role="Properties" EntitySet="Properties" />
             <End Role="UserInProperty" EntitySet="UserInProperty" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserInProperty_SiteUsers" Association="Self.FK_UserInProperty_SiteUsers">
-            <End Role="SiteUsers" EntitySet="SiteUsers" />
-            <End Role="UserInProperty" EntitySet="UserInProperty" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserInRole_Roles" Association="Self.FK_UserInRole_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="UserInRole" EntitySet="UserInRole" />
@@ -302,7 +283,6 @@
           <EntitySet Name="FormPropertyDamageClaims" EntityType="Carroll.Data.Entities.FormPropertyDamageClaim" />
           <EntitySet Name="Properties" EntityType="Carroll.Data.Entities.Property" />
           <EntitySet Name="Roles" EntityType="Carroll.Data.Entities.Role" />
-          <EntitySet Name="SiteUsers" EntityType="Carroll.Data.Entities.SiteUser" />
           <EntitySet Name="UserInProperties" EntityType="Carroll.Data.Entities.UserInProperty" />
           <EntitySet Name="UserInRoles" EntityType="Carroll.Data.Entities.UserInRole" />
           <AssociationSet Name="FK_UserInProperty_Properties" Association="Carroll.Data.Entities.FK_UserInProperty_Properties">
@@ -313,15 +293,12 @@
             <End Role="Role" EntitySet="Roles" />
             <End Role="UserInRole" EntitySet="UserInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserInProperty_SiteUsers" Association="Carroll.Data.Entities.FK_UserInProperty_SiteUsers">
-            <End Role="SiteUser" EntitySet="SiteUsers" />
-            <End Role="UserInProperty" EntitySet="UserInProperties" />
-          </AssociationSet>
+          <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
+          <EntitySet Name="SiteUsers" EntityType="Carroll.Data.Entities.SiteUser" />
           <AssociationSet Name="FK_UserInRole_SiteUsers" Association="Carroll.Data.Entities.FK_UserInRole_SiteUsers">
             <End Role="SiteUser" EntitySet="SiteUsers" />
             <End Role="UserInRole" EntitySet="UserInRoles" />
           </AssociationSet>
-          <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -485,26 +462,6 @@
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="UserInRoles" Relationship="Carroll.Data.Entities.FK_UserInRole_Roles" FromRole="Role" ToRole="UserInRole" />
         </EntityType>
-        <EntityType Name="SiteUser">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="PropertyId" Type="Int32" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
-          <Property Name="UserPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="Guid" />
-          <Property Name="UserObjectId" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_SiteUsers" FromRole="SiteUser" ToRole="UserInProperty" />
-          <NavigationProperty Name="UserInRoles" Relationship="Carroll.Data.Entities.FK_UserInRole_SiteUsers" FromRole="SiteUser" ToRole="UserInRole" />
-        </EntityType>
         <EntityType Name="UserInProperty">
           <Key>
             <PropertyRef Name="UserInPropertyId" />
@@ -516,7 +473,6 @@
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <NavigationProperty Name="Property" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="UserInProperty" ToRole="Property" />
-          <NavigationProperty Name="SiteUser" Relationship="Carroll.Data.Entities.FK_UserInProperty_SiteUsers" FromRole="UserInProperty" ToRole="SiteUser" />
         </EntityType>
         <EntityType Name="UserInRole">
           <Key>
@@ -559,34 +515,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserInProperty_SiteUsers">
-          <End Type="Carroll.Data.Entities.SiteUser" Role="SiteUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Carroll.Data.Entities.UserInProperty" Role="UserInProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SiteUser">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserInProperty">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserInRole_SiteUsers">
-          <End Type="Carroll.Data.Entities.SiteUser" Role="SiteUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Carroll.Data.Entities.UserInRole" Role="UserInRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SiteUser">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserInRole">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="spProperties_Result">
           <Property Type="Guid" Name="PropertyId" Nullable="false" />
           <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
@@ -617,6 +545,38 @@
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
         </ComplexType>
+        <EntityType Name="SiteUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="UserPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="UserPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <NavigationProperty Name="UserInRoles" Relationship="Carroll.Data.Entities.FK_UserInRole_SiteUsers" FromRole="SiteUser" ToRole="UserInRole" />
+        </EntityType>
+        <Association Name="FK_UserInRole_SiteUsers">
+          <End Type="Carroll.Data.Entities.SiteUser" Role="SiteUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Carroll.Data.Entities.UserInRole" Role="UserInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SiteUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserInRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -790,25 +750,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SiteUsers">
-            <EntityTypeMapping TypeName="Carroll.Data.Entities.SiteUser">
-              <MappingFragment StoreEntitySet="SiteUsers">
-                <ScalarProperty Name="UserObjectId" ColumnName="UserObjectId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserInProperties">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.UserInProperty">
               <MappingFragment StoreEntitySet="UserInProperty">
@@ -867,6 +808,24 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="SiteUsers">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.SiteUser">
+              <MappingFragment StoreEntitySet="SiteUsers">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

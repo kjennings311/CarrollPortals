@@ -22,6 +22,5 @@ namespace Carroll.Data.Entities
         public Nullable<System.Guid> CreatedBy { get; set; }
     
         public virtual Property Property { get; set; }
-        public virtual SiteUser SiteUser { get; set; }
     }
 }

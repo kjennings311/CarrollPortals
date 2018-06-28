@@ -34,9 +34,9 @@ namespace Carroll.Data.Entities
         public virtual DbSet<FormPropertyDamageClaim> FormPropertyDamageClaims { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<SiteUser> SiteUsers { get; set; }
         public virtual DbSet<UserInProperty> UserInProperties { get; set; }
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
+        public virtual DbSet<SiteUser> SiteUsers { get; set; }
     
         public virtual ObjectResult<spProperties_Result> spProperties()
         {

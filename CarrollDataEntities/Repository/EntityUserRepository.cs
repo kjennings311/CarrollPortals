@@ -13,17 +13,18 @@ namespace Carroll.Data.Entities.Repository
 
         public bool AuthenticateUser(string User, string Pass)
         {
-            //using (CarrollFormsEntities _entities = DBEntity)
-            //{
-            //    User _matches = _entities.Users.Where(x => x.UserEmail == User && x.UserPassword.Equals(Pass,StringComparison.InvariantCulture) && x.IsActive==true).FirstOrDefault();
-            //    if (_matches != null) {
-            //        if (_matches.UserPassword == Pass) { _matches = null; return true; }
-            //        else { _matches = null; return false; }
-            //    }
-            //    else return false;
-            //   // return (_matches == 0) ? false : true;
-            //}
-            return true;
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                SiteUser _matches = _entities.SiteUsers.Where(x => x.UserEmail == User && x.UserPassword.Equals(Pass, StringComparison.InvariantCulture) && x.IsActive == true).FirstOrDefault();
+                if (_matches != null)
+                {
+                    if (_matches.UserPassword == Pass) { _matches = null; return true; }
+                    else { _matches = null; return false; }
+                }
+                else return false;
+                // return (_matches == 0) ? false : true;
+            }
+            
         }
 
         public List<UserInRole> GetUserRoles(Guid userid)

@@ -17,7 +17,6 @@ namespace Carroll.Data.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SiteUser()
         {
-            this.UserInProperties = new HashSet<UserInProperty>();
             this.UserInRoles = new HashSet<UserInRole>();
         }
     
@@ -27,16 +26,13 @@ namespace Carroll.Data.Entities
         public string LastName { get; set; }
         public string Phone { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<int> PropertyId { get; set; }
+        public string UserPassword { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public bool IsApproved { get; set; }
         public string UserPhoto { get; set; }
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
-        public string UserObjectId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInProperty> UserInProperties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
     }
