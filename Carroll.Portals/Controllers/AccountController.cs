@@ -9,20 +9,20 @@ namespace Carroll.Portals.Controllers
 {
     public class AccountController : Controller
     {
-        private IDataService _service;
-        private IValidationDictionary _modelState;
+        //private IDataService _service;
+        //private IValidationDictionary _modelState;
 
-        public AccountController()
-        {
-            _modelState = new ModelStateWrapper(this.ModelState);
-            _service = new DataService(_modelState, new EntityDataRepository());
+        //public AccountController()
+        //{
+        //    _modelState = new ModelStateWrapper(this.ModelState);
+        //    _service = new DataService(_modelState, new EntityDataRepository());
 
-        }
+        //}
 
-        public AccountController(IDataService service)
-        {
-            _service = service;
-        }
+        //public AccountController(IDataService service)
+        //{
+        //    _service = service;
+        //}
        
 
         [AllowAnonymous]
