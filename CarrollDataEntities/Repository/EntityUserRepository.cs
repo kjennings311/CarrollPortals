@@ -37,7 +37,28 @@ namespace Carroll.Data.Entities.Repository
                 return _userRoles;
             }
         }
- 
+
+        public string GetUserRoleName(Guid userid)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                string role = "";
+                // _entities.Configuration.ProxyCreationEnabled = false;
+                var _userRoles = _entities.UserInRoles.Where(x => x.UserId == userid).ToList();
+                foreach (var item in _userRoles)
+                {
+                    var res = (from tbl in _entities.Roles
+                                where tbl.RoleId == item.RoleId
+                                select tbl.RoleName).FirstOrDefault();
+                    if (role == "")
+                        role = res;
+                    else
+                        role = ", " + res;
+                }
+                return role;
+            }
+        }
+
 
         public List<SiteUser> GetAllUsers(string optionalSeachText = "")
         {

@@ -7,13 +7,13 @@
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <img src="~/img/corpLogo.png" />
-                            </span> @*<strong class="font-bold">David Williams</strong>
-                            </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>*@
-                        </span>
+                            </span> <strong class="font-bold"> @Model.UserName </strong>
+                            </span> <span class="text-muted text-xs block"> @Model.RoleType <b class="caret"></b></span>
+                        
                     </a>
-                    @*<ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="#">Logout</a></li>
-                    </ul>*@
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="~/Account/Logout">Logout</a></li>
+                    </ul>
                 </div>
                 <div class="logo-element">
 

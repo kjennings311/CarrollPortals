@@ -83,6 +83,10 @@ namespace Carroll.Data.Services.Controllers
         }
 
 
+        public bool AuthenticateUser(string User, string Password)
+        {
+            return _service.AuthenticateUser(User, Password);
+        }
 
 
         //[ActionName("GetTokenInputUser")]
