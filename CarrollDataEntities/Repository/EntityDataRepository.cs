@@ -34,6 +34,7 @@ namespace Carroll.Data.Entities.Repository
                         _entities.Database.ExecuteSqlCommand("DELETE FROM EQUITYPARTNERS WHERE EquityPartnerId={0} ", recordId);
                         break;
                     case EntityType.User:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM SiteUsers WHERE UserId={0} ", recordId);
                         break;
                     default:
                         break;
@@ -54,7 +55,6 @@ namespace Carroll.Data.Entities.Repository
                 _entities.Configuration.ProxyCreationEnabled = false;
                 Guid _recId = new Guid(recordId);
                 
-
                 switch (entityType)
                 {
 
@@ -147,11 +147,9 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
-
                             _entities.Entry(_dbcontact).CurrentValues.SetValues(_contact);
                             int i = _entities.SaveChanges();
                             return true;
-
                         }
                     #endregion
                     case EntityType.Partner:
@@ -182,6 +180,33 @@ namespace Carroll.Data.Entities.Repository
 
                         }
                     #endregion
+
+                    case EntityType.User:
+                        #region [ User ] 
+                        SiteUser _user = obj;
+                        var _dbuser = _entities.SiteUsers.Where(x => x.UserId == _user.UserId).FirstOrDefault();
+                        if (_dbuser == null)
+                        {
+                            if ((_user.UserId.ToString() == "00000000-0000-0000-0000-000000000000") || (_user.UserId == null))
+                            {
+                                _user.UserId = Guid.NewGuid();
+                            }
+                            _user.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.SiteUsers.Add(_user);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _entities.Entry(_dbuser).CurrentValues.SetValues(_user);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
                     default:
                         break;
                 }
@@ -196,7 +221,6 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-
                 _entities.Configuration.ProxyCreationEnabled = false;
                
                 switch (entityType)
@@ -218,8 +242,10 @@ namespace Carroll.Data.Entities.Repository
                         else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
                         #endregion
                     case EntityType.User:
-                      
-                        return null;
+                        #region [ User ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.SiteUsers.ToList();
+                        else return _entities.SiteUsers.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) ||  x.Phone.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText))).ToList();
+                    #endregion
                     default:
                         break;
                 }
@@ -243,7 +269,8 @@ namespace Carroll.Data.Entities.Repository
 
         public dynamic GetRuntimeClassInstance(string className)
         {
-
+            if (className == "User")
+                className = "SiteUser";
             var type = Type.GetType("Carroll.Data.Entities." + className);
             return Activator.CreateInstance(type);
 

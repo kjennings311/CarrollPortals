@@ -8,22 +8,20 @@
                             <span class="block m-t-xs">
                                 <img src="~/img/corpLogo.png" />
                             </span> <strong class="font-bold"> @Model.UserName </strong>
-                            </span> <span class="text-muted text-xs block"> @Model.RoleType <b class="caret"></b></span>
-                        
+                        </span> <span class="text-muted text-xs block"> @Model.RoleType <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="~/Account/Logout">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
-
                     <img src="~/img/LogoC.png" />
                 </div>
             </li>
             <li class="active">
                 <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Intranet Home</span></a>
             </li>
-            <li >
+            <li>
                 <a href="/Data/properties"><i class="fa fa-building"></i> <span class="nav-label">Properties</span></a>
             </li>
             <li>
@@ -32,32 +30,44 @@
             <li>
                 <a href="/Data/partners"><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
             </li>
-            <li >
+            <li>
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Forms</span></a>
 
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="#">Property Forms<span class="fa arrow"></span></a>
+                    <li>
+                        <a href="#">Property Forms<span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse">
                             <li><a href="form_basic.html">Property Damage Claim </a></li>
                             <li><a href="form_advanced.html">General Liability Claim</a></li>
                             <li><a href="form_wizard.htmm">Mold Damage Claim</a></li>
                         </ul>
-</li>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Users </span></a>
+
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <a href="~/User/Index">Manage Users </a>
+                        <a href="~/User/Index"> Add User To Role  </a>
+                        <a href="~/User/Index">Add User To Property </a>
+                    </li>
                 </ul>
             </li>
             @*<li>
-                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Property Forms</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li><a href="form_basic.html">Property Damage Claim </a></li>
-                    <li><a href="form_advanced.html">General Liability Claim</a></li>
-                    <li><a href="form_wizard.htmm">Mold Damage Claim</a></li>
-                  
-                </ul>
-            </li>*@
+            <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Property Forms</span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse">
+                <li><a href="form_basic.html">Property Damage Claim </a></li>
+                <li><a href="form_advanced.html">General Liability Claim</a></li>
+                <li><a href="form_wizard.htmm">Mold Damage Claim</a></li>
+
+            </ul>
+        </li>*@
             @*<li>
-                <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Properties</span></a>
-                
-            </li>*@
+            <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Properties</span></a>
+
+        </li>*@
         </ul>
 
     </div>
