@@ -183,6 +183,10 @@ namespace Carroll.Data.Entities.Repository
                         }
                     #endregion
                     default:
+                        // if we are here that means it must be a dynamic object.. Let's try to evaluate and insert..
+
+                        Type _objType = obj?.GetType();
+
                         break;
                 }
                 return true;

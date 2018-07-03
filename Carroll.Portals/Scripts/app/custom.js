@@ -9,6 +9,7 @@ $(document).ready(function () {
 function BindElements() {
     $form = $('.dynamicForm');
     $('.dynamicForm #savechanges').click(function () {
+        
         $('.success-message').hide();
         $('.failure-message').hide();
     //    if (!CheckFormErrors($form)) {
@@ -116,6 +117,7 @@ function BindElements() {
                             400: function (XMLHttpResponse, textStatus, errorThrown) {
                                 var _err = "<b>Please correct the following errors</b><ul>";
                                 try {
+                                    
                                     var $response = $.parseJSON(XMLHttpResponse.responseText);
 
                                     for (var i = 0, len = $response.length; i < len; i++) {

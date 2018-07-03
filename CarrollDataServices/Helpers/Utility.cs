@@ -172,7 +172,7 @@ namespace Carroll.Data.Services.Helpers
         {
             foreach (FormField _field in FormData)
             {
-                if ((_field.Required) && (string.IsNullOrEmpty(_field.FieldValue.Trim())))
+                if ((_field.Required) && (string.IsNullOrEmpty(_field.FieldValue)))
                 //          if("a" == "a")
                 {
                     _validationDictionary.AddError(_field.FieldName, string.Concat(_field.FieldLabel, " is required."));

@@ -8,7 +8,7 @@
             <li>
                 <a href="index.html">Home / Forms</a>
             </li>
-           
+
             <li class="active">
                 <strong>General Liability Claim</strong>
             </li>
@@ -27,7 +27,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>General Liability Claims Form</h5>
-              
+
             </div>
             <div class="ibox-content dynamicForm">
 
@@ -38,12 +38,12 @@
 </div>
 
 @if (ViewBag.ErrorMessage == "AuthorizationRequired")
-            {
+{
     <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
 
 }
 @if (ViewBag.ErrorMessage == "UnexpectedError")
-            {
+{
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
 
@@ -81,7 +81,7 @@
 
 
         $(document).ready(function () {
-            getForm('generalliability', ''); 
+            getForm('@Url.RequestContext.RouteData.Values["id"]', '');
         });
     </script>
 

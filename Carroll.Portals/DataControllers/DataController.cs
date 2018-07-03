@@ -18,6 +18,11 @@ namespace Carroll.Portals.Controllers
             return View(new BaseViewModel());
         }
 
+        public ActionResult Index(string id)
+        {
+            return View(new BaseViewModel());
+        }
+
         [ActionName("GeneralLiabilityClaim")]
         public ActionResult GeneralLiabilityClaim()
         {

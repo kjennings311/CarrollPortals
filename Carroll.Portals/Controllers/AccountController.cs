@@ -62,7 +62,7 @@ namespace Carroll.Portals.Controllers
 
                     // is a valid user, create cookie, create session variables
                     FormsAuthentication.SetAuthCookie(Login.UserName, true);
-
+                    
                     // Get User Credentials
                     SiteUser user = _userservice.GetUser(Login.UserName);
 

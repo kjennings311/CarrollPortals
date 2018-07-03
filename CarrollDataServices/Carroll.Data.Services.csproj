@@ -149,6 +149,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ModelXml\PropertyDamage.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ModelXml\partner.xml">
       <SubType>Designer</SubType>
     </Content>
