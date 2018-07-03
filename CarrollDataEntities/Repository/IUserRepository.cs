@@ -11,12 +11,12 @@ namespace Carroll.Data.Entities.Repository
     public interface IUserRepository
     {
         bool AuthenticateUser(string User, string Password);
-
-       
-
+        
         #region [ User Management ]
+
         List<SiteUser> GetAllUsers(string optionalSeachText = "");
         List<Role> GetAllRoles();
+        List<Property> GetAllProperties();
 
         //bool IsUserNameUnique(string UserName);
         #endregion

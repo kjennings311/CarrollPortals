@@ -34,7 +34,7 @@ namespace Carroll.Data.Services.Models.Users
         }
         
 
-        #region [ User Managment ]
+        #region [User Managment]
 
         public List<SiteUser> GetAllUsers(string optionalSeachText = "")
         {
@@ -44,6 +44,11 @@ namespace Carroll.Data.Services.Models.Users
         public List<Role> GetAllRoles()
         {
             return _repository.GetAllRoles();
+        }
+
+        public List<Property> GetAllProperties()
+        {
+            return _repository.GetAllProperties();
         }
 
 

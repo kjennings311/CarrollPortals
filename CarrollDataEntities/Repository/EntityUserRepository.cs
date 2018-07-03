@@ -38,6 +38,9 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+       
+
+
         public string GetUserRoleName(Guid userid)
         {
             using (CarrollFormsEntities _entities = DBEntity)
@@ -79,6 +82,18 @@ namespace Carroll.Data.Entities.Repository
                 var _roles = _entities.Roles.ToList();
 
                 return _roles;
+            }
+        }
+
+        public List<Property> GetAllProperties()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                // _entities.Configuration.ProxyCreationEnabled = false;
+                _entities.Configuration.ProxyCreationEnabled = false;
+                var _properties = _entities.Properties.ToList();
+
+                return _properties;
             }
         }
 

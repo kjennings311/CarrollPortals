@@ -18,7 +18,7 @@ namespace Carroll.Data.Services.Models.Users
         List<SiteUser> GetAllUsers(string optionalSeachText = "");
 
         List<Role> GetAllRoles();
-
+        List<Property> GetAllProperties();
 
         #endregion
 
