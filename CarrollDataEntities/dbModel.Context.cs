@@ -42,5 +42,15 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spProperties_Result>("spProperties");
         }
+    
+        public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetUserProperties_Result>("sp_GetUserProperties");
+        }
+    
+        public virtual ObjectResult<sp_GetUserRoles_Result> sp_GetUserRoles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetUserRoles_Result>("sp_GetUserRoles");
+        }
     }
 }

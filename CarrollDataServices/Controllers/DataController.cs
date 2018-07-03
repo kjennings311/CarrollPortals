@@ -45,6 +45,8 @@ namespace Carroll.Data.Services.Controllers
 
         //    return _service.GetAllUsers();
         //}
+
+
         //[ActionName("GetRecords")]
         //[HttpGet]
         //public string GetRecords(EntityType entityType)

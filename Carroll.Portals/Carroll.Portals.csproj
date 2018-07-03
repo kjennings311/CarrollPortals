@@ -180,6 +180,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
     <Compile Include="Helpers\AdminFilter.cs" />
     <Compile Include="Helpers\BaseModel.cs" />
@@ -814,6 +815,9 @@
     <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\UserRoles.cshtml" />
+    <Content Include="Views\User\UserProperties.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -107,6 +107,12 @@
     <Compile Include="spProperties_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_GetUserProperties_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_GetUserRoles_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserInProperty.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

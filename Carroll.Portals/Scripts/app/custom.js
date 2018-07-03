@@ -1,11 +1,35 @@
-﻿//var $BaseApiUrl = "http://localhost:1002/"; 
-var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿var $BaseApiUrl = "http://localhost:1002/"; 
+// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 //49786/";
 //Token and UserOject are global variables can be used here.
 $(document).ready(function () {
     
   
 });
+
+var imagebase64 = "";
+
+function encodeImageFileAsURL(element) {
+
+      var filesSelected = element.files;
+    if (filesSelected.length > 0) {
+        var fileToLoad = filesSelected[0];
+        var fileReader = new FileReader();
+        var srcData = "";
+        fileReader.onload = function (fileLoadedEvent) {
+             srcData= fileLoadedEvent.target.result; // <--- data: base64
+            console.log('src data' + srcData);
+            var newImage = document.createElement('img');
+            newImage.src = srcData;
+            imagebase64 = srcData;
+            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+        }
+        fileReader.readAsDataURL(fileToLoad);
+      
+        console.log("base vlaue is "+imagebase64)
+    }
+}
+
 function BindElements() {
     $form = $('.dynamicForm');
     $('.dynamicForm #savechanges').click(function () {
@@ -14,7 +38,49 @@ function BindElements() {
         $('.failure-message').hide();
     //    if (!CheckFormErrors($form)) {
             var $this = $(this);
-            var formUrl = "api/form/GenerateForm/" + $('.dynamicForm #savechanges').attr("formname");
+        var formUrl = "api/form/GenerateForm/" + $('.dynamicForm #savechanges').attr("formname");
+
+        // if form is user then check if user exists with email id or not
+
+        alert($('.dynamicForm #savechanges').attr("formname"));
+
+        if ($('.dynamicForm #savechanges').attr("formname") == "user") {
+
+       
+        $.ajax({
+            type: "GET",
+            url: $BaseApiUrl + "api/user/checkifuserexists/",
+            data:"id="+$("#UserEmail").val(),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                alert('success');
+              
+                if (data == true)
+                {
+                    alert('success insdie');
+                    var _err = "<b>Please correct the following errors</b><ul>";
+
+                    _err += "<li> User with given Email Already Exists, Please Use Another </li>";
+                    $form.find($this).closest('.form-group').addClass('has-error');
+                    $form.find('#failureMessage').html(_err);
+                    $form.find('.failure-message').show('slow');
+                    ScrollToElement($form.find('.failure-message'));
+                    setTimeout(ScrollToElement($form), 3000);
+
+                }
+                else
+                {
+                    return;
+                }
+               
+            }
+          
+            });
+        }
+
+
             //*****************************************************************************
             // Let's get the original form and then load values into original form to send back to server for validation
             $.ajax({
@@ -35,15 +101,32 @@ function BindElements() {
                         // Build the form elements here
                         switch ($fields[i]["fieldType"]) {
                             case "Text":
-                            case "Check":
+                            case "Password":                         
                             case "Select":                           
                             case "Person":    
                                 $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
                                 break;
-                            
+                            case "Check":
+                                if ($('#' + $fields[i]["fieldName"]).prop('checked'))
+                                {
+                                    $fields[i]["fieldValue"] = true;
+                                    console.log("check field value" + true);
+                                }
+                                else
+                                {
+                                    $fields[i]["fieldValue"] = false;
+                                }
+                                break;
+                            case "File":
+                               // console.log('before assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
+                                $fields[i]["fieldValue"] = imagebase64;
+
+                               // console.log('after assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
+                                break;
                             case "Hidden":
                                 // Let's populate Created and CreatedName'
                                 switch ($fields[i]["fieldName"].toLowerCase()) {
+                                
                                     case "createdby":
                                         // if there is already a value read it and load if empty load current user
                                         if ($('#' + $fields[i]["fieldName"]).val() != "") {
@@ -61,6 +144,8 @@ function BindElements() {
                                         }
                                         
                                         break;
+                                    case "UserPhoto":
+                                        $fields[i]["fieldValue"] = imagebase64;
                                     default:
                                         $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
                                         break;
@@ -101,7 +186,7 @@ function BindElements() {
                                     $form.find('.success-message').show('slow');
                                     ScrollToElement($form.find('.success-message'));
                                     // go back to previous screen after 5 seconds
-                                    setTimeout(location.reload(), 5000);
+                                  //  setTimeout(location.reload(), 5000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -113,7 +198,6 @@ function BindElements() {
                             500: function (data) {
                                 alert(data.responseText);
                             },
-
                             400: function (XMLHttpResponse, textStatus, errorThrown) {
                                 var _err = "<b>Please correct the following errors</b><ul>";
                                 try {
@@ -130,8 +214,6 @@ function BindElements() {
                                     $form.find('.failure-message').show('slow');
                                     ScrollToElement($form.find('.failure-message'));
                                     setTimeout(ScrollToElement($form), 3000);
-
-
                                 } catch (err) { alert(err.message); }
 
                             }
@@ -217,7 +299,9 @@ function BindElements() {
 //*********
     });
 }
-function getForm(FormName, RecordId) {
+
+function getForm(FormName, RecordId)
+{
     var formUrl = "";
     var TXT_ERROR = " <div class=\"alert alert-danger alert-dismissable failure-message\" style=\"display:none\"><div id=\"failureMessage\">there was an error!</div> </div>";
     var TXT_SUCCESS = "<div class=\"alert alert-success alert-dismissable success-message\" style=\"display:none\"><div id=\"successMessage\"></div> </div>";
@@ -225,8 +309,10 @@ function getForm(FormName, RecordId) {
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" {2}> <i></i> {0} </label></div></div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"  {2}> <i></i> {0} </label></div></div></div>';
     var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4}></div></div>';
     var $savebuttons = '  <div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
@@ -269,6 +355,20 @@ function getForm(FormName, RecordId) {
                         var $datamask = "";
                        
                         $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        break;
+                    case "Password":
+
+                        var $req = $fields[i]["required"];
+                        var $datamask = "";
+
+                        $FormElements += format($passbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        break;
+                    case "File":
+
+                        var $req = $fields[i]["required"];
+                        var $datamask = "";
+
+                        $FormElements += format($filebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         break;
                     case "Check":
                       //  var $req = $fields[i]["required"];
@@ -322,6 +422,7 @@ function getForm(FormName, RecordId) {
 function LoadOptions(fieldId, DataLoadUrl, value) {
     var options = "";
     var selected = "";
+    console.log(data);
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
         for (var i = 0; i < data.length - 1; i++){
             if (data[i]["key"] == value) selected = "selected=selected";
@@ -344,7 +445,8 @@ function ToggleAdd(formaname) {
    
 }
 
-function ToggleEdit(formname) {
+function ToggleEdit(formname)
+{
     var recordid = $('.btnEdit').attr("itemId");
     
     // these controls are in properties.aspx page
@@ -353,6 +455,7 @@ function ToggleEdit(formname) {
             if ($(this).is(":visible")) { getForm(formname, recordid); }
         });
     });
+
 }
 
 function LoadData(formName) {
@@ -474,8 +577,10 @@ function HandleRowClick(obj) {
         $('.btnEdit').removeAttr("disabled");
         $('.btnEdit').attr("itemId", $this.attr("id"));
         // bind button events we can lookup item id on button attribute
-        $('.btnDelete').unbind('click').bind('click', function () {
-            if (confirm("Are you sure you want to delete?")) {
+        $('.btnDelete').unbind('click').bind('click', function ()
+        {
+            if (confirm("Are you sure you want to delete?"))
+            {
                 var idToDelete = $(this).attr("itemId");
                 var ItemType = $(this).attr("itemType");
              
@@ -679,7 +784,6 @@ function LoadPartners() {
                             { extend: 'csv' },
                             { extend: 'excel' },
                             { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
-
                             {
                                 extend: 'print',
                                 customize: function (win) {
@@ -965,6 +1069,205 @@ function LoadProperties() {
 
                     //  $('.ibox').children('.ibox-content').toggleClass('sk-loading');
 
+                }
+            });
+        }
+    );
+}
+
+// called from Users page
+function LoadUsers() {
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecords?entitytype=User",
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+
+                },
+                success: function (data) {
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: data,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here
+                            $(row).attr('id', data["userId"]);
+                            $(row).attr('itemType', "User");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+
+                        ],
+
+                        columns: [
+                            //{
+                            //    "targets": -1,
+                            //    "data": null,
+                            //    "sortable": false,
+                            //    "defaultContent": "<button>Click!</button>"
+                            //},
+                            {
+                                render: function (data, type, row, meta)
+                                {
+                                    return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                                }
+                            },
+                            { "data": "userEmail", "name": "userEmail", "autoWidth": false },
+                            { "data": "firstName", "name": "firstName", "autoWidth": false },
+                            { "data": "lastName", "name": "lastName", "autoWidth": false },
+                            { "data": "phone", "name": "phone", "autoWidth": false },
+                            {
+                                "data": "userPhoto", render: function (data, type, row, meta) {
+                                    return '<img src = "'+ data +'" width = "50px" height = "50px" > ';
+                                }
+                        , "name": "userPhoto", "autoWidth": false },
+                            { "data": "isActive", "name": "isActive", "autoWidth": false },
+                            { "data": "isApproved", "name": "isApproved", "autoWidth": false }]
+                    }).columns.adjust();
+                }
+            });
+        }
+    );
+}
+
+
+// called from User Role page
+function LoadUserRoles() {
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecords?entitytype=UserInRole",
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+
+                },
+                success: function (data) {
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: data,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here
+                            $(row).attr('id', data["userRoleId"]);
+                            $(row).attr('itemType', "UserInRole");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+
+                        ],
+
+                        columns: [
+                            //{
+                            //    "targets": -1,
+                            //    "data": null,
+                            //    "sortable": false,
+                            //    "defaultContent": "<button>Click!</button>"
+                            //},
+                            {
+                                render: function (data, type, row, meta) {
+                                    return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                                }
+                            },
+                            { "data": "userEmail", "name": "userEmail", "autoWidth": false },
+                            { "data": "userName", "name": "userName", "autoWidth": false },
+                            { "data": "roleName", "name": "lastName", "autoWidth": false }
+                         ]
+                    }).columns.adjust();
                 }
             });
         }

@@ -14,7 +14,8 @@ namespace Carroll.Data.Entities
         Partner=2,
         User=3,
         Role=4,
-        GeneralLiability
+        UserInRole = 5,
+        UserInProperty = 6           
 
     }
 }

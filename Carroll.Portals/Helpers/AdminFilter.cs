@@ -13,39 +13,10 @@ namespace Carroll.Portals.Helpers
         {
             base.OnActionExecuting(filterContext);
             HttpContextBase ctx = filterContext.HttpContext;
-            if (ctx.Session["Vm_UserId"] == null)
-            {
-                if (filterContext.HttpContext.Request.IsAjaxRequest())
-                {
-                    filterContext.HttpContext.Response.StatusCode = 401;
-                    filterContext.Result = new JsonResult
-                    {
-                        Data = new
-                        {
-                            // obviously here you could include whatever information you want about the exception
-                            // for example if you have some custom exceptions you could test
-                            // the type of the actual exception and extract additional data
-                            // For the sake of simplicity let's suppose that we want to
-                            // send only the exception message to the client
-                            ErrorId = 401,
-                            errorMessage = "Session Expired. Plz Login Again"
-                        },
-                        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                    };
-
-                }
-                else
-                {
-                    FormsAuthentication.SignOut();
-                    filterContext.Result = new RedirectResult("/Account/Login?returnUrl="+filterContext.HttpContext.Request.RawUrl);
-                }
-
-            }
-            else
-                if (!(filterContext.HttpContext.Session["Vm_RoleName"].ToString() == "Administrators" || filterContext.HttpContext.Session["Vm_RoleName"].ToString() == "Sales" || filterContext.HttpContext.Session["Vm_RoleName"].ToString() == "Sales Manager" || filterContext.HttpContext.Session["Vm_RoleName"].ToString() == "Inventory" || filterContext.HttpContext.Session["Vm_RoleName"].ToString() == "Accounts" || filterContext.HttpContext.Session["Vm_RoleName"].ToString() == "Purchaser"))
+           
+            if (!(filterContext.HttpContext.Session["Carroll_RoleName"].ToString().Contains("Administrator")))
             {
                 filterContext.Result = new ContentResult() { Content = "UnAuthorised Access to Specified Resource" };
-
             }
         }
 

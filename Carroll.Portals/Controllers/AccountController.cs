@@ -17,9 +17,7 @@ namespace Carroll.Portals.Controllers
 {
     public class AccountController : Controller
     {
-        //private IDataService _service;
-        //private IValidationDictionary _modelState;
-
+      
         private EntityUserRepository _userservice;
 
         public AccountController()
@@ -28,15 +26,6 @@ namespace Carroll.Portals.Controllers
 
         }
 
-        //public AccountController(IDataService service)
-        //{
-        //    _service = service;
-        //}
-
-        //public AccountController(EntityUserRepository userservice)
-        //{
-        //    _userservice = userservice;
-        //}
 
         [AllowAnonymous]
         [HttpGet]

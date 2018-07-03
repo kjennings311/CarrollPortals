@@ -20,7 +20,7 @@ using System.Web.Http.Cors;
 namespace Carroll.Data.Services.Controllers
 {
     
-    [Authorize]
+  //  [Authorize]
     public class UserController : ApiController
     {
         private IUserService _service;
@@ -41,15 +41,57 @@ namespace Carroll.Data.Services.Controllers
         [CustomActionFilter]
         [ActionName("GetUsers")]
         public List<SiteUser> GetUsers()
-        {
-            
+        {            
                 return _service.GetAllUsers();           
         }
-        
-        [ActionName("CheckIfUserExists")]
+
+
+        [CustomActionFilter]
+        [ActionName("GetRolesForSelect")]
+        public List<KeyValuePair> GetRolesForSelect()
+        {
+            List<KeyValuePair> _roles = new List<KeyValuePair>();
+            //us
+
+            foreach (var item in _service.GetAllRoles())
+            {
+                _roles.Add(new KeyValuePair(item.RoleId.ToString(), item.RoleName.ToString()));
+            }
+            return _roles;
+        }
+
+        [CustomActionFilter]
+        [ActionName("GetUsersForSelect")]
+        public List<KeyValuePair> GetUsersForSelect()
+        {
+            List<KeyValuePair> _users = new List<KeyValuePair>();
+            //us
+
+            foreach (var item in _service.GetAllUsers())
+            {
+                _users.Add(new KeyValuePair(item.UserId.ToString(), item.UserEmail+"( "+item.FirstName+" "+item.LastName+" )"));
+            }
+            return _users;
+          
+        }
+
+
+        [CustomActionFilter]
+        [ActionName("GetRoles")]
+        public List<Carroll.Data.Entities.Role> GetRoles()
+        {
+            return _service.GetAllRoles();
+        }
+
+
+       
+
+        [HttpGet]        
+        //[ActionName("CheckIfUserExists")]
         public bool CheckIfUserExists(string id)
         {
-            return false;
+           return _service.CheckIfUserExists(id);
+            
         }
 
         [HttpPost]

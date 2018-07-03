@@ -38,7 +38,9 @@ namespace Carroll.Data.Services.Models
         Person,
         Radio,
         LongText,
-        Hidden
+        Hidden,
+        Password,
+        File
     }
     public enum FieldValidationTypes
     {
@@ -53,7 +55,8 @@ namespace Carroll.Data.Services.Models
         Hyperlink,
         None,
         Contact,
-        TaxId
+        TaxId,
+        Password
 
         
 

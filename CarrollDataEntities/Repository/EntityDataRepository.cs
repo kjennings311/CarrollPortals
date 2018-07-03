@@ -34,6 +34,13 @@ namespace Carroll.Data.Entities.Repository
                         _entities.Database.ExecuteSqlCommand("DELETE FROM EQUITYPARTNERS WHERE EquityPartnerId={0} ", recordId);
                         break;
                     case EntityType.User:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM SiteUsers WHERE UserId={0} ", recordId);
+                        break;
+                    case EntityType.UserInRole:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM UserInRole WHERE UserRoleId={0} ", recordId);
+                        break;
+                    case EntityType.UserInProperty:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM UserInProperty WHERE UserInPropertyId={0} ", recordId);
                         break;
                     default:
                         break;
@@ -54,7 +61,6 @@ namespace Carroll.Data.Entities.Repository
                 _entities.Configuration.ProxyCreationEnabled = false;
                 Guid _recId = new Guid(recordId);
                 
-
                 switch (entityType)
                 {
 
@@ -147,11 +153,9 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
-
                             _entities.Entry(_dbcontact).CurrentValues.SetValues(_contact);
                             int i = _entities.SaveChanges();
                             return true;
-
                         }
                     #endregion
                     case EntityType.Partner:
@@ -182,6 +186,90 @@ namespace Carroll.Data.Entities.Repository
 
                         }
                     #endregion
+
+                    case EntityType.User:
+                        #region [ User ] 
+                        
+                        SiteUser _user = obj;
+                        var _dbuser = _entities.UserInRoles.Where(x => x.UserId == _user.UserId).FirstOrDefault();
+                        if (_dbuser == null)
+                        {
+                            if ((_user.UserId.ToString() == "00000000-0000-0000-0000-000000000000") || (_user.UserId == null))
+                            {
+                                _user.UserId = Guid.NewGuid();
+                            }
+                            _user.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.SiteUsers.Add(_user);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _entities.Entry(_dbuser).CurrentValues.SetValues(_user);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
+
+                    case EntityType.UserInRole:
+                        #region [ User Roles ] 
+
+                        UserInRole _userrole = obj;
+                        var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _userrole.UserRoleId).FirstOrDefault();
+                        if (_dbuserinrole == null)
+                        {
+                            if ((_userrole.UserRoleId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userrole.UserRoleId == null))
+                            {
+                                _userrole.UserRoleId = Guid.NewGuid();
+                            }
+                            _userrole.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.UserInRoles.Add(_userrole);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _entities.Entry(_dbuserinrole).CurrentValues.SetValues(_userrole);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
+
+                    case EntityType.UserInProperty:
+                        #region [ User Property ] 
+
+                        UserInProperty _userProp = obj;
+                        var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _userProp.UserInPropertyId).FirstOrDefault();
+                        if (_dbuserproperty == null)
+                        {
+                            if ((_userProp.UserInPropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userProp.UserInPropertyId == null))
+                            {
+                                _userProp.UserInPropertyId = Guid.NewGuid();
+                            }
+                            _userProp.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.UserInProperties.Add(_userProp);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _entities.Entry(_dbuserproperty).CurrentValues.SetValues(_userProp);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
                     default:
                         // if we are here that means it must be a dynamic object.. Let's try to evaluate and insert..
 
@@ -200,7 +288,6 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-
                 _entities.Configuration.ProxyCreationEnabled = false;
                
                 switch (entityType)
@@ -220,10 +307,23 @@ namespace Carroll.Data.Entities.Repository
                         #region
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.EquityPartners.ToList();
                         else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
-                        #endregion
+                    #endregion
+                    case EntityType.UserInRole:
+                        #region [ User ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.sp_GetUserRoles().ToList();
+                        else return _entities.sp_GetUserRoles().Where(x => x.userName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText) || x.RoleName.Contains(optionalSeachText)).ToList();
+                    #endregion
+                    case EntityType.UserInProperty:
+                        #region [ User ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.sp_GetUserProperties().ToList();
+                        else return _entities.sp_GetUserProperties().Where(x => x.userName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText) || x.PropertyName.Contains(optionalSeachText) || x.PropertyAddress.Contains(optionalSeachText) || x.City.Contains(optionalSeachText)).ToList();
+                    #endregion
                     case EntityType.User:
-                      
-                        return null;
+                        #region [ User ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.SiteUsers.ToList();
+                        else return _entities.SiteUsers.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) ||  x.Phone.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText))).ToList();
+                    #endregion
+                
                     default:
                         break;
                 }
@@ -247,6 +347,8 @@ namespace Carroll.Data.Entities.Repository
 
         public dynamic GetRuntimeClassInstance(string className)
         {
+            if (className == "User")
+                className = "SiteUser";
 
             var type = Type.GetType("Carroll.Data.Entities." + className);
             return Activator.CreateInstance(type);

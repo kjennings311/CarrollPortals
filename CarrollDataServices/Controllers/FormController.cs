@@ -72,7 +72,8 @@ namespace Carroll.Data.Services.Controllers
 
                 return _form;
             }
-            catch(Exception ex) { string s = ex.ToString(); return null; }
+            catch (Exception ex)
+            { return new Form { FormName=ex.Message }; }
 
 
         }
@@ -177,7 +178,6 @@ namespace Carroll.Data.Services.Controllers
             if (Utility.ValidateFormData(_modelState, _formdata.FormFields))
             {
                 // Now data is valid let's pass to DAL for update/Insert
-
                 object obj = _service.GetRuntimeClassInstance(_formdata.FormName);
 
                 foreach (FormField _field in _formdata.FormFields)
