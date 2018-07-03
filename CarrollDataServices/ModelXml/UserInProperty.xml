@@ -4,19 +4,19 @@
   <FormFields>
     <FormField>
       <FieldLabel>User</FieldLabel>
-      <FieldName>User</FieldName>
+      <FieldName>UserId</FieldName>
       <FieldType>Select</FieldType>
       <Required>true</Required>
       <FieldValidationType>None</FieldValidationType>
-      <DataLoadUrl>api/user/getusers</DataLoadUrl>
+      <DataLoadUrl>api/user/GetUsersForSelect</DataLoadUrl>
     </FormField>
     <FormField>
       <FieldLabel>Property</FieldLabel>
-      <FieldName>Property</FieldName>
+      <FieldName>PropertyId</FieldName>
       <FieldType>Select</FieldType>
       <Required>true</Required>
       <FieldValidationType>None</FieldValidationType>
-      <DataLoadUrl>api/user/getroles</DataLoadUrl>
+      <DataLoadUrl>api/user/GetPropertiesForSelect</DataLoadUrl>
     </FormField>
     <FormField>
       <FieldLabel>Created By</FieldLabel>

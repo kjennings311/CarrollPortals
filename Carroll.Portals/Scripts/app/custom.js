@@ -1,7 +1,9 @@
 ﻿var $BaseApiUrl = "http://localhost:1002/"; 
+
 // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 //49786/";
 //Token and UserOject are global variables can be used here.
+
 $(document).ready(function () {
     
   
@@ -30,20 +32,31 @@ function encodeImageFileAsURL(element) {
     }
 }
 
-function BindElements() {
+function BindElements()
+{
+
     $form = $('.dynamicForm');
-    $('.dynamicForm #savechanges').click(function () {
+
+    $('.dynamicForm #savechanges').click(function ()
+    {
         $('.success-message').hide();
         $('.failure-message').hide();
     //    if (!CheckFormErrors($form)) {
-            var $this = $(this);
-        var formUrl = "api/form/GenerateForm/" + $('.dynamicForm #savechanges').attr("formname");
+        var $this = $(this);
+
+        var RecordId = $('.btnEdit').attr("itemId");
+        var FormName = $('.dynamicForm #savechanges').attr("formname");
+        if (RecordId == '') formUrl = "api/form/GenerateForm/" + FormName;
+        else formUrl = "api/form/GenerateEditForm?entitytype=" + FormName + "&RECORDID=" + RecordId;
+
+
+     //   var formUrl = "api/form/GenerateForm/" + $('.dynamicForm #savechanges').attr("formname");
 
         // if form is user then check if user exists with email id or not
 
-        alert($('.dynamicForm #savechanges').attr("formname"));
-
-        if ($('.dynamicForm #savechanges').attr("formname") == "user") {
+      
+        if ($('.dynamicForm #savechanges').attr("formname") == "user" && RecordId == '')
+        {
 
        
         $.ajax({
@@ -54,8 +67,7 @@ function BindElements() {
             dataType: "json",
             async: false,
             success: function (data) {
-                alert('success');
-              
+
                 if (data == true)
                 {
                     alert('success insdie');
@@ -126,23 +138,23 @@ function BindElements() {
                                 // Let's populate Created and CreatedName'
                                 switch ($fields[i]["fieldName"].toLowerCase()) {
                                 
-                                    case "createdby":
-                                        // if there is already a value read it and load if empty load current user
-                                        if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                            $fields[i]["fieldValue"] = User.UserId;
-                                        } else {
-                                            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                        }
+                                    //case "createdby":
+                                    //    // if there is already a value read it and load if empty load current user
+                                    //    if ($('#' + $fields[i]["fieldName"]).val() != "") {
+                                    //        $fields[i]["fieldValue"] = User.UserId;
+                                    //    } else {
+                                    //        $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                    //    }
                                         
-                                        break;
-                                    case "createdbyname":
-                                        if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                            $fields[i]["fieldValue"] = User.FirstName + " " + User.LastName;
-                                        } else {
-                                            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                        }
+                                    //    break;
+                                    //case "createdbyname":
+                                    //    if ($('#' + $fields[i]["fieldName"]).val() != "") {
+                                    //        $fields[i]["fieldValue"] = User.FirstName + " " + User.LastName;
+                                    //    } else {
+                                    //        $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                    //    }
                                         
-                                        break;
+                                    //    break;
                                     case "UserPhoto":
                                         $fields[i]["fieldValue"] = imagebase64;
                                     default:
@@ -159,7 +171,7 @@ function BindElements() {
                     }
                     
                     // Let's set user id field so we can use that as a reference
-                    //$data["userId"] = User.UserId + "~" + User.FirstName + " " + User.LastName
+                 //   $data["userId"] = User.UserId + "~" + User.FirstName + " " + User.LastName
                     //  alert(JSON.stringify($data));
                     // now that we have updated Form record.. Let's pass it back to server with all  data for validation..
 
@@ -417,12 +429,16 @@ function getForm(FormName, RecordId)
 }
 
 // Loads choices in select, list boxes etc
-function LoadOptions(fieldId, DataLoadUrl, value) {
+function LoadOptions(fieldId, DataLoadUrl, value)
+{
     var options = "";
     var selected = "";
-    console.log(data);
+
+    console.log( 'field id is '+ fieldId +'value is ' + value);
+
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
-        for (var i = 0; i < data.length - 1; i++){
+       
+        for (var i = 0; i < data.length ; i++){
             if (data[i]["key"] == value) selected = "selected=selected";
             options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
             selected = "";
@@ -456,106 +472,7 @@ function ToggleEdit(formname)
 
 }
 
-function LoadData(formName) {
-   
-    $.when(GetToken()).then(
-        function () {
-            $.ajax({
-                type: "get",
-                dataType: "json",
-                url: $BaseApiUrl + "api/data/getrecords?entitytype=" + formName,
-                async: false,
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
 
-                },
-                statusCode: {
-                    401: function () {
-                        // beacuse the session with oAuth is limited to 10 minutes.. we will need to redirect to home page to reset all objects
-                        //$.when(GetToken()).then(
-                        //    function () {  });
-                        location.href = "/";
-                        // location.href = "/account/SignOut"
-                    },
-                    404: function () { },
-                    200: function () { },
-                    201: function () { },
-                    202: function () { }
-                },
-                success: function (data) {
-                   
-                   // var tbody = $("<tbody />"), tr;
-                   //// var $data = data;
-                   // $.each(data, function (_, obj) {
-                   //     tr = $("<tr />");
-                   //     $.each(obj, function (_, text) {
-                   //         tr.append("<td>" + text + "</td>")
-                   //     });
-                   //     tr.appendTo(tbody);
-                   // });
-                   // tbody.appendTo(".dtData");
-
-                   
-                   
-                    var my_columns = [];
-
-                    $.each(data[0], function (key, value) {
-                        var my_item = {};
-                        my_item.data = key;
-                        my_item.title = splitCamelCase(key).toUpperCase();
-                        my_columns.push(my_item);
-                    });
-
-                   
-
-                   
-                    //alert(JSON.stringify(my_columns));
-                    $('.dtData').DataTable({
-                        data: data,
-                        processing: true,
-                        "scrollX": true,
-                        "rowCallback": function (row, data) {
-                            // do anything row wise here
-                            $(row).attr('id', data["propertyId"]);
-                            $(row).attr('itemType', "property");
-                            $(row).attr('onClick', 'HandleRowClick(this);');
-
-                        },
-                        "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-                        select: 'single',     // enable single row selection
-                        responsive: false,     // enable responsiveness
-                        altEditor: false,      // Enable altEditor ****
-                        buttons: [
-
-                            { extend: 'copy' },
-                            { extend: 'csv' },
-                            { extend: 'excel' },
-                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
-
-                            {
-                                extend: 'print',
-                                customize: function (win) {
-                                    $(win.document.body).addClass('white-bg');
-                                    $(win.document.body).css('font-size', '10px');
-
-                                    $(win.document.body).find('table')
-                                        .addClass('compact')
-                                        .css('font-size', 'inherit');
-                                }
-                            }
-
-                        ],
-                        "columns": my_columns
-                    }).columns.adjust();
-
-                    //  $('.ibox').children('.ibox-content').toggleClass('sk-loading');
-
-                }
-            });
-        }
-    );
-}
 // takes thisIsTest converts to this Is Test
 function splitCamelCase(s) {
     return s.split(/(?=[A-Z])/).join(' ');
@@ -564,7 +481,7 @@ function splitCamelCase(s) {
 // this function let's you enable disable add delete buttons'
 function HandleRowClick(obj) {
     var $this = jQuery(obj);
- 
+    console.log('selected row is '+obj);
     if (!$this.hasClass('selected')) {
     //    $this.removeClass('selected');
         $('.btnDelete').css("color", "red");
@@ -574,6 +491,7 @@ function HandleRowClick(obj) {
         $('.btnEdit').css("color", "green");
         $('.btnEdit').removeAttr("disabled");
         $('.btnEdit').attr("itemId", $this.attr("id"));
+        $('.btnEdit').attr("itemType", $this.attr("itemType"));
         // bind button events we can lookup item id on button attribute
         $('.btnDelete').unbind('click').bind('click', function ()
         {
@@ -613,9 +531,11 @@ function HandleRowClick(obj) {
         $('.btnDelete').css("color", "#ccc");
         $('.btnDelete').attr("disabled", "disabled");
         $('.btnDelete').removeAttr("itemId");
+        $('.btnDelete').removeAttr("itemType");
         $('.btnEdit').css("color", "#ccc");
         $('.btnEdit').attr("disabled", "disabled");
         $('.btnEdit').removeAttr("itemId");
+        $('.btnEdit').removeAttr("itemType");
         $('.btnDelete').unbind('click').bind('click', function () {
 
             return false;
@@ -1202,6 +1122,7 @@ function LoadUserRoles() {
                             $(row).attr('id', data["userRoleId"]);
                             $(row).attr('itemType', "UserInRole");
                             $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
                         },
                         "order": [[2, 'asc']],
                         dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
@@ -1263,7 +1184,7 @@ function LoadUserRoles() {
                             },
                             { "data": "userEmail", "name": "userEmail", "autoWidth": false },
                             { "data": "userName", "name": "userName", "autoWidth": false },
-                            { "data": "roleName", "name": "lastName", "autoWidth": false }
+                            { "data": "roleName", "name": "roleName", "autoWidth": false }
                          ]
                     }).columns.adjust();
                 }
@@ -1271,6 +1192,105 @@ function LoadUserRoles() {
         }
     );
 }
+
+
+
+// called from User Role page
+function LoadUserProperties() {
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecords?entitytype=UserInProperty",
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: data,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here
+                            $(row).attr('id', data["userInPropertyId"]);
+                            $(row).attr('itemType', "UserInProperty");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+
+                        ],
+
+                        columns: [
+                            //{
+                            //    "targets": -1,
+                            //    "data": null,
+                            //    "sortable": false,
+                            //    "defaultContent": "<button>Click!</button>"
+                            //},
+                            {
+                                render: function (data, type, row, meta) {
+                                    return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                                }
+                            },
+                            { "data": "userEmail", "name": "userEmail", "autoWidth": false },
+                            { "data": "userName", "name": "userName", "autoWidth": false },
+                            { "data": "propertyName", "name": "propertyName", "autoWidth": false }
+                        ]
+                    }).columns.adjust();
+                }
+            });
+        }
+    );
+}
+
+
+
 
 function ApplyInputMask(container) {
     //https://github.com/RobinHerbots/jquery.inputmask

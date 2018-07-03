@@ -19,7 +19,8 @@ using System.Web.Http.Cors;
 
 namespace Carroll.Data.Services.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+   //  [EnableCors(origins = new[] { "http://localhost", "http://sample.com" })]
+       [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     //[RoutePrefix("api/Data")]
    // [Authorize]
     public class DataController : ApiController

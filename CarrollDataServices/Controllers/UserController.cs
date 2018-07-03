@@ -75,6 +75,21 @@ namespace Carroll.Data.Services.Controllers
           
         }
 
+        [CustomActionFilter]
+        [ActionName("GetPropertiesForSelect")]
+        public List<KeyValuePair> GetPropertiesForSelect()
+        {
+            List<KeyValuePair> _users = new List<KeyValuePair>();
+            //us
+
+            foreach (var item in _service.GetAllProperties())
+            {
+                _users.Add(new KeyValuePair(item.PropertyId.ToString(),item.PropertyName));
+            }
+            return _users;
+
+        }
+
 
         [CustomActionFilter]
         [ActionName("GetRoles")]

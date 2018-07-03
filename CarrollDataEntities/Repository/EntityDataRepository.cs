@@ -44,13 +44,10 @@ namespace Carroll.Data.Entities.Repository
                         break;
                     default:
                         break;
-                }
-               
+                }          
 
                 return true;
-
             }
-
         }
 
 
@@ -87,7 +84,19 @@ namespace Carroll.Data.Entities.Repository
                         var _user = _entities.SiteUsers.Where(x => x.UserId == _recId).FirstOrDefault();
                         if (_user != null) { return _user; }
                         return null;
-                        #endregion
+                    #endregion
+                    case EntityType.UserInRole:
+                        #region [ User In Role ]
+                        var _userinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _recId).FirstOrDefault();
+                        if (_userinrole != null) { return _userinrole; }
+                        return null;
+                    #endregion
+                    case EntityType.UserInProperty:
+                        #region [ User In Property ]
+                        var _userinproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _recId).FirstOrDefault();
+                        if (_userinproperty != null) { return _userinproperty; }
+                        return null;
+                    #endregion
                     default:
                         break;
                 }
@@ -191,7 +200,7 @@ namespace Carroll.Data.Entities.Repository
                         #region [ User ] 
                         
                         SiteUser _user = obj;
-                        var _dbuser = _entities.UserInRoles.Where(x => x.UserId == _user.UserId).FirstOrDefault();
+                        var _dbuser = _entities.SiteUsers.Where(x => x.UserId == _user.UserId).FirstOrDefault();
                         if (_dbuser == null)
                         {
                             if ((_user.UserId.ToString() == "00000000-0000-0000-0000-000000000000") || (_user.UserId == null))
@@ -219,7 +228,7 @@ namespace Carroll.Data.Entities.Repository
                         #region [ User Roles ] 
 
                         UserInRole _userrole = obj;
-                        var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _userrole.UserRoleId).FirstOrDefault();
+                        var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserId == _userrole.UserId && x.RoleId== _userrole.RoleId).FirstOrDefault();
                         if (_dbuserinrole == null)
                         {
                             if ((_userrole.UserRoleId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userrole.UserRoleId == null))
@@ -247,7 +256,7 @@ namespace Carroll.Data.Entities.Repository
                         #region [ User Property ] 
 
                         UserInProperty _userProp = obj;
-                        var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _userProp.UserInPropertyId).FirstOrDefault();
+                        var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserId == _userProp.UserId && x.PropertyId== _userProp.PropertyId).FirstOrDefault();
                         if (_dbuserproperty == null)
                         {
                             if ((_userProp.UserInPropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userProp.UserInPropertyId == null))
