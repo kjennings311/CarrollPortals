@@ -18,5 +18,15 @@ namespace Carroll.Portals.Controllers
         {
             return View(new BaseViewModel());
         }
+        // GET: User
+        public ActionResult UserRoles()
+        {
+            return View(new BaseViewModel());
+        }
+        // GET: User
+        public ActionResult UserProperties()
+        {
+            return View(new BaseViewModel());
+        }
     }
 }

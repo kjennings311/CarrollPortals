@@ -163,6 +163,8 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="ModelXml\user.xml" />
+    <Content Include="ModelXml\UserProperty.xml" />
+    <Content Include="ModelXml\UserInRole.xml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

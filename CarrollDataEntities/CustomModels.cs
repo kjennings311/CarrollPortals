@@ -13,7 +13,9 @@ namespace Carroll.Data.Entities
         Contact=1,
         Partner=2,
         User=3,
-        Role=4
+        Role=4,
+        UserInRole = 5,
+        UserInProperty = 6           
 
     }
 }

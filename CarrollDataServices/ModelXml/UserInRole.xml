@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FormName>UserInRole</FormName>
+  <FormFields>
+    <FormField>
+      <FieldLabel>User</FieldLabel>
+      <FieldName>UserId</FieldName>
+      <FieldType>Select</FieldType>
+      <Required>true</Required>
+      <FieldValidationType>None</FieldValidationType>
+      <DataLoadUrl>api/user/GetUsersForSelect</DataLoadUrl>
+    </FormField>
+    <FormField>
+      <FieldLabel>Role</FieldLabel>
+      <FieldName>RoleId</FieldName>
+      <FieldType>Select</FieldType>
+      <Required>true</Required>
+      <FieldValidationType>None</FieldValidationType>
+      <DataLoadUrl>api/user/GetRolesForSelect</DataLoadUrl>
+    </FormField>
+    <FormField>
+      <FieldLabel>Created By</FieldLabel>
+      <FieldName>CreatedBy</FieldName>
+      <FieldType>Hidden</FieldType>
+      <FieldValidationType>None</FieldValidationType>
+    </FormField>
+    <FormField>
+      <FieldLabel>Created By Name</FieldLabel>
+      <FieldName>CreatedByName</FieldName>
+      <FieldType>Hidden</FieldType>
+      <FieldValidationType>None</FieldValidationType>
+    </FormField>
+  </FormFields>
+  <FormPostUrl>posturl.htm</FormPostUrl>
+  <IsEditForm>false</IsEditForm>
+  <DBFieldId>0</DBFieldId>
+  <UserId>0</UserId>
+</Form>

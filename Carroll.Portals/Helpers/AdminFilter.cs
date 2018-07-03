@@ -14,7 +14,7 @@ namespace Carroll.Portals.Helpers
             base.OnActionExecuting(filterContext);
             HttpContextBase ctx = filterContext.HttpContext;
            
-            if (!(filterContext.HttpContext.Session["Carroll_RoleName"].ToString() == "Administrator"))
+            if (!(filterContext.HttpContext.Session["Carroll_RoleName"].ToString().Contains("Administrator")))
             {
                 filterContext.Result = new ContentResult() { Content = "UnAuthorised Access to Specified Resource" };
             }

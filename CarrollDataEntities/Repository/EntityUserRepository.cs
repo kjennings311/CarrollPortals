@@ -53,7 +53,7 @@ namespace Carroll.Data.Entities.Repository
                     if (role == "")
                         role = res;
                     else
-                        role = ", " + res;
+                        role += ", " + res;
                 }
                 return role;
             }
