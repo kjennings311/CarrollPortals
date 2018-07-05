@@ -20,9 +20,10 @@ using System.Web.Http.Cors;
 namespace Carroll.Data.Services.Controllers
 {
    //  [EnableCors(origins = new[] { "http://localhost", "http://sample.com" })]
-       [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+      [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     //[RoutePrefix("api/Data")]
-   // [Authorize]
+    // [Authorize]
+   // [EnableCors(origins: "http://localhost")]
     public class DataController : ApiController
     {
         private IDataService _service;
@@ -66,12 +67,12 @@ namespace Carroll.Data.Services.Controllers
 
             return _service.GetRecords(entityType, optionalText);
 
-
-
         }
-
+      
+        [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
         [ActionName("DeleteRecord")]
         [HttpPost]
+        
         public bool DeleteRecord(EntityType entityType, string recordId)
         {
 

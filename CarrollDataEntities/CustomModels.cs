@@ -15,7 +15,9 @@ namespace Carroll.Data.Entities
         User=3,
         Role=4,
         UserInRole = 5,
-        UserInProperty = 6           
-
+        UserInProperty = 6,
+        FormPropertyDamageClaim=7,
+        FormMoldDamageClaim=8,
+        FormGeneralLiabilityClaim=9
     }
 }

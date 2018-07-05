@@ -52,5 +52,20 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetUserRoles_Result>("sp_GetUserRoles");
         }
+    
+        public virtual ObjectResult<proc_GetGeneralLiabilityClaims_Result> proc_GetGeneralLiabilityClaims()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetGeneralLiabilityClaims_Result>("proc_GetGeneralLiabilityClaims");
+        }
+    
+        public virtual ObjectResult<proc_GetMoldDamageClaims_Result> proc_GetMoldDamageClaims()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetMoldDamageClaims_Result>("proc_GetMoldDamageClaims");
+        }
+    
+        public virtual ObjectResult<proc_GetPropertyDamageClaims_Result> proc_GetPropertyDamageClaims()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetPropertyDamageClaims_Result>("proc_GetPropertyDamageClaims");
+        }
     }
 }

@@ -46,7 +46,7 @@ function BindElements()
 
         var RecordId = $('.btnEdit').attr("itemId");
         var FormName = $('.dynamicForm #savechanges').attr("formname");
-        if (RecordId == '') formUrl = "api/form/GenerateForm/" + FormName;
+        if (RecordId == '' || RecordId=== undefined) formUrl = "api/form/GenerateForm/" + FormName;
         else formUrl = "api/form/GenerateEditForm?entitytype=" + FormName + "&RECORDID=" + RecordId;
 
 
@@ -130,6 +130,7 @@ function BindElements()
                                 break;
                             case "File":
                                // console.log('before assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
+                                if(imagebase64!="")
                                 $fields[i]["fieldValue"] = imagebase64;
 
                                // console.log('after assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
@@ -197,7 +198,7 @@ function BindElements()
                                     $form.find('.success-message').show('slow');
                                     ScrollToElement($form.find('.success-message'));
                                     // go back to previous screen after 5 seconds
-                                  //  setTimeout(location.reload(), 5000);
+                                  setTimeout(location.reload(), 5000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -320,7 +321,7 @@ function getForm(FormName, RecordId)
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"> </div></div>';
+    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
     var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"  {2}> <i></i> {0} </label></div></div></div>';
     var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4}></div></div>';
@@ -374,11 +375,11 @@ function getForm(FormName, RecordId)
                         $FormElements += format($passbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         break;
                     case "File":
-
                         var $req = $fields[i]["required"];
                         var $datamask = "";
-
+                    
                         $FormElements += format($filebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                                              
                         break;
                     case "Check":
                       //  var $req = $fields[i]["required"];
@@ -387,8 +388,6 @@ function getForm(FormName, RecordId)
                         if (checked) checkedtext = "checked=checked";
                         else checkedtext = "";
                         $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext);
-                        
-
                         break;
                     case "Select":
                         var $req = $fields[i]["required"];
@@ -422,11 +421,7 @@ function getForm(FormName, RecordId)
         }
 
     });
-  
-
-    
-
-}
+ }
 
 // Loads choices in select, list boxes etc
 function LoadOptions(fieldId, DataLoadUrl, value)
@@ -1289,6 +1284,105 @@ function LoadUserProperties() {
     );
 }
 
+
+
+// called from User Role page
+function LoadFormPropertyDamageClaims() {
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecords?entitytype=FormPropertyDamageClaim",
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: data,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here
+                            $(row).attr('id', data["PDLId"]);
+                            $(row).attr('itemType', "FormPropertyDamageClaim");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+                        ],
+                        columns: [
+                            //{
+                            //    "targets": -1,
+                            //    "data": null,
+                            //    "sortable": false,
+                            //    "defaultContent": "<button>Click!</button>"
+                            //},
+                            {
+                                render: function (data, type, row, meta) {
+                                    return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                                }
+                            },
+                            { "data": "PropertyName", "name": "PropertyName", "autoWidth": false },
+                            { "data": "IncidentDateTime", "name": "IncidentDateTime", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
+                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false }
+                        ]
+                    }).columns.adjust();
+                }
+            });
+        }
+    );
+}
 
 
 

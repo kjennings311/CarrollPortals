@@ -30,6 +30,12 @@
       <FieldType>Hidden</FieldType>
       <FieldValidationType>None</FieldValidationType>
     </FormField>
+    <FormField>
+      <FieldLabel>UserInPropertyId</FieldLabel>
+      <FieldName>UserInPropertyId</FieldName>
+      <FieldType>Hidden</FieldType>
+      <FieldValidationType>None</FieldValidationType>
+    </FormField>
   </FormFields>
   <FormPostUrl>posturl.htm</FormPostUrl>
   <IsEditForm>false</IsEditForm>

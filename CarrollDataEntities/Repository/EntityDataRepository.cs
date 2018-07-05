@@ -42,6 +42,15 @@ namespace Carroll.Data.Entities.Repository
                     case EntityType.UserInProperty:
                         _entities.Database.ExecuteSqlCommand("DELETE FROM UserInProperty WHERE UserInPropertyId={0} ", recordId);
                         break;
+                    case EntityType.FormGeneralLiabilityClaim:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM FormGeneralLiabilityClaim WHERE GLLId={0} ", recordId);
+                        break;
+                    case EntityType.FormMoldDamageClaim:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM FormMoldDamageClaim WHERE MDLId={0} ", recordId);
+                        break;
+                    case EntityType.FormPropertyDamageClaim:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM FormPropertyDamageClaim WHERE PDLId={0} ", recordId);
+                        break;
                     default:
                         break;
                 }          
@@ -95,6 +104,24 @@ namespace Carroll.Data.Entities.Repository
                         #region [ User In Property ]
                         var _userinproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _recId).FirstOrDefault();
                         if (_userinproperty != null) { return _userinproperty; }
+                        return null;
+                    #endregion
+                    case EntityType.FormPropertyDamageClaim:
+                        #region [ FormPropertyDamageClaim]
+                        var _damageclaim= _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
+                        if (_damageclaim != null) { return _damageclaim; }
+                        return null;
+                    #endregion
+                    case EntityType.FormGeneralLiabilityClaim:
+                        #region [ FormGeneralLiabilityClaim ]
+                        var _generalclaim = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _recId).FirstOrDefault();
+                        if (_generalclaim != null) { return _generalclaim; }
+                        return null;
+                    #endregion
+                    case EntityType.FormMoldDamageClaim:
+                        #region [ FormMoldDamageClaim ]
+                        var _formdamageclaim = _entities.FormMoldDamageClaims.Where(x => x.MDLId == _recId).FirstOrDefault();
+                        if (_formdamageclaim != null) { return _formdamageclaim; }
                         return null;
                     #endregion
                     default:
@@ -218,6 +245,7 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
+                            _user.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbuser).CurrentValues.SetValues(_user);
                             int i = _entities.SaveChanges();
                             return true;
@@ -228,7 +256,7 @@ namespace Carroll.Data.Entities.Repository
                         #region [ User Roles ] 
 
                         UserInRole _userrole = obj;
-                        var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserId == _userrole.UserId && x.RoleId== _userrole.RoleId).FirstOrDefault();
+                        var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _userrole.UserRoleId).FirstOrDefault();
                         if (_dbuserinrole == null)
                         {
                             if ((_userrole.UserRoleId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userrole.UserRoleId == null))
@@ -246,6 +274,7 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
+                            _userrole.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbuserinrole).CurrentValues.SetValues(_userrole);
                             int i = _entities.SaveChanges();
                             return true;
@@ -256,7 +285,7 @@ namespace Carroll.Data.Entities.Repository
                         #region [ User Property ] 
 
                         UserInProperty _userProp = obj;
-                        var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserId == _userProp.UserId && x.PropertyId== _userProp.PropertyId).FirstOrDefault();
+                        var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _userProp.UserInPropertyId).FirstOrDefault();
                         if (_dbuserproperty == null)
                         {
                             if ((_userProp.UserInPropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userProp.UserInPropertyId == null))
@@ -269,12 +298,104 @@ namespace Carroll.Data.Entities.Repository
                             _entities.UserInProperties.Add(_userProp);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
+                          
                             // return (i == 1) ? true : false;
                             return true;
                         }
                         else
                         {
+                            _userProp.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbuserproperty).CurrentValues.SetValues(_userProp);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
+
+                    case EntityType.FormGeneralLiabilityClaim:
+                        #region [ FormGeneralLiabilityClaim ] 
+
+                        FormGeneralLiabilityClaim _glc = obj;
+                        var _dbglc = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _glc.GLLId).FirstOrDefault();
+                        if (_dbglc == null)
+                        {
+                            if ((_dbglc.GLLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_dbglc.GLLId == null))
+                            {
+                                _dbglc.GLLId = Guid.NewGuid();
+                            }
+                            _dbglc.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.FormGeneralLiabilityClaims.Add(_dbglc);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _dbglc.CreatedDate = DateTime.Now;
+                            _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
+
+                    case EntityType.FormMoldDamageClaim:
+                        #region [ FormMoldDamageClaim ] 
+
+                        FormMoldDamageClaim _mdc = obj;
+                        var _dbmdc = _entities.FormMoldDamageClaims.Where(x => x.MDLId == _mdc.MDLId).FirstOrDefault();
+                        if (_dbmdc == null)
+                        {
+                            if ((_dbmdc.MDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_dbmdc.MDLId == null))
+                            {
+                                _dbmdc.MDLId = Guid.NewGuid();
+                            }
+                            _dbmdc.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.FormMoldDamageClaims.Add(_mdc);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _dbmdc.CreatedDate = DateTime.Now;
+                            _entities.Entry(_dbmdc).CurrentValues.SetValues(_mdc);
+                            int i = _entities.SaveChanges();
+                            return true;
+                        }
+                    #endregion
+
+                    case EntityType.FormPropertyDamageClaim:
+                        #region [ FormPropertyDamageClaim ] 
+
+                        FormPropertyDamageClaim _pdc = obj;
+                        var _dbpdc = _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _pdc.PDLId).FirstOrDefault();
+                        if (_dbpdc == null)
+                        {
+                            if ((_dbpdc.PDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_dbpdc.PDLId == null))
+                            {
+                                _dbpdc.PDLId = Guid.NewGuid();
+                            }
+                            _dbpdc.CreatedDate = DateTime.Now;
+                            // No record exists create a new property record here
+
+                            _entities.FormPropertyDamageClaims.Add(_dbpdc);
+                            _entities.SaveChanges();
+                            int i = _entities.SaveChanges();
+
+                            // return (i == 1) ? true : false;
+                            return true;
+                        }
+                        else
+                        {
+                            _dbpdc.CreatedDate = DateTime.Now;
+                            _entities.Entry(_dbpdc).CurrentValues.SetValues(_dbpdc);
                             int i = _entities.SaveChanges();
                             return true;
                         }
@@ -318,12 +439,12 @@ namespace Carroll.Data.Entities.Repository
                         else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
                     #endregion
                     case EntityType.UserInRole:
-                        #region [ User ]
+                        #region [ User In Role ]
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.sp_GetUserRoles().ToList();
                         else return _entities.sp_GetUserRoles().Where(x => x.userName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText) || x.RoleName.Contains(optionalSeachText)).ToList();
                     #endregion
                     case EntityType.UserInProperty:
-                        #region [ User ]
+                        #region [ User In Property ]
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.sp_GetUserProperties().ToList();
                         else return _entities.sp_GetUserProperties().Where(x => x.userName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText) || x.PropertyName.Contains(optionalSeachText) || x.PropertyAddress.Contains(optionalSeachText) || x.City.Contains(optionalSeachText)).ToList();
                     #endregion
@@ -332,7 +453,23 @@ namespace Carroll.Data.Entities.Repository
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.SiteUsers.ToList();
                         else return _entities.SiteUsers.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) ||  x.Phone.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText))).ToList();
                     #endregion
-                
+                    case EntityType.FormPropertyDamageClaim:
+                        #region [ FormPropertyDamageClaim ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.proc_GetPropertyDamageClaims().ToList();
+                        else return _entities.proc_GetPropertyDamageClaims().Where(x => x.PropertyName.Contains(optionalSeachText) || x.IncidentLocation.Contains(optionalSeachText) || x.EstimateOfDamage.Contains(optionalSeachText) || x.WeatherConditions.Contains(optionalSeachText)).ToList();
+                    #endregion
+                    case EntityType.FormMoldDamageClaim:
+                        #region [ FormPropertyDamageClaim ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.proc_GetMoldDamageClaims().ToList();
+                        else return _entities.proc_GetMoldDamageClaims().Where(x => x.PropertyName.Contains(optionalSeachText) || x.Description.Contains(optionalSeachText) || x.Location.Contains(optionalSeachText) || x.EstimatedTimeDamagePresent.Contains(optionalSeachText)).ToList();
+                    #endregion
+
+                    case EntityType.FormGeneralLiabilityClaim:
+                        #region [ FormGeneralLiabilityClaim ]
+                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.proc_GetGeneralLiabilityClaims().ToList();
+                        else return _entities.proc_GetGeneralLiabilityClaims().Where(x => x.PropertyName.Contains(optionalSeachText) || x.IncidentLocation.Contains(optionalSeachText) || x.IncidentDescription.Contains(optionalSeachText) || x.IncidentDateTime.ToString().Contains(optionalSeachText)).ToList();
+                    #endregion
+
                     default:
                         break;
                 }

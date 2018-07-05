@@ -246,6 +246,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_GetPropertyDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetUserProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -303,6 +306,9 @@
           </AssociationSet>
           <FunctionImport Name="sp_GetUserProperties" ReturnType="Collection(Carroll.Data.Entities.sp_GetUserProperties_Result)" />
           <FunctionImport Name="sp_GetUserRoles" ReturnType="Collection(Carroll.Data.Entities.sp_GetUserRoles_Result)" />
+          <FunctionImport Name="proc_GetGeneralLiabilityClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetGeneralLiabilityClaims_Result)" />
+          <FunctionImport Name="proc_GetMoldDamageClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetMoldDamageClaims_Result)" />
+          <FunctionImport Name="proc_GetPropertyDamageClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetPropertyDamageClaims_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -606,6 +612,82 @@
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
         </ComplexType>
+        <ComplexType Name="proc_GetGeneralLiabilityClaims_Result">
+          <Property Type="Guid" Name="GLLId" Nullable="false" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="Boolean" Name="AuthoritiesContacted" Nullable="true" />
+          <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClaimantName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ClaimantAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ClaimantPhone1" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="ClaimantPhone2" Nullable="true" MaxLength="17" />
+          <Property Type="Boolean" Name="AnyInjuries" Nullable="true" />
+          <Property Type="String" Name="InjuryDescription" Nullable="true" MaxLength="250" />
+          <Property Type="Boolean" Name="WitnessPresent" Nullable="true" />
+          <Property Type="String" Name="WitnessName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WitnessPhone" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="WitnessAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DescriptionOfProperty" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DescriptionOfDamage" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="17" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="proc_GetMoldDamageClaims_Result">
+          <Property Type="Guid" Name="MDLId" Nullable="false" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DiscoveryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="SuspectedCause" Nullable="true" />
+          <Property Type="Boolean" Name="AreBuildingMaterialsStillWet" Nullable="true" />
+          <Property Type="Boolean" Name="IsStandingWaterPresent" Nullable="true" />
+          <Property Type="String" Name="HowMuchWater" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstimatedSurfaceAreaAffected" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EstimatedTimeDamagePresent" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CorrectiveActionsTaken" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PlannedActions" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AdditionalComments" Nullable="true" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="17" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="proc_GetPropertyDamageClaims_Result">
+          <Property Type="Guid" Name="PDLId" Nullable="false" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="WeatherConditions" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescriptionOfProperty" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="String" Name="EstimateOfDamage" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="AuthoritiesContacted" Nullable="true" />
+          <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReportNumber" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="LossOfRevenues" Nullable="true" />
+          <Property Type="Boolean" Name="WitnessPresent" Nullable="true" />
+          <Property Type="String" Name="WitnessName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WitnessPhone" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="WitnessAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="IncidentReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="17" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -885,6 +967,94 @@
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetGeneralLiabilityClaims" FunctionName="Carroll.Data.Entities.Store.proc_GetGeneralLiabilityClaims">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_GetGeneralLiabilityClaims_Result">
+                <ScalarProperty Name="GLLId" ColumnName="GLLId" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="AuthoritiesContacted" ColumnName="AuthoritiesContacted" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="ClaimantName" ColumnName="ClaimantName" />
+                <ScalarProperty Name="ClaimantAddress" ColumnName="ClaimantAddress" />
+                <ScalarProperty Name="ClaimantPhone1" ColumnName="ClaimantPhone1" />
+                <ScalarProperty Name="ClaimantPhone2" ColumnName="ClaimantPhone2" />
+                <ScalarProperty Name="AnyInjuries" ColumnName="AnyInjuries" />
+                <ScalarProperty Name="InjuryDescription" ColumnName="InjuryDescription" />
+                <ScalarProperty Name="WitnessPresent" ColumnName="WitnessPresent" />
+                <ScalarProperty Name="WitnessName" ColumnName="WitnessName" />
+                <ScalarProperty Name="WitnessPhone" ColumnName="WitnessPhone" />
+                <ScalarProperty Name="WitnessAddress" ColumnName="WitnessAddress" />
+                <ScalarProperty Name="DescriptionOfProperty" ColumnName="DescriptionOfProperty" />
+                <ScalarProperty Name="DescriptionOfDamage" ColumnName="DescriptionOfDamage" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetMoldDamageClaims" FunctionName="Carroll.Data.Entities.Store.proc_GetMoldDamageClaims">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_GetMoldDamageClaims_Result">
+                <ScalarProperty Name="MDLId" ColumnName="MDLId" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="DiscoveryDate" ColumnName="DiscoveryDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SuspectedCause" ColumnName="SuspectedCause" />
+                <ScalarProperty Name="AreBuildingMaterialsStillWet" ColumnName="AreBuildingMaterialsStillWet" />
+                <ScalarProperty Name="IsStandingWaterPresent" ColumnName="IsStandingWaterPresent" />
+                <ScalarProperty Name="HowMuchWater" ColumnName="HowMuchWater" />
+                <ScalarProperty Name="EstimatedSurfaceAreaAffected" ColumnName="EstimatedSurfaceAreaAffected" />
+                <ScalarProperty Name="EstimatedTimeDamagePresent" ColumnName="EstimatedTimeDamagePresent" />
+                <ScalarProperty Name="CorrectiveActionsTaken" ColumnName="CorrectiveActionsTaken" />
+                <ScalarProperty Name="PlannedActions" ColumnName="PlannedActions" />
+                <ScalarProperty Name="AdditionalComments" ColumnName="AdditionalComments" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetPropertyDamageClaims" FunctionName="Carroll.Data.Entities.Store.proc_GetPropertyDamageClaims">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_GetPropertyDamageClaims_Result">
+                <ScalarProperty Name="PDLId" ColumnName="PDLId" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="WeatherConditions" ColumnName="WeatherConditions" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="DescriptionOfProperty" ColumnName="DescriptionOfProperty" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="EstimateOfDamage" ColumnName="EstimateOfDamage" />
+                <ScalarProperty Name="AuthoritiesContacted" ColumnName="AuthoritiesContacted" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="ReportNumber" ColumnName="ReportNumber" />
+                <ScalarProperty Name="LossOfRevenues" ColumnName="LossOfRevenues" />
+                <ScalarProperty Name="WitnessPresent" ColumnName="WitnessPresent" />
+                <ScalarProperty Name="WitnessName" ColumnName="WitnessName" />
+                <ScalarProperty Name="WitnessPhone" ColumnName="WitnessPhone" />
+                <ScalarProperty Name="WitnessAddress" ColumnName="WitnessAddress" />
+                <ScalarProperty Name="IncidentReportedBy" ColumnName="IncidentReportedBy" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
