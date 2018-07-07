@@ -318,14 +318,14 @@ namespace Carroll.Data.Entities.Repository
                         var _dbglc = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _glc.GLLId).FirstOrDefault();
                         if (_dbglc == null)
                         {
-                            if ((_dbglc.GLLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_dbglc.GLLId == null))
+                            if ((_glc.GLLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_glc.GLLId == null))
                             {
-                                _dbglc.GLLId = Guid.NewGuid();
+                                _glc.GLLId = Guid.NewGuid();
                             }
-                            _dbglc.CreatedDate = DateTime.Now;
+                            _glc.CreatedDate = DateTime.Now;
                             // No record exists create a new property record here
 
-                            _entities.FormGeneralLiabilityClaims.Add(_dbglc);
+                            _entities.FormGeneralLiabilityClaims.Add(_glc);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
 
@@ -334,11 +334,12 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
-                            _dbglc.CreatedDate = DateTime.Now;
+                            _glc.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
                             int i = _entities.SaveChanges();
                             return true;
                         }
+
                     #endregion
 
                     case EntityType.FormMoldDamageClaim:
@@ -348,11 +349,11 @@ namespace Carroll.Data.Entities.Repository
                         var _dbmdc = _entities.FormMoldDamageClaims.Where(x => x.MDLId == _mdc.MDLId).FirstOrDefault();
                         if (_dbmdc == null)
                         {
-                            if ((_dbmdc.MDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_dbmdc.MDLId == null))
+                            if ((_mdc.MDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_mdc.MDLId == null))
                             {
-                                _dbmdc.MDLId = Guid.NewGuid();
+                                _mdc.MDLId = Guid.NewGuid();
                             }
-                            _dbmdc.CreatedDate = DateTime.Now;
+                            _mdc.CreatedDate = DateTime.Now;
                             // No record exists create a new property record here
 
                             _entities.FormMoldDamageClaims.Add(_mdc);
@@ -364,7 +365,7 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
-                            _dbmdc.CreatedDate = DateTime.Now;
+                            _mdc.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbmdc).CurrentValues.SetValues(_mdc);
                             int i = _entities.SaveChanges();
                             return true;
@@ -378,14 +379,14 @@ namespace Carroll.Data.Entities.Repository
                         var _dbpdc = _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _pdc.PDLId).FirstOrDefault();
                         if (_dbpdc == null)
                         {
-                            if ((_dbpdc.PDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_dbpdc.PDLId == null))
+                            if ((_pdc.PDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_pdc.PDLId == null))
                             {
-                                _dbpdc.PDLId = Guid.NewGuid();
+                                _pdc.PDLId = Guid.NewGuid();
                             }
-                            _dbpdc.CreatedDate = DateTime.Now;
+                            _pdc.CreatedDate = DateTime.Now;
                             // No record exists create a new property record here
 
-                            _entities.FormPropertyDamageClaims.Add(_dbpdc);
+                            _entities.FormPropertyDamageClaims.Add(_pdc);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
 
@@ -394,8 +395,8 @@ namespace Carroll.Data.Entities.Repository
                         }
                         else
                         {
-                            _dbpdc.CreatedDate = DateTime.Now;
-                            _entities.Entry(_dbpdc).CurrentValues.SetValues(_dbpdc);
+                            _pdc.CreatedDate = DateTime.Now;
+                            _entities.Entry(_dbpdc).CurrentValues.SetValues(_pdc);
                             int i = _entities.SaveChanges();
                             return true;
                         }

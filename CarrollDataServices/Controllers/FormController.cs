@@ -159,7 +159,8 @@ namespace Carroll.Data.Services.Controllers
 
                 return _form;
             }
-            catch {return null; }
+            catch(Exception ex)
+            { return new Form { FormName=ex.Message }; }
 
 
         }

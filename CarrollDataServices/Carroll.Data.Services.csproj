@@ -150,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelXml\dummy.xml" />
+    <Content Include="ModelXml\FormGeneralLiabilityClaim.xml" />
+    <Content Include="ModelXml\FormMoldDamageClaim.xml" />
     <Content Include="ModelXml\FormPropertyDamageClaim.xml">
       <SubType>Designer</SubType>
     </Content>

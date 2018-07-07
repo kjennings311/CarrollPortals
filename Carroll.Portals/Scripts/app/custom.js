@@ -139,23 +139,22 @@ function BindElements()
                                 // Let's populate Created and CreatedName'
                                 switch ($fields[i]["fieldName"].toLowerCase()) {
                                 
-                                    //case "createdby":
-                                    //    // if there is already a value read it and load if empty load current user
-                                    //    if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                    //        $fields[i]["fieldValue"] = User.UserId;
-                                    //    } else {
-                                    //        $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                    //    }
+                                    case "createdby":
+                                        // if there is already a value read it and load if empty load current user
+                                        //if ($('#' + $fields[i]["fieldName"]).val() != "") {
+                                        //    $fields[i]["fieldValue"] = User.UserId;
+                                        //} else {
+                                            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                        //}
+                                                                                break;
+                                    case "createdbyname":
+                                        //if ($('#' + $fields[i]["fieldName"]).val() != "") {
+                                        //    $fields[i]["fieldValue"] = User.FirstName + " " + User.LastName;
+                                        //} else {
+                                            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                        //}
                                         
-                                    //    break;
-                                    //case "createdbyname":
-                                    //    if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                    //        $fields[i]["fieldValue"] = User.FirstName + " " + User.LastName;
-                                    //    } else {
-                                    //        $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                    //    }
-                                        
-                                    //    break;
+                                        break;
                                     case "UserPhoto":
                                         $fields[i]["fieldValue"] = imagebase64;
                                     default:
@@ -1307,7 +1306,7 @@ function LoadFormPropertyDamageClaims() {
                         "scrollX": true,
                         "rowCallback": function (row, data) {
                             // do anything row wise here
-                            $(row).attr('id', data["PDLId"]);
+                            $(row).attr('id', data["pdlId"]);
                             $(row).attr('itemType', "FormPropertyDamageClaim");
                             $(row).attr('onClick', 'HandleRowClick(this);');
                             console.log($(row));
@@ -1367,15 +1366,249 @@ function LoadFormPropertyDamageClaims() {
                                     return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
                                 }
                             },
-                            { "data": "PropertyName", "name": "PropertyName", "autoWidth": false },
-                            { "data": "IncidentDateTime", "name": "IncidentDateTime", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false },
-                            { "data": "IncidentLocation", "name": "IncidentLocation", "autoWidth": false }
+                            { "data": "propertyName", "name": "propertyName", "autoWidth": false },
+                            { "data": "incidentDateTime", "name": "incidentDateTime", "autoWidth": false },
+                            { "data": "weatherConditions", "name": "weatherConditions", "autoWidth": false },
+                            { "data": "incidentLocation", "name": "incidentLocation", "autoWidth": false },
+                            { "data": "descriptionOfProperty", "name": "descriptionOfProperty", "autoWidth": false },
+                            { "data": "incidentDescription", "name": "incidentDescription", "autoWidth": false },
+                            { "data": "estimateOfDamage", "name": "estimateOfDamage", "autoWidth": false },
+                            { "data": "authoritiesContacted", "name": "authoritiesContacted", "autoWidth": false },
+                            { "data": "contactPerson", "name": "contactPerson", "autoWidth": false },
+                            { "data": "reportNumber", "name": "reportNumber", "autoWidth": false },
+                            { "data": "lossOfRevenues", "name": "lossOfRevenues", "autoWidth": false },
+                            { "data": "witnessPresent", "name": "witnessPresent", "autoWidth": false },
+                            { "data": "witnessName", "name": "witnessName", "autoWidth": false },
+                            { "data": "witnessPhone", "name": "witnessPhone", "autoWidth": false },
+                            { "data": "witnessAddress", "name": "witnessAddress", "autoWidth": false },
+                            { "data": "incidentReportedBy", "name": "incidentReportedBy", "autoWidth": false },
+                            { "data": "reportedPhone", "name": "reportedPhone", "autoWidth": false },
+                            { "data": "dateReported", "name": "dateReported", "autoWidth": false },
+                            { "data": "createdDate", "name": "createdDate", "autoWidth": false },
+                            { "data": "createdByName", "name": "createdByName", "autoWidth": false }
+                        ]
+                    }).columns.adjust();
+                }
+            });
+        }
+    );
+}
+
+
+
+// called from User Role page
+function LoadGeneralLiabilityClaims() {
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecords?entitytype=FormGeneralLiabilityClaim",
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: data,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here
+                            $(row).attr('id', data["gllId"]);
+                            $(row).attr('itemType', "FormGeneralLiabilityClaim");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+                        ],
+                        columns: [
+                            //{
+                            //    "targets": -1,
+                            //    "data": null,
+                            //    "sortable": false,
+                            //    "defaultContent": "<button>Click!</button>"
+                            //},
+                            {
+                                render: function (data, type, row, meta) {
+                                    return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                                }
+                            },
+                            { "data": "propertyName", "name": "propertyName", "autoWidth": false },
+                            { "data": "incidentDateTime", "name": "incidentDateTime", "autoWidth": false },                         
+                            { "data": "incidentLocation", "name": "incidentLocation", "autoWidth": false },
+                            { "data": "incidentDescription", "name": "incidentDescription", "autoWidth": false },
+                            { "data": "authoritiesContacted", "name": "authoritiesContacted", "autoWidth": false },
+                            { "data": "contactPerson", "name": "contactPerson", "autoWidth": false },
+                            { "data": "claimantName", "name": "claimantName", "autoWidth": false },                            
+                            { "data": "claimantAddress", "name": "claimantAddress", "autoWidth": false },
+                            { "data": "claimantPhone1", "name": "claimantPhone1", "autoWidth": false },
+                            { "data": "claimantPhone2", "name": "claimantPhone2", "autoWidth": false },
+                            { "data": "anyInjuries", "name": "anyInjuries", "autoWidth": false },
+                            { "data": "injuryDescription", "name": "injuryDescription", "autoWidth": false },
+                            { "data": "witnessPresent", "name": "witnessPresent", "autoWidth": false },
+                            { "data": "witnessName", "name": "witnessName", "autoWidth": false },
+                            { "data": "witnessPhone", "name": "witnessPhone", "autoWidth": false },
+                            { "data": "witnessAddress", "name": "witnessAddress", "autoWidth": false },
+                            { "data": "descriptionOfProperty", "name": "descriptionOfProperty", "autoWidth": false },
+                            { "data": "descriptionOfDamage", "name": "descriptionOfDamage", "autoWidth": false },
+                            { "data": "reportedBy", "name": "reportedBy", "autoWidth": false },
+                              { "data": "reportedPhone", "name": "reportedPhone", "autoWidth": false },                     
+                            { "data": "dateReported", "name": "dateReported", "autoWidth": false },
+                            { "data": "createdDate", "name": "createdDate", "autoWidth": false },
+                            { "data": "createdByName", "name": "createdByName", "autoWidth": false }
+                        ]
+                    }).columns.adjust();
+                }
+            });
+        }
+    );
+}
+
+
+
+// called from User Role page
+function LoadMoldDamageClaims() {
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecords?entitytype=FormMoldDamageClaim",
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: data,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here
+                            $(row).attr('id', data["mdlId"]);
+                            $(row).attr('itemType', "FormMoldDamageClaim");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+                        ],
+                        columns: [
+                            //{
+                            //    "targets": -1,
+                            //    "data": null,
+                            //    "sortable": false,
+                            //    "defaultContent": "<button>Click!</button>"
+                            //},
+                            {
+                                render: function (data, type, row, meta) {
+                                    return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                                }
+                            },
+                            { "data": "propertyName", "name": "propertyName", "autoWidth": false },
+                            { "data": "discoveryDate", "name": "discoveryDate", "autoWidth": false },
+                            { "data": "location", "name": "location", "autoWidth": false },
+                            { "data": "description", "name": "description", "autoWidth": false },
+                            { "data": "suspectedCause", "name": "suspectedCause", "autoWidth": false },
+                            { "data": "areBuildingMaterialsStillWet", "name": "areBuildingMaterialsStillWet", "autoWidth": false },
+                            { "data": "isStandingWaterPresent", "name": "isStandingWaterPresent", "autoWidth": false },
+                            { "data": "howMuchWater", "name": "howMuchWater", "autoWidth": false },
+                            { "data": "estimatedSurfaceAreaAffected", "name": "estimatedSurfaceAreaAffected", "autoWidth": false },
+                            { "data": "estimatedTimeDamagePresent", "name": "estimatedTimeDamagePresent", "autoWidth": false },
+                            { "data": "correctiveActionsTaken", "name": "correctiveActionsTaken", "autoWidth": false },
+                            { "data": "plannedActions", "name": "plannedActions", "autoWidth": false },
+                            { "data": "additionalComments", "name": "additionalComments", "autoWidth": false },                          
+                            { "data": "reportedBy", "name": "reportedBy", "autoWidth": false },
+                            { "data": "reportedPhone", "name": "reportedPhone", "autoWidth": false },
+                            { "data": "dateReported", "name": "dateReported", "autoWidth": false },
+                            { "data": "createdDate", "name": "createdDate", "autoWidth": false },
+                            { "data": "createdByName", "name": "createdByName", "autoWidth": false }
                         ]
                     }).columns.adjust();
                 }
