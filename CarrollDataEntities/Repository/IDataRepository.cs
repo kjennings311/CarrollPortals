@@ -17,6 +17,7 @@ namespace Carroll.Data.Entities.Repository
         bool DeleteRecord(EntityType entityType,string recordId);
 
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
+        dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);

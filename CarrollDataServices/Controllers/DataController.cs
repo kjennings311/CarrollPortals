@@ -68,7 +68,15 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetRecords(entityType, optionalText);
 
         }
-      
+
+        [ActionName("GetRecordsWithConfig")]
+        [HttpGet]
+        public dynamic GetRecordsWithConfig(EntityType entityType, string optionalText = "")
+        {
+            return _service.GetRecordsWithConfig(entityType, optionalText);
+
+        }
+
         [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
         [ActionName("DeleteRecord")]
         [HttpPost]

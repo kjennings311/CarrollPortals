@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Carroll.Data.Entities.Helpers;
@@ -489,6 +490,49 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
+        public dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "")
+        {
+             using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+
+                var config = new Config { };
+
+                switch (entityType)
+                {
+
+                    case EntityType.Property:
+
+                        #region [ Property ]
+
+                        // we are calling stored procedure spProperties_Result here..
+                        if (string.IsNullOrEmpty(optionalSeachText))
+                             config.Rows=_entities.spProperties().ToList();
+                        else
+                            config.Rows = _entities.spProperties().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.LegalName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                        config.EtType = entityType.ToString();
+                        PropertyInfo[] properties = typeof(spProperties_Result).GetProperties();
+                        config.PkName = FirstChartoLower(properties.ToList().FirstOrDefault().Name);
+                        config.Columns = new List<DtableConfigArray>();
+
+                        foreach (var item in properties)
+                        {
+                            config.Columns.Add(new DtableConfigArray { data = FirstChartoLower(item.Name), name = FirstChartoLower(item.Name), autoWidth = false });
+                        }
+
+                        return config;
+                        
+                        #endregion
+                    default:
+                        break;
+                }
+
+            }
+            return null;
+
+        }
+
         // ************************ STORED PROCEDURES ****************************************//
         //public List<spProperties_Result> GetProperties(string optionalSeachText = "")
         //{
@@ -510,5 +554,25 @@ namespace Carroll.Data.Entities.Repository
             return Activator.CreateInstance(type);
 
         }
+
+        public string FirstChartoLower(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+                throw new ArgumentException("ARGH!");
+            return input.First().ToString().ToLower() + input.Substring(1);
+        }
+        //public Config GetDatatableConfig(EntityType entityType,)
+        //{
+
+        //    config.EtType = entityType.ToString();
+        //    PropertyInfo[] properties = typeof(spProperties_Result).GetProperties();
+        //    config.PkName = FirstChartoLower(properties.ToList().FirstOrDefault().Name);
+        //    config.Columns = new List<DtableConfigArray>();
+
+        //    foreach (var item in properties)
+        //    {
+        //        config.Columns.Add(new DtableConfigArray { data = FirstChartoLower(item.Name), name = FirstChartoLower(item.Name), autoWidth = false });
+        //    }
+        //}
     }
 }

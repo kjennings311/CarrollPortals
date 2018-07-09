@@ -1,4 +1,5 @@
-﻿var $BaseApiUrl = "http://localhost:1002/"; 
+﻿
+var $BaseApiUrl = "http://localhost:1002/"; 
 
 // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 //49786/";
@@ -1395,7 +1396,6 @@ function LoadFormPropertyDamageClaims() {
 }
 
 
-
 // called from User Role page
 function LoadGeneralLiabilityClaims() {
     $.when(GetToken()).then(
@@ -1799,3 +1799,93 @@ function ScrollToElement($elem) {
         scrollTop: $elem.offset().top
     }, 1500);
 }
+
+
+function ConfigDatatable(Form) {
+  
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getrecordswithconfig?entitytype=" + Form,
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+
+                    var configdata = data;
+                    console.log(configdata);
+
+                    console.log(configdata.columns);
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: configdata.rows,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here      
+                            
+                            console.log(data[configdata.pkName]);
+                            console.log(configdata.etType);
+                            console.log(configdata.columns);
+                            $(row).attr('id', data[configdata.pkName]);
+                            $(row).attr('itemType', configdata.etType);
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }
+                        ],
+                        columns: configdata.columns
+                    }).columns.adjust();
+                }
+            });
+        }
+    );
+}
+
+
+

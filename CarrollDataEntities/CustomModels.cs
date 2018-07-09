@@ -20,4 +20,19 @@ namespace Carroll.Data.Entities
         FormMoldDamageClaim=8,
         FormGeneralLiabilityClaim=9
     }
+
+    public class Config
+    {
+        public string PkName { get; set; }
+        public string EtType { get; set; }
+        public List<DtableConfigArray> Columns { get; set; }
+        public dynamic Rows { get; set; }
+    }
+
+    public class DtableConfigArray
+    {
+        public string name { get; set; }
+        public string data { get; set; }
+        public bool autoWidth { get; set; }
+    }
 }

@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" onload='javascript:document.getElementById("demo").click();' >
 
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <input type="password" name="Password" class="form-control" value="demotest" placeholder="Password" required="">
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                <button type="submit" id="demo" class="btn btn-primary block full-width m-b">Login</button>
 
                 <a href="~/Account/ForgotPassword"><small>Forgot password?</small></a>
                 <p class="text-muted text-center"><small>Do not have an account?</small></p>
@@ -62,6 +62,7 @@
     </div>
 
 </body>
+
 
 </html>
 
