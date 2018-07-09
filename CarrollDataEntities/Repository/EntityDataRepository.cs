@@ -136,6 +136,10 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
+                try
+                {
+
+               
                 _entities.Configuration.ProxyCreationEnabled = false;
                 switch (entityType)
                 {   
@@ -152,7 +156,7 @@ namespace Carroll.Data.Entities.Repository
                             _property.CreatedDate = DateTime.Now;
                             // No record exists create a new property record here
                             _entities.Properties.Add(_property);
-                            _entities.SaveChanges();
+                           // _entities.SaveChanges();
                             int i = _entities.SaveChanges();
                             return (i == 1) ? true : false;
                         }
@@ -408,9 +412,14 @@ namespace Carroll.Data.Entities.Repository
 
                         break;
                 }
+                }
+                catch (Exception ex)
+                {
+
+                    return false;
+                }
+
                 return true;
-               
-               
             }
 
         }
