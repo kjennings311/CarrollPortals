@@ -127,7 +127,7 @@
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PropertyName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PropertyNumber" Type="int" />
-          <Property Name="LegalName" Type="varchar" MaxLength="50" />
+          <Property Name="LegalName" Type="varchar" MaxLength="150" />
           <Property Name="Units" Type="int" />
           <Property Name="TaxId" Type="varchar" MaxLength="50" />
           <Property Name="PropertyAddress" Type="varchar" MaxLength="50" />
@@ -432,7 +432,7 @@
           <Property Name="PropertyId" Type="Guid" Nullable="false" />
           <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PropertyNumber" Type="Int32" />
-          <Property Name="LegalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LegalName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Units" Type="Int32" />
           <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PropertyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />

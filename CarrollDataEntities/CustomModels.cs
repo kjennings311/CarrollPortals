@@ -21,7 +21,15 @@ namespace Carroll.Data.Entities
         FormGeneralLiabilityClaim=9
     }
 
-    public class Config
+    public enum DFieldType
+    {
+        IsText=0,
+        IsDate=1,
+        IsPerson=2,
+        IsPic=3
+    }
+
+     public class Config
     {
         public string PkName { get; set; }
         public string EtType { get; set; }
@@ -32,7 +40,7 @@ namespace Carroll.Data.Entities
     public class DtableConfigArray
     {
         public string name { get; set; }
-        public string data { get; set; }
-        public bool autoWidth { get; set; }
+        public DFieldType type { get; set; }
+        public string href { get; set; }
     }
 }

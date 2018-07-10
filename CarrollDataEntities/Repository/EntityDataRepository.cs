@@ -503,27 +503,54 @@ namespace Carroll.Data.Entities.Repository
 
                     case EntityType.Property:
 
-                        #region [ Property ]
+                    //    #region [ Property ]
+
+                    //    // we are calling stored procedure spProperties_Result here..
+                    //    if (string.IsNullOrEmpty(optionalSeachText))
+                    //         config.Rows=_entities.spProperties().ToList();
+                    //    else
+                    //        config.Rows = _entities.spProperties().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.LegalName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                    //    config.EtType = entityType.ToString();
+                    //    PropertyInfo[] properties = typeof(spProperties_Result).GetProperties();
+                    //    config.PkName = FirstChartoLower(properties.ToList().FirstOrDefault().Name);
+                    //    config.Columns = new List<DtableConfigArray>();
+
+                    //    foreach (var item in properties)
+                    //    {
+                    //        config.Columns.Add(new DtableConfigArray { data = FirstChartoLower(item.Name), name = FirstChartoLower(item.Name), autoWidth = false });
+                    //    }
+
+                    //    return config;
+
+                    //#endregion
+
+                    case EntityType.User:
+
+                        #region [User]
 
                         // we are calling stored procedure spProperties_Result here..
                         if (string.IsNullOrEmpty(optionalSeachText))
-                             config.Rows=_entities.spProperties().ToList();
+                            config.Rows = _entities.SiteUsers.ToList();
                         else
-                            config.Rows = _entities.spProperties().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.LegalName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                            config.Rows = _entities.SiteUsers.Where(x => x.FirstName.ToLower().Contains(optionalSeachText.ToLower()) || x.LastName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                         config.EtType = entityType.ToString();
-                        PropertyInfo[] properties = typeof(spProperties_Result).GetProperties();
-                        config.PkName = FirstChartoLower(properties.ToList().FirstOrDefault().Name);
+                        PropertyInfo[] userprop = typeof(SiteUser).GetProperties();
+                        config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                         config.Columns = new List<DtableConfigArray>();
 
-                        foreach (var item in properties)
-                        {
-                            config.Columns.Add(new DtableConfigArray { data = FirstChartoLower(item.Name), name = FirstChartoLower(item.Name), autoWidth = false });
-                        }
+                        config.Columns.Add(new DtableConfigArray { name = "userEmail", type=0,href="" });
+                        config.Columns.Add(new DtableConfigArray { name = "firstName", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "lastName", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "phone", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "userPhoto", type = DFieldType.IsPic, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "isActive", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "isApproved", type = 0, href = "" });
 
                         return config;
-                        
-                        #endregion
+
+                    #endregion
                     default:
                         break;
                 }

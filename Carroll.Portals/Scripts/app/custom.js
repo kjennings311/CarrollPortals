@@ -2,6 +2,7 @@
 var $BaseApiUrl = "http://localhost:1002/"; 
 
 // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+
 //49786/";
 //Token and UserOject are global variables can be used here.
 
@@ -1060,8 +1061,7 @@ function LoadUsers() {
 
                         ],
 
-                        columns: [
-                            //{
+                        columns: [  //{
                             //    "targets": -1,
                             //    "data": null,
                             //    "sortable": false,
@@ -1815,10 +1815,52 @@ function ConfigDatatable(Form) {
                 },
                 success: function (data) {
 
-                    var configdata = data;
-                    console.log(configdata);
+                    var configdata =data;
+                  
+                    var columnlist1 = [];
+                    columnlist1.push({
+                        render: function (data, type, row, meta) {
+                            return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                        }
+                    });
 
-                    console.log(configdata.columns);
+                    for (var i = 0; i < configdata.columns.length; i++) {
+                        if (configdata.columns[i].type == "0")
+                            columnlist1.push({ data: configdata.columns[i].name, name: configdata.columns[i].name, autoWidth: false });
+
+                        else if (configdata.columns[i].type == "3") {
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, render: function (data, type, row, meta) {
+                                    return '<img src = "' + data + '" width = "50px" height = "50px" > ';
+                                }
+                                , "name": configdata.columns[i].name, "autoWidth": false
+                            });
+                        }
+                        else if (configdata.columns[i].type == "1") {
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, 'render': function (date) {
+                                    if (date == null) return '';
+                                    var date = new Date(date);
+                                    var month = date.getMonth() + 1;
+                                    return month + "/" + date.getDate() + "/" + date.getFullYear();
+                                }
+                            });
+                        }
+                        else if (configdata.columns[i].type == "2") {
+
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, render: function (data, type, row) {
+                                    if (data != null) {
+                                        var result = JSON.parse(data);
+                                        return '<a href="' + configdata.columns[i].href + result["id"] + '">' + result["name"] + '</a>';
+                                    } else return '';
+                                }
+                                , "name": configdata.columns[i].name
+                            });
+
+                        }
+                    }
+
                     var datatableVariable = $('.dtprops').DataTable({
                         data: configdata.rows,
                         processing: true,
@@ -1827,7 +1869,7 @@ function ConfigDatatable(Form) {
                         "scrollX": true,
                         "rowCallback": function (row, data) {
                             // do anything row wise here      
-                            
+
                             console.log(data[configdata.pkName]);
                             console.log(configdata.etType);
                             console.log(configdata.columns);
@@ -1877,10 +1919,11 @@ function ConfigDatatable(Form) {
                                         .addClass('compact')
                                         .css('font-size', 'inherit');
                                 }
-                            }
-                        ],
-                        columns: configdata.columns
-                    }).columns.adjust();
+                            }],
+                        columns: columnlist1
+
+                    });
+
                 }
             });
         }
