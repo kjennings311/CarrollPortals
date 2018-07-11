@@ -78,7 +78,7 @@ namespace Carroll.Data.Entities.Repository
                         return null;
                         #endregion
                     case EntityType.Contact:
-                        #region [ Cotact ]
+                        #region [ Contact ]
                         var _cont = _entities.Contacts.Where(x => x.ContactId == _recId).FirstOrDefault();
                         if (_cont != null) { return _cont; }
                         return null;
@@ -429,10 +429,13 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
+               
                 _entities.Configuration.ProxyCreationEnabled = false;
                
                 switch (entityType)
                 {
+                   
+
                     case EntityType.Property:
                         #region [ Property ]
                         // we are calling stored procedure spProperties_Result here..
@@ -441,8 +444,12 @@ namespace Carroll.Data.Entities.Repository
                         #endregion
                     case EntityType.Contact:
                         #region [ Contact ]
-                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.Contacts.ToList();
-                        else return _entities.Contacts.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Title.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.Email.Contains(optionalSeachText))).ToList();
+
+                        BaseRepository<Contact> rep = new BaseRepository<Contact>(_entities);
+                      return  rep.GetAll();
+
+                        //if (string.IsNullOrEmpty(optionalSeachText)) return _entities.Contacts.ToList();
+                        //else return _entities.Contacts.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Title.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.Email.Contains(optionalSeachText))).ToList();
                         #endregion
                     case EntityType.Partner:
                         #region
@@ -451,6 +458,7 @@ namespace Carroll.Data.Entities.Repository
                     #endregion
                     case EntityType.UserInRole:
                         #region [ User In Role ]
+                        
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.sp_GetUserRoles().ToList();
                         else return _entities.sp_GetUserRoles().Where(x => x.userName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText) || x.RoleName.Contains(optionalSeachText)).ToList();
                     #endregion
@@ -540,13 +548,13 @@ namespace Carroll.Data.Entities.Repository
                         config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                         config.Columns = new List<DtableConfigArray>();
 
-                        config.Columns.Add(new DtableConfigArray { name = "userEmail", type=0,href="" });
-                        config.Columns.Add(new DtableConfigArray { name = "firstName", type = 0, href = "" });
-                        config.Columns.Add(new DtableConfigArray { name = "lastName", type = 0, href = "" });
-                        config.Columns.Add(new DtableConfigArray { name = "phone", type = 0, href = "" });
-                        config.Columns.Add(new DtableConfigArray { name = "userPhoto", type = DFieldType.IsPic, href = "" });
-                        config.Columns.Add(new DtableConfigArray { name = "isActive", type = 0, href = "" });
-                        config.Columns.Add(new DtableConfigArray { name = "isApproved", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "userEmail", label="User Email", type=0,href="" });
+                        config.Columns.Add(new DtableConfigArray { name = "firstName", label = "First Name", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "lastName", label = "Last Name", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "phone", label = "Phone", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "userPhoto", label = "User Photo", type = DFieldType.IsPic, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "isActive", label = "Is Active", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "isApproved", label = "Is Approved", type = 0, href = "" });
 
                         return config;
 

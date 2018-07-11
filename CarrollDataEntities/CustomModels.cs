@@ -40,6 +40,7 @@ namespace Carroll.Data.Entities
     public class DtableConfigArray
     {
         public string name { get; set; }
+        public string label { get; set; }
         public DFieldType type { get; set; }
         public string href { get; set; }
     }

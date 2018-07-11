@@ -1823,8 +1823,9 @@ function ConfigDatatable(Form) {
                             return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
                         }
                     });
-
+                    var tablehead = "<tr><th></th>";
                     for (var i = 0; i < configdata.columns.length; i++) {
+                        tablehead += "<th>" + configdata.columns[i].label+" </th>";
                         if (configdata.columns[i].type == "0")
                             columnlist1.push({ data: configdata.columns[i].name, name: configdata.columns[i].name, autoWidth: false });
 
@@ -1861,6 +1862,12 @@ function ConfigDatatable(Form) {
                         }
                     }
 
+                    tablehead += "</tr>";
+                   
+                    $(".dtprops").html("<thead> " + tablehead + "</thead><tbody> </tbody> <tfoot> "+tablehead+"</tfoot>");
+                    
+
+
                     var datatableVariable = $('.dtprops').DataTable({
                         data: configdata.rows,
                         processing: true,
@@ -1869,10 +1876,7 @@ function ConfigDatatable(Form) {
                         "scrollX": true,
                         "rowCallback": function (row, data) {
                             // do anything row wise here      
-
-                            console.log(data[configdata.pkName]);
-                            console.log(configdata.etType);
-                            console.log(configdata.columns);
+                                                      
                             $(row).attr('id', data[configdata.pkName]);
                             $(row).attr('itemType', configdata.etType);
                             $(row).attr('onClick', 'HandleRowClick(this);');
