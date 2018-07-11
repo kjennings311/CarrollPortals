@@ -449,7 +449,22 @@ function ToggleAdd(formaname) {
     // these controls are in properties.aspx page
     $('.RowsContatiner').toggle('slow', function () {
         $('.AddEditContainer').toggle('slow', function () {
-            if ($(this).is(":visible")) { getForm(formaname,''); }
+            if ($(this).is(":visible")) {
+                getForm(formaname, '');
+                if ($(".form-heading").length)
+                {
+                    if (formaname =="FormPropertyDamageClaim")
+                        $(".form-heading").html("Add Property Damage Claim");
+                    else if (formaname == "FormGeneralLiabilityClaim")
+                        $(".form-heading").html("Add General Liability Claim");
+                    else if (formaname == "FormMoldDamageClaim")
+                        $(".form-heading").html("Add Mold Damage Claim");
+                    else
+                        $(".form-heading").html("");
+
+                }
+                   
+            }
         });
     });
    
