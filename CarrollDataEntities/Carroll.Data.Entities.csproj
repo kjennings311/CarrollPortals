@@ -118,6 +118,9 @@
     <Compile Include="spProperties_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_GetAllClaims_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_GetUserProperties_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -128,6 +131,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserInRole.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="view_getallclaims.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

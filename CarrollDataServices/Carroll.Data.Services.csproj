@@ -155,6 +155,9 @@
     <Content Include="ModelXml\FormPropertyDamageClaim.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ModelXml\partners.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ModelXml\PropertyDamage.xml">
       <SubType>Designer</SubType>
     </Content>

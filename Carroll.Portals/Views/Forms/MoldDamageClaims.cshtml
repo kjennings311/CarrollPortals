@@ -102,22 +102,26 @@
                 <h5> Add/Edit Mold Damage Claim </h5>
                 <div class="ibox-tools">
                     @*<a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>*@
+            <i class="fa fa-chevron-up"></i>
+        </a>*@
+                    @{
+                        if (@Model.RoleType == "Administrator")
+                        {
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('FormMoldDamageClaim');">
+                                <i class="fa fa-minus-circle"></i> Cancel
+                            </a>
+                            } }
 
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('FormMoldDamageClaim');">
-                        <i class="fa fa-minus-circle"></i> Cancel
-                    </a>
-                    @*<ul class="dropdown-menu dropdown-user">
-                            <li>
-                                <a href="#" >Cancel</a>
-                            </li>
+                            @*<ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#" >Cancel</a>
+                    </li>
 
-                        </ul>*@
-                    @*<a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>*@
-                </div>
+                </ul>*@
+                            @*<a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>*@
+                        </div>
             </div>
             <div class="ibox-content dynamicForm">
 

@@ -18,6 +18,7 @@ namespace Carroll.Data.Entities.Repository
 
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
+        dynamic GetAllClaims(Guid? userid,Guid? propertyid,string OptionalSeachText);
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);

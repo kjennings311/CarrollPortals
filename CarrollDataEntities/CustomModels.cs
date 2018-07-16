@@ -18,7 +18,9 @@ namespace Carroll.Data.Entities
         UserInProperty = 6,
         FormPropertyDamageClaim=7,
         FormMoldDamageClaim=8,
-        FormGeneralLiabilityClaim=9
+        FormGeneralLiabilityClaim=9,
+        AllClaims=10
+
     }
 
     public enum DFieldType

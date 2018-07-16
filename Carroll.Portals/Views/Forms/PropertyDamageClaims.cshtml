@@ -27,18 +27,24 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5> Property Damage Claims <small></small></h5>
-                <div class="ibox-tools">
-                    <a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('FormPropertyDamageClaim');"><i class="fa fa-edit"></i> Edit</a>
+                @{
+                    if (@Model.RoleType == "Administrator")
+                    {
 
-                    <a disabled="disabled" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>
+                        <div class="ibox-tools">
+                            <a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('FormPropertyDamageClaim');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a style="color:#1ab394;" href="#" onclick="ToggleAdd('FormPropertyDamageClaim');">
-                        <i class="fa fa-plus-circle"></i> Add New
-                    </a>
-                </div>
-            </div>
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+
+                            <a style="color:#1ab394;" href="#" onclick="ToggleAdd('FormPropertyDamageClaim');">
+                                <i class="fa fa-plus-circle"></i> Add New
+                            </a>
+                        </div>
+                        }
+                    }
+                    </div>
             <div class="ibox-content">
                 <table class="table table-striped table-bordered table-hover dtprops" width="100%">
                     <thead>
@@ -96,7 +102,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <div class="AddEditContainer row" style="display:none;">
 

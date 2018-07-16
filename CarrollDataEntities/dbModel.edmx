@@ -204,6 +204,31 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="view_getallclaims">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PropertyId" />
+            <PropertyRef Name="ClaimType" />
+            <PropertyRef Name="PropertyName" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaimType" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="PropertyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PropertyNumber" Type="int" />
+          <Property Name="PropertyManager" Type="varchar" MaxLength="31" />
+          <Property Name="PropertyAddress" Type="varchar" MaxLength="74" />
+          <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentDescription" Type="varchar(max)" />
+          <Property Name="IncidentDateTime" Type="datetime" />
+          <Property Name="ReportedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DateReported" Type="datetime" />
+          <Property Name="ReportedPhone" Type="varchar" MaxLength="17" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+        </EntityType>
         <Association Name="FK_UserInProperty_Properties">
           <End Role="Properties" Type="Self.Properties" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -249,6 +274,10 @@
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetPropertyDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetAllClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="propertyid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="sp_GetUserProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -263,6 +292,25 @@
           <EntitySet Name="SiteUsers" EntityType="Self.SiteUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInProperty" EntityType="Self.UserInProperty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInRole" EntityType="Self.UserInRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_getallclaims" EntityType="Self.view_getallclaims" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_getallclaims].[Id] AS [Id], 
+    [view_getallclaims].[PropertyId] AS [PropertyId], 
+    [view_getallclaims].[ClaimType] AS [ClaimType], 
+    [view_getallclaims].[PropertyName] AS [PropertyName], 
+    [view_getallclaims].[PropertyNumber] AS [PropertyNumber], 
+    [view_getallclaims].[PropertyManager] AS [PropertyManager], 
+    [view_getallclaims].[PropertyAddress] AS [PropertyAddress], 
+    [view_getallclaims].[IncidentLocation] AS [IncidentLocation], 
+    [view_getallclaims].[IncidentDescription] AS [IncidentDescription], 
+    [view_getallclaims].[IncidentDateTime] AS [IncidentDateTime], 
+    [view_getallclaims].[ReportedBy] AS [ReportedBy], 
+    [view_getallclaims].[DateReported] AS [DateReported], 
+    [view_getallclaims].[ReportedPhone] AS [ReportedPhone], 
+    [view_getallclaims].[CreatedDate] AS [CreatedDate], 
+    [view_getallclaims].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[view_getallclaims] AS [view_getallclaims]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_UserInProperty_Properties" Association="Self.FK_UserInProperty_Properties">
             <End Role="Properties" EntitySet="Properties" />
             <End Role="UserInProperty" EntitySet="UserInProperty" />
@@ -309,6 +357,11 @@
           <FunctionImport Name="proc_GetGeneralLiabilityClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetGeneralLiabilityClaims_Result)" />
           <FunctionImport Name="proc_GetMoldDamageClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetMoldDamageClaims_Result)" />
           <FunctionImport Name="proc_GetPropertyDamageClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetPropertyDamageClaims_Result)" />
+          <EntitySet Name="view_getallclaims" EntityType="Carroll.Data.Entities.view_getallclaims" />
+          <FunctionImport Name="SP_GetAllClaims" ReturnType="Collection(Carroll.Data.Entities.SP_GetAllClaims_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+            <Parameter Name="propertyid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -688,6 +741,46 @@
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
         </ComplexType>
+        <EntityType Name="view_getallclaims">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PropertyId" />
+            <PropertyRef Name="ClaimType" />
+            <PropertyRef Name="PropertyName" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PropertyId" Type="Guid" Nullable="false" />
+          <Property Name="ClaimType" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyNumber" Type="Int32" />
+          <Property Name="PropertyManager" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="74" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateReported" Type="DateTime" Precision="3" />
+          <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+        </EntityType>
+        <ComplexType Name="SP_GetAllClaims_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="17" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="31" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="74" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="17" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1054,6 +1147,48 @@
                 <ScalarProperty Name="DateReported" ColumnName="DateReported" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="view_getallclaims">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.view_getallclaims">
+              <MappingFragment StoreEntitySet="view_getallclaims">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetAllClaims" FunctionName="Carroll.Data.Entities.Store.SP_GetAllClaims">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.SP_GetAllClaims_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>

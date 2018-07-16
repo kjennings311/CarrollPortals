@@ -27,8 +27,11 @@ namespace Carroll.Data.Services.Models
             _repository = repository;
         }
 
+        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string optionalSeachText="")
+        {
+            return _repository.GetAllClaims(userid,propertyid, optionalSeachText);
+        }
 
-     
         #region [Records]
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {

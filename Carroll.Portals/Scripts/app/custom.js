@@ -198,8 +198,8 @@ function BindElements()
                                     $form.find('#successMessage').html("Record successfully updated!");
                                     $form.find('.success-message').show('slow');
                                     ScrollToElement($form.find('.success-message'));
-                                    // go back to previous screen after 5 seconds
-                                  setTimeout(location.reload(), 5000);
+                                    // go back to previous screen after 8 seconds
+                                 setTimeout(location.reload(), 10000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -430,8 +430,6 @@ function LoadOptions(fieldId, DataLoadUrl, value)
     var options = "";
     var selected = "";
 
-    console.log( 'field id is '+ fieldId +'value is ' + value);
-
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
        
         for (var i = 0; i < data.length ; i++){
@@ -447,6 +445,16 @@ function LoadOptions(fieldId, DataLoadUrl, value)
 
 function ToggleAdd(formaname) {
     // these controls are in properties.aspx page
+
+    if (!$('.RowsContatiner').is(":visible"))
+    {
+        if(!confirm("Form is Opened, Any Un Saved Changes will be lost, Do you want to Continue?"))
+        {           
+            return false;
+        }
+
+    }
+
     $('.RowsContatiner').toggle('slow', function () {
         $('.AddEditContainer').toggle('slow', function () {
             if ($(this).is(":visible")) {
@@ -468,6 +476,38 @@ function ToggleAdd(formaname) {
         });
     });
    
+}
+
+function LoadForm(formaname) {
+    // these controls are in properties.aspx page
+
+    if ($('.AddEditContainer').is(":visible")) {
+        if (!confirm("Form is Opened, Any Un Saved Changes will be lost, Do you want to Continue?")) {
+            return false;
+        }
+    }
+
+    //$('.RowsContatiner').toggle('slow', function ()
+    //{
+        $('.AddEditContainer').toggle('slow', function () {
+            if ($(this).is(":visible")) {
+                getForm(formaname, '');
+                if ($(".form-heading").length) {
+                    if (formaname == "FormPropertyDamageClaim")
+                        $(".form-heading").html("Add Property Damage Claim");
+                    else if (formaname == "FormGeneralLiabilityClaim")
+                        $(".form-heading").html("Add General Liability Claim");
+                    else if (formaname == "FormMoldDamageClaim")
+                        $(".form-heading").html("Add Mold Damage Claim");
+                    else
+                        $(".form-heading").html("");
+
+                }
+
+            }
+        });
+    //});
+
 }
 
 function ToggleEdit(formname)
@@ -1691,7 +1731,7 @@ function ApplyInputMask(container) {
                 default: break;
 
             }
-            $(":input").inputmask();
+          //  $(":input").inputmask();
         }
     });
 }
@@ -1949,5 +1989,138 @@ function ConfigDatatable(Form) {
     );
 }
 
+
+function GetAllClaims() {
+
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/getallclaims?userid=" + $("#CreatedBy").val(),
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+
+                    var configdata = data;
+
+                    var columnlist1 = [];
+                    columnlist1.push({
+                        render: function (data, type, row, meta) {
+                            return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                        }
+                    });
+                    var tablehead = "<tr><th></th>";
+                    for (var i = 0; i < configdata.columns.length; i++) {
+                        tablehead += "<th>" + configdata.columns[i].label + " </th>";
+                        if (configdata.columns[i].type == "0")
+                            columnlist1.push({ data: configdata.columns[i].name, name: configdata.columns[i].name, autoWidth: false });
+
+                        else if (configdata.columns[i].type == "3") {
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, render: function (data, type, row, meta) {
+                                    return '<img src = "' + data + '" width = "50px" height = "50px" > ';
+                                }
+                                , "name": configdata.columns[i].name, "autoWidth": false
+                            });
+                        }
+                        else if (configdata.columns[i].type == "1") {
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, 'render': function (date) {
+                                    if (date == null) return '';
+                                    var date = new Date(date);
+                                    var month = date.getMonth() + 1;
+                                    return month + "/" + date.getDate() + "/" + date.getFullYear();
+                                }
+                            });
+                        }
+                        else if (configdata.columns[i].type == "2") {
+
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, render: function (data, type, row) {
+                                    if (data != null) {
+                                        var result = JSON.parse(data);
+                                        return '<a href="' + configdata.columns[i].href + result["id"] + '">' + result["name"] + '</a>';
+                                    } else return '';
+                                }
+                                , "name": configdata.columns[i].name
+                            });
+
+                        }
+                    }
+
+                    tablehead += "</tr>";
+
+                    $(".dtprops").html("<thead> " + tablehead + "</thead><tbody> </tbody> <tfoot> " + tablehead + "</tfoot>");
+
+
+
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: configdata.rows,
+                        processing: true,
+                        scrollY: '50vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here      
+
+                            $(row).attr('id', data[configdata.pkName]);
+                            $(row).attr('itemType', configdata.etType);
+                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            console.log($(row));
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }],
+                        columns: columnlist1
+
+                    });
+
+                }
+            });
+        }
+    );
+}
 
 

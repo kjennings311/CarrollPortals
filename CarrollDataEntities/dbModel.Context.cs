@@ -37,6 +37,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<UserInProperty> UserInProperties { get; set; }
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
         public virtual DbSet<SiteUser> SiteUsers { get; set; }
+        public virtual DbSet<view_getallclaims> view_getallclaims { get; set; }
     
         public virtual ObjectResult<spProperties_Result> spProperties()
         {
@@ -66,6 +67,19 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_GetPropertyDamageClaims_Result> proc_GetPropertyDamageClaims()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetPropertyDamageClaims_Result>("proc_GetPropertyDamageClaims");
+        }
+    
+        public virtual ObjectResult<SP_GetAllClaims_Result> SP_GetAllClaims(Nullable<System.Guid> userid, Nullable<System.Guid> propertyid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            var propertyidParameter = propertyid.HasValue ?
+                new ObjectParameter("propertyid", propertyid) :
+                new ObjectParameter("propertyid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllClaims_Result>("SP_GetAllClaims", useridParameter, propertyidParameter);
         }
     }
 }

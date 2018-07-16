@@ -514,7 +514,7 @@ namespace Carroll.Portals
                         "~/scripts/plugins/pwstrength/zxcvbn.js"));
 
             // input-mask
-            bundles.Add(new StyleBundle("~/scripts/plugins/input-mask").Include(
+            bundles.Add(new StyleBundle("~/scripts/plugins/input-mask").Include("~/scripts/plugins/input-mask/inputmask.js",
                         "~/scripts/plugins/input-mask/jquery.inputmask.js",
                         "~/scripts/plugins/input-mask/jquery.inputmask.regex.extensions.js",
                         "~/scripts/plugins/input-mask/jquery.inputmask.numeric.extensions.js"

@@ -498,6 +498,43 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
+        public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string optionalSeachText)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+
+                var config = new Config { };
+
+                    
+                        if (string.IsNullOrEmpty(optionalSeachText))
+                            config.Rows = _entities.SP_GetAllClaims(userid,propertyid).ToList();
+                        else
+                            config.Rows = _entities.SP_GetAllClaims(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                        config.EtType = EntityType.AllClaims.ToString();
+                        PropertyInfo[] userprop = typeof(SP_GetAllClaims_Result).GetProperties();
+                        config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                        config.Columns = new List<DtableConfigArray>();
+
+                        config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Claim Type", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "propertyNumber", label = "Property Number", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "propertyManager", label = "Property Manager", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "propertyAddress", label = "Property Address", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "incidentLocation", label = "Incident Location", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "incidentDescription", label = "Incident Description", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "incidentDateTime", label = "Incident DateTime", type = DFieldType.IsDate, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "reportedBy", label = "Reported By", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "dateReported", label = "Date Reported", type = DFieldType.IsDate, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "reportedPhone", label = "Reported Phone", type = DFieldType.IsText, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type =  DFieldType.IsDate, href = "" });
+
+                return config;                
+
+            }
+
+        }
         public dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "")
         {
              using (CarrollFormsEntities _entities = DBEntity)
@@ -559,6 +596,7 @@ namespace Carroll.Data.Entities.Repository
                         return config;
 
                     #endregion
+
                     default:
                         break;
                 }

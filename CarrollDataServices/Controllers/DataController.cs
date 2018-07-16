@@ -77,6 +77,13 @@ namespace Carroll.Data.Services.Controllers
 
         }
 
+        [ActionName("GetAllClaims")]
+        [HttpGet]
+        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string optionalSeachText = "")
+        {
+            return _service.GetAllClaims(userid, propertyid, optionalSeachText);
+        }
+
         [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
         [ActionName("DeleteRecord")]
         [HttpPost]

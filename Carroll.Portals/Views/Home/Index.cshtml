@@ -12,13 +12,13 @@
                     <button type="button" class="btn btn-w-m btn-primary">Property Damage Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
-                    <div class="col-sm-6">
+                    @*<div class="col-sm-6">
                         <h1 class="no-margins">800</h1>
                         <small>Total Claims</small>
-                    </div>
+                    </div>*@
 
                     <div class="col-sm-6 font-bold text-primary" style="margin-top:15px;">
-                        <a style="color:#1ab394;font-size:20px" href="#" onclick="ToggleAdd('FormPropertyDamageClaim');">
+                        <a style="color:#1ab394;font-size:20px" href="#" onclick="LoadForm('FormPropertyDamageClaim');">
                             <i class="fa fa-plus-circle"></i> Add New
                         </a>
                     </div>
@@ -33,13 +33,13 @@
                     <button type="button" class="btn btn-w-m btn-info">General Liability Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
-                    <div class="col-sm-6">
+                    @*<div class="col-sm-6">
                         <h1 class="no-margins">80</h1>
                         <small>Total Claims</small>
-                    </div>
+                    </div>*@
 
                     <div class="col-sm-6 font-bold text-info" style="margin-top:15px;">
-                        <a style="color:#23c6c8;font-size:20px" href="#" onclick="ToggleAdd('FormGeneralLiabilityClaim');">
+                        <a style="color:#23c6c8;font-size:20px" href="#" onclick="LoadForm('FormGeneralLiabilityClaim');">
                             <i class="fa fa-plus-circle"></i> Add New
                         </a>
                     </div>
@@ -55,13 +55,13 @@
                     <button type="button" class="btn btn-w-m btn-success">Mold Damage Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
-                    <div class="col-sm-6">
+                    @*<div class="col-sm-6">
                         <h1 class="no-margins">8</h1>
                         <small>Total Claims</small>
-                    </div>
+                    </div>*@
 
                     <div class="col-sm-6 font-bold text-success" style="margin-top:15px;">
-                        <a style="color:#1c84c6;font-size:20px" href="#" onclick="ToggleAdd('FormMoldDamageClaim');">
+                        <a style="color:#1c84c6;font-size:20px" href="#" onclick="LoadForm('FormMoldDamageClaim');">
                             <i class="fa fa-plus-circle"></i> Add New
                         </a>
                     </div>
@@ -70,233 +70,16 @@
             </div>
         </div>
 
-        
+
 
 
     </div>
-   
+
 
     <div class="row">
 
         <div class="col-lg-12">
-            <div class="ibox RowsContatiner">
-                <div class="ibox-title">
-                    <h5>All Submissions </h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li>
-                                <a href="#" class="dropdown-item">Config option 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-item">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-sm-9 m-b-xs">
-                            <div data-toggle="buttons" class="btn-group btn-group-toggle">
-                                <label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options"> Day </label>
-                                <label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options"> Week </label>
-                                <label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options"> Month </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control form-control-sm" placeholder="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-sm btn-primary" type="button">Go!</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-
-                                    <th>#</th>
-                                    <th>Project </th>
-                                    <th>Name </th>
-                                    <th>Phone </th>
-                                    <th>Company </th>
-                                    <th>Completed </th>
-                                    <th>Task</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Project <small>This is example of project</small></td>
-                                    <td>Patrick Smith</td>
-                                    <td>0800 051213</td>
-                                    <td>Inceptos Hymenaeos Ltd</td>
-                                    <td><span class="pie">0.52/1.561</span></td>
-                                    <td>20%</td>
-                                    <td>Jul 14, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Alpha project</td>
-                                    <td>Alice Jackson</td>
-                                    <td>0500 780909</td>
-                                    <td>Nec Euismod In Company</td>
-                                    <td><span class="pie">6,9</span></td>
-                                    <td>40%</td>
-                                    <td>Jul 16, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Betha project</td>
-                                    <td>John Smith</td>
-                                    <td>0800 1111</td>
-                                    <td>Erat Volutpat</td>
-                                    <td><span class="pie">3,1</span></td>
-                                    <td>75%</td>
-                                    <td>Jul 18, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gamma project</td>
-                                    <td>Anna Jordan</td>
-                                    <td>(016977) 0648</td>
-                                    <td>Tellus Ltd</td>
-                                    <td><span class="pie">4,9</span></td>
-                                    <td>18%</td>
-                                    <td>Jul 22, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Alpha project</td>
-                                    <td>Alice Jackson</td>
-                                    <td>0500 780909</td>
-                                    <td>Nec Euismod In Company</td>
-                                    <td><span class="pie">6,9</span></td>
-                                    <td>40%</td>
-                                    <td>Jul 16, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Project <small>This is example of project</small></td>
-                                    <td>Patrick Smith</td>
-                                    <td>0800 051213</td>
-                                    <td>Inceptos Hymenaeos Ltd</td>
-                                    <td><span class="pie">0.52/1.561</span></td>
-                                    <td>20%</td>
-                                    <td>Jul 14, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gamma project</td>
-                                    <td>Anna Jordan</td>
-                                    <td>(016977) 0648</td>
-                                    <td>Tellus Ltd</td>
-                                    <td><span class="pie">4,9</span></td>
-                                    <td>18%</td>
-                                    <td>Jul 22, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Project <small>This is example of project</small></td>
-                                    <td>Patrick Smith</td>
-                                    <td>0800 051213</td>
-                                    <td>Inceptos Hymenaeos Ltd</td>
-                                    <td><span class="pie">0.52/1.561</span></td>
-                                    <td>20%</td>
-                                    <td>Jul 14, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Alpha project</td>
-                                    <td>Alice Jackson</td>
-                                    <td>0500 780909</td>
-                                    <td>Nec Euismod In Company</td>
-                                    <td><span class="pie">6,9</span></td>
-                                    <td>40%</td>
-                                    <td>Jul 16, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Betha project</td>
-                                    <td>John Smith</td>
-                                    <td>0800 1111</td>
-                                    <td>Erat Volutpat</td>
-                                    <td><span class="pie">3,1</span></td>
-                                    <td>75%</td>
-                                    <td>Jul 18, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gamma project</td>
-                                    <td>Anna Jordan</td>
-                                    <td>(016977) 0648</td>
-                                    <td>Tellus Ltd</td>
-                                    <td><span class="pie">4,9</span></td>
-                                    <td>18%</td>
-                                    <td>Jul 22, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Alpha project</td>
-                                    <td>Alice Jackson</td>
-                                    <td>0500 780909</td>
-                                    <td>Nec Euismod In Company</td>
-                                    <td><span class="pie">6,9</span></td>
-                                    <td>40%</td>
-                                    <td>Jul 16, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Project <small>This is example of project</small></td>
-                                    <td>Patrick Smith</td>
-                                    <td>0800 051213</td>
-                                    <td>Inceptos Hymenaeos Ltd</td>
-                                    <td><span class="pie">0.52/1.561</span></td>
-                                    <td>20%</td>
-                                    <td>Jul 14, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Gamma project</td>
-                                    <td>Anna Jordan</td>
-                                    <td>(016977) 0648</td>
-                                    <td>Tellus Ltd</td>
-                                    <td><span class="pie">4,9</span></td>
-                                    <td>18%</td>
-                                    <td>Jul 22, 2013</td>
-                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
+         
             <div class="AddEditContainer row" style="display:none;">
 
                 <div class="col-lg-12">
@@ -305,25 +88,25 @@
                             <h5 class="form-heading">  </h5>
                             <div class="ibox-tools">
                                 @*<a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>*@
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>*@
 
                                 @*<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('UserInRole');">
-                                    <i class="fa fa-minus-circle"></i> Cancel
-                                </a>*@
+                                        <i class="fa fa-minus-circle"></i> Cancel
+                                    </a>*@
                                 @*<ul class="dropdown-menu dropdown-user">
-                                <li>
-                                    <a href="#" >Cancel</a>
-                                </li>
+                                        <li>
+                                            <a href="#" >Cancel</a>
+                                        </li>
 
-                            </ul>*@
+                                    </ul>*@
                                 @*<a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>*@
+                                        <i class="fa fa-times"></i>
+                                    </a>*@
                             </div>
                         </div>
                         <div class="ibox-content dynamicForm">
-
+                         
                         </div>
                     </div>
                 </div>
@@ -335,4 +118,44 @@
 
 
 </div>
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/content/plugins/token-input")
+
+    <style>
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTables")
+    @Scripts.Render("~/scripts/plugins/input-mask")
+    @Scripts.Render("~/scripts/plugins/token-input")
+
+    <script>
+
+        $(document).ready(function () {
+
+                GetAllClaims();
+
+        });
+
+</script>
+
+}
 

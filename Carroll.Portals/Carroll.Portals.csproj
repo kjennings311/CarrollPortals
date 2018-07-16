@@ -637,6 +637,7 @@
     <Content Include="Scripts\plugins\i18next\i18next.min.js" />
     <Content Include="Scripts\plugins\iCheck\icheck.min.js" />
     <Content Include="Scripts\plugins\idle-timer\idle-timer.min.js" />
+    <Content Include="Scripts\plugins\input-mask\inputmask.js" />
     <Content Include="Scripts\plugins\input-mask\jquery.inputmask.binding.js" />
     <Content Include="Scripts\plugins\input-mask\jquery.inputmask.date.extensions.js" />
     <Content Include="Scripts\plugins\input-mask\jquery.inputmask.extensions.js" />
