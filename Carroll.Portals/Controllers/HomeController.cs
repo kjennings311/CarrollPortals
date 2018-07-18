@@ -16,5 +16,10 @@ namespace Carroll.Portals.Controllers
         {
             return View(new BaseViewModel());
         }
+
+        public ActionResult ViewClaim(string Claim)
+        {
+            return View(new BaseViewModel());
+        }
     }
 }

@@ -805,6 +805,7 @@
     <Content Include="Views\Forms\GeneralLiabilityClaims.cshtml" />
     <Content Include="Views\Forms\MoldDamageClaims.cshtml" />
     <Content Include="Views\Forms\PropertyDamageClaims.cshtml" />
+    <Content Include="Views\Home\ViewClaim.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

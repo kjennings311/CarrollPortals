@@ -487,8 +487,8 @@ function LoadForm(formaname) {
         }
     }
 
-    //$('.RowsContatiner').toggle('slow', function ()
-    //{
+    $('.RowsContatiner').toggle('slow', function ()
+    {
         $('.AddEditContainer').toggle('slow', function () {
             if ($(this).is(":visible")) {
                 getForm(formaname, '');
@@ -506,7 +506,7 @@ function LoadForm(formaname) {
 
             }
         });
-    //});
+    });
 
 }
 
@@ -530,11 +530,18 @@ function splitCamelCase(s) {
 }
 
 // this function let's you enable disable add delete buttons'
-function HandleRowClick(obj) {
+function HandleRowClick(obj)
+{
     var $this = jQuery(obj);
-    console.log('selected row is '+obj);
-    if (!$this.hasClass('selected')) {
+
+    if ($("#homecontainer").length)
+        console.log(JSON.stringify(obj) + "Selected Item in Home");
+   
+    if (!$this.hasClass('selected'))
+    {
+       
     //    $this.removeClass('selected');
+
         $('.btnDelete').css("color", "red");
         $('.btnDelete').removeAttr("disabled");
         $('.btnDelete').attr("itemId", $this.attr("id"));
@@ -544,6 +551,7 @@ function HandleRowClick(obj) {
         $('.btnEdit').attr("itemId", $this.attr("id"));
         $('.btnEdit').attr("itemType", $this.attr("itemType"));
         // bind button events we can lookup item id on button attribute
+
         $('.btnDelete').unbind('click').bind('click', function ()
         {
             if (confirm("Are you sure you want to delete?"))
@@ -592,6 +600,10 @@ function HandleRowClick(obj) {
             return false;
         });
     }
+}
+
+function LoadFormView(data) {
+    location.href = "viewclaim/?Claim=" + data;
 }
 
 
@@ -1997,7 +2009,7 @@ function GetAllClaims() {
             $.ajax({
                 type: "get",
                 dataType: "json",
-                url: $BaseApiUrl + "api/data/getallclaims?userid=" + $("#CreatedBy").val(),
+                url: $BaseApiUrl + "api/data/getallclaims?userid=" + $("#CreatedBy").val()+"&propertyid=null",
                 async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -2063,13 +2075,20 @@ function GetAllClaims() {
                         scrollY: '50vh',
                         scrollCollapse: true,
                         "scrollX": true,
-                        "rowCallback": function (row, data) {
+                        "rowCallback": function (row, data)
+                        {
                             // do anything row wise here      
 
                             $(row).attr('id', data[configdata.pkName]);
                             $(row).attr('itemType', configdata.etType);
-                            $(row).attr('onClick', 'HandleRowClick(this);');
-                            console.log($(row));
+                            var rowdata = JSON.parse(JSON.stringify(data));
+                            if (rowdata.claimType == "General Liability")
+                                $(row).attr('onClick', "LoadFormView('" + rowdata.id +"g');");
+                            else if (rowdata.claimType == "Mold Damage")
+                                $(row).attr('onClick', "LoadFormView('" + rowdata.id + "m');");
+                            else if (rowdata.claimType == "PropertyDamage")
+                                $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");                          
+                           
                         },
                         "order": [[2, 'asc']],
                         dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****

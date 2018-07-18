@@ -74,6 +74,12 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="FormAttachment.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormComment.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FormGeneralLiabilityClaim.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

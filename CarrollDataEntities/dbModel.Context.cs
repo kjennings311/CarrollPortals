@@ -38,6 +38,8 @@ namespace Carroll.Data.Entities
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
         public virtual DbSet<SiteUser> SiteUsers { get; set; }
         public virtual DbSet<view_getallclaims> view_getallclaims { get; set; }
+        public virtual DbSet<FormAttachment> FormAttachments { get; set; }
+        public virtual DbSet<FormComment> FormComments { get; set; }
     
         public virtual ObjectResult<spProperties_Result> spProperties()
         {

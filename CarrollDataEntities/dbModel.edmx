@@ -38,6 +38,31 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="FormAttachments">
+          <Key>
+            <PropertyRef Name="AttachmentId" />
+          </Key>
+          <Property Name="AttachmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RefId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RefFormType" Type="smallint" Nullable="false" />
+          <Property Name="At_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="At_FileName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UploadedByName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormComments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RefFormType" Type="smallint" Nullable="false" />
+          <Property Name="RefFormID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CommentDate" Type="datetime" Nullable="false" />
+          <Property Name="CommentByName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CommentBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="FormGeneralLiabilityClaims">
           <Key>
             <PropertyRef Name="GLLId" />
@@ -284,6 +309,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <EntityContainer Name="CarrollDataEntitiesStoreContainer">
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquityPartners" EntityType="Self.EquityPartners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormAttachments" EntityType="Self.FormAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormComments" EntityType="Self.FormComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormGeneralLiabilityClaims" EntityType="Self.FormGeneralLiabilityClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormMoldDamageClaims" EntityType="Self.FormMoldDamageClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormPropertyDamageClaims" EntityType="Self.FormPropertyDamageClaims" Schema="dbo" store:Type="Tables" />
@@ -362,6 +389,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <Parameter Name="userid" Mode="In" Type="Guid" />
             <Parameter Name="propertyid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="FormAttachments" EntityType="Carroll.Data.Entities.FormAttachment" />
+          <EntitySet Name="FormComments" EntityType="Carroll.Data.Entities.FormComment" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -781,6 +810,31 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
         </ComplexType>
+        <EntityType Name="FormAttachment">
+          <Key>
+            <PropertyRef Name="AttachmentId" />
+          </Key>
+          <Property Name="AttachmentId" Type="Guid" Nullable="false" />
+          <Property Name="RefId" Type="Guid" Nullable="false" />
+          <Property Name="RefFormType" Type="Int16" Nullable="false" />
+          <Property Name="At_Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="At_FileName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedBy" Type="Guid" Nullable="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="FormComment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Guid" Nullable="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="RefFormType" Type="Int16" Nullable="false" />
+          <Property Name="RefFormID" Type="Guid" Nullable="false" />
+          <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CommentByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CommentBy" Type="Guid" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1193,6 +1247,33 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="FormAttachments">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.FormAttachment">
+              <MappingFragment StoreEntitySet="FormAttachments">
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="UploadedByName" ColumnName="UploadedByName" />
+                <ScalarProperty Name="At_FileName" ColumnName="At_FileName" />
+                <ScalarProperty Name="At_Name" ColumnName="At_Name" />
+                <ScalarProperty Name="RefFormType" ColumnName="RefFormType" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="AttachmentId" ColumnName="AttachmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormComments">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.FormComment">
+              <MappingFragment StoreEntitySet="FormComments">
+                <ScalarProperty Name="CommentBy" ColumnName="CommentBy" />
+                <ScalarProperty Name="CommentByName" ColumnName="CommentByName" />
+                <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+                <ScalarProperty Name="RefFormID" ColumnName="RefFormID" />
+                <ScalarProperty Name="RefFormType" ColumnName="RefFormType" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
