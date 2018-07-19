@@ -84,6 +84,31 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetAllClaims(userid, propertyid, optionalSeachText);
         }
 
+        #region View Claim
+
+        [ActionName("GetClaimDetails")]
+        [HttpGet]
+        public dynamic GetClaimDetails(string Claim,char Type)
+        {
+
+            return _service.GetClaimDetails(Claim,Type);
+        }
+        [ActionName("InsertComment")]
+        [HttpPost]
+        public dynamic InsertComment(Guid Claim, dynamic obj)
+        {
+            return _service.InsertComment(Claim, obj);
+        }
+
+        [ActionName("InsertAttachment")]
+        [HttpPost]
+        public dynamic InsertAttachment(Guid Claim, dynamic obj)
+        {
+            return _service.InsertAttachment(Claim, obj);
+        }
+        #endregion
+
+
         [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
         [ActionName("DeleteRecord")]
         [HttpPost]

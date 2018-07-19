@@ -66,6 +66,21 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetRuntimeClassInstance(className);
         }
+
+        public dynamic GetClaimDetails(string Claim, char Type)
+        {
+            return _repository.GetClaimDetails(Claim,Type);
+        }
+
+        public dynamic InsertComment(Guid Claim, dynamic obj)
+        {
+            return _repository.InsertComment(Claim, obj);
+        }
+
+        public dynamic InsertAttachment(Guid Claim, dynamic obj)
+        {
+            return _repository.InsertAttachment(Claim, obj);
+        }
         #endregion
     }
 }

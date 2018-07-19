@@ -46,4 +46,12 @@ namespace Carroll.Data.Entities
         public DFieldType type { get; set; }
         public string href { get; set; }
     }
+
+    public class ClaimDetails
+    {
+        public dynamic Claim { get; set; }
+        public dynamic Comments { get; set; }
+        public dynamic Attchments { get; set; }
+    }
+
 }

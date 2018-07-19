@@ -2142,4 +2142,285 @@ function GetAllClaims() {
     );
 }
 
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
+function LoadClaim()
+{
+    var claim = getParameterByName("Claim");
+    var Type = claim[claim.length - 1];
+    claim = claim.substr(0, claim.length - 1)
+
+    $("#claim").val(claim);
+    if(Type=="m")
+        $("#type").val("3");
+    else if (Type == "p")
+        $("#type").val("1");
+    else if (Type == "g")
+        $("#type").val("2");
+
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/GetClaimDetails?claim=" + claim + "&Type=" + Type,
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                statusCode: {
+                    200: function (data) {
+                        if (data != null) {
+
+                            var ClaimData = JSON.parse(JSON.stringify(data));
+                            var claimbody = "";
+
+                            if (Type == "p") {
+                                $("#heading").html("Property Damage Claim");
+                                $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
+
+                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentLocation
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Weather Conditions : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.weatherConditions
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimate Of Damage : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.estimateOfDamage
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Contact Person : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.contactPerson
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPresent
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPhone
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentReportedBy
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdDate
+                                    + '</span></div></div></div>';
+
+
+                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDateTime
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDescription
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Authorities Contacted : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.authoritiesContacted
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Loss Of Revenues : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.lossOfRevenues
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Name : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessName
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Address : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessAddress
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.dateReported
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
+                                    + '</span></div></div></div>';
+                                $("#claimbody").html(claimbody);
+
+                            }
+                            else if (Type == "m") {
+                                $("#heading").html("Mold Damage Claim");
+                                $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
+
+                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.locaton
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.description
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Are Building Materials Still Wet: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.areBuildingMaterialsStillWet
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> How Much Water Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.howMuchWater
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimated Time Damage Present: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.estimatedTimeDamagePresent
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Planned Actions : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.plannedActions
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedBy
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdDate
+                                    + '</span></div></div></div>';
+
+
+                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Discovery Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.discoveryDate
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Suspected Cause : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.suspectedCause
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Is Standing Water Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.isStandingWaterPresent
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimated Surface Area Affected : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.estimatedSurfaceAreaAffected
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Corrective Actions Taken : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.correctiveActionsTaken
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Additional Comments : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.additionalComments
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.dateReported
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
+                                    + '</span></div></div></div>';
+                                $("#claimbody").html(claimbody);
+                            }
+                            else if (Type == "g") {
+                                $("#heading").html("General Liability Claim");
+                                $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
+
+                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentLocation
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDescription
+                                    + '</span></div></div>';
+
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Contact Person : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.contactPerson
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Address : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantAddress
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Phone2 : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantPhone2
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Injury Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.injuryDescription
+                                    + '</span></div></div>';
+
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Name </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessName
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Address </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessAddress
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description Of Damage </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.descriptionOfDamage
+                                    + '</span></div></div>';
+
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedBy
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdDate
+                                    + '</span></div></div></div>';
+
+
+                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDateTime
+                                    + '</span></div></div>';
+
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Authorities Contacted : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.authoritiesContacted
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Name : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantName
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Phone1 : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantPhone1
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Any Injuries : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.anyInjuries
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPresent
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPhone
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description Of Property : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.descriptionOfProperty
+                                    + '</span></div></div>';
+
+
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.dateReported
+                                    + '</span></div></div>';
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
+                                    + '</span></div></div></div>';
+                                $("#claimbody").html(claimbody);
+
+                            }
+
+                            $("#comm-att").show();
+
+                        }
+                        else
+                        {
+                            alert("No Claim Found");
+                        }
+                    }, 500: function (data) {
+                        alert(data.responseText);
+                    }
+                }
+            });
+        }
+    );
+}
+
+$(document).ready(function ()
+{
+
+    $("#btnAddComment").click(function ()
+    {
+
+        if ($("#txtcomment").val() == "")
+        {
+            alert("Please Write Comment to Proceed");
+            $("#txtcomment").focus();
+        }
+        else
+        {    
+
+            var insertForm = new FormData();
+            insertForm.append('Claim', $("#claim").val());
+            insertForm.append('Comment', $("#txtcomment").val());
+            insertForm.append('RefFormType', $("#type").val());
+    insertForm.append('CommentByName', $("#CreatedByName").val());
+    insertForm.append('CommentBy', $("#CreatedBy").val());
+
+            $.ajax({
+                url: $BaseApiUrl + "api/data/InsertComment",
+                type: 'POST',
+                data: insertForm,
+                success: function (data)
+                {
+                    // To-do code if ajax request is successful
+                    var arr = data;
+                    alert(arr);
+                    $.each(arr.brands, function (index, value)
+                    {
+                            $("#commentbody").append('');
+                    });
+                  
+                },
+                error: function (ts) {
+                                alert('error' + ts.errorMessage);
+                    }
+            });
+        }
+    });
+
+    $("#btnUpload").click(function () {
+
+        if ($("#logo").val() == "") {
+            alert("Please Upload an Attachment to Proceed");
+            $("#logo").focus();
+        }
+        else {
+
+            var insertForm = new FormData();
+            insertForm.append('Claim', $("#claim").val());
+            insertForm.append('At_FileName', $("#logo").val());
+            insertForm.append('RefFormType', $("#type").val());
+            insertForm.append('UploadedByName', $("#CreatedByName").val());
+            insertForm.append('UploadedBy', $("#CreatedBy").val());
+            insertForm.append('Attachments', document.getElementById('logo').files[0]);
+
+            $.ajax({
+                url: $BaseApiUrl + "api/data/InsertAttachment",
+                type: 'POST',
+                data: insertForm,
+                success: function (data) {
+                    // To-do code if ajax request is successful
+                    var arr = data;
+                    alert(arr);
+                    $.each(arr.brands, function (index, value) {
+                        $("#attachmentbody").append('');
+                    });
+
+                },
+                error: function (ts) {
+                    alert('error' + ts.errorMessage);
+                }
+            });
+        }
+    });
+
+});

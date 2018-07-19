@@ -639,6 +639,118 @@ namespace Carroll.Data.Entities.Repository
                 throw new ArgumentException("ARGH!");
             return input.First().ToString().ToLower() + input.Substring(1);
         }
+
+        public dynamic GetClaimDetails(string Claim, char Type)
+        {
+            ClaimDetails cd = new ClaimDetails();
+
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+                Guid _recId = new Guid(Claim);
+                Int16 formtype = 1;
+
+                if (Type == 'g')
+                {
+                    //  var _generalclaim = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _recId).FirstOrDefault();
+
+                    var _generalclaim = (from tbl in _entities.FormGeneralLiabilityClaims
+                                         join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                         where tbl.GLLId == _recId
+                                         select new { tbl, tblprop.PropertyName }).FirstOrDefault();
+                    if (_generalclaim != null)
+                    { cd.Claim = _generalclaim; }
+                    formtype = 2;
+
+                }
+                else if (Type == 'm')
+                {
+                    var _formdamageclaim = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                            where tbl.MDLId == _recId
+                                            select new { tbl, tblprop.PropertyName }).FirstOrDefault();
+
+                    //_entities.FormMoldDamageClaims.Where(x => x.MDLId == _recId).FirstOrDefault();
+                    if (_formdamageclaim != null)
+                    { cd.Claim = _formdamageclaim; }
+                    formtype = 3;
+
+
+
+                }
+                else if (Type == 'p')
+                {
+                    var _damageclaim = (from tbl in _entities.FormPropertyDamageClaims
+                                        join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                        where tbl.PDLId == _recId
+                                        select new { tbl, tblprop.PropertyName }).FirstOrDefault();
+
+                    //_entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
+                    if (_damageclaim != null) { cd.Claim = _damageclaim; }
+                    formtype = 1;
+
+                }
+
+                // Get All Comments for this RowId and Type
+
+                var AllComments = (from tbl in _entities.FormComments
+                                   where tbl.RefFormID == _recId && tbl.RefFormType == formtype
+                                   select tbl).ToList();
+
+                // Get All Attachment for this RowId and Type
+                var AllAttachments = (from tbl in _entities.FormAttachments
+                                      where tbl.RefFormType == formtype && tbl.RefId == _recId
+                                      select tbl).ToList();
+                cd.Comments = AllComments;
+                cd.Attchments = AllAttachments;
+                return cd;         
+            }
+        }
+
+        public dynamic InsertComment(Guid Claim, dynamic obj)
+        {
+            using (CarrollFormsEntities _entities= new CarrollFormsEntities())
+            {
+
+                           FormComment _property = obj;
+                           _property.RefFormID = Claim;
+                           _property.CommentId = Guid.NewGuid();
+                           _property.CommentDate = DateTime.Now;
+                    // No record exists create a new property record here
+                    _entities.FormComments.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+                var AllComments = (from tbl in _entities.FormComments
+                                   where tbl.RefFormID == Claim && tbl.RefFormType == _property.RefFormType
+                                   select tbl).ToList();
+
+                return AllComments;
+            }
+        }
+       
+
+        public dynamic InsertAttachment(Guid Claim, dynamic obj)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+               FormAttachment _property = obj;
+                _property.RefId = Claim;
+                _property.AttachmentId = Guid.NewGuid();
+                _property.UploadedDate = DateTime.Now;
+                // No record exists create a new property record here
+                _entities.FormAttachments.Add(_property);
+                // _entities.SaveChanges();
+                int i = _entities.SaveChanges();
+                var AllAttachments = (from tbl in _entities.FormAttachments
+                                   where tbl.RefId == Claim && tbl.RefFormType == _property.RefFormType
+                                   select tbl).ToList();
+                return AllAttachments;
+            }
+
+        }
+
+
         //public Config GetDatatableConfig(EntityType entityType,)
         //{
 

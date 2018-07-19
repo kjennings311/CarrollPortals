@@ -21,6 +21,8 @@ namespace Carroll.Data.Services.Models
         bool DeleteRecord(EntityType entityType,string recordId);
 
         dynamic GetRuntimeClassInstance(string className);
-
+        dynamic GetClaimDetails(string Claim, char Type);
+        dynamic InsertComment(Guid Claim, dynamic obj);
+        dynamic InsertAttachment(Guid Claim, dynamic obj);
     }
 }

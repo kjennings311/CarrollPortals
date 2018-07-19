@@ -2,6 +2,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+using System.Web;
 
 namespace Carroll.Data.Entities.Repository
 {
@@ -19,6 +20,10 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
         dynamic GetAllClaims(Guid? userid,Guid? propertyid,string OptionalSeachText);
+        dynamic GetClaimDetails(string Claim, char Type);
+        dynamic InsertComment(Guid Claim, dynamic obj);
+        dynamic InsertAttachment(Guid Claim, dynamic obj );
+     
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);
