@@ -72,14 +72,18 @@ namespace Carroll.Data.Services.Models
             return _repository.GetClaimDetails(Claim,Type);
         }
 
-        public dynamic InsertComment(Guid Claim, dynamic obj)
+        public dynamic InsertComment(FormComment obj)
         {
-            return _repository.InsertComment(Claim, obj);
+            return _repository.InsertComment(obj);
         }
 
-        public dynamic InsertAttachment(Guid Claim, dynamic obj)
+        public dynamic GetUserClaimCount(Guid userid)
         {
-            return _repository.InsertAttachment(Claim, obj);
+            return _repository.GetUserClaimCount(userid);
+        }
+        public dynamic InsertAttachment(FormAttachment formAttachment)
+        {
+            return _repository.InsertAttachment(formAttachment);
         }
         #endregion
     }

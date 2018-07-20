@@ -229,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarrollDataEntities\Carroll.Data.Entities.csproj">

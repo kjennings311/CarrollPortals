@@ -22,7 +22,8 @@ namespace Carroll.Data.Services.Models
 
         dynamic GetRuntimeClassInstance(string className);
         dynamic GetClaimDetails(string Claim, char Type);
-        dynamic InsertComment(Guid Claim, dynamic obj);
-        dynamic InsertAttachment(Guid Claim, dynamic obj);
+        dynamic InsertComment(FormComment obj);
+        dynamic InsertAttachment(FormAttachment formAttachment);
+        dynamic GetUserClaimCount(Guid userid);
     }
 }

@@ -20,9 +20,10 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
         dynamic GetAllClaims(Guid? userid,Guid? propertyid,string OptionalSeachText);
+        dynamic GetUserClaimCount(Guid userid);
         dynamic GetClaimDetails(string Claim, char Type);
-        dynamic InsertComment(Guid Claim, dynamic obj);
-        dynamic InsertAttachment(Guid Claim, dynamic obj );
+        dynamic InsertComment(FormComment obj);
+        dynamic InsertAttachment(FormAttachment formAttachment);
      
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");

@@ -24,4 +24,5 @@ namespace Carroll.Data.Services.Models
             Key = key;
         }
     }
+
 }

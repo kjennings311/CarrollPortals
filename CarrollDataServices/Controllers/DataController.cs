@@ -15,15 +15,17 @@ using Carroll.Data.Entities;
 using Carroll.Data.Entities.Repository;
 using System.Security.Claims;
 using System.Web.Http.Cors;
-
+using System.Web;
+using System.IO;
 
 namespace Carroll.Data.Services.Controllers
 {
-   //  [EnableCors(origins = new[] { "http://localhost", "http://sample.com" })]
-      [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+    //  [EnableCors(origins = new[] { "http://localhost", "http://sample.com" })]
+    [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
     //[RoutePrefix("api/Data")]
     // [Authorize]
-   // [EnableCors(origins: "http://localhost")]
+    // [EnableCors(origins: "http://localhost")]
+
     public class DataController : ApiController
     {
         private IDataService _service;
@@ -53,16 +55,16 @@ namespace Carroll.Data.Services.Controllers
         //[HttpGet]
         //public string GetRecords(EntityType entityType)
         //{
-          
+
         //        return new JavaScriptSerializer().Serialize(_service.GetRecords(entityType, ""));
-          
-          
+
+
         //}
 
         //**************************************************************************Record******************************************************//
         [ActionName("GetRecords")]
         [HttpGet]
-        public dynamic GetRecords(EntityType entityType, string optionalText="")
+        public dynamic GetRecords(EntityType entityType, string optionalText = "")
         {
 
             return _service.GetRecords(entityType, optionalText);
@@ -88,24 +90,62 @@ namespace Carroll.Data.Services.Controllers
 
         [ActionName("GetClaimDetails")]
         [HttpGet]
-        public dynamic GetClaimDetails(string Claim,char Type)
+        public dynamic GetClaimDetails(string Claim, char Type)
         {
 
-            return _service.GetClaimDetails(Claim,Type);
+            return _service.GetClaimDetails(Claim, Type);
         }
+
         [ActionName("InsertComment")]
-        [HttpPost]
-        public dynamic InsertComment(Guid Claim, dynamic obj)
-        {
-            return _service.InsertComment(Claim, obj);
+        [HttpPost]      
+        public dynamic InsertComment([FromBody] FormComment obj)
+        {           
+            return _service.InsertComment(obj);           
         }
 
         [ActionName("InsertAttachment")]
         [HttpPost]
-        public dynamic InsertAttachment(Guid Claim, dynamic obj)
+        public dynamic InsertAttachment()
         {
-            return _service.InsertAttachment(Claim, obj);
+
+            FormAttachment fa = new FormAttachment();
+
+            var randomstring= DateTime.Now.ToString("yyMMddHHmmssff");
+            var filename = "";
+
+            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                // Get the uploaded image from the Files collection
+                var httpPostedFile = HttpContext.Current.Request.Files["file"];
+
+                if (httpPostedFile != null)
+                {
+                    // Validate the uploaded image(optional)
+
+                    // Get the complete file path
+                    filename = httpPostedFile.FileName;
+                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring+httpPostedFile.FileName);
+
+                    // Save the uploaded file to "UploadedFiles" folder
+                    httpPostedFile.SaveAs(fileSavePath);
+                }
+            }
+            fa.RefFormType=Convert.ToInt16(HttpContext.Current.Request.Params["RefFormType"]);
+            fa.RefId = new Guid(HttpContext.Current.Request.Params["RefId"]);
+            fa.UploadedBy = new Guid(HttpContext.Current.Request.Params["UploadedBy"]);
+            fa.UploadedByName = HttpContext.Current.Request.Params["UploadedByName"];
+            fa.At_Name =filename;
+            fa.At_FileName = randomstring+filename;
+            return _service.InsertAttachment(fa);            
         }
+
+
+        public dynamic GetUserClaimCount(Guid userid)
+        {
+            return _service.GetUserClaimCount(userid);
+        }
+
+
         #endregion
 
 

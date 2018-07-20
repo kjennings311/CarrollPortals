@@ -499,7 +499,28 @@ namespace Carroll.Data.Entities.Repository
         }
 
 
+        public dynamic GetUserClaimCount(Guid userid)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                var ClaimCounts = new { PropertyCount = 0, DamangeCount = 0, LiabilityCount = 0 };
 
+                var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                  where tbl.CreatedBy == userid
+                                  select tbl).Count();
+                var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                    where tbl.CreatedBy == userid
+                                    select tbl).Count();
+                var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                       where tbl.CreatedBy == userid
+                                       select tbl).Count();
+
+                
+
+                return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                
+            }
+        }
 
 
         public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string optionalSeachText)
@@ -707,13 +728,10 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
-        public dynamic InsertComment(Guid Claim, dynamic obj)
+        public dynamic InsertComment(FormComment _property)
         {
             using (CarrollFormsEntities _entities= new CarrollFormsEntities())
             {
-
-                           FormComment _property = obj;
-                           _property.RefFormID = Claim;
                            _property.CommentId = Guid.NewGuid();
                            _property.CommentDate = DateTime.Now;
                     // No record exists create a new property record here
@@ -721,7 +739,7 @@ namespace Carroll.Data.Entities.Repository
                     // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
                 var AllComments = (from tbl in _entities.FormComments
-                                   where tbl.RefFormID == Claim && tbl.RefFormType == _property.RefFormType
+                                   where tbl.RefFormID == _property.RefFormID && tbl.RefFormType == _property.RefFormType
                                    select tbl).ToList();
 
                 return AllComments;
@@ -729,13 +747,12 @@ namespace Carroll.Data.Entities.Repository
         }
        
 
-        public dynamic InsertAttachment(Guid Claim, dynamic obj)
+        public dynamic InsertAttachment(FormAttachment formAttachment)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
 
-               FormAttachment _property = obj;
-                _property.RefId = Claim;
+               FormAttachment _property = formAttachment;               
                 _property.AttachmentId = Guid.NewGuid();
                 _property.UploadedDate = DateTime.Now;
                 // No record exists create a new property record here
@@ -743,7 +760,7 @@ namespace Carroll.Data.Entities.Repository
                 // _entities.SaveChanges();
                 int i = _entities.SaveChanges();
                 var AllAttachments = (from tbl in _entities.FormAttachments
-                                   where tbl.RefId == Claim && tbl.RefFormType == _property.RefFormType
+                                   where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
                                    select tbl).ToList();
                 return AllAttachments;
             }

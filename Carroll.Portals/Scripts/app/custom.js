@@ -2166,9 +2166,8 @@ function LoadClaim()
     else if (Type == "g")
         $("#type").val("2");
 
-    $.when(GetToken()).then(
-        function () {
-            $.ajax({
+   
+              $.ajax({
                 type: "get",
                 dataType: "json",
                 url: $BaseApiUrl + "api/data/GetClaimDetails?claim=" + claim + "&Type=" + Type,
@@ -2330,6 +2329,18 @@ function LoadClaim()
 
                             $("#comm-att").show();
 
+                            $("#commentbody").html();
+                            $.each(ClaimData.comments, function (index, value) {
+                                $("#commentbody").append('<tr><td> ' + value.comment + ' </td><td style="width:20%;" >' + value.commentDate+ ' </td> </tr>');
+                            });
+
+
+                            $("#attachmentbody").html('');
+
+                            $.each(ClaimData.Attchments, function (index, value) {
+                                $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate + ' </td> </tr>');
+                            });
+
                         }
                         else
                         {
@@ -2340,80 +2351,140 @@ function LoadClaim()
                     }
                 }
             });
+}
+
+function LoadUserClaims() {
+    $.ajax({
+        url: $BaseApiUrl + "api/data/GetUserClaimCount?userid="+$("#CreatedBy").val(),
+        type: 'GET',
+        dataType: "json",
+        async: false,       
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+        },
+        success: function (data)
+        {
+
+            // To-do code if ajax request is successful
+            $(".propcount").html(data.propertyCount);
+            $(".liabcount").html(data.liabilityCount);
+            $(".damagecount").html(data.damageCount);
+            $(".claimcount").show();
+          
+        },
+        error: function (ts) {
+            alert('error' + ts.errorMessage);
         }
-    );
+    });
+
 }
 
 $(document).ready(function ()
 {
 
-    $("#btnAddComment").click(function ()
-    {
+    $("#btnAddComment").click(function () {
 
-        if ($("#txtcomment").val() == "")
-        {
+        if ($("#txtcomment").val() == "") {
             alert("Please Write Comment to Proceed");
             $("#txtcomment").focus();
         }
         else
-        {    
+        {
+            $("#btnAddComment").attr('disabled', true);
+            $("#btnAddComment").html('<p style="color:white"> Sending .... </p>');
+            $("#btnAddComment").fadeTo(0.28);
+            $("#txtcomment").attr('disabled', true);
 
-            var insertForm = new FormData();
-            insertForm.append('Claim', $("#claim").val());
-            insertForm.append('Comment', $("#txtcomment").val());
-            insertForm.append('RefFormType', $("#type").val());
-    insertForm.append('CommentByName', $("#CreatedByName").val());
-    insertForm.append('CommentBy', $("#CreatedBy").val());
+            var data = {};
+            data["RefFormId"] = $("#claim").val();
+            data["Comment"] = $("#txtcomment").val();
+            data["RefFormType"] = $("#type").val();
+            data["CommentBy"] = $("#CreatedBy").val();
+            data["CommentByName"] = $("#CreatedByName").val();
+           
+               
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertComment",
+                        type: 'POST',
+                        dataType: "json",                      
+                        async: false,
+                        data: data,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                        },
+                        success: function (data) {
 
-            $.ajax({
-                url: $BaseApiUrl + "api/data/InsertComment",
-                type: 'POST',
-                data: insertForm,
-                success: function (data)
-                {
-                    // To-do code if ajax request is successful
-                    var arr = data;
-                    alert(arr);
-                    $.each(arr.brands, function (index, value)
-                    {
-                            $("#commentbody").append('');
+                            // To-do code if ajax request is successful
+                            $("#commentbody").html('');
+                            $.each(data, function (index, value) {
+                                $("#commentbody").append('<tr><td> ' + value.comment + ' </td><td style="width:20%;" >' + value.commentDate+' </td> </tr>');
+                            });
+                            setTimeout(function () {
+                                $("#btnAddComment").html('Send');
+                                $("#btnAddComment").attr('disabled', false);
+                                $("#btnAddComment").fadeIn();
+                                $("#txtcomment").val('');
+                               
+                                $("#txtcomment").attr('disabled', false);
+                            }, 1000);
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
                     });
-                  
-                },
-                error: function (ts) {
-                                alert('error' + ts.errorMessage);
-                    }
-            });
-        }
+                }
+           
+    
     });
 
-    $("#btnUpload").click(function () {
+    $("#btnUpload").click(function ()
+    {
 
-        if ($("#logo").val() == "") {
+        if ($("#logo").val() == "")
+        {
             alert("Please Upload an Attachment to Proceed");
             $("#logo").focus();
         }
-        else {
+        else
+        {
+            $("#btnUpload").attr('disabled', true);
+            $("#btnUpload").html('<p style="color:white"> Uploading .... </p>');
+            $("#btnUpload").fadeTo(0.28);
+            $("#logo").attr('disabled', true);
 
             var insertForm = new FormData();
-            insertForm.append('Claim', $("#claim").val());
+            insertForm.append('RefId', $("#claim").val());
             insertForm.append('At_FileName', $("#logo").val());
             insertForm.append('RefFormType', $("#type").val());
             insertForm.append('UploadedByName', $("#CreatedByName").val());
             insertForm.append('UploadedBy', $("#CreatedBy").val());
-            insertForm.append('Attachments', document.getElementById('logo').files[0]);
+            insertForm.append('file', document.getElementById('logo').files[0]);
 
             $.ajax({
                 url: $BaseApiUrl + "api/data/InsertAttachment",
                 type: 'POST',
+                dataType: "JSON",
+                processData: false,
+                contentType: false,
                 data: insertForm,
-                success: function (data) {
+                success: function (data)
+                {
                     // To-do code if ajax request is successful
-                    var arr = data;
-                    alert(arr);
-                    $.each(arr.brands, function (index, value) {
-                        $("#attachmentbody").append('');
+
+                    $("#attachmentbody").html('');
+
+                    $.each(data, function (index, value) {
+                        $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName +'" target="_blank" >'+value.at_Name+' </a></td><td style="width:20%;" >' + value.uploadedDate + ' </td> </tr>');
                     });
+
+                    setTimeout(function () {
+                        $("#btnUpload").html('Upload');
+                        $("#btnUpload").attr('disabled', false);
+                        $("#btnUpload").fadeIn();
+                        $("#logo").val('');
+
+                        $("#logo").attr('disabled', false);
+                    }, 1000);
 
                 },
                 error: function (ts) {
