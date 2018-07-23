@@ -44,6 +44,7 @@ function BindElements()
         $('.success-message').hide();
         $('.failure-message').hide();
     //    if (!CheckFormErrors($form)) {
+
         var $this = $(this);
 
         var RecordId = $('.btnEdit').attr("itemId");
@@ -96,6 +97,7 @@ function BindElements()
 
             //*****************************************************************************
             // Let's get the original form and then load values into original form to send back to server for validation
+
             $.ajax({
                 type: "get",
                 dataType: "json",
@@ -114,6 +116,7 @@ function BindElements()
                         // Build the form elements here
                         switch ($fields[i]["fieldType"]) {
                             case "Text":
+                            case "LongText":
                             case "Password":                         
                             case "Select":                           
                             case "Person":    
@@ -199,7 +202,7 @@ function BindElements()
                                     $form.find('.success-message').show('slow');
                                     ScrollToElement($form.find('.success-message'));
                                     // go back to previous screen after 8 seconds
-                                 setTimeout(location.reload(), 10000);
+                               //  setTimeout(location.reload(), 10000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -321,6 +324,7 @@ function getForm(FormName, RecordId)
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><textarea validationformat="{1}" class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
@@ -367,6 +371,13 @@ function getForm(FormName, RecordId)
                         var $datamask = "";
                        
                         $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        break;
+                    case "LongText":
+
+                        var $req = $fields[i]["required"];
+                        var $datamask = "";
+
+                        $FormElements += format($longtext, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         break;
                     case "Password":
 
