@@ -181,11 +181,19 @@ namespace Carroll.Data.Services.Controllers
                 // Now data is valid let's pass to DAL for update/Insert
                 object obj = _service.GetRuntimeClassInstance(_formdata.FormName);
 
+
                 foreach (FormField _field in _formdata.FormFields)
                 {
                     obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+                    //if(obj.GetPropertyValue(_field.FieldName) == null)
+                    //    obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+
                 }
-            
+
+           // Loop through each Property Of Object and check if any thing null, get the value from input object and bind that
+
+
+
                 bSucceeded = _service.CreateUpdateRecord(id, obj);
                return Utility.ReturnRecordResponse(_modelState, bSucceeded);
 
