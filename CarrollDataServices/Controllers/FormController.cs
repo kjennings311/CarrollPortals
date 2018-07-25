@@ -161,8 +161,7 @@ namespace Carroll.Data.Services.Controllers
             }
             catch(Exception ex)
             { return new Form { FormName=ex.Message }; }
-
-
+            
         }
 
         #region [ CRUD OPERATIONS ]
@@ -184,8 +183,12 @@ namespace Carroll.Data.Services.Controllers
 
                 foreach (FormField _field in _formdata.FormFields)
                 {
-                    obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
-                    //if(obj.GetPropertyValue(_field.FieldName) == null)
+                    if(_field.FieldValidationType==FieldValidationTypes.DateTime)
+                    obj.SetPropertyValue(_field.FieldName, Convert.ToDateTime( _field.FieldValue));
+                    else
+                     obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+
+                    //if (obj.GetPropertyValue(_field.FieldName) == null)
                     //    obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
 
                 }

@@ -41,6 +41,7 @@ function BindElements()
 
     $('.dynamicForm #savechanges').click(function ()
     {
+        $('.dynamicForm #savechanges').attr('disabled', true);
         $('.success-message').hide();
         $('.failure-message').hide();
     //    if (!CheckFormErrors($form)) {
@@ -201,8 +202,9 @@ function BindElements()
                                     $form.find('#successMessage').html("Record successfully updated!");
                                     $form.find('.success-message').show('slow');
                                     ScrollToElement($form.find('.success-message'));
+                                    $('.dynamicForm #savechanges').attr('disabled', false);
                                     // go back to previous screen after 8 seconds
-                               //  setTimeout(location.reload(), 10000);
+                                setTimeout(location.reload(), 10000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -618,6 +620,15 @@ function LoadFormView(data)
     location.href = "http://"+location.hostname+"/Home/viewclaim/?Claim=" + data;
 }
 
+function CheckNull(variable)
+{
+    if (variable == null)
+    {
+        return '';
+    }
+    else
+        return variable;
+}
 
 // called from Contacts page
 function LoadContacts() {
@@ -2199,29 +2210,29 @@ function LoadClaim()
                                 $("#heading").html("Property Damage Claim");
                                 $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
 
-                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentLocation
+                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.incidentLocation)
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Weather Conditions : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.weatherConditions
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Weather Conditions : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.weatherConditions)
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimate Of Damage : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.estimateOfDamage
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimate Of Damage : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.estimateOfDamage)
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Contact Person : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.contactPerson
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Contact Person : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.contactPerson)
                                     + '</span></div></div>';
                                 if (ClaimData.claim.tbl.witnessPresent=='false')
                                     claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
                                 else
                                     claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPhone
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.witnessPhone)
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentReportedBy
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdDate.substring(0, 10)
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)
                                     + '</span></div></div></div>';
 
 
-                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDateTime.substring(0, 10)
+                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10)
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDescription
                                     + '</span></div></div>';
@@ -2238,7 +2249,7 @@ function LoadClaim()
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Address : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessAddress
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.dateReported.substring(0, 10)
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10)
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
                                     + '</span></div></div></div>';
@@ -2250,7 +2261,7 @@ function LoadClaim()
                                 $("#heading").html("Mold Damage Claim");
                                 $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
 
-                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.locaton
+                                claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.location
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.description
                                     + '</span></div></div>';
@@ -2269,11 +2280,11 @@ function LoadClaim()
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdDate.substring(0, 10)
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)
                                     + '</span></div></div></div>';
 
 
-                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Discovery Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.discoveryDate.substring(0, 10)
+                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Discovery Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10)
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Suspected Cause : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.suspectedCause
                                     + '</span></div></div>';
@@ -2290,7 +2301,7 @@ function LoadClaim()
                                     claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Corrective Actions Taken : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Additional Comments : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.additionalComments
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.dateReported.substring(0, 10)
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + (ClaimData.claim.tbl.dateReported).substring(0, 10)
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
                                     + '</span></div></div></div>';
@@ -2325,11 +2336,11 @@ function LoadClaim()
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
                                     + '</span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdDate.substring(0, 10)
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)
                                     + '</span></div></div></div>';
 
 
-                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDateTime.substring(0, 10)
+                                claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10)
                                     + '</span></div></div>';
 
                                 if (ClaimData.claim.tbl.authoritiesContacted == 'false')
@@ -2345,15 +2356,18 @@ function LoadClaim()
                                     claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Any Injuries : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
                                 else
                                     claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Any Injuries : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPresent
-                                    + '</span></div></div>';
+                                if (ClaimData.claim.tbl.witnessPresent=='false')
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
+                                else
+                                    claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
+
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPhone
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description Of Property : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.descriptionOfProperty
                                     + '</span></div></div>';
 
 
-                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.dateReported.substring(0, 10)
+                                claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + (ClaimData.claim.tbl.dateReported).substring(0, 10)
                                     + '</span></div></div>';
                                 claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
                                     + '</span></div></div></div>';
