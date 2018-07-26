@@ -21,7 +21,7 @@ using System.IO;
 namespace Carroll.Data.Services.Controllers
 {
     //  [EnableCors(origins = new[] { "http://localhost", "http://sample.com" })]
-    [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     //[RoutePrefix("api/Data")]
     // [Authorize]
     // [EnableCors(origins: "http://localhost")]

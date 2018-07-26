@@ -19,8 +19,9 @@ using System.Web.Http.Cors;
 
 namespace Carroll.Data.Services.Controllers
 {
-    
-  //  [Authorize]
+
+    //  [Authorize]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         private IUserService _service;

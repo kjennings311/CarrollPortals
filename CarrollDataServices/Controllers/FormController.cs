@@ -12,10 +12,12 @@ using Carroll.Data.Entities.Repository;
 //using Carroll.Data.Services.Models.Contact;
 using Carroll.Data.Entities;
 using System.Reflection;
+using System.Web.Http.Cors;
 
 namespace Carroll.Data.Services.Controllers
 {
     //[Authorize]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FormController : ApiController
     {
 

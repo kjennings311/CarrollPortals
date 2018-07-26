@@ -19,6 +19,7 @@ using Carroll.Data.Services.Helpers;
 namespace Carroll.Data.Services.Controllers
 {
     //[Authorize]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PropertyController : ApiController   {
 
         private IPropertyService _service;

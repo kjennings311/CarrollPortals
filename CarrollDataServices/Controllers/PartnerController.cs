@@ -20,6 +20,7 @@ using Carroll.Data.Services.Models.Partners;
 namespace Carroll.Data.Services.Controllers
 {
     [Authorize]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PartnerController : ApiController
     {
         private IPartnerService _service;

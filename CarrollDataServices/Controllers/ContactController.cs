@@ -20,6 +20,7 @@ using System.Web.Http.Cors;
 namespace Carroll.Data.Services.Controllers
 {
     [Authorize]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ContactController : ApiController
     {
         private IContactService _service;
