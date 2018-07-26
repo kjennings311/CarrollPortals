@@ -32,7 +32,11 @@ namespace Carroll.Portals.Controllers
         // GET: Account
         public ActionResult Login()
         {
+            if(Session["Vm_UserId"] == null)
+
             return View();
+            else
+                return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]

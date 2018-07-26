@@ -21,7 +21,7 @@
                 </div>
             </li>
             <li class="active">
-                <a href="/"><i class="fa fa-home"></i> <span class="nav-label">Intranet Home</span></a>
+                <a href="~/Home/Index"><i class="fa fa-home"></i> <span class="nav-label">Portal Home</span></a>
             </li>
             <li>
                 <a href="/Data/properties"><i class="fa fa-building"></i> <span class="nav-label">Properties</span></a>
@@ -32,22 +32,23 @@
             <li>
                 <a href="/Data/partners"><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
             </li>
-            <li>
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Forms</span></a>
-                <ul class="nav nav-second-level collapse">
-                    <li>
-                        <a href="#">Property Forms<span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level collapse">
-                            <li><a href="/FORMS/PropertyDamageClaims">Property Damage Claim </a></li>
-                            <li><a href="/FORMS/GeneralLiabilityClaims">General Liability Claim</a></li>
-                            <li><a href="/FORMS/MoldDamageClaims">Mold Damage Claim</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
             @{
                 if (@Model.RoleType == "Administrator")
                 {
+
+                    <li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Forms</span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="#">Property Forms<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level collapse">
+                                    <li><a href="/FORMS/PropertyDamageClaims">Property Damage Claim </a></li>
+                                    <li><a href="/FORMS/GeneralLiabilityClaims">General Liability Claim</a></li>
+                                    <li><a href="/FORMS/MoldDamageClaims">Mold Damage Claim</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Users </span></a>
 
