@@ -6,48 +6,50 @@ namespace Carroll.Portals
     public class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
+
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/scripts/jquery-{version}.js"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-            //            "~/scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/scripts/jquery.validate*"));
 
-            //// Use the development version of Modernizr to develop with and learn from. Then, when you're
-            //// ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-            //            "~/scripts/modernizr-*"));
+            // Use the development version of Modernizr to develop with and learn from. Then, when you're
+            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/scripts/modernizr-*"));
 
-            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-            //          "~/scripts/bootstrap.js",
-            //          "~/scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/scripts/bootstrap.js",
+                      "~/scripts/respond.js"));
 
-            //bundles.Add(new StyleBundle("~/content/css").Include(
-            //          "~/content/bootstrap.min.css",
-            //          "~/content/animate.css",
-            //          "~/content/style.css"
-            //          ));
+            bundles.Add(new StyleBundle("~/content/css").Include(
+                      "~/content/bootstrap.min.css",
+                      "~/content/animate.css",
+                      "~/content/style.css"
+                      ));
 
-            //// Font Awesome icons
-            //bundles.Add(new StyleBundle("~/font-awesome/css").Include(
-            //          "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
-            //// Inspinia script
-            //bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
-            //          "~/scripts/app/inspinia.js"));
+            // Font Awesome icons
+            bundles.Add(new StyleBundle("~/font-awesome/css").Include(
+                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+            // Inspinia script
+            bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
+                      "~/scripts/app/inspinia.js"));
 
-            //// SlimScroll
-            //bundles.Add(new ScriptBundle("~/scripts/plugins/slimScroll").Include(
-            //          "~/scripts/plugins/slimScroll/jquery.slimscroll.min.js"));
+            // slimscroll
+            bundles.Add(new ScriptBundle("~/scripts/plugins/slimscrolljs").Include(
+                      "~/scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
 
-            //// jQuery plugins
-            //bundles.Add(new ScriptBundle("~/scripts/plugins/metsiMenu").Include(
-            //          "~/scripts/plugins/metisMenu/metisMenu.min.js"));
+            // jQuery plugins
+            bundles.Add(new ScriptBundle("~/scripts/plugins/metsiMenujs").Include(
+                      "~/scripts/plugins/metisMenu/metisMenu.min.js"));
 
-            //bundles.Add(new ScriptBundle("~/scripts/plugins/pace").Include(
-            //          "~/scripts/plugins/pace/pace.min.js"));
+            bundles.Add(new ScriptBundle("~/scripts/plugins/pacejs").Include(
+                      "~/scripts/plugins/pace/pace.min.js"));
 
             // CSS style (bootstrap/inspinia)
+
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/content/bootstrap.min.css",
                       "~/content/animate.css",
@@ -63,7 +65,7 @@ namespace Carroll.Portals
                         "~/scripts/jquery.easing.min.js"));
 
             // jQueryUI CSS
-            bundles.Add(new ScriptBundle("~/content/plugins/jquery-ui/jqueryuiStyles").Include(
+            bundles.Add(new ScriptBundle("~/content/plugins/jquery-ui/jqueryuiStylescss").Include(
                         "~/content/plugins/jquery-ui/jquery-ui.min.css"));
 
             // jQueryUI 
@@ -87,15 +89,15 @@ namespace Carroll.Portals
                       "~/scripts/app/skin.config.min.js"));
 
             // SlimScroll
-            bundles.Add(new ScriptBundle("~/scripts/plugins/slimScroll").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/slimScrolljs").Include(
                       "~/scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
 
             // Peity
-            bundles.Add(new ScriptBundle("~/scripts/plugins/peity").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/peityjs").Include(
                       "~/scripts/plugins/peity/jquery.peity.min.js"));
 
             // Video responsible
-            bundles.Add(new ScriptBundle("~/scripts/plugins/videoResponsible").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/videoResponsiblejs").Include(
                       "~/scripts/plugins/video/responsible-video.js"));
 
             // Lightbox gallery css styles
@@ -146,7 +148,7 @@ namespace Carroll.Portals
                       "~/scripts/plugins/iCheck/icheck.min.js"));
 
             // dataTables css styles
-            bundles.Add(new StyleBundle("~/content/plugins/dataTables/dataTablesStyles").Include(
+            bundles.Add(new StyleBundle("~/content/plugins/dataTables/dataTablesStylescss").Include(
                       "~/content/plugins/dataTables/datatables.min.css",
                       "~/content/plugins/dataTables/buttons.dataTables.min.css",
                       "~/content/plugins/dataTables/select.dataTables.min.css",
@@ -156,7 +158,7 @@ namespace Carroll.Portals
                       ));
 
             // dataTables 
-            bundles.Add(new ScriptBundle("~/scripts/plugins/dataTables").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/dataTablesjs").Include(
                       "~/scripts/plugins/dataTables/datatables.min.js",
                        "~/scripts/plugins/dataTables/dataTables.buttons.min.js",
                        "~/scripts/plugins/dataTables/dataTables.select.min.js",
@@ -166,7 +168,7 @@ namespace Carroll.Portals
                       ));
 
             // jeditable 
-            bundles.Add(new ScriptBundle("~/scripts/plugins/jeditable").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/jeditablejs").Include(
                       "~/scripts/plugins/jeditable/jquery.jeditable.js"));
 
             // jqGrid styles
@@ -240,7 +242,7 @@ namespace Carroll.Portals
                       "~/content/plugins/jasny/jasny-bootstrap.min.css"));
 
             // jasnyBootstrap 
-            bundles.Add(new ScriptBundle("~/scripts/plugins/jasnyBootstrap").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/jasnyBootstrapjs").Include(
                       "~/scripts/plugins/jasny/jasny-bootstrap.min.js"));
 
             // switchery styles
@@ -355,11 +357,11 @@ namespace Carroll.Portals
                       "~/scripts/plugins/clockpicker/clockpicker.js"));
 
             // Date range picker Styless
-            bundles.Add(new StyleBundle("~/content/plugins/dateRangeStyles").Include(
+            bundles.Add(new StyleBundle("~/content/plugins/dateRangeStylescss").Include(
                       "~/content/plugins/daterangepicker/daterangepicker-bs3.css"));
 
             // Date range picker
-            bundles.Add(new ScriptBundle("~/scripts/plugins/dateRange").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/dateRangejs").Include(
                       // Date range use moment.js same as full calendar plugin 
                       "~/scripts/plugins/fullcalendar/moment.min.js",
                       "~/scripts/plugins/daterangepicker/daterangepicker.js"));
@@ -514,18 +516,18 @@ namespace Carroll.Portals
                         "~/scripts/plugins/pwstrength/zxcvbn.js"));
 
             // input-mask
-            bundles.Add(new StyleBundle("~/scripts/plugins/input-mask").Include("~/scripts/plugins/input-mask/inputmask.js",
+            bundles.Add(new StyleBundle("~/scripts/plugins/input-maskjs").Include("~/scripts/plugins/input-mask/inputmask.js",
                         "~/scripts/plugins/input-mask/jquery.inputmask.js",
                         "~/scripts/plugins/input-mask/jquery.inputmask.regex.extensions.js",
                         "~/scripts/plugins/input-mask/jquery.inputmask.numeric.extensions.js"
                         ));
 
             // token-input gallery css styles
-            bundles.Add(new StyleBundle("~/content/plugins/token-input").Include(
+            bundles.Add(new StyleBundle("~/content/plugins/token-inputcss").Include(
                       "~/content/plugins/token-input/token-input-facebook.css"));
 
             // token-input gallery
-            bundles.Add(new ScriptBundle("~/scripts/plugins/token-input").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/token-inputjs").Include(
                       "~/scripts/plugins/token-input/jquery.tokeninput.js"));
         }
     }
