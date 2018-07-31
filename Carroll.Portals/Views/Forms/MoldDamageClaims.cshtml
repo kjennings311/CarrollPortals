@@ -143,8 +143,8 @@
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
 @section Styles {
-    @Styles.Render("~/content/plugins/dataTables/dataTablesStyles")
-    @Styles.Render("~/content/plugins/token-input")
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
 
     <style>
         .dtprops td, .dtprops th {
@@ -155,9 +155,9 @@
 
 @section Scripts
 {
-    @Scripts.Render("~/scripts/plugins/dataTables")
-    @Scripts.Render("~/scripts/plugins/input-mask")
-    @Scripts.Render("~/scripts/plugins/token-input")
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
 
     <script>
 
