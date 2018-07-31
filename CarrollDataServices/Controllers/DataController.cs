@@ -17,6 +17,10 @@ using System.Security.Claims;
 using System.Web.Http.Cors;
 using System.Web;
 using System.IO;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using Carroll.Data.Services.Models.MongoModels;
 
 namespace Carroll.Data.Services.Controllers
 {
@@ -31,12 +35,18 @@ namespace Carroll.Data.Services.Controllers
         private IDataService _service;
         private IValidationDictionary _modelState;
 
+        MongoClient _client;
+        IMongoDatabase _db;
+
         public DataController()
         {
             _modelState = new ModelStateWrapper(this.ModelState);
             _service = new DataService(_modelState, new EntityDataRepository());
+            _client = new MongoClient("mongodb://localhost:27017");
+            _db = _client.GetDatabase("DynamicForms");
 
         }
+
 
         public DataController(IDataService service)
         {
@@ -70,6 +80,22 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetRecords(entityType, optionalText);
 
         }
+
+
+        [ActionName("Index")]
+        [HttpGet]
+        public string Index()
+        {
+            return _db.GetCollection<Models.MongoModels.Form>("Forms").ToJson();
+        }
+
+        [ActionName("sample")]
+        [HttpGet]
+        public string sample()
+        {
+            return "Hi";
+        }
+
 
         [ActionName("GetRecordsWithConfig")]
         [HttpGet]
