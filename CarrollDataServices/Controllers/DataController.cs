@@ -149,7 +149,7 @@ namespace Carroll.Data.Services.Controllers
         #endregion
 
 
-        [EnableCors(origins: "http://localhost", headers: "*", methods: "*")]
+        
         [ActionName("DeleteRecord")]
         [HttpPost]
         
