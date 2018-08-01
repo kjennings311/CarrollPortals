@@ -58,10 +58,10 @@ namespace Carroll.Data.Services.Controllers
             return _db.GetCollection<Form>("Forms").Find(filter).ToJson();
         }
 
-            public string CreateForm(Form f)
+            public dynamic CreateForm(Form f)
         {
             _db.GetCollection<Form>("Forms").InsertOne(f);
-            return _db.GetCollection<Form>("Forms").ToJson();
+            return _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync().Result;
         }
 
         public dynamic UpdateForm(Form f)

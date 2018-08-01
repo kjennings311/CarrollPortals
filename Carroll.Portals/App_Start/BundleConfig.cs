@@ -81,10 +81,12 @@ namespace Carroll.Portals
                       "~/scripts/plugins/metisMenu/metisMenu.min.js",
                       "~/scripts/plugins/pace/pace.min.js",
                       "~/scripts/app/inspinia.js",
-                      "~/scripts/app/custom.js"
-                      ));
-
-            // Inspinia skin config script
+                      "~/scripts/app/custom.js" ));
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                    "~/scripts/app/admin.js"));
+            // Inspinia skin config script 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            "~/scripts/bootstrap.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/skinConfig").Include(
                       "~/scripts/app/skin.config.min.js"));
 

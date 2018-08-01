@@ -23,11 +23,11 @@
 </div>
 
 <div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
-        <div class="col-md-6">
+    <div class="col-md-6">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>Forms</h5>
-             
+
             </div>
             <div class="ibox-content">
                 <div class="jumbotron">
@@ -39,88 +39,72 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                          
+                            <th>Form Name</th>
+                            <th>Created Date </th>
+                            <th> Created By</th>
+                            <th>  </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
+                    <tbody class="allforms">
+                      
                     </tbody>
                 </table>
 
             </div>
         </div>
-        </div>
-        <div class="col-md-6">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Create/Edit Form</h5>
-                 
-                </div>
-                <div class="ibox-content">
-                    @AdminHelper.CreateEditForm()
-                </div>
+    </div>
+    <div class="col-md-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Create/Edit Form</h5>
 
-                </div><!-- /.col -->
+            </div>
+            <div class="ibox-content">
+                @AdminHelper.CreateEditForm()
             </div>
 
+        </div><!-- /.col -->
+    </div>
 
 
 
-            @if (ViewBag.ErrorMessage == "AuthorizationRequired")
-            {
-                <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
 
+    @if (ViewBag.ErrorMessage == "AuthorizationRequired")
+    {
+        <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+    }
+    @if (ViewBag.ErrorMessage == "UnexpectedError")
+    {
+        <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+    }
+    @section Styles {
+        @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+        @Styles.Render("~/content/plugins/token-inputcss")
+
+        <style>
+            .dtprops td, .dtprops th {
+                white-space: nowrap;
             }
-            @if (ViewBag.ErrorMessage == "UnexpectedError")
-            {
-                <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
-            }
-            @section Styles {
-                @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
-                @Styles.Render("~/content/plugins/token-inputcss")
+        </style>
+    }
 
-                <style>
-                    .dtprops td, .dtprops th {
-                        white-space: nowrap;
-                    }
-                </style>
-            }
-
-            @section Scripts
+    @section Scripts
 {
-                @Scripts.Render("~/scripts/plugins/dataTablesjs")
-                @Scripts.Render("~/scripts/plugins/input-maskjs")
-                @Scripts.Render("~/scripts/plugins/token-inputjs")
+        @Scripts.Render("~/scripts/plugins/dataTablesjs")
+        @Scripts.Render("~/scripts/plugins/input-maskjs")
+        @Scripts.Render("~/scripts/plugins/token-inputjs")
+        @Scripts.Render("~/bundles/admin")
+        <script>
 
-                <script>
+            $(document).ready(function () {
 
-                    $(document).ready(function () {
+                LoadAllForms();
 
+            });
 
+        </script>
 
-                    });
-
-                </script>
-
-            }
+    }
 
