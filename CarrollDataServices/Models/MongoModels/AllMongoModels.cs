@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using MongoDB.Bson;
@@ -29,20 +30,24 @@ namespace Carroll.Data.Services.Models.MongoModels
 
     public class Form
     {
-
+        [BsonId]
         public ObjectId Id { get; set; }
+        [Required]
         [BsonElement("FormName")]
-        public string FormName { get; set; }
+        [Display(Name ="Form Name")]
+        public BsonString FormName { get; set; }
+        [Required]
         [BsonElement("FormNamePlural")]
-        public string FormNamePlural { get; set; }
+        [Display(Name = "Form Name Plural")]
+        public BsonString FormNamePlural { get; set; }
         [BsonElement("CreatedBy")]
-        public string CreatedBy { get; set; }
+        public BsonString CreatedBy { get; set; }
         [BsonElement("CreatedDate")]
-        public DateTime CreatedDate { get; set; }
+        public BsonDateTime CreatedDate { get; set; }
         [BsonElement("ModifiedBy")]
-        public bool ModifiedBy { get; set; }
+        public BsonString ModifiedBy { get; set; }
         [BsonElement("ModifiedDate")]
-        public DateTime ModifiedDate { get; set; }
+         public BsonDateTime ModifiedDate { get; set; }
       
 
     }

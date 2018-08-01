@@ -36,16 +36,20 @@ namespace Carroll.Data.Services.Controllers
              return  false;
         }
 
-        [ActionName("Index")]
+        [ActionName("GetAllForms")]
         [HttpGet]
-        public string Index()
+        public List<BsonDocument> GetAllForms()
         {
-            var res= _db.GetCollection<BsonDocument>("Forms").ToJson();
-            return res;
+            var res = _db.GetCollection<BsonDocument>("Forms").Find(new BsonDocument()).ToListAsync();
+            return res.Result;
         }
-        public string GetAllForms()
+        public dynamic GetAllForms1()
         {
-            return _db.GetCollection<Form>("SiteUsers").ToJson();
+            var res =  _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync();
+            return res.Result;
+            //System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //var sJsonText = oSerializer.Serialize(res.Result);
+            //return sJsonText;
         }
 
         public string GetForm(ObjectId Id)
@@ -60,21 +64,23 @@ namespace Carroll.Data.Services.Controllers
             return _db.GetCollection<Form>("Forms").ToJson();
         }
 
-        public string UpdateForm(ObjectId Id,Form f)
+        public dynamic UpdateForm(Form f)
         {
-            f.Id = Id;
-            var res = Query<Form>.EQ(pd => pd.Id, Id);
+            //f.Id = new ObjectId(Id);
+           // var res = Query<Form>.EQ(pd => pd.Id, f.Id);
            // var operation = Update<Form>.Replace(f);
            
-            var filter = Builders<Form>.Filter.Eq("Id", Id);
+            var filter = Builders<Form>.Filter.Eq(s=> s.Id,f.Id);
+            _db.GetCollection<Form>("Forms").ReplaceOneAsync(filter, f);
+           return GetAllForms1();
 
-            var update = Builders<Form>.Update.Set(f.FormName.ToString(), f.FormName);
-            update = Builders<Form>.Update.Set(f.FormNamePlural.ToString(), f.FormNamePlural);
-            update = Builders<Form>.Update.Set(f.ModifiedBy.ToString(), f.CreatedBy);
-            update = Builders<Form>.Update.Set(f.ModifiedDate.ToString(), DateTime.Now);
+        //    var update = Builders<Form>.Update.Set(f.FormName.ToString(), f.FormName);
+        //    update = Builders<Form>.Update.Set(f.FormNamePlural.ToString(), f.FormNamePlural);
+        //    update = Builders<Form>.Update.Set(f.ModifiedBy.ToString(), f.CreatedBy);
+        //    update = Builders<Form>.Update.Set(f.ModifiedDate.ToString(), DateTime.Now);
 
-            _db.GetCollection<Form>("Forms").UpdateOne(filter, update);            
-            return _db.GetCollection<Form>("Forms").ToJson();
+            //    _db.GetCollection<Form>("Forms").UpdateOne(filter, update);            
+            //    return _db.GetCollection<Form>("Forms").ToJson();
         }
 
     }

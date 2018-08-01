@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Forms";
+
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2> Forms </h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+
+            <li class="active">
+                <strong>Forms</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
+        <div class="col-md-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Forms</h5>
+             
+            </div>
+            <div class="ibox-content">
+                <div class="jumbotron">
+
+                    <h1>What are Forms?</h1>
+                    <p>Forms are collection of Content Types. When creating a form use singular names.</p>
+                    @*<a class="btn btn-primary btn-lg">Start Now!</a>*@
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>mdo</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>fat</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Create/Edit Form</h5>
+                 
+                </div>
+                <div class="ibox-content">
+                    @AdminHelper.CreateEditForm()
+                </div>
+
+                </div><!-- /.col -->
+            </div>
+
+
+
+
+            @if (ViewBag.ErrorMessage == "AuthorizationRequired")
+            {
+                <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+            }
+            @if (ViewBag.ErrorMessage == "UnexpectedError")
+            {
+                <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+            }
+            @section Styles {
+                @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+                @Styles.Render("~/content/plugins/token-inputcss")
+
+                <style>
+                    .dtprops td, .dtprops th {
+                        white-space: nowrap;
+                    }
+                </style>
+            }
+
+            @section Scripts
+{
+                @Scripts.Render("~/scripts/plugins/dataTablesjs")
+                @Scripts.Render("~/scripts/plugins/input-maskjs")
+                @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+                <script>
+
+                    $(document).ready(function () {
+
+
+
+                    });
+
+                </script>
+
+            }
+

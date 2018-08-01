@@ -1,0 +1,42 @@
+﻿@helper CreateEditForm()
+{
+    <form role="form" id="frmForm" onsubmit="return false;">
+        <div class="box">
+         
+            <div class="box-body">
+                <div class="alert alert-danger alert-dismissable failure-message" style="display:none">
+
+                    <i class="fa fa-ban"></i>
+                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+                    <div class="failureMessage"></div>
+
+                </div>
+                <div class="alert alert-success alert-dismissable success-message" style="display:none">
+
+                    <i class="fa fa-check"></i>
+                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+                    <div class="successMessage"></div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Form Name (ex: opportunity)</label>
+                    <input type="text" class="form-control required" placeholder="Form Name" id="FormName" required>
+                    <input type="hidden" class="form-control" id="FormId" value="-1">
+                </div>
+                <div class="form-group">
+                    <label>Form Name Plural (ex: opportunities)</label>
+                    <input type="text" class="form-control required" placeholder="Form Name Plural" id="FormNamePlural" required>
+
+                </div>
+
+
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <button class="btn btn-primary" id="btnCreateUpdateForm" type="submit" onclick="CreateEditForm();">Submit</button>
+                <button type="button" class="btn btn-danger pull-right" style="display:none;" id="btnDiscard">Discard Edit</button>
+            </div>
+        </div><!-- /.box -->
+    </form>
+
+}
