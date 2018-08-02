@@ -19,7 +19,7 @@ using System.Web;
 using System.IO;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+//using MongoDB.Driver.Builders;
 using Carroll.Data.Services.Models.MongoModels;
 
 namespace Carroll.Data.Services.Controllers
@@ -42,8 +42,8 @@ namespace Carroll.Data.Services.Controllers
         {
             _modelState = new ModelStateWrapper(this.ModelState);
             _service = new DataService(_modelState, new EntityDataRepository());
-            _client = new MongoClient("mongodb://localhost:27017");
-            _db = _client.GetDatabase("DynamicForms");
+            //_client = new MongoClient("mongodb://localhost:27017");
+            //_db = _client.GetDatabase("DynamicForms");
 
         }
 
@@ -89,12 +89,7 @@ namespace Carroll.Data.Services.Controllers
             return _db.GetCollection<Models.MongoModels.Form>("Forms").ToJson();
         }
 
-        [ActionName("sample")]
-        [HttpGet]
-        public string sample()
-        {
-            return "Hi";
-        }
+       
 
 
         [ActionName("GetRecordsWithConfig")]

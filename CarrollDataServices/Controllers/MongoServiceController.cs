@@ -6,11 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
+//using MongoDB.Driver.Builders;
 using Carroll.Data.Services.Models.MongoModels;
+using System.Web.Http.Cors;
 
 namespace Carroll.Data.Services.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MongoServiceController : ApiController
     {
         IMongoClient _client;      
@@ -43,25 +45,51 @@ namespace Carroll.Data.Services.Controllers
             var res = _db.GetCollection<BsonDocument>("Forms").Find(new BsonDocument()).ToListAsync();
             return res.Result;
         }
-        public dynamic GetAllForms1()
-        {
-            var res =  _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync();
-            return res.Result;
-            //System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            //var sJsonText = oSerializer.Serialize(res.Result);
-            //return sJsonText;
-        }
+        //public dynamic GetAllForms1()
+        //{
+        //    var res =  _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync();
+        //    return res.Result;
+        //    //System.Web.Script.Serialization.JavaScriptSerializer oSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+        //    //var sJsonText = oSerializer.Serialize(res.Result);
+        //    //return sJsonText;
+        //}
+        
 
         public string GetForm(ObjectId Id)
         {
             var filter = Builders<Form>.Filter.Eq("_id", Id);
             return _db.GetCollection<Form>("Forms").Find(filter).ToJson();
         }
-
-            public dynamic CreateForm(Form f)
+        [ActionName("CEForm")]
+        [HttpPost]
+        public dynamic CEForm([FromBody]string f)
         {
-            _db.GetCollection<Form>("Forms").InsertOne(f);
-            return _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync().Result;
+            //IMongoCollection<BsonDocument> forms =  _db.GetCollection<BsonDocument>("Forms");
+
+            //forms.InsertOneAsync(f);
+            //return GetAllForms();
+
+            string s = "1";
+            return GetAllForms();
+            //bool isNew = true;
+            //try
+            //{
+            //    string s = f.Id.ToString();
+
+            //}
+            //catch { isNew = false; }
+            //if (isNew)
+            //{
+            //    _db.GetCollection<Form>("Forms").InsertOne(f);
+            //    //  return _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync().Result;
+            //    return GetAllForms();
+            //}
+            //else
+            //{
+            //    var filter = Builders<Form>.Filter.Eq(s => s.Id, f.Id);
+            //    _db.GetCollection<Form>("Forms").ReplaceOneAsync(filter, f);
+            //    return GetAllForms();
+            //}
         }
 
         public dynamic UpdateForm(Form f)
@@ -72,7 +100,7 @@ namespace Carroll.Data.Services.Controllers
            
             var filter = Builders<Form>.Filter.Eq(s=> s.Id,f.Id);
             _db.GetCollection<Form>("Forms").ReplaceOneAsync(filter, f);
-           return GetAllForms1();
+           return GetAllForms();
 
         //    var update = Builders<Form>.Update.Set(f.FormName.ToString(), f.FormName);
         //    update = Builders<Form>.Update.Set(f.FormNamePlural.ToString(), f.FormNamePlural);

@@ -82,7 +82,7 @@ namespace Carroll.Portals
                       "~/scripts/plugins/pace/pace.min.js",
                       "~/scripts/app/inspinia.js",
                       "~/scripts/app/custom.js" ));
-            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+            bundles.Add(new ScriptBundle("~/bundles/adminbundle").Include(
                     "~/scripts/app/admin.js"));
             // Inspinia skin config script 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
