@@ -12,6 +12,8 @@ using Carroll.Portals.Helpers;
 using System.Net.Mail;
 using System.Net;
 using System.Net.Mime;
+using System.Web;
+using System;
 
 namespace Carroll.Portals.Controllers
 {
@@ -55,18 +57,19 @@ namespace Carroll.Portals.Controllers
 
                     // is a valid user, create cookie, create session variables
                     FormsAuthentication.SetAuthCookie(Login.UserName, true);
-                    
+                    LoggedInUser.AssignRolesToUser();
                     // Get User Credentials
-                    SiteUser user = _userservice.GetUser(Login.UserName);
+                    // SiteUser user = _userservice.GetUser(Login.UserName);
 
-                   string role = _userservice.GetUserRoleName(user.UserId);
+                    //string role = _userservice.GetUserRoleName(user.UserId);
 
-                    if (user != null)
-                    {
-                        Session["Carroll_User_Id"] = user.UserId;
-                        Session["Carroll_UserName"] = user.FirstName + " " + user.LastName;                    
-                       Session["Carroll_RoleName"] = role;
-                    }
+                    // if (user != null)
+                    // {
+                    //     Session["Carroll_User_Id"] = user.UserId;
+                    //     Session["Carroll_UserName"] = user.FirstName + " " + user.LastName;                    
+                    //    Session["Carroll_RoleName"] = role;
+
+                    // }
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -204,7 +207,11 @@ namespace Carroll.Portals.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session.Clear();
+            Session.Abandon();
+            HttpCookie cookie1 = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            cookie1.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie1);
+
             return RedirectToAction("Login");
         }
 

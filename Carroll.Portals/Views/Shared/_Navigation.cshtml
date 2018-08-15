@@ -7,10 +7,12 @@
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <img src="~/img/corpLogo.png" />
-                            </span> <strong class="font-bold"> @Model.UserName </strong>
+                            </span>
+                        <p>&nbsp;</p>
+                        <strong class="font-bold"> @Model.Name </strong>
                             <input type="hidden" id="CreatedByName" value="@Model.UserName" />
                             <input type="hidden" id="CreatedBy" value="@Model.UserId" />
-                        </span> <span class="text-muted text-xs block"> @Model.RoleType <b class="caret"></b></span>
+                        </span> <span class="text-muted text-xs block">Access Level -  @Model.RoleType <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="~/Account/Logout">Logout</a></li>
@@ -20,7 +22,7 @@
                     <img src="~/img/LogoC.png" />
                 </div>
             </li>
-            <li class="active">
+            <li >
                 <a href="~/Home/Index"><i class="fa fa-home"></i> <span class="nav-label">Portal Home</span></a>
             </li>
             <li>
@@ -36,7 +38,7 @@
                 if (@Model.RoleType == "Administrator")
                 {
 
-                    <li>
+                    @*<li>
                         <a href="javascript:void(0)"><i class="fa fa-edit"></i> <span class="nav-label">Forms</span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
@@ -48,7 +50,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li>*@
                     <li>
                         <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label">Users </span></a>
 
@@ -60,7 +62,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    @*<li>
                         <a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="nav-label"> Administration </span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
@@ -69,7 +71,7 @@
                                 <a href="~/Admin/Forms">   <i class="fa fa-angle-double-right"></i>  Forms </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>*@
                 }
             }
 

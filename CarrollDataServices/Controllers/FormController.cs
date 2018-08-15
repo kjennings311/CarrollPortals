@@ -186,10 +186,14 @@ namespace Carroll.Data.Services.Controllers
 
                 foreach (FormField _field in _formdata.FormFields)
                 {
-                    if(_field.FieldValidationType==FieldValidationTypes.DateTime)
-                    obj.SetPropertyValue(_field.FieldName, DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy",null));
+                    if (_field.FieldValidationType == FieldValidationTypes.DateTime)
+                        try
+                        {
+                            obj.SetPropertyValue(_field.FieldName, DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy", null));
+                        }
+                        catch { }
                     else
-                     obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+                        obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
 
                     //if (obj.GetPropertyValue(_field.FieldName) == null)
                     //    obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
