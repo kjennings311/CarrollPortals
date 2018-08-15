@@ -13,6 +13,7 @@ using Carroll.Data.Entities.Repository;
 using Carroll.Data.Entities;
 using System.Reflection;
 using System.Web.Http.Cors;
+using System.Globalization;
 
 namespace Carroll.Data.Services.Controllers
 {
@@ -186,7 +187,7 @@ namespace Carroll.Data.Services.Controllers
                 foreach (FormField _field in _formdata.FormFields)
                 {
                     if(_field.FieldValidationType==FieldValidationTypes.DateTime)
-                    obj.SetPropertyValue(_field.FieldName, Convert.ToDateTime( _field.FieldValue));
+                    obj.SetPropertyValue(_field.FieldName, DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy",null));
                     else
                      obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
 

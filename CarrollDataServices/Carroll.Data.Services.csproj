@@ -15,7 +15,7 @@
     <RootNamespace>Carroll.Data.Services</RootNamespace>
     <AssemblyName>Carroll.Data.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>49786</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
@@ -258,6 +258,9 @@
       <Project>{bc5bdd53-19ff-4712-97de-8d55d4c79535}</Project>
       <Name>Carroll.Data.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

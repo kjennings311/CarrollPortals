@@ -224,11 +224,11 @@ namespace Carroll.Portals
                       "~/scripts/plugins/ionRangeSlider/ion.rangeSlider.min.js"));
 
             // dataPicker styles
-            bundles.Add(new StyleBundle("~/content/plugins/dataPickerStyles").Include(
+            bundles.Add(new StyleBundle("~/content/plugins/dataPickerStylescss").Include(
                       "~/content/plugins/datapicker/datepicker3.css"));
 
             // dataPicker 
-            bundles.Add(new ScriptBundle("~/scripts/plugins/dataPicker").Include(
+            bundles.Add(new ScriptBundle("~/scripts/plugins/dataPickerjs").Include(
                       "~/scripts/plugins/datapicker/bootstrap-datepicker.js"));
 
             // nouiSlider styles

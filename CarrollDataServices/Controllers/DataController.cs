@@ -16,6 +16,7 @@ using Carroll.Data.Entities.Repository;
 using System.Security.Claims;
 using System.Web.Http.Cors;
 using System.Web;
+//using System.Web.Mvc;
 using System.IO;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -173,7 +174,7 @@ namespace Carroll.Data.Services.Controllers
         
         [ActionName("DeleteRecord")]
         [HttpPost]
-        
+        //[ValidateInput(false)]
         public bool DeleteRecord(EntityType entityType, string recordId)
         {
 

@@ -28,27 +28,52 @@ namespace Carroll.Data.Services.Models.MongoModels
 
     }
 
+    //public class Form
+    //{
+    //    [BsonId]
+    //    public ObjectId Id { get; set; }
+    //    [Required]
+    //    [BsonElement("FormName")]
+    //    [Display(Name ="Form Name")]
+    //    public BsonString FormName { get; set; }
+    //    [Required]
+    //    [BsonElement("FormNamePlural")]
+    //    [Display(Name = "Form Name Plural")]
+    //    public BsonString FormNamePlural { get; set; }
+    //    [BsonElement("CreatedBy")]
+    //    public BsonString CreatedBy { get; set; }
+    //    [BsonElement("CreatedDate")]
+    //    public BsonDateTime CreatedDate { get; set; }
+    //    [BsonElement("ModifiedBy")]
+    //    public BsonString ModifiedBy { get; set; }
+    //    [BsonElement("ModifiedDate")]
+    //     public BsonDateTime ModifiedDate { get; set; }
+      
+
+    //}
+
+
     public class Form
     {
         [BsonId]
         public ObjectId Id { get; set; }
         [Required]
         [BsonElement("FormName")]
-        [Display(Name ="Form Name")]
-        public BsonString FormName { get; set; }
+        [Display(Name = "Form Name")]
+        public string FormName { get; set; }
         [Required]
         [BsonElement("FormNamePlural")]
         [Display(Name = "Form Name Plural")]
-        public BsonString FormNamePlural { get; set; }
+        public string FormNamePlural { get; set; }
         [BsonElement("CreatedBy")]
-        public BsonString CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         [BsonElement("CreatedDate")]
-        public BsonDateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         [BsonElement("ModifiedBy")]
-        public BsonString ModifiedBy { get; set; }
+        public string ModifiedBy { get; set; }
         [BsonElement("ModifiedDate")]
-         public BsonDateTime ModifiedDate { get; set; }
-      
+        public DateTime ModifiedDate { get; set; }
+
 
     }
 }

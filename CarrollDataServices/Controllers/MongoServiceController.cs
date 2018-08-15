@@ -54,12 +54,15 @@ namespace Carroll.Data.Services.Controllers
         //    //return sJsonText;
         //}
         
-
-        public string GetForm(ObjectId Id)
+        [ActionName("GetForm")]
+        [HttpGet]
+        public dynamic GetForm(ObjectId Id)
         {
             var filter = Builders<Form>.Filter.Eq("_id", Id);
-            return _db.GetCollection<Form>("Forms").Find(filter).ToJson();
+            return _db.GetCollection<Form>("Forms").Find(filter).ToListAsync().Result;
         }
+
+
         [ActionName("CEForm")]
         [HttpPost]
         public dynamic CEForm([FromBody]string f)
@@ -90,6 +93,19 @@ namespace Carroll.Data.Services.Controllers
             //    _db.GetCollection<Form>("Forms").ReplaceOneAsync(filter, f);
             //    return GetAllForms();
             //}
+        }
+
+
+
+
+        [ActionName("CreateForm")]
+        [HttpPost]
+        public dynamic CreateForm(Form f)
+        {
+            f.CreatedDate = DateTime.Now;
+
+            _db.GetCollection<Form>("Forms").InsertOne(f);
+            return _db.GetCollection<Form>("Forms").Find(new BsonDocument()).ToListAsync().Result;
         }
 
         public dynamic UpdateForm(Form f)
