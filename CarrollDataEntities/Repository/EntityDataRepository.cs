@@ -503,21 +503,46 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
+
+
                 var ClaimCounts = new { PropertyCount = 0, DamangeCount = 0, LiabilityCount = 0 };
 
-                var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                  where tbl.CreatedBy == userid
-                                  select tbl).Count();
-                var _damagecount = (from tbl in _entities.FormMoldDamageClaims
-                                    where tbl.CreatedBy == userid
-                                    select tbl).Count();
-                var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
-                                       where tbl.CreatedBy == userid
-                                       select tbl).Count();
+                var res = (from tbl in _entities.Roles
+                           join tbluserrole in _entities.UserInRoles on tbl.RoleId equals tbluserrole.RoleId
+                           where tbluserrole.UserId == userid && tbl.RoleName.Contains("admin")
+                           select tbl).Count();
+
+                if(res == 1)
+                {
+
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims                                    
+                                      select tbl).Count();
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims                                       
+                                        select tbl).Count();
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims                                          
+                                           select tbl).Count();
+
+                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                }
+                else
+                {
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                      where tbl.CreatedBy == userid
+                                      select tbl).Count();
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                        where tbl.CreatedBy == userid
+                                        select tbl).Count();
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                           where tbl.CreatedBy == userid
+                                           select tbl).Count();
+                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                }
+
+               
 
                 
 
-                return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+             
                 
             }
         }
