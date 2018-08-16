@@ -37,18 +37,20 @@ namespace Carroll.Data.Entities
         public bool IsOwned { get; set; }
         public bool IsActive { get; set; }
         public string EquityPartnerSiteCode { get; set; }
+        public Nullable<System.Guid> EquityPartner { get; set; }
+        public string InsuranceNotifyEmail { get; set; }
         public Nullable<System.Guid> VicePresident { get; set; }
+        public Nullable<System.Guid> RegionalVicePresident { get; set; }
         public Nullable<System.Guid> PropertyManager { get; set; }
         public Nullable<System.Guid> AssetManager1 { get; set; }
         public Nullable<System.Guid> AssetManager2 { get; set; }
         public Nullable<System.Guid> RegionalManager { get; set; }
+        public Nullable<System.Guid> ConstructionManager { get; set; }
         public string Field1 { get; set; }
         public string Field2 { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string CreatedByName { get; set; }
-        public Nullable<System.Guid> ConstructionManager { get; set; }
-        public Nullable<System.Guid> EquityPartner { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInProperty> UserInProperties { get; set; }

@@ -813,6 +813,7 @@
     <Content Include="Views\Forms\PropertyDamageClaims.cshtml" />
     <Content Include="Views\Home\ViewClaim.cshtml" />
     <Content Include="Views\Admin\Forms.cshtml" />
+    <Content Include="Views\Home\ViewClaim - Copy.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

@@ -30,7 +30,10 @@ namespace Carroll.Data.Entities
         public bool IsOwned { get; set; }
         public bool IsActive { get; set; }
         public string EquityPartnerSiteCode { get; set; }
+        public string InsuranceNotifyEmail { get; set; }
+        public string EquityPartner { get; set; }
         public string VicePresident { get; set; }
+        public string RegionalVicePresident { get; set; }
         public string PropertyManager { get; set; }
         public string AssetManager2 { get; set; }
         public string AssetManager1 { get; set; }

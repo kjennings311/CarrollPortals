@@ -167,7 +167,9 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="EquityPartnerSiteCode" Type="varchar" MaxLength="10" />
           <Property Name="EquityPartner" Type="uniqueidentifier" />
+          <Property Name="InsuranceNotifyEmail" Type="varchar" MaxLength="50" />
           <Property Name="VicePresident" Type="uniqueidentifier" />
+          <Property Name="RegionalVicePresident" Type="uniqueidentifier" />
           <Property Name="PropertyManager" Type="uniqueidentifier" />
           <Property Name="AssetManager1" Type="uniqueidentifier" />
           <Property Name="AssetManager2" Type="uniqueidentifier" />
@@ -361,19 +363,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="FormGeneralLiabilityClaims" EntityType="Carroll.Data.Entities.FormGeneralLiabilityClaim" />
           <EntitySet Name="FormMoldDamageClaims" EntityType="Carroll.Data.Entities.FormMoldDamageClaim" />
           <EntitySet Name="FormPropertyDamageClaims" EntityType="Carroll.Data.Entities.FormPropertyDamageClaim" />
-          <EntitySet Name="Properties" EntityType="Carroll.Data.Entities.Property" />
           <EntitySet Name="Roles" EntityType="Carroll.Data.Entities.Role" />
           <EntitySet Name="UserInProperties" EntityType="Carroll.Data.Entities.UserInProperty" />
           <EntitySet Name="UserInRoles" EntityType="Carroll.Data.Entities.UserInRole" />
-          <AssociationSet Name="FK_UserInProperty_Properties" Association="Carroll.Data.Entities.FK_UserInProperty_Properties">
-            <End Role="Property" EntitySet="Properties" />
-            <End Role="UserInProperty" EntitySet="UserInProperties" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserInRole_Roles" Association="Carroll.Data.Entities.FK_UserInRole_Roles">
             <End Role="Role" EntitySet="Roles" />
             <End Role="UserInRole" EntitySet="UserInRoles" />
           </AssociationSet>
-          <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
           <EntitySet Name="SiteUsers" EntityType="Carroll.Data.Entities.SiteUser" />
           <AssociationSet Name="FK_UserInRole_SiteUsers" Association="Carroll.Data.Entities.FK_UserInRole_SiteUsers">
             <End Role="SiteUser" EntitySet="SiteUsers" />
@@ -391,6 +387,12 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           </FunctionImport>
           <EntitySet Name="FormAttachments" EntityType="Carroll.Data.Entities.FormAttachment" />
           <EntitySet Name="FormComments" EntityType="Carroll.Data.Entities.FormComment" />
+          <EntitySet Name="Properties" EntityType="Carroll.Data.Entities.Property" />
+          <AssociationSet Name="FK_UserInProperty_Properties" Association="Carroll.Data.Entities.FK_UserInProperty_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="UserInProperty" EntitySet="UserInProperties" />
+          </AssociationSet>
+          <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -507,41 +509,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
         </EntityType>
-        <EntityType Name="Property">
-          <Key>
-            <PropertyRef Name="PropertyId" />
-          </Key>
-          <Property Name="PropertyId" Type="Guid" Nullable="false" />
-          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PropertyNumber" Type="Int32" />
-          <Property Name="LegalName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Units" Type="Int32" />
-          <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AcquisitionDate" Type="DateTime" Precision="3" />
-          <Property Name="DispositionDate" Type="DateTime" Precision="3" />
-          <Property Name="IsOwned" Type="Boolean" Nullable="false" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="EquityPartnerSiteCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="VicePresident" Type="Guid" />
-          <Property Name="PropertyManager" Type="Guid" />
-          <Property Name="AssetManager1" Type="Guid" />
-          <Property Name="AssetManager2" Type="Guid" />
-          <Property Name="RegionalManager" Type="Guid" />
-          <Property Name="Field1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Field2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" />
-          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="Property" ToRole="UserInProperty" />
-          <Property Name="ConstructionManager" Type="Guid" />
-          <Property Name="EquityPartner" Type="Guid" />
-        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -579,20 +546,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <NavigationProperty Name="Role" Relationship="Carroll.Data.Entities.FK_UserInRole_Roles" FromRole="UserInRole" ToRole="Role" />
           <NavigationProperty Name="SiteUser" Relationship="Carroll.Data.Entities.FK_UserInRole_SiteUsers" FromRole="UserInRole" ToRole="SiteUser" />
         </EntityType>
-        <Association Name="FK_UserInProperty_Properties">
-          <End Type="Carroll.Data.Entities.Property" Role="Property" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Carroll.Data.Entities.UserInProperty" Role="UserInProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Property">
-              <PropertyRef Name="PropertyId" />
-            </Principal>
-            <Dependent Role="UserInProperty">
-              <PropertyRef Name="PropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserInRole_Roles">
           <End Type="Carroll.Data.Entities.Role" Role="Role" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -607,36 +560,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="spProperties_Result">
-          <Property Type="Guid" Name="PropertyId" Nullable="false" />
-          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
-          <Property Type="String" Name="LegalName" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Units" Nullable="true" />
-          <Property Type="String" Name="TaxId" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="17" />
-          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="AcquisitionDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="DispositionDate" Nullable="true" Precision="23" />
-          <Property Type="Boolean" Name="IsOwned" Nullable="false" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="String" Name="EquityPartnerSiteCode" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="VicePresident" Nullable="true" MaxLength="90" />
-          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="90" />
-          <Property Type="String" Name="AssetManager2" Nullable="true" MaxLength="90" />
-          <Property Type="String" Name="AssetManager1" Nullable="true" MaxLength="90" />
-          <Property Type="String" Name="RegionalManager" Nullable="true" MaxLength="90" />
-          <Property Type="String" Name="ConstructionManager" Nullable="true" MaxLength="90" />
-          <Property Type="String" Name="Field1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Field2" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
-          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
-          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
-        </ComplexType>
         <EntityType Name="SiteUser">
           <Key>
             <PropertyRef Name="UserId" />
@@ -835,6 +758,90 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CommentByName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CommentBy" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyId" />
+          </Key>
+          <Property Name="PropertyId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyNumber" Type="Int32" />
+          <Property Name="LegalName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Units" Type="Int32" />
+          <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AcquisitionDate" Type="DateTime" Precision="3" />
+          <Property Name="DispositionDate" Type="DateTime" Precision="3" />
+          <Property Name="IsOwned" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EquityPartnerSiteCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EquityPartner" Type="Guid" />
+          <Property Name="InsuranceNotifyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VicePresident" Type="Guid" />
+          <Property Name="RegionalVicePresident" Type="Guid" />
+          <Property Name="PropertyManager" Type="Guid" />
+          <Property Name="AssetManager1" Type="Guid" />
+          <Property Name="AssetManager2" Type="Guid" />
+          <Property Name="RegionalManager" Type="Guid" />
+          <Property Name="ConstructionManager" Type="Guid" />
+          <Property Name="Field1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Field2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="Property" ToRole="UserInProperty" />
+        </EntityType>
+        <Association Name="FK_UserInProperty_Properties">
+          <End Type="Carroll.Data.Entities.Property" Role="Property" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Carroll.Data.Entities.UserInProperty" Role="UserInProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyId" />
+            </Principal>
+            <Dependent Role="UserInProperty">
+              <PropertyRef Name="PropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spProperties_Result">
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="LegalName" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="Units" Nullable="true" />
+          <Property Type="String" Name="TaxId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="AcquisitionDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="DispositionDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsOwned" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="EquityPartnerSiteCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="InsuranceNotifyEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EquityPartner" Nullable="true" MaxLength="84" />
+          <Property Type="String" Name="VicePresident" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="RegionalVicePresident" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="AssetManager2" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="AssetManager1" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="RegionalManager" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="ConstructionManager" Nullable="true" MaxLength="90" />
+          <Property Type="String" Name="Field1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Field2" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -961,41 +968,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Properties">
-            <EntityTypeMapping TypeName="Carroll.Data.Entities.Property">
-              <MappingFragment StoreEntitySet="Properties">
-                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
-                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
-                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Field2" ColumnName="Field2" />
-                <ScalarProperty Name="Field1" ColumnName="Field1" />
-                <ScalarProperty Name="RegionalManager" ColumnName="RegionalManager" />
-                <ScalarProperty Name="AssetManager2" ColumnName="AssetManager2" />
-                <ScalarProperty Name="AssetManager1" ColumnName="AssetManager1" />
-                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
-                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
-                <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
-                <ScalarProperty Name="DispositionDate" ColumnName="DispositionDate" />
-                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
-                <ScalarProperty Name="Units" ColumnName="Units" />
-                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
-                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
-                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.Role">
               <MappingFragment StoreEntitySet="Roles">
@@ -1032,40 +1004,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spProperties" FunctionName="Carroll.Data.Entities.Store.spProperties">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.spProperties_Result">
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
-                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
-                <ScalarProperty Name="Units" ColumnName="Units" />
-                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
-                <ScalarProperty Name="DispositionDate" ColumnName="DispositionDate" />
-                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
-                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
-                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
-                <ScalarProperty Name="AssetManager2" ColumnName="AssetManager2" />
-                <ScalarProperty Name="AssetManager1" ColumnName="AssetManager1" />
-                <ScalarProperty Name="RegionalManager" ColumnName="RegionalManager" />
-                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
-                <ScalarProperty Name="Field1" ColumnName="Field1" />
-                <ScalarProperty Name="Field2" ColumnName="Field2" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="SiteUsers">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.SiteUser">
               <MappingFragment StoreEntitySet="SiteUsers">
@@ -1274,6 +1212,80 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.Property">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Field2" ColumnName="Field2" />
+                <ScalarProperty Name="Field1" ColumnName="Field1" />
+                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
+                <ScalarProperty Name="RegionalManager" ColumnName="RegionalManager" />
+                <ScalarProperty Name="AssetManager2" ColumnName="AssetManager2" />
+                <ScalarProperty Name="AssetManager1" ColumnName="AssetManager1" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="RegionalVicePresident" ColumnName="RegionalVicePresident" />
+                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
+                <ScalarProperty Name="InsuranceNotifyEmail" ColumnName="InsuranceNotifyEmail" />
+                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
+                <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
+                <ScalarProperty Name="DispositionDate" ColumnName="DispositionDate" />
+                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spProperties" FunctionName="Carroll.Data.Entities.Store.spProperties">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.spProperties_Result">
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AcquisitionDate" ColumnName="AcquisitionDate" />
+                <ScalarProperty Name="DispositionDate" ColumnName="DispositionDate" />
+                <ScalarProperty Name="IsOwned" ColumnName="IsOwned" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
+                <ScalarProperty Name="InsuranceNotifyEmail" ColumnName="InsuranceNotifyEmail" />
+                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
+                <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
+                <ScalarProperty Name="RegionalVicePresident" ColumnName="RegionalVicePresident" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="AssetManager2" ColumnName="AssetManager2" />
+                <ScalarProperty Name="AssetManager1" ColumnName="AssetManager1" />
+                <ScalarProperty Name="RegionalManager" ColumnName="RegionalManager" />
+                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
+                <ScalarProperty Name="Field1" ColumnName="Field1" />
+                <ScalarProperty Name="Field2" ColumnName="Field2" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

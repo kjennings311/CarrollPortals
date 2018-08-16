@@ -32,7 +32,6 @@ namespace Carroll.Data.Entities
         public virtual DbSet<FormGeneralLiabilityClaim> FormGeneralLiabilityClaims { get; set; }
         public virtual DbSet<FormMoldDamageClaim> FormMoldDamageClaims { get; set; }
         public virtual DbSet<FormPropertyDamageClaim> FormPropertyDamageClaims { get; set; }
-        public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserInProperty> UserInProperties { get; set; }
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
@@ -40,11 +39,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<view_getallclaims> view_getallclaims { get; set; }
         public virtual DbSet<FormAttachment> FormAttachments { get; set; }
         public virtual DbSet<FormComment> FormComments { get; set; }
-    
-        public virtual ObjectResult<spProperties_Result> spProperties()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spProperties_Result>("spProperties");
-        }
+        public virtual DbSet<Property> Properties { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -82,6 +77,11 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("propertyid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllClaims_Result>("SP_GetAllClaims", useridParameter, propertyidParameter);
+        }
+    
+        public virtual ObjectResult<spProperties_Result> spProperties()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spProperties_Result>("spProperties");
         }
     }
 }

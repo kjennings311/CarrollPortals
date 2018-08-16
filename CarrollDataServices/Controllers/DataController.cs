@@ -192,7 +192,7 @@ namespace Carroll.Data.Services.Controllers
         public IEnumerable<TokenInput> GetTokenInputUser(string q)
         {
 
-            var _users = _service.GetRecords(EntityType.Contact,q);
+            var _users = _service.GetRecords(EntityType.Contact,q.ToLower());
             List<TokenInput> _coll = new List<TokenInput>();
             foreach (Contact _user in _users)
             {

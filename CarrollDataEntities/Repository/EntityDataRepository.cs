@@ -446,8 +446,14 @@ namespace Carroll.Data.Entities.Repository
                         #region [ Contact ]
 
                         BaseRepository<Contact> rep = new BaseRepository<Contact>(_entities);
-                      return  rep.GetAll();
-
+                       
+                        List<Contact>  _result =  rep.GetAll().ToList();
+                        if (!string.IsNullOrEmpty(optionalSeachText))
+                        {
+                            dynamic _temp = _result.Where(s => s.FirstName.ToLower().Contains(optionalSeachText) || s.LastName.ToLower().Contains(optionalSeachText)).ToList();
+                            return _temp;
+                        }
+                        return _result;
                         //if (string.IsNullOrEmpty(optionalSeachText)) return _entities.Contacts.ToList();
                         //else return _entities.Contacts.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Title.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.Email.Contains(optionalSeachText))).ToList();
                         #endregion
