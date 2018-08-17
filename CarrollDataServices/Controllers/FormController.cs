@@ -206,8 +206,13 @@ namespace Carroll.Data.Services.Controllers
            // Loop through each Property Of Object and check if any thing null, get the value from input object and bind that
 
 
+                RecordUpdateResult _result = _service.CreateUpdateRecord(id, obj);
+                bSucceeded = _result.Succeded;
 
-                bSucceeded = _service.CreateUpdateRecord(id, obj);
+                // Let's run workflow notificaiton here
+
+                WorkflowHelper.RunNotifyWorkflow(_result.RecordId);
+
                return Utility.ReturnRecordResponse(_modelState, bSucceeded);
 
              

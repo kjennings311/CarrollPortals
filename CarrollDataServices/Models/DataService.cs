@@ -50,7 +50,7 @@ namespace Carroll.Data.Services.Models
 
         }
 
-        public bool CreateUpdateRecord(EntityType entityType,dynamic obj)
+        public dynamic CreateUpdateRecord(EntityType entityType,dynamic obj)
         {
             //  if (!Carroll.Data.Services.Helpers.Utility.ValidateFormData(_validationDictionary, FormData)) return Guid.Empty;
             return _repository.CreateUpdateRecord(entityType,obj);

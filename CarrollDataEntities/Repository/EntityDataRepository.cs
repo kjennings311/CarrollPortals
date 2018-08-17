@@ -133,10 +133,11 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
-        public bool CreateUpdateRecord(EntityType entityType,dynamic obj)
+        public dynamic CreateUpdateRecord(EntityType entityType,dynamic obj)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
+                RecordUpdateResult _result = new RecordUpdateResult();
                 try
                 {
 
@@ -159,7 +160,11 @@ namespace Carroll.Data.Entities.Repository
                             _entities.Properties.Add(_property);
                            // _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-                            return (i == 1) ? true : false;
+                            bool bSuccess = true;
+                            _result.RecordId = _property.PropertyId.ToString();
+                            _result.Succeded = bSuccess;
+
+                            return _result;
                         }
                         else
                         {
@@ -168,10 +173,14 @@ namespace Carroll.Data.Entities.Repository
                             //_entities.Entry(Property).State = EntityState.Modified;
                             _entities.Entry(_dbProp).CurrentValues.SetValues(_property);
                             int i = _entities.SaveChanges();
-                            // return (i == 1) ? true : false;
-                            return true;
+                                // return (i == 1) ? true : false;
+                                _result.RecordId = _property.PropertyId.ToString();
+                                _result.Succeded = true;
 
-                        }
+                                return _result;
+
+
+                            }
                         #endregion
                     case EntityType.Contact:
                         #region [ Contact ] 
@@ -189,15 +198,23 @@ namespace Carroll.Data.Entities.Repository
                             _entities.Contacts.Add(_contact);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-                            // return (i == 1) ? true : false;
-                            return true;
-                        }
+                                _result.RecordId = _contact.ContactId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                                // return (i == 1) ? true : false;
+                                // return true;
+                            }
                         else
                         {
                             _entities.Entry(_dbcontact).CurrentValues.SetValues(_contact);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                _result.RecordId = _contact.ContactId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                                // return true;
+                            }
                     #endregion
                     case EntityType.Partner:
                         #region [ Partner ] 
@@ -216,17 +233,25 @@ namespace Carroll.Data.Entities.Repository
                             _entities.EquityPartners.Add(_partner);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-                            // return (i == 1) ? true : false;
-                            return true;
-                        }
+                                // return (i == 1) ? true : false;
+                                //return true;
+                                _result.RecordId = _partner.EquityPartnerId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
 
                             _entities.Entry(_dbpartner).CurrentValues.SetValues(_partner);
                             int i = _entities.SaveChanges();
-                            return true;
+                                // return true;
+                                _result.RecordId = _partner.EquityPartnerId.ToString();
+                                _result.Succeded = true;
 
-                        }
+                                return _result;
+
+                            }
                     #endregion
 
                     case EntityType.User:
@@ -246,16 +271,24 @@ namespace Carroll.Data.Entities.Repository
                             _entities.SiteUsers.Add(_user);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-                            // return (i == 1) ? true : false;
-                            return true;
-                        }
+                                // return true;
+                                //return true;
+                                _result.RecordId = _user.UserId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
                             _user.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbuser).CurrentValues.SetValues(_user);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                _result.RecordId = _user.UserId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                                // return true;
+                            }
                     #endregion
 
                     case EntityType.UserInRole:
@@ -275,16 +308,24 @@ namespace Carroll.Data.Entities.Repository
                             _entities.UserInRoles.Add(_userrole);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-                            // return (i == 1) ? true : false;
-                            return true;
-                        }
+                                // return (i == 1) ? true : false;
+                                // return true;
+                                _result.RecordId = _userrole.UserRoleId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
                             _userrole.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbuserinrole).CurrentValues.SetValues(_userrole);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                //return true;
+                                _result.RecordId = _userrole.UserRoleId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                     #endregion
 
                     case EntityType.UserInProperty:
@@ -304,17 +345,25 @@ namespace Carroll.Data.Entities.Repository
                             _entities.UserInProperties.Add(_userProp);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-                          
-                            // return (i == 1) ? true : false;
-                            return true;
-                        }
+
+                                // return (i == 1) ? true : false;
+                                // return true;
+                                _result.RecordId = _userProp.UserInPropertyId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
                             _userProp.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbuserproperty).CurrentValues.SetValues(_userProp);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                //return true;
+                                _result.RecordId = _userProp.UserInPropertyId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                     #endregion
 
                     case EntityType.FormGeneralLiabilityClaim:
@@ -338,15 +387,23 @@ namespace Carroll.Data.Entities.Repository
                                 string Comment = "FormGeneralLiabilityClaim Record was added on " + _glc.CreatedDate.ToString();
                                 LogActivity(Comment, _glc.CreatedByName, _glc.CreatedBy.ToString(), _glc.GLLId.ToString(), "New GL Claim");
                                 // return (i == 1) ? true : false;
-                                return true;
-                        }
+                                // return true;
+                                _result.RecordId = _glc.GLLId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
                             //_glc.mod = DateTime.Now;
                             _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                // return true;
+                                _result.RecordId = _glc.GLLId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
 
                     #endregion
 
@@ -370,15 +427,23 @@ namespace Carroll.Data.Entities.Repository
                                 string Comment = "Mold Damage Claim Record was added on " + _mdc.CreatedDate.ToString();
                                 LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New MD Claim");
                                 // return (i == 1) ? true : false;
-                                return true;
-                        }
+                                // return true;
+                                _result.RecordId = _mdc.MDLId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
                             _mdc.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbmdc).CurrentValues.SetValues(_mdc);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                //return true;
+                                _result.RecordId = _mdc.MDLId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                     #endregion
 
                     case EntityType.FormPropertyDamageClaim:
@@ -402,16 +467,24 @@ namespace Carroll.Data.Entities.Repository
 
                             string Comment = "Property Damage Claim Record was added on " + _pdc.CreatedDate.ToString();
                             LogActivity(Comment, _pdc.CreatedByName, _pdc.CreatedBy.ToString(), _pdc.PDLId.ToString(), "New PD Claim");
-                            // return (i == 1) ? true : false;
-                            return true;
-                        }
+                                // return (i == 1) ? true : false;
+                                //return true;
+                                _result.RecordId = _pdc.PDLId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                         else
                         {
                             _pdc.CreatedDate = DateTime.Now;
                             _entities.Entry(_dbpdc).CurrentValues.SetValues(_pdc);
                             int i = _entities.SaveChanges();
-                            return true;
-                        }
+                                //return true;
+                                _result.RecordId = _pdc.PDLId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
                     #endregion
                     default:
                         // if we are here that means it must be a dynamic object.. Let's try to evaluate and insert..

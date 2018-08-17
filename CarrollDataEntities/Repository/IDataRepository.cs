@@ -11,7 +11,7 @@ namespace Carroll.Data.Entities.Repository
     /// </summary>
     public interface IDataRepository
     {
-        bool CreateUpdateRecord(EntityType entityType,dynamic obj);
+        dynamic CreateUpdateRecord(EntityType entityType,dynamic obj);
 
         dynamic GetRecord(EntityType entityType,string recordId);
 
@@ -24,7 +24,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetClaimDetails(string Claim, char Type);
         dynamic InsertComment(FormComment obj);
         dynamic InsertAttachment(FormAttachment formAttachment);
-     
+        void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);

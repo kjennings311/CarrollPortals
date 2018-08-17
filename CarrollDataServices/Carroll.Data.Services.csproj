@@ -217,6 +217,7 @@
     <Compile Include="Helpers\Role.cs" />
     <Compile Include="Helpers\Utility.cs" />
     <Compile Include="Helpers\ValidateFilterAttribute.cs" />
+    <Compile Include="Helpers\WorkflowHelper.cs" />
     <Compile Include="Models\DataService.cs" />
     <Compile Include="Models\IDataService.cs" />
     <Compile Include="Models\MongoModels\AllMongoModels.cs" />

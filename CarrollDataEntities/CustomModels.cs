@@ -54,6 +54,12 @@ namespace Carroll.Data.Entities
         public dynamic Attchments { get; set; }
     }
 
+    public class RecordUpdateResult
+    {
+        public string RecordId { get; set; }
+        public bool Succeded { get; set; }
+    }
+
     public class EmailParams
     {
         public EmailParams()
