@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Net.Mime;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 using Carroll.Data.Entities.Helpers;
 
 namespace Carroll.Data.Entities.Repository
@@ -115,8 +110,6 @@ namespace Carroll.Data.Entities.Repository
                     case EntityType.FormPropertyDamageClaim:
                         #region [ FormPropertyDamageClaim]
                         var _damageclaim= _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
-
-                     
                         if (_damageclaim != null) { return _damageclaim; }
                         return null;
                     #endregion
@@ -217,6 +210,7 @@ namespace Carroll.Data.Entities.Repository
                                 _partner.EquityPartnerId = Guid.NewGuid();
                             }
                             _partner.CreatedDate = DateTime.Now;
+                            //
                             // No record exists create a new property record here
 
                             _entities.EquityPartners.Add(_partner);
@@ -341,12 +335,14 @@ namespace Carroll.Data.Entities.Repository
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
 
-                            // return (i == 1) ? true : false;
-                            return true;
+                                string Comment = "FormGeneralLiabilityClaim Record was added on " + _glc.CreatedDate.ToString();
+                                LogActivity(Comment, _glc.CreatedByName, _glc.CreatedBy.ToString(), _glc.GLLId.ToString(), "New GL Claim");
+                                // return (i == 1) ? true : false;
+                                return true;
                         }
                         else
                         {
-                            _glc.CreatedDate = DateTime.Now;
+                            //_glc.mod = DateTime.Now;
                             _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
                             int i = _entities.SaveChanges();
                             return true;
@@ -371,9 +367,10 @@ namespace Carroll.Data.Entities.Repository
                             _entities.FormMoldDamageClaims.Add(_mdc);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-
-                            // return (i == 1) ? true : false;
-                            return true;
+                                string Comment = "Mold Damage Claim Record was added on " + _mdc.CreatedDate.ToString();
+                                LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New MD Claim");
+                                // return (i == 1) ? true : false;
+                                return true;
                         }
                         else
                         {
@@ -402,7 +399,9 @@ namespace Carroll.Data.Entities.Repository
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
 
-                                SendEmailAlert(_pdc.PDLId.ToString(),'p');
+
+                            string Comment = "Property Damage Claim Record was added on " + _pdc.CreatedDate.ToString();
+                            LogActivity(Comment, _pdc.CreatedByName, _pdc.CreatedBy.ToString(), _pdc.PDLId.ToString(), "New PD Claim");
                             // return (i == 1) ? true : false;
                             return true;
                         }
@@ -720,8 +719,6 @@ namespace Carroll.Data.Entities.Repository
                                          select new { tbl, tblprop.PropertyName }).FirstOrDefault();
                     if (_generalclaim != null)
                     { cd.Claim = _generalclaim; }
-
-                   
                     formtype = 2;
 
                 }
@@ -756,12 +753,14 @@ namespace Carroll.Data.Entities.Repository
                 // Get All Comments for this RowId and Type
 
                 var AllComments = (from tbl in _entities.FormComments
-                                   where tbl.RefFormID == _recId && tbl.RefFormType == formtype
+                                   where tbl.RefFormID == _recId && tbl.RefFormType == formtype orderby
+                                   tbl.CommentDate descending
                                    select tbl).ToList();
 
                 // Get All Attachment for this RowId and Type
                 var AllAttachments = (from tbl in _entities.FormAttachments
-                                      where tbl.RefFormType == formtype && tbl.RefId == _recId
+                                      where tbl.RefFormType == formtype && tbl.RefId == _recId orderby 
+                                      tbl.UploadedDate descending
                                       select tbl).ToList();
                 cd.Comments = AllComments;
                 cd.Attchments = AllAttachments;
@@ -780,9 +779,11 @@ namespace Carroll.Data.Entities.Repository
                     // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
                 var AllComments = (from tbl in _entities.FormComments
-                                   where tbl.RefFormID == _property.RefFormID && tbl.RefFormType == _property.RefFormType
+                                   where tbl.RefFormID == _property.RefFormID && tbl.RefFormType == _property.RefFormType orderby
+                                   tbl.CommentDate descending
                                    select tbl).ToList();
-
+                string Comment = "A new comment was added by " + _property.CommentByName;
+                LogActivity(Comment, _property.CommentByName, _property.CommentBy.ToString(), _property.RefFormID.ToString(), "New Comment");
                 return AllComments;
             }
         }
@@ -802,291 +803,35 @@ namespace Carroll.Data.Entities.Repository
                 int i = _entities.SaveChanges();
                 var AllAttachments = (from tbl in _entities.FormAttachments
                                    where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
+                                   orderby tbl.UploadedDate descending
                                    select tbl).ToList();
+                string Comment = "A new attachement was added by " + _property.UploadedByName;
+                LogActivity(Comment, _property.UploadedByName, _property.UploadedBy.ToString(), _property.RefId.ToString(), "New Attachment");
                 return AllAttachments;
             }
 
         }
-        /// <summary>
-        /// 
-        /// Send Email alerts to Corresponding Receipients based on the Claim Type and Work Flow
-        /// 0. Get the Claim row
-        /// 1. Subject Compose
-        /// 2. Body compose based on Claim Type, get all fields all showing in View Claim Page, better call that method to get those row and Form tr's for each row.
-        /// 3. Get Mail Settings such as Host, Email, Password and Port settings
-        /// 4. Get All Receipents with email, those can be used to update Activity
-        /// 5. After sending email , update an acticity record for each user alert with proper description
-        /// 
-        /// </summary>
-        /// <param name="recordid"></param>
-        /// <param name="Form"></param>
-        /// <returns></returns>
 
-        private void SendEmailAlert(string recordid, char Type)
+
+        public void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus)
         {
-            var emailsettings = new EmailParams();
-
-           // var ClaimData = GetClaimDetails(recordid, Type);
-
-            bool mailsent = false;
-            string mailmsg = "";
-            string attachmsg = "";
-         
-            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            string toemail = "";
-
-            toemail = "sekhar.babu@forcitude.com";
-            var _entities = new CarrollFormsEntities();
-            var propid = new Guid(recordid);
-
-            Guid propertyid= Guid.NewGuid();
-
-            using (MailMessage mail = new MailMessage(new MailAddress(emailsettings.fromemail, emailsettings.Company), new MailAddress(emailsettings.fromemail, emailsettings.Company)))
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
-
-                if (Type == 'p')
-                {
-                   
-                    var ClaimData =(from tbl in _entities.FormPropertyDamageClaims
-                      join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
-                      where tbl.PDLId == propid
-                      select new { tbl, tblprop.PropertyName }).FirstOrDefault();
-                    propertyid = ClaimData.tbl.PropertyId;
-
-                    mail.Subject = "Alert New Property Damage Claim for " + ClaimData.PropertyName + " by " + ClaimData.tbl.IncidentReportedBy;
-                    emailsettings.mailbody = "";
-
-                    emailsettings.mailbody += "<tr><td> <strong> Incident Location : </strong> </td><td>" + ( ClaimData.tbl.IncidentLocation == null ? "" : ClaimData.tbl.IncidentLocation ) + "</td> <td><strong> Incident Date : </strong> </td><td>" + ClaimData.tbl.IncidentDateTime.ToShortDateString() + "</td> </tr>";
-
-                    emailsettings.mailbody += "<tr><td><strong> Weather Conditions : </strong> </td> <td>" + ( ClaimData.tbl.WeatherConditions == null ? "" : ClaimData.tbl.WeatherConditions) + " </td><td><strong> Incident Description : </strong> </td><td>" + ClaimData.tbl.IncidentDescription + "</td></tr>";
-                    if (ClaimData.tbl.AuthoritiesContacted == false)
-                        emailsettings.mailbody += "<tr><td><strong> Estimate Of Damage : </strong> </td><td> " + ( ClaimData.tbl.EstimateOfDamage == null ? "" : ClaimData.tbl.EstimateOfDamage ) + "</td> <td><strong> Authorities Contacted : </strong> </td><td> No </td></tr>";
-                    else
-                        emailsettings.mailbody += "<tr><td><strong> Estimate Of Damage : </strong> </td><td> " + (ClaimData.tbl.EstimateOfDamage == null ? "" : ClaimData.tbl.EstimateOfDamage) + "</td> <td><strong> Authorities Contacted : </strong> </td><td> Yes </td></tr>";
-                    if (ClaimData.tbl.LossOfRevenues == false)
-                        emailsettings.mailbody += "<tr><td><strong> Contact Person : </strong> </td><td>" + ( ClaimData.tbl.ContactPerson == null ? "" : ClaimData.tbl.ContactPerson ) + "</td> <td><strong> Loss Of Revenues : </strong> </td><td > No </td></tr>";
-                    else
-                        emailsettings.mailbody += "<tr><td><strong> Contact Person : </strong> </td><td>" + (ClaimData.tbl.ContactPerson == null ? "" : ClaimData.tbl.ContactPerson) + "</td> <td><strong> Loss Of Revenues : </strong> </td><td > Yes </td></tr>";
-
-
-                    if (ClaimData.tbl.WitnessPresent == false)
-                        emailsettings.mailbody += "<tr><td><strong> Witness Present : </strong> </td><td> No  </td> <td><strong> Witness Name : </strong> </td><td>" + ClaimData.tbl.WitnessName + "</td></tr> ";
-                    else
-                        emailsettings.mailbody += "<tr><td>><strong> Witness Present : </strong> </td><td> Yes  </td> <td><strong> Witness Name : </strong> </td><td>" + ClaimData.tbl.WitnessName + "</td></tr> ";
-
-                    emailsettings.mailbody += "<tr><td><strong> Witness Phone : </strong> </td><td> " + ( ClaimData.tbl.WitnessPhone == null ? "" : ClaimData.tbl.WitnessPhone ) + "</td> </tr>";
-                    emailsettings.mailbody += "<tr><td><strong> Reported By : </strong> </td><td>" + ClaimData.tbl.IncidentReportedBy + "</td></tr>";
-
-                    emailsettings.mailbody += "<tr><td><strong> Reported Phone : </strong> </td><td>" + ClaimData.tbl.ReportedPhone + "</td></tr>";
-
-                    emailsettings.mailbody += "<tr><td><strong> Created Date : </strong> </td><td>" + ClaimData.tbl.CreatedDate + "</td></tr>";
-                    
-
-                    emailsettings.mailbody += "<tr><td><strong> Incident Date : </strong> </td><td>" + ClaimData.tbl.IncidentDateTime.ToShortDateString() + "</td></tr>";
-
-                    emailsettings.mailbody += "<tr></tr>";
-
-                    if (ClaimData.tbl.AuthoritiesContacted == false )
-                        emailsettings.mailbody += "<tr><td><strong> Authorities Contacted : </strong> </td><td> No </td></tr>";
-                    else
-                        emailsettings.mailbody += "<tr><td><strong> Authorities Contacted : </strong> </td><td> Yes </td></tr>";
-                    if (ClaimData.tbl.LossOfRevenues == false )
-                        emailsettings.mailbody += "<tr><td><strong> Loss Of Revenues : </strong> </td><td > No </td></tr>";
-                    else
-                        emailsettings.mailbody += "<tr><td><strong> Loss Of Revenues : </strong> </td><td> Yes </td></tr>";
-
-                    emailsettings.mailbody += "<tr><td><strong> Witness Name : </strong> </td><td>" + ClaimData.tbl.WitnessName + "</td></tr>";
-                    emailsettings.mailbody += "<tr><td><strong> Witness Address : </strong> </td><td>" + ClaimData.tbl.WitnessAddress + "</td></tr>";
-                    emailsettings.mailbody += "<tr><td><strong> Date Reported : </strong> </td><td> " + ( ClaimData.tbl.DateReported == null ? "" : ClaimData.tbl.DateReported.Value.ToShortDateString() )+ "</td></tr>";
-                    emailsettings.mailbody += "<tr><td><strong> Created By : </strong> </td><td>" + ClaimData.tbl.CreatedByName + "</td></tr></table>";
-
-                }
-                else if (Type == 'm')
-                {
-
-                    var ClaimData = (from tbl in _entities.FormMoldDamageClaims
-                                            join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
-                                            where tbl.MDLId == propid
-                                            select new { tbl, tblprop.PropertyName }).FirstOrDefault();
-                    propertyid = ClaimData.tbl.PropertyId;
-
-                    mail.Subject = "Alert New Mold Damage Claim for " + ClaimData.PropertyName + " by " + ClaimData.tbl.ReportedBy;
-
-                }
-                else if (Type == 'g')
-                {
-                    var ClaimData = (from tbl in _entities.FormGeneralLiabilityClaims
-                                         join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
-                                         where tbl.GLLId == propid
-                                         select new { tbl, tblprop.PropertyName }).FirstOrDefault();
-
-                    propertyid = ClaimData.tbl.PropertyId;
-                    mail.Subject = "Alert New General Liability Claim for " + ClaimData.PropertyName + " by " + ClaimData.tbl.ReportedBy;
-
-                }
-
-
-
-
-
-
-                ////mail.Body = "<p> Dear Customer, Your Order details is </p>" +
-                //    //    "<table><tr><td> Order Ref Number : </td><td>" + item.OrderFormNumber + " </td></tr> " +
-                //    //    "<tr><td>Order Date :   </td> <td>    " + item.OrderDate.ToShortDateString() + "</td></tr>" +
-                //    //    " <tr><td> Amount :</td> <td>      " + item.NetTotalDue.ToString("#.##") + " </td></tr></table>";
-                //    outstandingmodel.cms = outstandingmodel.cms.Replace("[Customer Name]", item.CustomerName + "<br>");
-                //    outstandingmodel.cms = outstandingmodel.cms.Replace("[Invoice No]", item.invoiceclosenumber + "<br>");
-                //    outstandingmodel.cms = outstandingmodel.cms.Replace("[Invoice Date]", item.InvoiceDate.ToShortDateString() + "<br>");
-                //    outstandingmodel.cms = outstandingmodel.cms.Replace("[Amount Due]", Math.Round(Convert.ToDecimal(dueamount), 2) + "<br>");
-                //    outstandingmodel.cms = outstandingmodel.cms.Replace("[Due Date]", item.InvoiceDate.ToShortDateString() + "<br>");
-                //    outstandingmodel.cms = outstandingmodel.cms.Replace("[Due Days]", Math.Round((DateTime.Now - item.InvoiceDate).TotalDays) + "<br>");
-
-                //string path =System.Web.HttpContext.Current.Server.MapPath(@"img/" + emailsettings.logo);
-                //LinkedResource Img = new LinkedResource(path, MediaTypeNames.Image.Jpeg);
-                //Img.ContentId = "MyImage";
-
-                //   string header = emailsettings.mailstart + "<p> Dear Customer " + item.ContactName + "  </p>  <br> ";
-
-
-                //     outstandingmodel.cms = outstandingmodel.cms.Replace("[Customer Name]", item.CustomerName + "<br>");
-
-                //  mail.Body = header + outstandingmodel.cms + mailfooterhtml;
-                //now do the HTML formatting
-                AlternateView av1 = AlternateView.CreateAlternateViewFromString(
-                    emailsettings.mailstart + emailsettings.mailbody + emailsettings.signature+ emailsettings.mailfooterhtml,
-                      null, MediaTypeNames.Text.Html);
-
-                //now add the AlternateView
-                // av1.LinkedResources.Add(Img);
-
-                //now append it to the body of the mail
-                mail.AlternateViews.Add(av1);
-
-                mail.IsBodyHtml = true;
-
-                #region Attachments Adding
-                //var actionPDF = new Rotativa.ViewAsPdf("PrintInvoice", d)//some route values)
-                //{
-                //    //FileName = "TestView.pdf",
-                //    PageSize = Size.A4,
-                //    PageOrientation = Rotativa.Options.Orientation.Portrait,
-                //    PageMargins = { Left = 1, Right = 1 }
-                //};
-
-
-                //byte[] applicationPDFData = actionPDF.BuildPdf(ControllerContext);
-
-                //MemoryStream file = new MemoryStream(applicationPDFData);
-                //file.Seek(0, SeekOrigin.Begin);
-
-                //Attachment data = new Attachment(file, item.invoiceclosenumber + " - Invoice Details.pdf", "application/pdf");
-                //attachmsg = "";
-                //attachmsg += data.Name;
-                //ContentDisposition disposition = data.ContentDisposition;
-                //disposition.CreationDate = System.DateTime.Now;
-                //disposition.ModificationDate = System.DateTime.Now;
-                //disposition.DispositionType = DispositionTypeNames.Attachment;
-
-                //mail.Attachments.Add(data);
-                //if (outstandingmodel.includethmb)
-                //    if (attachments != null)
-                //    {
-                //        foreach (HttpPostedFileBase attachment in attachments)
-                //        {
-                //            if (attachment != null)
-                //            {
-                //                string fileName = Path.GetFileName(attachment.FileName);
-                //                attachmsg += string.IsNullOrEmpty(attachmsg) ? fileName : "," + fileName;
-
-                //                mail.Attachments.Add(new Attachment(attachment.InputStream, fileName));
-                //            }
-                //        }
-
-                //    }
-                #endregion
-                
-                SmtpClient smtp = SetMailServerSettings();
-
-                // get all emails to send and attach them one by one ( based on property )
-              
-            
-                var proprow = (from tbl in _entities.Properties
-                               where tbl.PropertyId == propertyid
-                               select new { tbl.EmailAddress, tbl.InsuranceNotifyEmail }).FirstOrDefault(); 
-
-
-                mailsent = false;
-                mailmsg = "";
-
-                bool validemail = false;
-                try
-                {
-                    if (!string.IsNullOrEmpty(proprow.EmailAddress))
-                    {
-
-                        Match match = regex.Match(proprow.EmailAddress);
-                        if (match.Success)
-                        {
-                            mail.To.Add(proprow.EmailAddress);
-                            validemail = true;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(proprow.InsuranceNotifyEmail))
-                    {
-                        Match match = regex.Match(proprow.InsuranceNotifyEmail);
-                        if (match.Success)
-                        {
-                            mail.To.Add(proprow.InsuranceNotifyEmail);
-                            validemail = true;
-                        }
-                    }
-                                     
-                    if (validemail)
-                    {
-                        mail.To.Clear();
-                        mail.To.Add(toemail);
-                        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                        mail.Priority = MailPriority.High;
-                       
-                        smtp.Send(mail);
-                        mailsent = true;
-                      
-                        // Activity  Insertion Goes Here
-
-
-                    }
-                    //else
-                    //    error.ErrorList.Add(new Error { ErrorExist = true, ErrorType = "Invalid Email Address", ErrorMsg = " Invalid Email For Customer " + item.CustomerName + " : Invoice Number " + item.InvoiceNumber });
-
-                }
-                catch (Exception ex)
-                {
-                    //mailsent = false;
-                    //mailmsg = ex.Message;
-
-                    //error.ErrorList.Add(new Error { ErrorExist = true, ErrorType = " Mail Function Failure", ErrorMsg = ex.Message });
-
-                }              
+                Activity _activity = new Activity();
+               _activity.ActivityId = System.Guid.NewGuid();
+                _activity.ActivityDescription = ActivityDesc;
+                _activity.ActivityDate = DateTime.Now;
+                _activity.ActivityBy = new Guid(UserGuid);
+                _activity.ActivityByName = UserName;
+                _activity.RecordId = new Guid(RecordId);
+                _activity.ActivityStatus = ActivityStatus;
+                _entities.Activities.Add(_activity);
+                _entities.SaveChanges();
 
             }
 
         }
 
-        public SmtpClient SetMailServerSettings()
-        {
-
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;        
-            smtp.UseDefaultCredentials = true;
-            NetworkCredential networkCredential = new NetworkCredential("sekhar.babu@forcitude.com", "R21221.Skr");
-
-            smtp.Credentials = networkCredential;
-            smtp.Port = 587; //587
-            return smtp;
-
-        }
 
         //public Config GetDatatableConfig(EntityType entityType,)
         //{

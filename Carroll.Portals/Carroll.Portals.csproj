@@ -184,6 +184,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
+    <Compile Include="GetCurrentUser.ashx.cs">
+      <DependentUpon>GetCurrentUser.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AdminFilter.cs" />
     <Compile Include="Helpers\BaseModel.cs" />
     <Compile Include="Helpers\MyAuthorize.cs" />
@@ -372,12 +375,14 @@
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\app\admin.js" />
+    <Content Include="Scripts\app\custom - Copy.js" />
     <Content Include="Scripts\app\custom.js" />
     <Content Include="Scripts\app\Global.js" />
     <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\AdminHelper.cshtml" />
+    <Content Include="GetCurrentUser.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
