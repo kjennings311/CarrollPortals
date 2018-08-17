@@ -20,7 +20,7 @@ namespace Carroll.Portals
             context.Response.ContentType = "text/plain";
             context.Response.Write("Hello World");
             SiteUser _user = LoggedInUser.Current;
-            context.Response.Write(JsonConvert.SerializeObject(_user));
+           // context.Response.Write(JsonConvert.SerializeObject(_user));
         }
 
         public bool IsReusable
