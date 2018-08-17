@@ -15,7 +15,7 @@
     <RootNamespace>Carroll.Data.Services</RootNamespace>
     <AssemblyName>Carroll.Data.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort>49786</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
@@ -173,9 +173,9 @@
     <Content Include="ModelXml\FormPropertyDamageClaim.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ModelXml\partners.xml">
+    <None Include="ModelXml\partners.xml.delete">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="ModelXml\PropertyDamage.xml">
       <SubType>Designer</SubType>
     </Content>

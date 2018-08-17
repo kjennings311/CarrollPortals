@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Carroll.Data.Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RecordId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActivityDescription" Type="varchar" MaxLength="100" />
+          <Property Name="ActivityDate" Type="datetime" />
+          <Property Name="ActivityStatus" Type="varchar" MaxLength="20" />
+          <Property Name="ActivityByName" Type="varchar" MaxLength="50" />
+          <Property Name="ActivityBy" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="Contacts">
           <Key>
             <PropertyRef Name="ContactId" />
@@ -309,6 +321,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="sp_GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CarrollDataEntitiesStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquityPartners" EntityType="Self.EquityPartners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormAttachments" EntityType="Self.FormAttachments" Schema="dbo" store:Type="Tables" />
@@ -393,6 +406,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <End Role="UserInProperty" EntitySet="UserInProperties" />
           </AssociationSet>
           <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
+          <EntitySet Name="Activities" EntityType="Carroll.Data.Entities.Activity" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -842,6 +856,18 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
         </ComplexType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Guid" Nullable="false" />
+          <Property Name="RecordId" Type="Guid" Nullable="false" />
+          <Property Name="ActivityDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityDate" Type="DateTime" Precision="3" />
+          <Property Name="ActivityStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityBy" Type="Guid" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1286,6 +1312,19 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
+                <ScalarProperty Name="ActivityByName" ColumnName="ActivityByName" />
+                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="RecordId" ColumnName="RecordId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

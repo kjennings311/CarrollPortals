@@ -25,7 +25,7 @@ namespace Carroll.Data.Entities.Repository
             {
                 _entities.Configuration.ProxyCreationEnabled = false;
                 if (string.IsNullOrEmpty(optionalSeachText)) return _entities.spProperties().ToList();
-                else return _entities.spProperties().Where(x => x.PropertyName.Contains(optionalSeachText) || x.LegalName.Contains(optionalSeachText)).ToList();
+                else return _entities.spProperties().Where(x => x.PropertyName.Contains(optionalSeachText) || x.LegalName.Contains(optionalSeachText) || x.PropertyId.ToString().Contains(optionalSeachText)).ToList();
                 
             }
         }

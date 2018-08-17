@@ -40,6 +40,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<FormAttachment> FormAttachments { get; set; }
         public virtual DbSet<FormComment> FormComments { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<Activity> Activities { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {

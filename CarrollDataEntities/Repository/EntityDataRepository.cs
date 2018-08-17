@@ -210,6 +210,7 @@ namespace Carroll.Data.Entities.Repository
                                 _partner.EquityPartnerId = Guid.NewGuid();
                             }
                             _partner.CreatedDate = DateTime.Now;
+                            //
                             // No record exists create a new property record here
 
                             _entities.EquityPartners.Add(_partner);
@@ -334,12 +335,14 @@ namespace Carroll.Data.Entities.Repository
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
 
-                            // return (i == 1) ? true : false;
-                            return true;
+                                string Comment = "FormGeneralLiabilityClaim Record was added on " + _glc.CreatedDate.ToString();
+                                LogActivity(Comment, _glc.CreatedByName, _glc.CreatedBy.ToString(), _glc.GLLId.ToString(), "New GL Claim");
+                                // return (i == 1) ? true : false;
+                                return true;
                         }
                         else
                         {
-                            _glc.CreatedDate = DateTime.Now;
+                            //_glc.mod = DateTime.Now;
                             _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
                             int i = _entities.SaveChanges();
                             return true;
@@ -364,9 +367,10 @@ namespace Carroll.Data.Entities.Repository
                             _entities.FormMoldDamageClaims.Add(_mdc);
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
-
-                            // return (i == 1) ? true : false;
-                            return true;
+                                string Comment = "Mold Damage Claim Record was added on " + _mdc.CreatedDate.ToString();
+                                LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New MD Claim");
+                                // return (i == 1) ? true : false;
+                                return true;
                         }
                         else
                         {
@@ -395,6 +399,9 @@ namespace Carroll.Data.Entities.Repository
                             _entities.SaveChanges();
                             int i = _entities.SaveChanges();
 
+
+                            string Comment = "Property Damage Claim Record was added on " + _pdc.CreatedDate.ToString();
+                            LogActivity(Comment, _pdc.CreatedByName, _pdc.CreatedBy.ToString(), _pdc.PDLId.ToString(), "New PD Claim");
                             // return (i == 1) ? true : false;
                             return true;
                         }
@@ -746,12 +753,14 @@ namespace Carroll.Data.Entities.Repository
                 // Get All Comments for this RowId and Type
 
                 var AllComments = (from tbl in _entities.FormComments
-                                   where tbl.RefFormID == _recId && tbl.RefFormType == formtype
+                                   where tbl.RefFormID == _recId && tbl.RefFormType == formtype orderby
+                                   tbl.CommentDate descending
                                    select tbl).ToList();
 
                 // Get All Attachment for this RowId and Type
                 var AllAttachments = (from tbl in _entities.FormAttachments
-                                      where tbl.RefFormType == formtype && tbl.RefId == _recId
+                                      where tbl.RefFormType == formtype && tbl.RefId == _recId orderby 
+                                      tbl.UploadedDate descending
                                       select tbl).ToList();
                 cd.Comments = AllComments;
                 cd.Attchments = AllAttachments;
@@ -770,9 +779,11 @@ namespace Carroll.Data.Entities.Repository
                     // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
                 var AllComments = (from tbl in _entities.FormComments
-                                   where tbl.RefFormID == _property.RefFormID && tbl.RefFormType == _property.RefFormType
+                                   where tbl.RefFormID == _property.RefFormID && tbl.RefFormType == _property.RefFormType orderby
+                                   tbl.CommentDate descending
                                    select tbl).ToList();
-
+                string Comment = "A new comment was added by " + _property.CommentByName;
+                LogActivity(Comment, _property.CommentByName, _property.CommentBy.ToString(), _property.RefFormID.ToString(), "New Comment");
                 return AllComments;
             }
         }
@@ -792,8 +803,31 @@ namespace Carroll.Data.Entities.Repository
                 int i = _entities.SaveChanges();
                 var AllAttachments = (from tbl in _entities.FormAttachments
                                    where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
+                                   orderby tbl.UploadedDate descending
                                    select tbl).ToList();
+                string Comment = "A new attachement was added by " + _property.UploadedByName;
+                LogActivity(Comment, _property.UploadedByName, _property.UploadedBy.ToString(), _property.RefId.ToString(), "New Attachment");
                 return AllAttachments;
+            }
+
+        }
+
+
+        public void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                Activity _activity = new Activity();
+               _activity.ActivityId = System.Guid.NewGuid();
+                _activity.ActivityDescription = ActivityDesc;
+                _activity.ActivityDate = DateTime.Now;
+                _activity.ActivityBy = new Guid(UserGuid);
+                _activity.ActivityByName = UserName;
+                _activity.RecordId = new Guid(RecordId);
+                _activity.ActivityStatus = ActivityStatus;
+                _entities.Activities.Add(_activity);
+                _entities.SaveChanges();
+
             }
 
         }
