@@ -10,14 +10,14 @@ function GetToken() {
              async: false,
              success: function (data) {
 
-                 if (JSON.stringify(data) === "relogin") location.href = "/account/signin";
-                 else {
-                     var userObject = data;
-                     Token = userObject.Token;
-                     User = userObject.SiteUser;
+                 //if (JSON.stringify(data) === "relogin") location.href = "/account/signin";
+                 //else {
+                 //    var userObject = data;
+                 //    Token = userObject.Token;
+                 //    User = userObject.SiteUser;
 
-                     return Token;
-                 }
+                 //    return Token;
+                 //}
 
              }
          });
