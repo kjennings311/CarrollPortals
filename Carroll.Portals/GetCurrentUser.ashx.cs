@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 
 namespace Carroll.Portals
 {
     /// <summary>
     /// Summary description for GetCurrentUser
     /// </summary>
-    public class GetCurrentUser : IHttpHandler
+    public class GetCurrentUser : IHttpHandler, IReadOnlySessionState
     {
 
         public void ProcessRequest(HttpContext context)

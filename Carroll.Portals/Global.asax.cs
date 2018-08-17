@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace Carroll.Portals
 {
@@ -23,5 +24,9 @@ namespace Carroll.Portals
         {
             LoggedInUser.AssignRolesToUser();
         }
+        //protected void Application_PostAuthorizeRequest()
+        //{
+        //    HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
+        //}
     }
 }
