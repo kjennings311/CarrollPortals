@@ -172,6 +172,7 @@
       <DependentUpon>dbModel.edmx</DependentUpon>
       <LastGenOutput>dbModel.cs</LastGenOutput>
     </Content>
+    <Content Include="img\carroll.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
