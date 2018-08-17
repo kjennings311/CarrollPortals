@@ -549,14 +549,7 @@ namespace Carroll.Data.Entities.Repository
                                            where tbl.CreatedBy == userid
                                            select tbl).Count();
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
-                }
-
-               
-
-                
-
-             
-                
+                }                
             }
         }
 

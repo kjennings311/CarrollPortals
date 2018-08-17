@@ -104,6 +104,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="NotifySecurityOfficer" Type="bit" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaims">
           <Key>
@@ -470,6 +471,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="NotifySecurityOfficer" Type="Boolean" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaim">
           <Key>
@@ -912,6 +914,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormGeneralLiabilityClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormGeneralLiabilityClaim">
               <MappingFragment StoreEntitySet="FormGeneralLiabilityClaims">
+                <ScalarProperty Name="NotifySecurityOfficer" ColumnName="NotifySecurityOfficer" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

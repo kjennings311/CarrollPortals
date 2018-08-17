@@ -14,6 +14,7 @@ namespace Carroll.Portals.Models
         {
             get
             {
+
                 if (HttpContext.Current.Session["user"] == null)
                 {
                     if (HttpContext.Current.User.Identity.IsAuthenticated)

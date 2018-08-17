@@ -193,7 +193,10 @@ namespace Carroll.Data.Services.Controllers
                         }
                         catch { }
                     else
+                    { 
+                        if (obj.GetPropertyValue(_field.FieldName) == null)
                         obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+                    }
 
                     //if (obj.GetPropertyValue(_field.FieldName) == null)
                     //    obj.SetPropertyValue(_field.FieldName, _field.FieldValue);

@@ -74,7 +74,6 @@ namespace Carroll.Data.Entities
         public string mailfooterhtml { get; set; }
         public string mailbody { get; set; }
         public string mailstart { get; set; } 
-        public System.Web.HttpServerUtilityBase Server { get; set; }
-    }
+           }
 
 }
