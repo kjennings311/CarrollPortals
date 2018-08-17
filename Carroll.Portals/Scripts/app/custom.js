@@ -156,7 +156,7 @@ function BindElements()
                                         //}
                                                                                 break;
                                     case "createdbyname":
-                                        alert($('#' + $fields[i]["fieldName"]).val());
+                                        //alert($('#' + $fields[i]["fieldName"]).val());
                                         //if ($('#' + $fields[i]["fieldName"]).val() != "") {
                                         //    $fields[i]["fieldValue"] = User.FirstName + " " + User.LastName;
                                         //} else {
