@@ -19,9 +19,9 @@
         <EntityTypeShape EntityType="Carroll.Data.Entities.view_getallclaims" Width="1.5" PointX="11.375" PointY="5.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.FormAttachment" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.FormComment" Width="1.5" PointX="11.75" PointY="10.75" />
-        <EntityTypeShape EntityType="Carroll.Data.Entities.Property" Width="1.5" PointX="0.75" PointY="13.25" />
-        <AssociationConnector Association="Carroll.Data.Entities.FK_UserInProperty_Properties" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.Activity" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.Property" Width="1.5" PointX="0.75" PointY="13.125" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_UserInProperty_Properties" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -118,7 +118,11 @@ namespace Carroll.Data.Services.Controllers
                     _form.DBFieldId = recordId;
                     foreach (FormField _ff in _form.FormFields)
                     {
-                        _ff.FieldValue = Convert.ToString(Utility.GetPropertyValue(_data, _ff.FieldName));
+                        try
+                        {
+                            _ff.FieldValue = Convert.ToString(Utility.GetPropertyValue(_data, _ff.FieldName));
+                        }
+                        catch { }
                     }
 
                     return _form;
@@ -194,8 +198,10 @@ namespace Carroll.Data.Services.Controllers
                         catch { }
                     else
                     { 
-                        if (obj.GetPropertyValue(_field.FieldName) == null)
-                        obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+                        //if (obj.GetPropertyValue(_field.FieldName) == null)
+                        //{
+                            obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
+                        //}
                     }
 
                     //if (obj.GetPropertyValue(_field.FieldName) == null)

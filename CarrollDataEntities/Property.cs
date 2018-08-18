@@ -38,7 +38,8 @@ namespace Carroll.Data.Entities
         public bool IsActive { get; set; }
         public string EquityPartnerSiteCode { get; set; }
         public Nullable<System.Guid> EquityPartner { get; set; }
-        public string InsuranceNotifyEmail { get; set; }
+        public Nullable<System.Guid> EquityPartnerContact { get; set; }
+        public Nullable<System.Guid> InsuranceContact { get; set; }
         public Nullable<System.Guid> VicePresident { get; set; }
         public Nullable<System.Guid> RegionalVicePresident { get; set; }
         public Nullable<System.Guid> PropertyManager { get; set; }

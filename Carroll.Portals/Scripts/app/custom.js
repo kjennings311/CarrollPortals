@@ -111,7 +111,7 @@ function BindElements()
                 success: function (data) {
                     // var $FormElements = $formBegin;
                     var $data = data;
-
+                  
                     var $fields = $data["formFields"];
                     for (var i = 0; i < $fields.length; i++) {
                         // alert($fields[i]["fieldLabel"]+ " " + $fields[i]["fieldType"]);
@@ -128,7 +128,7 @@ function BindElements()
                                 if ($('#' + $fields[i]["fieldName"]).prop('checked'))
                                 {
                                     $fields[i]["fieldValue"] = true;
-                                    console.log("check field value" + true);
+                                   // console.log("check field value" + true);
                                 }
                                 else
                                 {
@@ -143,38 +143,30 @@ function BindElements()
                                // console.log('after assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
                                 break;
                             case "Hidden":
-                                // Let's populate Created and CreatedName'
-                                switch ($fields[i]["fieldName"].toLowerCase()) {
+                                //// Let's populate Created and CreatedName'
+                                //switch ($fields[i]["fieldName"].toLowerCase()) {
                                 
-                                    case "createdby":
+                                //    case "createdby":
                                        
-                                      ////   if there is already a value read it and load if empty load current user
-                                      //  if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                      //      $fields[i]["fieldValue"] = User.userId;
-                                      //  } else {
-                                            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                        //}
-                                                                                break;
-                                    case "createdbyname":
-                                        //alert($('#' + $fields[i]["fieldName"]).val());
-                                        //if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                        //    $fields[i]["fieldValue"] = User.FirstName + " " + User.LastName;
-                                        //} else {
-                                        //    $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                        //}
-                                        //if ($('#' + $fields[i]["fieldName"]).val() != "") {
-                                        //    $fields[i]["fieldValue"] = User.firstName + " " + User.lastName
-                                        //} else {
-                                            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                      //  }
+                                 
+                                //            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                     
+                                //                                                break;
+                                //    case "createdbyname":
+                                      
+                                      
+                                //            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                  
                                         
-                                        break;
-                                    case "UserPhoto":
-                                        $fields[i]["fieldValue"] = imagebase64;
-                                    default:
-                                        $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                        break;
-                                }
+                                //        break;
+                                //    case "UserPhoto":
+                                //        $fields[i]["fieldValue"] = imagebase64;
+                                //        break;
+                                //    default:
+                                //        $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
+                                //        break;
+                                //}
+                                $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
                                 break;
                             default:
 
@@ -183,6 +175,8 @@ function BindElements()
                         }
                         
                     }
+
+                    
                     
                     // Let's set user id field so we can use that as a reference
                  //   $data["userId"] = User.UserId + "~" + User.FirstName + " " + User.LastName
@@ -190,7 +184,7 @@ function BindElements()
                     // now that we have updated Form record.. Let's pass it back to server with all  data for validation..
 
                     /**************************************************************************************/
-                    //
+                    
                     $.ajax({
                         type: "POST",
                         url: $BaseApiUrl + "api/Form/CreateUpdateFormData/" + $('.dynamicForm #savechanges').attr("formname"),
@@ -988,6 +982,17 @@ function LoadProperties() {
                                     } else return '';
                                 }
                             },
+                            {
+                                //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
+                                data: 'equityPartnerContact',
+                                render: function (data, type, row) {
+                                    if (data != null) {
+                                        var result = JSON.parse(data);
+                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                    } else return '';
+                                }
+                            },
+
                             //{ "data": "vicePresident", "name": "vicePresident", "autoWidth": false },
                             {
                                 //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
@@ -1060,7 +1065,16 @@ function LoadProperties() {
                                 }
                             },
 
-
+                            {
+                                //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
+                                data: 'insuranceContact',
+                                render: function (data, type, row) {
+                                    if (data != null) {
+                                        var result = JSON.parse(data);
+                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                    } else return '';
+                                }
+                            },
                             {
                                 "data": "acquisitionDate", 'render': function (date) {
                                     if (date == null) return '';
@@ -2417,6 +2431,10 @@ function LoadClaim()
                                     }
                                     $details += "<li>Partner Site Code: " + ($prop.equityPartnerSiteCode == null) ? '' : $prop.equityPartnerSiteCode + "</li>";
 
+                                    if ($prop.equityPartnerContact != null) {
+                                        var $val = JSON.parse($prop.equityPartnerContact);
+                                        $details += "<li>&nbsp;</li><li class='font-bold'>Equity Partner Contact:</li><li>" + $val.name + "</li>";
+                                    } 
                                     
                                     if ($prop.assetManager1 != null) {
                                         var $assetManager = JSON.parse($prop.assetManager1);
@@ -2454,6 +2472,11 @@ function LoadClaim()
                                     if ($prop.propertyManager != null) {
                                         var $val = JSON.parse($prop.propertyManager);
                                         $details += "<li>&nbsp;</li><li class='font-bold'>Property Manager:</li><li>" + $val.name + "</li>";
+                                    } 
+
+                                    if ($prop.insuranceContact != null) {
+                                        var $val = JSON.parse($prop.insuranceContact);
+                                        $details += "<li>&nbsp;</li><li class='font-bold'>Insurance Contact:</li><li>" + $val.name + "</li>";
                                     } 
 
                                   
