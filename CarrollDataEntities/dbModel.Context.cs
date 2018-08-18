@@ -84,5 +84,14 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spProperties_Result>("spProperties");
         }
+    
+        public virtual ObjectResult<proc_getworkflowemails_Result> proc_getworkflowemails(Nullable<System.Guid> propid)
+        {
+            var propidParameter = propid.HasValue ?
+                new ObjectParameter("propid", propid) :
+                new ObjectParameter("propid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getworkflowemails_Result>("proc_getworkflowemails", propidParameter);
+        }
     }
 }

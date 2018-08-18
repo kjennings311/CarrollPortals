@@ -210,10 +210,14 @@ namespace Carroll.Data.Services.Controllers
                 bSucceeded = _result.Succeded;
 
                 // Let's run workflow notificaiton here
+                if(id == EntityType.FormGeneralLiabilityClaim )
+                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId,'G');
+                else if (id == EntityType.FormMoldDamageClaim)
+                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'M');
+                    else if (id ==EntityType.FormPropertyDamageClaim)
+                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'P');
 
-                WorkflowHelper.RunNotifyWorkflow(_result.RecordId);
-
-               return Utility.ReturnRecordResponse(_modelState, bSucceeded);
+                return Utility.ReturnRecordResponse(_modelState, bSucceeded);
 
              
             }

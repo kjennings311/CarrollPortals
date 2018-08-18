@@ -2218,7 +2218,8 @@ function LoadClaim()
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
                 },
-                statusCode: {
+                statusCode: 
+                {
                     200: function (data) {
                         if (data != null) {
 

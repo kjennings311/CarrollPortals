@@ -180,7 +180,8 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="EquityPartnerSiteCode" Type="varchar" MaxLength="10" />
           <Property Name="EquityPartner" Type="uniqueidentifier" />
-          <Property Name="InsuranceNotifyEmail" Type="varchar" MaxLength="50" />
+          <Property Name="EquityPartnerContact" Type="uniqueidentifier" />
+          <Property Name="InsuranceContact" Type="uniqueidentifier" />
           <Property Name="VicePresident" Type="uniqueidentifier" />
           <Property Name="RegionalVicePresident" Type="uniqueidentifier" />
           <Property Name="PropertyManager" Type="uniqueidentifier" />
@@ -314,6 +315,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetPropertyDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getworkflowemails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="propid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="SP_GetAllClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="propertyid" Type="uniqueidentifier" Mode="In" />
@@ -408,6 +412,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           </AssociationSet>
           <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
           <EntitySet Name="Activities" EntityType="Carroll.Data.Entities.Activity" />
+          <FunctionImport Name="proc_getworkflowemails" ReturnType="Collection(Carroll.Data.Entities.proc_getworkflowemails_Result)">
+          <Parameter Name="propid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -796,7 +803,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="EquityPartnerSiteCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="EquityPartner" Type="Guid" />
-          <Property Name="InsuranceNotifyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VicePresident" Type="Guid" />
           <Property Name="RegionalVicePresident" Type="Guid" />
           <Property Name="PropertyManager" Type="Guid" />
@@ -810,6 +816,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="Property" ToRole="UserInProperty" />
+          <Property Name="EquityPartnerContact" Type="Guid" />
+          <Property Name="InsuranceContact" Type="Guid" />
         </EntityType>
         <Association Name="FK_UserInProperty_Properties">
           <End Type="Carroll.Data.Entities.Property" Role="Property" Multiplicity="0..1">
@@ -870,6 +878,17 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ActivityByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActivityBy" Type="Guid" />
         </EntityType>
+        <ComplexType Name="proc_getworkflowemails_Result">
+          <Property Type="String" Name="InsuranceEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EquityPartnerEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RMEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="VPEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RVPEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PropertyMgrEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AssetManager1Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AssetManager2Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CMEmail" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1244,6 +1263,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="Properties">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.Property">
               <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="InsuranceContact" ColumnName="InsuranceContact" />
+                <ScalarProperty Name="EquityPartnerContact" ColumnName="EquityPartnerContact" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1256,7 +1277,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
                 <ScalarProperty Name="RegionalVicePresident" ColumnName="RegionalVicePresident" />
                 <ScalarProperty Name="VicePresident" ColumnName="VicePresident" />
-                <ScalarProperty Name="InsuranceNotifyEmail" ColumnName="InsuranceNotifyEmail" />
                 <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
                 <ScalarProperty Name="EquityPartnerSiteCode" ColumnName="EquityPartnerSiteCode" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
@@ -1328,6 +1348,21 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_getworkflowemails" FunctionName="Carroll.Data.Entities.Store.proc_getworkflowemails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getworkflowemails_Result">
+                <ScalarProperty Name="InsuranceEmail" ColumnName="InsuranceEmail" />
+                <ScalarProperty Name="EquityPartnerEmail" ColumnName="EquityPartnerEmail" />
+                <ScalarProperty Name="RMEmail" ColumnName="RMEmail" />
+                <ScalarProperty Name="VPEmail" ColumnName="VPEmail" />
+                <ScalarProperty Name="RVPEmail" ColumnName="RVPEmail" />
+                <ScalarProperty Name="PropertyMgrEmail" ColumnName="PropertyMgrEmail" />
+                <ScalarProperty Name="AssetManager1Email" ColumnName="AssetManager1Email" />
+                <ScalarProperty Name="AssetManager2Email" ColumnName="AssetManager2Email" />
+                <ScalarProperty Name="CMEmail" ColumnName="CMEmail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

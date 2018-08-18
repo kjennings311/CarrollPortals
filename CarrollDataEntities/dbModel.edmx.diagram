@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1001967d2bb841b888833d61ed522c31" Name="Diagram1" ZoomLevel="94">
+      <Diagram DiagramId="1001967d2bb841b888833d61ed522c31" Name="Diagram1" ZoomLevel="56">
         <EntityTypeShape EntityType="Carroll.Data.Entities.Contact" Width="1.5" PointX="2.75" PointY="8.625" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.EquityPartner" Width="1.5" PointX="4.75" PointY="8.625" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.FormGeneralLiabilityClaim" Width="1.5" PointX="6.75" PointY="8.625" />
