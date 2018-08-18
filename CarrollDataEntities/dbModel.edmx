@@ -91,18 +91,18 @@
           <Property Name="ClaimantPhone1" Type="varchar" MaxLength="17" />
           <Property Name="ClaimantPhone2" Type="varchar" MaxLength="17" />
           <Property Name="AnyInjuries" Type="bit" />
-          <Property Name="InjuryDescription" Type="varchar" MaxLength="250" />
+          <Property Name="InjuryDescription" Type="varchar(max)" />
           <Property Name="WitnessPresent" Type="bit" />
           <Property Name="WitnessName" Type="varchar" MaxLength="50" />
           <Property Name="WitnessPhone" Type="varchar" MaxLength="17" />
           <Property Name="WitnessAddress" Type="varchar" MaxLength="100" />
-          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="100" />
-          <Property Name="DescriptionOfDamage" Type="varchar" MaxLength="100" />
+          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="255" />
+          <Property Name="DescriptionOfDamage" Type="varchar" MaxLength="255" />
           <Property Name="ReportedBy" Type="varchar" MaxLength="50" />
           <Property Name="DateReported" Type="datetime" />
           <Property Name="ReportedPhone" Type="varchar" MaxLength="17" />
           <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="NotifySecurityOfficer" Type="bit" />
         </EntityType>
@@ -118,17 +118,17 @@
           <Property Name="SuspectedCause" Type="varchar(max)" />
           <Property Name="AreBuildingMaterialsStillWet" Type="bit" />
           <Property Name="IsStandingWaterPresent" Type="bit" />
-          <Property Name="HowMuchWater" Type="varchar" MaxLength="20" />
-          <Property Name="EstimatedSurfaceAreaAffected" Type="varchar" MaxLength="20" />
-          <Property Name="EstimatedTimeDamagePresent" Type="varchar" MaxLength="20" />
-          <Property Name="CorrectiveActionsTaken" Type="varchar" MaxLength="50" />
-          <Property Name="PlannedActions" Type="varchar" MaxLength="50" />
+          <Property Name="HowMuchWater" Type="varchar" MaxLength="100" />
+          <Property Name="EstimatedSurfaceAreaAffected" Type="varchar" MaxLength="100" />
+          <Property Name="EstimatedTimeDamagePresent" Type="varchar" MaxLength="100" />
+          <Property Name="CorrectiveActionsTaken" Type="varchar" MaxLength="255" />
+          <Property Name="PlannedActions" Type="varchar" MaxLength="255" />
           <Property Name="AdditionalComments" Type="varchar(max)" />
           <Property Name="ReportedBy" Type="varchar" MaxLength="50" />
           <Property Name="DateReported" Type="datetime" />
           <Property Name="ReportedPhone" Type="varchar" MaxLength="17" />
           <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaims">
@@ -140,9 +140,9 @@
           <Property Name="IncidentDateTime" Type="datetime" Nullable="false" />
           <Property Name="WeatherConditions" Type="varchar" MaxLength="50" />
           <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
-          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="100" />
+          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="255" />
           <Property Name="IncidentDescription" Type="varchar(max)" />
-          <Property Name="EstimateOfDamage" Type="nvarchar" MaxLength="10" />
+          <Property Name="EstimateOfDamage" Type="nvarchar" MaxLength="50" />
           <Property Name="AuthoritiesContacted" Type="bit" />
           <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
           <Property Name="ReportNumber" Type="varchar" MaxLength="10" />
@@ -315,6 +315,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetPropertyDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getworkflowemails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="propid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="SP_GetAllClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="propertyid" Type="uniqueidentifier" Mode="In" />
@@ -409,6 +412,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <End Role="UserInProperty" EntitySet="UserInProperties" />
           </AssociationSet>
           <FunctionImport Name="spProperties" ReturnType="Collection(Carroll.Data.Entities.spProperties_Result)" />
+          <FunctionImport Name="proc_getworkflowemails" ReturnType="Collection(Carroll.Data.Entities.proc_getworkflowemails_Result)">
+          <Parameter Name="propid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -459,18 +465,18 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ClaimantPhone1" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="ClaimantPhone2" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="AnyInjuries" Type="Boolean" />
-          <Property Name="InjuryDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="InjuryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="WitnessPresent" Type="Boolean" />
           <Property Name="WitnessName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="WitnessPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="WitnessAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DescriptionOfProperty" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DescriptionOfDamage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfProperty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfDamage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateReported" Type="DateTime" Precision="3" />
           <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="NotifySecurityOfficer" Type="Boolean" />
         </EntityType>
@@ -486,17 +492,17 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="SuspectedCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AreBuildingMaterialsStillWet" Type="Boolean" />
           <Property Name="IsStandingWaterPresent" Type="Boolean" />
-          <Property Name="HowMuchWater" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="EstimatedSurfaceAreaAffected" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="EstimatedTimeDamagePresent" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CorrectiveActionsTaken" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PlannedActions" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HowMuchWater" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedSurfaceAreaAffected" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EstimatedTimeDamagePresent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CorrectiveActionsTaken" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PlannedActions" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="AdditionalComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateReported" Type="DateTime" Precision="3" />
           <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaim">
@@ -508,9 +514,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="IncidentDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="WeatherConditions" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescriptionOfProperty" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfProperty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="EstimateOfDamage" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EstimateOfDamage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AuthoritiesContacted" Type="Boolean" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ReportNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -872,6 +878,17 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="proc_getworkflowemails_Result">
+          <Property Type="String" Name="InsuranceEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EquityPartnerEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RMEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="VPEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RVPEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PropertyMgrEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AssetManager1Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AssetManager2Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CMEmail" Nullable="true" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1330,6 +1347,21 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getworkflowemails" FunctionName="Carroll.Data.Entities.Store.proc_getworkflowemails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getworkflowemails_Result">
+                <ScalarProperty Name="InsuranceEmail" ColumnName="InsuranceEmail" />
+                <ScalarProperty Name="EquityPartnerEmail" ColumnName="EquityPartnerEmail" />
+                <ScalarProperty Name="RMEmail" ColumnName="RMEmail" />
+                <ScalarProperty Name="VPEmail" ColumnName="VPEmail" />
+                <ScalarProperty Name="RVPEmail" ColumnName="RVPEmail" />
+                <ScalarProperty Name="PropertyMgrEmail" ColumnName="PropertyMgrEmail" />
+                <ScalarProperty Name="AssetManager1Email" ColumnName="AssetManager1Email" />
+                <ScalarProperty Name="AssetManager2Email" ColumnName="AssetManager2Email" />
+                <ScalarProperty Name="CMEmail" ColumnName="CMEmail" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
