@@ -52,6 +52,7 @@ namespace Carroll.Data.Entities
         public dynamic Claim { get; set; }
         public dynamic Comments { get; set; }
         public dynamic Attchments { get; set; }
+        public dynamic Activity { get; set; }
     }
 
     public class RecordUpdateResult

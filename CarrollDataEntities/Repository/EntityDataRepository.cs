@@ -541,10 +541,31 @@ namespace Carroll.Data.Entities.Repository
                         //if (string.IsNullOrEmpty(optionalSeachText)) return _entities.Contacts.ToList();
                         //else return _entities.Contacts.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Title.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.Email.Contains(optionalSeachText))).ToList();
                         #endregion
-                    case EntityType.Partner:
-                        #region
-                        if (string.IsNullOrEmpty(optionalSeachText)) return _entities.EquityPartners.ToList();
-                        else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
+
+                    case EntityType.Partner :
+
+                        #region [Partner]
+
+                        if (string.IsNullOrEmpty(optionalSeachText))
+                        {
+                            return (from tbl in _entities.EquityPartners
+                                       join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                                       select new { equityPartnerId=tbl.EquityPartnerId,  partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode,contactId=tblcontact.FirstName+" "+tblcontact.LastName,createdDate=tbl.CreatedDate, createdByName=tbl.CreatedByName }).ToList();
+
+                        }
+                        else
+                        {
+                          return  (from tbl in _entities.EquityPartners
+                                       join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                                       where tbl.IsActive== true && ( tbl.PartnerName.Contains(optionalSeachText) || tbl.AddressLine1.Contains(optionalSeachText) || tbl.AddressLine2.Contains(optionalSeachText) ||  tbl.City.Contains(optionalSeachText ) || tbl.State.Contains(optionalSeachText))
+                                       select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
+                        }
+
+
+                        //if (string.IsNullOrEmpty(optionalSeachText))
+                        //    return _entities.EquityPartners.ToList();
+                        //else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
+
                     #endregion
                     case EntityType.UserInRole:
                         #region [ User In Role ]
@@ -832,8 +853,15 @@ namespace Carroll.Data.Entities.Repository
                                       where tbl.RefFormType == formtype && tbl.RefId == _recId orderby 
                                       tbl.UploadedDate descending
                                       select tbl).ToList();
+
+                var AllActivity = (from tbl in _entities.Activities
+                                   where tbl.RecordId == _recId
+                                   select new { tbl.ActivityDescription,ActivityDate=tbl.ActivityDate,tbl.ActivityStatus,tbl.ActivityByName }).ToList();
+
+
                 cd.Comments = AllComments;
                 cd.Attchments = AllAttachments;
+                cd.Activity = AllActivity;
                 return cd;         
             }
         }
@@ -886,16 +914,24 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
-                Activity _activity = new Activity();
-               _activity.ActivityId = System.Guid.NewGuid();
-                _activity.ActivityDescription = ActivityDesc;
-                _activity.ActivityDate = DateTime.Now;
-                _activity.ActivityBy = new Guid(UserGuid);
-                _activity.ActivityByName = UserName;
-                _activity.RecordId = new Guid(RecordId);
-                _activity.ActivityStatus = ActivityStatus;
-                _entities.Activities.Add(_activity);
-                _entities.SaveChanges();
+                try
+                {
+                    Activity _activity = new Activity();
+                    _activity.ActivityId = System.Guid.NewGuid();
+                    _activity.ActivityDescription = ActivityDesc;
+                    _activity.ActivityDate = DateTime.Now;
+                    _activity.ActivityBy = new Guid(UserGuid);
+                    _activity.ActivityByName = UserName;
+                    _activity.RecordId = new Guid(RecordId);
+                    _activity.ActivityStatus = ActivityStatus;
+                    _entities.Activities.Add(_activity);
+                    _entities.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+
+                }
+             
 
             }
 

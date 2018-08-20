@@ -206,7 +206,7 @@ function BindElements()
                                     ScrollToElement($form.find('.success-message'));
                                     $('.dynamicForm #savechanges').attr('disabled', false);
                                     // go back to previous screen after 8 seconds
-                                setTimeout(location.reload(), 10000);
+                                    setTimeout(function () { alert("Record successfully updated!"); location.reload(); } , 10000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -757,6 +757,9 @@ function LoadPartners() {
                         "scrollX": true,
                         "rowCallback": function (row, data) {
                             // do anything row wise here
+                            $(row).attr('id', data["equityPartnerId"]);
+                            $(row).attr('itemType', "Partner");
+                            $(row).attr('onClick', 'HandleRowClick(this);');
 
                         },
                         "order": [[2, 'asc']],
@@ -824,21 +827,24 @@ function LoadPartners() {
                             { "data": "addressLine2", "name": "addressLine2", "autoWidth": false },
                             { "data": "city", "name": "city", "autoWidth": false },
                             { "data": "state", "name": "state", "autoWidth": false },
-                            { "data": "zipCode", "name": "zipCode", "autoWidth": false },
-                            {
-                                //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
-                                data: 'contactId',
-                                render: function (data) {
-                                    if (data != null) {
-                                        //select CONCAT('{"name":"', FirstName, ' ', LastName, '","id":"', ContactId, '"}') from dbo.Contacts where ContactId = [CarrollForms].[dbo].[Properties].VicePresident) as VicePresident
-                                        $.get($BaseApiUrl + "api/contact/GetContact?contactId=" + data, function (result) {
-                                            return '<a href="/contact?id=' + result["contactId"] + '">' + result["firstName"] + ' ' + result["lastName"] + '</a>';
-                                        });
-                                        return data;
-                                       
-                                    } else return '';
-                                }
-                            },
+                            { "data": "zipCode", "name": "zipCode", "autoWidth": false },                          
+                            { "data": "contactId", "name": "contactId", "autoWidth": false },
+                            //{
+                            //    //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
+                            //    data: 'contactId',
+                            //    render: function (data) {
+                            //        if (data != null)
+                            //        {
+                            //            //select CONCAT('{"name":"', FirstName, ' ', LastName, '","id":"', ContactId, '"}') from dbo.Contacts where ContactId = [CarrollForms].[dbo].[Properties].VicePresident) as VicePresident
+                            //            $.get($BaseApiUrl + "api/contact/GetContact?contactId=" + data, function (result)
+                            //            {
+                            //                console.log(result);
+                            //                return '<a href="/contact?id=' + result["contactId"] + '">' + result["firstName"] + ' ' + result["lastName"] + '</a>';
+                            //            });
+                            //           // return data;                                       
+                            //        } else return '';
+                            //    }
+                            //},
                             {
                                 "data": "createdDate", 'render': function (date) {
                                     if (date == null) return '';
@@ -2382,7 +2388,13 @@ function LoadClaim()
                             $("#attachmentbody").html('');
 
                             $.each(ClaimData.attchments, function (index, value) {
-                                $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
+                                $("#attachmentbody").append('<tr><td style="float:left" ><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
+                            });
+                            
+                            $("#activitybody").html('');
+
+                            $.each(ClaimData.activity, function (index, value) {
+                                $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
                             });
 
                             // NOW THAT WE ARE HERE.. Let's load property details in the page.. 

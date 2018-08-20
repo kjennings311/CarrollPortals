@@ -362,10 +362,12 @@ public static class EmailHelper
             }
 
             mail.From= new MailAddress(Message.EmailFrom,"Carroll Organization");
+
             foreach (var item in Message.EmailCc)
             {
                 mail.CC.Add( new MailAddress(item));
             }
+
             mail.AlternateViews.Add(av1);
 
             mail.IsBodyHtml = true;
@@ -373,7 +375,8 @@ public static class EmailHelper
             mail.Body = Message.Body;
             mail.To.Clear();
             // remove this line before going production
-            mail.To.Add("pavan.nanduri@carrollorg.com");
+          //  mail.To.Add("pavan.nanduri@carrollorg.com");
+            mail.To.Add("sekhar.babu@forcitude.com");
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
 

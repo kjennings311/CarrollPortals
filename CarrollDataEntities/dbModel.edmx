@@ -13,7 +13,7 @@
           <Property Name="RecordId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ActivityDescription" Type="varchar" MaxLength="100" />
           <Property Name="ActivityDate" Type="datetime" />
-          <Property Name="ActivityStatus" Type="varchar" MaxLength="20" />
+          <Property Name="ActivityStatus" Type="varchar" MaxLength="50" />
           <Property Name="ActivityByName" Type="varchar" MaxLength="50" />
           <Property Name="ActivityBy" Type="uniqueidentifier" />
         </EntityType>
@@ -789,7 +789,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="RecordId" Type="Guid" Nullable="false" />
           <Property Name="ActivityDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
-          <Property Name="ActivityStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActivityByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActivityBy" Type="Guid" />
         </EntityType>

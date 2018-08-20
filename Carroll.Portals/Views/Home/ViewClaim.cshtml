@@ -64,6 +64,7 @@
                                         <ul class="nav nav-tabs">
                                             <li class="active"><a class="nav-link active" href="#tab-2" data-toggle="tab">Comments</a></li>
                                             <li><a class="nav-link" href="#tab-1" data-toggle="tab">Attachments</a></li>
+                                            <li><a class="nav-link" href="#tab-3" data-toggle="tab"> Activity </a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -86,18 +87,18 @@
 
                                                 </div>
                                                 @*<table class="table table-striped">
-                                        <thead>
-                                            <tr>
+                    <thead>
+                        <tr>
 
-                                                <th>Comment</th>
-                                                <th>Date</th>
+                            <th>Comment</th>
+                            <th>Date</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody id="commentbody">
+                        </tr>
+                    </thead>
+                    <tbody id="commentbody">
 
-                                        </tbody>
-                                    </table>*@
+                    </tbody>
+                </table>*@
                                             </div>
 
 
@@ -116,7 +117,7 @@
                                                 <table class="table table-striped col-md-6">
                                                     <thead>
                                                         <tr>
-                                                            <th>File</th>
+                                                            <th style="float:left;">File</th>
                                                             <th>Date</th>
                                                         </tr>
                                                     </thead>
@@ -124,7 +125,22 @@
                                                 </table>
                                             </div>
                                         </div>
-
+                                        <div class="tab-pane" id="tab-3">
+                                            <div class="col-md-12 col-sm-12 col-lg-12 clear">
+                                              @*<h3> Activity </h3>*@
+                                                <table class="table table-striped col-md-6">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="float:left;" >Description</th>
+                                                            <th>Date</th>
+                                                            <th> Status </th>
+                                                            <th> Created By </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="activitybody"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
