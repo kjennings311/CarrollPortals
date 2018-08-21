@@ -2802,12 +2802,19 @@ $(document).ready(function ()
                           //  $("#commentbody").html('');
                             $(".feed-activity-list").html('');
                             
-                            $.each(data, function (index, value) {
+                            $.each(data.comments, function (index, value) {
                                 //$("#commentbody").append('<tr><td> ' + value.comment + ' </td><td style="width:20%;" >' + value.commentDate.substring(0, 10)+' </td> </tr>');
                               
                                 $(".feed-activity-list").append('<div class=\"feed-element\"><div class=\"media-body\">Posted by:  <strong>' + value.commentByName + '</strong><br><small class=\"text-muted\">' + value.commentDate + '</small>');
                                 $(".feed-activity-list").append('<div class=\"well\">' + value.comment + '</div></div></div><hr/>');
                             });
+
+                            $("#activitybody").html('');
+
+                            $.each(data.activity, function (index, value) {
+                                $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
+                            });
+
                             setTimeout(function () {
                                 $("#btnAddComment").html('Send');
                                 $("#btnAddComment").attr('disabled', false);
@@ -2862,8 +2869,15 @@ $(document).ready(function ()
 
                     $("#attachmentbody").html('');
 
-                    $.each(data, function (index, value) {
+                    $.each(data.attachments, function (index, value)
+                    {
                         $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
+                    });
+
+                    $("#activitybody").html('');
+
+                    $.each(data.activity, function (index, value) {
+                        $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
                     });
 
                     setTimeout(function () {

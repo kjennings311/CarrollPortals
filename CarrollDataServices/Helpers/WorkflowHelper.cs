@@ -263,15 +263,7 @@ namespace Carroll.Data.Services.Helpers
 
                     EmailHelper.SendEmail(_message, RecordId, ClaimData.tbl.CreatedByName, ClaimData.tbl.CreatedBy.ToString());
                 }
-
-
-
-
-
-            }
-
-
-            return true;
+       return true;
         }
 
       

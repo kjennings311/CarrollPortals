@@ -2,6 +2,16 @@
     ViewBag.Title = "View Claim ";
 }
 
+@section Styles 
+{
+
+    <style>
+        table th, table td {
+            text-align:left !important;
+        }
+    </style>
+}
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
         <h1 id="heading"> Property Damage Claim </h1>
@@ -25,29 +35,29 @@
                         <div class="col-lg-12">
                             <div class="m-b-md">
                                 @*<a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>
-                                <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>*@
+                                    <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>*@
                                 <h2 class="propertyName"></h2>
                             </div>
                             <h5>Report Details:</h5>
                             @*<dl class="dl-horizontal">
-                                <dt>Details:</dt>
-                                <dd><span class="claimDesc"></span></dd>
-                                <dt>Location:</dt>
-                                <dd><span class="location"></span></dd>
-                                <dt>Created By:</dt>
-                                <dd><span class="createdBy"></span></dd>
-                                <dt>Created Date:</dt>
-                                <dd><span class="createdDate"></span></dd>
-                            </dl>*@
-                           
+                                    <dt>Details:</dt>
+                                    <dd><span class="claimDesc"></span></dd>
+                                    <dt>Location:</dt>
+                                    <dd><span class="location"></span></dd>
+                                    <dt>Created By:</dt>
+                                    <dd><span class="createdBy"></span></dd>
+                                    <dt>Created Date:</dt>
+                                    <dd><span class="createdDate"></span></dd>
+                                </dl>*@
+
                         </div>
                     </div>
                     @*<div class="row">
-        <div class="col-lg-5">
-            <table class="table-hover table-responsive table-striped"
-        </div>
-        </div>*@
-                  
+                        <div class="col-lg-5">
+                            <table class="table-hover table-responsive table-striped"
+                        </div>
+                        </div>*@
+
                     <div class="row ">
                         <div class="col-lg-12" id="claimbody">
                             <p style="text-align:center"> Loading Claim Details ................................. </p>
@@ -87,18 +97,18 @@
 
                                                 </div>
                                                 @*<table class="table table-striped">
-                    <thead>
-                        <tr>
+                                                        <thead>
+                                                            <tr>
 
-                            <th>Comment</th>
-                            <th>Date</th>
+                                                                <th>Comment</th>
+                                                                <th>Date</th>
 
-                        </tr>
-                    </thead>
-                    <tbody id="commentbody">
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="commentbody">
 
-                    </tbody>
-                </table>*@
+                                                        </tbody>
+                                                    </table>*@
                                             </div>
 
 
@@ -127,11 +137,11 @@
                                         </div>
                                         <div class="tab-pane" id="tab-3">
                                             <div class="col-md-12 col-sm-12 col-lg-12 clear">
-                                              @*<h3> Activity </h3>*@
+                                                @*<h3> Activity </h3>*@
                                                 <table class="table table-striped col-md-6">
                                                     <thead>
                                                         <tr>
-                                                            <th style="float:left;" >Description</th>
+                                                            <th style="float:left;">Description</th>
                                                             <th>Date</th>
                                                             <th> Status </th>
                                                             <th> Created By </th>
@@ -175,7 +185,7 @@
                 </div>*@
         </div>
     </div>
-    
+
     <input type="hidden" id="claim" value="" />
     <input type="hidden" id="type" value="" />
 </div>
@@ -192,12 +202,6 @@
 @if (ViewBag.ErrorMessage == "UnexpectedError")
 {
     <p> An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in. </p>
-}
-
-@section Styles
-{
-
-
 }
 
 @section Scripts
@@ -220,7 +224,6 @@
         .table td,
         .table th {
             text-align: right;
-           
         }
 
             #right,
@@ -228,12 +231,14 @@
             .table th + th {
                 text-align: left;
             }
+
         .table > *:first-child:not(thead) td:first-child {
             font-weight: bold;
         }
-        .table{
-            max-width:90%;
-            margin-left:5%;
+
+        .table {
+            max-width: 90%;
+            margin-left: 5%;
         }
     </style>
 }

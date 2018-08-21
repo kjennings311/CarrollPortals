@@ -856,6 +856,7 @@ namespace Carroll.Data.Entities.Repository
 
                 var AllActivity = (from tbl in _entities.Activities
                                    where tbl.RecordId == _recId
+                                   orderby tbl.ActivityDate descending
                                    select new { tbl.ActivityDescription,ActivityDate=tbl.ActivityDate,tbl.ActivityStatus,tbl.ActivityByName }).ToList();
 
 
@@ -863,6 +864,19 @@ namespace Carroll.Data.Entities.Repository
                 cd.Attchments = AllAttachments;
                 cd.Activity = AllActivity;
                 return cd;         
+            }
+        }
+
+        public dynamic GetAllActivity(Guid _recId)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                var AllActivity = (from tbl in _entities.Activities
+                                   where tbl.RecordId == _recId
+                                   orderby tbl.ActivityDate descending
+                                   select new { tbl.ActivityDescription, ActivityDate = tbl.ActivityDate, tbl.ActivityStatus, tbl.ActivityByName }).ToList();
+
+                return AllActivity;
             }
         }
 
@@ -882,7 +896,7 @@ namespace Carroll.Data.Entities.Repository
                                    select tbl).ToList();
                 string Comment = "A new comment was added by " + _property.CommentByName;
                 LogActivity(Comment, _property.CommentByName, _property.CommentBy.ToString(), _property.RefFormID.ToString(), "New Comment");
-                return AllComments;
+                return new { comments = AllComments, activity = GetAllActivity(_property.RefFormID) } ;
             }
         }
        
@@ -905,7 +919,7 @@ namespace Carroll.Data.Entities.Repository
                                    select tbl).ToList();
                 string Comment = "A new attachement was added by " + _property.UploadedByName;
                 LogActivity(Comment, _property.UploadedByName, _property.UploadedBy.ToString(), _property.RefId.ToString(), "New Attachment");
-                return AllAttachments;
+                return new { attachments = AllAttachments, activity = GetAllActivity(formAttachment.RefId) }; ;
             }
 
         }
