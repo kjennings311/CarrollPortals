@@ -1,0 +1,313 @@
+﻿
+@{
+    ViewBag.Title = "Employee Lease Rider";
+
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <h2> Employee Lease Rider </h2>
+
+        <ol class="breadcrumb">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+
+            <li class="active">
+                <strong>Employee Lease Rider</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight" >
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+         
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+
+                <img src="~/img/carroll-print.png" />
+
+                <h1 style="text-align: center;
+    margin-top: -30px;">
+                    <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
+                </h1>
+                <form id="submitform" onsubmit="return false;">
+
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="date" id="leasedate" class="" /> </p>
+
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Community :  </span> <input style=" display:inline; " type="text" id="apartmentname" class="" />  </p>
+
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; " onchange="document.getElementById('printempname').value=this.value"  type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
+
+                    <ol>
+                        <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="text" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="text" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline; " type="text" id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon termination of my employment with Carroll Organization whether voluntary or involuntary, my lease will be terminated regardless of the lease term stated on the lease. I will not be considered a tenant of the apartment community nor will I have rights and privileges of a tenant without the written consent of the Carroll Organization.&nbsp; I further agree that upon such termination from employment, I will vacate the apartment occupied by me within <strong><u>seven days</u></strong> from the date of my termination of employment.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If the Carroll Organization should agree to allow me to continue to lease the apartment as a resident, a new lease will be signed that shall be at the current market rate and subject to all normal lease provisions.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon vacating the apartment occupied by me, for any reason, I will leave the apartment clean and in good condition.</span></li>
+                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
+                    </ol>
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
+
+                    <p><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________ </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10.0pt; line-height: 115%;margin-left:45%;"> ____________________________________</span></p>
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 10.0pt; line-height: 115%;margin-left:41%;"> Signature of Property Manager</span></p>
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="printempname" disabled  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Printed Name of Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+                    @*<p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cc: Property Lease Folder</span></p>*@
+                    <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;">Position : <input type="text" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
+                    <p style="text-align: justify;">
+                        <span style="font-size: 10.0pt; line-height: 115%;">Date : </span> <input style="margin-left: 2%;
+    padding-left: 10px;" type="date" id="positiondate" />
+                    </p>
+                    <br /> <br />
+                    <div id="status"> </div>
+                    <div class="col-md-12" style="text-align:right;">
+
+                        <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  <button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+
+    <style>
+        .dtprops td, .dtprops th 
+        {
+            white-space: nowrap;
+        }
+
+        input
+        {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding:5px;
+        }
+
+        button 
+        {
+            margin-left:4%;
+        }
+
+        .has-error
+        {
+            border-color:red;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function ()
+        {
+            var leaseid = "";
+
+            $("input").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "")
+                {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+            $("input").change   
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+                if($("#leasedate").val() == "")
+                {
+                    errormsgsummary += "<li> Please Choose Date </li>";
+                    $("#leasedate").addClass('has-error');
+                    if(control == "")
+                    control = $("#leasedate");
+                }
+
+                if ($("#apartmentname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Community Apartment Name </li>";
+                    $("#apartmentname").addClass('has-error');
+                    if (control == "")
+                        control = $("#apartmentname");
+                }
+
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
+
+
+                if ($("#marketvalue").val() == "") {
+                    errormsgsummary += "<li> Please Enter Market Value of Property </li>";
+                    $("#marketvalue").addClass('has-error');
+                    if (control == "")
+                        control = $("#marketvalue");
+                }
+                
+
+                if ($("#monthlyrent").val() == "") {
+                    errormsgsummary += "<li> Please Enter Monthly Rent </li>";
+                    $("#monthlyrent").addClass('has-error');
+                    if (control == "")
+                        control = $("#monthlyrent");
+                }
+                
+
+                if ($("#residency").val() == "") {
+                    errormsgsummary += "<li> Please Enter Residency Place  </li>";
+                    $("#residency").addClass('has-error');
+                    if (control == "")
+                        control = $("#residency");
+                }
+
+
+                if (errormsgsummary != "") {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                    
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+
+
+                    var insertForm = new FormData();
+                    insertForm.append('date', $("#leasedate").val());
+                    insertForm.append('community', $("#apartmentname").val());
+                    insertForm.append('empname', $("#empname").val());
+                    insertForm.append('marketvalue', $("#marketvalue").val());
+                    insertForm.append('emprent', $("#monthlyrent").val());
+                    insertForm.append('residence', $("#monthlyrent").val());
+                    insertForm.append('position', $("#position").val());
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertEmployeeLeaseRider",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
+
+                            if (data['error'] == true)
+                            {
+                                leaseid = data['insertedId'];
+
+                                $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
+                                //    $("#submitform").trigger('reset');
+                                //$("#submitform input") .each(function () {
+                                //    this.reset();
+                                //});
+
+                                setTimeout(function () {
+
+                                    $("#print").attr('disabled', false);
+                                    $("#pdf").attr('disabled', false);
+                                    $("#Submit").attr('disabled', true);
+                                }, 1000);
+
+                            }
+                            else
+                            {
+
+                            }
+                            
+                        
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
+                    });
+                    
+                }
+               
+
+            });
+
+            $("#print").click(function (e) {
+                e.preventDefault();
+                if (leaseid != "") {
+
+                    var printWindow = window.open("Hr/PrintEmployeeLeaseRider/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    printWindow.addEventListener('load', function () {
+                        setTimeout(function () {
+                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                        }, 1000);
+                    }, true);
+                }
+            });
+
+
+            $("#pdf").click(function (e) {
+                e.preventDefault();
+                if (leaseid != "")
+                {
+                    var printWindow = window.open("Hr/PDFEmployeeLeaseRider/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    printWindow.addEventListener('load', function () {
+                        setTimeout(function () {
+                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                        }, 1000);
+                    }, true);
+
+                }
+             
+            });
+
+            function PrintLease()
+            {
+              $("#status").html("Printing Invoice .....");
+
+            
+
+            }
+
+        });
+
+    </script>
+
+}

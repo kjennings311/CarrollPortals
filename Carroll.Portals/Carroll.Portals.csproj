@@ -17,7 +17,7 @@
     <AssemblyName>Carroll.Portals</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -56,6 +56,9 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -182,6 +185,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HrController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
     <Compile Include="GetCurrentUser.ashx.cs">
@@ -207,6 +211,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\a4css.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -334,6 +339,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\ajax-loader.gif" />
+    <Content Include="img\carroll-print.png" />
     <Content Include="img\corpLogo.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\LogoC.png" />
@@ -374,6 +380,10 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\admin.js" />
     <Content Include="Scripts\app\custom - Copy.js" />
     <Content Include="Scripts\app\custom.js" />
@@ -383,6 +393,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Code\AdminHelper.cshtml" />
     <Content Include="GetCurrentUser.ashx" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -819,6 +830,8 @@
     <Content Include="Views\Home\ViewClaim.cshtml" />
     <Content Include="Views\Admin\Forms.cshtml" />
     <Content Include="Views\Home\ViewClaim - Copy.cshtml" />
+    <Content Include="Views\Hr\EmployeeLeaseRider.cshtml" />
+    <Content Include="Views\Hr\PrintEmployeeLeaseRider.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

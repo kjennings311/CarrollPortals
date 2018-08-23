@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -82,5 +83,26 @@ namespace Carroll.Portals.Models
     {
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+    }
+
+    public class PrintEmployeeLeaseRider
+    {
+        public System.Guid EmployeeLeaseRiderId { get; set; }
+        public decimal ApartmentMarketRentalValue { get; set; }
+        public string EmployeeName { get; set; }
+        public System.DateTime Date { get; set; }
+        public string Community { get; set; }
+        public decimal EmployeeMonthlyRent { get; set; }
+        public string RentalPaymentResidencyAt { get; set; }
+        public string PropertyManager { get; set; }
+        public byte[] SignatureOfPropertyManager { get; set; }
+        public string Position { get; set; }
+        public byte[] SignatureOfEmployee { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
+        public Nullable<System.DateTime> CreatedDatetime { get; set; }
+        public Nullable<System.Guid> ModifiedUser { get; set; }
+        public Nullable<System.DateTime> ModifiedDatetime { get; set; }
+
+
     }
 }

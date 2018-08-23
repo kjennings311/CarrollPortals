@@ -36,7 +36,7 @@ namespace Carroll.Data.Services.Controllers
         private IDataService _service;
         private IValidationDictionary _modelState;
 
-        MongoClient _client;
+    //    MongoClient _client;
         IMongoDatabase _db;
 
         public DataController()
@@ -205,7 +205,37 @@ namespace Carroll.Data.Services.Controllers
             return _coll;
         }
 
+        #region  HR Forms
+        [ActionName("InsertEmployeeLeaseRider")]
+        [HttpPost]
+        public dynamic InsertEmployeeLeaseRider()
+        {
 
+            EmployeeLeaseRaider fa = new EmployeeLeaseRaider();
+            fa.Date = Convert.ToDateTime(HttpContext.Current.Request.Params["date"]);
+            fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
+            fa.Community = HttpContext.Current.Request.Params["community"].ToString();
+            fa.ApartmentMarketRentalValue = Convert.ToDecimal(HttpContext.Current.Request.Params["marketvalue"]);
+            fa.EmployeeMonthlyRent = Convert.ToDecimal(HttpContext.Current.Request.Params["emprent"]);
+            fa.RentalPaymentResidencyAt = HttpContext.Current.Request.Params["residence"].ToString();
+            fa.PropertyManager = "";
+            fa.EmployeeLeaseRiderId= System.Guid.NewGuid();
+            fa.Position = HttpContext.Current.Request.Params["position"].ToString();
+            fa.CreatedUser = new Guid( HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedDatetime = DateTime.Now;
+
+            return _service.InsertEmployeeLeaseRider(fa);
+        }
+
+        [ActionName("GetEmployeeLeaseRider")]
+        [HttpGet]
+        public dynamic GetEmployeeLeaseRider(string riderid)
+        {
+
+            return _service.GetEmployeeLeaseRider(new Guid(riderid));
+        }
+        
+        #endregion 
 
 
 

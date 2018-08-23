@@ -923,7 +923,8 @@ namespace Carroll.Data.Entities.Repository
             }
 
         }
-        
+
+
         public void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
@@ -950,6 +951,53 @@ namespace Carroll.Data.Entities.Repository
             }
 
         }
+
+        #region HR Forms
+
+
+        public dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                
+                try
+                {
+                    EmployeeLeaseRaider _property = formAttachment;
+
+                    // No record exists create a new property record here
+                    _entities.EmployeeLeaseRaiders.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+              
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.EmployeeLeaseRiderId };
+                }
+                catch (Exception ex)
+                {
+                   return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }                                
+            }
+        }
+
+        public dynamic GetEmployeeLeaseRider(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.EmployeeLeaseRaiders
+                               where tbl.EmployeeLeaseRiderId == riderid
+                               select tbl).FirstOrDefault();
+
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+        #endregion
 
 
         /// <summary>

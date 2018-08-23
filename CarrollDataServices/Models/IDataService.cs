@@ -24,6 +24,8 @@ namespace Carroll.Data.Services.Models
         dynamic GetClaimDetails(string Claim, char Type);
         dynamic InsertComment(FormComment obj);
         dynamic InsertAttachment(FormAttachment formAttachment);
+        dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider Elr);
+        dynamic GetEmployeeLeaseRider(Guid Elr);
         dynamic GetUserClaimCount(Guid userid);
     }
 }

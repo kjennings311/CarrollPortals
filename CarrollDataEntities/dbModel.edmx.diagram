@@ -22,6 +22,7 @@
         <EntityTypeShape EntityType="Carroll.Data.Entities.Activity" Width="1.5" PointX="3.375" PointY="12.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.Property" Width="1.5" PointX="0.75" PointY="13.125" />
         <AssociationConnector Association="Carroll.Data.Entities.FK_UserInProperty_Properties" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.EmployeeLeaseRaider" Width="1.5" PointX="13.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

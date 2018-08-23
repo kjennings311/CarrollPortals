@@ -77,14 +77,26 @@ namespace Carroll.Data.Services.Models
             return _repository.InsertComment(obj);
         }
 
+        public dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider obj)
+        {
+            return _repository.InsertEmployeeLeaseRider(obj);
+        }
+
+        public dynamic GetEmployeeLeaseRider(Guid obj)
+        {
+            return _repository.GetEmployeeLeaseRider(obj);
+        }
+
         public dynamic GetUserClaimCount(Guid userid)
         {
             return _repository.GetUserClaimCount(userid);
         }
+
         public dynamic InsertAttachment(FormAttachment formAttachment)
         {
             return _repository.InsertAttachment(formAttachment);
         }
+
         #endregion
     }
 }

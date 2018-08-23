@@ -2815,7 +2815,8 @@ $(document).ready(function ()
                                 $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
                             });
 
-                            setTimeout(function () {
+                            setTimeout(function ()
+                            {
                                 $("#btnAddComment").html('Send');
                                 $("#btnAddComment").attr('disabled', false);
                                 $("#btnAddComment").fadeIn();

@@ -74,6 +74,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeLeaseRaider.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EquityPartner.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

@@ -24,6 +24,8 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetClaimDetails(string Claim, char Type);
         dynamic InsertComment(FormComment obj);
         dynamic InsertAttachment(FormAttachment formAttachment);
+        dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment);
+        dynamic GetEmployeeLeaseRider(Guid riderid);
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");

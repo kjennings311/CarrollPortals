@@ -33,6 +33,26 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="ContactPhoto" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="EmployeeLeaseRaider">
+          <Key>
+            <PropertyRef Name="EmployeeLeaseRiderId" />
+          </Key>
+          <Property Name="EmployeeLeaseRiderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ApartmentMarketRentalValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Community" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmployeeMonthlyRent" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="RentalPaymentResidencyAt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PropertyManager" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SignatureOfPropertyManager" Type="image" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SignatureOfEmployee" Type="image" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="ModifiedUser" Type="uniqueidentifier" />
+          <Property Name="ModifiedDatetime" Type="datetime" />
+        </EntityType>
         <EntityType Name="EquityPartners">
           <Key>
             <PropertyRef Name="EquityPartnerId" />
@@ -328,6 +348,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <EntityContainer Name="CarrollDataEntitiesStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeLeaseRaider" EntityType="Self.EmployeeLeaseRaider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquityPartners" EntityType="Self.EquityPartners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormAttachments" EntityType="Self.FormAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormComments" EntityType="Self.FormComments" Schema="dbo" store:Type="Tables" />
@@ -415,6 +436,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getworkflowemails" ReturnType="Collection(Carroll.Data.Entities.proc_getworkflowemails_Result)">
           <Parameter Name="propid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="EmployeeLeaseRaiders" EntityType="Carroll.Data.Entities.EmployeeLeaseRaider" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -890,6 +912,26 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="AssetManager2Email" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CMEmail" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="EmployeeLeaseRaider">
+          <Key>
+            <PropertyRef Name="EmployeeLeaseRiderId" />
+          </Key>
+          <Property Name="EmployeeLeaseRiderId" Type="Guid" Nullable="false" />
+          <Property Name="ApartmentMarketRentalValue" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Community" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeMonthlyRent" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="RentalPaymentResidencyAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyManager" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureOfPropertyManager" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SignatureOfEmployee" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedUser" Type="Guid" />
+          <Property Name="ModifiedDatetime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1365,6 +1407,27 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="EmployeeLeaseRaiders">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.EmployeeLeaseRaider">
+              <MappingFragment StoreEntitySet="EmployeeLeaseRaider">
+                <ScalarProperty Name="ModifiedDatetime" ColumnName="ModifiedDatetime" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="SignatureOfEmployee" ColumnName="SignatureOfEmployee" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="SignatureOfPropertyManager" ColumnName="SignatureOfPropertyManager" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="RentalPaymentResidencyAt" ColumnName="RentalPaymentResidencyAt" />
+                <ScalarProperty Name="EmployeeMonthlyRent" ColumnName="EmployeeMonthlyRent" />
+                <ScalarProperty Name="Community" ColumnName="Community" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="ApartmentMarketRentalValue" ColumnName="ApartmentMarketRentalValue" />
+                <ScalarProperty Name="EmployeeLeaseRiderId" ColumnName="EmployeeLeaseRiderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
