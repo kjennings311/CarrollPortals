@@ -1,6 +1,8 @@
 ﻿@model Carroll.Portals.Models.PrintEmployeeLeaseRider
 
-PrintEmployeeLeaseRider
+@{
+    Layout = null;
+}
 
 <!DOCTYPE html>
 <html>
@@ -14,13 +16,11 @@ PrintEmployeeLeaseRider
 
     <style type="text/css">
 
-        body
-        {
+        body {
             font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #555555;
             font-size: 13px;
         }
-        
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
@@ -64,7 +64,7 @@ PrintEmployeeLeaseRider
             <p style="text-align: justify;">
                 <span style="font-size: 10.0pt; line-height: 115%;">Date : </span> <input type="text" id="leasedate" class="" value="@Model.Date.ToShortDateString()" />
             </p>
-            
+
         </form>
     </div>
 </body>
