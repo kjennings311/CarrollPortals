@@ -87,6 +87,16 @@ namespace Carroll.Data.Services.Models
             return _repository.GetEmployeeLeaseRider(obj);
         }
 
+        public dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice obj)
+        {
+            return _repository.InsertEmployeeNewHireNotice(obj);
+        }
+
+        public dynamic GetEmployeeNewHireNotice(Guid obj)
+        {
+            return _repository.GetEmployeeLeaseRider(obj);
+        }
+
         public dynamic GetUserClaimCount(Guid userid)
         {
             return _repository.GetUserClaimCount(userid);

@@ -1,0 +1,106 @@
+﻿@model Carroll.Portals.Models.PrintEmployeeNewHireNotice
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Print Employee New Hire Notice  </title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+
+        body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 13px;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+    </style>
+
+    <link href="/Content/a4css.css" rel="stylesheet" />
+
+</head>
+<body class="document">
+    <div class="page">
+
+        <form id="submitform" onsubmit="return false;">
+            <p class="c1 c8" style="margin-left:90px;">
+                <span class="c7">
+                    <img src="~/img/newhirenotice.png">
+                </span>
+            </p>
+            <p class="c1 c8" style="margin-left: 10%;">
+                <span class="c7"> NEW HIRE NOTICE </span>
+            </p>
+            <p class="c1">
+                <span class="c0"> Employee Name:    <input type="text" id="empname" value="@Model.EmployeeName" />        Start Date:<input type="text" id="startdate" value="@Model.StartDate" />  </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Employee Social Security Number:<input type="text" id="securitynumber" style="width:31%;" value="@Model.EmployeeSocialSecuirtyNumber" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Email Address: <input type="email" id="email" style="width:43%;" value="@Model.EmailAddress" /> </span>
+            </p>
+          
+            <p class="c1">
+                <span class="c0">Manager:<input type="text" id="manager" style="width:46.5%;" value="@Model.Manager" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Location:<input type="text" id="location" style="width:46.5%;" value="@Model.Location" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Position: Exempt <input type="text" id="exempt" value="@Model.Position_Exempt" />   Non-exempt <input type="text" id="nonexempt" value="@Model.Position_NonExempt" style="width:15%;" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Position <input type="text" id="position" style="width:46.5%;" value="@Model.Position" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
+            </p>
+            <p class="c1">
+                <span class="c0">Status :  @Model.Status  </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Wage/Salary <input type="text" id="salary" value="@Model.Wage_Salary" style="width:30%;" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Allocation <input type="text" id="allocation" value="@Model.Allocation" style="width:31.5%;" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Employee Signature _____________________________________________     Date_______________</span>
+            </p>
+            <p class="c1">
+                <span class="c0">Manager&rsquo;s Authorizing Signature ________________________________ Date ______________</span>
+            </p>
+            <p class="c1">
+                <span class="c0">RPM Signature____________________________________________________Date_______________</span>
+            </p>
+            <p class="c1" style="width:75%;">
+                <span class="c6">
+                    Manager Responsibilities: Complete the New Hire Notice, sign the form, and submit to Human Resources via email at
+                    HRNotifications@carrollmg.com. This form kicks off the launching on Onboarding in Paylocity.
+                </span>
+            </p>
+
+        </form>
+
+
+
+
+    </div>
+</body>
+</html>
+
+

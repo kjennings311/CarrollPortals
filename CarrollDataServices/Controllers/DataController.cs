@@ -234,7 +234,40 @@ namespace Carroll.Data.Services.Controllers
 
             return _service.GetEmployeeLeaseRider(new Guid(riderid));
         }
-        
+
+
+        [ActionName("InsertEmployeeNewHireNotice")]
+        [HttpPost]
+        public dynamic InsertEmployeeNewHireNotice()
+        {
+            EmployeeNewHireNotice fa = new EmployeeNewHireNotice();
+            fa.StartDate =Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["startdate"]));
+            fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
+            fa.EmployeeSocialSecuirtyNumber = HttpContext.Current.Request.Params["securitynumber"].ToString();
+            fa.EmailAddress =HttpContext.Current.Request.Params["email"].ToString();
+            fa.Manager = HttpContext.Current.Request.Params["manager"].ToString();
+            fa.Location = HttpContext.Current.Request.Params["location"].ToString();           
+            fa.EmployeeHireNoticeId = System.Guid.NewGuid();
+            fa.Position = HttpContext.Current.Request.Params["position"].ToString();
+            fa.Position_Exempt = HttpContext.Current.Request.Params["exempt"].ToString();
+            fa.Position_NonExempt = HttpContext.Current.Request.Params["nonexempt"].ToString();
+            fa.Status = HttpContext.Current.Request.Params["status"].ToString();
+            fa.Wage_Salary = HttpContext.Current.Request.Params["salary"].ToString();
+            fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();         
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedDateTime = DateTime.Now;
+
+            return _service.InsertEmployeeNewHireNotice(fa);
+        }
+
+        [ActionName("GetEmployeeNewHireNotice")]
+        [HttpGet]
+        public dynamic GetEmployeeNewHireNotice(string riderid)
+        {
+
+            return _service.GetEmployeeNewHireNotice(new Guid(riderid));
+        }
+
         #endregion 
 
 

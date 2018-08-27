@@ -26,7 +26,6 @@
     margin-right: 0.5cm;
     margin-bottom: 0.5cm;
 }
-
 @media print {
     .page {
         page-break-after: always;

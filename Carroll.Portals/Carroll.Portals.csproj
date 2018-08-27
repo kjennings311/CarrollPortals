@@ -380,6 +380,8 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="img\newhirebackground.jpg" />
+    <Content Include="img\newhirenotice.png" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltoimage.exe" />
@@ -832,6 +834,9 @@
     <Content Include="Views\Home\ViewClaim - Copy.cshtml" />
     <Content Include="Views\Hr\EmployeeLeaseRider.cshtml" />
     <Content Include="Views\Hr\PrintEmployeeLeaseRider.cshtml" />
+    <Content Include="Views\Hr\EmployeeNewHireNotice.cshtml" />
+    <Content Include="Views\Hr\EmployeeNewHireNotice - Copy.cshtml" />
+    <Content Include="Views\Hr\PrintEmployeeNewHireNotice.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

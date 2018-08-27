@@ -26,6 +26,8 @@ namespace Carroll.Data.Entities.Repository
         dynamic InsertAttachment(FormAttachment formAttachment);
         dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment);
         dynamic GetEmployeeLeaseRider(Guid riderid);
+        dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment);
+        dynamic GetEmployeeNewHireNotice(Guid riderid);
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");

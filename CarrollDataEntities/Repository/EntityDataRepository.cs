@@ -997,6 +997,48 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+        public dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    EmployeeNewHireNotice _property = formAttachment;
+
+                    // No record exists create a new property record here
+                    _entities.EmployeeNewHireNotices.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.EmployeeHireNoticeId };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+        public dynamic GetEmployeeNewHireNotice(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.EmployeeNewHireNotices
+                               where tbl.EmployeeHireNoticeId == riderid
+                               select tbl).FirstOrDefault();
+
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
         #endregion
 
 

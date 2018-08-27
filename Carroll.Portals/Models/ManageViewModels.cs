@@ -105,4 +105,27 @@ namespace Carroll.Portals.Models
 
 
     }
+
+    public class PrintEmployeeNewHireNotice
+    {
+        public System.Guid EmployeeHireNoticeId { get; set; }
+        public string EmployeeName { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public string EmployeeSocialSecuirtyNumber { get; set; }
+        public string EmailAddress { get; set; }
+        public string Manager { get; set; }
+        public string Location { get; set; }
+        public string Position_Exempt { get; set; }
+        public string Position_NonExempt { get; set; }
+        public string Position { get; set; }
+        public string Status { get; set; }
+        public string Wage_Salary { get; set; }
+        public string Allocation { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<System.Guid> ModifiedUser { get; set; }
+        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+
+
+    }
 }

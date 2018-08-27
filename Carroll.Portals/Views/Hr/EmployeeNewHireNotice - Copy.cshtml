@@ -1,0 +1,424 @@
+﻿
+@{
+    ViewBag.Title = "Employee New Hire Notice";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2> Employee New Hire Notice </h2>
+
+        <ol class="breadcrumb">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li class="active">
+                <strong> Employee New Hire Notice </strong>
+            </li>
+        </ol>
+    </div>
+    
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+                <form id="submitform" onsubmit="return false;">
+
+
+                    <div style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;border-style:outset;overflow:hidden">
+                        <div style="position:absolute;left:0px;top:0px">
+                            <img src="~/img/newhirebackground.jpg" width=612 height=792>
+                        </div>
+                        <div style="position:absolute;left:252.96px;top:138.13px" class="cls_006"><span class="cls_006">NEW HIRE NOTICE</span></div>
+                        <div style="position:absolute;left:90.00px;top:180.85px" class="cls_008"><span class="cls_008">Employee Name:_______________________________Start Date:________________________</span></div>
+                        <div style="position:absolute;left:90.00px;top:201.01px" class="cls_008"><span class="cls_008">Employee Social Security Number:__________________________________________________</span></div>
+                        <div style="position:absolute;left:90.00px;top:227.89px" class="cls_008"><span class="cls_008">Email Address: _________________________________________________________________</span></div>
+                        <div style="position:absolute;left:260.28px;top:241.33px" class="cls_009"><span class="cls_009">(do not leave blank)</span></div>
+                        <div style="position:absolute;left:90.00px;top:261.37px" class="cls_008"><span class="cls_008">Manager:______________________________________________________________________</span></div>
+                        <div style="position:absolute;left:90.00px;top:281.53px" class="cls_008"><span class="cls_008">Location:______________________________________________________________________</span></div>
+                        <div style="position:absolute;left:90.00px;top:321.85px" class="cls_008"><span class="cls_008">Position:   Exempt _________</span></div>
+                        <div style="position:absolute;left:305.97px;top:321.85px" class="cls_008"><span class="cls_008">Non-exempt__________</span></div>
+                        <div style="position:absolute;left:90.00px;top:342.01px" class="cls_008"><span class="cls_008">Position_______________________________________________________________________</span></div>
+                        <div style="position:absolute;left:149.16px;top:355.45px" class="cls_009"><span class="cls_009">(please make sure it is an approved Carroll Management Group title)</span></div>
+                        <div style="position:absolute;left:90.00px;top:395.65px" class="cls_008"><span class="cls_008">Status (full-time / part-time) - (please circle)</span></div>
+                        <div style="position:absolute;left:90.00px;top:415.81px" class="cls_008"><span class="cls_008">Wage/Salary______________________________________</span></div>
+                        <div style="position:absolute;left:90.00px;top:435.97px" class="cls_008"><span class="cls_008">Allocation________________________________________</span></div>
+                        <div style="position:absolute;left:90.00px;top:503.77px" class="cls_008"><span class="cls_008">Employee Signature_____________________________________________Date_______________</span></div>
+                        <div style="position:absolute;left:90.00px;top:523.81px" class="cls_008"><span class="cls_008">Manager’s Authorizing Signature __________________________________ Date ______________</span></div>
+                        <div style="position:absolute;left:90.00px;top:543.97px" class="cls_008"><span class="cls_008">RPM Signature_________________________________________________ Date_______________</span></div>
+                        <div style="position:absolute;left:90.00px;top:584.29px" class="cls_014"><span class="cls_014">Manager Responsibilities</span><span class="cls_011">: Complete the New Hire Notice, sign the form, and submit to Human</span></div>
+                        <div style="position:absolute;left:90.00px;top:597.73px" class="cls_011"><span class="cls_011">Resources via email at </span><span class="cls_015">HRNotifications@carrollmg.com</span><span class="cls_011">. This form kicks off the launching on</span></div>
+                        <div style="position:absolute;left:90.00px;top:611.17px" class="cls_011"><span class="cls_011">Onboarding in Paylocity.</span></div>
+                        <div style="position:absolute;left:90.00px;top:741.01px" class="cls_002"><span class="cls_002">Rev. August 2017</span></div>
+                    </div>
+
+                    <br /> <br />
+                    <div id="status"> </div>
+                    <div class="col-md-12" style="text-align:right;">
+
+                        <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  <button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+
+    <style>
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+        span.cls_006 {
+            font-family: "Calibri Bold",serif;
+            font-size: 14.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        div.cls_006 {
+            font-family: "Calibri Bold",serif;
+            font-size: 14.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        span.cls_008 {
+            font-family: "Calibri",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        div.cls_008 {
+            font-family: "Calibri",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        span.cls_009 {
+            font-family: "Calibri Bold",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        div.cls_009 {
+            font-family: "Calibri Bold",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        span.cls_014 {
+            font-family: "Calibri Bold Italic",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: underline
+        }
+
+        div.cls_014 {
+            font-family: "Calibri Bold Italic",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: none
+        }
+
+        span.cls_011 {
+            font-family: "Calibri Bold Italic",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: none
+        }
+
+        div.cls_011 {
+            font-family: "Calibri Bold Italic",serif;
+            font-size: 11.1px;
+            color: rgb(0,0,0);
+            font-weight: bold;
+            font-style: italic;
+            text-decoration: none
+        }
+
+        span.cls_015 {
+            font-family: "Calibri",serif;
+            font-size: 11.1px;
+            color: rgb(5,98,193);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: underline
+        }
+
+        div.cls_015 {
+            font-family: "Calibri",serif;
+            font-size: 11.1px;
+            color: rgb(5,98,193);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        span.cls_002 {
+            font-family: Times,serif;
+            font-size: 12.0px;
+            color: rgb(0,0,0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        div.cls_002 {
+            font-family: Times,serif;
+            font-size: 12.0px;
+            color: rgb(0,0,0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+       
+
+
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function ()
+        {
+            var leaseid = "";
+
+            $("input").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "")
+                {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+            $("input").change
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+                if($("#leasedate").val() == "")
+                {
+                    errormsgsummary += "<li> Please Choose Date </li>";
+                    $("#leasedate").addClass('has-error');
+                    if(control == "")
+                    control = $("#leasedate");
+                }
+
+                if ($("#apartmentname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Community Apartment Name </li>";
+                    $("#apartmentname").addClass('has-error');
+                    if (control == "")
+                        control = $("#apartmentname");
+                }
+
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
+
+
+                if ($("#marketvalue").val() == "") {
+                    errormsgsummary += "<li> Please Enter Market Value of Property </li>";
+                    $("#marketvalue").addClass('has-error');
+                    if (control == "")
+                        control = $("#marketvalue");
+                }
+
+
+                if ($("#monthlyrent").val() == "") {
+                    errormsgsummary += "<li> Please Enter Monthly Rent </li>";
+                    $("#monthlyrent").addClass('has-error');
+                    if (control == "")
+                        control = $("#monthlyrent");
+                }
+
+
+                if ($("#residency").val() == "") {
+                    errormsgsummary += "<li> Please Enter Residency Place  </li>";
+                    $("#residency").addClass('has-error');
+                    if (control == "")
+                        control = $("#residency");
+                }
+
+
+                if (errormsgsummary != "") {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+
+
+                    var insertForm = new FormData();
+                    insertForm.append('date', $("#leasedate").val());
+                    insertForm.append('community', $("#apartmentname").val());
+                    insertForm.append('empname', $("#empname").val());
+                    insertForm.append('marketvalue', $("#marketvalue").val());
+                    insertForm.append('emprent', $("#monthlyrent").val());
+                    insertForm.append('residence', $("#monthlyrent").val());
+                    insertForm.append('position', $("#position").val());
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertEmployeeLeaseRider",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data)
+                        {
+                            // To-do code if ajax request is successful
+
+                            if (data['error'] == false)
+                            {
+                                leaseid = data['insertedId'];
+
+                                $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
+
+                                //    $("#submitform").trigger('reset');
+                                //$("#submitform input") .each(function () {
+                                //    this.reset();
+                                //});
+
+                                setTimeout(function () {
+
+                                    $("#print").attr('disabled', false);
+                                    $("#pdf").attr('disabled', false);
+                                    $("#Submit").attr('disabled', true);
+                                }, 1000);
+                            }
+                            else
+                            {
+                                $("#status").html('');
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
+                    });
+
+                }
+
+
+            });
+
+            $("#print").click(function (e) {
+                e.preventDefault();
+                if (leaseid != "") {
+
+                    var printWindow = window.open("/Hr/PrintEmployeeLeaseRider/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    printWindow.addEventListener('load', function () {
+                        setTimeout(function () {
+                            printWindow.print();
+                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                        }, 1000);
+                    }, true);
+                }
+            });
+
+
+            $("#pdf").click(function (e) {
+                e.preventDefault();
+                if (leaseid != "")
+                {
+                    var printWindow = window.open("/Hr/PdfEmployeeLeaseRider/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    printWindow.addEventListener('load', function () {
+                        setTimeout(function () {
+                            //printWindow.close();
+                        }, 1000);
+                    }, true);
+
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}

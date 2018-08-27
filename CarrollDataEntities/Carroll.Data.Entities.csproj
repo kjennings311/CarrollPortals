@@ -77,6 +77,9 @@
     <Compile Include="EmployeeLeaseRaider.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeNewHireNotice.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EquityPartner.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
