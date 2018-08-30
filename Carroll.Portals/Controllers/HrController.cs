@@ -17,10 +17,16 @@ namespace Carroll.Portals.Controllers
     [BaseModel]
     public class HrController : Controller
     {
+        string Baseurl = "";
+
+        public HrController()
+        {
+            Baseurl = "http://localhost:1002/";
+        }
         // GET: Hr
         public async Task<ActionResult> PrintEmployeeLeaseRider(string id)
         {
-            string Baseurl = "http://localhost:1002/";
+            
 
             dynamic obj = new { };
          
@@ -56,8 +62,7 @@ namespace Carroll.Portals.Controllers
 
         public async Task<ActionResult> PdfEmployeeLeaseRider(string id)
         {
-            string Baseurl = "http://localhost:1002/";
-
+          
             dynamic obj = new { };
 
             using (var client = new HttpClient())
@@ -100,9 +105,10 @@ namespace Carroll.Portals.Controllers
         {
             return View(new BaseViewModel());
         }
+
         public async Task<ActionResult> PrintEmployeeNewHireNotice(string id)
         {
-            string Baseurl = "http://localhost:1002/";
+           
 
             dynamic obj = new { };
 
@@ -131,14 +137,14 @@ namespace Carroll.Portals.Controllers
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return View(obj);
+                return View("PrintEmployeeNewHireNotice", obj);
             }
 
         }
-
+        
         public async Task<ActionResult> PdfEmployeeNewHireNotice(string id)
         {
-            string Baseurl = "http://localhost:1002/";
+          
 
             dynamic obj = new { };
 
@@ -176,6 +182,173 @@ namespace Carroll.Portals.Controllers
             }
 
         }
+
+
+        public ActionResult PayRollStatusChange()
+        {
+            return View(new BaseViewModel());
+        }
+
+        public async Task<ActionResult> PrintPayRollStatusChange(string id)
+        {
+
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChange?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintPayRollStatusChange>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                return View("PrintPayRollStatusChange", obj);
+            }
+
+        }
+
+        public async Task<ActionResult> PdfPayRollStatusChange(string id)
+        {
+
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChange?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintPayRollStatusChange>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                //      return View(obj);
+
+
+                //returning the employee list to view  
+                return new ViewAsPdf("PrintPayRollStatusChange", obj) { FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
+
+            }
+
+        }
+
+
+        public ActionResult NoticeOfEmployeeSeparation()
+        {
+            return View(new BaseViewModel());
+        }
+
+        public async Task<ActionResult> PrintNoticeOfEmployeeSeparation(string id)
+        {
+
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeparation?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintNoticeOfEmployeeSeparation>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                return View("NoticeOfEmployeeSeparation", obj);
+            }
+
+        }
+
+        public async Task<ActionResult> PdfNoticeOfEmployeeSeparation(string id)
+        {
+
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeparation?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintNoticeOfEmployeeSeparation>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                //      return View(obj);
+
+
+                //returning the employee list to view  
+                return new ViewAsPdf("NoticeOfEmployeeSeparation", obj) { FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
+
+            }
+
+        }
+
 
     }
 }

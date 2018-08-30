@@ -101,6 +101,12 @@
     </Compile>
     <Compile Include="Helpers\EFConnectionAccessor.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="NoticeOfEmployeeSeperation.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollStatusChangeNotice.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetGeneralLiabilityClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

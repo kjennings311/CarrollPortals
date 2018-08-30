@@ -837,6 +837,11 @@
     <Content Include="Views\Hr\EmployeeNewHireNotice.cshtml" />
     <Content Include="Views\Hr\EmployeeNewHireNotice - Copy.cshtml" />
     <Content Include="Views\Hr\PrintEmployeeNewHireNotice.cshtml" />
+    <Content Include="Views\Hr\PrintNewHireNotice.cshtml" />
+    <Content Include="Views\Hr\PayRollStatusChange.cshtml" />
+    <Content Include="Views\Hr\NoticeOfEmployeeSeparation.cshtml" />
+    <Content Include="Views\Hr\PdfPayRollStatusChange.cshtml" />
+    <Content Include="Views\Hr\PrintPayRollStatusChange.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

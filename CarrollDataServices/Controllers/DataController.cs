@@ -264,10 +264,95 @@ namespace Carroll.Data.Services.Controllers
         [HttpGet]
         public dynamic GetEmployeeNewHireNotice(string riderid)
         {
-
             return _service.GetEmployeeNewHireNotice(new Guid(riderid));
         }
 
+
+        [ActionName("InsertPayRollStatusChangeNotice")]
+        [HttpPost]
+        public dynamic InsertPayRollStatusChangeNotice()
+        {
+            PayrollStatusChangeNotice fa = new PayrollStatusChangeNotice();
+            fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
+            fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
+            fa.Manager = HttpContext.Current.Request.Params["manager"].ToString();
+            fa.TodayDate =Convert.ToDateTime(HttpContext.Current.Request.Params["todaydate"].ToString());
+            fa.Wage_Salary = HttpContext.Current.Request.Params["salary"].ToString();
+            fa.Client_Location = HttpContext.Current.Request.Params["location"].ToString();
+            fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
+            fa.Position = HttpContext.Current.Request.Params["position"].ToString();
+            fa.NewHire = Convert.ToBoolean(HttpContext.Current.Request.Params["newhire"].ToString());
+            fa.ReHire = Convert.ToBoolean(HttpContext.Current.Request.Params["rehire"].ToString());
+            fa.Transfer = Convert.ToBoolean(HttpContext.Current.Request.Params["transfer"].ToString());
+            fa.SsHash = HttpContext.Current.Request.Params["ss"].ToString();
+            fa.DOB = Convert.ToDateTime(HttpContext.Current.Request.Params["dob"].ToString());
+            fa.Exempt = HttpContext.Current.Request.Params["exempt"].ToString();
+            fa.NonExempt = HttpContext.Current.Request.Params["nonexempt"].ToString();
+            fa.StreetAddress = HttpContext.Current.Request.Params["streetaddress"].ToString();
+            fa.City_State_Zip = HttpContext.Current.Request.Params["city_state_zip"].ToString();
+            fa.Phone = HttpContext.Current.Request.Params["phone"].ToString();
+            fa.Status_FullTime_PartTime = HttpContext.Current.Request.Params["status"].ToString();
+            fa.Change_Pay_Rate_From = Convert.ToDouble(HttpContext.Current.Request.Params["payratefrom"].ToString());
+            fa.Change_Pay_Rate_To = Convert.ToDouble(HttpContext.Current.Request.Params["payrateto"].ToString());
+            fa.Change_Property_From = HttpContext.Current.Request.Params["propertyfrom"].ToString();
+            fa.Change_Property_To = HttpContext.Current.Request.Params["propertyto"].ToString();
+            fa.Address_ContactInfo = HttpContext.Current.Request.Params["address_contactinfo"].ToString();
+            fa.Date_Of_Suspence = HttpContext.Current.Request.Params["dateofsuspence"].ToString();
+            fa.Suspence_Paid = Convert.ToDouble(HttpContext.Current.Request.Params["suspence_paid"].ToString());
+            fa.Suspence_UnPaid = Convert.ToDouble(HttpContext.Current.Request.Params["suspence_unpaid"].ToString());
+            fa.Leave_Absence = HttpContext.Current.Request.Params["leaveabsence"].ToString();
+            fa.Leave_Paid = Convert.ToDouble(HttpContext.Current.Request.Params["leave_paid"].ToString());
+            fa.Leave_UnPaid = Convert.ToDouble(HttpContext.Current.Request.Params["leave_unpaid"].ToString());
+            fa.Explanation = HttpContext.Current.Request.Params["explanation"].ToString();
+            fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedDateTime = DateTime.Now;
+
+            return _service.InsertPayRollStatusChangeNotice(fa);
+        }
+
+        [ActionName("GetEmployeeNewHireNotice")]
+        [HttpGet]
+        public dynamic GetPayRollStatusChangeNotice(string riderid)
+        {
+
+            return _service.GetPayRollStatusChangeNotice(new Guid(riderid));
+        }
+
+        [ActionName("InsertNoticeOfEmployeeSeperation")]
+        [HttpPost]
+        public dynamic InsertNoticeOfEmployeeSeperation()
+        {
+            NoticeOfEmployeeSeperation fa = new NoticeOfEmployeeSeperation();
+            fa.EffectiveDateOfChange = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["datechange"]));
+            fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
+            fa.EligibleForReHire = Convert.ToBoolean(HttpContext.Current.Request.Params["rehire"].ToString());
+            fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
+            fa.PropertyNumber = HttpContext.Current.Request.Params["propertynumber"].ToString();
+            fa.JobTitle = HttpContext.Current.Request.Params["jobtitile"].ToString();
+            fa.EmployeeSeperationId = System.Guid.NewGuid();
+            fa.Policty_Voilated = HttpContext.Current.Request.Params["policty"].ToString();
+            fa.AdditionalRemarks = HttpContext.Current.Request.Params["remarks"].ToString();
+            fa.DocumentationAvailable = HttpContext.Current.Request.Params["documentaiton"].ToString();
+            fa.WarningGiven_Dates = HttpContext.Current.Request.Params["warningdates"].ToString();
+            fa.EquipmentKeysReturned =Convert.ToBoolean( HttpContext.Current.Request.Params["keysreturned"].ToString());
+            fa.C2WeeeksNoticeGiven= Convert.ToBoolean(HttpContext.Current.Request.Params["noticegives"].ToString());
+            fa.VacationPaidOut =Convert.ToBoolean( HttpContext.Current.Request.Params["vacationpaidout"].ToString());
+            fa.VacationBalance = Convert.ToDouble(HttpContext.Current.Request.Params["balance"].ToString());
+            fa.Notes_Comments = HttpContext.Current.Request.Params["comments"].ToString();
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedDateTime = DateTime.Now;
+            return _service.InsertNoticeOfEmployeeSeperation(fa);
+        }
+
+        [ActionName("GetNoticeOfEmployeeSeperation")]
+        [HttpGet]
+        public dynamic GetNoticeOfEmployeeSeperation(string riderid)
+        {
+
+            return _service.GetNoticeOfEmployeeSeperation(new Guid(riderid));
+        }
+        
         #endregion 
 
 

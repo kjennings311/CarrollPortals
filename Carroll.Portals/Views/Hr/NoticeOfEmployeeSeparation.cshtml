@@ -1,0 +1,796 @@
+﻿@{
+    ViewBag.Title = "PayRoll Status Change Notice";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <ol class="breadcrumb" style="padding: 8px 15px;">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li class="active">
+                <strong> Notice Of Employee Separation </strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content" style="margin-left:20%; padding-top:0px;">
+                <form id="submitform" onsubmit="return false;">
+                    <p class="c1 c8" style="margin-left:90px;">
+                        <span class="c7">
+                            <img src="~/img/newhirenotice.png">
+                        </span>
+                    </p>
+                    <DIV id="page_1">
+                       
+                        <DIV class="dclr"></DIV>
+                        <P class="p0 ft0">Notice of Employee Separation</P>
+                        <P class="p1 ft1">Effective Date of Change______________________________ Eligible for Rehire ______YES _______NO</P>
+                        <P class="p1 ft1">Property Name______________________________________ Property Number _____________________</P>
+                        <P class="p2 ft1">Employee Name_____________________________________ Job Title____________________________</P>
+                        <P class="p3 ft2">Reason Code from below (Circle all that apply)</P>
+                        <TABLE cellpadding=0 cellspacing=0 class="t0">
+                            <TR>
+                                <TD class="tr0 td0"><P class="p4 ft3">Discharged</P></TD>
+                                <TD class="tr0 td1"><P class="p5 ft3">Quit</P></TD>
+                                <TD class="tr0 td2"><P class="p6 ft3">Lack of Work</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr1 td3"><P class="p7 ft4">Refused Instructions</P></TD>
+                                <TD class="tr1 td4"><P class="p8 ft4">Domestic Obligations</P></TD>
+                                <TD class="tr1 td5"><P class="p9 ft4">No Light Duty Available</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Falsified Applications</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">For Other Work</P></TD>
+                                <TD class="tr2 td5"><P class="p9 ft4">Location Closed</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Neglect of Duty</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Without Notice</P></TD>
+                                <TD class="tr2 td5"><P class="p9 ft4">Job Eliminated</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Misconduct</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Job Dissatisfaction</P></TD>
+                                <TD class="tr2 td5"><P class="p9 ft4">End of Temporary Assignment</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Violated Company Policy**</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Personal Reasons</P></TD>
+                                <TD class="tr2 td5"><P class="p9 ft4">End of Seasonal Work</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Unexcused Absenteeism</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Moved</P></TD>
+                                <TD class="tr2 td5"><P class="p9 ft4">Lack of Work</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Unexcused Tardiness</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Other Voluntarily Quit</P></TD>
+                                <TD class="tr2 td5"><P class="p9 ft3">Property Sold / Loss Mgt</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr0 td3"><P class="p7 ft4">Insubordination</P></TD>
+                                <TD class="tr0 td4"><P class="p8 ft4">Refused Recall</P></TD>
+                                <TD class="tr0 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr3 td3"><P class="p10 ft6">&nbsp;</P></TD>
+                                <TD class="tr3 td4"><P class="p8 ft7">Reduced Work</P></TD>
+                                <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr4 td3"><P class="p7 ft4">Work Quality / Quantity</P></TD>
+                                <TD class="tr4 td4"><P class="p8 ft4">Schedule</P></TD>
+                                <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Shortages / Theft</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Voluntary Retirement</P></TD>
+                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Dishonesty</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Not Able / Available</P></TD>
+                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Refused Work</P></TD>
+                                <TD class="tr2 td4"><P class="p8 ft4">Deceased</P></TD>
+                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td3"><P class="p7 ft4">Violation of Drug / Alcohol Policy</P></TD>
+                                <TD class="tr2 td4"><P class="p10 ft5">&nbsp;</P></TD>
+                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr2 td6"><P class="p7 ft3">Failed <NOBR>E-Verify</NOBR></P></TD>
+                                <TD class="tr2 td7"><P class="p10 ft5">&nbsp;</P></TD>
+                                <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
+                            </TR>
+                        </TABLE>
+                        <P class="p11 ft1">**What Policy specifically was violated? ________________________________________________________</P>
+                        <P class="p12 ft1">_______________________________________________________________________________________</P>
+                        <P class="p13 ft1">Additional Remarks ________________________________________________________________________</P>
+                        <P class="p14 ft1">________________________________________________________________________________________</P>
+                        <P class="p15 ft8">(Documentation Available? _________________________________________________________________</P>
+                        <P class="p16 ft1">________________________________________________________________________________________</P>
+                        <P class="p17 ft1">Warnings Given? Dates?) _________________________________________________________________</P>
+                        <P class="p14 ft1">________________________________________________________________________________________</P>
+                        <P class="p18 ft1">Equipment/Keys Returned? ____YES ____NO<SPAN style="padding-left:148px;">2 weeks’ notice given? ___YES ___ NO</SPAN></P>
+                        <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? ___YES ___NO </SPAN>(If yes, please indicate vacation balance: __________________)</P>
+                        <P class="p17 ft1">Immediate Supervisor’s Signature: ______________________________________ Date: ________________</P>
+                        <P class="p13 ft1">Senior Manager’s Signature: __________________________________________ Date: ________________</P>
+                        <P class="p17 ft1">Human Resources Manager’s Signature: _________________________________ Date: ________________</P>
+                        <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: ___________________________________________________________________________</P>
+                        <P class="p14 ft1">_________________________________________________________________________________________</P>
+                        <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
+                        <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
+                    </DIV>
+
+                    <br /> <br />
+                    <div id="status"> </div>
+                    <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+                        <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  <button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles 
+ {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+
+    <style type="text/css">
+
+        #page_1 
+        {
+            position: relative;
+            overflow: hidden;
+            margin: 50px 0px 48px 52px;
+            padding: 0px;
+            border: none;
+            width: 764px;
+        }
+
+       #page_1 #p1dimg1 
+       {
+                position: absolute;
+                top: 0px;
+                left: 8px;
+                z-index: -1;
+                width: 708px;
+                height: 563px;
+       }
+
+       #page_1 #p1dimg1 #p1img1 
+       {
+                    width: 708px;
+                    height: 563px;
+      }
+       
+    .dclr 
+    {
+        clear: both;
+        float: none;
+        height: 1px;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+    }
+
+    .ft0 {
+        font: 19px 'Arial';
+        line-height: 22px;
+    }
+
+        .ft1 {
+            font: 15px 'Arial';
+            line-height: 17px;
+        }
+
+        .ft2 {
+            font: bold 13px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft3 {
+            font: 13px 'Arial';
+            line-height: 15px;
+        }
+
+        .ft4 {
+            font: 12px 'Arial';
+            line-height: 14px;
+        }
+
+        .ft5 {
+            font: 1px 'Arial';
+            line-height: 1px;
+        }
+
+        .ft6 {
+            font: 1px 'Arial';
+            line-height: 13px;
+        }
+
+        .ft7 {
+            font: 12px 'Arial';
+            line-height: 13px;
+        }
+
+        .ft8 {
+            font: 15px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft9 {
+            font: italic 15px 'Arial';
+            line-height: 17px;
+        }
+
+        .ft10 {
+            font: 13px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft11 {
+            font: bold 15px 'Arial';
+            line-height: 18px;
+        }
+
+        .ft12 {
+            font: 9px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft13 {
+            font: 10px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft14 {
+            font: 12px 'Times New Roman';
+            line-height: 13px;
+        }
+
+        .p0 {
+            text-align: left;
+            padding-left: 233px;
+            margin-top: 96px;
+            margin-bottom: 0px;
+        }
+
+        .p1 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 16px;
+            margin-bottom: 0px;
+        }
+
+        .p2 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 17px;
+            margin-bottom: 0px;
+        }
+
+        .p3 {
+            text-align: left;
+            padding-left: 215px;
+            margin-top: 32px;
+            margin-bottom: 0px;
+        }
+
+        .p4 {
+            text-align: left;
+            padding-left: 128px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p5 {
+            text-align: left;
+            padding-left: 63px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p6 {
+            text-align: left;
+            padding-left: 77px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p7 {
+            text-align: left;
+            padding-left: 51px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p8 {
+            text-align: left;
+            padding-left: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p9 {
+            text-align: left;
+            padding-left: 25px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p10 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p11 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        .p12 {
+            text-align: left;
+            padding-left: 9px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p13 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p14 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p15 {
+            text-align: left;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p16 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p17 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 8px;
+            margin-bottom: 0px;
+        }
+
+        .p18 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 17px;
+            margin-bottom: 0px;
+        }
+
+        .p19 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p20 {
+            text-align: left;
+            padding-left: 160px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p21 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 13px;
+            margin-bottom: 0px;
+        }
+
+        .td0 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td1 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td2 {
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .td3 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td4 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td5 {
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .td6 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td7 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td8 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .tr0 {
+            height: 16px;
+        }
+
+        .tr1 {
+            height: 33px;
+        }
+
+        .tr2 {
+            height: 17px;
+        }
+
+        .tr3 {
+            height: 13px;
+        }
+
+        .tr4 {
+            height: 14px;
+        }
+
+        .t0 {
+            width: 708px;
+            margin-left: 8px;
+            margin-top: 15px;
+            font: 12px 'Arial';
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function () {
+            var leaseid = "";
+
+            $("input").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "") {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
+
+                if ($("#startdate").val() == "") {
+                    errormsgsummary += "<li> Please Enter Date </li>";
+                    $("#startdate").addClass('has-error');
+                    if (control == "")
+                        control = $("#startdate");
+                }
+
+                if ($("#securitynumber").val() == "") {
+                    errormsgsummary += "<li> Please Enter Security Number </li>";
+                    $("#securitynumber").addClass('has-error');
+                    if (control == "")
+                        control = $("#securitynumber");
+                }
+
+
+                if ($("#email").val() == "") {
+                    errormsgsummary += "<li> Please Enter Email Address </li>";
+                    $("#email").addClass('has-error');
+                    if (control == "")
+                        control = $("#email");
+                }
+
+
+                if ($("#manager").val() == "") {
+                    errormsgsummary += "<li> Please Enter Manager Name </li>";
+                    $("#manager").addClass('has-error');
+                    if (control == "")
+                        control = $("#manager");
+                }
+
+                if ($("#location").val() == "") {
+                    errormsgsummary += "<li> Please Enter Location </li>";
+                    $("#location").addClass('has-error');
+                    if (control == "")
+                        control = $("#location");
+                }
+
+
+                if ($("#exempt").val() == "") {
+                    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
+                    $("#exempt").addClass('has-error');
+                    if (control == "")
+                        control = $("#exempt");
+                }
+
+                if ($("#nonexempt").val() == "") {
+                    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
+                    $("#nonexempt").addClass('has-error');
+                    if (control == "")
+                        control = $("#nonexempt");
+                }
+
+
+
+                if ($("#position").val() == "") {
+                    errormsgsummary += "<li> Please Enter Position  </li>";
+                    $("#position").addClass('has-error');
+                    if (control == "")
+                        control = $("#position");
+                }
+
+
+
+                if ($("#status1").val() == "") {
+                    errormsgsummary += "<li> Please Choose Status  </li>";
+                    $("#status1").addClass('has-error');
+                    if (control == "")
+                        control = $("#status1");
+                }
+
+
+
+                if ($("#salary").val() == "") {
+                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                    $("#salary").addClass('has-error');
+                    if (control == "")
+                        control = $("#salary");
+                }
+
+
+                if ($("#allocation").val() == "") {
+                    errormsgsummary += "<li> Please Enter Allocation </li>";
+                    $("#allocation").addClass('has-error');
+                    if (control == "")
+                        control = $("#allocation");
+                }
+
+
+                if (errormsgsummary != "") {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else {
+
+                    var insertForm = new FormData();
+                    insertForm.append('empname', $("#empname").val());
+                    insertForm.append('startdate', $("#startdate").val());
+                    insertForm.append('securitynumber', $("#securitynumber").val());
+                    insertForm.append('email', $("#email").val());
+                    insertForm.append('manager', $("#manager").val());
+                    insertForm.append('location', $("#location").val());
+                    insertForm.append('exempt', $("#exempt").val());
+                    insertForm.append('nonexempt', $("#nonexempt").val());
+                    insertForm.append('position', $("#position").val());
+                    insertForm.append('status', $("#status1").val());
+                    insertForm.append('salary', $("#salary").val());
+                    insertForm.append('allocation', $("#allocation").val());
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
+
+                            if (data['error'] == false) {
+                                leaseid = data['insertedId'];
+
+                                $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
+
+                                //    $("#submitform").trigger('reset');
+                                //$("#submitform input") .each(function () {
+                                //    this.reset();
+                                //});
+
+                                setTimeout(function () {
+
+                                    $("#print").attr('disabled', false);
+                                    $("#pdf").attr('disabled', false);
+                                    $("#Submit").attr('disabled', true);
+                                }, 1000);
+                            }
+                            else {
+                                $("#status").html('');
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
+                    });
+
+                }
+
+
+            });
+
+            $("#print").click(function (e) {
+                e.preventDefault();
+                if (leaseid != "") {
+
+                    var printWindow = window.open("/Hr/PrintEmployeeNewHireNotice/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    printWindow.addEventListener('load', function () {
+                        setTimeout(function () {
+                            printWindow.print();
+                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                        }, 1000);
+                    }, true);
+                }
+            });
+
+
+            $("#pdf").click(function (e) {
+                e.preventDefault();
+                if (leaseid != "") {
+                    var printWindow = window.open("/Hr/PdfEmployeeNewHireNotice/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    printWindow.addEventListener('load', function () {
+                        setTimeout(function () {
+                            printWindow.close();
+                        }, 2000);
+                    }, true);
+
+                }
+
+            });
+
+
+        });
+
+    </script>
+
+}

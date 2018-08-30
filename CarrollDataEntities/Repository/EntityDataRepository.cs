@@ -1039,6 +1039,93 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+
+        public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    PayrollStatusChangeNotice _property = formAttachment;
+
+                    // No record exists create a new property record here
+                    _entities.PayrollStatusChangeNotices.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.PayrollStatusChangeNoticeId };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+        public dynamic GetPayRollStatusChangeNotice(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.PayrollStatusChangeNotices
+                               where tbl.PayrollStatusChangeNoticeId == riderid
+                               select tbl).FirstOrDefault();
+
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+
+
+        public dynamic InsertNoticeOfEmployeeSeperation(NoticeOfEmployeeSeperation formAttachment)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    NoticeOfEmployeeSeperation _property = formAttachment;
+
+                    // No record exists create a new property record here
+                    _entities.NoticeOfEmployeeSeperations.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.EmployeeSeperationId };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+        public dynamic GetNoticeOfEmployeeSeperation(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.NoticeOfEmployeeSeperations
+                               where tbl.EmployeeSeperationId == riderid
+                               select tbl).FirstOrDefault();
+
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
         #endregion
 
 
