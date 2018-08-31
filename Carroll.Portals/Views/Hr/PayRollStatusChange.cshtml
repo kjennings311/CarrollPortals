@@ -39,20 +39,20 @@
                     <p class="c0"><span class="c1">Manager:<input type="text" id="manager" style="width:55.5%; margin-right:5%" />  Today&rsquo;s Date:<input  type="date" id="todaydate" /> </span></p>
                     <p class="c0"><span class="c1">Client/Location:<input type="text" id="location" style="width:82%;" /> </span></p>
                     <p class="c0"><span class="c7 c8"> Check the boxes that apply and provide the explanation below: </span></p>
-                    <p class="c0"><span class="c1">  <input type="checkbox" id="newhire" class="bs-checkbox" />  New Hire  <input type="checkbox" class="bs-checkbox" id="rehire" />  ReHire <input type="checkbox" id="trasfer" class="bs-checkbox" />  Transfer Position<input type="text" style="width:25%" id="exempt" />  Exempt <input type="text" style="width:26.5%" id="nonexempt" />  Non-exempt </span></p>
+                    <p class="c0"><span class="c1">  <input type="checkbox" id="newhire" class="bs-checkbox" />  New Hire  <input type="checkbox" class="bs-checkbox" id="rehire" />  ReHire <input type="checkbox" id="transfer" class="bs-checkbox" />  Transfer Position<input type="text" style="width:25%" id="exempt" />  Exempt <input type="text" style="width:26.5%" id="nonexempt" />  Non-exempt </span></p>
                     <p class="c0"><span class="c1">Position<input style="width:87%;" type="text" id="position" /> </span></p>
                     <p class="c0"><span class="c1">SS#<input type="text" style="width:42%" id="sshash" /> DOB : <input type="date" id="dob" />  Status (full-time / part-time)<select id="status1"> <option value="Full Time"> Full Time </option><option value="Part Time"> Part Time </option> </select></span></p>
                     <p class="c0"><span class="c1">Wage/Salary<input type="text" style="width:40%" id="salary" /> Allocation<input type="text" style="width:37%" id="allocation" /> </span></p>
                     <p class="c0"><span class="c1">Street Address <input type="text" style="width:82%" id="streetaddress" /> </span></p>
                     <p class="c0"><span class="c1">City / State / Zip <input type="text" id="city_state_zip" style="width:80.5%" /> </span></p>
                     <p class="c0"><span class="c1">Phone (home, cell, work)<input type="tel" id="phone" style="width:75.5%" /> </span></p>
-                    <p class="c0"><span class="c1">Change of Pay Rate From $<input type="text" id="payratefrom" style="width:30%" />  to $<input style="width:30%" type="text" id="payrateto" /> </span></p>
+                    <p class="c0"><span class="c1">Change of Pay Rate From $<input type="number" id="payratefrom" style="width:30%" />  to $<input style="width:30%" type="number" id="payrateto" /> </span></p>
                     <p class="c0"><span class="c1">Change of Position/Property From<input type="text" id="propertyfrom" style="width:30%" />  To <input  style="width:26%" type="text" id="propertyto" /> </span></p>
                     <p class="c0"><span class="c1">Change of Address, Emergency Contact Information or Updated Employee Info</span></p>
                     <p class="c0"><span class="c1"><input type="text" id="address_emergency1" style="width:91%" /> </span></p>
                     <p class="c0"><span class="c1"><input type="text" id="address_emergency2" style="width:91%" /> </span></p>
                     <p class="c0"><span class="c1">Disciplinary Suspension Date(s) of Suspension <input style="width:21%" type="text" id="suspensiondate" /> <input type="text" id="suspension_paid" />Paid<input type="text" id="suspension_unpaid" /> Unpaid</span></p>
-                    <p class="c0"><span class="c1">Leave of Absence Date(s) of Leave<input type="text" style="width:28%" id="leavedate" /> <input type="text" id="leave_paid" /> Paid <input type="text" id="leave_unpaid" /> Unpaid </span></p>
+                    <p class="c0"><span class="c1">Leave of Absence Date(s) of Leave<input type="text" style="width:28%" id="leavedate" /> <input type="number" id="leave_paid" /> Paid <input type="number" id="leave_unpaid" /> Unpaid </span></p>
                     <p class="c0" style="width:91%"><span class="c1">Explanation: Please include other relevant information below for the record if it was discussed with the employee (proposed increase, date for next performance review, on-call arrangement, benefits or non-standard benefits, special circumstances, etc.) <input type="text" style="width:91%" id="explanation1" /></span></p>
                     <p class="c0"><span class="c1"><input type="text" id="explanation2" style="width:91%" /></span></p>
                     <p class="c0"><span class="c1">Employee Signature ____________________________________________ Date ______________</span></p>
@@ -425,7 +425,6 @@
                 }
 
 
-
                 if ($("#streetaddress").val() == "")
                 {
                     errormsgsummary += "<li> Please Enter Street Address  </li>";
@@ -433,7 +432,6 @@
                     if (control == "")
                         control = $("#streetaddress");
                 }
-
 
 
                 if ($("#city_state_zip").val() == "") {
@@ -461,15 +459,15 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else {
-
+                else
+                {
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
                     insertForm.append('effectivedate', $("#effectivedate").val());
                     insertForm.append('manager', $("#manager").val());
                     insertForm.append('todaydate', $("#todaydate").val());
-                    insertForm.append('manager', $("#manager").val());
+                  
                     insertForm.append('location', $("#location").val());
                     insertForm.append('position', $("#position").val());
                
@@ -503,6 +501,8 @@
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertPayRollStatusChangeNotice",
                         type: 'POST',
@@ -531,7 +531,7 @@
                                 }, 1000);
                             }
                             else {
-                                $("#status").html('');
+                                $("#status").html(data['errorMsg']);
 
                             }
 

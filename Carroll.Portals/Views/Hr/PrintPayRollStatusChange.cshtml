@@ -16,13 +16,13 @@
 
     <style type="text/css">
 
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
         body {
             font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #555555;
             font-size: 13px;
         }
-
-        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
 
         ol {
             margin: 0;
@@ -235,25 +235,25 @@
 
 </head>
 <body class="document">
-    <div class="page" style="padding-left:15%;">
+    <div class="page" >
 
-        <form id="submitform" onsubmit="return false;">
-            <p class="c1 c8" style="margin-left:90px;">
+       
+            <p class="c1 c8" style="margin-left:30%;">
                 <span class="c7">
                     <img src="~/img/newhirenotice.png">
                 </span>
             </p>
             <p class="c0 c5"><span class="c3"></span></p>
-            <p class="c0" style="margin-left: 12%;"><span class="c2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="c2 c7">PAYROLL STATUS CHANGE NOTICE</span></p>
+            <p class="c0" style="margin-left: 5%;"><span class="c2">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="c2 c7">PAYROLL STATUS CHANGE NOTICE</span></p>
 
-            <p class="c0"><span class="c1">Employee Name: <input type="text" id="empname" value="@Model.EmployeeName"  style="width:50%" />  Change effective as of: <input type="date" id="effectivedate" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" />  </span></p>
+            <p class="c0"><span class="c1">Employee Name: <input type="text" id="empname" value="@Model.EmployeeName"  style="width:30%" />  Change effective as of: <input type="text" id="effectivedate" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" />  </span></p>
             <p class="c0"><span class="c4">Manager Responsibilities: Complete the Payroll Status Change Notice, sign the form, and submit to Human Resources for any payroll/status adjustments. PLEASE NOTE pay changes need to have an effective date at the beginning of a pay period unless otherwise noted. Please send completed forms to HRNotifications@carrollmg.com.</span></p>
-            <p class="c0"><span class="c1">Manager:<input type="text" value="@Model.Manager" id="manager" style="width:55.5%; margin-right:5%" />  Today&rsquo;s Date:<input type="date" id="todaydate" value="@Model.TodayDate.Value.ToShortDateString()" /> </span></p>
+            <p class="c0"><span class="c1">Manager:<input type="text" value="@Model.Manager" id="manager" style="width:55.5%; margin-right:5%" />  Today&rsquo;s Date:<input type="text" id="todaydate" value="@Model.TodayDate.Value.ToShortDateString()" /> </span></p>
             <p class="c0"><span class="c1">Client/Location:<input type="text" id="location" style="width:82%;" value="@Model.Client_Location" /> </span></p>
             <p class="c0"><span class="c7 c8"> Check the boxes that apply and provide the explanation below: </span></p>
-            <p class="c0"><span class="c1">  <input type="checkbox" id="newhire" class="bs-checkbox" checked="@Model.NewHire" />  New Hire  <input type="checkbox" checked="@Model.ReHire"  class="bs-checkbox" id="rehire" />  ReHire <input checked="@Model.Transfer"  type="checkbox" id="trasfer" class="bs-checkbox" />  Transfer Position<input type="text" style="width:25%" id="exempt" value="@Model.Exempt" />  Exempt <input type="text" style="width:26.5%" id="nonexempt" value="@Model.NonExempt" />  Non-exempt </span></p>
+            <p class="c0"><span class="c1">  <input type="checkbox" id="newhire" class="bs-checkbox" checked="@Model.NewHire" />  New Hire  <input type="checkbox" checked="@Model.ReHire"  class="bs-checkbox" id="rehire" />  ReHire <input checked="@Model.Transfer"  type="checkbox" id="transfer" class="bs-checkbox" />  Transfer Position<input type="text" style="width:20%" id="exempt" value="@Model.Exempt" />  Exempt <input type="text" style="width:20%" id="nonexempt" value="@Model.NonExempt" />  Non-exempt </span></p>
             <p class="c0"><span class="c1">Position<input style="width:87%;" type="text" id="position" value="@Model.Position" /> </span></p>
-            <p class="c0"><span class="c1">SS#<input type="text" style="width:42%" id="sshash" value="@Model.SsHash" /> DOB : <input type="date" value="@Model.DOB.Value.ToShortDateString()" id="dob" />  Status (full-time / part-time) : @Model.Status_FullTime_PartTime </span></p>
+            <p class="c0"><span class="c1">SS#<input type="text" style="width:42%" id="sshash" value="@Model.SsHash" /> DOB : <input type="text" value="@Model.DOB.Value.ToShortDateString()" id="dob" />  Status : @Model.Status_FullTime_PartTime </span></p>
             <p class="c0"><span class="c1">Wage/Salary<input type="text" style="width:40%" id="salary" value="@Model.Wage_Salary" /> Allocation<input value="@Model.Allocation" type="text" style="width:37%" id="allocation" /> </span></p>
             <p class="c0"><span class="c1">Street Address <input type="text" style="width:82%" id="streetaddress"  value="@Model.StreetAddress"  /> </span></p>
             <p class="c0"><span class="c1">City / State / Zip <input type="text" id="city_state_zip" style="width:80.5%" value="@Model.City_State_Zip"  /> </span></p>
@@ -263,18 +263,15 @@
             <p class="c0"><span class="c1">Change of Address, Emergency Contact Information or Updated Employee Info</span></p>
             <p class="c0"><span class="c1"><input type="text" id="address_emergency1" value="@Model.Address_ContactInfo"  style="width:91%" /> </span></p>
             <p class="c0"><span class="c1"><input type="text" id="address_emergency2" style="width:91%" /> </span></p>
-            <p class="c0"><span class="c1">Disciplinary Suspension Date(s) of Suspension <input style="width:21%" type="text" value="@Model.Date_Of_Suspence"  id="suspensiondate" /> <input type="text" value="@Model.Suspence_Paid"  id="suspension_paid" />Paid<input type="text" value="@Model.Suspence_UnPaid"  id="suspension_unpaid" /> Unpaid</span></p>
-            <p class="c0"><span class="c1">Leave of Absence Date(s) of Leave<input type="text" style="width:28%" id="leavedate" value="@Model.Leave_Absence"  /> <input type="text" id="leave_paid" value="@Model.Leave_Paid"  /> Paid <input type="text" value="@Model.Leave_UnPaid"  id="leave_unpaid" /> Unpaid </span></p>
+            <p class="c0"><span class="c1">Leave of Absence Date(s) of Leave<input type="text" style="width:28%" id="leavedate" value="@Model.Leave_Absence"  /> <input type="text" id="leave_paid" value="@Model.Leave_Paid" style="width:10%"  /> Paid <input type="text" value="@Model.Leave_UnPaid"  id="leave_unpaid" /> Unpaid </span></p>
+            <p class="c0"><span class="c1">Disciplinary Suspension Date(s) of Suspension <input style="width:10%" type="text" value="@Model.Date_Of_Suspence"  id="suspensiondate" /> <input type="text" value="@Model.Suspence_Paid" style="width:15%"  id="suspension_paid" />Paid<input type="text" value="@Model.Suspence_UnPaid"  id="suspension_unpaid" /> Unpaid</span></p>
+            <p class="c0"><span class="c1">Leave of Absence Date(s) of Leave<input type="text" style="width:28%" id="leavedate" value="@Model.Leave_Absence"  /> <input type="text" id="leave_paid" value="@Model.Leave_Paid" style="width:10%"  /> Paid <input type="text" value="@Model.Leave_UnPaid"  id="leave_unpaid" /> Unpaid </span></p>
             <p class="c0" style="width:91%"><span class="c1">Explanation: Please include other relevant information below for the record if it was discussed with the employee (proposed increase, date for next performance review, on-call arrangement, benefits or non-standard benefits, special circumstances, etc.) <input type="text" style="width:91%" id="explanation1" value="@Model.Explanation"  /></span></p>
             <p class="c0"><span class="c1"><input type="text" id="explanation2" style="width:91%" /></span></p>
             <p class="c0"><span class="c1">Employee Signature ____________________________________________ Date ______________</span></p>
             <p class="c0"><span class="c1">Manager&rsquo;s Signature____________________________________________ Date______________</span></p>
             <p class="c0"><span class="c1">Executive or Regional Manager Signature____________________________ Date______________</span></p>
-
-
-        </form>
-
-
+        
 
 
     </div>

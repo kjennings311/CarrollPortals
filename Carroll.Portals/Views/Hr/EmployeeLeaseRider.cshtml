@@ -217,6 +217,7 @@
                 else
                 {
 
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
 
                     var insertForm = new FormData();
                     insertForm.append('date', $("#leasedate").val());
@@ -260,10 +261,8 @@
                             }
                             else
                             {
-                                $("#status").html('');
-
-                            }
-                            
+                                $("#status").html(data['errorMsg']);
+                            }                           
                         
                         },
                         error: function (ts) {

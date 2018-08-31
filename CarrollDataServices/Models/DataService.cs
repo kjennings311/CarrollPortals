@@ -117,7 +117,7 @@ namespace Carroll.Data.Services.Models
 
         public dynamic GetNoticeOfEmployeeSeperation(Guid obj)
         {
-            return _repository.GetEmployeeNewHireNotice(obj);
+            return _repository.GetNoticeOfEmployeeSeperation(obj);
         }
         public dynamic GetUserClaimCount(Guid userid)
         {

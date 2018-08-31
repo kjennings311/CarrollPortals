@@ -206,7 +206,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChange?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChangeNotice?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -242,7 +242,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChange?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChangeNotice?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -260,7 +260,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintPayRollStatusChange", obj) { FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintPayRollStatusChange", obj) { FileName = "PayROll Status Change - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 
@@ -289,7 +289,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeparation?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeperation?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -303,15 +303,14 @@ namespace Carroll.Portals.Controllers
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return View("NoticeOfEmployeeSeparation", obj);
+                return View("PrintNoticeOfEmployeeSeparation", obj);
             }
 
         }
 
         public async Task<ActionResult> PdfNoticeOfEmployeeSeparation(string id)
         {
-
-
+            
             dynamic obj = new { };
 
             using (var client = new HttpClient())
@@ -325,7 +324,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeparation?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeperation?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -343,7 +342,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("NoticeOfEmployeeSeparation", obj) { FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj) { FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 

@@ -496,7 +496,7 @@
                     insertForm.append('allocation', $("#allocation").val());
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
-
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
                         type: 'POST',
@@ -525,7 +525,7 @@
                                 }, 1000);
                             }
                             else {
-                                $("#status").html('');
+                                $("#status").html(data['errorMsg']);
 
                             }
 

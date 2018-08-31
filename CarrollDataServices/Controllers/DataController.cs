@@ -292,17 +292,25 @@ namespace Carroll.Data.Services.Controllers
             fa.City_State_Zip = HttpContext.Current.Request.Params["city_state_zip"].ToString();
             fa.Phone = HttpContext.Current.Request.Params["phone"].ToString();
             fa.Status_FullTime_PartTime = HttpContext.Current.Request.Params["status"].ToString();
+            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["payratefrom"].ToString()))
             fa.Change_Pay_Rate_From = Convert.ToDouble(HttpContext.Current.Request.Params["payratefrom"].ToString());
-            fa.Change_Pay_Rate_To = Convert.ToDouble(HttpContext.Current.Request.Params["payrateto"].ToString());
-            fa.Change_Property_From = HttpContext.Current.Request.Params["propertyfrom"].ToString();
-            fa.Change_Property_To = HttpContext.Current.Request.Params["propertyto"].ToString();
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["payrateto"].ToString()))
+                fa.Change_Pay_Rate_To = Convert.ToDouble(HttpContext.Current.Request.Params["payrateto"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyfrom"].ToString()))
+                fa.Change_Property_From = HttpContext.Current.Request.Params["propertyfrom"].ToString();
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyto"].ToString()))
+                fa.Change_Property_To = HttpContext.Current.Request.Params["propertyto"].ToString();
             fa.Address_ContactInfo = HttpContext.Current.Request.Params["address_contactinfo"].ToString();
             fa.Date_Of_Suspence = HttpContext.Current.Request.Params["dateofsuspence"].ToString();
-            fa.Suspence_Paid = Convert.ToDouble(HttpContext.Current.Request.Params["suspence_paid"].ToString());
-            fa.Suspence_UnPaid = Convert.ToDouble(HttpContext.Current.Request.Params["suspence_unpaid"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["suspence_paid"].ToString()))
+                fa.Suspence_Paid = Convert.ToDouble(HttpContext.Current.Request.Params["suspence_paid"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["suspence_unpaid"].ToString()))
+                fa.Suspence_UnPaid = Convert.ToDouble(HttpContext.Current.Request.Params["suspence_unpaid"].ToString());
             fa.Leave_Absence = HttpContext.Current.Request.Params["leaveabsence"].ToString();
-            fa.Leave_Paid = Convert.ToDouble(HttpContext.Current.Request.Params["leave_paid"].ToString());
-            fa.Leave_UnPaid = Convert.ToDouble(HttpContext.Current.Request.Params["leave_unpaid"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["leave_paid"].ToString()))
+                fa.Leave_Paid = Convert.ToDouble(HttpContext.Current.Request.Params["leave_paid"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["leave_unpaid"].ToString()))
+                fa.Leave_UnPaid = Convert.ToDouble(HttpContext.Current.Request.Params["leave_unpaid"].ToString());
             fa.Explanation = HttpContext.Current.Request.Params["explanation"].ToString();
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
@@ -311,7 +319,7 @@ namespace Carroll.Data.Services.Controllers
             return _service.InsertPayRollStatusChangeNotice(fa);
         }
 
-        [ActionName("GetEmployeeNewHireNotice")]
+        [ActionName("GetPayRollStatusChangeNotice")]
         [HttpGet]
         public dynamic GetPayRollStatusChangeNotice(string riderid)
         {
@@ -338,6 +346,7 @@ namespace Carroll.Data.Services.Controllers
             fa.EquipmentKeysReturned =Convert.ToBoolean( HttpContext.Current.Request.Params["keysreturned"].ToString());
             fa.C2WeeeksNoticeGiven= Convert.ToBoolean(HttpContext.Current.Request.Params["noticegives"].ToString());
             fa.VacationPaidOut =Convert.ToBoolean( HttpContext.Current.Request.Params["vacationpaidout"].ToString());
+            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["balance"].ToString()))
             fa.VacationBalance = Convert.ToDouble(HttpContext.Current.Request.Params["balance"].ToString());
             fa.Notes_Comments = HttpContext.Current.Request.Params["comments"].ToString();
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);

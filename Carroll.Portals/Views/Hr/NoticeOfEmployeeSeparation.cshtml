@@ -23,20 +23,19 @@
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-            <div class="ibox-content" style="margin-left:20%; padding-top:0px;">
+            <div class="ibox-content" style="margin-left:15%; padding-top:0px;">
                 <form id="submitform" onsubmit="return false;">
-                    <p class="c1 c8" style="margin-left:90px;">
+                    <p class="c1 c8" style="margin-left:30%;">
                         <span class="c7">
                             <img src="~/img/newhirenotice.png">
                         </span>
                     </p>
                     <DIV id="page_1">
-                       
                         <DIV class="dclr"></DIV>
-                        <P class="p0 ft0">Notice of Employee Separation</P>
-                        <P class="p1 ft1">Effective Date of Change______________________________ Eligible for Rehire ______YES _______NO</P>
-                        <P class="p1 ft1">Property Name______________________________________ Property Number _____________________</P>
-                        <P class="p2 ft1">Employee Name_____________________________________ Job Title____________________________</P>
+                        <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
+                        <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate"  /> Eligible for Rehire <select id="rehire" ><option value="true" > Yes </option><option value="false"> No </option> </select></p>
+                        <p class="p1 ft1">Property Name <input type="text" id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
+                        <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <input type="text" id="jobtitle" style="width:46%" /></p>
                         <P class="p3 ft2">Reason Code from below (Circle all that apply)</P>
                         <TABLE cellpadding=0 cellspacing=0 class="t0">
                             <TR>
@@ -120,21 +119,21 @@
                                 <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
                             </TR>
                         </TABLE>
-                        <P class="p11 ft1">**What Policy specifically was violated? ________________________________________________________</P>
-                        <P class="p12 ft1">_______________________________________________________________________________________</P>
-                        <P class="p13 ft1">Additional Remarks ________________________________________________________________________</P>
-                        <P class="p14 ft1">________________________________________________________________________________________</P>
-                        <P class="p15 ft8">(Documentation Available? _________________________________________________________________</P>
-                        <P class="p16 ft1">________________________________________________________________________________________</P>
-                        <P class="p17 ft1">Warnings Given? Dates?) _________________________________________________________________</P>
-                        <P class="p14 ft1">________________________________________________________________________________________</P>
-                        <P class="p18 ft1">Equipment/Keys Returned? ____YES ____NO<SPAN style="padding-left:148px;">2 weeks’ notice given? ___YES ___ NO</SPAN></P>
-                        <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? ___YES ___NO </SPAN>(If yes, please indicate vacation balance: __________________)</P>
+                        <P class="p11 ft1">**What Policy specifically was violated? <input type="text" id="polictyvoilated1" style="width:60%" /></P>
+                        <P class="p12 ft1"><input type="text" id="polictyvoilated2" style="width:95%" /></P>
+                        <P class="p13 ft1">Additional Remarks <input type="text" id="remarks1" style="width:78%" /></P>
+                        <P class="p14 ft1"><input type="text" id="remarks2" style="width:96%" /></P>
+                        <P class="p15 ft8">(Documentation Available?<input type="text" id="documentsavailable1" style="width:72%" /></P>
+                        <P class="p16 ft1"><input type="text" id="documentsavailable2" style="width:96%" /></P>
+                        <P class="p17 ft1">Warnings Given? Dates?) <input type="text" id="warningsgiven1" style="width:73%" /></P>
+                        <P class="p14 ft1"><input type="text" id="warningsgiven2" style="width:96%" /></P>
+                        <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned" ><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:148px;">2 weeks’ notice given? <select id="noticegiven" ><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
+                        <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? <select id="vacationpaid" ><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
                         <P class="p17 ft1">Immediate Supervisor’s Signature: ______________________________________ Date: ________________</P>
                         <P class="p13 ft1">Senior Manager’s Signature: __________________________________________ Date: ________________</P>
                         <P class="p17 ft1">Human Resources Manager’s Signature: _________________________________ Date: ________________</P>
-                        <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: ___________________________________________________________________________</P>
-                        <P class="p14 ft1">_________________________________________________________________________________________</P>
+                        <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input type="text" id="notes1" style="width:82%" /></P>
+                        <P class="p14 ft1"><input type="text" id="notes2" style="width:96%; margin-bottom:20px;" /></P>
                         <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
                         <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                     </DIV>
@@ -172,12 +171,26 @@
     @Styles.Render("~/content/plugins/token-inputcss")
 
     <style type="text/css">
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        /*body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 13px;
+        }*/
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
 
         #page_1 
         {
             position: relative;
             overflow: hidden;
-            margin: 50px 0px 48px 52px;
+            /*margin: 50px 0px 48px 52px;*/
             padding: 0px;
             border: none;
             width: 764px;
@@ -287,7 +300,7 @@
         .p0 {
             text-align: left;
             padding-left: 233px;
-            margin-top: 96px;
+            /*margin-top: 96px;*/
             margin-bottom: 0px;
         }
 
@@ -594,6 +607,36 @@
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
+
+                if ($("#effectivedate").val() == "") {
+                    errormsgsummary += "<li> Please Choose Date </li>";
+                    $("#effectivedate").addClass('has-error');
+                    if (control == "")
+                        control = $("#effectivedate");
+                }
+                if ($("#rehire").val() == "") {
+                    errormsgsummary += "<li> Please Choose Eligibile For Rehire </li>";
+                    $("#rehire").addClass('has-error');
+                    if (control == "")
+                        control = $("#rehire");
+                }
+
+              
+                if ($("#propertyname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Property Name </li>";
+                    $("#propertyname").addClass('has-error');
+                    if (control == "")
+                        control = $("#propertyname");
+                }
+
+
+                if ($("#propertynumber").val() == "") {
+                    errormsgsummary += "<li> Please Enter Property Number </li>";
+                    $("#propertynumber").addClass('has-error');
+                    if (control == "")
+                        control = $("#propertynumber");
+                }
+
                 if ($("#empname").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Name </li>";
                     $("#empname").addClass('has-error');
@@ -601,95 +644,24 @@
                         control = $("#empname");
                 }
 
-                if ($("#startdate").val() == "") {
-                    errormsgsummary += "<li> Please Enter Date </li>";
-                    $("#startdate").addClass('has-error');
+
+                if ($("#jobtitle").val() == "") {
+                    errormsgsummary += "<li> Please Enter Job Title Of Employee</li>";
+                    $("#jobtitle").addClass('has-error');
                     if (control == "")
-                        control = $("#startdate");
+                        control = $("#jobtitle");
                 }
 
-                if ($("#securitynumber").val() == "") {
-                    errormsgsummary += "<li> Please Enter Security Number </li>";
-                    $("#securitynumber").addClass('has-error');
+                if (($("#polictyvoilated1").val() + $("#polictyvoilated2").val()) == "") {
+                    errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
+                    $("#polictyvoilated1").addClass('has-error');
                     if (control == "")
-                        control = $("#securitynumber");
+                        control = $("#polictyvoilated1");
                 }
+                
 
-
-                if ($("#email").val() == "") {
-                    errormsgsummary += "<li> Please Enter Email Address </li>";
-                    $("#email").addClass('has-error');
-                    if (control == "")
-                        control = $("#email");
-                }
-
-
-                if ($("#manager").val() == "") {
-                    errormsgsummary += "<li> Please Enter Manager Name </li>";
-                    $("#manager").addClass('has-error');
-                    if (control == "")
-                        control = $("#manager");
-                }
-
-                if ($("#location").val() == "") {
-                    errormsgsummary += "<li> Please Enter Location </li>";
-                    $("#location").addClass('has-error');
-                    if (control == "")
-                        control = $("#location");
-                }
-
-
-                if ($("#exempt").val() == "") {
-                    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
-                    $("#exempt").addClass('has-error');
-                    if (control == "")
-                        control = $("#exempt");
-                }
-
-                if ($("#nonexempt").val() == "") {
-                    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
-                    $("#nonexempt").addClass('has-error');
-                    if (control == "")
-                        control = $("#nonexempt");
-                }
-
-
-
-                if ($("#position").val() == "") {
-                    errormsgsummary += "<li> Please Enter Position  </li>";
-                    $("#position").addClass('has-error');
-                    if (control == "")
-                        control = $("#position");
-                }
-
-
-
-                if ($("#status1").val() == "") {
-                    errormsgsummary += "<li> Please Choose Status  </li>";
-                    $("#status1").addClass('has-error');
-                    if (control == "")
-                        control = $("#status1");
-                }
-
-
-
-                if ($("#salary").val() == "") {
-                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                    $("#salary").addClass('has-error');
-                    if (control == "")
-                        control = $("#salary");
-                }
-
-
-                if ($("#allocation").val() == "") {
-                    errormsgsummary += "<li> Please Enter Allocation </li>";
-                    $("#allocation").addClass('has-error');
-                    if (control == "")
-                        control = $("#allocation");
-                }
-
-
-                if (errormsgsummary != "") {
+                if (errormsgsummary != "")
+                {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -701,22 +673,27 @@
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
-                    insertForm.append('startdate', $("#startdate").val());
-                    insertForm.append('securitynumber', $("#securitynumber").val());
-                    insertForm.append('email', $("#email").val());
-                    insertForm.append('manager', $("#manager").val());
-                    insertForm.append('location', $("#location").val());
-                    insertForm.append('exempt', $("#exempt").val());
-                    insertForm.append('nonexempt', $("#nonexempt").val());
-                    insertForm.append('position', $("#position").val());
-                    insertForm.append('status', $("#status1").val());
-                    insertForm.append('salary', $("#salary").val());
-                    insertForm.append('allocation', $("#allocation").val());
+                    insertForm.append('datechange', $("#effectivedate").val());
+                    insertForm.append('propertyname', $("#propertyname").val());
+                    insertForm.append('rehire', $("#rehire").val());
+                    insertForm.append('propertynumber', $("#propertynumber").val());
+                    insertForm.append('jobtitile', $("#jobtitle").val());
+                    insertForm.append('policty', $("#polictyvoilated1").val() + " " + $("#polictyvoilated2").val());
+                    insertForm.append('remarks', $("#remarks1").val() + " " + $("#remarks2").val());
+                    insertForm.append('documentaiton', $("#documentsavailable1").val() + " " + $("#documentsavailable2").val());
+                    insertForm.append('warningdates', $("#warningsgiven1").val() + " " + $("#warningsgiven2").val());
+                    insertForm.append('keysreturned', $("#keysreturned").val());
+                    insertForm.append('noticegives', $("#noticegiven").val());
+                    insertForm.append('vacationpaidout', $("#vacationpaid").val());
+                    insertForm.append('balance', $("#vacationbalance").val());
+                    insertForm.append('comments', $("#notes1").val() + " " + $("#notes2").val());                  
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+
                     $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
+                        url: $BaseApiUrl + "api/data/InsertNoticeOfEmployeeSeperation",
                         type: 'POST',
                         dataType: "JSON",
                         processData: false,
@@ -725,7 +702,8 @@
                         success: function (data) {
                             // To-do code if ajax request is successful
 
-                            if (data['error'] == false) {
+                            if (data['error'] == false)
+                            {
                                 leaseid = data['insertedId'];
 
                                 $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
@@ -743,7 +721,7 @@
                                 }, 1000);
                             }
                             else {
-                                $("#status").html('');
+                                $("#status").html(data['errorMsg']);
 
                             }
 
@@ -763,7 +741,7 @@
                 e.preventDefault();
                 if (leaseid != "") {
 
-                    var printWindow = window.open("/Hr/PrintEmployeeNewHireNotice/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    var printWindow = window.open("/Hr/PrintNoticeOfEmployeeSeparation/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
                     printWindow.addEventListener('load', function () {
                         setTimeout(function () {
                             printWindow.print();
@@ -777,7 +755,7 @@
             $("#pdf").click(function (e) {
                 e.preventDefault();
                 if (leaseid != "") {
-                    var printWindow = window.open("/Hr/PdfEmployeeNewHireNotice/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+                    var printWindow = window.open("/Hr/PdfNoticeOfEmployeeSeparation/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
                     printWindow.addEventListener('load', function () {
                         setTimeout(function () {
                             printWindow.close();
