@@ -2205,6 +2205,196 @@ function GetAllClaims() {
     );
 }
 
+
+
+function GetAllHRFORMs(formtype) {
+
+    $.when(GetToken()).then(
+        function () {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: $BaseApiUrl + "api/data/GetAllHrForms?FormType=" + formtype,
+                async: false,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
+
+                    var configdata = data;
+
+                    if (formtype == "New Hire Notice")
+                    {
+                        $(".ibox-title").html("<h5> All New Hire Notices </h5>");
+
+                    }
+                    else if (formtype == "EmployeeSeparation")
+                    {
+                        $(".ibox-title").html("<h5> All Notices Of Employee Separation  </h5>");
+
+                    }
+                    else if (formtype == "PayRollChange")
+                    {
+                        $(".ibox-title").html("<h5> All Carroll Payroll Status Change Notices  </h5>");
+                    }
+                    else if (formtype == "LeaseRider")
+                    {
+                        $(".ibox-title").html("<h5> All Employee Lease Rider Forms  </h5>");
+                    }
+
+                    if ($.fn.DataTable.isDataTable('.dtprops')) {
+                        $('.dtprops').DataTable().clear().destroy();
+                    }
+
+                    var columnlist1 = [];
+                    columnlist1.push({
+                        render: function (data, type, row, meta) {
+                            return ''//'<i style="color:#1ab394" class="fa fa-edit"></i>'
+                        }
+                    });
+                    var tablehead = "<tr><th></th>";
+                    for (var i = 0; i < configdata.columns.length; i++) {
+                        tablehead += "<th>" + configdata.columns[i].label + " </th>";
+                        if (configdata.columns[i].type == "0")
+                            columnlist1.push({ data: configdata.columns[i].name, name: configdata.columns[i].name, autoWidth: false });
+
+                        else if (configdata.columns[i].type == "3") {
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, render: function (data, type, row, meta) {
+                                    return '<img src = "' + data + '" width = "50px" height = "50px" > ';
+                                }
+                                , "name": configdata.columns[i].name, "autoWidth": false
+                            });
+                        }
+                        else if (configdata.columns[i].type == "1") {
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, 'render': function (date) {
+                                    if (date == null) return '';
+                                    var date = new Date(date);
+                                    var month = date.getMonth() + 1;
+                                    return month + "/" + date.getDate() + "/" + date.getFullYear();
+                                }
+                            });
+                        }
+                        else if (configdata.columns[i].type == "2") {
+
+                            columnlist1.push({
+                                "data": configdata.columns[i].name, render: function (data, type, row) {
+                                    if (data != null) {
+                                        var result = JSON.parse(data);
+                                        return '<a href="' + configdata.columns[i].href + result["id"] + '">' + result["name"] + '</a>';
+                                    } else return '';
+                                }
+                                , "name": configdata.columns[i].name
+                            });
+
+                        }
+                    }
+
+                    tablehead += "</tr>";
+
+                    $(".dtprops").html("<thead> " + tablehead + "</thead><tbody> </tbody> <tfoot> " + tablehead + "</tfoot>");
+
+
+                    var datatableVariable = $('.dtprops').DataTable({
+                        data: configdata.rows,
+                        processing: true,
+                        scrollY: '80vh',
+                        scrollCollapse: true,
+                        "scrollX": true,
+                        "rowCallback": function (row, data) {
+                            // do anything row wise here      
+
+                            $(row).attr('id', data[configdata.pkName]);
+                            $(row).attr('itemType', configdata.etType);
+                            //var rowdata = JSON.parse(JSON.stringify(data));
+                            //if (rowdata.claimType == "General Liability")
+                            //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "g');");
+                            //else if (rowdata.claimType == "Mold Damage")
+                            //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "m');");
+                            //else if (rowdata.claimType == "PropertyDamage")
+                            //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");
+
+                        },
+                        "order": [[2, 'asc']],
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        select: 'single',     // enable single row selection
+                        responsive: false,     // enable responsiveness
+                        altEditor: false,      // Enable altEditor ****
+                        buttons: [
+                            //    {
+                            //    text: 'Add',
+                            //    name: 'add',     // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+                            //        ToggleAdd();
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row http://kingkode.com/free-datatables-editor-alternative/
+                            //    text: 'Edit',
+                            //    name: 'edit',       // DO NOT change name
+                            //    action: function (e, dt, node, config) {
+
+                            //    }
+                            //},
+                            //{
+                            //    extend: 'selected', // Bind to Selected row
+                            //    text: 'Delete',
+                            //    name: 'delete'      // DO NOT change name
+                            //},
+                            { extend: 'copy' },
+                            { extend: 'csv' },
+                            { extend: 'excel' },
+                            { extend: 'pdf', orientation: 'landscape', pageSize: 'LEGAL' },
+                            {
+                                extend: 'print',
+                                customize: function (win) {
+                                    $(win.document.body).addClass('white-bg');
+                                    $(win.document.body).css('font-size', '10px');
+
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                }
+                            }],
+                        columns: columnlist1
+
+                    });
+
+                }
+            });
+        }
+    );
+}
+
+function LoadHrFormsCount()
+{
+    $.ajax({
+        url: $BaseApiUrl + "api/data/GetHrFormCount",
+        type: 'GET',
+        dataType: "json",
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+        },
+        success: function (data) {
+
+            // To-do code if ajax request is successful
+            $(".leasecount").html(data.leaseCount);
+            $(".payrollcount").html(data.payRollCount);
+            $(".noticecount").html(data.separationCount);
+            $(".hirecount").html(data.hireCount);
+            $(".claimcount").show();
+
+        },
+        error: function (ts) {
+            alert('error' + ts.errorMessage);
+        }
+    });
+
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");

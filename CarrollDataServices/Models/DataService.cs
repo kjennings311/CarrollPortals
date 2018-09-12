@@ -129,6 +129,15 @@ namespace Carroll.Data.Services.Models
             return _repository.InsertAttachment(formAttachment);
         }
 
+      public  dynamic GetAllHrForms(string FormType, string OptionalSeachText)
+        {
+            return _repository.GetAllHrForms(FormType, OptionalSeachText);
+        }
+
+        public dynamic GetHrFormCount()
+        {
+            return _repository.GetHrFormCount();
+        }
         #endregion
     }
 }

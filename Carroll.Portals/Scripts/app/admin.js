@@ -105,7 +105,8 @@ function CreateEditForm()
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: false,
-            statusCode: {
+            statusCode:
+            {
                 200: function (data) {
                     // if we are here it means all good.. 
                     ClearForm($form);

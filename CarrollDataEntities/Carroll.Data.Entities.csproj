@@ -107,6 +107,18 @@
     <Compile Include="PayrollStatusChangeNotice.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_getallemployeeleaseriders_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallemployeenewhirenotice_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallnoticeofemployeeseparation_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallpayrollstatuschange_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetGeneralLiabilityClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

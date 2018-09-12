@@ -97,5 +97,25 @@ namespace Carroll.Data.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getworkflowemails_Result>("proc_getworkflowemails", propidParameter);
         }
+    
+        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
+        }
+    
+        public virtual ObjectResult<proc_getallemployeenewhirenotice_Result> proc_getallemployeenewhirenotice()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice_Result>("proc_getallemployeenewhirenotice");
+        }
+    
+        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
+        }
+    
+        public virtual ObjectResult<proc_getallpayrollstatuschange_Result> proc_getallpayrollstatuschange()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallpayrollstatuschange_Result>("proc_getallpayrollstatuschange");
+        }
     }
 }

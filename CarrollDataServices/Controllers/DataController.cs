@@ -361,8 +361,22 @@ namespace Carroll.Data.Services.Controllers
 
             return _service.GetNoticeOfEmployeeSeperation(new Guid(riderid));
         }
-        
-        #endregion 
+
+        [ActionName("GetAllHrForms")]
+        [HttpGet]
+        public dynamic GetAllHrForms(string FormType, string OptionalSeachText="")
+        {
+            return _service.GetAllHrForms(FormType, OptionalSeachText);
+        }
+
+        [ActionName("GetHrFormCount")]
+        [HttpGet]
+        public dynamic GetHrFormCount()
+        {
+            return _service.GetHrFormCount();
+        }
+
+        #endregion
 
 
 

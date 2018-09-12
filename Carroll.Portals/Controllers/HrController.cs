@@ -23,6 +23,12 @@ namespace Carroll.Portals.Controllers
         {
             Baseurl = "http://localhost:1002/";
         }
+
+        public ActionResult Index()
+        {
+            return View(new BaseViewModel());
+        }
+
         // GET: Hr
         public async Task<ActionResult> PrintEmployeeLeaseRider(string id)
         {
