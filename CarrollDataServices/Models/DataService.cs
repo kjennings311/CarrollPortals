@@ -32,6 +32,11 @@ namespace Carroll.Data.Services.Models
             return _repository.GetAllClaims(userid,propertyid, optionalSeachText);
         }
 
+     public   dynamic GetUserProperty(Guid userid)
+        {
+            return _repository.GetUserProperty(userid);
+        }
+
         #region [Records]
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {

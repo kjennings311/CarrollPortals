@@ -36,6 +36,7 @@ namespace Carroll.Data.Entities.Repository
 
         dynamic InsertNoticeOfEmployeeSeperation(NoticeOfEmployeeSeperation formAttachment);
         dynamic GetNoticeOfEmployeeSeperation(Guid riderid);
+        dynamic GetUserProperty(Guid userid);
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");

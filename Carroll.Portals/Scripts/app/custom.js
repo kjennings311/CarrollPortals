@@ -319,6 +319,28 @@ function BindElements()
     });
 }
 
+
+function LoadUserProperty() {
+    var val = "";
+
+    $.ajax({
+        url: $BaseApiUrl + "api/data/GetUserProperty?userid=" + $("#CreatedBy").val(),
+        type: 'GET',
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        success: function (data) {
+                     $("#UserPropertyAccess").val(""+data);           
+        },
+        error: function (ts) {
+            alert('error' + ts.errorMessage);
+        }
+    });
+
+    return val;
+
+}
+
 function getForm(FormName, RecordId)
 {
     var formUrl = "";
@@ -411,7 +433,22 @@ function getForm(FormName, RecordId)
 
                         $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"]);
                         //Let's Load select options from websevice
-                        LoadOptions($fields[i]["fieldName"],dataurl, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                      
+                        if ($fields[i]["fieldName"] == "PropertyId") {
+                          
+                            if (RecordId == '') {
+                              
+                                LoadOptions($fields[i]["fieldName"], dataurl, $("#UserPropertyAccess").val());
+                            }
+                        }
+                        else
+                        {
+                            //Let's Load select options from websevice
+                            LoadOptions($fields[i]["fieldName"], dataurl, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+
+                        }
+                           
+
                         break;
                     case "Person":
                         var $req = $fields[i]["required"];
@@ -493,6 +530,7 @@ function ToggleAdd(formaname) {
    
 }
 
+
 function LoadForm(formaname) {
     // these controls are in properties.aspx page
 
@@ -501,13 +539,20 @@ function LoadForm(formaname) {
             return false;
         }
     }
+    else {
+        LoadUserProperty();
+    }
+
+  
 
     $('.RowsContatiner').toggle('slow', function ()
     {
         $('.AddEditContainer').toggle('slow', function () {
-            if ($(this).is(":visible")) {
+            if ($(this).is(":visible"))
+            {
                 getForm(formaname, '');
-                if ($(".form-heading").length) {
+                if ($(".form-heading").length)
+                {
                     if (formaname == "FormPropertyDamageClaim")
                         $(".form-heading").html("Add Property Damage Claim");
                     else if (formaname == "FormGeneralLiabilityClaim")
@@ -518,6 +563,8 @@ function LoadForm(formaname) {
                         $(".form-heading").html("");
 
                 }
+
+              
 
             }
         });

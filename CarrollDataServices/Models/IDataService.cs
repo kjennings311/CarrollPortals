@@ -29,6 +29,7 @@ namespace Carroll.Data.Services.Models
         dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice Elr);
         dynamic GetEmployeeNewHireNotice(Guid Elr);
         dynamic GetUserClaimCount(Guid userid);
+        dynamic GetUserProperty(Guid userid);
         dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment);
         dynamic GetPayRollStatusChangeNotice(Guid riderid);
 

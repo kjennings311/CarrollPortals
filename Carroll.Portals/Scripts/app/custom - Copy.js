@@ -409,6 +409,13 @@ function getForm(FormName, RecordId)
                         var dataurl = $fields[i]["dataLoadUrl"];
 
                         $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"]);
+
+                        if ($fields[i]["fieldName"] == "PropertyId") {
+                            if (RecordId == '') {
+                                LoadOptions($fields[i]["fieldName"], dataurl, );
+                            }
+                        }
+                        else
                         //Let's Load select options from websevice
                         LoadOptions($fields[i]["fieldName"],dataurl, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         break;

@@ -651,6 +651,18 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+        public dynamic GetUserProperty(Guid userid)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                var res = (from tbl in _entities.UserInProperties
+                           where tbl.UserId == userid
+                           select tbl.PropertyId).FirstOrDefault();
+
+                return res;
+            }
+        }
+
 
         public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string optionalSeachText)
         {

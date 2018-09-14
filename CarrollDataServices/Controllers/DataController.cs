@@ -108,6 +108,15 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetAllClaims(userid, propertyid, optionalSeachText);
         }
 
+
+        [ActionName("GetUserProperty")]
+        [HttpGet]
+        public dynamic GetUserProperty(Guid userid)
+        {
+            return _service.GetUserProperty(userid);
+        }
+
+
         #region View Claim
 
         [ActionName("GetClaimDetails")]
