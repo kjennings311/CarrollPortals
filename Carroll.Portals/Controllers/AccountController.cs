@@ -44,6 +44,8 @@ namespace Carroll.Portals.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+
         // GET: Account
         public ActionResult CheckLogin(LoginModel Login)
         {
