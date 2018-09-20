@@ -26,11 +26,11 @@ using Carroll.Data.Services.Models.MongoModels;
 namespace Carroll.Data.Services.Controllers
 {
     //  [EnableCors(origins = new[] { "http://localhost", "http://sample.com" })]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+
     //[RoutePrefix("api/Data")]
     // [Authorize]
     // [EnableCors(origins: "http://localhost")]
-
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DataController : ApiController
     {
         private IDataService _service;

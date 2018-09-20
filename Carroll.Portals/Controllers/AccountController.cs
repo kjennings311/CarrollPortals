@@ -31,6 +31,7 @@ namespace Carroll.Portals.Controllers
 
         [AllowAnonymous]
         [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         // GET: Account
         public ActionResult Login()
         {

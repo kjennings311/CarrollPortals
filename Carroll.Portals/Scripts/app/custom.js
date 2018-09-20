@@ -1,7 +1,7 @@
 ﻿
-var $BaseApiUrl = "http://localhost:1002/"; 
+//var $BaseApiUrl = "http://localhost:1002/"; 
 
-// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -68,7 +68,7 @@ function BindElements()
             url: $BaseApiUrl + "api/user/checkifuserexists/",
             data:"id="+$("#UserEmail").val(),
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
             async: false,
             success: function (data) {
 
@@ -101,7 +101,7 @@ function BindElements()
 
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + formUrl,
                 beforeSend: function (xhr)
                 {
@@ -190,7 +190,7 @@ function BindElements()
                         url: $BaseApiUrl + "api/Form/CreateUpdateFormData/" + $('.dynamicForm #savechanges').attr("formname"),
                         data: JSON.stringify($data),
                         contentType: "application/json; charset=utf-8",
-                        dataType: "json",
+                        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                         async: false,
                         statusCode: {
                             200: function (data) {
@@ -285,7 +285,7 @@ function BindElements()
             //                    url: $BaseApiUrl + "api/Property/CUProperty",
             //                    data: JSON.stringify(jsonObject),
             //                    contentType: "application/json; charset=utf-8",
-            //                    dataType: "json",
+            //                    dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
             //                    async: true,                            
             //                    beforeSend: function (xhr) {
             //                        xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -326,7 +326,7 @@ function LoadUserProperty() {
     $.ajax({
         url: $BaseApiUrl + "api/data/GetUserProperty?userid=" + $("#CreatedBy").val(),
         type: 'GET',
-        dataType: "JSON",
+        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
         processData: false,
         contentType: false,
         success: function (data) {
@@ -376,7 +376,7 @@ function getForm(FormName, RecordId)
         
     $.ajax({
         type: "get",
-        dataType: "json",
+        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
         url: $BaseApiUrl + formUrl ,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -624,7 +624,7 @@ function HandleRowClick(obj)
                 //  make ajax call to delete the row and remove the row.
                 $.ajax({
                     type: "post",
-                    dataType: "json",
+                    dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                     url: $BaseApiUrl + "api/data/deleterecord?entitytype=" + ItemType + "&recordid=" + idToDelete,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -685,7 +685,7 @@ function LoadContacts() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=Contact",
                 async: false,
                 beforeSend: function (xhr) {
@@ -788,7 +788,7 @@ function LoadPartners() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=Partner",
                 async: false,
                 beforeSend: function (xhr) {
@@ -919,7 +919,7 @@ function LoadProperties() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=Property",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1172,7 +1172,7 @@ function LoadUsers() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=User",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1275,7 +1275,7 @@ function LoadUserRoles() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=UserInRole",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1373,7 +1373,7 @@ function LoadUserProperties() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=UserInProperty",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1469,7 +1469,7 @@ function LoadFormPropertyDamageClaims() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=FormPropertyDamageClaim",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1579,7 +1579,7 @@ function LoadGeneralLiabilityClaims() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=FormGeneralLiabilityClaim",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1693,7 +1693,7 @@ function LoadMoldDamageClaims() {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecords?entitytype=FormMoldDamageClaim",
                 async: false,
                 beforeSend: function (xhr) {
@@ -1984,7 +1984,7 @@ function ConfigDatatable(Form) {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getrecordswithconfig?entitytype=" + Form,
                 async: false,
                 beforeSend: function (xhr) {
@@ -2119,6 +2119,7 @@ function GetAllClaims() {
             $.ajax({
                 type: "get",
                 dataType: "json",
+                headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/getallclaims?userid=" + $("#CreatedBy").val()+"&propertyid=null",
                 async: false,
                 beforeSend: function (xhr) {
@@ -2260,7 +2261,7 @@ function GetAllHRFORMs(formtype) {
         function () {
             $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/GetAllHrForms?FormType=" + formtype,
                 async: false,
                 beforeSend: function (xhr) {
@@ -2420,7 +2421,7 @@ function LoadHrFormsCount()
     $.ajax({
         url: $BaseApiUrl + "api/data/GetHrFormCount",
         type: 'GET',
-        dataType: "json",
+        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
         async: false,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -2469,7 +2470,7 @@ function LoadClaim()
    
               $.ajax({
                 type: "get",
-                dataType: "json",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + "api/data/GetClaimDetails?claim=" + claim + "&Type=" + Type,
                 async: false,
                 beforeSend: function (xhr) {
@@ -2639,7 +2640,7 @@ function LoadClaim()
                             //**************************************************************
                             $.ajax({
                                 type: "get",
-                                dataType: "json",
+                                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                                 url: $BaseApiUrl + "api/property/GetProperty/" + ClaimData.claim.tbl.propertyId,
                                 async: false,
                                 //beforeSend: function (xhr) {
@@ -2767,7 +2768,7 @@ function LoadClaim()
 
 //    $.ajax({
 //        type: "get",
-//        dataType: "json",
+//        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
 //        url: $BaseApiUrl + "api/data/GetClaimDetails?claim=" + claim + "&Type=" + Type,
 //        async: false,
 //        beforeSend: function (xhr) {
@@ -2978,7 +2979,7 @@ function LoadUserClaims() {
     $.ajax({
         url: $BaseApiUrl + "api/data/GetUserClaimCount?userid="+$("#CreatedBy").val(),
         type: 'GET',
-        dataType: "json",
+        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
         async: false,       
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -3027,7 +3028,7 @@ $(document).ready(function ()
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertComment",
                         type: 'POST',
-                        dataType: "json",                      
+                        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },                      
                         async: false,
                         data: data,
                         beforeSend: function (xhr) {
@@ -3097,7 +3098,7 @@ $(document).ready(function ()
             $.ajax({
                 url: $BaseApiUrl + "api/data/InsertAttachment",
                 type: 'POST',
-                dataType: "JSON",
+                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
                 processData: false,
                 contentType: false,
                 data: insertForm,
