@@ -663,6 +663,20 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+        public dynamic GetEquityPartners()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+
+                var res = (from tbl in _entities.EquityPartners
+                           join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                           select tbl).ToList();
+
+                return res;
+            }
+        }
+
+        
 
         public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string optionalSeachText)
         {

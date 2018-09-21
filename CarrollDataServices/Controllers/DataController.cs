@@ -473,10 +473,11 @@ namespace Carroll.Data.Services.Controllers
         [AllowAnonymous]
         public List<KeyValuePair> GetEquityPartners()
         {
-            var _partners = _service.GetRecords(EntityType.Partner);
+            var _partners = _service.GetEquityPartners();
             List<KeyValuePair> _equityPartners = new List<KeyValuePair>();
             foreach(EquityPartner _partner in _partners)
             {
+              
                 _equityPartners.Add(new KeyValuePair(_partner.EquityPartnerId.ToString(), _partner.PartnerName));
             }
 

@@ -16,7 +16,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetRecord(EntityType entityType,string recordId);
 
         bool DeleteRecord(EntityType entityType,string recordId);
-
+        dynamic GetEquityPartners();
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
         dynamic GetAllClaims(Guid? userid,Guid? propertyid,string OptionalSeachText);

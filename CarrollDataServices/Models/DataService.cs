@@ -41,9 +41,14 @@ namespace Carroll.Data.Services.Models
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {
             return  _repository.GetRecords(entityType,optionalSeachText);
+
         }
+        public  dynamic GetEquityPartners()
+        {
+            return _repository.GetEquityPartners();
 
-
+        }
+      
         public  dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "")
         {
             return _repository.GetRecordsWithConfig(entityType, optionalSeachText);
