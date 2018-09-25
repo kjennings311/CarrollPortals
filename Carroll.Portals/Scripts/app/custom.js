@@ -206,7 +206,7 @@ function BindElements()
                                     ScrollToElement($form.find('.success-message'));
                                     $('.dynamicForm #savechanges').attr('disabled', false);
                                     // go back to previous screen after 8 seconds
-                                    setTimeout(function () { alert("Record successfully updated!"); location.reload(); } , 10000);
+                                    setTimeout(function () { alert("Record successfully updated!"); location.reload(); } , 1000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -350,6 +350,7 @@ function getForm(FormName, RecordId)
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><textarea validationformat="{1}" class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
@@ -393,10 +394,32 @@ function getForm(FormName, RecordId)
                 switch ($fields[i]["fieldType"]) {
                     case "Text":
 
-                        var $req = $fields[i]["required"];            
+                        var $req = $fields[i]["required"];
                         var $datamask = "";
+                        // Format should be 
+                        var datevalue = "";
+
+                        console.log(" Date field Validation Type " + $fields[i]["fieldValidationType"] + " Field Value is " + $fields[i]["fieldValue"]);
+
+                        if ($fields[i]["fieldValidationType"] == "DateTime" && $fields[i]["fieldValue"] != null)
+                        {
+                            var s = $fields[i]["fieldValue"];
+                            
+                            var bits = s.split(/\D/);
+                          //  console.log(bits);
+
+                            var datestring = bits[1]+"/"+bits[0]+"/"+bits[2];
+                           // console.log(datestring);
+                         
+                          //  var datestring = d.getMonth()+"/"+d.getDate() + "/"  + d.getFullYear();
+
+                            $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring);
+                        }
+                        else
+                        {
+                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        }
                        
-                        $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         break;
                     case "LongText":
 
@@ -423,8 +446,12 @@ function getForm(FormName, RecordId)
                       //  var $req = $fields[i]["required"];
                         var checkedtext = "";
                         var checked = ($fields[i]["fieldValue"] == null) ? false : $fields[i]["fieldValue"];
-                        if (checked) checkedtext = "checked=checked";
+                        console.log('field value is' + $fields[i]["fieldValue"] + ' checked value is' + checked);
+
+                        if (checked=="True") checkedtext = "checked=checked";
                         else checkedtext = "";
+                        console.log('checked text ' + checkedtext);
+
                         $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext);
                         break;
                     case "Select":
@@ -448,7 +475,6 @@ function getForm(FormName, RecordId)
 
                         }
                            
-
                         break;
                     case "Person":
                         var $req = $fields[i]["required"];
