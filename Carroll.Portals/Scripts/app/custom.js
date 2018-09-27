@@ -125,8 +125,9 @@ function BindElements()
                                 $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
                                 break;
                             case "Check":
-                                if ($('#' + $fields[i]["fieldName"]).prop('checked'))
+                                if ($('#' + $fields[i]["fieldName"]).prop('checked') == true)
                                 {
+                                    //.is(":checked")
                                     $fields[i]["fieldValue"] = true;
                                    // console.log("check field value" + true);
                                 }
@@ -206,7 +207,7 @@ function BindElements()
                                     ScrollToElement($form.find('.success-message'));
                                     $('.dynamicForm #savechanges').attr('disabled', false);
                                     // go back to previous screen after 8 seconds
-                                    setTimeout(function () { alert("Record successfully updated!"); location.reload(); } , 1000);
+                                   setTimeout(function () { alert("Record successfully updated!"); location.reload(); } , 1000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -396,10 +397,7 @@ function getForm(FormName, RecordId)
 
                         var $req = $fields[i]["required"];
                         var $datamask = "";
-                        // Format should be 
-                        var datevalue = "";
-
-                        console.log(" Date field Validation Type " + $fields[i]["fieldValidationType"] + " Field Value is " + $fields[i]["fieldValue"]);
+                     
 
                         if ($fields[i]["fieldValidationType"] == "DateTime" && $fields[i]["fieldValue"] != null)
                         {
@@ -446,11 +444,11 @@ function getForm(FormName, RecordId)
                       //  var $req = $fields[i]["required"];
                         var checkedtext = "";
                         var checked = ($fields[i]["fieldValue"] == null) ? false : $fields[i]["fieldValue"];
-                        console.log('field value is' + $fields[i]["fieldValue"] + ' checked value is' + checked);
+                     
 
                         if (checked=="True") checkedtext = "checked=checked";
                         else checkedtext = "";
-                        console.log('checked text ' + checkedtext);
+                     
 
                         $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext);
                         break;
@@ -2521,20 +2519,20 @@ function LoadClaim()
                                 claimbody += '<tr><td style="width:30%;">Incident Description:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDescription) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">Estimate of Damage:</td><td>' + CheckNull(ClaimData.claim.tbl.estimateOfDamage) + '</td></tr>';
 
-                                if (ClaimData.claim.tbl.authoritiesContacted == 'false')
+                                if (ClaimData.claim.tbl.authoritiesContacted == false)
                                     claimbody += '<tr><td style="width:30%;">Authorities Contacted:</td><td>No</td></tr>';
                                 else
                                     claimbody += '<tr><td style="width:30%;">Authorities Contacted:</td><td>Yes</td></tr>'; 
 
 
                                 claimbody += '<tr><td style="width:30%;">Contact Person:</td><td>' + CheckNull(ClaimData.claim.tbl.contactPerson) + '</td></tr>';  
-                                if (ClaimData.claim.tbl.lossOfRevenues == 'false')
+                                if (ClaimData.claim.tbl.lossOfRevenues == false)
                                     claimbody += '<tr><td style="width:30%;"> Loss Of Revenues:</td><td>No</td></tr>';
 
                                 else
                                     claimbody += '<tr><td style="width:30%;"> Loss Of Revenues:</td><td>Yes</td></tr>';   
 
-                                if (ClaimData.claim.tbl.witnessPresent == 'false')
+                                if (ClaimData.claim.tbl.witnessPresent == false)
                                     claimbody += '<tr><td style="width:30%;"> Witness Present:</td><td>No</td></tr>';
                                 else
                                     claimbody += '<tr><td style="width:30%;"> Witness Present:</td><td>Yes</td></tr>';   
@@ -2559,25 +2557,33 @@ function LoadClaim()
                                // $('.claimDesc').html(ClaimData.claim.tbl.description);
                                 claimbody += ' <table class="table table-hover table-responsive table-striped">';
                                 claimbody += '<tr><td style="width:30%;"> Location :</td><td>' + ClaimData.claim.tbl.location + '</td></tr>';                               
-                                claimbody += '<tr><td  style="width:30%;"> Description :</td><td>' + ClaimData.claim.tbl.description + '</td></tr>';                              
-                                if(ClaimData.claim.tbl.areBuildingMaterialsStillWet=='false')
+                                claimbody += '<tr><td  style="width:30%;"> Description :</td><td>' + ClaimData.claim.tbl.description + '</td></tr>';  
+                                console.log('building still wet'+ClaimData.claim.tbl.areBuildingMaterialsStillWet )
+                                if (ClaimData.claim.tbl.areBuildingMaterialsStillWet == false ) {
                                     claimbody += '<tr><td  style="width:30%;">Are Building Materials Still Wet: </td><td> No </td></tr>';
-                                else
+                                    console.log('buidling still wet coiming false')
+                                }
+
+                                else {
                                     claimbody += '<tr><td  style="width:30%;">Are Building Materials Still Wet: </td><td> Yes </td></tr>';
+                                    console.log('building still wet true');
+                                }
+                                   
+
                                 claimbody += '<tr><td  style="width:30%;"> How Much Water Present :</td><td>' + ClaimData.claim.tbl.howMuchWater + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Estimated Time Damage Present: </td><td>' + ClaimData.claim.tbl.estimatedTimeDamagePresent + '</td></tr>';                                  
                                 claimbody += '<tr><td  style="width:30%;"> Planned Actions : </td><td>' + ClaimData.claim.tbl.plannedActions + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Discovery Date : </td><td>' + CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10) + '</td></tr>';                                 
                                 claimbody += '<tr><td  style="width:30%;"> Suspected Cause : </td><td>' + ClaimData.claim.tbl.suspectedCause + '</td></tr>';                                  
-                                if (ClaimData.claim.tbl.isStandingWaterPresent=='false')
+                                if (ClaimData.claim.tbl.isStandingWaterPresent == false)
                                     claimbody += '<tr><td  style="width:30%;"> Is Standing Water Present : </td><td>  No' + '</td></tr>';
                                 else
                                     claimbody += '<tr><td  style="width:30%;"> Is Standing Water Present : </td><td> Yes </td></tr>';
                                 claimbody += '<tr><td  style="width:30%;">Estimated Surface Area Affected : </td><td>' + ClaimData.claim.tbl.estimatedSurfaceAreaAffected + '</td></tr>';                                  
-                                if (ClaimData.claim.tbl.correctiveActionsTaken=='false')
-                                    claimbody += '<tr><td> Corrective Actions Taken : </td><td> No </td></tr>';
-                                else
-                                    claimbody += '<tr><td  style="width:30%;"> Corrective Actions Taken : </td><td> Yes</td></tr>';
+                                //if (ClaimData.claim.tbl.correctiveActionsTaken== false)
+                                //    claimbody += '<tr><td> Corrective Actions Taken : </td><td> No </td></tr>';
+                                //else
+                                claimbody += '<tr><td  style="width:30%;"> Corrective Actions Taken : </td><td> ' + ClaimData.claim.tbl.correctiveActionsTaken+'</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Additional Comments : </td><td>' + ClaimData.claim.tbl.additionalComments + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Reported By : </td><td>' + ClaimData.claim.tbl.reportedBy + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Reported Date : </td><td>' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';
@@ -2597,7 +2603,7 @@ function LoadClaim()
                                 claimbody += '<tr><td style="width:30%;"> Incident Location:</td><td>' + ClaimData.claim.tbl.incidentLocation + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;"> Incident Description:</td><td>' + ClaimData.claim.tbl.incidentDescription + '</td></tr>';  
                                
-                                if (ClaimData.claim.tbl.authoritiesContacted == 'false')
+                                if (ClaimData.claim.tbl.authoritiesContacted == false)
                                     claimbody += '<tr><td>Authorities Contacted: </td><td> No </td></tr>';
                                 else
                                     claimbody += '<tr><td>Authorities Contacted: </td><td> Yes </td></tr>';
@@ -2608,13 +2614,13 @@ function LoadClaim()
                                 claimbody += '<tr><td style="width:30%;"> Claimant Phone1:</td><td>' + ClaimData.claim.tbl.claimantPhone1 + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Claimant Phone2:</td><td>' + ClaimData.claim.tbl.claimantPhone2 + '</td></tr>'; 
                               
-                                if (ClaimData.claim.tbl.anyInjuries == 'false')
+                                if (ClaimData.claim.tbl.anyInjuries == false)
                                     claimbody += '<tr><td> Any Injuries: </td><td> No </td></tr>';
                                 else
                                     claimbody += '<tr><td> Any Injuries: </td><td> Yes </td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Injury Description :</td><td>' + ClaimData.claim.tbl.injuryDescription + '</td></tr>'; 
                                
-                                if (ClaimData.claim.tbl.witnessPresent == 'false')
+                                if (ClaimData.claim.tbl.witnessPresent == false)
                                     claimbody += '<tr><td>Witness Present: </td><td> No </td></tr>';
                                 else
                                     claimbody += '<tr><td>Witness Present: </td><td> Yes </td></tr>';
