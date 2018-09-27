@@ -368,7 +368,7 @@ function getForm(FormName, RecordId)
     var $select = '<div class="form-group">'
         + '<label class="col-sm-2 control-label">{0}</label>'
         + '<div class="col-sm-10">'
-        + '<select data-placeholder="Select option" class="form-control {1}" tabindex="2" id="{2}" >'
+        + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" >'
         + '<option value="">Select</option>'
         + '</select>'
         + '</div>'
@@ -516,6 +516,7 @@ function LoadOptions(fieldId, DataLoadUrl, value)
         }
         // now let's load options into select box
         $('#' + fieldId).append(options);
+        
     });
 }
 
@@ -2634,6 +2635,11 @@ function LoadClaim()
                               
                                 claimbody += '<tr><td style="width:30%;">Reported By:</td><td>' + ClaimData.claim.tbl.reportedBy + '</td></tr>';                                 
                                 claimbody += '<tr><td style="width:30%;">Reported Phone:</td><td>' + ClaimData.claim.tbl.reportedPhone + '</td></tr>'; 
+                                if (ClaimData.claim.tbl.notifySecurityOfficer == true)
+                                    claimbody += '<tr><td style="width:30%;">Notify Security Officer :</td><td> Yes </td></tr>';
+                                else
+                                    claimbody += '<tr><td style="width:30%;">Notify Security Officer :</td><td> No </td></tr>'; 
+
                                 claimbody += '<tr><td style="width:30%;">Date Reported:</td><td>' + (ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';  
 
                                 claimbody += '<tr><td style="width:30%;">Created By:</td><td>' + ClaimData.claim.tbl.createdByName + '</td></tr>'; 
