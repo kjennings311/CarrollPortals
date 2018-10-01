@@ -22,7 +22,7 @@ namespace Carroll.Portals
 
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
-            LoggedInUser.AssignRolesToUser();
+           // LoggedInUser.AssignRolesToUser();
         }
         //protected void Application_PostAuthorizeRequest()
         //{

@@ -57,23 +57,15 @@ namespace Carroll.Portals.Controllers
 
                 if (_userservice.AuthenticateUser(Login.UserName, Login.Password))
                 {
-
                     // is a valid user, create cookie, create session variables
+
+                    // COMMENTING BELOW CODE BECAUSE WE ARE HAVING ISSUE WITH ROLES NOT BEING SET IMMEDIATELY AFTER LOGIN.
                     FormsAuthentication.SetAuthCookie(Login.UserName, true);
-                    LoggedInUser.AssignRolesToUser();
-                    // Get User Credentials
-                    // SiteUser user = _userservice.GetUser(Login.UserName);
 
-                    //string role = _userservice.GetUserRoleName(user.UserId);
+                    //LoggedInUser.AssignRolesToUser();
 
-                    // if (user != null)
-                    // {
-                    //     Session["Carroll_User_Id"] = user.UserId;
-                    //     Session["Carroll_UserName"] = user.FirstName + " " + user.LastName;                    
-                    //    Session["Carroll_RoleName"] = role;
-
-                    // }
-                    return RedirectToAction("Index", "Home");
+                    // return RedirectToAction("Index", "Home");
+                    return Redirect("/validateuser.aspx");
                 }
                 else
                 {
