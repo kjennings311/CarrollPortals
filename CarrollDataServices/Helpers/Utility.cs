@@ -216,6 +216,22 @@ namespace Carroll.Data.Services.Helpers
                             }
                         }
                         break;
+
+                    case FieldValidationTypes.Phone:
+
+                        if (!string.IsNullOrEmpty(_field.FieldValue.Trim()))
+                        {
+                            //if(_field.FieldValue.Trim().Replace("-","").Length < 10 )
+                            //{
+                            //    _validationDictionary.AddError(_field.FieldName, string.Concat(_field.FieldLabel, " needs minimum 10 digits"));
+                            //}
+
+                            if (!Regex.IsMatch(_field.FieldValue.Trim(), @"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}"))
+                            {
+                                _validationDictionary.AddError(_field.FieldName, string.Concat(_field.FieldLabel, " is invalid Phone Number format."));
+                            }
+                        }
+                        break;
                     default:
                         break;
                 }

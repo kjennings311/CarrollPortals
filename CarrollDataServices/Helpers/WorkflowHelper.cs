@@ -369,6 +369,8 @@ namespace Carroll.Data.Services.Helpers
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
                 mail.To.Add("sekhar.babu@forcitude.com");
+                mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
+
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
 
