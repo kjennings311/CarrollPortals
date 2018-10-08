@@ -147,6 +147,7 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="NotifySecurityOfficer" Type="bit" />
+          <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaims">
           <Key>
@@ -172,6 +173,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaims">
           <Key>
@@ -199,6 +201,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="NoticeOfEmployeeSeperation">
           <Key>
@@ -363,6 +366,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <PropertyRef Name="PropertyName" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ClaimType" Type="varchar" MaxLength="17" Nullable="false" />
           <Property Name="PropertyName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -458,6 +462,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="view_getallclaims" EntityType="Self.view_getallclaims" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [view_getallclaims].[Id] AS [Id], 
+    [view_getallclaims].[ClaimNumber] AS [ClaimNumber], 
     [view_getallclaims].[PropertyId] AS [PropertyId], 
     [view_getallclaims].[ClaimType] AS [ClaimType], 
     [view_getallclaims].[PropertyName] AS [PropertyName], 
@@ -515,7 +520,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_GetMoldDamageClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetMoldDamageClaims_Result)" />
           <FunctionImport Name="proc_GetPropertyDamageClaims" ReturnType="Collection(Carroll.Data.Entities.proc_GetPropertyDamageClaims_Result)" />
           <EntitySet Name="view_getallclaims" EntityType="Carroll.Data.Entities.view_getallclaims" />
-          <FunctionImport Name="SP_GetAllClaims" ReturnType="Collection(Carroll.Data.Entities.SP_GetAllClaims_Result)">
+          <FunctionImport Name="SP_GetAllClaims">
             <Parameter Name="userid" Mode="In" Type="Guid" />
             <Parameter Name="propertyid" Mode="In" Type="Guid" />
           </FunctionImport>
@@ -539,6 +544,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getallemployeenewhirenotice" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result)" />
           <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
           <FunctionImport Name="proc_getallpayrollstatuschange" ReturnType="Collection(Carroll.Data.Entities.proc_getallpayrollstatuschange_Result)" />
+          <FunctionImport Name="SP_GetAllClaims1" ReturnType="Collection(Carroll.Data.Entities.SP_GetAllClaims1_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+            <Parameter Name="propertyid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -603,6 +612,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="NotifySecurityOfficer" Type="Boolean" />
+          <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaim">
           <Key>
@@ -628,6 +638,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaim">
           <Key>
@@ -655,6 +666,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -862,24 +874,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ReportedPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="SP_GetAllClaims_Result">
-          <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="Guid" Name="PropertyId" Nullable="false" />
-          <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="17" />
-          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
-          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="31" />
-          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="74" />
-          <Property Type="String" Name="IncidentLocation" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="IncidentDescription" Nullable="true" />
-          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
-          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="17" />
-          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
-          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
-        </ComplexType>
         <EntityType Name="FormAttachment">
           <Key>
             <PropertyRef Name="AttachmentId" />
@@ -1230,6 +1226,24 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="172" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="173" />
         </ComplexType>
+        <ComplexType Name="SP_GetAllClaims1_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="12" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="17" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="31" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="74" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="17" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1274,6 +1288,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormGeneralLiabilityClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormGeneralLiabilityClaim">
               <MappingFragment StoreEntitySet="FormGeneralLiabilityClaims">
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="NotifySecurityOfficer" ColumnName="NotifySecurityOfficer" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
@@ -1306,6 +1321,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormMoldDamageClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormMoldDamageClaim">
               <MappingFragment StoreEntitySet="FormMoldDamageClaims">
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1332,6 +1348,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormPropertyDamageClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormPropertyDamageClaim">
               <MappingFragment StoreEntitySet="FormPropertyDamageClaims">
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -1535,6 +1552,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="view_getallclaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.view_getallclaims">
               <MappingFragment StoreEntitySet="view_getallclaims">
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
@@ -1553,27 +1571,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_GetAllClaims" FunctionName="Carroll.Data.Entities.Store.SP_GetAllClaims">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.SP_GetAllClaims_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
-                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
-                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
-                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
-                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
-                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
-                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="FormAttachments">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormAttachment">
               <MappingFragment StoreEntitySet="FormAttachments">
@@ -1938,6 +1935,28 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetAllClaims1" FunctionName="Carroll.Data.Entities.Store.SP_GetAllClaims">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.SP_GetAllClaims1_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

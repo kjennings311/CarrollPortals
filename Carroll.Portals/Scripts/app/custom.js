@@ -1,7 +1,7 @@
 ﻿
-//var $BaseApiUrl = "http://localhost:1002/"; 
+var $BaseApiUrl = "http://localhost:1002/"; 
 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -3112,14 +3112,23 @@ $(document).ready(function ()
 
     $("#btnUpload").click(function ()
     {
+        
 
         if ($("#logo").val() == "")
         {
             alert("Please Upload an Attachment to Proceed");
             $("#logo").focus();
-        }
+        }      
         else
         {
+            var ext = $('#my_file_field').val().split('.').pop().toLowerCase();
+
+            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv','avi','mov','mpg','wmv','3gp']) == -1)
+            {
+                alert('invalid File Upload!');
+                return;
+            }
+
             $("#btnUpload").attr('disabled', true);
             $("#btnUpload").html('<p style="color:white"> Uploading .... </p>');
             $("#btnUpload").fadeTo(0.28);

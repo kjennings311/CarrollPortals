@@ -688,16 +688,17 @@ namespace Carroll.Data.Entities.Repository
 
                     
                         if (string.IsNullOrEmpty(optionalSeachText))
-                            config.Rows = _entities.SP_GetAllClaims(userid,propertyid).ToList();
+                            config.Rows = _entities.SP_GetAllClaims1(userid,propertyid).ToList();
                         else
-                            config.Rows = _entities.SP_GetAllClaims(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                            config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                         config.EtType = EntityType.AllClaims.ToString();
-                        PropertyInfo[] userprop = typeof(SP_GetAllClaims_Result).GetProperties();
+                        PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
                         config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                         config.Columns = new List<DtableConfigArray>();
+                config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "Claim Number", type = 0, href = "" });
 
-                        config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Claim Type", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Claim Type", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
                        // config.Columns.Add(new DtableConfigArray { name = "propertyNumber", label = "Property Number", type = 0, href = "" });
                        // config.Columns.Add(new DtableConfigArray { name = "propertyManager", label = "Property Manager", type = 0, href = "" });

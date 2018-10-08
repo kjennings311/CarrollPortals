@@ -29,5 +29,6 @@ namespace Carroll.Data.Entities
         public string ReportedPhone { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
+        public string ClaimNumber { get; set; }
     }
 }

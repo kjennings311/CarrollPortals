@@ -19,7 +19,9 @@ namespace Carroll.Data.Services.Models
         public bool Required;
         [JsonConverter(typeof(StringEnumConverter))]
         public FieldValidationTypes FieldValidationType;
+        
         // This url must load keyvalue pairs or dictionary
+
         public string DataLoadUrl;
         public string FieldValue;
         public string ValidationExpressionServerSide;
@@ -56,11 +58,8 @@ namespace Carroll.Data.Services.Models
         None,
         Contact,
         TaxId,
-        Password
-
-        
-
-
+        Password,
+        Zip
     }
 
 }

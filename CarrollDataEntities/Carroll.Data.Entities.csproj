@@ -155,7 +155,7 @@
     <Compile Include="spProperties_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="SP_GetAllClaims_Result.cs">
+    <Compile Include="SP_GetAllClaims1_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_GetUserProperties_Result.cs">
@@ -203,5 +203,4 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-
 </Project>

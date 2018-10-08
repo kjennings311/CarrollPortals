@@ -36,5 +36,6 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
+        public string ClaimNumber { get; set; }
     }
 }

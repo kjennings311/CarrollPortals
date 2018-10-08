@@ -11,9 +11,10 @@ namespace Carroll.Data.Entities
 {
     using System;
     
-    public partial class SP_GetAllClaims_Result
+    public partial class SP_GetAllClaims1_Result
     {
         public System.Guid Id { get; set; }
+        public string ClaimNumber { get; set; }
         public System.Guid PropertyId { get; set; }
         public string ClaimType { get; set; }
         public string PropertyName { get; set; }
