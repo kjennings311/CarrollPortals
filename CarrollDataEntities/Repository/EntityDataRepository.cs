@@ -670,6 +670,7 @@ namespace Carroll.Data.Entities.Repository
 
                 var res = (from tbl in _entities.EquityPartners
                            join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                           where tbl.IsActive == true
                            select tbl).ToList();
 
                 return res;
