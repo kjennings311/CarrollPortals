@@ -356,7 +356,7 @@ function getForm(FormName, RecordId)
     var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" data-toggle="popover" data-trigger="hover" data-content="{6}" id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1" data-toggle="popover" data-trigger="hover" data-content="{6}"  {2}> <i></i> {0} </label></div></div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1" data-toggle="popover" data-trigger="hover" data-content="{3}"  {2}> <i></i> {0} </label></div></div></div>';
     var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}" data-toggle="popover" data-trigger="hover" data-content="{6}" id="{3}" {4}></div></div>';
     var $savebuttons = '  <div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
@@ -417,7 +417,7 @@ function getForm(FormName, RecordId)
                         }
                         else
                         {
-                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         }
                        
                         break;
@@ -426,20 +426,20 @@ function getForm(FormName, RecordId)
                         var $req = $fields[i]["required"];
                         var $datamask = "";
 
-                        $FormElements += format($longtext, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                        $FormElements += format($longtext, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         break;
                     case "Password":
 
                         var $req = $fields[i]["required"];
                         var $datamask = "";
 
-                        $FormElements += format($passbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                        $FormElements += format($passbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         break;
                     case "File":
                         var $req = $fields[i]["required"];
                         var $datamask = "";
                     
-                        $FormElements += format($filebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                        $FormElements += format($filebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                                               
                         break;
                     case "Check":
@@ -452,13 +452,13 @@ function getForm(FormName, RecordId)
                         else checkedtext = "";
                      
 
-                        $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext, ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                        $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         break;
                     case "Select":
                         var $req = $fields[i]["required"];
                         var dataurl = $fields[i]["dataLoadUrl"];
 
-                        $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                        $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         //Let's Load select options from websevice
                       
                         if ($fields[i]["fieldName"] == "PropertyId") {
@@ -480,7 +480,7 @@ function getForm(FormName, RecordId)
                         var $req = $fields[i]["required"];
                         var personId = ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"];
                         var val = 'Value="' + personId + '"';
-                        $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
+                        $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         break;
                     case "Hidden":
                         $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
@@ -594,8 +594,18 @@ function ToggleAdd(formaname) {
 
                 }
 
-                $('[data-toggle="popover"]').popover(); 
-                   
+            
+                //var popOverSettings = {
+                //    placement: 'right',
+                //    container: 'body',
+                //    html: true,
+                //    selector: '[data-toggle="popover"]', //Sepcify the selector here
+                //    content: function () {
+                //        return $('#popover-content').html();
+                //    }
+                //}
+
+                //$('body').popover(popOverSettings);
             }
         });
     });
@@ -634,7 +644,20 @@ function LoadForm(formaname) {
                     else
                         $(".form-heading").html("");
 
-                    $('[data-toggle="popover"]').popover(); 
+                  //  $('[data-toggle="popover"]').popover(); 
+
+                    var popOverSettings = {
+                        placement: 'bottom',
+                        container: 'body',
+                        trigger:'hover',
+                        html: true,
+                        selector: '[data-toggle="popover"]', //Sepcify the selector here
+                        content: function () {
+                            return $('#popover-content').html() === undefined ? "" : $('#popover-content').html() ;
+                        }
+                    }
+
+                    $('body').popover(popOverSettings);
 
                 }
 
