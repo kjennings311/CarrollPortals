@@ -15,6 +15,7 @@ namespace Carroll.Portals.Controllers
 {
     [CustomAuthorize]
     [BaseModel]
+    [AdminFilter]
     public class HrController : Controller
     {
 
