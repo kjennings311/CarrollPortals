@@ -852,6 +852,7 @@
     <Content Include="Views\Hr\PrintPayRollStatusChange.cshtml" />
     <Content Include="Views\Hr\PrintNoticeOfEmployeeSeparation.cshtml" />
     <Content Include="Views\Hr\Index.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

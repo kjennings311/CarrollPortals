@@ -17,6 +17,7 @@ namespace Carroll.Portals.Controllers
     [BaseModel]
     public class HrController : Controller
     {
+
         string Baseurl = "";
 
         public HrController()

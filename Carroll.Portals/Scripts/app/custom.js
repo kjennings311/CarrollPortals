@@ -350,14 +350,14 @@ function getForm(FormName, RecordId)
     var $formBegin = '<form  class="form-horizontal CustomForm">';
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
-    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><textarea validationformat="{1}" class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
-    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" data-toggle="popover" data-trigger="hover" data-content="{6}"  type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" data-toggle="popover" data-trigger="hover" data-content="{6}" type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><textarea validationformat="{1}" data-toggle="popover" data-trigger="hover" data-content="{6}" class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
+    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" data-toggle="popover" data-trigger="hover" data-content="{6}" id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"  {2}> <i></i> {0} </label></div></div></div>';
-    var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4}></div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1" data-toggle="popover" data-trigger="hover" data-content="{6}"  {2}> <i></i> {0} </label></div></div></div>';
+    var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}" data-toggle="popover" data-trigger="hover" data-content="{6}" id="{3}" {4}></div></div>';
     var $savebuttons = '  <div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
@@ -368,7 +368,7 @@ function getForm(FormName, RecordId)
     var $select = '<div class="form-group">'
         + '<label class="col-sm-2 control-label">{0}</label>'
         + '<div class="col-sm-10">'
-        + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" >'
+        + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" data-toggle="popover" data-trigger="hover" data-content="{3}" >'
         + '<option value="">Select</option>'
         + '</select>'
         + '</div>'
@@ -387,6 +387,8 @@ function getForm(FormName, RecordId)
         success: function (data) {
             var $FormElements = $formBegin;
             var $data = data;
+
+            console.log(data);
 
             var $fields = $data["formFields"];
             for (var i = 0; i < $fields.length; i++) {
@@ -415,7 +417,7 @@ function getForm(FormName, RecordId)
                         }
                         else
                         {
-                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                         }
                        
                         break;
@@ -424,20 +426,20 @@ function getForm(FormName, RecordId)
                         var $req = $fields[i]["required"];
                         var $datamask = "";
 
-                        $FormElements += format($longtext, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        $FormElements += format($longtext, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                         break;
                     case "Password":
 
                         var $req = $fields[i]["required"];
                         var $datamask = "";
 
-                        $FormElements += format($passbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        $FormElements += format($passbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                         break;
                     case "File":
                         var $req = $fields[i]["required"];
                         var $datamask = "";
                     
-                        $FormElements += format($filebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                        $FormElements += format($filebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                                               
                         break;
                     case "Check":
@@ -450,20 +452,20 @@ function getForm(FormName, RecordId)
                         else checkedtext = "";
                      
 
-                        $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext);
+                        $FormElements += format($checkbox, $fields[i]["fieldLabel"], $fields[i]["fieldName"], checkedtext, ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                         break;
                     case "Select":
                         var $req = $fields[i]["required"];
                         var dataurl = $fields[i]["dataLoadUrl"];
 
-                        $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"]);
+                        $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"], ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                         //Let's Load select options from websevice
                       
                         if ($fields[i]["fieldName"] == "PropertyId") {
                           
                             if (RecordId == '') {
                               
-                                LoadOptions($fields[i]["fieldName"], dataurl, $("#UserPropertyAccess").val());
+                                LoadOptionsProp($fields[i]["fieldName"], dataurl, $("#UserPropertyAccess").val());
                             }
                         }
                         else
@@ -478,7 +480,7 @@ function getForm(FormName, RecordId)
                         var $req = $fields[i]["required"];
                         var personId = ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"];
                         var val = 'Value="' + personId + '"';
-                        $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val);
+                        $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["PopOverText"] == null) ? "" : $fields[i]["PopOverText"]);
                         break;
                     case "Hidden":
                         $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
@@ -508,15 +510,58 @@ function LoadOptions(fieldId, DataLoadUrl, value)
 
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
        
-        for (var i = 0; i < data.length ; i++){
-            if (data[i]["key"] == value) selected = "selected=selected";
+        for (var i = 0; i < data.length; i++)
+        {
+            if ($("#UserR").val() == "Administrator") {
+
+            if (data[i]["key"] == value)
+                selected = "selected=selected";
             options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
-            selected = "";
+                selected = "";
+
+            }
     
         }
         // now let's load options into select box
         $('#' + fieldId).append(options);
         
+    });
+}
+
+
+// Loads choices in select, list boxes etc
+function LoadOptionsProp(fieldId, DataLoadUrl, value) {
+    var options = "";
+    var selected = "";
+
+    $.get($BaseApiUrl + DataLoadUrl, function (data) {
+
+        for (var i = 0; i < data.length; i++)
+        {
+            if ($("#UserR").val() == "Administrator")
+            {
+
+                if (data[i]["key"] == value)
+                    selected = "selected=selected";
+                options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
+                selected = "";
+
+            }
+            else
+            {
+                if (data[i]["key"] == value)
+                {
+                    selected = "selected=selected";
+                    options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
+                    selected = "";
+                }
+                    
+            }
+
+        }
+        // now let's load options into select box
+        $('#' + fieldId).append(options);
+
     });
 }
 
@@ -548,6 +593,8 @@ function ToggleAdd(formaname) {
                         $(".form-heading").html("");
 
                 }
+
+                $('[data-toggle="popover"]').popover(); 
                    
             }
         });
@@ -586,6 +633,8 @@ function LoadForm(formaname) {
                         $(".form-heading").html("Add Mold Damage Claim");
                     else
                         $(".form-heading").html("");
+
+                    $('[data-toggle="popover"]').popover(); 
 
                 }
 

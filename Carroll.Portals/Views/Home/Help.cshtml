@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Help Page";
+}
+
+@section Styles
+{
+
+    <style>
+        table th, table td {
+            text-align: left !important;
+        }
+    </style>
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h1 id="heading"> Help/About </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="~/Home/Index"> Home </a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong> Help </strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p> For all emergency situations an Incident Report must be completed and all of the appropriate parties inclusive of: Sr. Vice President Investments, Vice President, Regional Vice President, Investments Analyst and Regional Manager must be notified by phone and/or email at <a href="mailto:riskmanagement@carrollmg.com"> riskmanagement@carrollmg.com </a>. The Regional Vice President is to alert Brian McKay of Rhodes Risk Advisors via email at <a href="mailto:brian.mckay@rhodesra.com"> brian.mckay@rhodesra.com </a></p>
+                            <p> All accidents are to be recorded in an Incident Report even if assumed to be of minor severity within 24 hours of the occurrence.  All accidents are important, no matter how minor it may seem. If the individual(s) involved does not wish to file a police report, the Property Manager must take initiative and do so. All details documented must be recorded and retained. </p>
+                            <p> Photographs should be taken as additional documentation for all incidents whenever possible.  All photographs and supportive documents from local authorities will be uploaded on the incident report portal and submitted along with the actual incident report.  </p>
+                            <p> For cases of death in the community, a major fire or any other event that may receive press coverage the following Corporate Office personnel are to be alerted immediately: Sr. Vice President Investments, Vice President, Regional Vice President, Investments Analyst and Regional Manager for the property.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content ">
+            <h2 id="property"></h2>
+            @*<img src="img/zender_logo.png" class="img-responsive">*@
+            <p class="small description">
+                @*There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look
+                    even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing*@
+            </p>
+            @*<p class="small font-bold">
+                    <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                </p>*@
+
+
+            <ul class="list-unstyled PropDetails"></ul>
+            @*<div class="text-center m-t-md">
+                    <a href="#" class="btn btn-xs btn-primary">Add files</a>
+                    <a href="#" class="btn btn-xs btn-primary">Report contact</a>
+
+                </div>*@
+        </div>
+    </div>
+
+    <input type="hidden" id="claim" value="" />
+    <input type="hidden" id="type" value="" />
+</div>
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p> You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in. </p>
+
+}
+
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p> An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in. </p>
+}

@@ -25,8 +25,7 @@ namespace Carroll.Data.Services.Models
         public string DataLoadUrl;
         public string FieldValue;
         public string ValidationExpressionServerSide;
-
-
+        public string PopOverText;
 
 
     }
