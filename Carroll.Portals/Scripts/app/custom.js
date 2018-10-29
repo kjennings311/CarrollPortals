@@ -511,15 +511,12 @@ function LoadOptions(fieldId, DataLoadUrl, value)
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
        
         for (var i = 0; i < data.length; i++)
-        {
-            if ($("#UserR").val() == "Administrator") {
+        {           
 
             if (data[i]["key"] == value)
                 selected = "selected=selected";
             options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
-                selected = "";
-
-            }
+                selected = "";        
     
         }
         // now let's load options into select box
