@@ -613,9 +613,14 @@ function ToggleAdd(formaname) {
 function LoadForm(formaname) {
     // these controls are in properties.aspx page
 
-    if ($('.AddEditContainer').is(":visible")) {
+    if ($('.AddEditContainer').is(":visible"))
+    {
         if (!confirm("Form is Opened, Any Un Saved Changes will be lost, Do you want to Continue?")) {
             return false;
+        }
+        else
+        {
+            $('#myModal').modal('hide');
         }
     }
     else {
@@ -626,7 +631,9 @@ function LoadForm(formaname) {
 
     $('.RowsContatiner').toggle('slow', function ()
     {
-        $('.AddEditContainer').toggle('slow', function () {
+        $('.AddEditContainer').toggle('slow', function ()
+        {
+
             if ($(this).is(":visible"))
             {
                 getForm(formaname, '');
