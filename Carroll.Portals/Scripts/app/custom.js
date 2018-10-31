@@ -511,15 +511,12 @@ function LoadOptions(fieldId, DataLoadUrl, value)
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
        
         for (var i = 0; i < data.length; i++)
-        {
-            if ($("#UserR").val() == "Administrator") {
+        {           
 
             if (data[i]["key"] == value)
                 selected = "selected=selected";
             options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
-                selected = "";
-
-            }
+                selected = "";        
     
         }
         // now let's load options into select box
@@ -616,9 +613,14 @@ function ToggleAdd(formaname) {
 function LoadForm(formaname) {
     // these controls are in properties.aspx page
 
-    if ($('.AddEditContainer').is(":visible")) {
+    if ($('.AddEditContainer').is(":visible"))
+    {
         if (!confirm("Form is Opened, Any Un Saved Changes will be lost, Do you want to Continue?")) {
             return false;
+        }
+        else
+        {
+            $('#myModal').modal('hide');
         }
     }
     else {
@@ -629,7 +631,9 @@ function LoadForm(formaname) {
 
     $('.RowsContatiner').toggle('slow', function ()
     {
-        $('.AddEditContainer').toggle('slow', function () {
+        $('.AddEditContainer').toggle('slow', function ()
+        {
+
             if ($(this).is(":visible"))
             {
                 getForm(formaname, '');
