@@ -21,40 +21,57 @@
     @Scripts.Render("~/bundles/jqueryui")
     <script src="~/Scripts/app/Global.js"></script>
 </head>
-<body >
+<body>
 
     <!-- Wrapper-->
-    <div id="wrapper" >@*class="@Html.PageClass()">*@
+    <div id="wrapper">
+        @*class="@Html.PageClass()">*@
 
-        <!-- Navigation -->
-        @Html.Partial("_Navigation")
+    <!-- Navigation -->
+    @Html.Partial("_Navigation")
 
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg">
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg">
 
-            <!-- Top Navbar -->
-            @Html.Partial("_TopNavbar")
+        <!-- Top Navbar -->
+        @Html.Partial("_TopNavbar")
 
-            <!-- Main view  -->
-            @RenderBody()
-           
-            <!-- Footer -->
-            @Html.Partial("_Footer")
+        <!-- Main view  -->
+        @RenderBody()
 
-        </div>
-        <!-- End page wrapper-->
+        <!-- Footer -->
+        @Html.Partial("_Footer")
 
     </div>
-    <!-- End wrapper-->
-    
+    <!-- End page wrapper-->
 
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/scripts/plugins/metsiMenujs")
-    @Scripts.Render("~/scripts/plugins/pacejs")
-    @Scripts.Render("~/scripts/plugins/slimScrolljs")
-    @Scripts.Render("~/bundles/inspinia")
-    @RenderSection("scripts", required: false)
- 
-   
+</div>
+<!-- End wrapper-->
+
+<div class="modal fade bs-example-modal-lg" id="#toastnotification" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">           
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" style="border:1px solid;">
+                        <div class="alert alert-success">
+                         
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/scripts/plugins/metsiMenujs")
+@Scripts.Render("~/scripts/plugins/pacejs")
+@Scripts.Render("~/scripts/plugins/slimScrolljs")
+@Scripts.Render("~/bundles/inspinia")
+@RenderSection("scripts", required: false)
+
+
 </body>
 </html>

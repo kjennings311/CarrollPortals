@@ -206,8 +206,10 @@ function BindElements()
                                     $form.find('.success-message').show('slow');
                                     ScrollToElement($form.find('.success-message'));
                                     $('.dynamicForm #savechanges').attr('disabled', false);
+                                    $(".alert").html('Record Successfully Updated !');
+                                    $('#toastnotification').modal('show'); 
                                     // go back to previous screen after 8 seconds
-                                   setTimeout(function () { alert("Record successfully updated!"); location.reload(); } , 1000);
+                                   setTimeout(function () {  location.reload(); } , 1000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
