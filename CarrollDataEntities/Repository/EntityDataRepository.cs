@@ -657,7 +657,16 @@ namespace Carroll.Data.Entities.Repository
             {
                 var res = (from tbl in _entities.UserInProperties
                            where tbl.UserId == userid
-                           select tbl.PropertyId).FirstOrDefault();
+                           select tbl.PropertyId).ToList();
+                var str= "";
+
+                foreach (var item in res)
+                {
+                    if(str!="")
+                    str += item.ToString();
+                    else
+                    str +=","+ item.ToString();
+                }
 
                 return res;
             }

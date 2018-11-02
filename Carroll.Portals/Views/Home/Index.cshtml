@@ -4,42 +4,66 @@
 }
 
 <div class="wrapper wrapper-content">
-    <div class="row">
+    <div class="row hidewhenformopen">
         <div class="col-md-12">
             <img style="width: 100%;height: 400px;" src="~/carroll.portals/img/bg.jpg" />
-            <button type="button" class="btn btn-primary" data-toggle="modal" style="position:relative;margin-top:-150px;background:blue;width:100%;font-size:30px;font-weight:bold" data-target=".bs-example-modal-lg">File a New Claim </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" style="position:relative;margin-top:-150px;background:blue;width:100%;font-size:30px;font-weight:bold" data-target=".claimmodal">File a New Claim </button>
         </div>
         <!-- Large modal -->
        
 
-        <div class="modal fade bs-example-modal-lg"  id="#myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-            <div class="modal-dialog modal-lg" role="document">
+        <div class="modal fade bs-example-modal-lg claimmodal"  id="#myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" style="width:80%" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h1 class="modal-title" style="font-weight:bold;" id="gridSystemModalLabel"> Select Type Of Claim </h1>
+                        <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel"  > Select Type Of Claim </h1>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-4" style="border:1px solid;">
-                                <h2> Property Damage Claim </h2>
+                            <div class="col-md-3" style="border:1px solid;margin-left: 25px;min-height: 500px;width: 29%;">
+                                <h2> <strong>  Property Damage Claim </strong> </h2>
+                                <p> A Property Damage claim Report Should be filed when there is damage to the buildign or common areas. Examples include the following : </p>
+                                <ul>
+                                    <li> Tree falling on a building </li>
+                                    <li> Roof leak damage due to a storm </li>
+                                    <li> Balcony Collapsing </li>
+                                    <li> Mail Kiosk Support damage </li>
+                                    <li> Resident's guest damages gates while accessing community without authorization</li>
+                                    <li> Unit Flooding causing floor damage to the unit </li>
 
-                                <button  onclick="`('FormPropertyDamageClaim');"  > Start Claim  </button>
+
+                                </ul>
+                                <p> If there is injury to an individual due to property damage, both a Property Liability Claim Report and a General Liability Claim Report must be completed. </p>
+                                <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to completing the Property Damage Claim Report. </p>
+                                <button class="btn btn-primary " style="margin-left: 75px;
+    margin-top: 10px;"  onclick="LoadForm('FormPropertyDamageClaim');"  > Start Claim  </button>
                             </div>
-                            <div class="col-md-4" style="border:1px solid;">
+                            <div class="col-md-3" style="border:1px solid; margin-left: 25px;min-height: 500px;width: 29%;">
 
-                                <h2> General Liability Claim </h2>
-
-                                <button onclick="LoadForm('FormGeneralLiabilityClaim');"> Start Claim  </button>
+                                <h2> <strong>  General Liability Claim</strong> </h2>
+                                <p> A General Liability Claim Report should be filed when there is an injury to an individual at the property :</p>
+                                <ul>
+                                    <li>Resident trips on damage sidewalk and injuries themselves </li>
+                                    <li>One resident's Dog bites another resident</li>
+                                    <li> Resident reports their child is injured due to faulty playground equipment </li>
+                                    <li> Resident is injured due to stairs collapsing </li>
+                                    <li> Resident's reports being injured (Physically or emotionally) due to criminal activity on property grounds.</li>
+                                    <li> Resident drops weight on thier foot in fitness center and claims injury</li>
+                                </ul>
+                                <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to </p>
+                                <button class="btn btn-primary " style="margin-left: 75px;
+    margin-top: 10px;"  onclick="LoadForm('FormGeneralLiabilityClaim');"> Start Claim  </button>
 
                             </div>
-                            <div class="col-md-4" style="border:1px solid;">
+                            <div class="col-md-3"  style="border:1px solid;margin-left: 25px;min-height: 500px;width: 29%;">
 
-                                <h2>Mold Damage Claim </h2>
+                                <h2> <strong> Mold Damage Claim </strong> </h2>
 
-                                <button onclick="LoadForm('FormMoldDamageClaim');"> Start Claim  </button>
+                                <button class="btn btn-primary " style="margin-left: 75px;
+    margin-top: 10px;"  onclick="LoadForm('FormMoldDamageClaim');"> Start Claim  </button>
                             </div>
-
 
                         </div>
                     </div>
@@ -53,10 +77,10 @@
 
 
 
-    <div class="row" id="homecontainer" >
+    <div class="row hidewhenformopen" id="homecontainer" >
         <div class="col-lg-3" style="margin-left: 90px;">
           
-            <div class="widget style1 navy-bg">
+            <div class="widget style1 ">
                 <div class="row">
                   
                     <div class="col-xs-12" style="text-align: center;
@@ -92,7 +116,7 @@
                 </div>
             </div>*@
 
-            <div class="widget style1 lazur-bg">
+            <div class="widget style1 ">
                 <div class="row">
                  
                     <div class="col-xs-12" style="text-align: center;
@@ -130,7 +154,7 @@
                 </div>
             </div>*@
 
-            <div class="widget style1 yellow-bg">
+            <div class="widget style1 ">
                 <div class="row">                 
                     <div class="col-xs-12" style="text-align: center;
     border-top: 2px solid blue;

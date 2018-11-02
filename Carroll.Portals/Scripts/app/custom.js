@@ -1,7 +1,7 @@
 ﻿
-//var $BaseApiUrl = "http://localhost:1002/"; 
+var $BaseApiUrl = "http://localhost:1002/"; 
 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -202,14 +202,14 @@ function BindElements()
                                 // if we are here it means all good.. 
                                 if (data.responseText == "OK") {
                                     // show success message
-                                    $form.find('#successMessage').html("Record successfully updated!");
-                                    $form.find('.success-message').show('slow');
-                                    ScrollToElement($form.find('.success-message'));
+                                    //$form.find('#successMessage').html("Record successfully updated!");
+                                    //$form.find('.success-message').show('slow');
+                                    //ScrollToElement($form.find('.success-message'));
                                     $('.dynamicForm #savechanges').attr('disabled', false);
                                     $(".alert").html('Record Successfully Updated !');
                                     $('#toastnotification').modal('show'); 
                                     // go back to previous screen after 8 seconds
-                                   setTimeout(function () {  location.reload(); } , 1000);
+                                   setTimeout(function () {  location.reload(); } , 3000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -461,12 +461,14 @@ function getForm(FormName, RecordId)
                         var dataurl = $fields[i]["dataLoadUrl"];
 
                         $FormElements += format($select, $fields[i]["fieldLabel"], ($req) ? "required" : "", $fields[i]["fieldName"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
+
                         //Let's Load select options from websevice
                       
-                        if ($fields[i]["fieldName"] == "PropertyId") {
+                        if ($fields[i]["fieldName"] == "PropertyId")
+                        {
                           
-                            if (RecordId == '') {
-                              
+                            if (RecordId == '')
+                            {                              
                                 LoadOptionsProp($fields[i]["fieldName"], dataurl, $("#UserPropertyAccess").val());
                             }
                         }
@@ -548,8 +550,8 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
             }
             else
             {
-                if (data[i]["key"] == value)
-                {
+                if (value.toLowerCase().indexOf(data[i]["key"]) >= 0)
+           {
                     selected = "selected=selected";
                     options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
                     selected = "";
@@ -636,11 +638,9 @@ function LoadForm(formaname) {
         $('.AddEditContainer').toggle('slow', function ()
         {
 
-            if ($(this).is(":visible"))
-            {
+            if ($(this).is(":visible")) {
                 getForm(formaname, '');
-                if ($(".form-heading").length)
-                {
+                if ($(".form-heading").length) {
                     if (formaname == "FormPropertyDamageClaim")
                         $(".form-heading").html("Add Property Damage Claim");
                     else if (formaname == "FormGeneralLiabilityClaim")
@@ -650,16 +650,20 @@ function LoadForm(formaname) {
                     else
                         $(".form-heading").html("");
 
-                  //  $('[data-toggle="popover"]').popover(); 
+                    $('.claimmodal').modal('hide');
+
+                    $(".hidewhenformopen").hide();
+
+                    //  $('[data-toggle="popover"]').popover(); 
 
                     var popOverSettings = {
                         placement: 'bottom',
                         container: 'body',
-                        trigger:'hover',
+                        trigger: 'hover',
                         html: true,
                         selector: '[data-toggle="popover"]', //Sepcify the selector here
                         content: function () {
-                            return $('#popover-content').html() === undefined ? "" : $('#popover-content').html() ;
+                            return $('#popover-content').html() === undefined ? "" : $('#popover-content').html();
                         }
                     }
 
@@ -667,9 +671,15 @@ function LoadForm(formaname) {
 
                 }
 
-              
+
 
             }
+            else {
+
+                $(".hidewhenformopen").show();
+
+            }
+
         });
     });
 
@@ -2555,9 +2565,12 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+var claimbody = "";
+var $details = "";
 
 function LoadClaim()
 {
+
     var claim = getParameterByName("Claim");
     var Type = claim[claim.length - 1];
     claim = claim.substr(0, claim.length - 1)
@@ -2585,7 +2598,7 @@ function LoadClaim()
                         if (data != null) {
 
                             var ClaimData = JSON.parse(JSON.stringify(data));
-                            var claimbody = "";
+                         
 
                             if (Type == "p")
                             {
@@ -2780,7 +2793,7 @@ function LoadClaim()
                                     
                                     var $prop = data[0];
                                     
-                                    var $details = "<li>Address:</li><li>" + $prop.propertyAddress + "</li>";
+                                     $details = "<li>Address:</li><li>" + $prop.propertyAddress + "</li>";
                                     $details += "<li>" + $prop.city + ", " + $prop.state + " " + $prop.zipCode + "</li>";
                                     $details += "<li>" + $prop.phoneNumber + "</li>";
                                     $details += "<li>Units: " + $prop.units + "</li>";
@@ -2845,10 +2858,6 @@ function LoadClaim()
                                         var $val = JSON.parse($prop.insuranceContact);
                                         $details += "<li>&nbsp;</li><li class='font-bold'>Insurance Contact:</li><li>" + $val.name + "</li>";
                                     } 
-
-                                  
-                                    
-
                                     $('.PropDetails').html($details);
                                     $('.propertyName').html($prop.propertyName);
                                 }
@@ -3187,6 +3196,23 @@ $(document).ready(function ()
            
     
     });
+
+    $("#printclaim").click(function (e) {
+        e.preventDefault();
+        var claim = getParameterByName("Claim");
+        if (claim != "") {
+
+            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim, 'Claim Details', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+            $(printWindow.document.body).html('<div class="page">'+claimbody+'</div>');
+
+            //printWindow.addEventListener('load', function () {
+            //    setTimeout(function () {
+            //        printWindow.print();
+            //        //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+            //    }, 1000);
+            //}, true);
+        }
+    });
 
     $("#btnUpload").click(function ()
     {
