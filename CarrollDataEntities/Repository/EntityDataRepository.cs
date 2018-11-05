@@ -906,6 +906,61 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+        public dynamic GetPrintClaim(string Claim, char Type)
+        {
+            ClaimDetails cd = new ClaimDetails();
+
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+                Guid _recId = new Guid(Claim);
+                Int16 formtype = 1;
+
+                if (Type == 'g')
+                {
+                    //  var _generalclaim = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _recId).FirstOrDefault();
+
+                    var _generalclaim = (from tbl in _entities.FormGeneralLiabilityClaims
+                                         join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                         where tbl.GLLId == _recId
+                                         select new { tbl }).FirstOrDefault();
+                    if (_generalclaim != null)
+                    {
+                        return _generalclaim.tbl;
+                    }                  
+                }
+                else if (Type == 'm')
+                {
+                    var _formdamageclaim = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                            where tbl.MDLId == _recId
+                                            select new { tbl }).FirstOrDefault();
+
+                    //_entities.FormMoldDamageClaims.Where(x => x.MDLId == _recId).FirstOrDefault();
+                    if (_formdamageclaim != null)
+                    {  return _formdamageclaim.tbl; }
+                  
+                }
+                else if (Type == 'p')
+                {
+                    var _damageclaim = (from tbl in _entities.FormPropertyDamageClaims
+                                        join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                        where tbl.PDLId == _recId
+                                        select new { tbl }).FirstOrDefault();
+
+                    //_entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
+                    if (_damageclaim != null)
+                    {
+                        return _damageclaim.tbl;
+                    }
+                   
+                }
+
+                return cd;
+            }
+        }
+
         public dynamic GetAllActivity(Guid _recId)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
@@ -1621,6 +1676,24 @@ namespace Carroll.Data.Entities.Repository
             smtp.Port = 587; //587
             return smtp;
 
+        }
+
+        public dynamic GetUserPropertyForClaimPrint(string userid)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                PrintProperty pp = new PrintProperty();
+
+                _entities.Configuration.ProxyCreationEnabled = false;
+                Guid _propId = new Guid(userid);
+
+                var propertyres = _entities.proc_getpropertydetails(_propId).FirstOrDefault();
+
+                if (propertyres != null)
+                    return propertyres;
+                else
+                    return null;
+            }
         }
 
         //public Config GetDatatableConfig(EntityType entityType,)

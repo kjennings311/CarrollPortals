@@ -352,14 +352,14 @@ function getForm(FormName, RecordId)
     var $formBegin = '<form  class="form-horizontal CustomForm">';
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
-    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" data-toggle="popover" data-trigger="hover" data-content="{6}"  type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" data-toggle="popover" data-trigger="hover" data-content="{6}" type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><textarea validationformat="{1}" data-toggle="popover" data-trigger="hover" data-content="{6}" class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
-    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}" data-toggle="popover" data-trigger="hover" data-content="{6}" id="{3}" {4} value="{5}"></div></div>';
-    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
+    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a> </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><input maxlength="100"  type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
+    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
+    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a> </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0}</label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1" data-toggle="popover" data-trigger="hover" data-content="{3}"  {2}> <i></i> {0} </label></div></div></div>';
-    var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0}</label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}" data-toggle="popover" data-trigger="hover" data-content="{6}" id="{3}" {4}></div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > ? </a></label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"   {2}> <i></i> {0} </label></div></div></div>';
+    var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
     var $savebuttons = '  <div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
@@ -368,9 +368,9 @@ function getForm(FormName, RecordId)
         + '<a id="savechanges" class="btn btn-primary btn-add" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
         + '</div></div >';
     var $select = '<div class="form-group">'
-        + '<label class="col-sm-2 control-label">{0}</label>'
+        + '<label class="col-sm-2 control-label">{0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > ? </a> </label>'
         + '<div class="col-sm-10">'
-        + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" data-toggle="popover" data-trigger="hover" data-content="{3}" >'
+        + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" >'
         + '<option value="">Select</option>'
         + '</select>'
         + '</div>'
@@ -657,7 +657,7 @@ function LoadForm(formaname) {
                     //  $('[data-toggle="popover"]').popover(); 
 
                     var popOverSettings = {
-                        placement: 'bottom',
+                        placement: 'top',
                         container: 'body',
                         trigger: 'hover',
                         html: true,
@@ -3197,20 +3197,24 @@ $(document).ready(function ()
     
     });
 
-    $("#printclaim").click(function (e) {
+    $("#printclaim").click(function (e)
+    {
+
         e.preventDefault();
         var claim = getParameterByName("Claim");
-        if (claim != "") {
+        var Type = claim[claim.length - 1];
+        claim = claim.substr(0, claim.length - 1);
 
-            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim, 'Claim Details', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-            $(printWindow.document.body).html('<div class="page">'+claimbody+'</div>');
+        if (claim != "")
+        {
+            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim+"&Type="+Type, 'Claim Details', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
 
-            //printWindow.addEventListener('load', function () {
-            //    setTimeout(function () {
-            //        printWindow.print();
-            //        //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-            //    }, 1000);
-            //}, true);
+            printWindow.addEventListener('load', function () {
+                setTimeout(function () {
+                    printWindow.print();
+                    //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                }, 1000);
+            }, true);
         }
     });
 

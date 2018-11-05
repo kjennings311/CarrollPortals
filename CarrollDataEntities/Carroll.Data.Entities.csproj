@@ -128,6 +128,9 @@
     <Compile Include="proc_GetPropertyDamageClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_getpropertydetails_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_getworkflowemails_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

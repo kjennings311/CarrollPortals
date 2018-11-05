@@ -32,9 +32,13 @@ namespace Carroll.Data.Services.Models
             return _repository.GetAllClaims(userid,propertyid, optionalSeachText);
         }
 
-     public   dynamic GetUserProperty(Guid userid)
+        public dynamic GetUserProperty(Guid userid)
         {
             return _repository.GetUserProperty(userid);
+        }
+        public   dynamic GetUserPropertyForClaimPrint(string userid)
+        {
+            return _repository.GetUserPropertyForClaimPrint(userid);
         }
 
         #region [Records]
@@ -80,6 +84,11 @@ namespace Carroll.Data.Services.Models
         public dynamic GetClaimDetails(string Claim, char Type)
         {
             return _repository.GetClaimDetails(Claim,Type);
+        }
+
+        public dynamic GetClaimDetailsForPrint(string Claim, char Type)
+        {
+            return _repository.GetPrintClaim(Claim, Type);
         }
 
         public dynamic InsertComment(FormComment obj)

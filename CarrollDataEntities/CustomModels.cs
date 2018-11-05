@@ -55,6 +55,12 @@ namespace Carroll.Data.Entities
         public dynamic Activity { get; set; }
     }
 
+    public class PrintClaimDetails
+    {
+        public dynamic ClaimDetails { get; set; }
+        public dynamic PropertyDetails { get; set; }
+    }
+
     public class RecordUpdateResult
     {
         public string RecordId { get; set; }

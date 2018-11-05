@@ -116,6 +116,13 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetUserProperty(userid);
         }
 
+        [ActionName("GetUserPropertyForClaimPrint")]
+        [HttpGet]
+        public dynamic GetUserPropertyForClaimPrint(string userid)
+        {
+            return _service.GetUserPropertyForClaimPrint(userid);
+        }
+
 
         #region View Claim
 
@@ -123,8 +130,16 @@ namespace Carroll.Data.Services.Controllers
         [HttpGet]
         public dynamic GetClaimDetails(string Claim, char Type)
         {
-
             return _service.GetClaimDetails(Claim, Type);
+        }
+
+
+        [ActionName("GetClaimDetailsForPrint")]
+        [HttpGet]
+        public dynamic GetClaimDetailsForPrint(string Claim, char Type)
+        {
+
+            return _service.GetClaimDetailsForPrint(Claim, Type);
         }
 
         [ActionName("InsertComment")]

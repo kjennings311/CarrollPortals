@@ -97,5 +97,51 @@ namespace Carroll.Data.Entities.Repository
             }
 
         }
+
+
+        public dynamic GetUserPropertyForClaimPrint(string PropertyId)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                PrintProperty pp = new PrintProperty();
+
+                _entities.Configuration.ProxyCreationEnabled = false;
+                Guid _propId = new Guid(PropertyId);
+
+                var propertyres = _entities.proc_getpropertydetails(_propId).FirstOrDefault();
+
+                if (propertyres != null)
+                    return propertyres;
+                else
+                    return null;
+            }
+              
+            
+
+        }
+    }
+    public class PrintProperty
+    {
+        public string PropertyName { get; set; }
+        public string LegalName { get; set; }
+        public string Units { get; set; }
+        public string YardiCode { get; set; }
+        public string Taxid { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string EquityPartner { get; set; }
+        public string VicePresident { get; set; }
+        public string RegionalVicePresident { get; set; }
+        public string PropertyManager { get; set; }
+        public string AssetManager { get; set; }
+        public string RegionalManager { get; set; }
+        public string ConstructionManager { get; set; }
+        //public string Address { get; set; }
+        //public string Address { get; set; }
+
     }
 }

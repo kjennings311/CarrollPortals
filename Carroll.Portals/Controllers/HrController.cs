@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -23,7 +24,7 @@ namespace Carroll.Portals.Controllers
 
         public HrController()
         {
-            Baseurl = "http://localhost:1002/";
+            Baseurl = ConfigurationManager.AppSettings["ServiceURL"];
         }
 
         public ActionResult Index()

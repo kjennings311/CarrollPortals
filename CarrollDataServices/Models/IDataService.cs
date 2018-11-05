@@ -22,6 +22,8 @@ namespace Carroll.Data.Services.Models
 
         dynamic GetRuntimeClassInstance(string className);
         dynamic GetClaimDetails(string Claim, char Type);
+        dynamic GetClaimDetailsForPrint(string Claim, char Type);
+        dynamic GetUserPropertyForClaimPrint(string userid);
         dynamic InsertComment(FormComment obj);
         dynamic InsertAttachment(FormAttachment formAttachment);
         dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider Elr);

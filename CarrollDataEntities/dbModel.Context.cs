@@ -130,5 +130,14 @@ namespace Carroll.Data.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllClaims1_Result>("SP_GetAllClaims1", useridParameter, propertyidParameter);
         }
+    
+        public virtual ObjectResult<proc_getpropertydetails_Result> proc_getpropertydetails(Nullable<System.Guid> propid)
+        {
+            var propidParameter = propid.HasValue ?
+                new ObjectParameter("propid", propid) :
+                new ObjectParameter("propid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertydetails_Result>("proc_getpropertydetails", propidParameter);
+        }
     }
 }

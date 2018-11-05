@@ -17,5 +17,7 @@ namespace Carroll.Data.Entities.Repository
         bool DeleteProperty(string PropertyId);
 
         Property GetProperty(string PropertyId);
+        dynamic GetUserPropertyForClaimPrint(string PropertyId);
     }
+    
 }
