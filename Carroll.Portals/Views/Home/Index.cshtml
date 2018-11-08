@@ -10,15 +10,16 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" style="position:relative;margin-top:-150px;background:blue;width:100%;font-size:30px;font-weight:bold" data-target=".claimmodal">File a New Claim </button>
         </div>
         <!-- Large modal -->
-       
 
-        <div class="modal fade bs-example-modal-lg claimmodal"  id="#myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade bs-example-modal-lg claimmodal" id="#myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" style="width:80%" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h1 class="modal-title" style="font-weight:bold;text-align: center;
-    color: black;" id="gridSystemModalLabel"  > Select Type Of Claim </h1>
+    color: black;" id="gridSystemModalLabel">
+                            Select Type Of Claim
+                        </h1>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -38,7 +39,9 @@
                                 <p> If there is injury to an individual due to property damage, both a Property Liability Claim Report and a General Liability Claim Report must be completed. </p>
                                 <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to completing the Property Damage Claim Report. </p>
                                 <button class="btn btn-primary " style="margin-left: 75px;
-    margin-top: 10px;"  onclick="LoadForm('FormPropertyDamageClaim');"  > Start Claim  </button>
+    margin-top: 10px;" onclick="LoadForm('FormPropertyDamageClaim');">
+                                    Start Claim
+                                </button>
                             </div>
                             <div class="col-md-3" style="border:1px solid; margin-left: 25px;min-height: 500px;width: 29%;">
 
@@ -54,22 +57,60 @@
                                 </ul>
                                 <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to </p>
                                 <button class="btn btn-primary " style="margin-left: 75px;
-    margin-top: 10px;"  onclick="LoadForm('FormGeneralLiabilityClaim');"> Start Claim  </button>
+    margin-top: 10px;" onclick="LoadForm('FormGeneralLiabilityClaim');">
+                                    Start Claim
+                                </button>
 
                             </div>
-                            <div class="col-md-3"  style="border:1px solid;margin-left: 25px;min-height: 500px;width: 29%;">
+                            <div class="col-md-3" style="border:1px solid;margin-left: 25px;min-height: 500px;width: 29%;">
 
                                 <h2> <strong> Mold Damage Claim </strong> </h2>
 
                                 <button class="btn btn-primary " style="margin-left: 75px;
-    margin-top: 10px;"  onclick="LoadForm('FormMoldDamageClaim');"> Start Claim  </button>
+    margin-top: 10px;" onclick="LoadForm('FormMoldDamageClaim');">
+                                    Start Claim
+                                </button>
                             </div>
 
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade bs-example-modal-lg reviewmodal" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" style="width:60%" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                            Is the information provided accurate and complete?
+                        </h1>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12" style="text-align:center">
+                                <button class="btn btn-success " style="margin-left: 75px;
+    margin-top: 10px;" onclick="submitformdata()">
+                                    I AM READY TO SUBMIT
+                                </button>
+
+                                <button class="btn btn-danger " style="margin-left: 75px;
+    margin-top: 10px;" onclick="closereviewmodal()">
+                                    I WANT TO REVIEW
+                                </button>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
         </div>
+
+
+
     </div>
 
 
@@ -175,7 +216,7 @@
         <div class="row">
 
             <div class="col-lg-12 no-padding">
-
+                <input type="hidden" id="homeval"  value="1" />
                 <div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
