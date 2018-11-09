@@ -8561,11 +8561,27 @@ body.md-skin {
   }
 }
 
-/* Custom*/
-.ipbackground {
-    min-height: 400px !important;
-    background: url('/IMG/BG.JPG') center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0 auto;
+
+a.tooltipwala {
+    float: left;
+    margin-right: 10px;
+    background: #0c81cba8;
+    /* padding: 5px; */
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    /* vertical-align: middle; */
+    color: white;
+    font-style: italic;
+    padding-top: 1px;
 }
+.form-horizontal .control-label 
+{
+    text-align:left !important;
+}
+
+.popover{
+z-index:99999999 !important;
+}
+

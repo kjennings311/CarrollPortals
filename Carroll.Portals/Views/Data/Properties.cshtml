@@ -134,24 +134,28 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>Add/Edit Property</h5>
-                <div class="ibox-tools">
-                    @*<a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>*@
-                    <a class="warning"  href="#" onclick="ToggleAdd('property');">
-                        <i class="fa fa-minus-circle"></i> Cancel
-                    </a>
-                    @*<ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#" >Cancel</a>
-                        </li>
-                   
-                    </ul>*@
-                    @*<a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>*@
+                @if (@Model.RoleType.ToLower() == "administrator")
+                {
+                    <div class="ibox-tools">
+                        @*<a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>*@
+                        <a class="warning" href="#" onclick="ToggleAdd('property');">
+                            <i class="fa fa-minus-circle"></i> Cancel
+                        </a>
+                        @*<ul class="dropdown-menu dropdown-user">
+                    <li>
+                        <a href="#" >Cancel</a>
+                    </li>
+
+                </ul>*@
+                        @*<a class="close-link">
+                    <i class="fa fa-times"></i>
+                </a>*@
+                    </div>
+                }
                 </div>
-            </div>
+                
             <div class="ibox-content dynamicForm">
 
             </div>

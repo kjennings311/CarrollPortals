@@ -34,6 +34,22 @@ function encodeImageFileAsURL(element) {
     }
 }
 
+function closereviewmodal() {
+
+    $("#reviewmodal").modal('hide'); 
+}
+
+
+function submitformdata()
+{
+    $("#reviewmodal").modal('hide'); 
+    $("#homeval").val('0');
+    $('.dynamicForm #savechanges').click();
+   
+}
+
+
+
 function BindElements()
 {
 
@@ -41,6 +57,22 @@ function BindElements()
 
     $('.dynamicForm #savechanges').click(function ()
     {
+
+
+        if ($("#homeval").length > 0)
+        {
+            if ($("#homeval").val() == '1') {
+
+
+                $("#reviewmodal").modal('show'); 
+
+                return false;
+            }
+
+
+        }
+
+
         $('.dynamicForm #savechanges').attr('disabled', true);
         $('.success-message').hide();
         $('.failure-message').hide();
@@ -352,14 +384,14 @@ function getForm(FormName, RecordId)
     var $formBegin = '<form  class="form-horizontal CustomForm">';
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
-    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a> </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><input maxlength="100"  type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
-    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
-    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a> </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
+    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a  class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
+    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
+    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label">{0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > ? </a></label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"   {2}> <i></i> {0} </label></div></div></div>';
-    var $person = '<div class="form-group"><label class="col-sm-2 control-label"> {0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > ? </a></label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label"> <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"   {2}> <i></i> {0} </label></div></div></div>';
+    var $person = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
     var $savebuttons = '  <div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
@@ -368,7 +400,7 @@ function getForm(FormName, RecordId)
         + '<a id="savechanges" class="btn btn-primary btn-add" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
         + '</div></div >';
     var $select = '<div class="form-group">'
-        + '<label class="col-sm-2 control-label">{0} <a style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > ? </a> </label>'
+        + '<label class="col-sm-2 control-label"> <a class="tooltipwala" style="margin-left:15px;" data-container="body" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > i </a> {0} </label>'
         + '<div class="col-sm-10">'
         + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" >'
         + '<option value="">Select</option>'
@@ -593,6 +625,8 @@ function ToggleAdd(formaname) {
                     else
                         $(".form-heading").html("");
 
+                    $("#homeval").val('1');
+
                 }
 
             
@@ -614,7 +648,8 @@ function ToggleAdd(formaname) {
 }
 
 
-function LoadForm(formaname) {
+function LoadForm(formaname)
+{
     // these controls are in properties.aspx page
 
     if ($('.AddEditContainer').is(":visible"))
@@ -668,6 +703,16 @@ function LoadForm(formaname) {
                     }
 
                     $('body').popover(popOverSettings);
+
+                    $(".tooltipwala").each(function ()
+                    {
+                        if ($(this).attr("data-content") == "")
+                        {
+                            $(this).hide();
+                        }
+                       
+                    });
+
 
                 }
 
