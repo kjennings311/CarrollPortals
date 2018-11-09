@@ -8560,3 +8560,12 @@ body.md-skin {
     margin: 0;
   }
 }
+
+/* Custom*/
+.ipbackground {
+    min-height: 400px !important;
+    background: url('/IMG/BG.JPG') center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
