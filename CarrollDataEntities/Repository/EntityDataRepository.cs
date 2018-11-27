@@ -626,11 +626,14 @@ namespace Carroll.Data.Entities.Repository
                 if(res == 1)
                 {
 
-                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims                                    
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims    
+                                      join tbluser in _entities.SiteUsers on tbl.CreatedBy equals tbluser.UserId
                                       select tbl).Count();
-                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims                                       
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                        join tbluser in _entities.SiteUsers on tbl.CreatedBy equals tbluser.UserId
                                         select tbl).Count();
-                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims                                          
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                           join tbluser in _entities.SiteUsers on tbl.CreatedBy equals tbluser.UserId
                                            select tbl).Count();
 
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };

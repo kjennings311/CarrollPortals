@@ -15,7 +15,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 
     <style type="text/css">
-
+        html, body {
+            overflow: scroll;
+        }
         body {
             font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
             color: #555555;
@@ -73,7 +75,7 @@
 
 
         <table class="table table-hover table-responsive table-striped">
-            <tr> <td> <strong>Claim Details : </strong></td></tr>
+            <tr> <td> <strong>Claim Details : </strong></td> </tr> <tr> <td style="width:30%;"> <b> Claim Number  </b> </td><td> <b> @Model.GLC.ClaimNumber</b> </td></tr>
             <tr><td style="width:30%;"> Incident Date:</td><td> @(Model.GLC.IncidentDateTime == null ? "" : Model.GLC.IncidentDateTime.ToString().Substring(0, 10)) </td></tr>
 
             <tr><td style="width:30%;"> Incident Location:</td><td> @Model.GLC.IncidentLocation </td></tr>
@@ -166,7 +168,8 @@
            
 
         <table class="table table-hover table-responsive table-striped">
-            <tr> <td> <strong>Claim Details : </strong></td></tr>
+            <tr> <td> <strong>Claim Details : </strong></td>   </tr>
+            <tr> <td style="width:30%;"> <b> Claim Number  </b> </td><td> <b> @Model.MDC.ClaimNumber</b> </td></tr>
             <tr><td style="width:30%;"> Location :</td><td> @Model.MDC.Location</td></tr>
 
             <tr><td style="width:30%;"> Description :</td><td> @Model.MDC.Description</td></tr>
@@ -231,7 +234,8 @@
         {
 
         <table class="table table-hover table-responsive table-striped">
-            <tr> <td> <strong>Claim Details : </strong></td></tr>
+            <tr> <td> <strong>Claim Details : </strong></td>  </tr>
+            <tr> <td style="width:30%;"> <b> Claim Number </b> </td><td> <b> @Model.PDC.ClaimNumber</b> </td></tr>
             <tr><td style="width:30%;">Weather Conditions:</td><td>   @Model.PDC.WeatherConditions </td></tr>
             <tr><td style="width:30%;">Incident Date:</td><td>   @(Model.PDC.IncidentDateTime == null ? "" : Model.PDC.IncidentDateTime.ToString().Substring(0, 10)) </td></tr>
             <tr><td style="width:30%;">Incident Location:</td><td>   @Model.PDC.IncidentLocation </td></tr>

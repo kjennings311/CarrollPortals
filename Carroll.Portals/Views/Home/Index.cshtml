@@ -46,8 +46,9 @@
                                 </ul>
                                 <p> If there is injury to an individual due to property damage, both a Property Liability Claim Report and a General Liability Claim Report must be completed. </p>
                                 <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to completing the Property Damage Claim Report. </p>
-                                <button class="btn btn-primary " style="margin-left: 75px;
-    margin-top: 10px;" onclick="LoadForm('FormPropertyDamageClaim');">
+<button class="btn btn-primary " style="position: absolute;
+    bottom: 10px;
+    left: 40%;" onclick="LoadForm('FormPropertyDamageClaim');">
                                     Start Claim
                                 </button>
                             </div>
@@ -64,8 +65,9 @@
                                     <li> Resident drops weight on thier foot in fitness center and claims injury</li>
                                 </ul>
                                 <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to </p>
-                                <button class="btn btn-primary " style="margin-left: 75px;
-    margin-top: 10px;" onclick="LoadForm('FormGeneralLiabilityClaim');">
+                                <button class="btn btn-primary " style="position: absolute;
+    bottom: 10px;
+    left: 40%;" onclick="LoadForm('FormGeneralLiabilityClaim');">
                                     Start Claim
                                 </button>
 
@@ -74,8 +76,9 @@
 
                                 <h2> <strong> Mold Damage Claim </strong> </h2>
 
-                                <button class="btn btn-primary " style="margin-left: 75px;
-    margin-top: 10px;" onclick="LoadForm('FormMoldDamageClaim');">
+                                <button class="btn btn-primary " style="position: absolute;
+    bottom: 10px;
+    left: 40%;" onclick="LoadForm('FormMoldDamageClaim');">
                                     Start Claim
                                 </button>
                             </div>
@@ -116,56 +119,68 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
-
-
-
-
-
-
+    
     <div class="row hidewhenformopen" id="homecontainer" >
         <div class="col-lg-3" style="margin-left: 90px;">
-          
-            <div class="widget style1 ">
+
+            <div class="ibox ">
+                <div class="ibox-title text-center">
+                    <button type="button" class="btn btn-w-m btn-primary">Property Damage Claims</button>
+                </div>
+                <div class="ibox-content col-sm-12">
+                    <div class="col-sm-12 claimcount text-center" style="display:none; ">
+                        <h1 class="no-margins propcount"> </h1>
+                        <small>Total Claims</small>
+                    </div>
+
+                    @*<div class="col-sm-6 font-bold text-info" style="margin-top:15px;">
+                    <a style="color:#23c6c8;font-size:20px" href="#" onclick="LoadForm('FormGeneralLiabilityClaim');">
+                        <i class="fa fa-plus-circle"></i> Add New
+                    </a>
+                </div>*@
+
+                </div>
+            </div>
+
+
+            @*<div class="widget style1 ">
                 <div class="row">
-                  
+
                     <div class="col-xs-12" style="text-align: center;
     border-top: 2px solid #337ab7;
     padding: 20px;
-    border-bottom: 2px solid #337ab7;" >
+    border-bottom: 2px solid #337ab7;">
                         <h3 class="font-bold"> Property Damage Claims </h3>
                         <div class="claimcount" style="display:none">
                             <h2 class="font-bold propcount"> </h2>
-                           
+
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
         <div class="col-lg-3">
-            @*<div class="ibox ">
+            <div class="ibox ">
                 <div class="ibox-title text-center">
                     <button type="button" class="btn btn-w-m btn-info">General Liability Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
-                    <div class="col-sm-6 claimcount" style="display:none">
+                    <div class="col-sm-12 claimcount text-center" style="display:none">
                         <h1 class="no-margins liabcount"> </h1>
                         <small>Total Claims</small>
                     </div>
 
-                    <div class="col-sm-6 font-bold text-info" style="margin-top:15px;">
+                    @*<div class="col-sm-6 font-bold text-info" style="margin-top:15px;">
                         <a style="color:#23c6c8;font-size:20px" href="#" onclick="LoadForm('FormGeneralLiabilityClaim');">
                             <i class="fa fa-plus-circle"></i> Add New
                         </a>
-                    </div>
+                    </div>*@
 
                 </div>
-            </div>*@
+            </div>
 
-            <div class="widget style1 ">
+            @*<div class="widget style1 ">
                 <div class="row">
                  
                     <div class="col-xs-12" style="text-align: center;
@@ -179,31 +194,31 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
 
         <div class="col-lg-3">
-            @*<div class="ibox ">
+            <div class="ibox ">
                 <div class="ibox-title text-center">
 
                     <button type="button" class="btn btn-w-m btn-success">Mold Damage Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
-                    <div class="col-sm-6 claimcount" style="display:none">
+                    <div class="col-sm-12 claimcount text-center" style="display:none">
                         <h1 class="no-margins damagecount"></h1>
                         <small>Total Claims</small>
                     </div>
 
-                    <div class="col-sm-6 font-bold text-success" style="margin-top:15px;">
+                    @*<div class="col-sm-6 font-bold text-success" style="margin-top:15px;">
                         <a style="color:#1c84c6;font-size:20px" href="#" onclick="LoadForm('FormMoldDamageClaim');">
                             <i class="fa fa-plus-circle"></i> Add New
                         </a>
-                    </div>
+                    </div>*@
 
                 </div>
-            </div>*@
+            </div>
 
-            <div class="widget style1 ">
+            @*<div class="widget style1 ">
                 <div class="row">                 
                     <div class="col-xs-12" style="text-align: center;
     border-top: 2px solid #337ab7;
@@ -216,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>     
         </div>
 

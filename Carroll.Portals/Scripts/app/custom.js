@@ -1,7 +1,7 @@
 ﻿
-//var $BaseApiUrl = "http://localhost:1002/"; 
+var $BaseApiUrl = "http://localhost:1002/"; 
 
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -2643,7 +2643,8 @@ function LoadClaim()
                         if (data != null) {
 
                             var ClaimData = JSON.parse(JSON.stringify(data));
-                         
+
+                            $("#claimnumber").html(ClaimData.claim.tbl.claimNumber);
 
                             if (Type == "p")
                             {
@@ -3252,7 +3253,7 @@ $(document).ready(function ()
 
         if (claim != "")
         {
-            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim+"&Type="+Type, 'Claim Details', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
+            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim+"&Type="+Type, 'Claim Details', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=1,scrollbars=yes');
 
             printWindow.addEventListener('load', function () {
                 setTimeout(function () {
