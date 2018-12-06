@@ -68,8 +68,8 @@ namespace Carroll.Data.Entities.Repository
             using (CarrollFormsEntities _entities = DBEntity)
             {
                 _entities.Configuration.ProxyCreationEnabled = false;
-                if (string.IsNullOrEmpty(optionalSeachText)) return _entities.SiteUsers.ToList();
-                else return _entities.SiteUsers.Where(x => x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText)).ToList();
+                if (string.IsNullOrEmpty(optionalSeachText)) return _entities.SiteUsers.OrderBy(x=>x.FirstName).ToList();
+                else return _entities.SiteUsers.Where(x => x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText)).OrderBy(x => x.FirstName).ToList();
                 
             }
         }
@@ -91,7 +91,7 @@ namespace Carroll.Data.Entities.Repository
             {
                 // _entities.Configuration.ProxyCreationEnabled = false;
                 _entities.Configuration.ProxyCreationEnabled = false;
-                var _properties = _entities.Properties.ToList();
+                var _properties = _entities.Properties.OrderBy(x => x.PropertyName).ToList();
 
                 return _properties;
             }
