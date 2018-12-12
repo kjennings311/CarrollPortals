@@ -14,7 +14,7 @@ namespace Carroll.Data.Services.Models
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
 
         dynamic GetRecord(EntityType entityType, string recordId);
-        dynamic GetAllClaims(Guid? userid, Guid? propertyid, string optionalSeachText);
+        dynamic GetAllClaims(Guid? userid, Guid? propertyid, string Type, string optionalSeachText);
 
         dynamic CreateUpdateRecord(EntityType entityType,dynamic obj);
 

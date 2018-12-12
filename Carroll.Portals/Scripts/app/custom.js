@@ -2270,7 +2270,14 @@ function ConfigDatatable(Form) {
 }
 
 
-function GetAllClaims() {
+function GetAllClaims(Type) {
+
+
+    if ($.fn.DataTable.isDataTable('.dtprops')) {
+        $(".dtprops").DataTable().destroy();
+        $('.dtprops tbody').empty();
+    }
+       
 
     $.when(GetToken()).then(
         function () {
@@ -2278,7 +2285,7 @@ function GetAllClaims() {
                 type: "get",
                 dataType: "json",
                 headers: { 'Access-Control-Allow-Origin': true },
-                url: $BaseApiUrl + "api/data/getallclaims?userid=" + $("#CreatedBy").val()+"&propertyid=null",
+                url: $BaseApiUrl + "api/data/getallclaims?Type="+Type+"&userid="+ $("#CreatedBy").val()+"&propertyid=null",
                 async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -3253,7 +3260,7 @@ $(document).ready(function ()
 
         if (claim != "")
         {
-            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim+"&Type="+Type, 'Claim Details', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=1,scrollbars=yes');
+            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim+"&Type="+Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
 
             printWindow.addEventListener('load', function () {
                 setTimeout(function () {

@@ -8585,3 +8585,51 @@ a.tooltipwala {
 z-index:99999999 !important;
 }
 
+
+
+@media only screen and (max-width : 1200px) {
+
+    .start-claim {
+        width:29% !important;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+    .start-claim {
+        width: 29% !important;
+    }
+
+    /*.start-claim button 
+    {
+        margin-left:10% !important;
+    }*/
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .start-claim {
+        width: 29% !important;
+    }
+
+
+    /* Extra Small Devices, Phones */
+    @media only screen and (max-width : 480px) {
+        .start-claim {
+            width: 50% !important;
+        }
+        }
+
+
+
+    /* Custom, iPhone Retina */
+    @media only screen and (max-width : 320px) {
+        .start-claim {
+            width: 90% !important;
+        }
+
+    }
+
+  
+
+}
