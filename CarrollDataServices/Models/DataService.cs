@@ -27,9 +27,9 @@ namespace Carroll.Data.Services.Models
             _repository = repository;
         }
 
-        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string optionalSeachText="")
+        public dynamic GetAllClaims(Guid? userid, Guid? propertyid,string Type, string optionalSeachText="")
         {
-            return _repository.GetAllClaims(userid,propertyid, optionalSeachText);
+            return _repository.GetAllClaims(userid,propertyid, Type, optionalSeachText);
         }
 
         public dynamic GetUserProperty(Guid userid)

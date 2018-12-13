@@ -691,7 +691,7 @@ namespace Carroll.Data.Entities.Repository
 
         
 
-        public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string optionalSeachText)
+        public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string Type, string optionalSeachText)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -699,13 +699,14 @@ namespace Carroll.Data.Entities.Repository
 
                 var config = new Config { };
 
-                    
-                        if (string.IsNullOrEmpty(optionalSeachText))
+                        if (string.IsNullOrEmpty(optionalSeachText)  && string.IsNullOrEmpty(Type))
                             config.Rows = _entities.SP_GetAllClaims1(userid,propertyid).ToList();
-                        else
+                        else if(Type=="All")
                             config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        else
+                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
 
-                        config.EtType = EntityType.AllClaims.ToString();
+                config.EtType = EntityType.AllClaims.ToString();
                         PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
                         config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                         config.Columns = new List<DtableConfigArray>();
