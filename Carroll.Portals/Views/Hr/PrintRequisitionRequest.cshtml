@@ -1,0 +1,377 @@
+﻿@model Carroll.Portals.Models.PrintRequisitionRequest
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Print Requisition Request  </title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+
+        body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 13px;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+    </style>
+
+    <link href="/Content/a4css.css" rel="stylesheet" />
+
+</head>
+<body class="document">
+    <div class="page">
+        <form id="submitform" onsubmit="return false;">
+            <div id="page_1">
+                <DIV id="p1dimg 1" style="text-align:center;">
+                    <img src="/img/requistionrequestheader.jpg" />
+                    <h1 style="font-weight:bold">  Requistion Request </h1>
+                </DIV>
+
+                <TABLE cellpadding=0 cellspacing=0 class="t0">
+                    <TR>
+                        <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><input type="text" id="propertyname" value="@Model.PropertyName" /></P></TD>
+                        <TD class="tr0 td1"><P class="p0 ft3"><SPAN class="ft2"> Date: </SPAN><input type="text" id="datechoosen" value="@Model.Date.Value.ToShortDateString()" /> </P></TD>
+                    </TR>
+                    <TR>
+                        <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0"> Requestor’s Name & Position </SPAN>: <input type="text" id="requestorname"  value="@Model.RequestorName"/></P></TD>
+                        <TD class="tr1 td1"><P class="p0 ft4">&nbsp;</P></TD>
+                    </TR>
+                </TABLE>
+                <P class="p1 ft0">Position (please indicate number of requested open needs for each position for this property):</P>
+                <P class="p2 ft1"> @{ if (Model.PositionCombined.Contains("Property Manager")) { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> } else { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                }  Property Manager</P>
+                <P class="p3 ft1">
+                    @{ if (Model.PositionCombined.Contains("Assistant Property Manager"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                                }  Assistant Property Manager
+                            </P>
+                <P class="p2 ft1">
+                    @{ if (Model.PositionCombined.Contains("Leasing Manager"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    }  Leasing Manager
+                </P>
+                <P class="p3 ft1">
+                    @{ if (Model.PositionCombined.Contains("Leasing Consultant"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    }  Leasing Consultant
+                </P>
+                <P class="p2 ft1">
+                    @{ if (Model.PositionCombined.Contains("Maintenance Supervisor"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    } Maintenance Supervisor
+                </P>
+                <P class="p3 ft1">
+                    @{ if (Model.PositionCombined.Contains("Maintenance Technician"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    }  Maintenance Technician
+                </P>
+                <P class="p2 ft1">
+                    @{ if (Model.PositionCombined.Contains("Groundskeeper"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    }  Groundskeeper
+                </P>
+                <P class="p3 ft1">
+                    @{ if (Model.PositionCombined.Contains("Housekeeper"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    }  Housekeeper
+                </P>
+                <P class="p2 ft1">
+                    @{ if (Model.PositionCombined.Contains("Other"))
+                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
+                        else
+                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
+                    } Other: <input type="text" id="txtother" value="@Model.PositionOther" />
+                </P>
+                <P class="p1 ft0">Circle One: <SPAN class="ft1">
+    @{
+        if (@Model.ChkNewPosition == true)
+        {
+            <input type="radio" name="position" class="" id="chknewposition" checked />
+        }
+        else
+        {
+            <input type="radio" name="position" class="" id="chknewposition" />
+        }
+
+    }
+    New Position
+</SPAN></P>
+                <P class="p4 ft1">
+                    @{
+                        if (@Model.ChkReplacementPosition == true)
+                        {
+                            <input type="radio" class="" name="position" id="chkreplacementposition" checked />
+
+                        }
+                        else
+                        {
+
+                            <input type="radio" class="" name="position" id="chkreplacementposition" />
+                        }
+                    } Replacement Position
+                </P>
+                            
+<P class="p5 ft1">Name of Person(s) Replacing: <input type = "text" id="replaceperson" value="@Model.ReplacingPerson" /> </P>
+<P class="p1 ft1">
+    <SPAN class="ft0">Post to: </SPAN>   @{
+        if (@Model.ChkCarrollCareersIndeed == true)
+        {
+            <input type="checkbox" id="postindeed" checked />
+        }
+        else
+        {
+            <input type="checkbox" id="postindeed" />
+        }
+    } Carroll Careers/ Indeed </P>
+
+
+
+<P class="p6 ft1">
+    @{
+        if (@Model.ChkApartmentAssociation == true)
+        {
+            <input type="checkbox" id="postassociation" checked />
+        }
+        else
+        {
+            <input type="checkbox" id="postassociation" />
+        }
+    } Apartment Association
+</P>
+<P class="p4 ft1">
+    @{
+        if (@Model.ChkOtherPost == true)
+        {
+                 <input type="checkbox" id="chkotherpost" checked />
+        }
+        else
+        {
+               <input type="checkbox" id="chkotherpost" />
+        }
+    } <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost"  value="@Model.PostOther"/>
+</P>
+                        <P class="p7 ft1">Special Instructions(i.e.confidential posting, etc.)</P>
+                        <P class="p2 ft1"><input type = "text" style="width:100%" id="specialinstructions1" />@Model.SpecailInstructions </P>                       
+                        <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
+                        <P class="p7 ft1">Requisition Number(s): <input type = "text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
+                        <P class="p7 ft1">Date Posted:<input type = "text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" /></P>
+                        <P class="p7 ft1">Notes:</P>
+                        <P class="p3 ft1"><input type = "text" style="width:100%" id="notes1" />@Model.Notes</P>
+                        <br /> <br />                        
+            </div>
+        </form>
+    </div>
+
+    <style type="text/css">
+
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+
+
+        body {
+            margin-top: 0px;
+            margin-left: 0px;
+        }
+
+        #page_1 {
+            position: relative;
+            overflow: hidden;
+            margin: 48px 0px 101px 46px;
+            padding: 0px;
+            border: none;
+            width: 770px;
+        }
+
+            #page_1 #p1dimg1 {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: -1;
+                width: 706px;
+                height: 709px;
+            }
+
+                #page_1 #p1dimg1 #p1img1 {
+                    width: 706px;
+                    height: 709px;
+                }
+
+
+
+
+        .dclr {
+            clear: both;
+            float: none;
+            height: 1px;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .ft0 {
+            font: bold 16px 'Calibri';
+            line-height: 19px;
+        }
+
+        .ft1 {
+            font: 16px 'Calibri';
+            line-height: 19px;
+        }
+
+        .ft2 {
+            font: bold 15px 'Calibri';
+            line-height: 18px;
+        }
+
+        .ft3 {
+            font: 15px 'Calibri';
+            line-height: 18px;
+        }
+
+        .ft4 {
+            font: 1px 'Calibri';
+            line-height: 1px;
+        }
+
+        .p0 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p1 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 40px;
+            margin-bottom: 0px;
+        }
+
+        .p2 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p3 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p4 {
+            text-align: left;
+            padding-left: 78px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p5 {
+            text-align: left;
+            padding-left: 146px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p6 {
+            text-align: left;
+            padding-left: 56px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p7 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        .p8 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 43px;
+            margin-bottom: 0px;
+        }
+
+        .td0 {
+            padding: 0px;
+            margin: 0px;
+            width: 480px;
+            vertical-align: bottom;
+        }
+
+        .td1 {
+            padding: 0px;
+            margin: 0px;
+            width: 175px;
+            vertical-align: bottom;
+        }
+
+        .tr0 {
+            height: 20px;
+        }
+
+        .tr1 {
+            height: 42px;
+        }
+
+        .t0 {
+            width: 655px;
+            margin-left: 2px;
+            /*margin-top: 119px;*/
+            font: bold 16px 'Calibri';
+        }
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+    </style>
+</body>
+</html>
+
+

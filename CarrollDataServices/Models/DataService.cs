@@ -115,7 +115,15 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetEmployeeNewHireNotice(obj);
         }
+        public dynamic InsertRequisitionRequest(RequisitionRequest obj)
+        {
+            return _repository.InsertRequistionRequest(obj);
+        }
 
+        public dynamic GetRequisitionRequest(Guid obj)
+        {
+            return _repository.GetRequisitionRequest(obj);
+        }
 
         public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice obj)
         {

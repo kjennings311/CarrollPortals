@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "PayRoll Status Change Notice";
+    ViewBag.Title = "Notice of Employee Separation";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -23,129 +23,172 @@
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-            <div class="ibox-content" style="margin-left:15%; padding-top:0px;">
-                <form id="submitform" onsubmit="return false;">
-                    <p class="c1 c8" style="margin-left:30%;">
-                        <span class="c7">
-                            <img src="~/img/newhirenotice.png">
-                        </span>
-                    </p>
-                    <DIV id="page_1">
-                        <DIV class="dclr"></DIV>
-                        <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
-                        <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate"  /> Eligible for Rehire <select id="rehire" ><option value="true" > Yes </option><option value="false"> No </option> </select></p>
-                        <p class="p1 ft1">Property Name <input type="text" id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
-                        <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <input type="text" id="jobtitle" style="width:46%" /></p>
-                        <P class="p3 ft2">Reason Code from below (Circle all that apply)</P>
-                        <TABLE cellpadding=0 cellspacing=0 class="t0">
-                            <TR>
-                                <TD class="tr0 td0"><P class="p4 ft3">Discharged</P></TD>
-                                <TD class="tr0 td1"><P class="p5 ft3">Quit</P></TD>
-                                <TD class="tr0 td2"><P class="p6 ft3">Lack of Work</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr1 td3"><P class="p7 ft4">Refused Instructions</P></TD>
-                                <TD class="tr1 td4"><P class="p8 ft4">Domestic Obligations</P></TD>
-                                <TD class="tr1 td5"><P class="p9 ft4">No Light Duty Available</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Falsified Applications</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">For Other Work</P></TD>
-                                <TD class="tr2 td5"><P class="p9 ft4">Location Closed</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Neglect of Duty</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Without Notice</P></TD>
-                                <TD class="tr2 td5"><P class="p9 ft4">Job Eliminated</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Misconduct</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Job Dissatisfaction</P></TD>
-                                <TD class="tr2 td5"><P class="p9 ft4">End of Temporary Assignment</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Violated Company Policy**</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Personal Reasons</P></TD>
-                                <TD class="tr2 td5"><P class="p9 ft4">End of Seasonal Work</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Unexcused Absenteeism</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Moved</P></TD>
-                                <TD class="tr2 td5"><P class="p9 ft4">Lack of Work</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Unexcused Tardiness</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Other Voluntarily Quit</P></TD>
-                                <TD class="tr2 td5"><P class="p9 ft3">Property Sold / Loss Mgt</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr0 td3"><P class="p7 ft4">Insubordination</P></TD>
-                                <TD class="tr0 td4"><P class="p8 ft4">Refused Recall</P></TD>
-                                <TD class="tr0 td5"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr3 td3"><P class="p10 ft6">&nbsp;</P></TD>
-                                <TD class="tr3 td4"><P class="p8 ft7">Reduced Work</P></TD>
-                                <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr4 td3"><P class="p7 ft4">Work Quality / Quantity</P></TD>
-                                <TD class="tr4 td4"><P class="p8 ft4">Schedule</P></TD>
-                                <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Shortages / Theft</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Voluntary Retirement</P></TD>
-                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Dishonesty</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Not Able / Available</P></TD>
-                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Refused Work</P></TD>
-                                <TD class="tr2 td4"><P class="p8 ft4">Deceased</P></TD>
-                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td3"><P class="p7 ft4">Violation of Drug / Alcohol Policy</P></TD>
-                                <TD class="tr2 td4"><P class="p10 ft5">&nbsp;</P></TD>
-                                <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td6"><P class="p7 ft3">Failed <NOBR>E-Verify</NOBR></P></TD>
-                                <TD class="tr2 td7"><P class="p10 ft5">&nbsp;</P></TD>
-                                <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
-                            </TR>
-                        </TABLE>
-                        <P class="p11 ft1">**What Policy specifically was violated? <input type="text" id="polictyvoilated1" style="width:60%" /></P>
-                        <P class="p12 ft1"><input type="text" id="polictyvoilated2" style="width:95%" /></P>
-                        <P class="p13 ft1">Additional Remarks <input type="text" id="remarks1" style="width:78%" /></P>
-                        <P class="p14 ft1"><input type="text" id="remarks2" style="width:96%" /></P>
-                        <P class="p15 ft8">(Documentation Available?<input type="text" id="documentsavailable1" style="width:72%" /></P>
-                        <P class="p16 ft1"><input type="text" id="documentsavailable2" style="width:96%" /></P>
-                        <P class="p17 ft1">Warnings Given? Dates?) <input type="text" id="warningsgiven1" style="width:73%" /></P>
-                        <P class="p14 ft1"><input type="text" id="warningsgiven2" style="width:96%" /></P>
-                        <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned" ><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:148px;">2 weeks’ notice given? <select id="noticegiven" ><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
-                        <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? <select id="vacationpaid" ><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
-                        <P class="p17 ft1">Immediate Supervisor’s Signature: ______________________________________ Date: ________________</P>
-                        <P class="p13 ft1">Senior Manager’s Signature: __________________________________________ Date: ________________</P>
-                        <P class="p17 ft1">Human Resources Manager’s Signature: _________________________________ Date: ________________</P>
-                        <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input type="text" id="notes1" style="width:82%" /></P>
-                        <P class="p14 ft1"><input type="text" id="notes2" style="width:96%; margin-bottom:20px;" /></P>
-                        <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
-                        <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
-                    </DIV>
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
 
-                    <br /> <br />
-                    <div id="status"> </div>
-                    <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+                <h1 style="color:black"> <b> Notice of Employee Separation </b></h1>
 
-                        <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  <button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                {
 
+                    <div class="ibox-tools" style="margin-top:-55px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+
+                    <a disabled="disabled" class="btnDelete" href="#">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>*@
+
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeSeparation');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
                     </div>
-                </form>
+                }
+            </div>
+
+            <div class="ibox-content" style="margin-left:0%; padding-top:0px;">
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @*<h1 class="modal-title" style="font-weight:bold;text-align: center;
+                            color: black;" id="gridSystemModalLabel">
+                                                            Payroll Status Change
+                                                        </h1>*@
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;
+    border: 2px solid black;">
+                                    <form id="submitform" onsubmit="return false;">
+                                        <p class="c1 c8" style="margin-left:30%;">
+                                            <span class="c7">
+                                                <img src="~/img/newhirenotice.png">
+                                            </span>
+                                        </p>
+                                        <DIV id="page_1">
+                                            <DIV class="dclr"></DIV>
+                                            <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
+                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <select id="rehire"><option value="true"> Yes </option><option value="false"> No </option> </select></p>
+                                            <p class="p1 ft1">Property Name <input type="text" id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
+                                            <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <input type="text" id="jobtitle" style="width:46%" /></p>
+                                            <P class="p3 ft2">Reason Code from below (Circle all that apply)</P>
+                                            <TABLE cellpadding=0 cellspacing=0 class="t0">
+                                                <TR>
+                                                    <TD class="tr0 td0"><P class="p4 ft3">Discharged</P></TD>
+                                                    <TD class="tr0 td1"><P class="p5 ft3">Quit</P></TD>
+                                                    <TD class="tr0 td2"><P class="p6 ft3">Lack of Work</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr1 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Refused Instructions" />Refused Instructions </P></TD>
+                                                    <TD class="tr1 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Domestic Obligations" />Domestic Obligations</P></TD>
+                                                    <TD class="tr1 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="No Light Duty Available" /> No Light Duty Available</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Falsified Applications" /> Falsified Applications</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="For Other Work" />For Other Work</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="Location Closed" /> Location Closed</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Neglect of Duty" /> Neglect of Duty</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Without Notice" />Without Notice</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="Job Eliminated" /> Job Eliminated</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Misconduct" /> Misconduct</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Job Dissatisfaction" />Job Dissatisfaction</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="End of Temporary Assignment" /> End of Temporary Assignment</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Violated Company Policy**" />Violated Company Policy**</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Personal Reasons" />Personal Reasons</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="End of Seasonal Work" /> End of Seasonal Work</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Unexcused Absenteeism" />Unexcused Absenteeism</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Moved" />Moved</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"><input type="checkbox" class="wor" value="Lack of Work" /> Lack of Work</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Unexcused Tardiness" />Unexcused Tardiness</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Other Voluntarily Quit" />Other Voluntarily Quit</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft3"> <input type="checkbox" class="wor" value="Property Sold / Loss Mgt" /> Property Sold / Loss Mgt</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr0 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Insubordination" />Insubordination</P></TD>
+                                                    <TD class="tr0 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Refused Recall" />Refused Recall</P></TD>
+                                                    <TD class="tr0 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr3 td3"><P class="p10 ft6">&nbsp;</P></TD>
+                                                    <TD class="tr3 td4"><P class="p8 ft7"><input type="checkbox" class="qui" value="Reduced Work" />Reduced Work</P></TD>
+                                                    <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr4 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value=" Work Quality / Quantity" /> Work Quality / Quantity</P></TD>
+                                                    <TD class="tr4 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Schedule" />Schedule</P></TD>
+                                                    <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Shortages / Theft" />Shortages / Theft</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Voluntary Retirement" />Voluntary Retirement</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Dishonesty" />Dishonesty</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Not Able / Available" />Not Able / Available</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Refused Work" />Refused Work</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Refused Instructions" />Deceased</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Violation of Drug / Alcohol Policy" />Violation of Drug / Alcohol Policy</P></TD>
+                                                    <TD class="tr2 td4"><P class="p10 ft5">&nbsp;</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td6"><P class="p7 ft3"> <input type="checkbox" class="dis" value="Failed E-Verify" /> Failed E-Verify</NOBR></P></TD>
+                                                    <TD class="tr2 td7"><P class="p10 ft5">&nbsp;</P></TD>
+                                                    <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                            </TABLE>
+                                            <P class="p11 ft1">**What Policy specifically was violated? <input type="text" id="polictyvoilated1" style="width:60%" /></P>
+                                            <P class="p12 ft1"><input type="text" id="polictyvoilated2" style="width:95%" /></P>
+                                            <P class="p13 ft1">Additional Remarks <input type="text" id="remarks1" style="width:78%" /></P>
+                                            <P class="p14 ft1"><input type="text" id="remarks2" style="width:96%" /></P>
+                                            <P class="p15 ft8">(Documentation Available?<input type="text" id="documentsavailable1" style="width:72%" /></P>
+                                            <P class="p16 ft1"><input type="text" id="documentsavailable2" style="width:96%" /></P>
+                                            <P class="p17 ft1">Warnings Given? Dates?) <input type="text" id="warningsgiven1" style="width:73%" /></P>
+                                            <P class="p14 ft1"><input type="text" id="warningsgiven2" style="width:96%" /></P>
+                                            <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:148px;">2 weeks’ notice given? <select id="noticegiven"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
+                                            <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
+                                            <P class="p17 ft1">Immediate Supervisor’s Signature: ______________________________________ Date: ________________</P>
+                                            <P class="p13 ft1">Senior Manager’s Signature: __________________________________________ Date: ________________</P>
+                                            <P class="p17 ft1">Human Resources Manager’s Signature: _________________________________ Date: ________________</P>
+                                            <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input type="text" id="notes1" style="width:82%" /></P>
+                                            <P class="p14 ft1"><input type="text" id="notes2" style="width:96%; margin-bottom:20px;" /></P>
+                                            <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
+                                            <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
+                                        </DIV>
+
+                                        <br /> <br />
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+
 
             </div>
         </div>
@@ -588,7 +631,11 @@
         $(document).ready(function () {
             var leaseid = "";
 
-            $("input").change(function (e) {
+            GetAllHRFORMs('EmployeeSeparation');
+
+
+            $("input").change(function (e)
+            {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
@@ -597,16 +644,50 @@
                 else {
                     $(this).removeClass("has-error");
                 }
-
             });
 
 
-            $("#Submit").click(function (e) {
+            $("#Submit").click(function (e)
+            {
                 e.preventDefault();
 
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
+
+
+                var dischargetext = "";
+
+                $('.dis').each(function (index, obj) {
+                    if (this.checked === true) {
+                        dischargetext += $(this).val() + ",";
+                       
+                    }
+                });
+
+                dischargetext = dischargetext.replace(/(^,)|(,$)/g, "");
+
+                var quittext = "";
+
+                $('.qui').each(function (index, obj) {
+                    if (this.checked === true) {
+                        quittext += $(this).val() + ",";
+                       
+                    }
+                });
+               
+                quittext = quittext.replace(/(^,)|(,$)/g, "");
+
+                var worktext = "";
+
+                $('.wor').each(function (index, obj) {
+                    if (this.checked === true) {
+                        worktext += $(this).val() + ",";                       
+                    }
+                });
+
+                worktext = worktext.replace(/(^,)|(,$)/g, "");
+
 
                 if ($("#effectivedate").val() == "") {
                     errormsgsummary += "<li> Please Choose Date </li>";
@@ -670,6 +751,14 @@
                     return false;
                 }
                 else {
+                    $('#myModal').modal('hide');
+
+                    //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
+                    $(".alert").html('Processing ........');
+                    $('#toastnotification').modal('show'); 
+
+                  
+
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
@@ -686,11 +775,14 @@
                     insertForm.append('noticegives', $("#noticegiven").val());
                     insertForm.append('vacationpaidout', $("#vacationpaid").val());
                     insertForm.append('balance', $("#vacationbalance").val());
-                    insertForm.append('comments', $("#notes1").val() + " " + $("#notes2").val());                  
+                    insertForm.append('comments', $("#notes1").val() + " " + $("#notes2").val());   
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('discharge', dischargetext);
+                    insertForm.append('quit', quittext);
+                    insertForm.append('work', worktext);
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
-                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $("#status").html("<p style='color:green'> Processing </p>");
 
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertNoticeOfEmployeeSeperation",
@@ -705,20 +797,22 @@
                             if (data['error'] == false)
                             {
                                 leaseid = data['insertedId'];
+                                GetAllHRFORMs('EmployeeSeparation');
+                                $("#status").html('');
 
-                                $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
+                                    $("#submitform").trigger('reset');
+                                document.getElementById("submitform").reset();
 
-                                //    $("#submitform").trigger('reset');
-                                //$("#submitform input") .each(function () {
-                                //    this.reset();
-                                //});
-
+                                $(".alert").html('Record Successfully Updated !');
+                                $('#toastnotification').modal('show'); 
+                                
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', true);
-                                }, 1000);
+                                    $('#toastnotification').modal('hide'); 
+                                }, 3000);
                             }
                             else {
                                 $("#status").html(data['errorMsg']);

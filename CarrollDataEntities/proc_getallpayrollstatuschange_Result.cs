@@ -13,42 +13,10 @@ namespace Carroll.Data.Entities
     
     public partial class proc_getallpayrollstatuschange_Result
     {
-        public System.Guid PayrollStatusChangeNoticeId { get; set; }
         public string EmployeeName { get; set; }
         public Nullable<System.DateTime> ChangeEffectiveDate { get; set; }
-        public string Manager { get; set; }
-        public Nullable<System.DateTime> TodayDate { get; set; }
-        public string Client_Location { get; set; }
-        public Nullable<bool> NewHire { get; set; }
-        public Nullable<bool> ReHire { get; set; }
-        public Nullable<bool> Transfer { get; set; }
-        public string Position { get; set; }
-        public string Exempt { get; set; }
-        public string NonExempt { get; set; }
-        public string SsHash { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
-        public string Status_FullTime_PartTime { get; set; }
-        public string Wage_Salary { get; set; }
-        public string Allocation { get; set; }
-        public string StreetAddress { get; set; }
-        public string City_State_Zip { get; set; }
-        public string Phone { get; set; }
-        public Nullable<double> Change_Pay_Rate_From { get; set; }
-        public Nullable<double> Change_Pay_Rate_To { get; set; }
-        public string Change_Property_From { get; set; }
-        public string Change_Property_To { get; set; }
-        public string Address_ContactInfo { get; set; }
-        public string Date_Of_Suspence { get; set; }
-        public Nullable<double> Suspence_Paid { get; set; }
-        public Nullable<double> Suspence_UnPaid { get; set; }
-        public string Leave_Absence { get; set; }
-        public Nullable<double> Leave_Paid { get; set; }
-        public Nullable<double> Leave_UnPaid { get; set; }
-        public string Explanation { get; set; }
-        public Nullable<System.Guid> CreatedUser { get; set; }
+        public string TypeOfChange { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
-        public Nullable<System.Guid> ModifiedUser { get; set; }
-        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }

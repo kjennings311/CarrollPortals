@@ -1,21 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Employee Lease Rider";
-
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-
-        @*<h2> Employee Lease Rider </h2>*@
-
         <ol class="breadcrumb" style="padding: 8px 15px;">
             <li>
                 <a href="~/Home/Index">Home</a>
             </li>
 
             <li class="active">
-                <strong>Employee Lease Rider</strong>
+                <strong> Employee Lease Rider</strong>
             </li>
         </ol>
     </div>
@@ -27,56 +22,95 @@
 <div class="RowsContatiner animated fadeInRight" >
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-         
-            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
 
-                <img src="~/img/carroll-print.png" />
+                <h1 style="color:black"> <b> Employee Lease Rider  </b></h1>
 
-                <h1 style="text-align: center;
-    margin-top: -30px;">
-                    <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
-                </h1>
-                <form id="submitform" onsubmit="return false;">
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                {
 
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="date" id="leasedate" class="" /> </p>
+                    <div class="ibox-tools" style="margin-top:-55px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Community :  </span> <input style=" display:inline; " type="text" id="apartmentname" class="" />  </p>
+                        <a disabled="disabled" class="btnDelete" href="#">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>*@
 
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; " onchange="document.getElementById('printempname').value=this.value" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
-
-                    <ol>
-                        <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="text" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="text" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline; " type="text" id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon termination of my employment with Carroll Organization whether voluntary or involuntary, my lease will be terminated regardless of the lease term stated on the lease. I will not be considered a tenant of the apartment community nor will I have rights and privileges of a tenant without the written consent of the Carroll Organization.&nbsp; I further agree that upon such termination from employment, I will vacate the apartment occupied by me within <strong><u>seven days</u></strong> from the date of my termination of employment.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If the Carroll Organization should agree to allow me to continue to lease the apartment as a resident, a new lease will be signed that shall be at the current market rate and subject to all normal lease provisions.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon vacating the apartment occupied by me, for any reason, I will leave the apartment clean and in good condition.</span></li>
-                        <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
-                    </ol>
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
-
-                    <p><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________ </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10.0pt; line-height: 115%;margin-left:45%;"> ____________________________________</span></p>
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 10.0pt; line-height: 115%;margin-left:41%;"> Signature of Property Manager</span></p>
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="printempname" disabled />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
-                    <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Printed Name of Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
-                    @*<p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cc: Property Lease Folder</span></p>*@
-                    <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;">Position : <input type="text" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
-                    <p style="text-align: justify;">
-                        <span style="font-size: 10.0pt; line-height: 115%;">Date : </span> <input style="margin-left: 2%;
-    padding-left: 10px;" type="date" id="positiondate" />
-                    </p>
-                    <br /> <br />
-                    <div id="status"> </div>
-                    <div class="col-md-12" style="text-align:right;margin-bottom:20px;">
-
-                        <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  <button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>
-
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeLeaseRider');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
                     </div>
-                    <br /> <br />
+                }
+            </div>
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+                <div id="status1"> </div>
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                                    Employee Lease Rider
+                                </h1>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;
+    border: 2px solid black;" >
+                                    <img src="~/img/carroll-print.png" />
 
-                </form>
+                                    @*<h1 style="text-align: center;
+    margin-top: -30px;">
+                                        <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
+                                    </h1>*@
+                                    <form id="submitform" onsubmit="return false;">
+
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="date" id="leasedate" class="" /> </p>
+
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Property :  </span> <input style=" display:inline; " type="text" id="apartmentname" class="" />  </p>
+
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; " onchange="document.getElementById('printempname').value=this.value" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
+
+                                        <ol>
+                                            <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="text" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="text" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline; " type="text" id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon termination of my employment with Carroll Organization whether voluntary or involuntary, my lease will be terminated regardless of the lease term stated on the lease. I will not be considered a tenant of the apartment community nor will I have rights and privileges of a tenant without the written consent of the Carroll Organization.&nbsp; I further agree that upon such termination from employment, I will vacate the apartment occupied by me within <strong><u>seven days</u></strong> from the date of my termination of employment.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If the Carroll Organization should agree to allow me to continue to lease the apartment as a resident, a new lease will be signed that shall be at the current market rate and subject to all normal lease provisions.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon vacating the apartment occupied by me, for any reason, I will leave the apartment clean and in good condition.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
+                                        </ol>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
+
+                                        <p><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________ </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10.0pt; line-height: 115%;margin-left:45%;"> ____________________________________</span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 10.0pt; line-height: 115%;margin-left:41%;"> Signature of Property Manager</span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="printempname" disabled />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Printed Name of Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+                                        @*<p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cc: Property Lease Folder</span></p>*@
+                                        <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;">Position : <input type="text" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
+                                        <p style="text-align: justify;">
+                                            <span style="font-size: 10.0pt; line-height: 115%;">Date : </span> <input style="margin-left: 2%;
+    padding-left: 10px;" type="date" id="positiondate" />
+                                        </p>
+                                        <br /> <br />
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:right;margin-bottom:20px;">
+
+                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                                        </div>
+                                        <br /> <br />
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+
 
             </div>
         </div>
@@ -137,6 +171,8 @@
 
         $(document).ready(function ()
         {
+            GetAllHRFORMs('LeaseRider');
+
             var leaseid = "";
 
             $("input").change(function (e) {
@@ -217,7 +253,11 @@
                 else
                 {
 
-                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $('#myModal').modal('hide');
+
+                    //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
+                    $(".alert").html('Processing');
+                    $('#toastnotification').modal('show'); 
 
                     var insertForm = new FormData();
                     insertForm.append('date', $("#leasedate").val());
@@ -225,7 +265,7 @@
                     insertForm.append('empname', $("#empname").val());
                     insertForm.append('marketvalue', $("#marketvalue").val());
                     insertForm.append('emprent', $("#monthlyrent").val());
-                    insertForm.append('residence', $("#monthlyrent").val());
+                    insertForm.append('residence', $("#residency").val());
                     insertForm.append('position', $("#position").val());
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
@@ -243,24 +283,33 @@
 
                             if (data['error'] == false)
                             {
+                              
                                 leaseid = data['insertedId'];
 
-                                $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
+                                $("#status1").html('');
+                                GetAllHRFORMs('LeaseRider');
+                                $("#submitform").trigger('reset');
 
-                                //    $("#submitform").trigger('reset');
-                                //$("#submitform input") .each(function () {
-                                //    this.reset();
-                                //});
-
+                                $("#leasedate").val('');
+                                $("#apartmentname").val('');
+                                $("#empname").val('');
+                                $("#marketvalue").val('');
+                                $("#monthlyrent").val('');
+                                $("#residency").val('');
+                                $(".alert").html('Record Successfully Updated !');
+                                $('#toastnotification').modal('show'); 
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', true);
-                                }, 1000);
+                                    $("#status1").html('');
+                                    $('#toastnotification').modal('hide'); 
+                                }, 3000);
                             }
                             else
                             {
+                                $('#myModal').modal('show');
                                 $("#status").html(data['errorMsg']);
                             }                           
                         

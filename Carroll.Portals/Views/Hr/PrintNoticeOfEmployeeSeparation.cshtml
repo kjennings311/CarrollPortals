@@ -452,77 +452,349 @@
                     <TD class="tr0 td2"><P class="p6 ft3">Lack of Work</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr1 td3"><P class="p7 ft4">Refused Instructions</P></TD>
-                    <TD class="tr1 td4"><P class="p8 ft4">Domestic Obligations</P></TD>
-                    <TD class="tr1 td5"><P class="p9 ft4">No Light Duty Available</P></TD>
+                    <TD class="tr1 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Refused Instructions"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox"  />
+        }
+    } Refused Instructions
+</P></TD>
+                    <TD class="tr1 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Domestic Obligations"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Domestic Obligations
+</P></TD>
+                    <TD class="tr1 td5"><P class="p9 ft4">
+    @{ if (Model.LackOfWork.Contains("No Light Duty Available"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }No Light Duty Available
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Falsified Applications</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">For Other Work</P></TD>
-                    <TD class="tr2 td5"><P class="p9 ft4">Location Closed</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Falsified Applications"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    } Falsified Applications
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("For Other Work"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    } For Other Work
+</P></TD>
+                    <TD class="tr2 td5"><P class="p9 ft4">
+    @{ if (Model.LackOfWork.Contains("Location Closed"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    } Location Closed
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Neglect of Duty</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Without Notice</P></TD>
-                    <TD class="tr2 td5"><P class="p9 ft4">Job Eliminated</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Neglect of Duty"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Neglect of Duty
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Without Notice"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Without Notice
+</P></TD>
+                    <TD class="tr2 td5"><P class="p9 ft4">
+    @{ if (Model.LackOfWork.Contains("Job Eliminated"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Job Eliminated
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Misconduct</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Job Dissatisfaction</P></TD>
-                    <TD class="tr2 td5"><P class="p9 ft4">End of Temporary Assignment</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Misconduct"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Misconduct
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Job Dissatisfaction"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Job Dissatisfaction
+</P></TD>
+                    <TD class="tr2 td5"><P class="p9 ft4">
+    @{ if (Model.LackOfWork.Contains("End of Temporary Assignment"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }End of Temporary Assignment
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Violated Company Policy**</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Personal Reasons</P></TD>
-                    <TD class="tr2 td5"><P class="p9 ft4">End of Seasonal Work</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Violated Company Policy**"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Violated Company Policy**
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Personal Reasons"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Personal Reasons
+</P></TD>
+                    <TD class="tr2 td5"><P class="p9 ft4">
+    @{ if (Model.LackOfWork.Contains("End of Seasonal Work"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }End of Seasonal Work
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Unexcused Absenteeism</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Moved</P></TD>
-                    <TD class="tr2 td5"><P class="p9 ft4">Lack of Work</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Unexcused Absenteeism"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Unexcused Absenteeism
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Moved"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Moved
+</P></TD>
+                    <TD class="tr2 td5"><P class="p9 ft4">
+    @{ if (Model.LackOfWork.Contains("Lack of Work"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Lack of Work
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Unexcused Tardiness</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Other Voluntarily Quit</P></TD>
-                    <TD class="tr2 td5"><P class="p9 ft3">Property Sold / Loss Mgt</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Unexcused Tardiness"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Unexcused Tardiness
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Other Voluntarily Quit"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Other Voluntarily Quit
+</P></TD>
+                    <TD class="tr2 td5"><P class="p9 ft3">
+    @{ if (Model.LackOfWork.Contains("Property Sold / Loss Mgt"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Property Sold / Loss Mgt
+</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr0 td3"><P class="p7 ft4">Insubordination</P></TD>
-                    <TD class="tr0 td4"><P class="p8 ft4">Refused Recall</P></TD>
+                    <TD class="tr0 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Insubordination"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Insubordination
+</P></TD>
+                    <TD class="tr0 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Refused Recall"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Refused Recall
+</P></TD>
                     <TD class="tr0 td5"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
                 <TR>
                     <TD class="tr3 td3"><P class="p10 ft6">&nbsp;</P></TD>
-                    <TD class="tr3 td4"><P class="p8 ft7">Reduced Work</P></TD>
+                    <TD class="tr3 td4"><P class="p8 ft7">
+    @{ if (Model.QuitText.Contains("Reduced Work"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Reduced Work
+</P></TD>
                     <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr4 td3"><P class="p7 ft4">Work Quality / Quantity</P></TD>
-                    <TD class="tr4 td4"><P class="p8 ft4">Schedule</P></TD>
+                    <TD class="tr4 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Work Quality / Quantity"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Work Quality / Quantity
+</P></TD>
+                    <TD class="tr4 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Schedule"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Schedule
+</P></TD>
                     <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Shortages / Theft</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Voluntary Retirement</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Shortages / Theft"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Shortages / Theft
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Voluntary Retirement"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Voluntary Retirement
+</P></TD>
                     <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Dishonesty</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Not Able / Available</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Dishonesty"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Dishonesty
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Not Able / Available"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Not Able / Available
+</P></TD>
                     <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Refused Work</P></TD>
-                    <TD class="tr2 td4"><P class="p8 ft4">Deceased</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Refused Work"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Refused Work
+</P></TD>
+                    <TD class="tr2 td4"><P class="p8 ft4">
+    @{ if (Model.QuitText.Contains("Deceased"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Deceased
+</P></TD>
                     <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td3"><P class="p7 ft4">Violation of Drug / Alcohol Policy</P></TD>
+                    <TD class="tr2 td3"><P class="p7 ft4">
+    @{ if (Model.DischargedText.Contains("Violation of Drug / Alcohol Policy"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Violation of Drug / Alcohol Policy
+</P></TD>
                     <TD class="tr2 td4"><P class="p10 ft5">&nbsp;</P></TD>
                     <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
                 <TR>
-                    <TD class="tr2 td6"><P class="p7 ft3">Failed <NOBR>E-Verify</NOBR></P></TD>
+                    <TD class="tr2 td6"><P class="p7 ft3">
+    @{ if (Model.DischargedText.Contains("Failed E-Verify"))
+        { <input type="checkbox" checked /> }
+        else
+        {
+            <input type="checkbox" />
+        }
+    }Failed <NOBR>E-Verify</NOBR>
+</P></TD>
                     <TD class="tr2 td7"><P class="p10 ft5">&nbsp;</P></TD>
                     <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>

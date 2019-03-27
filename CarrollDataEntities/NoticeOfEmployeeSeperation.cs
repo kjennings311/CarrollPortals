@@ -34,5 +34,8 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string DischargedText { get; set; }
+        public string QuitText { get; set; }
+        public string LackOfWork { get; set; }
     }
 }

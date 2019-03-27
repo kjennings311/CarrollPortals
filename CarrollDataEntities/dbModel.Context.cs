@@ -45,6 +45,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
         public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
         public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
+        public virtual DbSet<RequisitionRequest> RequisitionRequests { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -113,11 +114,6 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
     
-        public virtual ObjectResult<proc_getallpayrollstatuschange_Result> proc_getallpayrollstatuschange()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallpayrollstatuschange_Result>("proc_getallpayrollstatuschange");
-        }
-    
         public virtual ObjectResult<SP_GetAllClaims1_Result> SP_GetAllClaims1(Nullable<System.Guid> userid, Nullable<System.Guid> propertyid)
         {
             var useridParameter = userid.HasValue ?
@@ -138,6 +134,16 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("propid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertydetails_Result>("proc_getpropertydetails", propidParameter);
+        }
+    
+        public virtual ObjectResult<proc_getallpayrollstatuschange_Result> proc_getallpayrollstatuschange()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallpayrollstatuschange_Result>("proc_getallpayrollstatuschange");
+        }
+    
+        public virtual ObjectResult<proc_getallrequisitionrequests_Result> proc_getallrequisitionrequests()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallrequisitionrequests_Result>("proc_getallrequisitionrequests");
         }
     }
 }

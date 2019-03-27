@@ -4,8 +4,8 @@
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-      
-        <ol class="breadcrumb" style="padding: 8px 15px;" >
+
+        <ol class="breadcrumb" style="padding: 8px 15px;">
             <li>
                 <a href="~/Home/Index">Home</a>
             </li>
@@ -23,82 +23,137 @@
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-            <div class="ibox-content" style="margin-left:20%; padding-top:0px;">
-                <form id="submitform" onsubmit="return false;">
-                    <p class="c1 c8" style="margin-left:90px;">
-                        <span class="c7">
-                            <img src="~/img/newhirenotice.png">
-                        </span>
-                    </p>
-                    <p class="c1 c8"  style="margin-left: 10%;">
-                        <span class="c7"> NEW HIRE NOTICE </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0"> Employee Name:    <input type="text" id="empname" />        Start Date:<input type="date" id="startdate" />  </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Employee Social Security Number:<input type="text" id="securitynumber" style="width:31%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Email Address: <input type="email" id="email" style="width:43%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c4">(do not leave blank)</span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Manager:<input type="text" id="manager" style="width:46.5%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Location:<input type="text" id="location" style="width:46.5%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Position: Exempt <input type="text" id="exempt" />   Non-exempt <input type="text" id="nonexempt" style="width:15%;"  /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Position <input type="text" id="position" style="width:46.5%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Status (full-time / part-time) :  <select id="status1" > <option value="Full Time"> Full Time </option><option value="Part Time"> Part Time </option> </select></span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Wage/Salary <input type="text" id="salary" style="width:30%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Allocation <input type="text" id="allocation" style="width:31.5%;" /> </span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Employee Signature _____________________________________________     Date_______________</span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature ________________________________ Date ______________</span>
-                    </p>
-                    <p class="c1">
-                        <span class="c0">RPM Signature____________________________________________________Date_______________</span>
-                    </p>
-                    <p class="c1" style="width:75%;">
-                        <span class="c6">
-                            Manager Responsibilities: Complete the New Hire Notice, sign the form, and submit to Human Resources via email at
-                            HRNotifications@carrollmg.com. This form kicks off the launching on Onboarding in Paylocity.
-                        </span>
-                    </p>
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
 
-                    <br /> <br />
-                    <div id="status"> </div>
-                    <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+                <h1 style="padding-top:5px;color:black"> <b>  Employee New Hire Notice </b></h1>
 
-                        <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  <button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                {
 
+                    <div class="ibox-tools" style="margin-top:-55px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+
+                    <a disabled="disabled" class="btnDelete" href="#">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>*@
+
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeLeaseRider');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
                     </div>
-                </form>
+                }
+            </div>
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="padding: 0px;
+    border: none;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;display:none;" id="gridSystemModalLabel">
+                                    Employee New Hire Notice
+                                </h1>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;
+    border: 2px solid black;">
+                                    <form id="submitform" onsubmit="return false;">
+                                        <p class="c1 c8" style="margin-left:90px;">
+                                            <span class="c7">
+                                                <img src="~/img/newhirenotice.png">
+                                            </span>
+                                        </p>
+                                        <p class="c1 c8" style="margin-left: 10%;">
+                                            <span class="c7"> NEW HIRE NOTICE </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0"> Employee Name:    <input type="text" id="empname" />        Start Date:<input type="date" id="startdate" />  </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Employee Social Security Number:<input type="text" id="securitynumber" style="width:31%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Email Address: <input type="email" id="email" style="width:43%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c4">(do not leave blank)</span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Manager:<input type="text" id="manager" style="width:46.5%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Location:<input type="text" id="location" style="width:46.5%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Position: Exempt <input type="text" id="exempt" />   Non-exempt <input type="text" id="nonexempt" style="width:15%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Position <input type="text" id="position" style="width:46.5%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Status (full-time / part-time) :  <select id="status1"> <option value="Full Time"> Full Time </option><option value="Part Time"> Part Time </option> </select></span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Wage/Salary <input type="text" id="salary" style="width:30%;" /> </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Allocation <input type="text" id="allocation" style="width:31.5%;" /> </span>
+                                        </p>
+
+                                        <p class="c1">
+                                            <span class="c0">
+                                                New Hire Kit Ordered (date) : <input type="date" id="kitorderdate" style="width:20%;" />
+                                            </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0"> Onboarding Call scheduled for (date):  <input type="date" id="onboardcall" style="width:20%;" /> </span>
+                                        </p>
+
+
+                                        <p class="c1">
+                                            <span class="c0">Employee Signature _____________________________________________     Date_______________</span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Manager&rsquo;s Authorizing Signature ________________________________ Date ______________</span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">RPM Signature____________________________________________________Date_______________</span>
+                                        </p>
+                                        <p class="c1" style="width:75%;">
+                                            <span class="c6">
+                                                Manager Responsibilities: Please return the signed form to Human Resources via email at HRNotifications@carrollmg.com with the I9 and appropriate documents.
+
+                                            </span>
+                                        </p>
+
+                                        <br /> <br />
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+
 
             </div>
         </div>
     </div>
 
 </div>
+
 
 
 
@@ -116,7 +171,13 @@
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")
     <style type="text/css">
-@@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');ol{margin:0;padding:0}
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
         table
         .c0 {
             color: #000000;
@@ -321,7 +382,7 @@
             widows: 2;
             text-align: left
         }
-  
+
         .dtprops td, .dtprops th {
             white-space: nowrap;
         }
@@ -339,7 +400,6 @@
         .has-error {
             border-color: red;
         }
-
     </style>
 }
 
@@ -353,7 +413,9 @@
 
         $(document).ready(function () {
             var leaseid = "";
+            GetAllHRFORMs('New Hire Notice');
 
+            
             $("input").change(function (e) {
                 e.preventDefault();
 
@@ -366,9 +428,8 @@
 
             });
 
-          
-            $("#Submit").click(function (e)
-            {
+
+            $("#Submit").click(function (e) {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -381,8 +442,7 @@
                         control = $("#empname");
                 }
 
-                if ($("#startdate").val() == "")
-                {
+                if ($("#startdate").val() == "") {
                     errormsgsummary += "<li> Please Enter Date </li>";
                     $("#startdate").addClass('has-error');
                     if (control == "")
@@ -480,7 +540,11 @@
                 }
                 else
                 {
-                                       
+                    $('#myModal').modal('hide');
+
+                    $(".alert").html('Processing ........');
+                    $('#toastnotification').modal('show'); 
+
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
                     insertForm.append('startdate', $("#startdate").val());
@@ -493,9 +557,12 @@
                     insertForm.append('position', $("#position").val());
                     insertForm.append('status', $("#status1").val());
                     insertForm.append('salary', $("#salary").val());
+                    insertForm.append('kitordered', $("#kitorderdate").val());
+                    insertForm.append('callscheduled', $("#onboardcall").val());
                     insertForm.append('allocation', $("#allocation").val());
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
+
                     $("#status").html("<p style='color:green'> Processing ........ </p>");
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
@@ -510,19 +577,34 @@
                             if (data['error'] == false) {
                                 leaseid = data['insertedId'];
 
-                                $("#status").html("<p style='color:green'> Updated Sucessfully. </p>");
+                                $("#empname").val('');
+                                $("#startdate").val('');
+                                $("#securitynumber").val('');
+                                $("#email").val('');
+                                $("#manager").val('');
+                                $("#location").val('');
+                                $("#exempt").val('');
+                                $("#nonexempt").val('');
+                                $("#position").val('');
+                                $("#status1").val('');
+                                $("#salary").val('');
+                                $("#kitorderdate").val('');
+                                $("#onboardcall").val('');
+                                $("#allocation").val('');
+                              
 
-                                //    $("#submitform").trigger('reset');
-                                //$("#submitform input") .each(function () {
-                                //    this.reset();
-                                //});
+                                GetAllHRFORMs('New Hire Notice');
+                                $(".alert").html('Record Successfully Updated !');
+                                $('#toastnotification').modal('show'); 
+                                 
 
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', true);
-                                }, 1000);
+                                    $('#toastnotification').modal('hide'); 
+                                }, 3000);
                             }
                             else {
                                 $("#status").html(data['errorMsg']);

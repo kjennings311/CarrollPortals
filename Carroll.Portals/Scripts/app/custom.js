@@ -376,6 +376,8 @@ function LoadUserProperty() {
 
 }
 
+
+
 function getForm(FormName, RecordId)
 {
     var formUrl = "";
@@ -384,14 +386,14 @@ function getForm(FormName, RecordId)
     var $formBegin = '<form  class="form-horizontal CustomForm">';
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
-    var $textbox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $datebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a  class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
-    var $passbox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
-    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
+    var $textbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $datebox = '<div class="form-group"><label class="col-sm-12 control-label">  <a  class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="text" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
+    var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
+    var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-2 control-label"> <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-10"><div class="i-checks"><label> <input class="form-control" type="checkbox" id="{1}" value="1"   {2}> <i></i> {0} </label></div></div></div>';
-    var $person = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body" style="margin-left:15px;" href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-4 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-8"> <div class="col-md-1" > <input class="form-control" type="checkbox"  id="{1}" value="1"   {2}></div> </div></div>';
+    var $person = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
     var $savebuttons = '  <div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
@@ -400,7 +402,7 @@ function getForm(FormName, RecordId)
         + '<a id="savechanges" class="btn btn-primary btn-add" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
         + '</div></div >';
     var $select = '<div class="form-group">'
-        + '<label class="col-sm-2 control-label"> <a class="tooltipwala" style="margin-left:15px;" data-container="body" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > i </a> {0} </label>'
+        + '<label class="col-sm-12 control-label"> <a class="tooltipwala" data-container="body" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > i </a> {0} </label>'
         + '<div class="col-sm-10">'
         + '<select data-placeholder="Select option" class="form-control {1}" id="{2}" >'
         + '<option value="">Select</option>'
@@ -596,6 +598,10 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
         $('#' + fieldId).append(options);
 
     });
+}
+
+function LoadHrForm(formname) {
+    $("#myModal").modal('show');
 }
 
 function ToggleAdd(formaname) {
@@ -1593,7 +1599,6 @@ function LoadUserProperties() {
                                         .css('font-size', 'inherit');
                                 }
                             }
-
                         ],
 
                         columns: [
@@ -2269,7 +2274,6 @@ function ConfigDatatable(Form) {
     );
 }
 
-
 function GetAllClaims(Type) {
 
 
@@ -2436,24 +2440,24 @@ function GetAllHRFORMs(formtype) {
 
                     var configdata = data;
 
-                    if (formtype == "New Hire Notice")
-                    {
-                        $(".ibox-title").html("<h5> All New Hire Notices </h5>");
+                    //if (formtype == "New Hire Notice")
+                    //{
+                    //    $(".ibox-title").html("<h5> All New Hire Notices </h5>");
 
-                    }
-                    else if (formtype == "EmployeeSeparation")
-                    {
-                        $(".ibox-title").html("<h5> All Notices Of Employee Separation  </h5>");
+                    //}
+                    //else if (formtype == "EmployeeSeparation")
+                    //{
+                    //    $(".ibox-title").html("<h5> All Notices Of Employee Separation  </h5>");
 
-                    }
-                    else if (formtype == "PayRollChange")
-                    {
-                        $(".ibox-title").html("<h5> All Carroll Payroll Status Change Notices  </h5>");
-                    }
-                    else if (formtype == "LeaseRider")
-                    {
-                        $(".ibox-title").html("<h5> All Employee Lease Rider Forms  </h5>");
-                    }
+                    //}
+                    //else if (formtype == "PayRollChange")
+                    //{
+                    //    $(".ibox-title").html("<h5> All Carroll Payroll Status Change Notices  </h5>");
+                    //}
+                    //else if (formtype == "LeaseRider")
+                    //{
+                    //    $(".ibox-title").html("<h5> All Employee Lease Rider Forms  </h5>");
+                    //}
 
                     if ($.fn.DataTable.isDataTable('.dtprops')) {
                         $('.dtprops').DataTable().clear().destroy();
@@ -2528,8 +2532,7 @@ function GetAllHRFORMs(formtype) {
                             //else if (rowdata.claimType == "PropertyDamage")
                             //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");
 
-                        },
-                        "order": [[2, 'asc']],
+                        },                       
                         dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
@@ -3153,7 +3156,8 @@ function LoadClaim()
 //    });
 //}
 
-function LoadUserClaims() {
+function LoadUserClaims()
+{
     $.ajax({
         url: $BaseApiUrl + "api/data/GetUserClaimCount?userid="+$("#CreatedBy").val(),
         type: 'GET',
@@ -3344,5 +3348,9 @@ $(document).ready(function ()
             });
         }
     });
+
+    // HR Forms
+
+   
 
 });

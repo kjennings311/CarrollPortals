@@ -48,6 +48,7 @@ namespace Carroll.Data.Entities.Repository
                 string role = "";
                 // _entities.Configuration.ProxyCreationEnabled = false;
                 var _userRoles = _entities.UserInRoles.Where(x => x.UserId == userid).ToList();
+
                 foreach (var item in _userRoles)
                 {
                     var res = (from tbl in _entities.Roles
@@ -103,6 +104,7 @@ namespace Carroll.Data.Entities.Repository
             using (CarrollFormsEntities _entities = DBEntity)
             {
                 SiteUser _matches = _entities.SiteUsers.Where(x => x.UserEmail.ToLower() == Email.ToLower()).FirstOrDefault();
+
                 if (_matches != null)
                 {
                     return true;
@@ -163,7 +165,6 @@ namespace Carroll.Data.Entities.Repository
                     int i = _entities.SaveChanges();
                     return (i == 1) ? true : false;
                 }
-
             }
             return false;
         }
