@@ -276,7 +276,7 @@
             <p class="c1">
                 <span class="c0">Email Address: <input type="email" id="email" style="width:43%;" value="@Model.EmailAddress" /> </span>
             </p>
-          
+
             <p class="c1">
                 <span class="c0">Manager:<input type="text" id="manager" style="width:46.5%;" value="@Model.Manager" /> </span>
             </p>
@@ -301,6 +301,17 @@
             <p class="c1">
                 <span class="c0">Allocation <input type="text" id="allocation" value="@Model.Allocation" style="width:31.5%;" /> </span>
             </p>
+
+            <p class="c1">
+                <span class="c0">
+                    New Hire Kit Ordered (date) : <input type="text" id="kitorderdate" value="@Model.kitordered.Value.ToShortDateString()" style="width:30%;" />
+                </span>
+            </p>
+            <p class="c1">
+                <span class="c0"> Onboarding Call scheduled for (date):  <input type="text" id="onboardcall" value="@Model.boardingcallscheduled.Value.ToShortDateString()" style="width:30%;" /> </span>
+            </p>
+
+
             <p class="c1">
                 <span class="c0">Employee Signature _____________________________________________     Date_______________</span>
             </p>
@@ -312,8 +323,8 @@
             </p>
             <p class="c1" style="width:75%;">
                 <span class="c6">
-                    Manager Responsibilities: Complete the New Hire Notice, sign the form, and submit to Human Resources via email at
-                    HRNotifications@carrollmg.com. This form kicks off the launching on Onboarding in Paylocity.
+                    Manager Responsibilities: Please return the signed form to Human Resources via email at HRNotifications@carrollmg.com with the I9 and appropriate documents.
+
                 </span>
             </p>
 

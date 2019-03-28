@@ -144,12 +144,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
-
     </div>
 
 
@@ -224,12 +219,13 @@
     {
 
 
-
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")
 
     <style>
-        .dtprops td, .dtprops th {
+
+        .dtprops td, .dtprops th 
+        {
             white-space: nowrap;
         }
        
@@ -253,11 +249,10 @@
 
     <script>
 
-        $(document).ready(function () {
-
+        $(document).ready(function ()
+        {
             LoadHrFormsCount();
-                GetAllHRFORMs('LeaseRider');
-
+            GetAllHRFORMs('LeaseRider');
         });
 
     </script>

@@ -119,6 +119,9 @@
     <Compile Include="proc_getallpayrollstatuschange_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_getallrequisitionrequests_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetGeneralLiabilityClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -149,6 +152,9 @@
     <Compile Include="Repository\ignore\IContactRepository.cs" />
     <Compile Include="Repository\IDataRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
+    <Compile Include="RequisitionRequest.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Role.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

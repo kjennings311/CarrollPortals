@@ -35,6 +35,8 @@ namespace Carroll.Data.Services.Models
         dynamic GetUserProperty(Guid userid);
         dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment);
         dynamic GetPayRollStatusChangeNotice(Guid riderid);
+        dynamic InsertRequisitionRequest(RequisitionRequest requisitionRequest);
+        dynamic GetRequisitionRequest(Guid riderid);
 
         dynamic InsertNoticeOfEmployeeSeperation(NoticeOfEmployeeSeperation formAttachment);
         dynamic GetNoticeOfEmployeeSeperation(Guid riderid);

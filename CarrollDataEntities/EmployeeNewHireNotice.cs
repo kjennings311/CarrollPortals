@@ -31,5 +31,7 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public Nullable<System.DateTime> kitordered { get; set; }
+        public Nullable<System.DateTime> boardingcallscheduled { get; set; }
     }
 }

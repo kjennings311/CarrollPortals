@@ -25,4 +25,23 @@ namespace Carroll.Portals.Helpers
         }
 
     }
+
+    public class AdminHRFilter : ActionFilterAttribute, IActionFilter
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+            HttpContextBase ctx = filterContext.HttpContext;
+
+            if (Carroll.Portals.Models.LoggedInUser.AssignedRole().ToLower() != "administrator" && Carroll.Portals.Models.LoggedInUser.AssignedRole().ToLower() != "hr")
+            {
+                filterContext.Result = new ContentResult() { Content = "You do not have permission to access this resource. Please contact your IT department." };
+            }
+            //if (!(filterContext.HttpContext.Session["Carroll_RoleName"].ToString().Contains("Administrator")))
+            //{
+            //    filterContext.Result = new ContentResult() { Content = "UnAuthorised Access to Specified Resource" };
+            //}
+        }
+
+    }
 }

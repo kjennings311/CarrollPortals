@@ -16,7 +16,7 @@ namespace Carroll.Portals.Controllers
 {
     [CustomAuthorize]
     [BaseModel]
-    [AdminFilter]
+    [AdminHRFilter]
     public class HrController : Controller
     {
 
@@ -35,10 +35,10 @@ namespace Carroll.Portals.Controllers
         // GET: Hr
         public async Task<ActionResult> PrintEmployeeLeaseRider(string id)
         {
-            
+
 
             dynamic obj = new { };
-         
+
             using (var client = new HttpClient())
             {
                 //Passing service base url  
@@ -66,12 +66,12 @@ namespace Carroll.Portals.Controllers
                 //returning the employee list to view  
                 return View(obj);
             }
-         
+
         }
 
         public async Task<ActionResult> PdfEmployeeLeaseRider(string id)
         {
-          
+
             dynamic obj = new { };
 
             using (var client = new HttpClient())
@@ -99,8 +99,8 @@ namespace Carroll.Portals.Controllers
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintEmployeeLeaseRider",obj) { FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
-                
+                return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
+
             }
 
         }
@@ -117,7 +117,7 @@ namespace Carroll.Portals.Controllers
 
         public async Task<ActionResult> PrintEmployeeNewHireNotice(string id)
         {
-           
+
 
             dynamic obj = new { };
 
@@ -150,10 +150,10 @@ namespace Carroll.Portals.Controllers
             }
 
         }
-        
+
         public async Task<ActionResult> PdfEmployeeNewHireNotice(string id)
         {
-          
+
 
             dynamic obj = new { };
 
@@ -182,7 +182,7 @@ namespace Carroll.Portals.Controllers
 
                 // o.Date=obj.
                 //returning the employee list to view  
-          //      return View(obj);
+                //      return View(obj);
 
 
                 //returning the employee list to view  
@@ -276,6 +276,8 @@ namespace Carroll.Portals.Controllers
         }
 
 
+        #region NotificeOfEmployeeSeparation 
+
         public ActionResult NoticeOfEmployeeSeparation()
         {
             return View(new BaseViewModel());
@@ -319,7 +321,7 @@ namespace Carroll.Portals.Controllers
 
         public async Task<ActionResult> PdfNoticeOfEmployeeSeparation(string id)
         {
-            
+
             dynamic obj = new { };
 
             using (var client = new HttpClient())
@@ -357,6 +359,92 @@ namespace Carroll.Portals.Controllers
 
         }
 
+        #endregion
 
+
+        #region NotificeOfEmployeeSeparation 
+
+        public ActionResult RequisitionRequest()
+        {
+            return View(new BaseViewModel());
+        }
+
+        public async Task<ActionResult> PrintRequisitionRequest(string id)
+        {
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetRequisitionRequest?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintRequisitionRequest>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                return View("PrintRequisitionRequest", obj);
+            }
+
+        }
+
+        public async Task<ActionResult> RequistionRequestPdf(string id)
+        {
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetRequisitionRequest?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintRequisitionRequest>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                //      return View(obj);
+
+
+                //returning the employee list to view  
+                return new ViewAsPdf("PrintRequisitionRequest", obj) { FileName = "RequisitionRequest - " + DateTime.Now.ToShortDateString() + ".pdf" };
+
+            }
+
+        }
+
+        #endregion
+
+        
     }
 }

@@ -103,7 +103,35 @@ namespace Carroll.Portals.Models
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
 
+    }
 
+    public class PrintRequisitionRequest
+    {
+        public System.Guid RequisitionRequestId { get; set; }
+        public string PropertyName { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public string RequestorName { get; set; }
+        public string RequestorPosition { get; set; }
+        public string PositionCombined { get; set; }
+        public string PositionOther { get; set; }
+        public string Type { get; set; }
+        public string Post { get; set; }
+        public Nullable<bool> ChkNewPosition { get; set; }
+        public Nullable<bool> ChkReplacementPosition { get; set; }
+        public string ReplacingPerson { get; set; }
+        public Nullable<bool> ChkCarrollCareersIndeed { get; set; }
+        public Nullable<bool> ChkApartmentAssociation { get; set; }
+        public string PostOther { get; set; }
+        public string SpecailInstructions { get; set; }
+        public string RequistionNumber { get; set; }
+        public Nullable<System.DateTime> DatePosted { get; set; }
+        public string Notes { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
+        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public Nullable<System.Guid> ModifiedUser { get; set; }
+        public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public Nullable<bool> ChkOtherPosition { get; set; }
+        public Nullable<bool> ChkOtherPost { get; set; }
     }
 
     public  class PrintViewClaim
@@ -253,6 +281,8 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public Nullable<System.DateTime> kitordered { get; set; }
+        public Nullable<System.DateTime> boardingcallscheduled { get; set; }
 
 
     }
@@ -263,35 +293,38 @@ namespace Carroll.Portals.Models
         public System.Guid PayrollStatusChangeNoticeId { get; set; }
         public string EmployeeName { get; set; }
         public Nullable<System.DateTime> ChangeEffectiveDate { get; set; }
-        public string Manager { get; set; }
-        public Nullable<System.DateTime> TodayDate { get; set; }
-        public string Client_Location { get; set; }
-        public Nullable<bool> NewHire { get; set; }
-        public Nullable<bool> ReHire { get; set; }
-        public Nullable<bool> Transfer { get; set; }
-        public string Position { get; set; }
-        public string Exempt { get; set; }
-        public string NonExempt { get; set; }
-        public string SsHash { get; set; }
-        public Nullable<System.DateTime> DOB { get; set; }
-        public string Status_FullTime_PartTime { get; set; }
-        public string Wage_Salary { get; set; }
-        public string Allocation { get; set; }
-        public string StreetAddress { get; set; }
-        public string City_State_Zip { get; set; }
-        public string Phone { get; set; }
-        public Nullable<double> Change_Pay_Rate_From { get; set; }
-        public Nullable<double> Change_Pay_Rate_To { get; set; }
-        public string Change_Property_From { get; set; }
-        public string Change_Property_To { get; set; }
-        public string Address_ContactInfo { get; set; }
-        public string Date_Of_Suspence { get; set; }
-        public Nullable<double> Suspence_Paid { get; set; }
-        public Nullable<double> Suspence_UnPaid { get; set; }
-        public string Leave_Absence { get; set; }
-        public Nullable<double> Leave_Paid { get; set; }
-        public Nullable<double> Leave_UnPaid { get; set; }
-        public string Explanation { get; set; }
+        public string TypeOfChange { get; set; }
+        public Nullable<double> FromPropNum { get; set; }
+        public string FromPropName { get; set; }
+        public string FromManager { get; set; }
+        public Nullable<double> ToPropNum { get; set; }
+        public string ToPropName { get; set; }
+        public string ToManager { get; set; }
+        public Nullable<double> PayChangeTo { get; set; }
+        public Nullable<double> PayChangeFrom { get; set; }
+        public Nullable<bool> PayChangeFullTime { get; set; }
+        public Nullable<bool> PayChangePartTime { get; set; }
+        public Nullable<bool> PayChangeHourly { get; set; }
+        public Nullable<bool> PayChangeSalary { get; set; }
+        public Nullable<System.DateTime> BeginPayPeriod { get; set; }
+        public string La_Property1 { get; set; }
+        public Nullable<double> La_Property1_Per { get; set; }
+        public string La_Property2 { get; set; }
+        public Nullable<double> La_Property2_Per { get; set; }
+        public Nullable<bool> Chk_CarAmount { get; set; }
+        public Nullable<double> CarAmountPerMonth { get; set; }
+        public Nullable<bool> Chk_PhoneAmount { get; set; }
+        public Nullable<double> PhoneAmountPerMonth { get; set; }
+        public Nullable<bool> FmlaYes { get; set; }
+        public Nullable<bool> FmlaNo { get; set; }
+        public Nullable<bool> EnrolledBenefitsYes { get; set; }
+        public Nullable<bool> EnrolledBenefitNo { get; set; }
+        public string Leave_Purpose { get; set; }
+        public Nullable<System.DateTime> Leave_End { get; set; }
+        public Nullable<System.DateTime> Leave_Begin { get; set; }
+        public Nullable<double> Pto_Balance { get; set; }
+        public string Notes1 { get; set; }
+        public string Notes2 { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
@@ -320,5 +353,8 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string DischargedText { get; set; }
+        public string QuitText { get; set; }
+        public string LackOfWork { get; set; }
     }
 }

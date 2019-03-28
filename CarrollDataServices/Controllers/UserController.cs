@@ -42,8 +42,8 @@ namespace Carroll.Data.Services.Controllers
         [CustomActionFilter]
         [ActionName("GetUsers")]
         public List<SiteUser> GetUsers()
-        {            
-                return _service.GetAllUsers();           
+        {
+            return _service.GetAllUsers();
         }
 
 
@@ -70,10 +70,10 @@ namespace Carroll.Data.Services.Controllers
 
             foreach (var item in _service.GetAllUsers())
             {
-                _users.Add(new KeyValuePair(item.UserId.ToString(), item.UserEmail+"( "+item.FirstName+" "+item.LastName+" )"));
+                _users.Add(new KeyValuePair(item.UserId.ToString(), item.UserEmail + "( " + item.FirstName + " " + item.LastName + " )"));
             }
             return _users;
-          
+
         }
 
         [CustomActionFilter]
@@ -85,7 +85,7 @@ namespace Carroll.Data.Services.Controllers
 
             foreach (var item in _service.GetAllProperties())
             {
-                _users.Add(new KeyValuePair(item.PropertyId.ToString(),item.PropertyName));
+                _users.Add(new KeyValuePair(item.PropertyId.ToString(), item.PropertyName));
             }
             return _users;
 
@@ -100,7 +100,6 @@ namespace Carroll.Data.Services.Controllers
         }
 
 
-       
 
         [HttpGet]        
         //[ActionName("CheckIfUserExists")]

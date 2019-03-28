@@ -13,16 +13,17 @@
     background-size: cover;">
 
             <button type="button" class="btn btn-lg " data-toggle="modal" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;width: 100%;
-     background-color: #003767;
-    border-color: #003767; color:white;position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 80px;
-} " data-target=".claimmodal">
+   background-color: #003767;
+    border-color: #003767;
+    color: white;
+    position: absolute;
+    bottom: 7%;
+    left: -1%;
+    height: 60px;
+    width: 102%; " data-target=".claimmodal">
                 File a New Claim
             </button>
         </div>
-
 
         <!-- Large modal -->
 
@@ -42,7 +43,7 @@
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">
 
                                     <h2> <strong>  Property Damage Claim </strong> </h2>
-                                    <p> A Property Damage claim Report Should be filed when there is damage to the buildign or common areas. Examples include the following : </p>
+                                    <p> A Property Damage claim Report Should be filed when there is damage to the building or common areas. Examples include the following : </p>
                                     <ul>
                                         <li> Tree falling on a building </li>
                                         <li> Roof leak damage due to a storm </li>
@@ -54,7 +55,7 @@
 
                                     </ul>
                                     <p> If there is injury to an individual due to property damage, both a Property Liability Claim Report and a General Liability Claim Report must be completed. </p>
-                                    <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to completing the Property Damage Claim Report. </p>
+                                    <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immediately in addition to completing the Property Damage Claim Report. </p>
                                 </div> 
                                 <div class="col-md-12 text-center" style="position: absolute;
     bottom: 10px;" >
@@ -77,7 +78,7 @@
                                         <li> Resident's reports being injured (Physically or emotionally) due to criminal activity on property grounds.</li>
                                         <li> Resident drops weight on thier foot in fitness center and claims injury</li>
                                     </ul>
-                                    <p > ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immeadiately in addition to </p>
+                                    <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immediately in addition to completing the General Liability Claim Report </p>
                                     </div>
                                    
                                     <div class="col-md-12 text-center" style="position: absolute;
@@ -140,79 +141,102 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 
     <div class="row hidewhenformopen" id="homecontainer">
         <div class="col-lg-4">
-            <div class="ibox ">
-                <div class="ibox-title text-center">
+            <div class="widget style1 navy-bg">
+                <div class="row">
+                    
+                    <div class="col-xs-12 text-center">
+                        <h3 class="font-bold" style="font-size:20px;"> Property Damage Claims </h3>
+                        <div class="claimcount" onclick="GetAllClaims('PropertyDamage')" style="display:none">
+                            <h2 class="font-bold propcount" style="color:white;font-size:40px"> </h2>
+                            <a class="btn btn-sm" href="javascript:void" style="font-size:12px; color:white"> View All </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            @*<div class="ibox ">
+                <div class="ibox-title text-center">
                     <button type="button" onclick="GetAllClaims('PropertyDamage')" class="btn btn-w-m btn-primary">Property Damage Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
                     @*<div class="col-sm-6">
-                            <h1 class="no-margins">800</h1>
-                            <small>Total Claims</small>
-                        </div>*@
-
+                    <h1 class="no-margins">800</h1>
+                    <small>Total Claims</small>
+                </div>
                     <div class="col-sm-12 font-bold text-primary  claimcount text-center" style="margin-top:15px;">
                         <h1 class="no-margins propcount" style="color:#1ab394"> </h1>
                         <small style="color:#1ab394"> Total Claims </small>
-
-                      
                     </div>
-
                 </div>
-            </div>
+            </div>*@
         </div>
         <div class="col-lg-4">
-            <div class="ibox ">
+            <div class="widget style1 lazur-bg">
+                <div class="row">
+                 
+                    <div class="col-xs-12 text-center">
+                        <h3 class="font-bold" style="font-size:20px;"> General Liability Claims </h3>
+                        <div class="claimcount" onclick="GetAllClaims('General Liability')" style="display:none">
+                            <h2 class="font-bold liabcount"  style="color:white;font-size:40px" > </h2>
+                            <a class="btn btn-sm"  style="color:white;font-size:12px" href="javascript:void"> View All </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="ibox ">
                 <div class="ibox-title text-center">
 
                     <button type="button" onclick="GetAllClaims('General Liability')" class="btn btn-w-m btn-info">General Liability Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
                     @*<div class="col-sm-6">
-                            <h1 class="no-margins">80</h1>
-                            <small>Total Claims</small>
-                        </div>*@
-
+                    <h1 class="no-margins">80</h1>
+                    <small>Total Claims</small>
+                </div>
                     <div class="col-sm-12 font-bold text-info claimcount text-center" style="margin-top:15px;">
                         <h1 class="no-margins liabcount" style="color:#23c6c8"> </h1>
                         <small style="color:#23c6c8"> Total Claims </small>
-
-
-                       
                     </div>
-
                 </div>
-            </div>
+            </div>*@
         </div>
 
         <div class="col-lg-4">
-            <div class="ibox ">
+            <div class="widget style1 yellow-bg">
+                <div class="row">                   
+                    <div class="col-xs-12 text-center">
+                        <h3 class="font-bold"  style="font-size:20px;"> Mold Damage Claims </h3>
+                        <div class="claimcount" onclick="GetAllClaims('Mold Damage')" style="display:none">
+                            <h2 class="font-bold damagecount"  style="color:white;font-size:40px" > </h2>
+                            <a class="btn btn-sm"  style="color:white;font-size:12px" href="javascript:void"> View All </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="ibox ">
                 <div class="ibox-title text-center">
                     <button type="button" onclick="GetAllClaims('Mold Damage')" class="btn btn-w-m btn-success">Mold Damage Claims</button>
                 </div>
                 <div class="ibox-content col-sm-12">
                     @*<div class="col-sm-6">
-                            <h1 class="no-margins">8</h1>
-                            <small>Total Claims</small>
-                        </div>*@
-
-                    <div class="col-sm-12 font-bold text-success claimcount text-center " style="margin-top:15px;">
-                        <h1 class="no-margins damagecount" style="color:#1c84c6" > </h1>
-                        <small style="color:#1c84c6" > Total Claims </small>
-                       
-                    </div>
-
+                    <h1 class="no-margins">8</h1>
+                    <small>Total Claims</small>
                 </div>
-            </div>
+                    <div class="col-sm-12 font-bold text-success claimcount text-center " style="margin-top:15px;">
+                        <h1 class="no-margins damagecount" style="color:#1c84c6"> </h1>
+                        <small style="color:#1c84c6"> Total Claims </small>
+                    </div>
+                </div>
+            </div>*@
         </div>
-
-
-
-
     </div>
 
 
@@ -397,7 +421,9 @@
 {
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
-@section Styles {
+
+@section Styles 
+    {
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")
 

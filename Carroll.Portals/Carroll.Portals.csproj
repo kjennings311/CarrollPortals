@@ -60,6 +60,12 @@
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -186,6 +192,7 @@
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HrController.cs" />
+    <Compile Include="Controllers\MileageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
     <Compile Include="GetCurrentUser.ashx.cs">
@@ -349,6 +356,7 @@
     <Content Include="img\bg.jpg" />
     <Content Include="img\carroll-print.png" />
     <Content Include="img\corpLogo.png" />
+    <Content Include="img\hrbg-min.jpg" />
     <Content Include="img\logo.png" />
     <Content Include="img\LogoC.png" />
     <Content Include="ApplicationInsights.config">
@@ -390,9 +398,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="img\newhirebackground.jpg" />
     <Content Include="img\newhirenotice.png" />
+    <Content Include="img\requistionrequestheader.jpg" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
-    <Content Include="Rotativa\wkhtmltoimage.exe" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\admin.js" />
     <Content Include="Scripts\app\custom - Copy.js" />
@@ -859,6 +867,12 @@
     <Content Include="Views\Hr\Index.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Home\PrintClaim.cshtml" />
+    <Content Include="Views\Hr\RequisitionRequest.cshtml" />
+    <Content Include="Views\Hr\PayRollStatusChange - Copy.cshtml" />
+    <Content Include="Views\Hr\PrintRequisitionRequest.cshtml" />
+    <Content Include="Views\Mileage\CarrollMileageLog.cshtml" />
+    <Content Include="Views\Mileage\CarrollMileageLogInstructions.cshtml" />
+    <Content Include="Views\Mileage\CarrollExpenseForm.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

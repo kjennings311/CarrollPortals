@@ -66,23 +66,48 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="~/Hr/Index/"><i class="fa fa-table"></i> <span class="nav-label"> All HR Forms </span></a>
 
-                    </li>
                     <li>
-                        <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-table"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
+                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
 
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
+
+                            </li>
+                            <li>
+                                <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Notice Of Employee Separation  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
+                            </li>
+
+                        </ul>
                     </li>
+
                     <li>
-                        <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-table"></i> <span class="nav-label"> New Hire Notice  </span></a>
+                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> Expense Reports </span></a>
+
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="~/Mileage/CarrollMileageLog/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Mileage Log </span></a>
+
+                            </li>
+                            <li>
+                                <a href="~/Mileage/CarrollMileageLogInstructions/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">  Mileage Log Reimbursement Instructions  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Mileage/CarrollExpenseForm/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Expense Form  </span></a>
+                            </li>                          
+                        </ul>
                     </li>
-                    <li>
-                        <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-table"></i> <span class="nav-label"> PayRoll Status Change  </span></a>
-                    </li>
-                    <li>
-                        <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-table"></i> <span class="nav-label"> Notice Of Employee Separation  </span></a>
-                    </li>
+
                     @*<li>
                     <a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="nav-label"> Administration </span></a>
                     <ul class="nav nav-second-level collapse">
@@ -93,6 +118,33 @@
                         </li>
                     </ul>
                 </li>*@
+                }
+                else if (@Model.RoleType.ToLower() == "hr")
+                {
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
+
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
+
+                            </li>
+                            <li>
+                                <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Notice Of Employee Separation  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                 }
             }
 
