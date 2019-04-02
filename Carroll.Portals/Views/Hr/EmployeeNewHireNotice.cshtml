@@ -23,9 +23,9 @@
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
 
-                <h1 style="padding-top:5px;color:black"> <b>  Employee New Hire Notice </b></h1>
+                <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Employee New Hire Notice </b></h1>
 
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
@@ -46,7 +46,7 @@
             <div class="ibox-content" style="padding:80px; padding-top:40px;">
 
                 <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                    <div class="modal-dialog modal-lg" style="width:60%" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="padding: 0px;
     border: none;">
@@ -57,40 +57,40 @@
                                 </h1>
                             </div>
                             <div class="modal-body">
-                                <div class="row" style="padding: 20px;
+                                <div class="row" style="padding: 20px;padding-left:110px;
     border: 2px solid black;">
                                     <form id="submitform" onsubmit="return false;">
-                                        <p class="c1 c8" style="margin-left:90px;">
+                                        <p class="c1 c8" style="margin-left:125px;">
                                             <span class="c7">
                                                 <img src="~/img/newhirenotice.png">
                                             </span>
                                         </p>
-                                        <p class="c1 c8" style="margin-left: 10%;">
+                                        <p class="c1 c8" style="    margin-left: 20%;
+    margin-top: 15px;
+    margin-bottom: 15px;">
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Employee Name:    <input type="text" id="empname" />        Start Date:<input type="date" id="startdate" />  </span>
+                                            <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input data-date-format="MM-DD-YYYY" type="date" id="startdate" />  </span>
                                         </p>
-                                        <p class="c1">
+                                        <p class="c1" style="display:none;">
                                             <span class="c0">Employee Social Security Number:<input type="text" id="securitynumber" style="width:31%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Email Address: <input type="email" id="email" style="width:43%;" /> </span>
+                                            <span class="c0">Email Address: <input type="email" id="email" style="width:60%;" /> (do not leave blank) </span>
+                                        </p>
+
+                                        <p class="c1">
+                                            <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c4">(do not leave blank)</span>
+                                            <span class="c0">Location:<input type="text" id="location" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Manager:<input type="text" id="manager" style="width:46.5%;" /> </span>
+                                            <span class="c0">Position:<input type="radio" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Location:<input type="text" id="location" style="width:46.5%;" /> </span>
-                                        </p>
-                                        <p class="c1">
-                                            <span class="c0">Position: Exempt <input type="text" id="exempt" />   Non-exempt <input type="text" id="nonexempt" style="width:15%;" /> </span>
-                                        </p>
-                                        <p class="c1">
-                                            <span class="c0">Position <input type="text" id="position" style="width:46.5%;" /> </span>
+                                            <span class="c0">Position <input type="text" id="position" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
                                             <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
@@ -107,22 +107,22 @@
 
                                         <p class="c1">
                                             <span class="c0">
-                                                New Hire Kit Ordered (date) : <input type="date" id="kitorderdate" style="width:20%;" />
+                                                New Hire Kit Ordered (date) : <input type="date" id="kitorderdate" style="width:63%;" />
                                             </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Onboarding Call scheduled for (date):  <input type="date" id="onboardcall" style="width:20%;" /> </span>
+                                            <span class="c0"> Onboarding Call scheduled for (date):  <input type="date" id="onboardcall" style="width:55%;" /> </span>
                                         </p>
 
 
                                         <p class="c1">
-                                            <span class="c0">Employee Signature _____________________________________________     Date_______________</span>
+                                            <span class="c0">Employee Signature <input type="text" id="esignature" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Manager&rsquo;s Authorizing Signature ________________________________ Date ______________</span>
+                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:30%;" /> Date <input type="date" style="width:24%;" name="name" id="mdate" value="" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">RPM Signature____________________________________________________Date_______________</span>
+                                            <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
                                         </p>
                                         <p class="c1" style="width:75%;">
                                             <span class="c6">
@@ -132,6 +132,7 @@
                                         </p>
 
                                         <br /> <br />
+                                        <p>Rev. June 2018</p>
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
@@ -411,12 +412,14 @@
 
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             var leaseid = "";
-            GetAllHRFORMs('New Hire Notice');
 
+            GetAllHRFORMs('New Hire Notice');
             
-            $("input").change(function (e) {
+            $("input").change(function (e) 
+            {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
@@ -428,6 +431,8 @@
 
             });
 
+     
+            
 
             $("#Submit").click(function (e) {
                 e.preventDefault();
@@ -435,102 +440,105 @@
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
-                if ($("#empname").val() == "") {
-                    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                    $("#empname").addClass('has-error');
-                    if (control == "")
-                        control = $("#empname");
-                }
 
-                if ($("#startdate").val() == "") {
-                    errormsgsummary += "<li> Please Enter Date </li>";
-                    $("#startdate").addClass('has-error');
-                    if (control == "")
-                        control = $("#startdate");
-                }
+                //if ($("#empname").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                //    $("#empname").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#empname");
+                //}
 
-                if ($("#securitynumber").val() == "") {
-                    errormsgsummary += "<li> Please Enter Security Number </li>";
-                    $("#securitynumber").addClass('has-error');
-                    if (control == "")
-                        control = $("#securitynumber");
-                }
+                //if ($("#startdate").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Date </li>";
+                //    $("#startdate").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#startdate");
+                //}
+
+                //if ($("#securitynumber").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Security Number </li>";
+                //    $("#securitynumber").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#securitynumber");
+                //}
 
 
-                if ($("#email").val() == "") {
-                    errormsgsummary += "<li> Please Enter Email Address </li>";
+                if (!validateEmail($("#email").val())) 
+                {
+                    errormsgsummary += "<li> Please Enter Valid Email Address </li>";
                     $("#email").addClass('has-error');
                     if (control == "")
                         control = $("#email");
                 }
 
 
-                if ($("#manager").val() == "") {
-                    errormsgsummary += "<li> Please Enter Manager Name </li>";
-                    $("#manager").addClass('has-error');
-                    if (control == "")
-                        control = $("#manager");
-                }
+                //if ($("#manager").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Manager Name </li>";
+                //    $("#manager").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#manager");
+                //}
 
-                if ($("#location").val() == "") {
-                    errormsgsummary += "<li> Please Enter Location </li>";
-                    $("#location").addClass('has-error');
-                    if (control == "")
-                        control = $("#location");
-                }
-
-
-                if ($("#exempt").val() == "") {
-                    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
-                    $("#exempt").addClass('has-error');
-                    if (control == "")
-                        control = $("#exempt");
-                }
-
-                if ($("#nonexempt").val() == "") {
-                    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
-                    $("#nonexempt").addClass('has-error');
-                    if (control == "")
-                        control = $("#nonexempt");
-                }
+                //if ($("#location").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Location </li>";
+                //    $("#location").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#location");
+                //}
 
 
+                //if ($("#exempt").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
+                //    $("#exempt").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#exempt");
+                //}
 
-                if ($("#position").val() == "") {
-                    errormsgsummary += "<li> Please Enter Position  </li>";
-                    $("#position").addClass('has-error');
-                    if (control == "")
-                        control = $("#position");
-                }
+                //if ($("#nonexempt").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
+                //    $("#nonexempt").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#nonexempt");
+                //}
 
 
 
-                if ($("#status1").val() == "") {
-                    errormsgsummary += "<li> Please Choose Status  </li>";
-                    $("#status1").addClass('has-error');
-                    if (control == "")
-                        control = $("#status1");
-                }
+                //if ($("#position").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Position  </li>";
+                //    $("#position").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#position");
+                //}
 
 
 
-                if ($("#salary").val() == "") {
-                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                    $("#salary").addClass('has-error');
-                    if (control == "")
-                        control = $("#salary");
-                }
+                //if ($("#status1").val() == "") {
+                //    errormsgsummary += "<li> Please Choose Status  </li>";
+                //    $("#status1").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#status1");
+                //}
 
 
-                if ($("#allocation").val() == "") {
-                    errormsgsummary += "<li> Please Enter Allocation </li>";
-                    $("#allocation").addClass('has-error');
-                    if (control == "")
-                        control = $("#allocation");
-                }
+
+                //if ($("#salary").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                //    $("#salary").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#salary");
+                //}
 
 
-                if (errormsgsummary != "") {
+                //if ($("#allocation").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Allocation </li>";
+                //    $("#allocation").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#allocation");
+                //}
+
+
+                if (errormsgsummary != "")
+                {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -542,8 +550,8 @@
                 {
                     $('#myModal').modal('hide');
 
-                    $(".alert").html('Processing ........');
-                    $('#toastnotification').modal('show'); 
+                    $(".alert").html('Processing');
+                    $('#toastnotification').modal('show');
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
@@ -552,14 +560,36 @@
                     insertForm.append('email', $("#email").val());
                     insertForm.append('manager', $("#manager").val());
                     insertForm.append('location', $("#location").val());
-                    insertForm.append('exempt', $("#exempt").val());
-                    insertForm.append('nonexempt', $("#nonexempt").val());
+                    if ($("#exempt").is(":checked"))
+                    {
+                        insertForm.append('exempt', '1');
+                    }
+                    else {
+                        insertForm.append('exempt', '0');
+                    }
+
+                    if ($("#nonexempt").is(":checked"))
+                    {
+                        insertForm.append('nonexempt', '1');
+                    }
+                    else {
+                        insertForm.append('nonexempt', '0');
+                    }
+                   
+                   
                     insertForm.append('position', $("#position").val());
                     insertForm.append('status', $("#status1").val());
                     insertForm.append('salary', $("#salary").val());
                     insertForm.append('kitordered', $("#kitorderdate").val());
                     insertForm.append('callscheduled', $("#onboardcall").val());
                     insertForm.append('allocation', $("#allocation").val());
+                    insertForm.append('esignature', $("#esignature").val());
+                    insertForm.append('edate', $("#edate").val());
+                    insertForm.append('mdate', $("#mdate").val());
+                    insertForm.append('msignature', $("#msignature").val());
+                    insertForm.append('rpmsignature', $("#rpmsignature").val());
+                    insertForm.append('rpmdate', $("#rpmdate").val());
+
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
@@ -591,19 +621,19 @@
                                 $("#kitorderdate").val('');
                                 $("#onboardcall").val('');
                                 $("#allocation").val('');
-                              
+
 
                                 GetAllHRFORMs('New Hire Notice');
                                 $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show'); 
-                                 
+                                $('#toastnotification').modal('show');
+
 
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', true);
-                                    $('#toastnotification').modal('hide'); 
+                                    $('#toastnotification').modal('hide');
                                 }, 3000);
                             }
                             else {
@@ -653,7 +683,7 @@
             });
 
 
-        });
+      });
 
     </script>
 

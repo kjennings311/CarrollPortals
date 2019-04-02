@@ -144,6 +144,13 @@
             margin-bottom: 0px;
         }
 
+        .p0 {
+            text-align: left;
+            padding-left: 233px;
+            /*margin-top: 96px;*/
+            margin-bottom: 0px;
+        }
+
         .p1 {
             text-align: left;
             padding-left: 8px;
@@ -161,7 +168,7 @@
         .p3 {
             text-align: left;
             padding-left: 215px;
-            margin-top: 10px;
+            margin-top: 5px;
             margin-bottom: 0px;
         }
 
@@ -223,7 +230,7 @@
         .p11 {
             text-align: left;
             padding-left: 4px;
-            margin-top: 20px;
+            margin-top: 5px;
             margin-bottom: 0px;
         }
 
@@ -271,7 +278,7 @@
         .p18 {
             text-align: left;
             padding-left: 4px;
-            margin-top: 17px;
+            margin-top: 5px;
             margin-bottom: 0px;
         }
 
@@ -292,7 +299,7 @@
         .p21 {
             text-align: left;
             padding-left: 2px;
-            margin-top: 13px;
+            margin-top: 5px;
             margin-bottom: 0px;
         }
 
@@ -337,7 +344,7 @@
             border-right: #000000 1px solid;
             padding: 0px;
             margin: 0px;
-            width: 150px;
+            width: 180px;
             vertical-align: bottom;
         }
 
@@ -852,9 +859,9 @@
         }
     }
 </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" style="width:10%" />)</P>
-            <P class="p17 ft1">Immediate Supervisor’s Signature: ______________________________________ Date: ________________</P>
-            <P class="p13 ft1">Senior Manager’s Signature: __________________________________________ Date: ________________</P>
-            <P class="p17 ft1">Human Resources Manager’s Signature: _________________________________ Date: ________________</P>
+            <P class="p17 ft1">Immediate Supervisor’s Signature: <input type="text" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
+            <P class="p13 ft1">Senior Manager’s Signature: <input type="text" name="name" value="@Model.SMSignature" />Date: <input type="text" name="name" value="@Model.SMDate.Value.ToShortDateString()" /></P>
+            <P class="p17 ft1">Human Resources Manager’s Signature: <input type="text" name="name" value="@Model.HRMSignature" /> Date: <input type="text" name="name" value="@Model.HRMDate.Value.ToShortDateString()" /></P>
             <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input value="@Model.Notes_Comments" type="text" id="notes1" style="width:82%" /></P>
             <P class="p14 ft1"><input type="text" id="notes2" style="width:96%;" /></P>
             <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>

@@ -256,44 +256,76 @@
 
 </head>
 <body class="document">
-    <div class="page" style="padding-left:15%;">
+    <div class="page" style="padding-left:10%;">
 
         <form id="submitform" onsubmit="return false;">
-            <p class="c1 c8" style="margin-left:90px;">
+            <p class="c1 c8" style="margin-left:125px;">
                 <span class="c7">
                     <img src="~/img/newhirenotice.png">
                 </span>
             </p>
-            <p class="c1 c8" style="margin-left: 13%;">
+            <p class="c1 c8" style="margin-left: 20%;
+    margin-top: 15px;
+    margin-bottom: 15px;">
                 <span class="c7"> NEW HIRE NOTICE </span>
             </p>
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" id="empname" value="@Model.EmployeeName" />        Start Date:<input type="text" id="startdate" value="@Model.StartDate.Value.ToShortDateString()" />  </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:40%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
+            
             <p class="c1">
-                <span class="c0">Employee Social Security Number:<input type="text" id="securitynumber" style="width:31%;" value="@Model.EmployeeSocialSecuirtyNumber" /> </span>
-            </p>
-            <p class="c1">
-                <span class="c0">Email Address: <input type="email" id="email" style="width:43%;" value="@Model.EmailAddress" /> </span>
+                <span class="c0">Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:60%;" /> (do not leave blank) </span>
             </p>
 
             <p class="c1">
-                <span class="c0">Manager:<input type="text" id="manager" style="width:46.5%;" value="@Model.Manager" /> </span>
+                <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" value="@Model.Manager" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">Location:<input type="text" id="location" style="width:46.5%;" value="@Model.Location" /> </span>
+                <span class="c0">Location:<input type="text" id="location" style="width:83%;" value="@Model.Location" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">Position: Exempt <input type="text" id="exempt" value="@Model.Position_Exempt" />   Non-exempt <input type="text" id="nonexempt" value="@Model.Position_NonExempt" style="width:15%;" /> </span>
+                <span class="c0">Position: @{ if (Model.Position_Exempt == "1")
+                    {
+                        <input type="radio" checked value="1" name="exempt" id="exempt" /> 
+                    }
+                    else
+                    {
+                        <input type="radio" value="1" name="exempt" id="exempt" />
+                    }
+
+
+
+
+                }   Exempt @{ if (Model.Position_NonExempt == "")
+                    {  <input type="radio" checked value="1" name="exempt" id="exempt" />   }
+                    else
+                    {
+                        <input type="radio" value="1" name="exempt" id="exempt" />
+                    }
+                    }
+                </span>
             </p>
             <p class="c1">
-                <span class="c0">Position <input type="text" id="position" style="width:46.5%;" value="@Model.Position" /> </span>
+                <span class="c0">Position <input type="text" id="position" style="width:83%;" value="@Model.Position" /> </span>
             </p>
             <p class="c1">
                 <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
             </p>
             <p class="c1">
-                <span class="c0">Status :  @Model.Status  </span>
+                <span class="c0">Status (full-time / part-time) :  <select id="status1"> 
+                    @{ if (Model.Status.ToString() == "Full Time ")
+                        {
+                            <option selected value="Full Time"> Full Time </option>
+                            <option value="Part Time"> Part Time </option>
+                        }
+                        else 
+                        {
+                            <option  value="Full Time"> Full Time </option>
+                            <option selected value="Part Time"> Part Time </option>
+
+                            }
+                        }
+                   </select></span>
             </p>
             <p class="c1">
                 <span class="c0">Wage/Salary <input type="text" id="salary" value="@Model.Wage_Salary" style="width:30%;" /> </span>
@@ -304,22 +336,22 @@
 
             <p class="c1">
                 <span class="c0">
-                    New Hire Kit Ordered (date) : <input type="text" id="kitorderdate" value="@Model.kitordered.Value.ToShortDateString()" style="width:30%;" />
+                    New Hire Kit Ordered (date) : <input type="text" value="@Model.kitordered" id="kitorderdate" style="width:63%;" />
                 </span>
             </p>
             <p class="c1">
-                <span class="c0"> Onboarding Call scheduled for (date):  <input type="text" id="onboardcall" value="@Model.boardingcallscheduled.Value.ToShortDateString()" style="width:30%;" /> </span>
+                <span class="c0"> Onboarding Call scheduled for (date):  <input value="@Model.boardingcallscheduled" type="text" id="onboardcall" style="width:55%;" /> </span>
             </p>
 
 
             <p class="c1">
-                <span class="c0">Employee Signature _____________________________________________     Date_______________</span>
+                <span class="c0">Employee Signature <input type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date <input type="text"  name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
             </p>
             <p class="c1">
-                <span class="c0">Manager&rsquo;s Authorizing Signature ________________________________ Date ______________</span>
+                <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature"  value="@Model.msignature" style="width:30%;" /> Date <input type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">RPM Signature____________________________________________________Date_______________</span>
+                <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="@Model.rpmsignature" />Date <input type="text" name="name"  id="rpmdate" value="@Model.rpmdate.Value.ToShortDateString()" /></span>
             </p>
             <p class="c1" style="width:75%;">
                 <span class="c6">
@@ -328,8 +360,10 @@
                 </span>
             </p>
 
+            <br /> <br />
+            <p>Rev. June 2018</p>
+          
         </form>
-
 
 
 

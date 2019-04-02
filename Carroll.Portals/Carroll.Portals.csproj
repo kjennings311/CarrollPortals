@@ -354,7 +354,9 @@
     <Content Include="Global.asax" />
     <Content Include="img\ajax-loader.gif" />
     <Content Include="img\bg.jpg" />
+    <Content Include="img\carrol1.png" />
     <Content Include="img\carroll-print.png" />
+    <Content Include="img\contactbg-min.jpg" />
     <Content Include="img\corpLogo.png" />
     <Content Include="img\hrbg-min.jpg" />
     <Content Include="img\logo.png" />
@@ -398,6 +400,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="img\newhirebackground.jpg" />
     <Content Include="img\newhirenotice.png" />
+    <Content Include="img\payroll.png" />
+    <Content Include="img\propbg-min.jpg" />
     <Content Include="img\requistionrequestheader.jpg" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />

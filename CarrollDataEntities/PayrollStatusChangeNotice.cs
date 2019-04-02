@@ -53,5 +53,9 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string ESignature { get; set; }
+        public Nullable<System.DateTime> EDate { get; set; }
+        public string MSignature { get; set; }
+        public Nullable<System.DateTime> MDate { get; set; }
     }
 }

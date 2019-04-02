@@ -237,12 +237,15 @@ namespace Carroll.Data.Services.Controllers
 
             EmployeeLeaseRaider fa = new EmployeeLeaseRaider();
             fa.Date = Convert.ToDateTime(HttpContext.Current.Request.Params["date"]);
+            fa.PositionDate = Convert.ToDateTime(HttpContext.Current.Request.Params["positiondate"]);
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.Community = HttpContext.Current.Request.Params["community"].ToString();
             fa.ApartmentMarketRentalValue = Convert.ToDecimal(HttpContext.Current.Request.Params["marketvalue"]);
             fa.EmployeeMonthlyRent = Convert.ToDecimal(HttpContext.Current.Request.Params["emprent"]);
             fa.RentalPaymentResidencyAt = HttpContext.Current.Request.Params["residence"].ToString();
             fa.PropertyManager = "";
+            fa.SignatureOfPropertyManager = HttpContext.Current.Request.Params["propertymanager"].ToString();
+            fa.SignatureOfEmployee = HttpContext.Current.Request.Params["signature"].ToString();
             fa.EmployeeLeaseRiderId= System.Guid.NewGuid();
             fa.Position = HttpContext.Current.Request.Params["position"].ToString();
             fa.CreatedUser = new Guid( HttpContext.Current.Request.Params["CreatedBy"]);
@@ -277,9 +280,20 @@ namespace Carroll.Data.Services.Controllers
             fa.Position_NonExempt = HttpContext.Current.Request.Params["nonexempt"].ToString();
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
             fa.Wage_Salary = HttpContext.Current.Request.Params["salary"].ToString();
-            fa.kitordered = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["kitordered"]));
-            fa.boardingcallscheduled = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]));
-            fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();         
+            fa.kitordered = Convert.ToDateTime(HttpContext.Current.Request.Params["kitordered"]);
+            fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
+            fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
+            fa.esignature = HttpContext.Current.Request.Params["esignature"].ToString();
+            fa.edate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
+
+            fa.msignature = HttpContext.Current.Request.Params["msignature"].ToString();
+            fa.mdate = Convert.ToDateTime(HttpContext.Current.Request.Params["mdate"]);
+
+            fa.rpmsignature = HttpContext.Current.Request.Params["rpmsignature"].ToString();
+            fa.rpmdate = Convert.ToDateTime(HttpContext.Current.Request.Params["rpmdate"]);
+
+          
+
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
 
@@ -335,7 +349,12 @@ namespace Carroll.Data.Services.Controllers
             fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
            fa.Pto_Balance=Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
                 fa.Notes1=HttpContext.Current.Request.Params["notes1"].ToString();
-            fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();         
+            fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
+            fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
+            fa.EDate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
+
+            fa.MSignature = HttpContext.Current.Request.Params["msignature"].ToString();
+            fa.MDate = Convert.ToDateTime(HttpContext.Current.Request.Params["mdate"]);
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);        
             fa.CreatedDateTime = DateTime.Now;
 
@@ -409,6 +428,13 @@ namespace Carroll.Data.Services.Controllers
             fa.DischargedText = HttpContext.Current.Request.Params["discharge"].ToString();
             fa.QuitText = HttpContext.Current.Request.Params["quit"].ToString();
             fa.LackOfWork = HttpContext.Current.Request.Params["work"].ToString();
+            fa.SSignature = HttpContext.Current.Request.Params["ssignature"].ToString();
+            fa.SDate = Convert.ToDateTime(HttpContext.Current.Request.Params["sdate"]);
+            fa.SMSignature = HttpContext.Current.Request.Params["smsignature"].ToString();
+            fa.SMDate = Convert.ToDateTime(HttpContext.Current.Request.Params["smdate"]);
+            fa.HRMSignature = HttpContext.Current.Request.Params["hrmsignature"].ToString();
+            fa.HRMDate = Convert.ToDateTime(HttpContext.Current.Request.Params["hrmdate"]);
+
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
             return _service.InsertNoticeOfEmployeeSeperation(fa);

@@ -13,15 +13,15 @@
     background-size: cover;">
 
             <button type="button" class="btn btn-lg " data-toggle="modal" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;width: 100%;
-   background-color: #003767;
-    border-color: #003767;
+   background-color: #293846;
+    border-color: #293846;
     color: white;
     position: absolute;
     bottom: 7%;
     left: -1%;
     height: 60px;
-    width: 102%; " data-target=".claimmodal">
-                File a New Claim
+    width: 102%; text-transform:uppercase;font-weight:bold " data-target=".claimmodal">
+                Start a New Claim
             </button>
         </div>
 
@@ -146,213 +146,53 @@
     </div>
 
     <div class="row hidewhenformopen" id="homecontainer">
-        <div class="col-lg-4">
-            <div class="widget style1 navy-bg">
+        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;">
+            <div class="widget style1 navy-bg" style="background:#293846">
                 <div class="row">
                     
                     <div class="col-xs-12 text-center">
                         <h3 class="font-bold" style="font-size:20px;"> Property Damage Claims </h3>
                         <div class="claimcount" onclick="GetAllClaims('PropertyDamage')" style="display:none">
-                            <h2 class="font-bold propcount" style="color:white;font-size:40px"> </h2>
-                            <a class="btn btn-sm" href="javascript:void" style="font-size:12px; color:white"> View All </a>
+                            <h2 class="font-bold propcount" style="color:white;font-size:69px"> </h2>
                         </div>
                     </div>
                 </div>
             </div>
 
-            @*<div class="ibox ">
-                <div class="ibox-title text-center">
-                    <button type="button" onclick="GetAllClaims('PropertyDamage')" class="btn btn-w-m btn-primary">Property Damage Claims</button>
-                </div>
-                <div class="ibox-content col-sm-12">
-                    @*<div class="col-sm-6">
-                    <h1 class="no-margins">800</h1>
-                    <small>Total Claims</small>
-                </div>
-                    <div class="col-sm-12 font-bold text-primary  claimcount text-center" style="margin-top:15px;">
-                        <h1 class="no-margins propcount" style="color:#1ab394"> </h1>
-                        <small style="color:#1ab394"> Total Claims </small>
-                    </div>
-                </div>
-            </div>*@
         </div>
-        <div class="col-lg-4">
-            <div class="widget style1 lazur-bg">
+        <div class="col-lg-4" style="width:30%;margin-left:2%; cursor:pointer;"  onclick="GetAllClaims('General Liability')">
+            <div class="widget style1 lazur-bg" style="background:#293846">
                 <div class="row">
                  
-                    <div class="col-xs-12 text-center">
-                        <h3 class="font-bold" style="font-size:20px;"> General Liability Claims </h3>
-                        <div class="claimcount" onclick="GetAllClaims('General Liability')" style="display:none">
-                            <h2 class="font-bold liabcount"  style="color:white;font-size:40px" > </h2>
-                            <a class="btn btn-sm"  style="color:white;font-size:12px" href="javascript:void"> View All </a>
+                    <div class="col-xs-12 text-center" >
+                        <h3 class="font-bold" style="font-size: 17px;text-transform: uppercase;"> General Liability Claims </h3>
+                        <div class="claimcount"  style="display:none">
+                            <h2 class="font-bold liabcount"  style="color:white;font-size:70px" > </h2>
+                            
                         </div>
                     </div>
                 </div>
             </div>
 
-            @*<div class="ibox ">
-                <div class="ibox-title text-center">
-
-                    <button type="button" onclick="GetAllClaims('General Liability')" class="btn btn-w-m btn-info">General Liability Claims</button>
-                </div>
-                <div class="ibox-content col-sm-12">
-                    @*<div class="col-sm-6">
-                    <h1 class="no-margins">80</h1>
-                    <small>Total Claims</small>
-                </div>
-                    <div class="col-sm-12 font-bold text-info claimcount text-center" style="margin-top:15px;">
-                        <h1 class="no-margins liabcount" style="color:#23c6c8"> </h1>
-                        <small style="color:#23c6c8"> Total Claims </small>
-                    </div>
-                </div>
-            </div>*@
         </div>
 
-        <div class="col-lg-4">
-            <div class="widget style1 yellow-bg">
+        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;" onclick="GetAllClaims('Mold Damage')" >
+            <div class="widget style1 yellow-bg" style="background:#293846">
                 <div class="row">                   
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold"  style="font-size:20px;"> Mold Damage Claims </h3>
-                        <div class="claimcount" onclick="GetAllClaims('Mold Damage')" style="display:none">
-                            <h2 class="font-bold damagecount"  style="color:white;font-size:40px" > </h2>
-                            <a class="btn btn-sm"  style="color:white;font-size:12px" href="javascript:void"> View All </a>
+                        <h3 class="font-bold"  style="font-size:17px;text-transform: uppercase;"> Mold Damage Claims </h3>
+                        <div class="claimcount"  style="display:none">
+                            <h2 class="font-bold damagecount"  style="color:white;font-size:69px" > </h2>                           
                         </div>
                     </div>
                 </div>
             </div>
 
-            @*<div class="ibox ">
-                <div class="ibox-title text-center">
-                    <button type="button" onclick="GetAllClaims('Mold Damage')" class="btn btn-w-m btn-success">Mold Damage Claims</button>
-                </div>
-                <div class="ibox-content col-sm-12">
-                    @*<div class="col-sm-6">
-                    <h1 class="no-margins">8</h1>
-                    <small>Total Claims</small>
-                </div>
-                    <div class="col-sm-12 font-bold text-success claimcount text-center " style="margin-top:15px;">
-                        <h1 class="no-margins damagecount" style="color:#1c84c6"> </h1>
-                        <small style="color:#1c84c6"> Total Claims </small>
-                    </div>
-                </div>
-            </div>*@
         </div>
     </div>
 
 
-    @*<div class="row hidewhenformopen" id="homecontainer" >
-        <div class="col-lg-3" style="margin-left: 90px;">
-
-            <div class="ibox  btn-primary ">
-                <div class="ibox-title text-center">
-                    <button type="button" class="btn btn-w-m ">Property Damage Claims</button>
-                </div>
-                <div class="ibox-content col-sm-12">
-                    <div class="col-sm-12 claimcount text-center" style="display:none; ">
-                        <h1 class="no-margins propcount"> </h1>
-                        <small>Total Claims</small>
-                    </div>
-
-                    @*<div class="col-sm-6 font-bold text-info" style="margin-top:15px;">
-                            <a style="color:#23c6c8;font-size:20px" href="#" onclick="LoadForm('FormGeneralLiabilityClaim');">
-                                <i class="fa fa-plus-circle"></i> Add New
-                            </a>
-                        </div>
-
-                </div>
-            </div>
-
-
-            @*<div class="widget style1 ">
-                            <div class="row">
-
-                                <div class="col-xs-12" style="text-align: center;
-                border-top: 2px solid #337ab7;
-                padding: 20px;
-                border-bottom: 2px solid #337ab7;">
-                                    <h3 class="font-bold"> Property Damage Claims </h3>
-                                    <div class="claimcount" style="display:none">
-                                        <h2 class="font-bold propcount"> </h2>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-        <div class="col-lg-3 ">
-            <div class="ibox btn-info">
-                <div class="ibox-title text-center">
-                    <button type="button" class="btn btn-w-m ">General Liability Claims</button>
-                </div>
-                <div class="ibox-content col-sm-12">
-                    <div class="col-sm-12 claimcount text-center" style="display:none">
-                        <h1 class="no-margins liabcount"> </h1>
-                        <small>Total Claims</small>
-                    </div>
-
-                    @*<div class="col-sm-6 font-bold text-info" style="margin-top:15px;">
-                            <a style="color:#23c6c8;font-size:20px" href="#" onclick="LoadForm('FormGeneralLiabilityClaim');">
-                                <i class="fa fa-plus-circle"></i> Add New
-                            </a>
-                        </div>
-
-                </div>
-            </div>
-
-            @*<div class="widget style1 ">
-                            <div class="row">
-
-                                <div class="col-xs-12" style="text-align: center;
-                border-top: 2px solid #337ab7;
-                padding: 20px;
-                border-bottom: 2px solid #337ab7;" >
-                                    <h3 class="font-bold"> General Liability Claims </h3>
-                                    <div class="claimcount" style="display:none">
-                                        <h2 class="font-bold liabcount"> </h2>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-
-        <div class="col-lg-3">
-            <div class="ibox  btn-success btn-success">
-                <div class="ibox-title text-center">
-
-                    <button type="button" class="btn btn-w-m ">Mold Damage Claims</button>
-                </div>
-                <div class="ibox-content col-sm-12">
-                    <div class="col-sm-12 claimcount text-center" style="display:none">
-                        <h1 class="no-margins damagecount"></h1>
-                        <small>Total Claims</small>
-                    </div>
-
-                    @*<div class="col-sm-6 font-bold text-success" style="margin-top:15px;">
-                            <a style="color:#1c84c6;font-size:20px" href="#" onclick="LoadForm('FormMoldDamageClaim');">
-                                <i class="fa fa-plus-circle"></i> Add New
-                            </a>
-                        </div>
-
-                </div>
-            </div>
-
-            @*<div class="widget style1 ">
-                            <div class="row">
-                                <div class="col-xs-12" style="text-align: center;
-                border-top: 2px solid #337ab7;
-                padding: 20px;
-                border-bottom: 2px solid #337ab7;">
-                                    <h3 class="font-bold"> Mold Damage Claims </h3>
-                                    <div class="claimcount" style="display:none">
-                                        <h2 class="font-bold damagecount"> </h2>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-    </div>*@
+ 
 
 
     <div class="row">

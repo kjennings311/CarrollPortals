@@ -403,7 +403,7 @@ namespace Carroll.Portals.Controllers
 
         }
 
-        public async Task<ActionResult> RequistionRequestPdf(string id)
+        public async Task<ActionResult> PdfRequisitionRequest(string id)
         {
 
             dynamic obj = new { };

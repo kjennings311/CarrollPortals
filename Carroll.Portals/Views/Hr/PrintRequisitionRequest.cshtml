@@ -176,16 +176,16 @@
         {
                <input type="checkbox" id="chkotherpost" />
         }
-    } <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost"  value="@Model.PostOther"/>
+    }  Other:   <input type="text" id="otherpost"  value="@Model.PostOther"/>
 </P>
                         <P class="p7 ft1">Special Instructions(i.e.confidential posting, etc.)</P>
-                        <P class="p2 ft1"><input type = "text" style="width:100%" id="specialinstructions1" />@Model.SpecailInstructions </P>                       
+                        <P class="p2 ft1"><p> @Model.SpecailInstructions </p> </P>                       
                         <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
                         <P class="p7 ft1">Requisition Number(s): <input type = "text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
                         <P class="p7 ft1">Date Posted:<input type = "text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" /></P>
                         <P class="p7 ft1">Notes:</P>
-                        <P class="p3 ft1"><input type = "text" style="width:100%" id="notes1" />@Model.Notes</P>
-                        <br /> <br />                        
+                        <P class="p3 ft1">@Model.Notes</P>
+                                              
             </div>
         </form>
     </div>
@@ -204,7 +204,7 @@
         #page_1 {
             position: relative;
             overflow: hidden;
-            margin: 48px 0px 101px 46px;
+            margin: 0px 0px 101px 20px;
             padding: 0px;
             border: none;
             width: 770px;
@@ -271,7 +271,7 @@
         .p1 {
             text-align: left;
             padding-left: 2px;
-            margin-top: 40px;
+            margin-top: 0px;
             margin-bottom: 0px;
         }
 
@@ -313,14 +313,14 @@
         .p7 {
             text-align: left;
             padding-left: 2px;
-            margin-top: 20px;
+            margin-top: 10px;
             margin-bottom: 0px;
         }
 
         .p8 {
             text-align: left;
             padding-left: 2px;
-            margin-top: 43px;
+            margin-top: 10px;
             margin-bottom: 0px;
         }
 

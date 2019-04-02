@@ -21,13 +21,14 @@ namespace Carroll.Data.Entities
         public decimal EmployeeMonthlyRent { get; set; }
         public string RentalPaymentResidencyAt { get; set; }
         public string PropertyManager { get; set; }
-        public byte[] SignatureOfPropertyManager { get; set; }
         public string Position { get; set; }
-        public byte[] SignatureOfEmployee { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
+        public string SignatureOfPropertyManager { get; set; }
+        public string SignatureOfEmployee { get; set; }
+        public Nullable<System.DateTime> PositionDate { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }

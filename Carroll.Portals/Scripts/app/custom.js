@@ -11,6 +11,17 @@ $(document).ready(function () {
   
 });
 
+
+function validateEmail(emailID) {
+    atpos = emailID.indexOf("@");
+    dotpos = emailID.lastIndexOf(".");
+    if (atpos < 1 || (dotpos - atpos < 2)) {
+    
+        return false;
+    }
+    return (true);
+}
+
 var imagebase64 = "";
 
 function encodeImageFileAsURL(element) {

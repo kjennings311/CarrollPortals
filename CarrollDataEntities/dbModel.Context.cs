@@ -41,11 +41,11 @@ namespace Carroll.Data.Entities
         public virtual DbSet<FormComment> FormComments { get; set; }
         public virtual DbSet<Activity> Activities { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<RequisitionRequest> RequisitionRequests { get; set; }
         public virtual DbSet<EmployeeLeaseRaider> EmployeeLeaseRaiders { get; set; }
         public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
         public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
         public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
-        public virtual DbSet<RequisitionRequest> RequisitionRequests { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -99,11 +99,6 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getworkflowemails_Result>("proc_getworkflowemails", propidParameter);
         }
     
-        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
-        }
-    
         public virtual ObjectResult<proc_getallemployeenewhirenotice_Result> proc_getallemployeenewhirenotice()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice_Result>("proc_getallemployeenewhirenotice");
@@ -144,6 +139,11 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_getallrequisitionrequests_Result> proc_getallrequisitionrequests()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallrequisitionrequests_Result>("proc_getallrequisitionrequests");
+        }
+    
+        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
         }
     }
 }

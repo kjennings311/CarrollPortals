@@ -91,13 +91,14 @@ namespace Carroll.Portals.Models
         public decimal ApartmentMarketRentalValue { get; set; }
         public string EmployeeName { get; set; }
         public System.DateTime Date { get; set; }
+        public System.DateTime PositionDate { get; set; }
         public string Community { get; set; }
         public decimal EmployeeMonthlyRent { get; set; }
         public string RentalPaymentResidencyAt { get; set; }
         public string PropertyManager { get; set; }
-        public byte[] SignatureOfPropertyManager { get; set; }
+        public string SignatureOfPropertyManager { get; set; }
         public string Position { get; set; }
-        public byte[] SignatureOfEmployee { get; set; }
+        public string SignatureOfEmployee { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
@@ -283,7 +284,12 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
         public Nullable<System.DateTime> kitordered { get; set; }
         public Nullable<System.DateTime> boardingcallscheduled { get; set; }
-
+        public string esignature { get; set; }
+        public Nullable<System.DateTime> edate { get; set; }
+        public string msignature { get; set; }
+        public Nullable<System.DateTime> mdate { get; set; }
+        public string rpmsignature { get; set; }
+        public Nullable<System.DateTime> rpmdate { get; set; }
 
     }
 
@@ -329,6 +335,10 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string ESignature { get; set; }
+        public Nullable<System.DateTime> EDate { get; set; }
+        public string MSignature { get; set; }
+        public Nullable<System.DateTime> MDate { get; set; }
     }
 
     public class PrintNoticeOfEmployeeSeparation
@@ -356,5 +366,11 @@ namespace Carroll.Portals.Models
         public string DischargedText { get; set; }
         public string QuitText { get; set; }
         public string LackOfWork { get; set; }
+        public string SSignature { get; set; }
+        public Nullable<System.DateTime> SDate { get; set; }
+        public string SMSignature { get; set; }
+        public Nullable<System.DateTime> SMDate { get; set; }
+        public string HRMSignature { get; set; }
+        public Nullable<System.DateTime> HRMDate { get; set; }
     }
 }

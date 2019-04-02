@@ -27,11 +27,17 @@ namespace Carroll.Data.Entities
         public string Status { get; set; }
         public string Wage_Salary { get; set; }
         public string Allocation { get; set; }
+        public Nullable<System.DateTime> kitordered { get; set; }
+        public Nullable<System.DateTime> boardingcallscheduled { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
-        public Nullable<System.DateTime> kitordered { get; set; }
-        public Nullable<System.DateTime> boardingcallscheduled { get; set; }
+        public string esignature { get; set; }
+        public Nullable<System.DateTime> edate { get; set; }
+        public string msignature { get; set; }
+        public Nullable<System.DateTime> mdate { get; set; }
+        public string rpmsignature { get; set; }
+        public Nullable<System.DateTime> rpmdate { get; set; }
     }
 }

@@ -22,9 +22,9 @@
 <div class="RowsContatiner animated fadeInRight" >
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
 
-                <h1 style="color:black"> <b> Employee Lease Rider  </b></h1>
+                <h1 style="color:black; text-transform:uppercase"> <b> Employee Lease Rider  </b></h1>
 
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
@@ -42,7 +42,7 @@
                     </div>
                 }
             </div>
-            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+            <div class="ibox-content" style="margin-left:0%; padding-top:20px;">
                 <div id="status1"> </div>
                 <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" style="width:70%" role="document">
@@ -81,11 +81,8 @@
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon vacating the apartment occupied by me, for any reason, I will leave the apartment clean and in good condition.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
                                         </ol>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
-
-                                        <p><span style="font-size: 10.0pt; line-height: 115%;">&nbsp;</span></p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________ </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10.0pt; line-height: 115%;margin-left:45%;"> ____________________________________</span></p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 10.0pt; line-height: 115%;margin-left:41%;"> Signature of Property Manager</span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="signature" /> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10.0pt; line-height: 115%;margin-left:25%;"> <input type="text" id="signatureproperymanager" /> </span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 10.0pt; line-height: 115%;margin-left:25%;"> Signature of Property Manager</span></p>
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="printempname" disabled />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Printed Name of Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
                                         @*<p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cc: Property Lease Folder</span></p>*@
@@ -157,6 +154,9 @@
             border-color:red;
         }
 
+        p {
+            margin-bottom: 10px !important;
+        }
 
     </style>
 }
@@ -189,57 +189,60 @@
             });
 
           
-            $("#Submit").click(function (e) {
+            $("#Submit").click(function (e)
+            {
                 e.preventDefault();
 
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
-                if($("#leasedate").val() == "")
-                {
-                    errormsgsummary += "<li> Please Choose Date </li>";
-                    $("#leasedate").addClass('has-error');
-                    if(control == "")
-                    control = $("#leasedate");
-                }
-
-                if ($("#apartmentname").val() == "") {
-                    errormsgsummary += "<li> Please Enter Community Apartment Name </li>";
-                    $("#apartmentname").addClass('has-error');
-                    if (control == "")
-                        control = $("#apartmentname");
-                }
-
-                if ($("#empname").val() == "") {
-                    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                    $("#empname").addClass('has-error');
-                    if (control == "")
-                        control = $("#empname");
-                }
 
 
-                if ($("#marketvalue").val() == "") {
-                    errormsgsummary += "<li> Please Enter Market Value of Property </li>";
-                    $("#marketvalue").addClass('has-error');
-                    if (control == "")
-                        control = $("#marketvalue");
-                }
+                //if($("#leasedate").val() == "")
+                //{
+                //    errormsgsummary += "<li> Please Choose Date </li>";
+                //    $("#leasedate").addClass('has-error');
+                //    if(control == "")
+                //    control = $("#leasedate");
+                //}
+
+                //if ($("#apartmentname").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Community Apartment Name </li>";
+                //    $("#apartmentname").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#apartmentname");
+                //}
+
+                //if ($("#empname").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                //    $("#empname").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#empname");
+                //}
+
+
+                //if ($("#marketvalue").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Market Value of Property </li>";
+                //    $("#marketvalue").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#marketvalue");
+                //}
                 
 
-                if ($("#monthlyrent").val() == "") {
-                    errormsgsummary += "<li> Please Enter Monthly Rent </li>";
-                    $("#monthlyrent").addClass('has-error');
-                    if (control == "")
-                        control = $("#monthlyrent");
-                }
+                //if ($("#monthlyrent").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Monthly Rent </li>";
+                //    $("#monthlyrent").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#monthlyrent");
+                //}
                 
 
-                if ($("#residency").val() == "") {
-                    errormsgsummary += "<li> Please Enter Residency Place  </li>";
-                    $("#residency").addClass('has-error');
-                    if (control == "")
-                        control = $("#residency");
-                }
+                //if ($("#residency").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Residency Place  </li>";
+                //    $("#residency").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#residency");
+                //}
 
 
                 if (errormsgsummary != "") {
@@ -267,6 +270,9 @@
                     insertForm.append('emprent', $("#monthlyrent").val());
                     insertForm.append('residence', $("#residency").val());
                     insertForm.append('position', $("#position").val());
+                    insertForm.append('signature', $("#signature").val());
+                    insertForm.append('positiondate', $("#positiondate").val());
+                    insertForm.append('propertymanager', $("#signatureproperymanager").val());
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
