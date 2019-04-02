@@ -463,6 +463,15 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetAllHrForms(FormType, OptionalSeachText);
         }
 
+        [ActionName("GetAllMileageForms")]
+        [HttpGet]
+        public dynamic GetAllMileageForms(string FormType, string userid)
+        {
+            return _service.GetAllMileageForms(FormType,userid, "");
+        }
+
+
+
         [ActionName("GetHrFormCount")]
         [HttpGet]
         public dynamic GetHrFormCount()

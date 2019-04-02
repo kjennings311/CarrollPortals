@@ -1,8 +1,964 @@
-﻿
-@{
-    ViewBag.Title = "CarrollExpenseForm";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.Title = "Expense Reimbursement";
 }
 
-<h2>CarrollExpenseForm</h2>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
 
+        <ol class="breadcrumb" style="padding: 8px 15px;">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li class="active">
+                <strong> Expense Reimbursement </strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="background:url('/img/expensereport-min.jpg');background-size: cover;padding: 240px 15px 7px;">
+
+                <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Expense Reimbursement </b></h1>
+
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                {
+
+                    <div class="ibox-tools" style="margin-top:-55px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
+
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('Expense Reimbursement');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:90%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="padding: 0px;
+    border: none;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;display:none;" id="gridSystemModalLabel">
+                                    Expense Reimbursement
+                                </h1>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;padding-left:20px;border: 2px solid black;">
+                                    <form id="submitform" onsubmit="return false;">
+ <p class="c1 c8" style="margin-left: 30%;
+    margin-top: 0px; margin-bottom:0px;">
+                                            <span class="c7"> Expense Reimbursement</span>
+                                        </p>
+                                        <div class="col-md-6"> <img src="~/img/newhirenotice.png" /> </div>
+                                        <div class="col-md-6"> <p class="c1">
+    <span class="c0">  Name:    <input type="text" style="width:40%" id="name" />  </span>
+</p>
+                                            <p class="c1">
+                                                <span class="c0">Date Of Submission :<input type="date" id="location" style="width:45%;" /> </span>
+                                            </p>
+
+<p class="c1">
+    <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:83%;" /> </span>
+</p>
+ </div>
+                                        
+<table id="allorders" style="height: 670px;overflow: scroll; display:inline-block;border-collapse:collapse;" class="table table-bordered">
+                                           
+                                            <tbody style="display: table-header-group;">
+                                                <tr>
+                                                    <td rowspan="2" class="date-input hd"> Date  </td>
+                                                    <td rowspan="2" class="txtshort hd"> Short Description </td>
+                                                    <td class="unstyled hd "> <span style="color:black;font-weight:bold"> Yardi ==>  </span> </td>
+                                                    <td class="input-number color-red un-selectable hd"> 700 </td>
+                                                    <td class="input-number"> <input type="number" id="1colyardi" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="2colyardi" name="name" value="" /></td><td class="input-number"> <input type="number" id="3colyardi" name="name" value="" /> </td>
+<td class="input-number"> <input type="number" id="4colyardi" name="name" value="" /> </td>
+<td class="input-number"> <input type="number" id="5colyardi" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="6colyardi" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="7colyardi" name="name" value="" /> </td>  </tr>
+                                                <tr>
+                                                    <td rowspan="2" style="color:black;font-weight:bold" > GL Code ==>   </td>
+                                                    <td rowspan="2" class="color-red un-selectable"> 6390-0007  </td>
+                                                    <td class="input-number"> <input type="number" id="1colglcode" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="2colglcode" name="name" value="" /></td>
+                                                    <td class="input-number"> <input type="number" id="3colglcode" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="4colglcode" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="5colglcode" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="6colglcode" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="7colglcode" name="name" value="" /> </td>
+                                                </tr>
+
+                                            </tbody>
+                                            <tfoot> <tr class="un-selectable"> <td  class="date-input color-red un-selectable"> 01-05-2018  </td>
+<td class="txtshort color-red" colspan="2"> Example: Roundtrip mileage to leasing rally </td>  <td class="input-number un-selectable"> $58  </td>
+<td class="input-number"> </td>
+
+<td class="input-number"> </td>
+<td class="input-number"> </td>
+
+<td class="input-number"> </td>
+<td class="input-number"> </td>
+                                                        <td class="input-number"> </td>
+                                                        <td class="input-number"> </td></tr>
+                                                <tr class="un-selectable">
+                                                    <td class="date-input color-red"> 01-05-2018  </td>
+                                                    <td class="txtshort color-red" colspan="2"> Example: Tolls to leasing rally </td>
+                                                    <td class="input-number un-selectable"> $3  </td>
+                                                    <td class="input-number"> </td>
+
+                                                    <td class="input-number"> </td>
+                                                    <td class="input-number"> </td>
+
+                                                    <td class="input-number"> </td>
+                                                    <td class="input-number"> </td>
+                                                    <td class="input-number"> </td>
+                                                    <td class="input-number"> </td>
+                                                </tr>
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+                                                <tr class="">
+                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="input-number un-selectable">  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
+
+                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                </tr>
+
+
+
+                                            
+                                                <tr> <td colspan="3" style="text-align:right;font-weight:bold; "> Total Expense By GL/Property </td> <td class="un-selectable">  </td> <td> <span id="col1total"> </span> </td> 
+                                                    <td> <span id="col2total"> </span> </td> <td> <span id="col3total"> </span> </td> <td> <span id="col4total"> </span> </td> <td> <span id="col5total"> </span> </td> <td> <span id="col6total"> </span> </td> <td> <span id="col7total"> </span> </td></tr></tfoot>
+                                        </table>
+
+                                        <div class="col-md-6">
+                                            <p style="color:red"> <b style="font-size:16px; font-weight:bold">* Propery team members </b> are to use this form mileage/travel expenses ONLY</p>
+                                            <p> <b> * when billing back to a property use Code: 6390-0007 </b> </p>
+                                            <p>* when billing back for a due diligence use Yardi ID:CMG and Code: 1130-0070</p>
+                                        </div>
+                                        <div class="col-md-6"> <table>
+    <tr>
+        <td>TOTAL EXPENSES</td><td><span id="totalexpenses" > </span></td>
+        <td style="color:red"  ><span >  LESS ANY CORRECTIONS</span> </td>
+        <td><span class="corrections"> <input type="number" id="corrections" name="name" value="" /> </span></td>
+        <td style="font-size:20px;" ><span > BALANCE DUE </span></td>
+        <td><span id="balancedue"> </span></td>
+    </tr>
+</table></div>
+                                        <div class="col-md-6">
+
+                                            <table>
+                                                <thead style="background-color:aliceblue;"><tr><th>Corporate team members please use codes below: </th></tr></thead>
+                                            <tbody>
+                                                <tr><td> 1130-0070 - All Due Diligence Expenses </td></tr>
+                                                <tr><td> 6542-0034 - Travel expenses for Training,Assee.Mgmt. and Marketing  </td></tr>
+                                                <tr><td> 6542-0037 - Travel expenses for Construction </td></tr>
+                                                <tr><td> 6542-0039 - Travel expenses for Operations </td></tr>
+                                                <tr><td> 6542-0035 - Travel expenses - Other </td></tr>
+                                                <tr><td> 6542-0058 - Pre-approved EDU fund expenses </td></tr>
+                                                <tr><td> 6542-0038 - Meals - Other </td></tr>
+                                                <tr><td> 6547-0010 - Office Supplies </td></tr>                                               
+                                            </tbody>
+                                            </table>
+
+
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                        
+
+                                            <p class="c1">
+                                                <span class="c0"> Submitted By Signature <input type="text" id="signature" style="width:42%; margin-left:2%" />   </span> <br />
+                                                 <span style="float:right;" class="c0">  Date : <input type="date" id="sdate" /> </span>
+</p>
+                                            
+                                            <p class="c1">
+                                                <span class="c0">Approved By Signature  <input type="text" id="approvedby" style="width:42%;" /> </span>
+                                                <span style="float:right;" class="c0">  Date : <input type="date" id="sdate" /> </span>
+                                            </p>
+                                         </div>
+
+
+
+
+                                        <br />
+                                        <br />
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" /> 
+                                            
+    @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+    <style type="text/css">
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        .color-red {
+            color:red;
+        }
+
+        .un-selectable 
+        {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .txtshort
+        {
+            width:20%;
+
+        }
+
+        .date-input
+        {
+            width:10%;
+        }
+        
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        td.input-number
+        {
+            width:85px;
+        }
+
+            td.input-number input
+            {
+                width:100%;
+                height:25px !important;
+            }
+            
+            tfoot td
+            {
+                padding:5px !important;
+            }
+            
+            .hd {
+                font-weight: bold;
+                text-align: center;
+                vertical-align: middle !important;
+            }
+        
+        td 
+        {
+            text-align:center;
+        }
+
+
+        table .c0 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c6 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: italic
+        }
+
+        .c9 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 12pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c7 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 14pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c4 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c5 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: justify
+        }
+
+        .c1 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: left
+        }
+
+        .c2 {
+            background-color: #ffffff;
+            max-width: 468pt;
+            padding: 72pt 72pt 72pt 72pt
+        }
+
+        .c8 {
+            margin-left: 144pt;
+            text-indent: 36pt
+        }
+
+        .c3 {
+            height: 11pt
+        }
+
+        .title {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 36pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 18pt;
+            color: #666666;
+            font-size: 24pt;
+            padding-bottom: 4pt;
+            font-family: "Georgia";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        /*li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        /*p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        h1 {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 24pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 18pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 14pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 12pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 12pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 11pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 11pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 10pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 10pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+
+        input.pur {
+            width: 100%;
+        }
+
+        table thead th {
+            text-align: center;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function ()
+        {
+            var leaseid = "";
+
+            GetAllMileageForms('Expense Reimbursement');
+
+            $("input").change(function (e)
+            {
+                e.preventDefault();
+
+                if ($(this).val() == "") {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+
+
+
+            var totalmiles = 0;
+            var totaldue = 0;
+
+
+            function calculatetotalmiles()
+            {
+                totalmiles = 0;
+
+            $(".cmile").each(function () {
+
+                if ($(this).val() != "" && $(this).val() != "0")
+                {
+                    totalmiles += parseFloat($(this).val());
+                }
+            });
+            totaldue = parseFloat(totalmiles * 0.545).toFixed(2);
+            $("#totalmiles").html(totalmiles);
+            $("#totalprice").html(totaldue);
+            }
+
+
+            $(".cmile").focusout(function ()
+            {
+                calculatetotalmiles();
+            });
+
+
+            // foreach change loop through all, get total miles, multiply wiith 0.545 , show in total display
+
+
+
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+
+                //if ($("#empname").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                //    $("#empname").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#empname");
+                //}
+
+                //if ($("#startdate").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Date </li>";
+                //    $("#startdate").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#startdate");
+                //}
+
+                //if ($("#securitynumber").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Security Number </li>";
+                //    $("#securitynumber").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#securitynumber");
+                //}
+
+
+                if (!validateEmail($("#email").val()))
+                {
+                    errormsgsummary += "<li> Please Enter Valid Email Address </li>";
+                    $("#email").addClass('has-error');
+                    if (control == "")
+                        control = $("#email");
+                }
+
+
+                //if ($("#manager").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Manager Name </li>";
+                //    $("#manager").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#manager");
+                //}
+
+                //if ($("#location").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Location </li>";
+                //    $("#location").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#location");
+                //}
+
+
+                //if ($("#exempt").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
+                //    $("#exempt").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#exempt");
+                //}
+
+                //if ($("#nonexempt").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
+                //    $("#nonexempt").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#nonexempt");
+                //}
+
+
+
+                //if ($("#position").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Position  </li>";
+                //    $("#position").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#position");
+                //}
+
+
+
+                //if ($("#status1").val() == "") {
+                //    errormsgsummary += "<li> Please Choose Status  </li>";
+                //    $("#status1").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#status1");
+                //}
+
+
+
+                //if ($("#salary").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                //    $("#salary").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#salary");
+                //}
+
+
+                //if ($("#allocation").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Allocation </li>";
+                //    $("#allocation").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#allocation");
+                //}
+
+
+                if (errormsgsummary != "")
+                {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+                    $('#myModal').modal('hide');
+
+                    $(".alert").html('Processing');
+                    $('#toastnotification').modal('show');
+
+                    var insertForm = new FormData();
+                    insertForm.append('empname', $("#empname").val());
+                    insertForm.append('startdate', $("#startdate").val());
+                    insertForm.append('securitynumber', $("#securitynumber").val());
+                    insertForm.append('email', $("#email").val());
+                    insertForm.append('manager', $("#manager").val());
+                    insertForm.append('location', $("#location").val());
+                    if ($("#exempt").is(":checked"))
+                    {
+                        insertForm.append('exempt', '1');
+                    }
+                    else {
+                        insertForm.append('exempt', '0');
+                    }
+
+                    if ($("#nonexempt").is(":checked"))
+                    {
+                        insertForm.append('nonexempt', '1');
+                    }
+                    else {
+                        insertForm.append('nonexempt', '0');
+                    }
+
+
+                    insertForm.append('position', $("#position").val());
+                    insertForm.append('status', $("#status1").val());
+                    insertForm.append('salary', $("#salary").val());
+                    insertForm.append('kitordered', $("#kitorderdate").val());
+                    insertForm.append('callscheduled', $("#onboardcall").val());
+                    insertForm.append('allocation', $("#allocation").val());
+                    insertForm.append('esignature', $("#esignature").val());
+                    insertForm.append('edate', $("#edate").val());
+                    insertForm.append('mdate', $("#mdate").val());
+                    insertForm.append('msignature', $("#msignature").val());
+                    insertForm.append('rpmsignature', $("#rpmsignature").val());
+                    insertForm.append('rpmdate', $("#rpmdate").val());
+
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
+
+
+
+                            if (data['error'] == false) {
+                                leaseid = data['insertedId'];
+
+                                $("#empname").val('');
+                                $("#startdate").val('');
+                                $("#securitynumber").val('');
+                                $("#email").val('');
+                                $("#manager").val('');
+                                $("#location").val('');
+                                $("#exempt").val('');
+                                $("#nonexempt").val('');
+                                $("#position").val('');
+                                $("#status1").val('');
+                                $("#salary").val('');
+                                $("#kitorderdate").val('');
+                                $("#onboardcall").val('');
+                                $("#allocation").val('');
+
+
+                                GetAllHRFORMs('New Hire Notice');
+                                $(".alert").html('Record Successfully Updated !');
+                                $('#toastnotification').modal('show');
+
+
+                                setTimeout(function () {
+
+                                    $("#print").attr('disabled', false);
+                                    $("#pdf").attr('disabled', false);
+                                    $("#Submit").attr('disabled', true);
+                                    $('#toastnotification').modal('hide');
+                                }, 3000);
+                            }
+                            else {
+                                $("#status").html(data['errorMsg']);
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
+                    });
+
+                }
+
+
+            });
+
+
+      });
+
+    </script>
+
+}

@@ -83,6 +83,15 @@
     <Compile Include="EquityPartner.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EquityPartnerContact.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseReimbursementDetail.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseReimbursementHeader.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="FormAttachment.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
@@ -101,6 +110,12 @@
     </Compile>
     <Compile Include="Helpers\EFConnectionAccessor.cs" />
     <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="MileageLogDetail.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MileageLogHeader.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="NoticeOfEmployeeSeperation.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -111,6 +126,12 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getallemployeenewhirenotice_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallexpensemileagelogs_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallmonthlyexpensedetails_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getallnoticeofemployeeseparation_Result.cs">

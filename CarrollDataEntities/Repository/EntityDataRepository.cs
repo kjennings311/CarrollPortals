@@ -1292,9 +1292,85 @@ namespace Carroll.Data.Entities.Repository
             }
         }
         
+        public dynamic GetAllMileageForms(string FormType,Guid userid, string optionalSeachText)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+
+                var config = new Config { };
+
+                if (FormType == "Mileage Log")
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.proc_getallexpensemileagelogs(userid).ToList();
+                    else
+                        config.Rows = _entities.proc_getallexpensemileagelogs(userid).Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.TotalPrice.Value.ToString().ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                    config.EtType = EntityType.AllClaims.ToString();
+                    PropertyInfo[] userprop = typeof(MileageLogHeader).GetProperties();
+                    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                    config.Columns = new List<DtableConfigArray>();
+
+                    config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Submitter Name", type = 0, href = "" });
+                  //  config.Columns.Add(new DtableConfigArray { name = "reportedMonthMileage", label = "Month Mileage", type = DFieldType.IsDate, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "emailAddress", label = "EmailAddress", type = 0, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "manager", label = "Manager", type = 0, href = "" });
+                 //   config.Columns.Add(new DtableConfigArray { name = "totalNumberOfMiles", label = "Total Miles", type = 0, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "totalPrice", label = "Total Price", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "status", label = "Status", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                }
+                else if (FormType == "Expense Reimbursement")
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.proc_getallmonthlyexpensedetails(userid).ToList();
+                    else
+                        config.Rows = _entities.proc_getallmonthlyexpensedetails(userid).Where(x => x.Name.ToLower().Contains(optionalSeachText.ToLower()) || x.TotalExpenses.Value.ToString().ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                    config.EtType = EntityType.AllClaims.ToString();
+                    PropertyInfo[] userprop = typeof(ExpenseReimbursementHeader).GetProperties();
+                    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                    config.Columns = new List<DtableConfigArray>();
+
+                    config.Columns.Add(new DtableConfigArray { name = "name", label = "Submitter Name", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "submissionDate", label = "Submission Date", type = DFieldType.IsDate, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "emailAddress", label = "EmailAddress", type = 0, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "manager", label = "Manager", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "totalExpenses", label = "Total Expenses", type = 0, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
+                 //   config.Columns.Add(new DtableConfigArray { name = "balanceDue", label = "Balance Due", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "status", label = "Status", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                }
 
 
-        public dynamic GetAllHrForms(string FormType, string optionalSeachText)
+                return config;
+
+            }
+
+
+            }
+
+
+            public dynamic GetAllHrForms(string FormType, string optionalSeachText)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -1488,8 +1564,68 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
+                //else if (FormType == "Mileage Log")
+                //{
+                //    if (string.IsNullOrEmpty(optionalSeachText))
+                //        config.Rows = _entities.proc_getallexpensemileagelogs().ToList();
+                //    else
+                //        config.Rows = _entities.proc_getallexpensemileagelogs().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.TotalPrice.Value.ToString().ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
-                
+                //    config.EtType = EntityType.AllClaims.ToString();
+                //    PropertyInfo[] userprop = typeof(MileageLogHeader).GetProperties();
+                //    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                //    config.Columns = new List<DtableConfigArray>();
+
+                //    config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "reportedMonthMileage", label = "Month Mileage", type = DFieldType.IsDate, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "emailAddress", label = "EmailAddress", type = 0, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "manager", label = "Manager", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "totalNumberOfMiles", label = "Total Miles", type = 0, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "totalPrice", label = "Total Price", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "status", label = "Status", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                //}
+                //else if (FormType == "Expense Reimbursement")
+                //{
+                //    if (string.IsNullOrEmpty(optionalSeachText))
+                //        config.Rows = _entities.proc_getallmonthlyexpensedetails().ToList();
+                //    else
+                //        config.Rows = _entities.proc_getallmonthlyexpensedetails().Where(x => x.Name.ToLower().Contains(optionalSeachText.ToLower()) || x.TotalExpenses.Value.ToString().ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                //    config.EtType = EntityType.AllClaims.ToString();
+                //    PropertyInfo[] userprop = typeof(ExpenseReimbursementHeader).GetProperties();
+                //    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                //    config.Columns = new List<DtableConfigArray>();
+
+                //    config.Columns.Add(new DtableConfigArray { name = "name", label = "Name", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "submissionDate", label = "Submission Date", type = DFieldType.IsDate, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "emailAddress", label = "EmailAddress", type = 0, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "manager", label = "Manager", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "totalExpenses", label = "Total Expenses", type = 0, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "balanceDue", label = "Balance Due", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "status", label = "Status", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
+                //    //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                //}
+
+
                 return config;
 
             }

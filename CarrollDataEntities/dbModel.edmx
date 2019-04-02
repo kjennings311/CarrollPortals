@@ -84,6 +84,17 @@
           <Property Name="rpmsignature" Type="nvarchar" MaxLength="100" />
           <Property Name="rpmdate" Type="date" />
         </EntityType>
+        <EntityType Name="EquityPartnerContacts">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EquityPartnerId" Type="uniqueidentifier" />
+          <Property Name="ContactId" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="EquityPartners">
           <Key>
             <PropertyRef Name="EquityPartnerId" />
@@ -100,6 +111,58 @@
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExpenseReimbursementDetails">
+          <Key>
+            <PropertyRef Name="ExpenseReimbursementDetailId" />
+          </Key>
+          <Property Name="ExpenseReimbursementDetailId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExpenseReimbursementId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="ShortDescription" Type="text" />
+          <Property Name="Col1Expense" Type="float" />
+          <Property Name="Col2Epense" Type="float" />
+          <Property Name="Col3Expense" Type="float" />
+          <Property Name="Col4Expense" Type="float" />
+          <Property Name="Col5Expense" Type="float" />
+          <Property Name="Col6Expense" Type="float" />
+          <Property Name="Col7Expense" Type="float" />
+        </EntityType>
+        <EntityType Name="ExpenseReimbursementHeader">
+          <Key>
+            <PropertyRef Name="ExpenseReimbursementId" />
+          </Key>
+          <Property Name="ExpenseReimbursementId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="SubmittionDate" Type="date" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="Col1YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col1GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col2YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col2GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col3YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col3GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col4YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col4GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col5YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col5GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col6YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col6GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col7YardiCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Col7GlCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalExpenses" Type="float" />
+          <Property Name="LessAnyCorrections" Type="float" />
+          <Property Name="BalanceDue" Type="float" />
+          <Property Name="SubmittedBySignature" Type="nvarchar" MaxLength="100" />
+          <Property Name="SubmittedDate" Type="date" />
+          <Property Name="ApprovedSignature" Type="nvarchar" MaxLength="100" />
+          <Property Name="ApprovedDate" Type="date" />
+          <Property Name="PropertyId" Type="uniqueidentifier" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="ModifiedUser" Type="uniqueidentifier" />
+          <Property Name="ModifedDatetime" Type="datetime" />
         </EntityType>
         <EntityType Name="FormAttachments">
           <Key>
@@ -211,6 +274,37 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="MileageLogDetails">
+          <Key>
+            <PropertyRef Name="MileageLogDetailsId" />
+          </Key>
+          <Property Name="MileageLogDetailsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MileageLogId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="date" />
+          <Property Name="BillToProperty" Type="nvarchar" MaxLength="50" />
+          <Property Name="Origin_Destination" Type="text" />
+          <Property Name="Purpose" Type="text" />
+          <Property Name="NumberOfMiles" Type="float" />
+        </EntityType>
+        <EntityType Name="MileageLogHeader">
+          <Key>
+            <PropertyRef Name="MonthlyMileageLogId" />
+          </Key>
+          <Property Name="MonthlyMileageLogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="OfficeAddress" Type="nvarchar" MaxLength="300" />
+          <Property Name="ReportedMonthMileage" Type="nvarchar" MaxLength="20" />
+          <Property Name="TotalNumberOfMiles" Type="float" />
+          <Property Name="TotalPrice" Type="float" />
+          <Property Name="Signature" Type="nvarchar" MaxLength="100" />
+          <Property Name="ApprovedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="PropertyId" Type="uniqueidentifier" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="CreatedDatetime" Type="datetime" />
+          <Property Name="ModifiedUser" Type="uniqueidentifier" />
+          <Property Name="ModifiedDatetime" Type="datetime" />
         </EntityType>
         <EntityType Name="NoticeOfEmployeeSeperation">
           <Key>
@@ -481,6 +575,12 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         </Association>
         <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeenewhirenotice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallexpensemileagelogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="proc_getallmonthlyexpensedetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallnoticeofemployeeseparation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallpayrollstatuschange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallrequisitionrequests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -505,12 +605,17 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeLeaseRaider" EntityType="Self.EmployeeLeaseRaider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeNewHireNotice" EntityType="Self.EmployeeNewHireNotice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquityPartnerContacts" EntityType="Self.EquityPartnerContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquityPartners" EntityType="Self.EquityPartners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenseReimbursementDetails" EntityType="Self.ExpenseReimbursementDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenseReimbursementHeader" EntityType="Self.ExpenseReimbursementHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormAttachments" EntityType="Self.FormAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormComments" EntityType="Self.FormComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormGeneralLiabilityClaims" EntityType="Self.FormGeneralLiabilityClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormMoldDamageClaims" EntityType="Self.FormMoldDamageClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormPropertyDamageClaims" EntityType="Self.FormPropertyDamageClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MileageLogDetails" EntityType="Self.MileageLogDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MileageLogHeader" EntityType="Self.MileageLogHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NoticeOfEmployeeSeperation" EntityType="Self.NoticeOfEmployeeSeperation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayrollStatusChangeNotice" EntityType="Self.PayrollStatusChangeNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
@@ -596,7 +701,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getworkflowemails" ReturnType="Collection(Carroll.Data.Entities.proc_getworkflowemails_Result)">
           <Parameter Name="propid" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="proc_getallemployeenewhirenotice" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result)" />
           <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
           <FunctionImport Name="SP_GetAllClaims1" ReturnType="Collection(Carroll.Data.Entities.SP_GetAllClaims1_Result)">
             <Parameter Name="userid" Mode="In" Type="Guid" />
@@ -613,6 +717,18 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="EmployeeNewHireNotices" EntityType="Carroll.Data.Entities.EmployeeNewHireNotice" />
           <EntitySet Name="NoticeOfEmployeeSeperations" EntityType="Carroll.Data.Entities.NoticeOfEmployeeSeperation" />
           <EntitySet Name="PayrollStatusChangeNotices" EntityType="Carroll.Data.Entities.PayrollStatusChangeNotice" />
+          <EntitySet Name="EquityPartnerContacts" EntityType="Carroll.Data.Entities.EquityPartnerContact" />
+          <EntitySet Name="ExpenseReimbursementDetails" EntityType="Carroll.Data.Entities.ExpenseReimbursementDetail" />
+          <EntitySet Name="ExpenseReimbursementHeaders" EntityType="Carroll.Data.Entities.ExpenseReimbursementHeader" />
+          <EntitySet Name="MileageLogDetails" EntityType="Carroll.Data.Entities.MileageLogDetail" />
+          <EntitySet Name="MileageLogHeaders" EntityType="Carroll.Data.Entities.MileageLogHeader" />
+          <FunctionImport Name="proc_getallemployeenewhirenotice" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result)" />
+          <FunctionImport Name="proc_getallexpensemileagelogs" ReturnType="Collection(Carroll.Data.Entities.proc_getallexpensemileagelogs_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getallmonthlyexpensedetails" ReturnType="Collection(Carroll.Data.Entities.proc_getallmonthlyexpensedetails_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1075,28 +1191,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="AssetManager2Email" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CMEmail" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="proc_getallemployeenewhirenotice_Result">
-          <Property Type="Guid" Name="EmployeeHireNoticeId" Nullable="false" />
-          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="StartDate" Nullable="true" />
-          <Property Type="String" Name="EmployeeSocialSecuirtyNumber" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Manager" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Location" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Position_Exempt" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Position_NonExempt" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Position" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Status" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Wage_Salary" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Allocation" Nullable="true" MaxLength="50" />
-          <Property Type="Guid" Name="CreatedUser" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
-          <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
-          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
-          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
-          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
-        </ComplexType>
         <ComplexType Name="proc_getallnoticeofemployeeseparation_Result">
           <Property Type="Guid" Name="EmployeeSeperationId" Nullable="false" />
           <Property Type="DateTime" Name="EffectiveDateOfChange" Nullable="true" />
@@ -1379,6 +1473,155 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="MSignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MDate" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="EquityPartnerContact">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="EquityPartnerId" Type="Guid" />
+          <Property Name="ContactId" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ExpenseReimbursementDetail">
+          <Key>
+            <PropertyRef Name="ExpenseReimbursementDetailId" />
+          </Key>
+          <Property Name="ExpenseReimbursementDetailId" Type="Guid" Nullable="false" />
+          <Property Name="ExpenseReimbursementId" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="ShortDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Col1Expense" Type="Double" />
+          <Property Name="Col2Epense" Type="Double" />
+          <Property Name="Col3Expense" Type="Double" />
+          <Property Name="Col4Expense" Type="Double" />
+          <Property Name="Col5Expense" Type="Double" />
+          <Property Name="Col6Expense" Type="Double" />
+          <Property Name="Col7Expense" Type="Double" />
+        </EntityType>
+        <EntityType Name="ExpenseReimbursementHeader">
+          <Key>
+            <PropertyRef Name="ExpenseReimbursementId" />
+          </Key>
+          <Property Name="ExpenseReimbursementId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubmittionDate" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Col1YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col1GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col2YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col2GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col3YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col3GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col4YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col4GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col5YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col5GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col6YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col6GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col7YardiCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Col7GlCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalExpenses" Type="Double" />
+          <Property Name="LessAnyCorrections" Type="Double" />
+          <Property Name="BalanceDue" Type="Double" />
+          <Property Name="SubmittedBySignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedSignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedUser" Type="Guid" />
+          <Property Name="ModifedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="PropertyId" Type="Guid" />
+          <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MileageLogDetail">
+          <Key>
+            <PropertyRef Name="MileageLogDetailsId" />
+          </Key>
+          <Property Name="MileageLogDetailsId" Type="Guid" Nullable="false" />
+          <Property Name="MileageLogId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="BillToProperty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Origin_Destination" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfMiles" Type="Double" />
+        </EntityType>
+        <EntityType Name="MileageLogHeader">
+          <Key>
+            <PropertyRef Name="MonthlyMileageLogId" />
+          </Key>
+          <Property Name="MonthlyMileageLogId" Type="Guid" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ReportedMonthMileage" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TotalNumberOfMiles" Type="Double" />
+          <Property Name="TotalPrice" Type="Double" />
+          <Property Name="Signature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedUser" Type="Guid" />
+          <Property Name="ModifiedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="PropertyId" Type="Guid" />
+          <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="proc_getallemployeenewhirenotice_Result">
+          <Property Type="Guid" Name="EmployeeHireNoticeId" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="String" Name="EmployeeSocialSecuirtyNumber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Manager" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Location" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Position_Exempt" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Position_NonExempt" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Position" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Wage_Salary" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Allocation" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="kitordered" Nullable="true" />
+          <Property Type="DateTime" Name="boardingcallscheduled" Nullable="true" />
+          <Property Type="Guid" Name="CreatedUser" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="esignature" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="edate" Nullable="true" />
+          <Property Type="String" Name="msignature" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="mdate" Nullable="true" />
+          <Property Type="String" Name="rpmsignature" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="rpmdate" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
+        </ComplexType>
+        <ComplexType Name="proc_getallexpensemileagelogs_Result">
+          <Property Type="Guid" Name="MonthlyMileageLogId" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OfficeAddress" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="ReportedMonthMileage" Nullable="true" MaxLength="20" />
+          <Property Type="Double" Name="TotalNumberOfMiles" Nullable="true" />
+          <Property Type="Double" Name="TotalPrice" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="168" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="176" />
+        </ComplexType>
+        <ComplexType Name="proc_getallmonthlyexpensedetails_Result">
+          <Property Type="Guid" Name="ExpenseReimbursementId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="SubmittionDate" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="300" />
+          <Property Type="Double" Name="TotalExpenses" Nullable="true" />
+          <Property Type="Double" Name="LessAnyCorrections" Nullable="true" />
+          <Property Type="Double" Name="BalanceDue" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="178" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="179" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1837,32 +2080,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_getallemployeenewhirenotice" FunctionName="Carroll.Data.Entities.Store.proc_getallemployeenewhirenotice">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result">
-                <ScalarProperty Name="EmployeeHireNoticeId" ColumnName="EmployeeHireNoticeId" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EmployeeSocialSecuirtyNumber" ColumnName="EmployeeSocialSecuirtyNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="Manager" ColumnName="Manager" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Position_Exempt" ColumnName="Position_Exempt" />
-                <ScalarProperty Name="Position_NonExempt" ColumnName="Position_NonExempt" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Wage_Salary" ColumnName="Wage_Salary" />
-                <ScalarProperty Name="Allocation" ColumnName="Allocation" />
-                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
-                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_getallnoticeofemployeeseparation" FunctionName="Carroll.Data.Entities.Store.proc_getallnoticeofemployeeseparation">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result">
@@ -2174,6 +2391,172 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EquityPartnerContacts">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.EquityPartnerContact">
+              <MappingFragment StoreEntitySet="EquityPartnerContacts">
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="EquityPartnerId" ColumnName="EquityPartnerId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseReimbursementDetails">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ExpenseReimbursementDetail">
+              <MappingFragment StoreEntitySet="ExpenseReimbursementDetails">
+                <ScalarProperty Name="Col7Expense" ColumnName="Col7Expense" />
+                <ScalarProperty Name="Col6Expense" ColumnName="Col6Expense" />
+                <ScalarProperty Name="Col5Expense" ColumnName="Col5Expense" />
+                <ScalarProperty Name="Col4Expense" ColumnName="Col4Expense" />
+                <ScalarProperty Name="Col3Expense" ColumnName="Col3Expense" />
+                <ScalarProperty Name="Col2Epense" ColumnName="Col2Epense" />
+                <ScalarProperty Name="Col1Expense" ColumnName="Col1Expense" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ExpenseReimbursementId" ColumnName="ExpenseReimbursementId" />
+                <ScalarProperty Name="ExpenseReimbursementDetailId" ColumnName="ExpenseReimbursementDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseReimbursementHeaders">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ExpenseReimbursementHeader">
+              <MappingFragment StoreEntitySet="ExpenseReimbursementHeader">
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ModifedDatetime" ColumnName="ModifedDatetime" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="ApprovedSignature" ColumnName="ApprovedSignature" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="SubmittedBySignature" ColumnName="SubmittedBySignature" />
+                <ScalarProperty Name="BalanceDue" ColumnName="BalanceDue" />
+                <ScalarProperty Name="LessAnyCorrections" ColumnName="LessAnyCorrections" />
+                <ScalarProperty Name="TotalExpenses" ColumnName="TotalExpenses" />
+                <ScalarProperty Name="Col7GlCode" ColumnName="Col7GlCode" />
+                <ScalarProperty Name="Col7YardiCode" ColumnName="Col7YardiCode" />
+                <ScalarProperty Name="Col6GlCode" ColumnName="Col6GlCode" />
+                <ScalarProperty Name="Col6YardiCode" ColumnName="Col6YardiCode" />
+                <ScalarProperty Name="Col5GlCode" ColumnName="Col5GlCode" />
+                <ScalarProperty Name="Col5YardiCode" ColumnName="Col5YardiCode" />
+                <ScalarProperty Name="Col4GlCode" ColumnName="Col4GlCode" />
+                <ScalarProperty Name="Col4YardiCode" ColumnName="Col4YardiCode" />
+                <ScalarProperty Name="Col3GlCode" ColumnName="Col3GlCode" />
+                <ScalarProperty Name="Col3YardiCode" ColumnName="Col3YardiCode" />
+                <ScalarProperty Name="Col2GlCode" ColumnName="Col2GlCode" />
+                <ScalarProperty Name="Col2YardiCode" ColumnName="Col2YardiCode" />
+                <ScalarProperty Name="Col1GlCode" ColumnName="Col1GlCode" />
+                <ScalarProperty Name="Col1YardiCode" ColumnName="Col1YardiCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SubmittionDate" ColumnName="SubmittionDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExpenseReimbursementId" ColumnName="ExpenseReimbursementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MileageLogDetails">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.MileageLogDetail">
+              <MappingFragment StoreEntitySet="MileageLogDetails">
+                <ScalarProperty Name="NumberOfMiles" ColumnName="NumberOfMiles" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Origin_Destination" ColumnName="Origin_Destination" />
+                <ScalarProperty Name="BillToProperty" ColumnName="BillToProperty" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MileageLogId" ColumnName="MileageLogId" />
+                <ScalarProperty Name="MileageLogDetailsId" ColumnName="MileageLogDetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MileageLogHeaders">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.MileageLogHeader">
+              <MappingFragment StoreEntitySet="MileageLogHeader">
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ModifiedDatetime" ColumnName="ModifiedDatetime" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="TotalNumberOfMiles" ColumnName="TotalNumberOfMiles" />
+                <ScalarProperty Name="ReportedMonthMileage" ColumnName="ReportedMonthMileage" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="MonthlyMileageLogId" ColumnName="MonthlyMileageLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallemployeenewhirenotice" FunctionName="Carroll.Data.Entities.Store.proc_getallemployeenewhirenotice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result">
+                <ScalarProperty Name="EmployeeHireNoticeId" ColumnName="EmployeeHireNoticeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EmployeeSocialSecuirtyNumber" ColumnName="EmployeeSocialSecuirtyNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Position_Exempt" ColumnName="Position_Exempt" />
+                <ScalarProperty Name="Position_NonExempt" ColumnName="Position_NonExempt" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Wage_Salary" ColumnName="Wage_Salary" />
+                <ScalarProperty Name="Allocation" ColumnName="Allocation" />
+                <ScalarProperty Name="kitordered" ColumnName="kitordered" />
+                <ScalarProperty Name="boardingcallscheduled" ColumnName="boardingcallscheduled" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="esignature" ColumnName="esignature" />
+                <ScalarProperty Name="edate" ColumnName="edate" />
+                <ScalarProperty Name="msignature" ColumnName="msignature" />
+                <ScalarProperty Name="mdate" ColumnName="mdate" />
+                <ScalarProperty Name="rpmsignature" ColumnName="rpmsignature" />
+                <ScalarProperty Name="rpmdate" ColumnName="rpmdate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallexpensemileagelogs" FunctionName="Carroll.Data.Entities.Store.proc_getallexpensemileagelogs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallexpensemileagelogs_Result">
+                <ScalarProperty Name="MonthlyMileageLogId" ColumnName="MonthlyMileageLogId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="ReportedMonthMileage" ColumnName="ReportedMonthMileage" />
+                <ScalarProperty Name="TotalNumberOfMiles" ColumnName="TotalNumberOfMiles" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallmonthlyexpensedetails" FunctionName="Carroll.Data.Entities.Store.proc_getallmonthlyexpensedetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallmonthlyexpensedetails_Result">
+                <ScalarProperty Name="ExpenseReimbursementId" ColumnName="ExpenseReimbursementId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="SubmittionDate" ColumnName="SubmittionDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TotalExpenses" ColumnName="TotalExpenses" />
+                <ScalarProperty Name="LessAnyCorrections" ColumnName="LessAnyCorrections" />
+                <ScalarProperty Name="BalanceDue" ColumnName="BalanceDue" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -41,6 +41,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetNoticeOfEmployeeSeperation(Guid riderid);
         dynamic GetUserProperty(Guid userid);
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
+         dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);

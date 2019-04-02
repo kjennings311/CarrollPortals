@@ -161,6 +161,13 @@ namespace Carroll.Data.Services.Models
             return _repository.GetAllHrForms(FormType, OptionalSeachText);
         }
 
+        public dynamic GetAllMileageForms(string FormType,string userid, string OptionalSeachText)
+        {
+            return _repository.GetAllMileageForms(FormType, new Guid(userid), OptionalSeachText);
+        }
+
+        
+
         public dynamic GetHrFormCount()
         {
             return _repository.GetHrFormCount();

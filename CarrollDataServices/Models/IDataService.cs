@@ -41,6 +41,7 @@ namespace Carroll.Data.Services.Models
         dynamic InsertNoticeOfEmployeeSeperation(NoticeOfEmployeeSeperation formAttachment);
         dynamic GetNoticeOfEmployeeSeperation(Guid riderid);
         dynamic GetAllHrForms(string FormType, string OptionalSeachText);
+        dynamic GetAllMileageForms(string FormType, string userid, string OptionalSeachText);
         dynamic GetHrFormCount();
     }
 }
