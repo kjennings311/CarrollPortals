@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Employee New Hire Notice";
+    ViewBag.Title = "Month Mileage Log";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -63,19 +63,21 @@
         <p class="c1 c8" style="    margin-left: 20%;
     margin-top: 15px;
     margin-bottom: 15px;">
-            <span class="c7"> MONTHLY MILEAGE LOG </span>
+            <span class="c7"> MONTH MILEAGE LOG </span>
         </p>
-        <p class="c1">
-            <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />  </span>
-        </p>
+        <div class="" style="margin-left:20%;">
+            <p class="c1">
+                <span class="c0"> Employee Name:    <input type="text" style="width:50%;margin-left:11%;" id="empname" />  </span>
+            </p>
 
-        <p class="c1">
-            <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:83%;" /> </span>
-        </p>
-        <p class="c1">
-            <span class="c0">Monthly Mileage is Reported :<input type="text" id="location" style="width:45%;" /> </span>
-        </p>
-        <table id="allorders" style="height: 470px;
+            <p class="c1">
+                <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:50%;margin-left:12.5%;" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Monthly Mileage is Reported :<input type="text" id="location" style="width:50%;margin-left:2%;" /> </span>
+            </p>
+        </div>
+        <table id="allorders" style="height: 450px;
     overflow: scroll; display:inline-block;border-collapse:collapse" class="table table-bordered">
             <thead id="header-fixed" style="display: table-header-group;">
                 <tr>
@@ -93,70 +95,76 @@
                 <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
                 <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile"  />  </td> </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile" />  </td>
+                    <td> <input type="date" id="2tdate" />  </td>
+                    <td> <input type="text" id="2property" />  </td>
+                    <td> <input type="text" name="name" id="2destination" value="" />  </td>
+                    <td><input type="text" name="name" id="2purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" id="2miles" value="0" class="cmile" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile"  />  </td>
+                    <td> <input type="date" id="3tdate" />  </td>
+                    <td> <input type="text" id="3property" />  </td>
+                    <td> <input type="text" name="name" id="3destination" value="" />  </td>
+                    <td><input type="text" name="name" id="3purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" id="3miles" value="0" class="cmile"  />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile" />  </td>
+                    <td> <input type="date" id="4tdate" />  </td>
+                    <td> <input type="text" id="4property" />  </td>
+                    <td> <input type="text" name="name" id="4destination" value="" />  </td>
+                    <td><input type="text" name="name" id="4purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" id="4miles" value="0" class="cmile" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile" />  </td>
+                    <td> <input type="date" id="5tdate" />  </td>
+                    <td> <input type="text" id="5property" />  </td>
+                    <td> <input type="text" name="name" id="5destination" value="" />  </td>
+                    <td><input type="text" name="name" id="5purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" id="5miles" value="0" class="cmile" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile" />  </td>
+                    <td> <input type="date" id="6tdate" />  </td>
+                    <td> <input type="text" id="6property" />  </td>
+                    <td> <input type="text" name="name" id="6destination" value="" />  </td>
+                    <td><input type="text" name="name" id="6purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" id="6miles" value="0" class="cmile" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" value="0" class="cmile"     id="1miles" />  </td>
+                    <td> <input type="date" id="7tdate" />  </td>
+                    <td> <input type="text" id="7property" />  </td>
+                    <td> <input type="text" name="name" id="7destination" value="" />  </td>
+                    <td><input type="text" name="name" id="7purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" value="0" class="cmile"     id="7miles" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur"  value="" /> </td>
-                    <td> <input type="number" style="width:70px;" class="cmile"  value="0" id="1miles" />  </td>
+                    <td> <input type="date" id="8tdate" />  </td>
+                    <td> <input type="text" id="8property" />  </td>
+                    <td> <input type="text" name="name" id="8destination" value="" />  </td>
+                    <td><input type="text" name="name" id="8purpose" class="pur"  value="" /> </td>
+                    <td> <input type="number" style="width:70px;" class="cmile"  value="0" id="8miles" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="1miles" />  </td>
+                    <td> <input type="date" id="9tdate" />  </td>
+                    <td> <input type="text" id="9property" />  </td>
+                    <td> <input type="text" name="name" id="9destination" value="" />  </td>
+                    <td><input type="text" name="name" id="9purpose" class="pur" value="" /> </td>
+                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="9miles" />  </td>
                 </tr>
                 <tr>
-                    <td> <input type="date" id="1tdate" />  </td>
-                    <td> <input type="text" id="1property" />  </td>
-                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                    <td><input type="text" name="name" id="1purpose" value="0" class="pur" /> </td>
-                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="1miles" />  </td>
+                    <td> <input type="date" id="10tdate" />  </td>
+                    <td> <input type="text" id="10property" />  </td>
+                    <td> <input type="text" name="name" id="10destination" value="" />  </td>
+                    <td><input type="text" name="name" id="10purpose" class="pur" /> </td>
+                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="10miles" />  </td>
                 </tr>
             </tbody>
-            <tfoot> <tr> <td colspan="3" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles *  * 0.545 Cents ) </td><td> <span id="totalmiles"> </span> * 0.545 Cents  </td> <td> <span id="totalprice" > </span> </td></tr></tfoot>
+            <tfoot>
+            <tr> <td style="text-align:center" colspan="1"> <a class="btn btn-sm btn-primary"  id="btnnewrow" href="#">  New </a></td> <td colspan="3" style="text-align:right;font-size: 15px;
+    vertical-align: middle;
+    font-weight: bold;">  Total Miles </td>  <td style="font-size: 15px;
+    font-weight: bold;
+    vertical-align: middle;"> <span id="totalmiles"> </span> </td></tr>
+            <tr> <td colspan="4" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice" > </span> </td></tr></tfoot>
                 </table>
         <p class="c1">
                     <span class="c0"> Signature <input type="text" id="signature" style="width:42%; margin-left:2%" />   </span>
@@ -424,7 +432,13 @@
         input {
             border: none;
             border-bottom: 1px solid #0c0606;
-            padding: 0px;
+            padding: 5px;
+            height: 18px;
+        }
+
+        #submitform table td 
+        {
+            padding:5px !important;
         }
 
         button {
@@ -493,16 +507,73 @@
             $("#totalprice").html(totaldue);
             }
 
-
-            $(".cmile").focusout(function ()
-            {
+            $(document).on('focusout', '.cmile', function (e) {
                 calculatetotalmiles();
+                
+            });
+
+            var isfilled = true;
+            var totalrows = [];
+
+            function checkrowvalidation(controlid)
+            {
+
+                if ($("#" + controlid + "tdate").val() == "") {
+                    isfilled = false;
+                    $("#" + controlid + "tdate").addClass('has-error');
+                }
+                else
+                {
+                    isfilled = true;
+                    $("#" + controlid + "date").removeClass('has-error');
+
+                }
+
+                if ($("#" + controlid + "property").val() == "")
+                {
+                    isfilled = false;
+                    $("#" + controlid + "property").addClass('has-error');
+                }
+                else
+                {
+                    isfilled = true;
+                    $("#" + controlid + "property").removeClass('has-error');
+                }
+
+                if ($("#" + controlid + "destination").val() == "") {
+                    isfilled = false;
+                    $("#" + controlid + "destination").addClass('has-error');
+                }
+                else {
+                    isfilled = true;
+                    $("#" + controlid + "destination").removeClass('has-error');
+                }
+
+                if ($("#" + controlid + "purpose").val() == "")
+                {
+                    isfilled = false;
+                    $("#" + controlid + "purpose").addClass('has-error');
+                }
+                else {
+                    isfilled = true;
+                    $("#" + controlid + "purpose").removeClass('has-error');
+                }
+                totalrows.push($("#" + controlid + "tdate").val() + "," + $("#" + controlid + "propery").val() + "," + $("#" + controlid + "destination").val() + ","+$("#" + controlid + "purpose").val() + "," + $("#" + controlid + "cmile").val());
+            }
+
+
+            var icount = 10;
+
+            $("#btnnewrow").click(function ()
+            {
+                icount++;
+                $("#allorders tbody").append('<tr><td> <input type="date" id="' + icount + 'tdate" />  </td><td> <input type="text" id="' + icount + 'property" />  </td><td> <input type="text" name="name" id="' + icount + 'destination" value="" />  </td> <td><input type="text" name="name" id="' + icount + 'purpose"  class="pur" /> </td> <td> <input type="number" style="width:70px;" class="cmile" value="0" id="' + icount +'miles" />  </td>< </tr>');
+
             });
 
 
-            // foreach change loop through all, get total miles, multiply wiith 0.545 , show in total display
 
-
+            
 
             $("#Submit").click(function (e) {
                 e.preventDefault();
@@ -511,108 +582,21 @@
                 var control = "";
                 $("#status").html('');
 
-                //if ($("#empname").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                //    $("#empname").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#empname");
-                //}
+                // check validation whether for mile entered row other fields are filled properly
+                totalrows=[];
+                $(".cmile").each(function () {
 
-                //if ($("#startdate").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Date </li>";
-                //    $("#startdate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#startdate");
-                //}
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('miles', ''));
+                    }
+                });
 
-                //if ($("#securitynumber").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Security Number </li>";
-                //    $("#securitynumber").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#securitynumber");
-                //}
-
-
-                if (!validateEmail($("#email").val()))
-                {
-                    errormsgsummary += "<li> Please Enter Valid Email Address </li>";
-                    $("#email").addClass('has-error');
-                    if (control == "")
-                        control = $("#email");
-                }
-
-
-                //if ($("#manager").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Manager Name </li>";
-                //    $("#manager").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#manager");
-                //}
-
-                //if ($("#location").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Location </li>";
-                //    $("#location").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#location");
-                //}
-
-
-                //if ($("#exempt").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
-                //    $("#exempt").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#exempt");
-                //}
-
-                //if ($("#nonexempt").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
-                //    $("#nonexempt").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#nonexempt");
-                //}
-
-
-
-                //if ($("#position").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Position  </li>";
-                //    $("#position").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#position");
-                //}
-
-
-
-                //if ($("#status1").val() == "") {
-                //    errormsgsummary += "<li> Please Choose Status  </li>";
-                //    $("#status1").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#status1");
-                //}
-
-
-
-                //if ($("#salary").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                //    $("#salary").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#salary");
-                //}
-
-
-                //if ($("#allocation").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Allocation </li>";
-                //    $("#allocation").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#allocation");
-                //}
-
-
-                if (errormsgsummary != "")
+                if (!isfilled)
                 {
 
-                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the highlighted inputs </ul> ');
 
-                    setTimeout(ScrollToElement(control), 3000);
+                   // setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
@@ -625,85 +609,42 @@
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
-                    insertForm.append('startdate', $("#startdate").val());
-                    insertForm.append('securitynumber', $("#securitynumber").val());
-                    insertForm.append('email', $("#email").val());
-                    insertForm.append('manager', $("#manager").val());
-                    insertForm.append('location', $("#location").val());
-                    if ($("#exempt").is(":checked"))
-                    {
-                        insertForm.append('exempt', '1');
-                    }
-                    else {
-                        insertForm.append('exempt', '0');
-                    }
-
-                    if ($("#nonexempt").is(":checked"))
-                    {
-                        insertForm.append('nonexempt', '1');
-                    }
-                    else {
-                        insertForm.append('nonexempt', '0');
-                    }
-
-
-                    insertForm.append('position', $("#position").val());
-                    insertForm.append('status', $("#status1").val());
-                    insertForm.append('salary', $("#salary").val());
-                    insertForm.append('kitordered', $("#kitorderdate").val());
-                    insertForm.append('callscheduled', $("#onboardcall").val());
-                    insertForm.append('allocation', $("#allocation").val());
-                    insertForm.append('esignature', $("#esignature").val());
-                    insertForm.append('edate', $("#edate").val());
-                    insertForm.append('mdate', $("#mdate").val());
-                    insertForm.append('msignature', $("#msignature").val());
-                    insertForm.append('rpmsignature', $("#rpmsignature").val());
-                    insertForm.append('rpmdate', $("#rpmdate").val());
-
+                    insertForm.append('officeaddress', $("#officeaddress").val());
+                    insertForm.append('mileagereported', $("#location").val());
+                    insertForm.append('totalmiles', totalmiles);
+                    insertForm.append('totalprice', totaldue);
+                   
+                    insertForm.append('signature', $("#signature").val());
+                    insertForm.append('approvedby', $("#approvedby").val());
+                    insertForm.append('rows', tablerows);
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
-                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+
                     $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
+                        url: $BaseApiUrl + "api/data/InsertMileageLog",
                         type: 'POST',
                         dataType: "JSON",
                         processData: false,
                         contentType: false,
                         data: insertForm,
-                        success: function (data) {
+                        success: function (data)
+                        {
                             // To-do code if ajax request is successful
-
 
 
                             if (data['error'] == false) {
                                 leaseid = data['insertedId'];
-
-                                $("#empname").val('');
-                                $("#startdate").val('');
-                                $("#securitynumber").val('');
-                                $("#email").val('');
-                                $("#manager").val('');
-                                $("#location").val('');
-                                $("#exempt").val('');
-                                $("#nonexempt").val('');
-                                $("#position").val('');
-                                $("#status1").val('');
-                                $("#salary").val('');
-                                $("#kitorderdate").val('');
-                                $("#onboardcall").val('');
-                                $("#allocation").val('');
-
-
-                                GetAllHRFORMs('New Hire Notice');
+                                
+                                GetAllMileageForms('Mileage Log');
                                 $(".alert").html('Record Successfully Updated !');
                                 $('#toastnotification').modal('show');
 
 
-                                setTimeout(function () {
+                                document.getElementById("submitform").reset();
 
-                                    $("#print").attr('disabled', false);
-                                    $("#pdf").attr('disabled', false);
+                                setTimeout(function () {
+                                    
                                     $("#Submit").attr('disabled', true);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
