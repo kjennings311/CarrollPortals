@@ -60,10 +60,10 @@
 <div class="row" style="padding: 20px;padding-left:20px;border: 2px solid black;">
     <form id="submitform" onsubmit="return false;">
 
-        <p class="c1 c8" style="    margin-left: 20%;
+        <p class="c1 c8" style="    margin-left: 30%;
     margin-top: 15px;
     margin-bottom: 15px;">
-            <span class="c7"> MONTH MILEAGE LOG </span>
+            <span class="c7"> MONTHLY MILEAGE LOG </span>
         </p>
         <div class="" style="margin-left:20%;">
             <p class="c1">
@@ -159,12 +159,21 @@
                 </tr>
             </tbody>
             <tfoot>
-            <tr> <td style="text-align:center" colspan="1"> <a class="btn btn-sm btn-primary"  id="btnnewrow" href="#">  New </a></td> <td colspan="3" style="text-align:right;font-size: 15px;
+                <tr>
+                    <td style="text-align:center" colspan="1"> <a class="btn btn-sm btn-primary" id="btnnewrow" href="#"> Add New </a></td>
+                    <td colspan="3" style="text-align:right;font-size: 15px;
     vertical-align: middle;
-    font-weight: bold;">  Total Miles </td>  <td style="font-size: 15px;
+    font-weight: bold;">
+                        Total Miles
+                    </td>
+                    <td style="font-size: 15px;
     font-weight: bold;
-    vertical-align: middle;"> <span id="totalmiles"> </span> </td></tr>
-            <tr> <td colspan="4" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice" > </span> </td></tr></tfoot>
+    vertical-align: middle;">
+                        <span id="totalmiles"> </span>
+                    </td>
+                </tr>
+                <tr> <td colspan="5" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice"> </span> </td></tr>
+            </tfoot>
                 </table>
         <p class="c1">
                     <span class="c0"> Signature <input type="text" id="signature" style="width:42%; margin-left:2%" />   </span>
@@ -177,8 +186,7 @@
                 <br />
                 <div id="status"> </div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
-
-                    <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                    <input type="button" id="Submit" value="Submit" class="btn btn-primary" style="height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                 </div>
     </form>
@@ -513,7 +521,7 @@
             });
 
             var isfilled = true;
-            var totalrows = [];
+            var totalrows = "";
 
             function checkrowvalidation(controlid)
             {
@@ -524,7 +532,7 @@
                 }
                 else
                 {
-                    isfilled = true;
+                   
                     $("#" + controlid + "date").removeClass('has-error');
 
                 }
@@ -536,7 +544,7 @@
                 }
                 else
                 {
-                    isfilled = true;
+                   
                     $("#" + controlid + "property").removeClass('has-error');
                 }
 
@@ -545,20 +553,24 @@
                     $("#" + controlid + "destination").addClass('has-error');
                 }
                 else {
-                    isfilled = true;
+                   
                     $("#" + controlid + "destination").removeClass('has-error');
                 }
 
                 if ($("#" + controlid + "purpose").val() == "")
                 {
-                    isfilled = false;
+                   
                     $("#" + controlid + "purpose").addClass('has-error');
                 }
-                else {
-                    isfilled = true;
+                else
+                {                  
                     $("#" + controlid + "purpose").removeClass('has-error');
                 }
-                totalrows.push($("#" + controlid + "tdate").val() + "," + $("#" + controlid + "propery").val() + "," + $("#" + controlid + "destination").val() + ","+$("#" + controlid + "purpose").val() + "," + $("#" + controlid + "cmile").val());
+
+                if (totalrows != "")
+                    totalrows += "|";
+                    totalrows += $("#" + controlid + "tdate").val() + "," + $("#" + controlid + "property").val() + "," + $("#" + controlid + "destination").val() + "," + $("#" + controlid + "purpose").val() + "," + $("#" + controlid + "miles").val();
+
             }
 
 
@@ -583,7 +595,7 @@
                 $("#status").html('');
 
                 // check validation whether for mile entered row other fields are filled properly
-                totalrows=[];
+                totalrows="";
                 $(".cmile").each(function () {
 
                     if ($(this).val() != "" && $(this).val() != "0") {
@@ -616,10 +628,9 @@
                    
                     insertForm.append('signature', $("#signature").val());
                     insertForm.append('approvedby', $("#approvedby").val());
-                    insertForm.append('rows', tablerows);
+                    insertForm.append('rows', totalrows);
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
-
 
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertMileageLog",
@@ -631,7 +642,6 @@
                         success: function (data)
                         {
                             // To-do code if ajax request is successful
-
 
                             if (data['error'] == false) {
                                 leaseid = data['insertedId'];

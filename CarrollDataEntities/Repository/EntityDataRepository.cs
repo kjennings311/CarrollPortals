@@ -1269,7 +1269,125 @@ namespace Carroll.Data.Entities.Repository
                     return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
                 }
             }
-        }   
+        }
+
+
+
+
+
+        public dynamic InsertMileageLog(MileageLogHeader mlh,List<MileageLogDetail> mld)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    MileageLogHeader _property = mlh;
+
+                    // No record exists create a new property record here
+                    _entities.MileageLogHeaders.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    foreach (var item in mld)
+                    {
+                        MileageLogDetail md = item;
+                        _entities.MileageLogDetails.Add(md);
+
+                    }
+                    int i1 = _entities.SaveChanges();
+
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.MonthlyMileageLogId };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+
+        public dynamic GetMileageLog(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.MileageLogHeaders
+                               where tbl.MonthlyMileageLogId == riderid
+                               select tbl).FirstOrDefault();
+
+                    var res2 = (from tbl in _entities.MileageLogDetails
+                                where tbl.MileageLogId == riderid
+                                select tbl).FirstOrDefault();
+
+
+                    return new { header=res,details=res2 };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+        public dynamic InsertExpenseReimbursement(ExpenseReimbursementHeader mlh, List<ExpenseReimbursementDetail> mld)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    ExpenseReimbursementHeader _property = mlh;
+
+                    // No record exists create a new property record here
+                    _entities.ExpenseReimbursementHeaders.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    foreach (var item in mld)
+                    {
+                        ExpenseReimbursementDetail md = item;
+                        _entities.ExpenseReimbursementDetails.Add(md);
+                    }
+
+                    int i1 = _entities.SaveChanges();
+
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.ExpenseReimbursementId };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+
+        public dynamic GetExpenseReimbursement(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.ExpenseReimbursementHeaders
+                               where tbl.ExpenseReimbursementId == riderid
+                               select tbl).FirstOrDefault();
+
+                    var res2 = (from tbl in _entities.ExpenseReimbursementDetails
+                                where tbl.ExpenseReimbursementId == riderid
+                                select tbl).FirstOrDefault();
+
+
+                    return new { header = res, details = res2 };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
 
         public dynamic GetHrFormCount()
         {

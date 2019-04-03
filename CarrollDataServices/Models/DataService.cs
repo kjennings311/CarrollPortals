@@ -125,6 +125,26 @@ namespace Carroll.Data.Services.Models
             return _repository.GetRequisitionRequest(obj);
         }
 
+        public dynamic InsertMileageLog(MileageLogHeader mh,List<MileageLogDetail> obj)
+        {
+            return _repository.InsertMileageLog(mh,obj);
+        }
+
+        public dynamic GetMileageLog(Guid obj)
+        {
+            return _repository.GetMileageLog(obj);
+        }
+
+        public dynamic InsertExpenseReimbursement(ExpenseReimbursementHeader eh,List<ExpenseReimbursementDetail> md)
+        {
+            return _repository.InsertExpenseReimbursement(eh,md);
+        }
+
+        public dynamic GetExpenseReimbursement(Guid obj)
+        {
+            return _repository.GetExpenseReimbursement(obj);
+        }
+
         public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice obj)
         {
             return _repository.InsertPayRollStatusChangeNotice(obj);

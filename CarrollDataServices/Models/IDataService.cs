@@ -42,6 +42,11 @@ namespace Carroll.Data.Services.Models
         dynamic GetNoticeOfEmployeeSeperation(Guid riderid);
         dynamic GetAllHrForms(string FormType, string OptionalSeachText);
         dynamic GetAllMileageForms(string FormType, string userid, string OptionalSeachText);
+        dynamic InsertMileageLog(MileageLogHeader mlh,List<MileageLogDetail> mld);
+        dynamic GetMileageLog(Guid riderid);
+        dynamic InsertExpenseReimbursement(ExpenseReimbursementHeader mlh, List<ExpenseReimbursementDetail> mld);
+        dynamic GetExpenseReimbursement(Guid riderid);
+        
         dynamic GetHrFormCount();
     }
 }

@@ -40,6 +40,11 @@ namespace Carroll.Data.Entities.Repository
         dynamic InsertNoticeOfEmployeeSeperation(NoticeOfEmployeeSeperation formAttachment);
         dynamic GetNoticeOfEmployeeSeperation(Guid riderid);
         dynamic GetUserProperty(Guid userid);
+        dynamic InsertMileageLog(MileageLogHeader mlh, List<MileageLogDetail> mld);
+        dynamic GetMileageLog(Guid riderid);
+        dynamic InsertExpenseReimbursement(ExpenseReimbursementHeader mlh, List<ExpenseReimbursementDetail> mld);
+        dynamic GetExpenseReimbursement(Guid riderid);
+
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
          dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
 

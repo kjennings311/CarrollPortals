@@ -444,8 +444,64 @@ namespace Carroll.Data.Services.Controllers
         [HttpGet]
         public dynamic GetNoticeOfEmployeeSeperation(string riderid)
         {
-
             return _service.GetNoticeOfEmployeeSeperation(new Guid(riderid));
+        }
+
+        [ActionName("InsertMileageLog")]
+        [HttpPost]
+        public dynamic InsertMileageLog(List<string> rows)
+        {
+            MileageLogHeader fa = new MileageLogHeader();
+           
+            fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
+            fa.OfficeAddress = HttpContext.Current.Request.Params["officeaddress"].ToString();
+            // fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
+            fa.ReportedMonthMileage = HttpContext.Current.Request.Params["mileagereported"].ToString();
+            fa.TotalNumberOfMiles = Convert.ToDouble(HttpContext.Current.Request.Params["totalmiles"].ToString());
+            fa.MonthlyMileageLogId = System.Guid.NewGuid();
+            fa.TotalPrice = Convert.ToDouble(HttpContext.Current.Request.Params["totalprice"].ToString());
+            fa.Signature =  HttpContext.Current.Request.Params["signature"].ToString();
+            fa.ApprovedBy = HttpContext.Current.Request.Params["approvedby"].ToString();
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedDatetime = DateTime.Now;
+
+          var totalrows = HttpContext.Current.Request.Params["rows"].ToString();
+            var allrows = totalrows.Split('|');
+
+            List<MileageLogDetail> md = new List<MileageLogDetail>();
+
+            foreach (var item in allrows)
+            {
+                var values = item.ToString().Split(',');
+                var m = new MileageLogDetail();
+                m.MileageLogDetailsId = System.Guid.NewGuid();
+                m.Date = Convert.ToDateTime(values[0]);
+                m.BillToProperty = values[1].ToString();
+                m.Origin_Destination = values[2].ToString();
+                m.Purpose = values[3].ToString();
+                m.MileageLogId = fa.MonthlyMileageLogId;
+                m.NumberOfMiles = Convert.ToDouble(values[4]);
+                md.Add(m);
+            }
+
+            return _service.InsertMileageLog(fa,md);
+        }
+
+        [ActionName("GetMileageLog")]
+        [HttpGet]
+        public dynamic GetMileageLog(string riderid)
+        {
+
+            return _service.GetMileageLog(new Guid(riderid));
+        }
+
+
+        [ActionName("GetExpenseReimbursement")]
+        [HttpGet]
+        public dynamic GetExpenseReimbursement(string riderid)
+        {
+
+            return _service.GetExpenseReimbursement(new Guid(riderid));
         }
 
         [ActionName("GetRequisitionRequest")]
@@ -482,6 +538,11 @@ namespace Carroll.Data.Services.Controllers
         #endregion
 
 
+        #region Mileage Forms
+
+
+
+        #endregion
 
 
         [ActionName("GetStates")]
