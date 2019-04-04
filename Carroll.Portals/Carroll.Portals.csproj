@@ -358,6 +358,8 @@
     <Content Include="img\carroll-print.png" />
     <Content Include="img\contactbg-min.jpg" />
     <Content Include="img\corpLogo.png" />
+    <Content Include="img\dashboard.jpg" />
+    <Content Include="img\dashboardbg.jpg" />
     <Content Include="img\expensereport-min.jpg" />
     <Content Include="img\hrbg-min.jpg" />
     <Content Include="img\logo.png" />
@@ -403,6 +405,7 @@
     <Content Include="img\newhirenotice.png" />
     <Content Include="img\payroll.png" />
     <Content Include="img\propbg-min.jpg" />
+    <Content Include="img\propbg-min.png" />
     <Content Include="img\requistionrequestheader.jpg" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
@@ -878,6 +881,7 @@
     <Content Include="Views\Mileage\CarrollMileageLog.cshtml" />
     <Content Include="Views\Mileage\CarrollMileageLogInstructions.cshtml" />
     <Content Include="Views\Mileage\CarrollExpenseForm.cshtml" />
+    <Content Include="Views\Home\home.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

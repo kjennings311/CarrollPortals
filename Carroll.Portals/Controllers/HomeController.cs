@@ -20,9 +20,13 @@ namespace Carroll.Portals.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(new BaseViewModel());
+            return View("home",new BaseViewModel());
         }
-
+        // GET: Home
+        public ActionResult IncidentDashboard()
+        {
+            return View("Index", new BaseViewModel());
+        }
 
         public ActionResult Help()
         {
