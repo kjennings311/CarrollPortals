@@ -6,24 +6,24 @@
 
 <div class="wrapper wrapper-content">
     <div class="row hidewhenformopen">
-        <div class="col-md-12 ipbackground" style="background-image: url(/img/dashboardbg.jpg);
-    min-height: 500px;
+        <div class="col-md-12 ipbackground" style="background-image: url(/img/dashboardbgnew.jpg);
+    min-height: 285px !important;
     background-position: center;
     width: 100%;
     background-size: cover;">
 
             <button type="button" class="btn btn-lg " data-toggle="modal" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   background-color: #293846;
-    border-color: #293846;
+  
     color: white;
     position: absolute;
-  bottom: 3%;
-    right: 1%; " data-target=".claimmodal">
-                <i style="font-size:30px;" class="fa fa-plus-circle"></i>
+  bottom: 0%;
+    right: 0%; background:none;" data-target=".claimmodal">
+                <i style="font-size: 50px;
+    font-weight: bold;" class="fa fa-plus"></i>
             </button>
             <h1 style="color: white;
     position: absolute;
-  bottom: 3%;
+  bottom: 0%;
     left: 1%;font-weight:bold;"> INCIDENT DASHBOARD & REPORTING </h1>
         </div>
 
@@ -147,30 +147,51 @@
 
     </div>
 
-    <div class="row hidewhenformopen" id="homecontainer">
-        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;">
-            <div class="widget style1 navy-bg" style="background:#293846">
-                <div class="row">
-                    
+    <div class="row hidewhenformopen" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
+        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer; border-right:1px solid #797979">
+            <div class="widget style1 navy-bg" style="background:none !important">
+                <div class="row">                    
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold" style="font-size:20px;"> Property Damage Claims </h3>
+                        <h3 class="font-bold" style="font-size: 20px;
+    text-transform: uppercase;
+    color: #797979;
+    margin-bottom: 10px;"> Property Damage Claim </h3>
                         <div class="claimcount" onclick="GetAllClaims('PropertyDamage')" style="display:none">
-                            <h2 class="font-bold propcount" style="color:white;font-size:69px"> </h2>
+                            <div class="font-bold " style="width: 100px;
+    text-align: center;
+    margin-left: 30%;
+    border-radius: 100px;
+    background:#797979;
+    padding-top: 1px;
+    padding-bottom: 0px;
+    height: 100px;">  <h1 class="propcount" style="font-weight:bold;"> </h1>  <p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-4" style="width:30%;margin-left:2%; cursor:pointer;"  onclick="GetAllClaims('General Liability')">
-            <div class="widget style1 lazur-bg" style="background:#293846">
+        <div class="col-lg-4" style="width:30%;margin-left:2%; cursor:pointer;border-right:1px solid #797979"  onclick="GetAllClaims('General Liability')">
+            <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
                  
                     <div class="col-xs-12 text-center" >
-                        <h3 class="font-bold" style="font-size: 17px;text-transform: uppercase;"> General Liability Claims </h3>
-                        <div class="claimcount"  style="display:none">
-                            <h2 class="font-bold liabcount"  style="color:white;font-size:70px" > </h2>
-                            
+                        <h3 class="font-bold" style="font-size: 20px;
+    text-transform: uppercase;
+    color: #797979;
+    margin-bottom: 10px;"> General Liability Claim </h3>
+                        <div class="claimcount" style="display:none">
+                            <div class="font-bold " style="width: 100px;
+    text-align: center;
+    margin-left: 30%;
+    border-radius: 100px;
+    background:#797979;
+    padding-top: 1px;
+    padding-bottom: 0px;
+    height: 100px;"><h1 class="liabcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+
+                           
+
                         </div>
                     </div>
                 </div>
@@ -179,12 +200,24 @@
         </div>
 
         <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;" onclick="GetAllClaims('Mold Damage')" >
-            <div class="widget style1 yellow-bg" style="background:#293846">
+            <div class="widget style1 yellow-bg" style="background:none !important">
                 <div class="row">                   
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold"  style="font-size:17px;text-transform: uppercase;"> Mold Damage Claims </h3>
-                        <div class="claimcount"  style="display:none">
-                            <h2 class="font-bold damagecount"  style="color:white;font-size:69px" > </h2>                           
+                        <h3 class="font-bold"  style="font-size: 20px;
+    text-transform: uppercase;
+    color: #797979;
+    margin-bottom: 10px;"> Mold Damage Claim </h3>
+                        <div class="claimcount" style="display:none">
+                            <div class="font-bold " style="width: 100px;
+    text-align: center;
+    margin-left: 30%;
+    border-radius: 100px;
+    background:#797979;
+    padding-top: 1px;
+    padding-bottom: 0px;
+    height: 100px;"><h1 class="damagecount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+
+                           
                         </div>
                     </div>
                 </div>
