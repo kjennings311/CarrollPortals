@@ -469,14 +469,15 @@
                     var quittext = "";
                     var i = 0;
 
-                    $('.chkposition').each(function (index, obj) {
+                    $('.chkposition').each(function (index, obj)
+                    {
                         if (this.checked === true) {
                             quittext += $(this).val() + ",";
                             i++;
 
                         }
                     });
-                    quittext = quittext.replace(/(^,)|(,$)/g, "");
+                    quittext = quittext.replace(/(^,)|(,$)/g, );
 
 
                     $(".alert").html('Processing');
