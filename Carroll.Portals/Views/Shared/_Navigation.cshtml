@@ -29,17 +29,21 @@
                 <a href="~/Home/Index"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
             </li>
             <li>
-                <a href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
+                <a href="/Data/contacts"><i class="fa fa-envelope fa-star fa-user-"></i> <span class="nav-label">Contacts</span></a>
+
             </li>
             <li>
                 <a href="/Data/properties"><i class="fa fa-building"></i> <span class="nav-label">Properties</span></a>
             </li>
-            <li>
-                <a href="/Data/contacts"><i class="fa fa-envelope fa-star fa-user-"></i> <span class="nav-label">Contacts</span></a>
-            </li>
+
             <li>
                 <a href="/Data/partners"><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
             </li>
+            <li>
+                <a href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
+            </li>
+
+
             @{
                 if (@Model.RoleType.ToLower() == "administrator")
                 {
@@ -57,17 +61,7 @@
                         </li>
                     </ul>
                 </li>*@
-                    <li>
-                        <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label">Users </span></a>
 
-                        <ul class="nav nav-second-level collapse">
-                            <li>
-                                <a href="~/User/Index">  <i class="fa fa-angle-double-right"></i>  Manage Users </a>
-                                <a href="~/User/UserRoles">   <i class="fa fa-angle-double-right"></i>  Add User To Role  </a>
-                                <a href="~/User/UserProperties">  <i class="fa fa-angle-double-right"></i>  Add User To Property </a>
-                            </li>
-                        </ul>
-                    </li>
 
 
                     <li>
@@ -95,7 +89,7 @@
                     </li>
 
                     <li>
-                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> Expense Reports </span></a>
+                        <a href="javascript:void(0)"><i class="fa fa-dollar"></i> <span class="nav-label"> Expense Reports </span></a>
 
                         <ul class="nav nav-second-level collapse">
                             <li>
@@ -107,6 +101,17 @@
                             </li>
                             <li>
                                 <a href="~/Mileage/CarrollExpenseForm/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Expense Form  </span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label">Users </span></a>
+
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="~/User/Index">  <i class="fa fa-angle-double-right"></i>  Manage Users </a>
+                                <a href="~/User/UserRoles">   <i class="fa fa-angle-double-right"></i>  Add User To Role  </a>
+                                <a href="~/User/UserProperties">  <i class="fa fa-angle-double-right"></i>  Add User To Property </a>
                             </li>
                         </ul>
                     </li>
@@ -125,7 +130,7 @@
                 else if (@Model.RoleType.ToLower() == "hr")
                 {
                     <li>
-                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
+                        <a href="javascript:void(0)"><i class="fa fa-dollar"></i> <span class="nav-label"> HR Forms </span></a>
 
                         <ul class="nav nav-second-level collapse">
                             <li>

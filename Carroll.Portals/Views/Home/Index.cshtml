@@ -173,7 +173,7 @@
     </div>
 
     <div class="row hidewhenformopen" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
-        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer; border-right:1px solid #797979">
+        <div class="col-lg-4" onclick="GetAllClaims('PropertyDamage')" style="width:30%;margin-left:2%;cursor:pointer; border-right:1px solid #797979">
             <div class="widget style1 navy-bg" style="background:none !important">
                 <div class="row">                    
                     <div class="col-xs-12 text-center">
@@ -181,10 +181,10 @@
     text-transform: uppercase;
     color: #797979;
     margin-bottom: 10px;"> Property Damage Claim </h3>
-                        <div class="claimcount" onclick="GetAllClaims('PropertyDamage')" style="display:none">
-                            <div class="font-bold " style="width: 100px;
+                        <div class="claimcount" style="display:none; text-align:center;">
+                            <div class="font-bold hclaimcount" style="width: 100px;
     text-align: center;
-    margin-left: 30%;
+   display:inline-block;
     border-radius: 100px;
     background:#797979;
     padding-top: 1px;
@@ -205,10 +205,10 @@
     text-transform: uppercase;
     color: #797979;
     margin-bottom: 10px;"> General Liability Claim </h3>
-                        <div class="claimcount" style="display:none">
-                            <div class="font-bold " style="width: 100px;
+                        <div class="claimcount" style="display:none;text-align:center;">
+                            <div class="font-bold hclaimcount" style="width: 100px;
     text-align: center;
-    margin-left: 30%;
+   display:inline-block;
     border-radius: 100px;
     background:#797979;
     padding-top: 1px;
@@ -232,10 +232,10 @@
     text-transform: uppercase;
     color: #797979;
     margin-bottom: 10px;"> Mold Damage Claim </h3>
-                        <div class="claimcount" style="display:none">
-                            <div class="font-bold " style="width: 100px;
+                        <div class="claimcount" style="display:none;text-align:center">
+                            <div class="font-bold hclaimcount " style="width: 100px;
     text-align: center;
-    margin-left: 30%;
+    display:inline-block;
     border-radius: 100px;
     background:#797979;
     padding-top: 1px;
@@ -335,6 +335,9 @@
             white-space: nowrap;
         }
 
+        .hclaimcount:hover {
+            background: #2f4050 !important;
+        }
         
 
     </style>
