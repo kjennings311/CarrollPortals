@@ -188,7 +188,7 @@
                     </div>
                 </div>
                 <br />
-                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+                <table class="table  dtprops" width="100%"></table>
 
 
             </div>
@@ -658,39 +658,59 @@
                 var control = "";
                 $("#status").html('');
 
+                var cnt = 0;
+                var reason = "";
 
                 var dischargetext = "";
 
                 $('.dis').each(function (index, obj) {
                     if (this.checked === true) {
                         dischargetext += $(this).val() + ",";
-                       
+                        cnt++;                       
                     }
                 });
 
                 dischargetext = dischargetext.replace(/(^,)|(,$)/g, "");
+
+                if (cnt == 1)
+                    reason = dischargetext;
+                else
+                    reason = "Multiple";
+
 
                 var quittext = "";
 
                 $('.qui').each(function (index, obj) {
                     if (this.checked === true) {
                         quittext += $(this).val() + ",";
+                        cnt++;
                        
                     }
                 });
                
                 quittext = quittext.replace(/(^,)|(,$)/g, "");
 
+                if (cnt == 1 && dischargetext=="")
+                    reason = quittext;
+                else
+                    reason = "Multiple";
+
+
                 var worktext = "";
 
                 $('.wor').each(function (index, obj) {
                     if (this.checked === true) {
-                        worktext += $(this).val() + ",";                       
+                        worktext += $(this).val() + ",";  
+                        cnt++;
                     }
                 });
 
                 worktext = worktext.replace(/(^,)|(,$)/g, "");
 
+                if (cnt == 1 && quittext == "")
+                    reason = worktext;
+                else
+                    reason = "Multiple";
 
                 //if ($("#effectivedate").val() == "") {
                 //    errormsgsummary += "<li> Please Choose Date </li>";
@@ -784,6 +804,7 @@
                     insertForm.append('discharge', dischargetext);
                     insertForm.append('quit', quittext);
                     insertForm.append('work', worktext);
+                    insertForm.append('reason', reason);
                     insertForm.append('ssignature', $("#ssignature").val());
                     insertForm.append('sdate', $("#sdate").val());
                     insertForm.append('smdate', $("#smdate").val());
@@ -813,7 +834,7 @@
 
                                     $("#submitform").trigger('reset');
                                 document.getElementById("submitform").reset();
-
+                                $("#Submit").prop('disabled', false);
                                 $(".alert").html('Record Successfully Updated !');
                                 $('#toastnotification').modal('show'); 
                                 

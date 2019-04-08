@@ -1,17 +1,10 @@
 ﻿
-// var $BaseApiUrl = "http://localhost:1002/"; 
+ var $BaseApiUrl = "http://localhost:1002/"; 
 
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
-
-$(document).ready(function ()
-{
-    
-  
-});
-
 
 function validateEmail(emailID) {
     atpos = emailID.indexOf("@");
@@ -69,25 +62,19 @@ function BindElements()
 
     $('.dynamicForm #savechanges').click(function ()
     {
-
-
         if ($("#homeval").length > 0)
         {
-            if ($("#homeval").val() == '1') {
-
-
+            if ($("#homeval").val() == '1')
+            {
                 $("#reviewmodal").modal('show'); 
-
                 return false;
             }
-
-
         }
-
-
+        
         $('.dynamicForm #savechanges').attr('disabled', true);
         $('.success-message').hide();
         $('.failure-message').hide();
+
     //    if (!CheckFormErrors($form)) {
 
         var $this = $(this);
@@ -670,81 +657,133 @@ function LoadForm(formaname)
 {
     // these controls are in properties.aspx page
 
-    if ($('.AddEditContainer').is(":visible"))
-    {
-        if (!confirm("Form is Opened, Any Un Saved Changes will be lost, Do you want to Continue?")) {
-            return false;
-        }
+    // hide popup
+    // open another popup, load the form, show header
+    $('#myModal').modal('hide');
+
+    getForm(formaname, '');
+    if ($(".form-heading").length) {
+        if (formaname == "FormPropertyDamageClaim")
+            $(".form-heading").html("Add Property Damage Claim");
+        else if (formaname == "FormGeneralLiabilityClaim")
+            $(".form-heading").html("Add General Liability Claim");
+        else if (formaname == "FormMoldDamageClaim")
+            $(".form-heading").html("Add Mold Damage Claim");
         else
-        {
-            $('#myModal').modal('hide');
-        }
-    }
-    else {
-        LoadUserProperty();
-    }
+            $(".form-heading").html("");
 
-  
+        $('.claimmodal').modal('hide');
 
-    $('.RowsContatiner').toggle('slow', function ()
-    {
-        $('.AddEditContainer').toggle('slow', function ()
-        {
+        $('.incidentformmodal').modal('show');
 
-            if ($(this).is(":visible")) {
-                getForm(formaname, '');
-                if ($(".form-heading").length) {
-                    if (formaname == "FormPropertyDamageClaim")
-                        $(".form-heading").html("Add Property Damage Claim");
-                    else if (formaname == "FormGeneralLiabilityClaim")
-                        $(".form-heading").html("Add General Liability Claim");
-                    else if (formaname == "FormMoldDamageClaim")
-                        $(".form-heading").html("Add Mold Damage Claim");
-                    else
-                        $(".form-heading").html("");
+        //  $(".hidewhenformopen").hide();
 
-                    $('.claimmodal').modal('hide');
+        //  $('[data-toggle="popover"]').popover(); 
 
-                    $(".hidewhenformopen").hide();
-
-                    //  $('[data-toggle="popover"]').popover(); 
-
-                    var popOverSettings = {
-                        placement: 'top',
-                        container: 'body',
-                        trigger: 'hover',
-                        html: true,
-                        selector: '[data-toggle="popover"]', //Sepcify the selector here
-                        content: function () {
-                            return $('#popover-content').html() === undefined ? "" : $('#popover-content').html();
-                        }
-                    }
-
-                    $('body').popover(popOverSettings);
-
-                    $(".tooltipwala").each(function ()
-                    {
-                        if ($(this).attr("data-content") == "")
-                        {
-                            $(this).hide();
-                        }
-                       
-                    });
-
-
-                }
-
-
-
+        var popOverSettings = {
+            placement: 'top',
+            container: 'body',
+            trigger: 'hover',
+            html: true,
+            selector: '[data-toggle="popover"]', //Sepcify the selector here
+            content: function () {
+                return $('#popover-content').html() === undefined ? "" : $('#popover-content').html();
             }
-            else {
+        }
 
-                $(".hidewhenformopen").show();
+        $('body').popover(popOverSettings);
 
+        $(".tooltipwala").each(function () {
+            if ($(this).attr("data-content") == "") {
+                $(this).hide();
             }
 
         });
-    });
+
+
+    }
+
+
+
+
+
+    //if ($('.AddEditContainer').is(":visible"))
+    //{
+    //    if (!confirm("Form is Opened, Any Un Saved Changes will be lost, Do you want to Continue?")) {
+    //        return false;
+    //    }
+    //    else
+    //    {
+    //        $('#myModal').modal('hide');
+    //    }
+    //}
+    //else {
+    //    LoadUserProperty();
+    //}
+
+  
+
+    //$('.RowsContatiner').toggle('slow', function ()
+    //{
+    //    $('.AddEditContainer').toggle('slow', function ()
+    //    {
+
+    //        if ($(this).is(":visible")) {
+    //            getForm(formaname, '');
+    //            if ($(".form-heading").length) {
+    //                if (formaname == "FormPropertyDamageClaim")
+    //                    $(".form-heading").html("Add Property Damage Claim");
+    //                else if (formaname == "FormGeneralLiabilityClaim")
+    //                    $(".form-heading").html("Add General Liability Claim");
+    //                else if (formaname == "FormMoldDamageClaim")
+    //                    $(".form-heading").html("Add Mold Damage Claim");
+    //                else
+    //                    $(".form-heading").html("");
+
+    //                $('.claimmodal').modal('hide');
+
+    //                $('.incidentformmodal').modal('show');
+
+    //                $(".hidewhenformopen").hide();
+
+    //                  $('[data-toggle="popover"]').popover(); 
+
+    //                var popOverSettings = {
+    //                    placement: 'top',
+    //                    container: 'body',
+    //                    trigger: 'hover',
+    //                    html: true,
+    //                    selector: '[data-toggle="popover"]', //Sepcify the selector here
+    //                    content: function () {
+    //                        return $('#popover-content').html() === undefined ? "" : $('#popover-content').html();
+    //                    }
+    //                }
+
+    //                $('body').popover(popOverSettings);
+
+    //                $(".tooltipwala").each(function ()
+    //                {
+    //                    if ($(this).attr("data-content") == "")
+    //                    {
+    //                        $(this).hide();
+    //                    }
+                       
+    //                });
+
+
+    //            }
+
+
+
+    //        }
+    //        else {
+
+    //            $(".hidewhenformopen").show();
+
+    //        }
+
+    //    });
+    //});
 
 }
 
@@ -767,7 +806,7 @@ function splitCamelCase(s) {
     return s.split(/(?=[A-Z])/).join(' ');
 }
 
-// this function let's you enable disable add delete buttons'
+// this function let's you enable disable add delete buttons' 
 function HandleRowClick(obj)
 {
     var $this = jQuery(obj);
@@ -2830,7 +2869,7 @@ function LoadClaim()
                             {
                                 $("#heading").html("Property Damage Claim");
                                 $("#property").html(ClaimData.claim.propertyName);
-                                claimbody += ' <table class="table table-hover table-responsive table-striped">';
+                                claimbody += ' <table class="table">';
                                 claimbody += '<tr><td style="width:30%;">Weather Conditions:</td><td>' + CheckNull(ClaimData.claim.tbl.weatherConditions) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">Incident Date:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDateTime) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">Incident Location:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentLocation) + '</td></tr>'; 
@@ -2873,7 +2912,7 @@ function LoadClaim()
 
                             
                                // $('.claimDesc').html(ClaimData.claim.tbl.description);
-                                claimbody += ' <table class="table table-hover table-responsive table-striped">';
+                                claimbody += ' <table class="table ">';
                                 claimbody += '<tr><td style="width:30%;"> Location :</td><td>' + ClaimData.claim.tbl.location + '</td></tr>';                               
                                 claimbody += '<tr><td  style="width:30%;"> Description :</td><td>' + ClaimData.claim.tbl.description + '</td></tr>';  
                                 console.log('building still wet'+ClaimData.claim.tbl.areBuildingMaterialsStillWet )
@@ -2915,7 +2954,7 @@ function LoadClaim()
                             else if (Type == "g") {
                                 $("#heading").html("General Liability Claim");
                                 $("#property").html(ClaimData.claim.propertyName);
-                                claimbody += ' <table class="table table-hover table-responsive table-striped">';
+                                claimbody += ' <table class="table">';
 
                                 claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Incident Location:</td><td>' + ClaimData.claim.tbl.incidentLocation + '</td></tr>';

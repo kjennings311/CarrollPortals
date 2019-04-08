@@ -160,8 +160,9 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td style="text-align:center" colspan="1"> <a class="btn btn-sm btn-primary" id="btnnewrow" href="#"> Add New </a></td>
-                    <td colspan="3" style="text-align:right;font-size: 15px;
+                    <td style="text-align:left;margin-left:20px;" colspan="5"> <a class="btn btn-sm btn-primary btn-lg" id="btnnewrow" href="#"> Add New </a></td> </tr>
+                <tr>
+                    <td colspan="4" style="text-align:right;font-size: 15px;
     vertical-align: middle;
     font-weight: bold;">
                         Total Miles
@@ -172,7 +173,7 @@
                         <span id="totalmiles"> </span>
                     </td>
                 </tr>
-                <tr> <td colspan="5" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice"> </span> </td></tr>
+                <tr> <td colspan="4" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice"> </span> </td></tr>
             </tfoot>
                 </table>
         <p class="c1">
@@ -196,7 +197,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+                <table class="table  dtprops" width="100%"></table>
 
 
             </div>
@@ -525,15 +526,16 @@
 
             function checkrowvalidation(controlid)
             {
+                var allfilled = true;
 
-                if ($("#" + controlid + "tdate").val() == "") {
+                if($("#" + controlid + "tdate").val() == "") {
                     isfilled = false;
                     $("#" + controlid + "tdate").addClass('has-error');
                 }
                 else
                 {
                    
-                    $("#" + controlid + "date").removeClass('has-error');
+                    $("#" + controlid + "tdate").removeClass('has-error');
 
                 }
 
@@ -603,7 +605,7 @@
                     }
                 });
 
-                if (!isfilled)
+                if ($("input.has-error").length > 0)
                 {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the highlighted inputs </ul> ');

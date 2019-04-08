@@ -1638,7 +1638,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "jobTitle", label = "Employee Position", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "policty_Voilated", label = "Policty_Voilated", type = DFieldType.IsText, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "additionalRemarks", label = "Reason", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "reason", label = "Reason", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "documentationAvailable", label = "DocumentationAvailable", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "warningGiven_Dates", label = "WarningGiven_Dates", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "equipmentKeysReturned", label = "EquipmentKeysReturned", type = DFieldType.IsText, href = "" });

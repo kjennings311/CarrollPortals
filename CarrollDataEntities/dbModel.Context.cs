@@ -44,13 +44,13 @@ namespace Carroll.Data.Entities
         public virtual DbSet<RequisitionRequest> RequisitionRequests { get; set; }
         public virtual DbSet<EmployeeLeaseRaider> EmployeeLeaseRaiders { get; set; }
         public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
-        public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
         public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
         public virtual DbSet<EquityPartnerContact> EquityPartnerContacts { get; set; }
         public virtual DbSet<ExpenseReimbursementDetail> ExpenseReimbursementDetails { get; set; }
         public virtual DbSet<ExpenseReimbursementHeader> ExpenseReimbursementHeaders { get; set; }
         public virtual DbSet<MileageLogDetail> MileageLogDetails { get; set; }
         public virtual DbSet<MileageLogHeader> MileageLogHeaders { get; set; }
+        public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -102,11 +102,6 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("propid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getworkflowemails_Result>("proc_getworkflowemails", propidParameter);
-        }
-    
-        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
     
         public virtual ObjectResult<SP_GetAllClaims1_Result> SP_GetAllClaims1(Nullable<System.Guid> userid, Nullable<System.Guid> propertyid)
@@ -167,6 +162,11 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("userid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallmonthlyexpensedetails_Result>("proc_getallmonthlyexpensedetails", useridParameter);
+        }
+    
+        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
     }
 }

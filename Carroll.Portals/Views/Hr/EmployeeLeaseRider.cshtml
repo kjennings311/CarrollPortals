@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+                <table class="table  dtprops" width="100%"></table>
 
 
             </div>
@@ -257,7 +257,7 @@
                 {
 
                     $('#myModal').modal('hide');
-
+                    $("#Submit").prop('disabled', false);
                     //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show'); 

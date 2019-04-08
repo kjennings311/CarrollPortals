@@ -43,7 +43,7 @@
                 }
             </div>
             <div class="ibox-content" style="padding:80px; padding-top:40px;">
-                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+                <table class="table  dtprops" width="100%"></table>
 
                 <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                     <div class="modal-dialog modal-lg" style="width:70%" role="document">
@@ -595,7 +595,7 @@
 
 
                                 document.getElementById("submitform").reset();
-
+                                $("#Submit").prop('disabled', false);
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);

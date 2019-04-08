@@ -43,5 +43,6 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> SMDate { get; set; }
         public string HRMSignature { get; set; }
         public Nullable<System.DateTime> HRMDate { get; set; }
+        public string Reason { get; set; }
     }
 }

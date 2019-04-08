@@ -427,6 +427,7 @@ namespace Carroll.Data.Services.Controllers
             fa.Notes_Comments = HttpContext.Current.Request.Params["comments"].ToString();
             fa.DischargedText = HttpContext.Current.Request.Params["discharge"].ToString();
             fa.QuitText = HttpContext.Current.Request.Params["quit"].ToString();
+            fa.Reason = HttpContext.Current.Request.Params["reason"].ToString();
             fa.LackOfWork = HttpContext.Current.Request.Params["work"].ToString();
             fa.SSignature = HttpContext.Current.Request.Params["ssignature"].ToString();
             fa.SDate = Convert.ToDateTime(HttpContext.Current.Request.Params["sdate"]);

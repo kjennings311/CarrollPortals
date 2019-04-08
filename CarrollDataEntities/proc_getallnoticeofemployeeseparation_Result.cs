@@ -29,10 +29,20 @@ namespace Carroll.Data.Entities
         public Nullable<bool> VacationPaidOut { get; set; }
         public Nullable<double> VacationBalance { get; set; }
         public string Notes_Comments { get; set; }
+        public string DischargedText { get; set; }
+        public string QuitText { get; set; }
+        public string LackOfWork { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
+        public string SSignature { get; set; }
+        public Nullable<System.DateTime> SDate { get; set; }
+        public string SMSignature { get; set; }
+        public Nullable<System.DateTime> SMDate { get; set; }
+        public string HRMSignature { get; set; }
+        public Nullable<System.DateTime> HRMDate { get; set; }
+        public string Reason { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }

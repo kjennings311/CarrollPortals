@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <br />
-                <table class="table table-striped table-bordered table-hover dtprops" width="100%"></table>
+                <table class="table  dtprops" width="100%"></table>
 
 
                
@@ -1120,7 +1120,7 @@
                     $('#myModal').modal('hide');
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show'); 
-
+                    $("#Submit").prop('disabled', false);
                     $.ajax({
                         url: $BaseApiUrl + "api/data/InsertPayRollStatusChangeNotice",
                         type: 'POST',
