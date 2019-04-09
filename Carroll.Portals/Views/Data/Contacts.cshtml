@@ -1,7 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Contacts";
-   
+    ViewBag.Title = "Contacts";   
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
@@ -9,7 +8,7 @@
         <h2>Contacts</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html">Home</a>
+                <a href="~/Home/Index">Home</a>
             </li>
 
             <li class="active">
@@ -122,9 +121,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 
 @if (ViewBag.ErrorMessage == "AuthorizationRequired")
@@ -147,14 +144,14 @@
     </style>
 }
 
-@section Scripts {
+@section Scripts 
+{
+
     @Scripts.Render("~/scripts/plugins/dataTablesjs")
     @Scripts.Render("~/scripts/plugins/input-maskjs")
     @Scripts.Render("~/scripts/plugins/token-inputjs")
 
-
     <script>
-
 
         $(document).ready(function () {
 

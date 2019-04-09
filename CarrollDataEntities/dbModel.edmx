@@ -722,14 +722,14 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="MileageLogDetails" EntityType="Carroll.Data.Entities.MileageLogDetail" />
           <EntitySet Name="MileageLogHeaders" EntityType="Carroll.Data.Entities.MileageLogHeader" />
           <FunctionImport Name="proc_getallemployeenewhirenotice" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result)" />
-          <FunctionImport Name="proc_getallexpensemileagelogs" ReturnType="Collection(Carroll.Data.Entities.proc_getallexpensemileagelogs_Result)">
-          <Parameter Name="userid" Mode="In" Type="Guid" />
-          </FunctionImport>
           <FunctionImport Name="proc_getallmonthlyexpensedetails" ReturnType="Collection(Carroll.Data.Entities.proc_getallmonthlyexpensedetails_Result)">
           <Parameter Name="userid" Mode="In" Type="Guid" />
           </FunctionImport>
           <EntitySet Name="NoticeOfEmployeeSeperations" EntityType="Carroll.Data.Entities.NoticeOfEmployeeSeperation" />
           <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
+          <FunctionImport Name="proc_getallexpensemileagelogs" ReturnType="Collection(Carroll.Data.Entities.proc_getallexpensemileagelogs_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1539,18 +1539,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
         </ComplexType>
-        <ComplexType Name="proc_getallexpensemileagelogs_Result">
-          <Property Type="Guid" Name="MonthlyMileageLogId" Nullable="false" />
-          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="OfficeAddress" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="ReportedMonthMileage" Nullable="true" MaxLength="20" />
-          <Property Type="Double" Name="TotalNumberOfMiles" Nullable="true" />
-          <Property Type="Double" Name="TotalPrice" Nullable="true" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
-          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="168" />
-          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="176" />
-        </ComplexType>
         <ComplexType Name="proc_getallmonthlyexpensedetails_Result">
           <Property Type="Guid" Name="ExpenseReimbursementId" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
@@ -1633,6 +1621,19 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="179" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="180" />
+        </ComplexType>
+        <ComplexType Name="proc_getallexpensemileagelogs_Result">
+          <Property Type="Guid" Name="MonthlyMileageLogId" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OfficeAddress" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="ReportedMonthMileage" Nullable="true" MaxLength="20" />
+          <Property Type="Double" Name="TotalNumberOfMiles" Nullable="true" />
+          <Property Type="Double" Name="TotalPrice" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="168" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="176" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2472,22 +2473,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_getallexpensemileagelogs" FunctionName="Carroll.Data.Entities.Store.proc_getallexpensemileagelogs">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallexpensemileagelogs_Result">
-                <ScalarProperty Name="MonthlyMileageLogId" ColumnName="MonthlyMileageLogId" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
-                <ScalarProperty Name="ReportedMonthMileage" ColumnName="ReportedMonthMileage" />
-                <ScalarProperty Name="TotalNumberOfMiles" ColumnName="TotalNumberOfMiles" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
-                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_getallmonthlyexpensedetails" FunctionName="Carroll.Data.Entities.Store.proc_getallmonthlyexpensedetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallmonthlyexpensedetails_Result">
@@ -2575,6 +2560,23 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="HRMDate" ColumnName="HRMDate" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallexpensemileagelogs" FunctionName="Carroll.Data.Entities.Store.proc_getallexpensemileagelogs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallexpensemileagelogs_Result">
+                <ScalarProperty Name="MonthlyMileageLogId" ColumnName="MonthlyMileageLogId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="OfficeAddress" ColumnName="OfficeAddress" />
+                <ScalarProperty Name="ReportedMonthMileage" ColumnName="ReportedMonthMileage" />
+                <ScalarProperty Name="TotalNumberOfMiles" ColumnName="TotalNumberOfMiles" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
               </ComplexTypeMapping>

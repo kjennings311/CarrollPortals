@@ -373,4 +373,43 @@ namespace Carroll.Portals.Models
         public string HRMSignature { get; set; }
         public Nullable<System.DateTime> HRMDate { get; set; }
     }
+
+    public class PrintMileageLogHeader
+    {
+        public System.Guid MonthlyMileageLogId { get; set; }
+        public string EmployeeName { get; set; }
+        public string OfficeAddress { get; set; }
+        public string ReportedMonthMileage { get; set; }
+        public Nullable<double> TotalNumberOfMiles { get; set; }
+        public Nullable<double> TotalPrice { get; set; }
+        public string Signature { get; set; }
+        public string ApprovedBy { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
+        public Nullable<System.DateTime> CreatedDatetime { get; set; }
+        public Nullable<System.Guid> ModifiedUser { get; set; }
+        public Nullable<System.DateTime> ModifiedDatetime { get; set; }
+        public Nullable<System.Guid> PropertyId { get; set; }
+        public string PropertyName { get; set; }
+    }
+
+    public class PrintMileageLogDetails
+    {
+        public System.Guid MileageLogDetailsId { get; set; }
+        public Nullable<System.Guid> MileageLogId { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public string BillToProperty { get; set; }
+        public string Origin_Destination { get; set; }
+        public string Purpose { get; set; }
+        public Nullable<double> NumberOfMiles { get; set; }
+    }
+
+
+    public class PrintMileageLog
+    {
+        public PrintMileageLogHeader header { get; set; }
+        public List<PrintMileageLogDetails> details { get; set; }
+
+
+    }
+
 }

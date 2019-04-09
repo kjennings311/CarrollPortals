@@ -885,6 +885,7 @@
     <Content Include="Views\Mileage\CarrollMileageLogInstructions.cshtml" />
     <Content Include="Views\Mileage\CarrollExpenseForm.cshtml" />
     <Content Include="Views\Home\home.cshtml" />
+    <Content Include="Views\Mileage\PrintMonthlyLog.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

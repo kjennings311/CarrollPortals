@@ -21,6 +21,7 @@ namespace Carroll.Data.Entities
         public Nullable<double> TotalNumberOfMiles { get; set; }
         public Nullable<double> TotalPrice { get; set; }
         public string UserName { get; set; }
+        public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }
     }

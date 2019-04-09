@@ -67,14 +67,13 @@
         </p>
         <div class="" style="margin-left:20%;">
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:50%;margin-left:11%;" id="empname" />  </span>
-            </p>
-
-            <p class="c1">
-                <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:50%;margin-left:12.5%;" /> </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:59%;" id="empname" />  </span>
             </p>
             <p class="c1">
-                <span class="c0">Monthly Mileage is Reported :<input type="text" id="location" style="width:50%;margin-left:2%;" /> </span>
+                <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:60.5%;" /> </span>
+            </p>
+            <p class="c1">
+                <span class="c0">Monthly Mileage is Reported :<input type="text" id="location" style="width:50%;" /> </span>
             </p>
         </div>
         <table id="allorders" style="height: 450px;
@@ -160,7 +159,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td style="text-align:left;margin-left:20px;" colspan="5"> <a class="btn btn-sm btn-primary btn-lg" id="btnnewrow" href="#"> Add New </a></td> </tr>
+                    <td style="text-align:center;margin-left:20px;" colspan="5"> <a class="btn btn-sm  btn-lg" style="background:#2f4050 !important;" id="btnnewrow" href="#"> Add New Row </a></td> </tr>
                 <tr>
                     <td colspan="4" style="text-align:right;font-size: 15px;
     vertical-align: middle;
@@ -187,7 +186,7 @@
                 <br />
                 <div id="status"> </div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
-                    <input type="button" id="Submit" value="Submit" class="btn btn-primary" style="height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                    <input type="button" id="Submit" value="Submit" class="btn" style="background:#2f4050 !important;height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                 </div>
     </form>
@@ -198,8 +197,6 @@
                     </div>
                 </div>
                 <table class="table  dtprops" width="100%"></table>
-
-
             </div>
         </div>
     </div>
@@ -645,7 +642,8 @@
                         {
                             // To-do code if ajax request is successful
 
-                            if (data['error'] == false) {
+                            if (data['error'] == false)
+                            {
                                 leaseid = data['insertedId'];
                                 
                                 GetAllMileageForms('Mileage Log');
@@ -654,10 +652,10 @@
 
 
                                 document.getElementById("submitform").reset();
-
+                                $("#Submit").prop('disabled', false);
                                 setTimeout(function () {
                                     
-                                    $("#Submit").attr('disabled', true);
+                                    $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
                             }

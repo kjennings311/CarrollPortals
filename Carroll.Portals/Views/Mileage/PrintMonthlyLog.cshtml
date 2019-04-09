@@ -1,0 +1,362 @@
+﻿
+
+@model Carroll.Portals.Models.PrintMileageLog
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Print Monthly Mileage Log </title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+
+        body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 10px;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        p {
+            margin-bottom: 10px !important;
+        }
+   
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        table .c0 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c6 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: italic
+        }
+
+        .c9 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 12pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c7 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 14pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c4 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c5 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: justify
+        }
+
+        .c1 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: left
+        }
+
+        .c2 {
+            background-color: #ffffff;
+            max-width: 468pt;
+            padding: 72pt 72pt 72pt 72pt
+        }
+
+        .c8 {
+            margin-left: 144pt;
+            text-indent: 36pt
+        }
+
+        .c3 {
+            height: 11pt
+        }
+
+        .title {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 36pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 18pt;
+            color: #666666;
+            font-size: 24pt;
+            padding-bottom: 4pt;
+            font-family: "Georgia";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        /*li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        /*p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        h1 {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 24pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 18pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 14pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 12pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 12pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 11pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 11pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 10pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 10pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+            height: 18px;
+        }
+
+        #submitform table td {
+            padding: 5px !important;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+
+        input.pur {
+            width: 100%;
+        }
+
+        table thead th {
+            text-align: center;
+        }
+    </style>
+
+    <link href="/Content/a4css.css" rel="stylesheet" />
+
+</head>
+<body class="document">
+    <div class="page" style="padding: 30px;">
+        <div class="col-md-12" style="    width: 100%;
+    border: 1px solid black;
+    padding: 40px;">
+            <form id="submitform" onsubmit="return false;">
+
+                <p class="c1 c8" style="    margin-left: 20%;
+    margin-top: 15px;
+    margin-bottom: 15px;">
+                    <span class="c7"> MONTHLY MILEAGE LOG </span>
+                </p>
+                <div class="" style="margin-left:20%;">
+                    <p class="c1">
+                        <span class="c0"> Employee Name:    <input type="text" style="width:59%;" value="@Model.header.EmployeeName" id="empname" />  </span>
+                    </p>
+                    <p class="c1">
+                        <span class="c0">Office Address :<input type="text" id="officeaddress" value="@Model.header.OfficeAddress" style="width:60.5%;" /> </span>
+                    </p>
+                    <p class="c1">
+                        <span class="c0">Monthly Mileage is Reported :<input type="text" value="@Model.header.TotalNumberOfMiles" id="location" style="width:50%;" /> </span>
+                    </p>
+                </div>
+                <table id="allorders" style="" class="table table-bordered">
+                    <thead id="header-fixed" style="display: table-header-group;">
+                        <tr>
+                            <th style="width:10%"> Date </th>
+                            <th style="width:10%"> Bill To Property  </th>
+                            <th style="width: 10%;"> Origin/Destination  </th>
+                            <th style="width: 25%;"> Purpose  </th>
+                            <th style="width: 5%;"> Miles </th>
+                        </tr>
+                    </thead>
+                    <tbody style="display: table-header-group;">
+                        @{
+
+                            foreach (var item in Model.details)
+                            {
+                                <tr>
+                                    <td> @item.Date.Value.ToShortDateString()   </td>
+                                    <td> @item.BillToProperty </td>
+                                    <td> @item.Origin_Destination </td>
+                                    <td> @item.Purpose </td>
+                                    <td> @item.NumberOfMiles  </td>
+                                </tr>
+                            }
+
+                         }
+
+                    </tbody>
+                    <tfoot>
+                        
+                        <tr>
+                            <td colspan="4" style="text-align:right;font-size: 15px;
+    vertical-align: middle;
+    font-weight: bold;">
+                                Total Miles
+                            </td>
+                            <td style="font-size: 15px;
+    font-weight: bold;
+    vertical-align: middle;">
+                                <span id="totalmiles"> @Model.header.TotalNumberOfMiles </span>
+                            </td>
+                        </tr>
+                        <tr> <td colspan="4" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice"> @Model.header.TotalPrice </span> </td></tr>
+                    </tfoot>
+                </table>
+                <p class="c1">
+                    <span class="c0"> Signature <input type="text" id="signature" value="@Model.header.Signature" style="width:42%; margin-left:2%" />   </span>
+                </p>
+                <p class="c1">
+                    <span class="c0">Approved By <input type="text" id="approvedby" value="@Model.header.ApprovedBy" style="width:42%;" /> </span>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+

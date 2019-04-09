@@ -1320,7 +1320,7 @@ namespace Carroll.Data.Entities.Repository
 
                     var res2 = (from tbl in _entities.MileageLogDetails
                                 where tbl.MileageLogId == riderid
-                                select tbl).FirstOrDefault();
+                                select tbl).ToList();
 
 
                     return new { header=res,details=res2 };
@@ -1377,7 +1377,7 @@ namespace Carroll.Data.Entities.Repository
 
                     var res2 = (from tbl in _entities.ExpenseReimbursementDetails
                                 where tbl.ExpenseReimbursementId == riderid
-                                select tbl).FirstOrDefault();
+                                select tbl).ToList();
 
 
                     return new { header = res, details = res2 };

@@ -1,7 +1,7 @@
 ﻿
- // var $BaseApiUrl = "http://localhost:1002/"; 
+  var $BaseApiUrl = "http://localhost:1002/"; 
 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -18,10 +18,11 @@ function validateEmail(emailID) {
 
 var imagebase64 = "";
 
-function encodeImageFileAsURL(element) {
-
+function encodeImageFileAsURL(element)
+{
       var filesSelected = element.files;
-    if (filesSelected.length > 0) {
+    if (filesSelected.length > 0)
+    {
         var fileToLoad = filesSelected[0];
         var fileReader = new FileReader();
         var srcData = "";

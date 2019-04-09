@@ -146,15 +146,6 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice_Result>("proc_getallemployeenewhirenotice");
         }
     
-        public virtual ObjectResult<proc_getallexpensemileagelogs_Result> proc_getallexpensemileagelogs(Nullable<System.Guid> userid)
-        {
-            var useridParameter = userid.HasValue ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(System.Guid));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallexpensemileagelogs_Result>("proc_getallexpensemileagelogs", useridParameter);
-        }
-    
         public virtual ObjectResult<proc_getallmonthlyexpensedetails_Result> proc_getallmonthlyexpensedetails(Nullable<System.Guid> userid)
         {
             var useridParameter = userid.HasValue ?
@@ -167,6 +158,15 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
+        }
+    
+        public virtual ObjectResult<proc_getallexpensemileagelogs_Result> proc_getallexpensemileagelogs(Nullable<System.Guid> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallexpensemileagelogs_Result>("proc_getallexpensemileagelogs", useridParameter);
         }
     }
 }
