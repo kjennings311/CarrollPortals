@@ -25,7 +25,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title" style="background:url('/img/expensereport-min.jpg');background-size: cover;padding: 240px 15px 7px;">
 
-                <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Mileage Log </b></h1>
+                <h1 style="padding-top:5px;color:white;text-transform:uppercase;"> <b>  Mileage Log </b></h1>
 
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
@@ -186,7 +186,7 @@
                 <br />
                 <div id="status"> </div>
                 <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
-                    <input type="button" id="Submit" value="Submit" class="btn" style="background:#2f4050 !important;height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                    <input type="button" id="Submit" value="Submit" class="btn" style="background:#2f4050 !important;color:white;height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                 </div>
     </form>
@@ -508,7 +508,8 @@
                     totalmiles += parseFloat($(this).val());
                 }
             });
-            totaldue = parseFloat(totalmiles * 0.545).toFixed(2);
+                totaldue = parseFloat(totalmiles * 0.545).toFixed(2);
+
             $("#totalmiles").html(totalmiles);
             $("#totalprice").html(totaldue);
             }
@@ -652,6 +653,11 @@
 
 
                                 document.getElementById("submitform").reset();
+                                totaldue = 0;
+                                totalmiles = 0;
+                                $("#totalmiles").html(totalmiles);
+                                $("#totalprice").html(totaldue);
+
                                 $("#Submit").prop('disabled', false);
                                 setTimeout(function () {
                                     

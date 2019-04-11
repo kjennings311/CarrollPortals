@@ -923,7 +923,7 @@ function LoadContacts() {
 
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1026,7 +1026,7 @@ function LoadPartners() {
 
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1168,7 +1168,7 @@ function LoadProperties() {
 
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1409,7 +1409,7 @@ function LoadUsers() {
                             $(row).attr('onClick', 'HandleRowClick(this);');
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1513,7 +1513,7 @@ function LoadUserRoles() {
                             console.log($(row));
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1610,7 +1610,7 @@ function LoadUserProperties() {
                             console.log($(row));
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1705,7 +1705,7 @@ function LoadFormPropertyDamageClaims() {
                             console.log($(row));
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1815,7 +1815,7 @@ function LoadGeneralLiabilityClaims() {
                             console.log($(row));
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1929,7 +1929,7 @@ function LoadMoldDamageClaims() {
                             console.log($(row));
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -2275,7 +2275,7 @@ function ConfigDatatable(Form) {
                             console.log($(row));
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: true,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -2423,7 +2423,7 @@ function GetAllClaims(Type) {
                            
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -2583,7 +2583,7 @@ function GetAllMileageForms(formtype) {
                             //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");
 
                         },
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -2743,7 +2743,7 @@ function GetAllHRFORMs(formtype) {
                             //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");
 
                         },                       
-                        dom: '<"html5buttons"B>lTgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
