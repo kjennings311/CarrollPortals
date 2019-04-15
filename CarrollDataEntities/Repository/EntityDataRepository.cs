@@ -1461,7 +1461,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns = new List<DtableConfigArray>();
 
                     config.Columns.Add(new DtableConfigArray { name = "name", label = "Submitter Name", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "submissionDate", label = "Submission Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "submittionDate", label = "Submission Date", type = DFieldType.IsDate, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "emailAddress", label = "EmailAddress", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "manager", label = "Manager", type = 0, href = "" });
@@ -1473,7 +1473,7 @@ namespace Carroll.Data.Entities.Repository
                     //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                 //   config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 

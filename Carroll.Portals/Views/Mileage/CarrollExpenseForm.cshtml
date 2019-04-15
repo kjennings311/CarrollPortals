@@ -68,16 +68,16 @@
     <span class="c0" >  <span class="name">  Name: </span>    <input type="text" style="width:70%" id="name" />  </span>
 </p>
                                             <p class="c1" style="text-align:right">
-                                                <span class="c0"> <span class="name">   Date Of Submission : </span> <input type="date" id="location" style="width:70%;" /> </span>
+                                                <span class="c0"> <span class="name">   Date Of Submission : </span> <input type="date" id="date" style="width:70%;" /> </span>
                                             </p>
 
 <p class="c1" style="text-align:right">
-    <span class="c0"><span class="name">   Address : </span><input type="text" id="officeaddress" style="width:70%;" /> </span>
+    <span class="c0"><span class="name">   Address : </span><input type="text" id="address" style="width:70%;" /> </span>
 </p>
  </div>
                                         
-<table id="allorders" style="height: 670px;overflow: scroll; display:inline-block;border-collapse:collapse;" class="table table-bordered">
-                                           
+                                        <table id="allorders" style="height: 670px;overflow: scroll; display:inline-block;border-collapse:collapse;" class="table table-bordered">
+
                                             <tbody style="display: table-header-group;">
                                                 <tr>
                                                     <td rowspan="2" class="date-input hd"> Date  </td>
@@ -85,14 +85,16 @@
                                                     <td class="unstyled hd "> <span style="color:black;font-weight:bold"> Yardi  </span> </td>
                                                     <td class="input-number color-red un-selectable hd"> 700 </td>
                                                     <td class="input-number"> <input type="number" id="1colyardi" name="name" value="" /> </td>
-                                                    <td class="input-number"> <input type="number" id="2colyardi" name="name" value="" /></td><td class="input-number"> <input type="number" id="3colyardi" name="name" value="" /> </td>
-<td class="input-number"> <input type="number" id="4colyardi" name="name" value="" /> </td>
-<td class="input-number"> <input type="number" id="5colyardi" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="2colyardi" name="name" value="" /></td>
+                                                    <td class="input-number"> <input type="number" id="3colyardi" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="4colyardi" name="name" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="5colyardi" name="name" value="" /> </td>
                                                     <td class="input-number"> <input type="number" id="6colyardi" name="name" value="" /> </td>
-                                                    <td class="input-number"> <input type="number" id="7colyardi" name="name" value="" /> </td>  </tr>
+                                                    <td class="input-number"> <input type="number" id="7colyardi" name="name" value="" /> </td>
+                                                </tr>
                                                 <tr>
-                                                    <td rowspan="2" style="color:black;font-weight:bold" > GL Code    </td>
-                                                    <td rowspan="2" class="color-red un-selectable"> 6390-0007  </td>
+                                                    <td rowspan="2" style="color:black;font-weight:bold"> GL Code    </td>
+                                                    <td rowspan="1" class="color-red un-selectable"> 6390-0007  </td>
                                                     <td class="input-number"> <input type="number" id="1colglcode" name="name" value="" /> </td>
                                                     <td class="input-number"> <input type="number" id="2colglcode" name="name" value="" /></td>
                                                     <td class="input-number"> <input type="number" id="3colglcode" name="name" value="" /> </td>
@@ -102,200 +104,173 @@
                                                     <td class="input-number"> <input type="number" id="7colglcode" name="name" value="" /> </td>
                                                 </tr>
 
-                                            </tbody>
-                                            <tfoot>
+
                                                 <tr class="un-selectable">
                                                     <td class="date-input color-red un-selectable"> 01-05-2018  </td>
-                                                    <td class="txtshort color-red" colspan="2"> Example: Roundtrip mileage to leasing rally </td>
+                                                    <td class=" color-red" colspan="2"> Example: Roundtrip mileage to leasing rally </td>
                                                     <td class="input-number un-selectable"> $58  </td>
                                                     <td class="input-number"> </td>
-
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
-
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
                                                 </tr>
+
                                                 <tr class="un-selectable">
                                                     <td class="date-input color-red"> 01-05-2018  </td>
-                                                    <td class="txtshort color-red" colspan="2"> Example: Tolls to leasing rally </td>
+                                                    <td class=" color-red" colspan="2"> Example: Tolls to leasing rally </td>
                                                     <td class="input-number un-selectable"> $3  </td>
                                                     <td class="input-number"> </td>
-
-                                                    <td class="input-number"> </td>
-                                                    <td class="input-number"> </td>
-
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
                                                     <td class="input-number"> </td>
+                                                    <td class="input-number"> </td>
+                                                    <td class="input-number"> </td>
                                                 </tr>
 
                                                 <tr class="">
                                                     <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
                                                     <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol2" class="numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol3" class="numcol3" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol4" class="numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol5" class="numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol6" class="numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="1numcol7" class="numcol7" name="" value="" />  </td>
                                                 </tr>
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date2" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin2" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol2" class="numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol3" class="numcol3" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol4" class="numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol5" class="numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol6" class="numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="2numcol7" class="numcol7" name="" value="" />  </td>
                                                 </tr>
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date3" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin3" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol2" class="numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol3" class="numcol3" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol4" class="numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol5" class="numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol6" class="numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="3numcol7" class="numcol7" name="" value="" />  </td>
                                                 </tr>
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date4" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin4" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol2" name="" class="numcol2" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol3" name="" class="numcol3" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol4" name="" class="numcol4" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol5" name="" class="numcol5" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol6" name="" class="numcol6" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="4numcol7" name="" class="numcol7" value="" />  </td>
                                                 </tr>
 
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date5" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin5" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol2" name="" class="numcol2" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol3" name="" class="numcol3" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol4" name="" class="numcol4" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol5" name="" class="numcol5" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol6" name="" class="numcol6" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="5numcol7" name="" class="numcol7" value="" />  </td>
                                                 </tr>
 
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date6" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin6" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol1" name="" class="numcol1" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol2" name="" class="numcol2" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol3" name="" class="numcol3" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol4" name="" class="numcol4" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol5" name="" class="numcol5" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol6" name="" class="numcol6" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="6numcol7" name="" class="numcol7" value="" />  </td>
                                                 </tr>
 
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date7" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin7" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol1" name="" class="numcol1" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol2" name="" class="numcol2" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol3" name="" class="numcol3" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol4" name="" class="numcol4" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol5" name="" class="numcol5" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol6" name="" class="numcol6" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="7numcol7" name="" class="numcol7" value="" />  </td>
                                                 </tr>
 
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date8" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin8" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol1" name="" class="numcol1" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol2" name="" class="numcol2" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol3" name="" class="numcol3" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol4" name="" class="numcol4" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol5" name="" class="numcol5" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol6" name="" class="numcol6" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="8numcol7" name="" class="numcol7" value="" />  </td>
                                                 </tr>
 
 
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date9" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin9" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol2" name="" class="numcol2" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol3" name="" class="numcol3" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol4" name="" class="numcol4" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol5" name="" class="numcol5" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol6" name="" class="numcol6" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="9numcol7" name="" class="numcol7" value="" />  </td>
                                                 </tr>
-
-
                                                 <tr class="">
-                                                    <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
+                                                    <td class="date-input color-red"> <input type="date" id="date10" name="" value="" />  </td>
+                                                    <td class="txtshort color-red" colspan="2"> <input type="text" id="origin10" name="" value="" /> </td>
                                                     <td class="input-number un-selectable">  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol1" name="" value="" /> </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol2" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol3" name="" value="" />  </td>
-
-                                                    <td class="input-number"> <input type="number" id="1numcol4" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol5" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol6" name="" value="" />  </td>
-                                                    <td class="input-number"> <input type="number" id="1numcol7" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol1" class="numcol1" name="" value="" /> </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol2" class="numcol2" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol3" class="numcol3" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol4" class="numcol4" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol5" class="numcol5" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol6" class="numcol6" name="" value="" />  </td>
+                                                    <td class="input-number"> <input type="number" id="10numcol7" class="numcol7" name="" value="" />  </td>
                                                 </tr>
-
-
+                                            </tbody>
+                                            <tfoot>
                                                 <tr>
                                                     <td style="text-align:center;margin-left:20px;" colspan="10"> <a class="btn btn-sm  btn-lg" style="background:#2f4050 !important;color:white;" id="btnnewrow" href="#"> Add New Row </a></td>
                                                 </tr>
-
                                                 <tr>
-                                                    <td colspan="3" style="text-align:right;font-weight:bold; "> Total Expense By GL/Property </td>
+                                                    <td colspan="3" style="text-align:right;font-weight:bold;"> Total Expense By GL/Property </td>
                                                     <td class="un-selectable">  </td>
                                                     <td> <span id="col1total"> </span> </td>
                                                     <td> <span id="col2total"> </span> </td>
@@ -309,7 +284,7 @@
                                         </table>
 <div class="col-md-12">
     <div class="col-md-6">
-        <p style="color:red"> <b style="font-size:16px; font-weight:bold">* Propery team members </b> are to use this form mileage/travel expenses ONLY</p>
+        <p style="color:red"> <b style="font-size:16px; font-weight:bold">* Property team members </b> are to use this form mileage/travel expenses ONLY</p>
         <p style="color:red"> <b> * when billing back to a property use Code: 6390-0007 </b> </p>
         <p style="color:red">* when billing back for a due diligence use Yardi ID:CMG and Code: 1130-0070</p>
     </div>
@@ -318,13 +293,13 @@
     float: right;">
             <tr>
                 <td style="width:80%;">TOTAL EXPENSES</td>
-                <td><span id="totalexpenses"> </span></td> </tr>
+                <td> $ <span id="totalexpenses"> </span></td> </tr>
             <tr> 
                 <td style="color:red"><span>  LESS ANY CORRECTIONS</span> </td>
-                <td><span class="corrections"> <input type="number" style="width:80px" id="corrections" name="name" value="" /> </span></td> </tr>
+                <td> <span class="corrections"> <input type="number" style="width:80px" id="corrections" name="name" value="" /> </span></td> </tr>
             <tr>
                 <td style="font-size:20px;"><span> BALANCE DUE </span></td>
-                <td><span id="balancedue"> </span></td>
+                <td> $ <span id="balancedue"> </span></td>
             </tr>
         </table>
     </div>
@@ -346,14 +321,9 @@
                 <tr><td> 6547-0010 - Office Supplies </td></tr>
             </tbody>
         </table>
-
-
-
     </div>
 
     <div class="col-md-6">
-
-
         <p class="c1" style="margin-bottom:40px;">
             <span class="c0"> Submitted By Signature <input type="text" id="signature" style="width:73%; margin-left:2%" />   </span> <br />
             <span style="float:right;float: right;
@@ -364,10 +334,9 @@
         <p class="c1" style="margin-bottom:40px;" >
             <span class="c0">Approved By Signature  <input type="text" id="approvedby" style="width:42%;" /> </span>
             <span style="float:right;float: right;
-    margin-top: 20px;" class="c0">  Date : <input type="date" id="sdate" /> </span>
+    margin-top: 20px;" class="c0">  Date : <input type="date" id="adate" /> </span>
         </p>
     </div>
-
 </div>
 
 
@@ -705,6 +674,11 @@
         table thead th {
             text-align: center;
         }
+
+        td.txtshort input {
+                width:90%;
+            }
+
     </style>
 }
 
@@ -726,158 +700,285 @@
             {
                 e.preventDefault();
 
-                if ($(this).val() == "") {
+                if ($(this).val() == "")
+                {
                     $(this).addClass("has-error");
                 }
-                else {
+                else
+                {
                     $(this).removeClass("has-error");
                 }
 
             });
-
-
-
-
-            var totalmiles = 0;
+            
+            var totalexpenses = 0;
+            var corrections = 0;
             var totaldue = 0;
+            var line1total = 0;
+            var line2total = 0;
+            var line3total = 0;
+            var line4total = 0;
+            var line5total = 0;
+            var line6total = 0;
+            var line7total = 0;
 
 
-            function calculatetotalmiles()
+            function writetotalsinhtml()
             {
-                totalmiles = 0;
 
-            $(".cmile").each(function () {
+                totalexpenses = parseFloat(line1total + line2total + line3total + line4total + line5total + line6total + line7total).toFixed(2);
+                totaldue = parseFloat(totalexpenses - corrections).toFixed(2);
 
-                if ($(this).val() != "" && $(this).val() != "0")
-                {
-                    totalmiles += parseFloat($(this).val());
-                }
-            });
-            totaldue = parseFloat(totalmiles * 0.545).toFixed(2);
-            $("#totalmiles").html(totalmiles);
-            $("#totalprice").html(totaldue);
+
+                $("#col1total").html(line1total);
+                $("#col2total").html(line2total);
+                $("#col3total").html(line3total);
+                $("#col4total").html(line4total);
+                $("#col5total").html(line5total);
+                $("#col6total").html(line6total);
+                $("#col7total").html(line7total);
+
+                $("#totalexpenses").html(totalexpenses);
+                $("#balancedue").html(totaldue);
+                $("#corrections").html(corrections);
             }
 
 
-            $(".cmile").focusout(function ()
+            function calculatetotalmiles(lineno)
             {
-                calculatetotalmiles();
+                if (lineno == 'numcol1') 
+                {
+                    line1total = 0;
+                    $(".numcol1").each(function ()
+                    {
+                        if ($(this).val() != "" && $(this).val() != "0")
+                        {
+                            line1total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+
+                if (lineno == 'numcol2') {
+                    line2total = 0;
+                    $(".numcol2").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
+                            line2total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+                if (lineno == 'numcol3') {
+                    line3total = 0;
+                    $(".numcol3").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
+                            line3total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+                if (lineno == 'numcol4') {
+                    line4total = 0;
+                    $(".numcol4").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
+                            line4total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+                if (lineno == 'numcol5') {
+                    line5total = 0;
+                    $(".numcol5").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
+                            line5total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+                if (lineno == 'numcol6') {
+                    line6total = 0;
+                    $(".numcol6").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
+                            line6total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+                if (lineno == 'numcol7') {
+                    line7total = 0;
+                    $(".numcol7").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
+                            line7total += parseFloat($(this).val());
+                        }
+                    });
+                }
+
+                writetotalsinhtml();
+
+            }
+
+            $(document).on('focusout', '.numcol1', function (e) {
+                calculatetotalmiles('numcol1');
+            });
+
+            $(document).on('focusout', '.numcol2', function (e) {
+                calculatetotalmiles('numcol2');
+            });
+
+            $(document).on('focusout', '.numcol3', function (e) {
+                calculatetotalmiles('numcol3');
+            });
+
+            $(document).on('focusout', '.numcol4', function (e) {
+                calculatetotalmiles('numcol4');
+            });
+
+            $(document).on('focusout', '.numcol5', function (e) {
+                calculatetotalmiles('numcol5');
+            });
+
+            $(document).on('focusout', '.numcol6', function (e) {
+                calculatetotalmiles('numcol6');
+            });
+
+            $(document).on('focusout', '.numcol7', function (e) {
+                calculatetotalmiles('numcol7');
+            });
+
+            $(document).on('focusout', '#corrections', function (e) {
+                corrections = parseFloat($("#corrections").val());
+                writetotalsinhtml();
+            });
+
+            
+
+
+            var isfilled = true;
+            var totalrows = "";
+
+            function checkrowvalidation(controlid)
+            {
+                var allfilled = true;
+
+                if ($("#date" + controlid).val() == "")
+                {
+                    isfilled = false;
+                    $("#date" + controlid).addClass('has-error');
+                }
+                else
+                {
+
+                    $("#date" + controlid).removeClass('has-error');
+
+                }
+
+                if ($("#origin" + controlid ).val() == "") {
+                    isfilled = false;
+                    $("#origin" + controlid ).addClass('has-error');
+                }
+                else
+                {
+                    $("#" + controlid + "property").removeClass('has-error');
+                }
+
+                if (totalrows != "")
+                    totalrows += "|";
+                console.log($("#origin" + controlid).val() + "  " + $("#date" + controlid).val());
+                if ($("#origin" + controlid).val() != "" && $("#date" + controlid).val())
+                totalrows += $("#date" + controlid).val() + "," + $("#origin" + controlid).val() + "," + $("#" + controlid + "numcol1").val() + "," + $("#" + controlid + "numcol2").val() + "," + $("#" + controlid + "numcol3").val() + "," + $("#" + controlid + "numcol4").val() + "," + $("#" + controlid + "numcol5").val() + "," + $("#" + controlid + "numcol6").val() + "," + $("#" + controlid + "numcol7").val();
+
+            }
+
+            var icount = 10;
+
+            $("#btnnewrow").click(function ()
+            {
+                icount++;
+                $("#allorders tbody").append('<tr class=""><td class= "date-input color-red" > <input type="date" id="date'+icount+'" name="" value="" />  </td><td class="txtshort color-red" colspan="2"> <input type="text" id="origin'+icount+'" name="" value="" /> </td><td class="input-number un-selectable">  </td>' +
+                    '<td class="input-number"> <input type="number" id="' + icount +'numcol1" class="numcol1" name="" value="" /> </td>'+
+                    '<td class="input-number"> <input type="number" id="' + icount +'numcol2" class="numcol2" name="" value="" />  </td>'+
+                    '<td class="input-number"> <input type="number" id="' + icount +'numcol3" class="numcol3" name="" value="" />  </td>'+
+                    '<td class= "input-number"> <input type="number" id="' + icount +'numcol4" class="numcol4" name="" value="" />  </td > '+
+                    '<td class= "input-number"> <input type="number" id="' + icount +'numcol5" class="numcol5" name="" value="" />  </td > '+
+                    '<td class= "input-number"> <input type="number" id="' + icount +'numcol6" class="numcol6" name="" value="" />  </td > '+
+                    '<td class="input-number"> <input type="number" id="' + icount +'numcol7" class="numcol7" name="" value="" />  </td></tr >');
+
             });
 
 
-            // foreach change loop through all, get total miles, multiply wiith 0.545 , show in total display
 
 
 
-            $("#Submit").click(function (e) {
+            $("#Submit").click(function (e)
+            {
                 e.preventDefault();
 
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
 
-                //if ($("#empname").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                //    $("#empname").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#empname");
-                //}
+                // check validation whether for mile entered row other fields are filled properly
+                totalrows = "";
 
-                //if ($("#startdate").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Date </li>";
-                //    $("#startdate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#startdate");
-                //}
-
-                //if ($("#securitynumber").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Security Number </li>";
-                //    $("#securitynumber").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#securitynumber");
-                //}
-
-
-                if (!validateEmail($("#email").val()))
+                $(".numcol1").each(function ()
                 {
-                    errormsgsummary += "<li> Please Enter Valid Email Address </li>";
-                    $("#email").addClass('has-error');
-                    if (control == "")
-                        control = $("#email");
-                }
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol1', ''));
+                    }
+                });
+
+                $(".numcol2").each(function ()
+                {
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol2', ''));
+                    }
+                });
 
 
-                //if ($("#manager").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Manager Name </li>";
-                //    $("#manager").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#manager");
-                //}
+                $(".numcol3").each(function () {
 
-                //if ($("#location").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Location </li>";
-                //    $("#location").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#location");
-                //}
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol3', ''));
+                    }
+                });
 
+                $(".numcol4").each(function () {
 
-                //if ($("#exempt").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
-                //    $("#exempt").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#exempt");
-                //}
-
-                //if ($("#nonexempt").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
-                //    $("#nonexempt").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#nonexempt");
-                //}
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol4', ''));
+                    }
+                });
 
 
+                $(".numcol5").each(function () {
 
-                //if ($("#position").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Position  </li>";
-                //    $("#position").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#position");
-                //}
-
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol5', ''));
+                    }
+                });
 
 
-                //if ($("#status1").val() == "") {
-                //    errormsgsummary += "<li> Please Choose Status  </li>";
-                //    $("#status1").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#status1");
-                //}
+                $(".numcol6").each(function () {
+
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol6', ''));
+                    }
+                });
 
 
+                $(".numcol7").each(function () {
 
-                //if ($("#salary").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                //    $("#salary").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#salary");
-                //}
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        checkrowvalidation($(this).attr('id').replace('numcol7', ''));
+                    }
+                });
 
-
-                //if ($("#allocation").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Allocation </li>";
-                //    $("#allocation").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#allocation");
-                //}
-
-
-                if (errormsgsummary != "")
+                if ($("input.has-error").length > 0)
                 {
 
-                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the highlighted inputs </ul> ');
 
-                    setTimeout(ScrollToElement(control), 3000);
+                    // setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
@@ -889,48 +990,40 @@
                     $('#toastnotification').modal('show');
 
                     var insertForm = new FormData();
-                    insertForm.append('empname', $("#empname").val());
-                    insertForm.append('startdate', $("#startdate").val());
-                    insertForm.append('securitynumber', $("#securitynumber").val());
-                    insertForm.append('email', $("#email").val());
-                    insertForm.append('manager', $("#manager").val());
-                    insertForm.append('location', $("#location").val());
-                    if ($("#exempt").is(":checked"))
-                    {
-                        insertForm.append('exempt', '1');
-                    }
-                    else {
-                        insertForm.append('exempt', '0');
-                    }
+                    insertForm.append('name', $("#name").val());
+                    insertForm.append('date', $("#date").val());
+                    insertForm.append('address', $("#address").val());
+                    insertForm.append('yard1', $("#1colyardi").val()); insertForm.append('gl1', $("#1colyardi").val());
+                    insertForm.append('yard2', $("#2colyardi").val()); insertForm.append('gl2', $("#2colyardi").val());
+                    insertForm.append('yard3', $("#3colyardi").val()); insertForm.append('gl3', $("#3colyardi").val());
+                    insertForm.append('yard4', $("#4colyardi").val()); insertForm.append('gl4', $("#4colyardi").val());
+                    insertForm.append('yard5', $("#5colyardi").val()); insertForm.append('gl5', $("#5colyardi").val());
+                    insertForm.append('yard6', $("#6colyardi").val()); insertForm.append('gl6', $("#6colyardi").val());
+                    insertForm.append('yard7', $("#7colyardi").val()); insertForm.append('gl7', $("#7colyardi").val());
 
-                    if ($("#nonexempt").is(":checked"))
-                    {
-                        insertForm.append('nonexempt', '1');
-                    }
-                    else {
-                        insertForm.append('nonexempt', '0');
-                    }
+                    insertForm.append('line1tot', line1total);
+                    insertForm.append('line2tot', line2total);
+                    insertForm.append('line3tot', line3total);
+                    insertForm.append('line4tot', line4total);
+                    insertForm.append('line5tot', line5total);
+                    insertForm.append('line6tot', line6total);
+                    insertForm.append('line7tot', line7total);
 
+                    insertForm.append('totalexpenses', totalexpenses );
+                    insertForm.append('corrections', corrections );
+                    insertForm.append('totaldue', totaldue );
 
-                    insertForm.append('position', $("#position").val());
-                    insertForm.append('status', $("#status1").val());
-                    insertForm.append('salary', $("#salary").val());
-                    insertForm.append('kitordered', $("#kitorderdate").val());
-                    insertForm.append('callscheduled', $("#onboardcall").val());
-                    insertForm.append('allocation', $("#allocation").val());
-                    insertForm.append('esignature', $("#esignature").val());
-                    insertForm.append('edate', $("#edate").val());
-                    insertForm.append('mdate', $("#mdate").val());
-                    insertForm.append('msignature', $("#msignature").val());
-                    insertForm.append('rpmsignature', $("#rpmsignature").val());
-                    insertForm.append('rpmdate', $("#rpmdate").val());
+                    insertForm.append('ssignature', $("#signature").val());
+                    insertForm.append('sdate', $("#sdate").val());
 
+                    insertForm.append('asignature', $("#approvedby").val());
+                    insertForm.append('adate', $("#adate").val());
+                    insertForm.append('rows', totalrows);
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
-                    $("#status").html("<p style='color:green'> Processing ........ </p>");
                     $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
+                        url: $BaseApiUrl + "api/data/InsertExpenseForm",
                         type: 'POST',
                         dataType: "JSON",
                         processData: false,
@@ -939,34 +1032,35 @@
                         success: function (data) {
                             // To-do code if ajax request is successful
 
-
-
-                            if (data['error'] == false) {
+                            if (data['error'] == false)
+                            {
                                 leaseid = data['insertedId'];
 
-                                $("#empname").val('');
-                                $("#startdate").val('');
-                                $("#securitynumber").val('');
-                                $("#email").val('');
-                                $("#manager").val('');
-                                $("#location").val('');
-                                $("#exempt").val('');
-                                $("#nonexempt").val('');
-                                $("#position").val('');
-                                $("#status1").val('');
-                                $("#salary").val('');
-                                $("#kitorderdate").val('');
-                                $("#onboardcall").val('');
-                                $("#allocation").val('');
-
-                                GetAllHRFORMs('New Hire Notice');
+                                GetAllMileageForms('Expense Reimbursement');
                                 $(".alert").html('Record Successfully Updated !');
                                 $('#toastnotification').modal('show');
 
+
+                                document.getElementById("submitform").reset();
+
+
+                                 totalexpenses = 0;
+                                 corrections = 0;
+                                 totaldue = 0;
+                                 line1total = 0;
+                                 line2total = 0;
+                                 line3total = 0;
+                                 line4total = 0;
+                                 line5total = 0;
+                                 line6total = 0;
+                                 line7total = 0;
+
+                                writetotalsinhtml();
+                                icount = 10;
+
+                                $("#Submit").prop('disabled', false);
                                 setTimeout(function () {
 
-                                    $("#print").attr('disabled', false);
-                                    $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
@@ -987,6 +1081,7 @@
 
 
             });
+
 
 
       });

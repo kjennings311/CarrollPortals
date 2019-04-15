@@ -497,6 +497,110 @@ namespace Carroll.Data.Services.Controllers
         }
 
 
+        [ActionName("InsertExpenseForm")]
+        [HttpPost]
+        public dynamic InsertExpenseForm(List<string> rows)
+        {
+            ExpenseReimbursementHeader fa = new ExpenseReimbursementHeader();
+
+            fa.Name = HttpContext.Current.Request.Params["name"].ToString();
+            fa.SubmittionDate = Convert.ToDateTime(HttpContext.Current.Request.Params["date"].ToString());
+            // fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
+            fa.Address = HttpContext.Current.Request.Params["address"].ToString();
+            fa.Col1YardiCode = HttpContext.Current.Request.Params["yard1"].ToString();
+            fa.Col1GlCode = HttpContext.Current.Request.Params["gl1"].ToString();
+            fa.Col2YardiCode = HttpContext.Current.Request.Params["yard2"].ToString();
+            fa.Col2GlCode = HttpContext.Current.Request.Params["gl2"].ToString();
+            fa.Col3YardiCode = HttpContext.Current.Request.Params["yard3"].ToString();
+            fa.Col3GlCode = HttpContext.Current.Request.Params["gl3"].ToString();
+            fa.Col4YardiCode = HttpContext.Current.Request.Params["yard4"].ToString();
+            fa.Col4GlCode = HttpContext.Current.Request.Params["gl4"].ToString();
+            fa.Col5YardiCode = HttpContext.Current.Request.Params["yard5"].ToString();
+            fa.Col5GlCode = HttpContext.Current.Request.Params["gl5"].ToString();
+            fa.Col6YardiCode = HttpContext.Current.Request.Params["yard6"].ToString();
+            fa.Col6GlCode = HttpContext.Current.Request.Params["gl6"].ToString();
+            fa.Col7YardiCode = HttpContext.Current.Request.Params["yard7"].ToString();
+            fa.Col7GlCode = HttpContext.Current.Request.Params["gl7"].ToString();
+            fa.line1total = Convert.ToDouble(HttpContext.Current.Request.Params["line1tot"].ToString());
+            fa.line2total = Convert.ToDouble(HttpContext.Current.Request.Params["line3tot"].ToString());
+            fa.line3total = Convert.ToDouble(HttpContext.Current.Request.Params["line3tot"].ToString());
+            fa.line4total = Convert.ToDouble(HttpContext.Current.Request.Params["line4tot"].ToString());
+            fa.line5total = Convert.ToDouble(HttpContext.Current.Request.Params["line5tot"].ToString());
+            fa.line6total = Convert.ToDouble(HttpContext.Current.Request.Params["line6tot"].ToString());
+            fa.line7total = Convert.ToDouble(HttpContext.Current.Request.Params["line7tot"].ToString());
+            fa.TotalExpenses = Convert.ToDouble(HttpContext.Current.Request.Params["totalexpenses"].ToString());
+            fa.LessAnyCorrections = Convert.ToDouble(HttpContext.Current.Request.Params["corrections"].ToString());
+            fa.BalanceDue = Convert.ToDouble(HttpContext.Current.Request.Params["totaldue"].ToString());
+            fa.ExpenseReimbursementId = System.Guid.NewGuid();
+
+            fa.SubmittedBySignature = HttpContext.Current.Request.Params["ssignature"].ToString();
+            fa.SubmittedDate = Convert.ToDateTime(HttpContext.Current.Request.Params["sdate"].ToString());
+
+            fa.ApprovedSignature = HttpContext.Current.Request.Params["asignature"].ToString();
+            fa.ApprovedDate = Convert.ToDateTime(HttpContext.Current.Request.Params["adate"].ToString());
+
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedDatetime = DateTime.Now;
+
+            var totalrows = HttpContext.Current.Request.Params["rows"].ToString();
+            var allrows = totalrows.Split('|');
+
+            List<ExpenseReimbursementDetail> md = new List<ExpenseReimbursementDetail>();
+
+            foreach (var item in allrows)
+            {
+                var values = item.ToString().Split(',');
+                var m = new ExpenseReimbursementDetail();
+                m.ExpenseReimbursementDetailId = System.Guid.NewGuid();
+                m.Date = Convert.ToDateTime(values[0]);
+                m.ShortDescription = values[1].ToString();
+                if (values[2].ToString() != "")
+                    m.Col1Expense = Convert.ToDouble(values[2].ToString());
+                else
+                    m.Col1Expense = 0;
+
+                if (values[3].ToString() != "")
+                    m.Col2Epense= Convert.ToDouble(values[3].ToString());
+                else
+                    m.Col2Epense = 0;
+
+
+                if (values[4].ToString() != "")
+                    m.Col3Expense = Convert.ToDouble(values[4].ToString());
+                else
+                    m.Col3Expense = 0;
+
+
+                if (values[5].ToString() != "")
+                    m.Col4Expense = Convert.ToDouble(values[5].ToString());
+                else
+                    m.Col4Expense = 0;
+
+
+                if (values[6].ToString() != "")
+                    m.Col5Expense = Convert.ToDouble(values[6].ToString());
+                else
+                    m.Col5Expense = 0;
+
+
+                if (values[7].ToString() != "")
+                    m.Col6Expense = Convert.ToDouble(values[7].ToString());
+                else
+                    m.Col6Expense = 0;
+
+
+                if (values[8].ToString() != "")
+                    m.Col7Expense = Convert.ToDouble(values[8].ToString());
+                else
+                    m.Col7Expense = 0;
+
+              
+                md.Add(m);
+            }
+
+            return _service.InsertExpenseReimbursement(fa, md);
+        }
+
         [ActionName("GetExpenseReimbursement")]
         [HttpGet]
         public dynamic GetExpenseReimbursement(string riderid)

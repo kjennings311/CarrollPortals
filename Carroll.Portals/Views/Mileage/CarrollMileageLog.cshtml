@@ -579,7 +579,7 @@
             $("#btnnewrow").click(function ()
             {
                 icount++;
-                $("#allorders tbody").append('<tr><td> <input type="date" id="' + icount + 'tdate" />  </td><td> <input type="text" id="' + icount + 'property" />  </td><td> <input type="text" name="name" id="' + icount + 'destination" value="" />  </td> <td><input type="text" name="name" id="' + icount + 'purpose"  class="pur" /> </td> <td> <input type="number" style="width:70px;" class="cmile" value="0" id="' + icount +'miles" />  </td>< </tr>');
+                $("#allorders tbody").append('<tr><td> <input type="date" id="' + icount + 'tdate" />  </td><td> <input type="text" id="' + icount + 'property" />  </td><td> <input type="text" name="name" id="' + icount + 'destination" value="" />  </td> <td><input type="text" name="name" id="' + icount + 'purpose"  class="pur" /> </td> <td> <input type="number" style="width:70px;" class="cmile" value="0" id="' + icount +'miles" />  </td> </tr>');
 
             });
 
@@ -657,6 +657,7 @@
                                 totalmiles = 0;
                                 $("#totalmiles").html(totalmiles);
                                 $("#totalprice").html(totaldue);
+                                icount = 10;
 
                                 $("#Submit").prop('disabled', false);
                                 setTimeout(function () {

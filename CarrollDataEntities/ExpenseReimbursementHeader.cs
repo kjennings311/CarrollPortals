@@ -45,5 +45,12 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> ModifedDatetime { get; set; }
         public Nullable<System.Guid> PropertyId { get; set; }
         public string PropertyName { get; set; }
+        public Nullable<double> line1total { get; set; }
+        public Nullable<double> line2total { get; set; }
+        public Nullable<double> line3total { get; set; }
+        public Nullable<double> line4total { get; set; }
+        public Nullable<double> line5total { get; set; }
+        public Nullable<double> line6total { get; set; }
+        public Nullable<double> line7total { get; set; }
     }
 }

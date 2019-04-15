@@ -163,6 +163,13 @@
           <Property Name="CreatedDatetime" Type="datetime" />
           <Property Name="ModifiedUser" Type="uniqueidentifier" />
           <Property Name="ModifedDatetime" Type="datetime" />
+          <Property Name="line1total" Type="float" />
+          <Property Name="line2total" Type="float" />
+          <Property Name="line3total" Type="float" />
+          <Property Name="line4total" Type="float" />
+          <Property Name="line5total" Type="float" />
+          <Property Name="line6total" Type="float" />
+          <Property Name="line7total" Type="float" />
         </EntityType>
         <EntityType Name="FormAttachments">
           <Key>
@@ -728,7 +735,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="NoticeOfEmployeeSeperations" EntityType="Carroll.Data.Entities.NoticeOfEmployeeSeperation" />
           <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
           <FunctionImport Name="proc_getallexpensemileagelogs" ReturnType="Collection(Carroll.Data.Entities.proc_getallexpensemileagelogs_Result)">
-            <Parameter Name="userid" Mode="In" Type="Guid" />
+          <Parameter Name="userid" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
@@ -1477,6 +1484,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ModifedDatetime" Type="DateTime" Precision="3" />
           <Property Name="PropertyId" Type="Guid" />
           <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="line1total" Type="Double" />
+          <Property Name="line2total" Type="Double" />
+          <Property Name="line3total" Type="Double" />
+          <Property Name="line4total" Type="Double" />
+          <Property Name="line5total" Type="Double" />
+          <Property Name="line6total" Type="Double" />
+          <Property Name="line7total" Type="Double" />
         </EntityType>
         <EntityType Name="MileageLogDetail">
           <Key>
@@ -2372,6 +2386,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="ExpenseReimbursementHeaders">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.ExpenseReimbursementHeader">
               <MappingFragment StoreEntitySet="ExpenseReimbursementHeader">
+                <ScalarProperty Name="line7total" ColumnName="line7total" />
+                <ScalarProperty Name="line6total" ColumnName="line6total" />
+                <ScalarProperty Name="line5total" ColumnName="line5total" />
+                <ScalarProperty Name="line4total" ColumnName="line4total" />
+                <ScalarProperty Name="line3total" ColumnName="line3total" />
+                <ScalarProperty Name="line2total" ColumnName="line2total" />
+                <ScalarProperty Name="line1total" ColumnName="line1total" />
                 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
                 <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
                 <ScalarProperty Name="ModifedDatetime" ColumnName="ModifedDatetime" />
