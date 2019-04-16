@@ -856,6 +856,9 @@
             var isfilled = true;
             var totalrows = "";
 
+            var rowsarray = [];
+
+
             function checkrowvalidation(controlid)
             {
                 var allfilled = true;
@@ -881,12 +884,15 @@
                     $("#" + controlid + "property").removeClass('has-error');
                 }
 
+                if (!rowsarray.includes(controlid)) {
+                    rowsarray.push(controlid);
                 if (totalrows != "")
                     totalrows += "|";
                 console.log($("#origin" + controlid).val() + "  " + $("#date" + controlid).val());
                 if ($("#origin" + controlid).val() != "" && $("#date" + controlid).val())
                 totalrows += $("#date" + controlid).val() + "," + $("#origin" + controlid).val() + "," + $("#" + controlid + "numcol1").val() + "," + $("#" + controlid + "numcol2").val() + "," + $("#" + controlid + "numcol3").val() + "," + $("#" + controlid + "numcol4").val() + "," + $("#" + controlid + "numcol5").val() + "," + $("#" + controlid + "numcol6").val() + "," + $("#" + controlid + "numcol7").val();
 
+                }
             }
 
             var icount = 10;
