@@ -150,7 +150,7 @@
 
         .c1 {
             padding-top: 0pt;
-            padding-bottom: 5pt;
+            padding-bottom: 0pt;
             line-height: 1.15;
             text-align: left
         }
@@ -324,6 +324,13 @@
         td.txtshort input {
             width: 90%;
         }
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th
+        {
+            padding:2px;
+            border-top:none !important;
+        }
+
+       
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
@@ -333,15 +340,15 @@
     <div class="page" style="padding: 30px;">
         <div class="col-md-12" style="    width: 100%;
     border: 1px solid black;
-    padding: 40px;">
+    padding:10px;">
 
             <form id="submitform" onsubmit="return false;">
-                <p class="c1 c8" style="margin-left: 30%;
+                <p class="c1 c8" style="margin-left: 20%;
     margin-top: 0px; margin-bottom:0px;">
                     <span class="c7"> Expense Reimbursement</span>
                 </p>
-                <div class="col-md-7"> <img src="~/img/newhirenotice.png" /> </div>
-                <div class="col-md-5">
+                <div class="col-md-4" style="width:26%; margin-bottom:20px; display:inline-block !important;"> <img src="~/img/newhirenotice.png" style="width:100%;" /> </div>
+                <div class="col-md-8" style="width:70%;display:inline-block !important;">
                     <p class="c1" style="text-align:right">
                         <span class="c0">  <span class="name">  Name: </span>    <input type="text" value="@Model.header.Name" style="width:70%" id="name" />  </span>
                     </p>
@@ -354,241 +361,99 @@
                     </p>
                 </div>
 
-                <table id="allorders" style="height: 670px;overflow: scroll; display:inline-block;border-collapse:collapse;" class="table table-bordered">
+                <table id="allorders" style="" class="table">
 
                     <tbody style="display: table-header-group;">
                         <tr>
                             <td rowspan="2" class="date-input hd"> Date  </td>
                             <td rowspan="2" class="txtshort hd"> Short Description </td>
-                            <td class="unstyled hd "> <span style="color:black;font-weight:bold"> Yardi  </span> </td>
-                            <td class="input-number color-red un-selectable hd"> 700 </td>
-                            <td class="input-number"> <input type="number" id="1colyardi"  name="name" value="@Model.header.Col1YardiCode" /> </td>
-                            <td class="input-number"> <input type="number" id="2colyardi" name="name" value="@Model.header.Col2YardiCode"  /></td>
-                            <td class="input-number"> <input type="number" id="3colyardi" name="name" value="@Model.header.Col3YardiCode"  /> </td>
-                            <td class="input-number"> <input type="number" id="4colyardi" name="name" value="@Model.header.Col4YardiCode"  /> </td>
-                            <td class="input-number"> <input type="number" id="5colyardi" name="name" value="@Model.header.Col5YardiCode"  /> </td>
-                            <td class="input-number"> <input type="number" id="6colyardi" name="name" value="@Model.header.Col6YardiCode" /> </td>
-                            <td class="input-number"> <input type="number" id="7colyardi" name="name" value="@Model.header.Col7YardiCode"  /> </td>
+                            <td class="unstyled hd "> <span style="color:black;font-weight:bold;font-size:7px;"> Yardi  </span> </td>
+                          
+                            <td class="input-number"> @Model.header.Col1YardiCode </td>
+                            <td class="input-number"> @Model.header.Col2YardiCode </td>
+                            <td class="input-number"> @Model.header.Col3YardiCode </td>
+                            <td class="input-number"> @Model.header.Col4YardiCode </td>
+                            <td class="input-number"> @Model.header.Col5YardiCode </td>
+                            <td class="input-number"> @Model.header.Col6YardiCode </td>
+                            <td class="input-number"> @Model.header.Col7YardiCode </td>
                         </tr>
                         <tr>
-                            <td rowspan="2" style="color:black;font-weight:bold"> GL Code    </td>
-                            <td rowspan="1" class="color-red un-selectable"> 6390-0007  </td>
-                            <td class="input-number"> <input type="number" id="1colglcode" name="name" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="2colglcode" name="name" value="" /></td>
-                            <td class="input-number"> <input type="number" id="3colglcode" name="name" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="4colglcode" name="name" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="5colglcode" name="name" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="6colglcode" name="name" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="7colglcode" name="name" value="" /> </td>
+                            <td rowspan="2" style="color:black;font-weight:bold;font-size:7px;"> GL Code    </td>
+                           
+                            <td class="input-number"> @Model.header.Col1GlCode </td>
+                            <td class="input-number"> @Model.header.Col2GlCode </td>
+                            <td class="input-number"> @Model.header.Col3GlCode </td>
+                            <td class="input-number"> @Model.header.Col4GlCode </td>
+                            <td class="input-number"> @Model.header.Col5GlCode </td>
+                            <td class="input-number"> @Model.header.Col6GlCode </td>
+                            <td class="input-number"> @Model.header.Col7GlCode </td>
                         </tr>
 
+                        @{
 
-                        <tr class="un-selectable">
-                            <td class="date-input color-red un-selectable"> 01-05-2018  </td>
-                            <td class=" color-red" colspan="2"> Example: Roundtrip mileage to leasing rally </td>
-                            <td class="input-number un-selectable"> $58  </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
+                            foreach (var item in Model.details)
+                            {
+                        <tr>
+                            <td> @item.Date.Value.ToShortDateString()   </td>
+                            <td colspan="2">  @item.ShortDescription </td>
+                           
+                            <td> @item.Col1Expense </td>
+                            <td> @item.Col2Epense </td>
+                            <td> @item.Col3Expense  </td>
+                            <td> @item.Col4Expense  </td>
+                            <td> @item.Col5Expense  </td>
+                            <td> @item.Col6Expense  </td>
+                            <td> @item.Col6Expense  </td>
                         </tr>
+                            }
+                        }
 
-                        <tr class="un-selectable">
-                            <td class="date-input color-red"> 01-05-2018  </td>
-                            <td class=" color-red" colspan="2"> Example: Tolls to leasing rally </td>
-                            <td class="input-number un-selectable"> $3  </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                            <td class="input-number"> </td>
-                        </tr>
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date1" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin1" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="1numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="1numcol2" class="numcol2" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="1numcol3" class="numcol3" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="1numcol4" class="numcol4" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="1numcol5" class="numcol5" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="1numcol6" class="numcol6" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="1numcol7" class="numcol7" name="" value="" />  </td>
-                        </tr>
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date2" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin2" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="2numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="2numcol2" class="numcol2" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="2numcol3" class="numcol3" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="2numcol4" class="numcol4" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="2numcol5" class="numcol5" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="2numcol6" class="numcol6" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="2numcol7" class="numcol7" name="" value="" />  </td>
-                        </tr>
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date3" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin3" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="3numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="3numcol2" class="numcol2" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="3numcol3" class="numcol3" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="3numcol4" class="numcol4" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="3numcol5" class="numcol5" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="3numcol6" class="numcol6" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="3numcol7" class="numcol7" name="" value="" />  </td>
-                        </tr>
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date4" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin4" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="4numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="4numcol2" name="" class="numcol2" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="4numcol3" name="" class="numcol3" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="4numcol4" name="" class="numcol4" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="4numcol5" name="" class="numcol5" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="4numcol6" name="" class="numcol6" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="4numcol7" name="" class="numcol7" value="" />  </td>
-                        </tr>
-
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date5" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin5" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="5numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="5numcol2" name="" class="numcol2" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="5numcol3" name="" class="numcol3" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="5numcol4" name="" class="numcol4" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="5numcol5" name="" class="numcol5" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="5numcol6" name="" class="numcol6" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="5numcol7" name="" class="numcol7" value="" />  </td>
-                        </tr>
-
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date6" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin6" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="6numcol1" name="" class="numcol1" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="6numcol2" name="" class="numcol2" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="6numcol3" name="" class="numcol3" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="6numcol4" name="" class="numcol4" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="6numcol5" name="" class="numcol5" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="6numcol6" name="" class="numcol6" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="6numcol7" name="" class="numcol7" value="" />  </td>
-                        </tr>
-
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date7" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin7" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="7numcol1" name="" class="numcol1" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="7numcol2" name="" class="numcol2" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="7numcol3" name="" class="numcol3" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="7numcol4" name="" class="numcol4" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="7numcol5" name="" class="numcol5" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="7numcol6" name="" class="numcol6" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="7numcol7" name="" class="numcol7" value="" />  </td>
-                        </tr>
-
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date8" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin8" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="8numcol1" name="" class="numcol1" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="8numcol2" name="" class="numcol2" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="8numcol3" name="" class="numcol3" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="8numcol4" name="" class="numcol4" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="8numcol5" name="" class="numcol5" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="8numcol6" name="" class="numcol6" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="8numcol7" name="" class="numcol7" value="" />  </td>
-                        </tr>
-
-
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date9" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin9" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="9numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="9numcol2" name="" class="numcol2" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="9numcol3" name="" class="numcol3" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="9numcol4" name="" class="numcol4" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="9numcol5" name="" class="numcol5" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="9numcol6" name="" class="numcol6" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="9numcol7" name="" class="numcol7" value="" />  </td>
-                        </tr>
-                        <tr class="">
-                            <td class="date-input color-red"> <input type="date" id="date10" name="" value="" />  </td>
-                            <td class="txtshort color-red" colspan="2"> <input type="text" id="origin10" name="" value="" /> </td>
-                            <td class="input-number un-selectable">  </td>
-                            <td class="input-number"> <input type="number" id="10numcol1" class="numcol1" name="" value="" /> </td>
-                            <td class="input-number"> <input type="number" id="10numcol2" class="numcol2" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="10numcol3" class="numcol3" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="10numcol4" class="numcol4" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="10numcol5" class="numcol5" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="10numcol6" class="numcol6" name="" value="" />  </td>
-                            <td class="input-number"> <input type="number" id="10numcol7" class="numcol7" name="" value="" />  </td>
-                        </tr>
+                      
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <td style="text-align:center;margin-left:20px;" colspan="10"> <a class="btn btn-sm  btn-lg" style="background:#2f4050 !important;color:white;" id="btnnewrow" href="#"> Add New Row </a></td>
-                        </tr>
+                     
                         <tr>
                             <td colspan="3" style="text-align:right;font-weight:bold;"> Total Expense By GL/Property </td>
-                            <td class="un-selectable">  </td>
-                            <td> <span id="col1total"> </span> </td>
-                            <td> <span id="col2total"> </span> </td>
-                            <td> <span id="col3total"> </span> </td>
-                            <td> <span id="col4total"> </span> </td>
-                            <td> <span id="col5total"> </span> </td>
-                            <td> <span id="col6total"> </span> </td>
-                            <td> <span id="col7total"> </span> </td>
+                          
+                            <td> <span id="col1total"> @Model.header.line1total </span> </td>
+                            <td> <span id="col2total"> @Model.header.line2total </span> </td>
+                            <td> <span id="col3total"> @Model.header.line3total </span> </td>
+                            <td> <span id="col4total"> @Model.header.line4total </span> </td>
+                            <td> <span id="col5total"> @Model.header.line5total </span> </td>
+                            <td> <span id="col6total"> @Model.header.line6total </span> </td>
+                            <td> <span id="col7total"> @Model.header.line7total</span> </td>
                         </tr>
                     </tfoot>
                 </table>
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="width:49%;display:inline-block">
                         <p style="color:red"> <b style="font-size:16px; font-weight:bold">* Property team members </b> are to use this form mileage/travel expenses ONLY</p>
                         <p style="color:red"> <b> * when billing back to a property use Code: 6390-0007 </b> </p>
                         <p style="color:red">* when billing back for a due diligence use Yardi ID:CMG and Code: 1130-0070</p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="width:48%;display:inline-block">
                         <table class="table table-bordered" style="width: 60%;
     float: right;">
                             <tr>
                                 <td style="width:80%;">TOTAL EXPENSES</td>
-                                <td> $ <span id="totalexpenses"> </span></td>
+                                <td> $ <span id="totalexpenses"> @Model.header.TotalExpenses </span></td>
                             </tr>
                             <tr>
                                 <td style="color:red"><span>  LESS ANY CORRECTIONS</span> </td>
-                                <td> <span class="corrections"> <input type="number" style="width:80px" id="corrections" name="name" value="" /> </span></td>
+                                <td> <span class="corrections">@Model.header.LessAnyCorrections </span></td>
                             </tr>
                             <tr>
-                                <td style="font-size:20px;"><span> BALANCE DUE </span></td>
-                                <td> $ <span id="balancedue"> </span></td>
+                                <td style="font-size:10px;"><span> BALANCE DUE </span></td>
+                                <td> $ <span id="balancedue"> @Model.header.BalanceDue </span></td>
                             </tr>
                         </table>
                     </div>
                 </div>
 
                 <div class="col-md-12">
-                    <div class="col-md-5">
+                    <div class="col-md-5" style="width:40%;display:inline-block">
 
-                        <table id="footertable" class="table table-bordered">
+                        <table id="footertable" class="table " style="display:inline-block;">
                             <thead style="background-color:aliceblue;"><tr><th>Corporate team members please use codes below: </th></tr></thead>
                             <tbody>
                                 <tr><td> 1130-0070 - All Due Diligence Expenses </td></tr>
@@ -603,18 +468,18 @@
                         </table>
                     </div>
 
-                    <div class="col-md-6">
-                        <p class="c1" style="margin-bottom:40px;">
-                            <span class="c0"> Submitted By Signature <input type="text" id="signature" style="width:73%; margin-left:2%" />   </span> <br />
+                    <div class="col-md-6" style="width:58%;display:inline-block">
+                        <p class="c1" style="margin-bottom:10px;">
+                            <span class="c0"> Submitted By Signature <input value="@Model.header.SubmittedBySignature" type="text" id="signature" style="width:60%;" />   </span> <br />
                             <span style="float:right;float: right;
-    margin-top: 20px;" class="c0">Date :<input type="text" id="sdate" /></span>
+    " class="c0">Date :<input type="text" id="sdate" value="@Model.header.SubmittedDate.Value.ToShortDateString()" /></span>
                         </p>
                         <br />
                         <br />
-                        <p class="c1" style="margin-bottom:40px;">
-                            <span class="c0">Approved By Signature  <input type="text" id="approvedby" style="width:42%;" /> </span>
+                        <p class="c1" style="margin-bottom:10px;">
+                            <span class="c0">Approved By Signature  <input type="text" value="@Model.header.ApprovedSignature" id="approvedby" style="width:60%;" /> </span>
                             <span style="float:right;float: right;
-    margin-top: 20px;" class="c0">Date :<input type="text" id="adate" /></span>
+    " class="c0">Date :<input type="text" id="adate" value="@Model.header.ApprovedDate.Value.ToShortDateString()" /></span>
                         </p>
                     </div>
                 </div>

@@ -8644,3 +8644,10 @@ z-index:99999999 !important;
 {
     display:none !important;
 }
+
+
+.btn-primary,.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary.active:hover, .btn-primary.active:focus {
+    background: #2f4050 !important;
+    color: white;
+    border: none !important;
+}

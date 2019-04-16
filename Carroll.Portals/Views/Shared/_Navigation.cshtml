@@ -3,7 +3,7 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <a data-toggle="dropdown" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <img src="~/img/corpLogo.png" />
@@ -14,11 +14,11 @@
                             <input type="hidden" id="CreatedBy" value="@Model.UserId" />
                             <input type="hidden" id="UserPropertyAccess" value="" />
                             <input type="hidden" id="UserR" value="@Model.RoleType" />
-                        </span> <span class="text-muted text-xs block">Access Level -  @Model.RoleType <b class="caret"></b></span>
+                        </span> <span class="text-muted text-xs block">Access Level -  @Model.RoleType </span>
                     </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                    @*<ul class="dropdown-menu animated fadeInRight m-t-xs">
                         <li><a href="~/Account/Logout">Logout</a></li>
-                    </ul>
+                    </ul>*@
                 </div>
                 <div class="logo-element">
                     <img src="~/img/LogoC.png" />

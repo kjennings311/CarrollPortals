@@ -552,6 +552,7 @@ namespace Carroll.Data.Services.Controllers
                 var values = item.ToString().Split(',');
                 var m = new ExpenseReimbursementDetail();
                 m.ExpenseReimbursementDetailId = System.Guid.NewGuid();
+                m.ExpenseReimbursementId = fa.ExpenseReimbursementId;
                 m.Date = Convert.ToDateTime(values[0]);
                 m.ShortDescription = values[1].ToString();
                 if (values[2].ToString() != "")
