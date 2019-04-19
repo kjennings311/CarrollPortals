@@ -189,6 +189,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="ModelXml\carrollpositions.xml" />
+    <Content Include="ModelXml\payperiods.xml" />
     <Content Include="ModelXml\user.xml" />
     <Content Include="ModelXml\UserInProperty.xml" />
     <Content Include="ModelXml\UserProperty.xml" />

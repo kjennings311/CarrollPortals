@@ -67,8 +67,8 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <select id="rehire"><option value="true"> Yes </option><option value="false"> No </option> </select></p>
-                                            <p class="p1 ft1">Property Name <input type="text" id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
+                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <select disabled id="rehire"><option value="true"> Yes </option><option value="false"> No </option> </select></p>
+                                            <p class="p1 ft1">Property Name <input type="text" disabled id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
                                             <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <input type="text" id="jobtitle" style="width:46%" /></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
@@ -98,7 +98,7 @@
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="End of Temporary Assignment" /> End of Temporary Assignment</P></TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Violated Company Policy**" />Violated Company Policy**</P></TD>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" id="chkviolated" class="dis" value="Violated Company Policy**" />Violated Company Policy**</P></TD>
                                                     <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Personal Reasons" />Personal Reasons</P></TD>
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="End of Seasonal Work" /> End of Seasonal Work</P></TD>
                                                 </TR>
@@ -157,18 +157,12 @@
                                             <P class="p12 ft1"><input type="text" id="polictyvoilated2" style="width:95%" /></P>
                                             <P class="p13 ft1">Additional Remarks <input type="text" id="remarks1" style="width:78%" /></P>
                                             <P class="p14 ft1"><input type="text" id="remarks2" style="width:96%" /></P>
-                                            <P class="p15 ft8">(Documentation Available?<input type="text" id="documentsavailable1" style="width:72%" /></P>
-                                            <P class="p16 ft1"><input type="text" id="documentsavailable2" style="width:96%" /></P>
-                                            <P class="p17 ft1">Warnings Given? Dates?) <input type="text" id="warningsgiven1" style="width:73%" /></P>
-                                            <P class="p14 ft1"><input type="text" id="warningsgiven2" style="width:96%" /></P>
-                                            <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:148px;">2 weeks’ notice given? <select id="noticegiven"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
-                                            <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1">Immediate Supervisor’s Signature: <input type="text" id="ssignature" />  Date: <input type="date" id="sdate" /></P>
-                                            <P class="p13 ft1">Senior Manager’s Signature: <input type="text" id="smsignature" /> Date: <input type="date" id="smdate" /></P>
-                                            <P class="p17 ft1">Human Resources Manager’s Signature: <input type="text" id="hrmsignature" /> Date:<input type="date" id="hrmdate" /></P>
-                                            <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input type="text" id="notes1" style="width:82%" /></P>
-                                            <P class="p14 ft1"><input type="text" id="notes2" style="width:96%; margin-bottom:20px;" /></P>
-                                            <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
+                                          
+                                            <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
+                                            
+                                            <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
+                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" />  Date: <input type="date" id="sdate" /></P>
+                                           <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
 
@@ -631,7 +625,8 @@
 
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function () 
+        {
             var leaseid = "";
 
             GetAllHRFORMs('EmployeeSeparation');
@@ -649,6 +644,71 @@
                 }
             });
 
+            $("#2weekscom").change(function (e)
+            {
+                e.preventDefault();
+                if ($("2weekscom").val() == true) {
+                    $("#rehire").val("true");
+                }
+                else {
+                    $("#rehire").val("false");
+                }
+               
+            });
+
+
+            // on focus out get the PropertyName for Property Number
+
+
+            $("#propertynumber").focusout(function ()
+            {
+
+                if ($("#propertynumber").val() == "") {
+
+                    //$('#toastnotification').modal('show');
+
+                    //$(".alert").html('<h6 style="color:red;"> Please Enter Property Number </h6> ');
+
+                    //setTimeout(function () {
+                    //    $('#toastnotification').modal('hide');
+
+                    //    $(".alert").html(' ');
+                    //}, 3000);
+
+                    alert("Please Enter Property Number");
+
+                 //   $("#propertynumber").focus();
+                }
+                else
+                {
+                    
+                    $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber="+$("#propertynumber").val(), function (data)
+                    {
+                        if (data == "") {
+
+                            alert("Invalid Property Code");
+
+                         //   $("#propertynumber").focus();
+                            $("#propertyname").val('');
+                            //$('#toastnotification').modal('show');
+
+                            //$(".alert").html('<h6 style="color:red;"> Invalid Property Code </h6> ');
+
+                            //setTimeout(function ()
+                            //{
+                            //    $('#toastnotification').modal('hide');
+
+                            //    $(".alert").html(' ');
+                            //}, 3000);
+                        }
+                        else {
+
+                            $("#propertyname").val(data);
+                        }  
+                    });
+                }
+
+            });
 
             $("#Submit").click(function (e)
             {
@@ -712,76 +772,73 @@
                 else
                     reason = "Multiple";
 
-                //if ($("#effectivedate").val() == "") {
-                //    errormsgsummary += "<li> Please Choose Date </li>";
-                //    $("#effectivedate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#effectivedate");
-                //}
-                //if ($("#rehire").val() == "") {
-                //    errormsgsummary += "<li> Please Choose Eligibile For Rehire </li>";
-                //    $("#rehire").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#rehire");
-                //}
+                if ($("#effectivedate").val() == "") {
+                    errormsgsummary += "<li> Please Choose Date </li>";
+                    $("#effectivedate").addClass('has-error');
+                    if (control == "")
+                        control = $("#effectivedate");
+                }
+                if ($("#rehire").val() == "") {
+                    errormsgsummary += "<li> Please Choose Eligibile For Rehire </li>";
+                    $("#rehire").addClass('has-error');
+                    if (control == "")
+                        control = $("#rehire");
+                }
 
               
-                //if ($("#propertyname").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Property Name </li>";
-                //    $("#propertyname").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#propertyname");
-                //}
+                if ($("#propertyname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Property Name </li>";
+                    $("#propertyname").addClass('has-error');
+                    if (control == "")
+                        control = $("#propertyname");
+                }
 
 
-                //if ($("#propertynumber").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Property Number </li>";
-                //    $("#propertynumber").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#propertynumber");
-                //}
+                if ($("#propertynumber").val() == "") {
+                    errormsgsummary += "<li> Please Enter Property Number </li>";
+                    $("#propertynumber").addClass('has-error');
+                    if (control == "")
+                        control = $("#propertynumber");
+                }
 
-                //if ($("#empname").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                //    $("#empname").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#empname");
-                //}
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
 
 
-                //if ($("#jobtitle").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Job Title Of Employee</li>";
-                //    $("#jobtitle").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#jobtitle");
-                //}
+                if ($("#jobtitle").val() == "") {
+                    errormsgsummary += "<li> Please Enter Job Title Of Employee</li>";
+                    $("#jobtitle").addClass('has-error');
+                    if (control == "")
+                        control = $("#jobtitle");
+                }
 
-                //if (($("#polictyvoilated1").val() + $("#polictyvoilated2").val()) == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
-                //    $("#polictyvoilated1").addClass('has-error');
-                //    if (control == "")    
-                //        control = $("#polictyvoilated1");
-                //}
-                
+                if ($("#chkviolated").is(":Checked") && ($("#polictyvoilated1").val() + $("#polictyvoilated2").val()) == "")
+                {
+                    errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
+                    $("#polictyvoilated1").addClass('has-error');
+                    if (control == "")    
+                        control = $("#polictyvoilated1");
+                }
 
                 if (errormsgsummary != "")
                 {
-
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
                     setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else {
+                else
+                {
                     $('#myModal').modal('hide');
 
                     //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show'); 
-
-                  
 
 
                     var insertForm = new FormData();
@@ -793,13 +850,17 @@
                     insertForm.append('jobtitile', $("#jobtitle").val());
                     insertForm.append('policty', $("#polictyvoilated1").val() + " " + $("#polictyvoilated2").val());
                     insertForm.append('remarks', $("#remarks1").val() + " " + $("#remarks2").val());
-                    insertForm.append('documentaiton', $("#documentsavailable1").val() + " " + $("#documentsavailable2").val());
-                    insertForm.append('warningdates', $("#warningsgiven1").val() + " " + $("#warningsgiven2").val());
+              
                     insertForm.append('keysreturned', $("#keysreturned").val());
-                    insertForm.append('noticegives', $("#noticegiven").val());
+
+                    if ($("#noticegiven").val()=="1")
+                        insertForm.append('noticegives', true);
+                    else
+                        insertForm.append('noticegives', false);
+                    
                     insertForm.append('vacationpaidout', $("#vacationpaid").val());
                     insertForm.append('balance', $("#vacationbalance").val());
-                    insertForm.append('comments', $("#notes1").val() + " " + $("#notes2").val());   
+                    insertForm.append('weekscom', $("#2weekscom").val());
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('discharge', dischargetext);
                     insertForm.append('quit', quittext);
@@ -807,11 +868,7 @@
                     insertForm.append('reason', reason);
                     insertForm.append('ssignature', $("#ssignature").val());
                     insertForm.append('sdate', $("#sdate").val());
-                    insertForm.append('smdate', $("#smdate").val());
-                    insertForm.append('smsignature', $("#smsignature").val());
-                    insertForm.append('hrmsignature', $("#hrmsignature").val());
-                    insertForm.append('hrmdate', $("#hrmdate").val());
-
+                 
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
                     $("#status").html("<p style='color:green'> Processing </p>");
@@ -842,7 +899,7 @@
 
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
-                                    $("#Submit").attr('disabled', true);
+                                    $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide'); 
                                 }, 3000);
                             }
@@ -863,34 +920,7 @@
 
             });
 
-            $("#print").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-
-                    var printWindow = window.open("/Hr/PrintNoticeOfEmployeeSeparation/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.print();
-                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-                        }, 1000);
-                    }, true);
-                }
-            });
-
-
-            $("#pdf").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-                    var printWindow = window.open("/Hr/PdfNoticeOfEmployeeSeparation/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.close();
-                        }, 2000);
-                    }, true);
-
-                }
-
-            });
+         
 
 
         });

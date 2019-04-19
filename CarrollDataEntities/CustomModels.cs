@@ -19,7 +19,9 @@ namespace Carroll.Data.Entities
         FormPropertyDamageClaim=7,
         FormMoldDamageClaim=8,
         FormGeneralLiabilityClaim=9,
-        AllClaims=10
+        AllClaims=10,
+        PayPeriods=11,
+        CarrollPositions=12
 
     }
 

@@ -55,6 +55,12 @@
     <Compile Include="Activity.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CarrollPayPeriod.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarrollPosition.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Contact.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -120,6 +126,12 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PayrollStatusChangeNotice.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallcarrollpayperiods_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallcarrollpositions_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getallemployeeleaseriders_Result.cs">

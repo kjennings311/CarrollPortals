@@ -39,5 +39,10 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> mdate { get; set; }
         public string rpmsignature { get; set; }
         public Nullable<System.DateTime> rpmdate { get; set; }
+        public string La_Property1 { get; set; }
+        public Nullable<double> La_Property1_Per { get; set; }
+        public string La_Property2 { get; set; }
+        public Nullable<double> La_Property2_Per { get; set; }
+        public string Sal_Time { get; set; }
     }
 }

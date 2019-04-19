@@ -48,7 +48,13 @@ namespace Carroll.Data.Entities.Repository
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
          dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
 
+        List<CarrollPosition> GetAllCarrollPositions();
+        List<CarrollPayPeriod> GetAllCarrollPayPerilds();
+
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);
+
+        string GetPropertyName(int PropertyNumber);
+        
     }
 }

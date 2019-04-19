@@ -48,5 +48,8 @@ namespace Carroll.Data.Services.Models
         dynamic GetExpenseReimbursement(Guid riderid);
         
         dynamic GetHrFormCount();
+        List<CarrollPosition> GetAllCarrollPositions();
+        List<CarrollPayPeriod> GetAllCarrollPayPerilds();
+        string GetPropertyName(int PropertyNumber);
     }
 }

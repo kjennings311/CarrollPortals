@@ -17,6 +17,29 @@
           <Property Name="ActivityByName" Type="varchar" MaxLength="50" />
           <Property Name="ActivityBy" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="CarrollPayPeriods">
+          <Key>
+            <PropertyRef Name="PeriodId" />
+          </Key>
+          <Property Name="PeriodId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PayFrom" Type="date" />
+          <Property Name="PayTo" Type="date" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="CarrollPositions">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="ModifiedDat" Type="date" />
+        </EntityType>
         <EntityType Name="Contacts">
           <Key>
             <PropertyRef Name="ContactId" />
@@ -83,6 +106,11 @@
           <Property Name="mdate" Type="date" />
           <Property Name="rpmsignature" Type="nvarchar" MaxLength="100" />
           <Property Name="rpmdate" Type="date" />
+          <Property Name="La_Property1" Type="nvarchar" MaxLength="50" />
+          <Property Name="La_Property1_Per" Type="float" />
+          <Property Name="La_Property2" Type="nvarchar" MaxLength="50" />
+          <Property Name="La_Property2_Per" Type="float" />
+          <Property Name="Sal_Time" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="EquityPartnerContacts">
           <Key>
@@ -347,6 +375,7 @@
           <Property Name="HRMSignature" Type="nvarchar" MaxLength="100" />
           <Property Name="HRMDate" Type="date" />
           <Property Name="Reason" Type="nvarchar" MaxLength="50" />
+          <Property Name="2WeeksCompleted" Type="bit" />
         </EntityType>
         <EntityType Name="PayrollStatusChangeNotice">
           <Key>
@@ -581,6 +610,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="proc_getallcarrollpayperiods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallcarrollpositions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeenewhirenotice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallexpensemileagelogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -610,6 +641,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CarrollDataEntitiesStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrollPayPeriods" EntityType="Self.CarrollPayPeriods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrollPositions" EntityType="Self.CarrollPositions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeLeaseRaider" EntityType="Self.EmployeeLeaseRaider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeNewHireNotice" EntityType="Self.EmployeeNewHireNotice" Schema="dbo" store:Type="Tables" />
@@ -737,6 +770,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getallexpensemileagelogs" ReturnType="Collection(Carroll.Data.Entities.proc_getallexpensemileagelogs_Result)">
           <Parameter Name="userid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="CarrollPayPeriods" EntityType="Carroll.Data.Entities.CarrollPayPeriod" />
+          <EntitySet Name="CarrollPositions" EntityType="Carroll.Data.Entities.CarrollPosition" />
+          <FunctionImport Name="proc_getallcarrollpayperiods" ReturnType="Collection(Carroll.Data.Entities.proc_getallcarrollpayperiods_Result)" />
+          <FunctionImport Name="proc_getallcarrollpositions" ReturnType="Collection(Carroll.Data.Entities.proc_getallcarrollpositions_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1373,6 +1410,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="mdate" Type="DateTime" Precision="0" />
           <Property Name="rpmsignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="rpmdate" Type="DateTime" Precision="0" />
+          <Property Name="La_Property1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property1_Per" Type="Double" />
+          <Property Name="La_Property2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property2_Per" Type="Double" />
+          <Property Name="Sal_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PayrollStatusChangeNotice">
           <Key>
@@ -1600,6 +1642,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="HRMSignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="HRMDate" Type="DateTime" Precision="0" />
           <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C2WeeksCompleted" Type="Boolean" />
         </EntityType>
         <ComplexType Name="proc_getallnoticeofemployeeseparation_Result">
           <Property Type="Guid" Name="EmployeeSeperationId" Nullable="false" />
@@ -1648,6 +1691,48 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="168" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="176" />
+        </ComplexType>
+        <EntityType Name="CarrollPayPeriod">
+          <Key>
+            <PropertyRef Name="PeriodId" />
+          </Key>
+          <Property Name="PeriodId" Type="Guid" Nullable="false" />
+          <Property Name="PayFrom" Type="DateTime" Precision="0" />
+          <Property Name="PayTo" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CarrollPosition">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="Guid" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="ModifiedDat" Type="DateTime" Precision="0" />
+        </EntityType>
+        <ComplexType Name="proc_getallcarrollpayperiods_Result">
+          <Property Type="Guid" Name="PeriodId" Nullable="false" />
+          <Property Type="DateTime" Name="PayFrom" Nullable="true" />
+          <Property Type="DateTime" Name="PayTo" Nullable="true" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="Guid" Name="ModifiedBy" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+        </ComplexType>
+        <ComplexType Name="proc_getallcarrollpositions_Result">
+          <Property Type="Guid" Name="PositionId" Nullable="false" />
+          <Property Type="String" Name="Position" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="Guid" Name="ModifiedBy" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDat" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2277,6 +2362,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="EmployeeNewHireNotices">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.EmployeeNewHireNotice">
               <MappingFragment StoreEntitySet="EmployeeNewHireNotice">
+                <ScalarProperty Name="Sal_Time" ColumnName="Sal_Time" />
+                <ScalarProperty Name="La_Property2_Per" ColumnName="La_Property2_Per" />
+                <ScalarProperty Name="La_Property2" ColumnName="La_Property2" />
+                <ScalarProperty Name="La_Property1_Per" ColumnName="La_Property1_Per" />
+                <ScalarProperty Name="La_Property1" ColumnName="La_Property1" />
                 <ScalarProperty Name="rpmdate" ColumnName="rpmdate" />
                 <ScalarProperty Name="rpmsignature" ColumnName="rpmsignature" />
                 <ScalarProperty Name="mdate" ColumnName="mdate" />
@@ -2514,6 +2604,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="NoticeOfEmployeeSeperations">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.NoticeOfEmployeeSeperation">
               <MappingFragment StoreEntitySet="NoticeOfEmployeeSeperation">
+                <ScalarProperty Name="C2WeeksCompleted" ColumnName="2WeeksCompleted" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="HRMDate" ColumnName="HRMDate" />
                 <ScalarProperty Name="HRMSignature" ColumnName="HRMSignature" />
@@ -2600,6 +2691,58 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CarrollPayPeriods">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.CarrollPayPeriod">
+              <MappingFragment StoreEntitySet="CarrollPayPeriods">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PayTo" ColumnName="PayTo" />
+                <ScalarProperty Name="PayFrom" ColumnName="PayFrom" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrollPositions">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.CarrollPosition">
+              <MappingFragment StoreEntitySet="CarrollPositions">
+                <ScalarProperty Name="ModifiedDat" ColumnName="ModifiedDat" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallcarrollpayperiods" FunctionName="Carroll.Data.Entities.Store.proc_getallcarrollpayperiods">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallcarrollpayperiods_Result">
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="PayFrom" ColumnName="PayFrom" />
+                <ScalarProperty Name="PayTo" ColumnName="PayTo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallcarrollpositions" FunctionName="Carroll.Data.Entities.Store.proc_getallcarrollpositions">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallcarrollpositions_Result">
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDat" ColumnName="ModifiedDat" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

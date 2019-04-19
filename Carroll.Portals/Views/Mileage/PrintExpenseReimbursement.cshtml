@@ -347,7 +347,7 @@
     margin-top: 0px; margin-bottom:0px;">
                     <span class="c7"> Expense Reimbursement</span>
                 </p>
-                <div class="col-md-4" style="width:26%; margin-bottom:20px; display:inline-block !important;"> <img src="~/img/newhirenotice.png" style="width:100%;" /> </div>
+                <div class="col-md-4" style="width:26%; margin-bottom:20px; display:inline-block !important;"> <img src="~/img/newhirenotice.png" style="width:60%;" /> </div>
                 <div class="col-md-8" style="width:70%;display:inline-block !important;">
                     <p class="c1" style="text-align:right">
                         <span class="c0">  <span class="name">  Name: </span>    <input type="text" value="@Model.header.Name" style="width:70%" id="name" />  </span>
@@ -432,10 +432,10 @@
                         <p style="color:red">* when billing back for a due diligence use Yardi ID:CMG and Code: 1130-0070</p>
                     </div>
                     <div class="col-md-6" style="width:48%;display:inline-block">
-                        <table class="table table-bordered" style="width: 60%;
+                        <table class="table table-bordered" style="width: 99%;
     float: right;">
                             <tr>
-                                <td style="width:80%;">TOTAL EXPENSES</td>
+                                <td style="width:60%;">TOTAL EXPENSES</td>
                                 <td> $ <span id="totalexpenses"> @Model.header.TotalExpenses </span></td>
                             </tr>
                             <tr>
@@ -470,14 +470,14 @@
 
                     <div class="col-md-6" style="width:58%;display:inline-block">
                         <p class="c1" style="margin-bottom:10px;">
-                            <span class="c0"> Submitted By Signature <input value="@Model.header.SubmittedBySignature" type="text" id="signature" style="width:60%;" />   </span> <br />
+                            <span class="c0"> Submitted By Signature <input value="@Model.header.SubmittedBySignature" type="text" id="signature" style="width:69%;" />   </span> <br />
                             <span style="float:right;float: right;
     " class="c0">Date :<input type="text" id="sdate" value="@Model.header.SubmittedDate.Value.ToShortDateString()" /></span>
                         </p>
                         <br />
                         <br />
                         <p class="c1" style="margin-bottom:10px;">
-                            <span class="c0">Approved By Signature  <input type="text" value="@Model.header.ApprovedSignature" id="approvedby" style="width:60%;" /> </span>
+                            <span class="c0">Approved By Signature  <input type="text" value="@Model.header.ApprovedSignature" id="approvedby" style="width:69%;" /> </span>
                             <span style="float:right;float: right;
     " class="c0">Date :<input type="text" id="adate" value="@Model.header.ApprovedDate.Value.ToShortDateString()" /></span>
                         </p>

@@ -37,7 +37,7 @@
                         <i class="fa fa-trash"></i> Delete
                     </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeLeaseRider');">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeLeaseRider'); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -60,7 +60,7 @@
                                 <div class="row" style="padding: 20px;padding-left:110px;
     border: 2px solid black;">
                                     <form id="submitform" onsubmit="return false;">
-                                        <p class="c1 c8" style="margin-left:125px;">
+                                        <p class="c1 c8" style="margin-left:19%;">
                                             <span class="c7">
                                                 <img src="~/img/newhirenotice.png">
                                             </span>
@@ -73,11 +73,9 @@
                                         <p class="c1">
                                             <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input data-date-format="MM-DD-YYYY" type="date" id="startdate" />  </span>
                                         </p>
-                                        <p class="c1" style="display:none;">
-                                            <span class="c0">Employee Social Security Number:<input type="text" id="securitynumber" style="width:31%;" /> </span>
-                                        </p>
+
                                         <p class="c1">
-                                            <span class="c0">Email Address: <input type="email" id="email" style="width:60%;" /> (do not leave blank) </span>
+                                            <span class="c0">Personal Email Address: <input type="email" id="email" style="width:60%;" /> (do not leave blank) </span>
                                         </p>
 
                                         <p class="c1">
@@ -87,23 +85,38 @@
                                             <span class="c0">Location:<input type="text" id="location" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Position: <input type="radio" style="margin-left:20px;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
-                                        </p>
-                                        <p class="c1">
-                                            <span class="c0">Position <input type="text" id="position" style="width:83%;" /> </span>
-                                        </p>
-                                        <p class="c1">
                                             <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Status (full-time / part-time) :  <select id="status1"> <option value="Full Time"> Full Time </option><option value="Part Time"> Part Time </option> </select></span>
+                                            <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
+
                                         <p class="c1">
-                                            <span class="c0">Wage/Salary <input type="text" id="salary" style="width:30%;" /> </span>
+                                            <span class="c0">Status :  <input type="radio" style="margin-left:26.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
                                         </p>
+
                                         <p class="c1">
-                                            <span class="c0">Allocation <input type="text" id="allocation" style="width:31.5%;" /> </span>
+                                            <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
                                         </p>
+
+                                        <p class="c1">
+                                            <span class="c0">Position <select style="width:250px;margin-left:10%; " class="select select2" id="position"> </select> </span>
+                                        </p>
+
+                                        <table style="width: 80%;
+    margin-left: 10%;margin-bottom:20px;">
+                                            <tr>
+                                                <td colspan="1">
+                                                    <h3 style="text-align: center;
+    margin-left: 40%;">
+                                                        Labour Allocation
+                                                    </h3>
+                                                </td>
+                                            </tr>
+                                            <tr> <td> Property </td> <td> Percentage </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop1" /> </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
+                                        </table>
 
                                         <p class="c1">
                                             <span class="c0">
@@ -216,7 +229,7 @@
             text-decoration: none;
             vertical-align: baseline;
             font-size: 14pt;
-            font-family: "Times";
+          
             font-style: normal
         }
 
@@ -441,27 +454,21 @@
                 var control = "";
                 $("#status").html('');
 
-                //if ($("#empname").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                //    $("#empname").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#empname");
-                //}
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
 
-                //if ($("#startdate").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Date </li>";
-                //    $("#startdate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#startdate");
-                //}
+                if ($("#startdate").val() == "") {
+                    errormsgsummary += "<li> Please Enter Date </li>";
+                    $("#startdate").addClass('has-error');
+                    if (control == "")
+                        control = $("#startdate");
+                }
 
-                //if ($("#securitynumber").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Security Number </li>";
-                //    $("#securitynumber").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#securitynumber");
-                //}
-
+              
 
                 if (!validateEmail($("#email").val())) 
                 {
@@ -472,70 +479,113 @@
                 }
 
 
-                //if ($("#manager").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Manager Name </li>";
-                //    $("#manager").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#manager");
-                //}
 
-                //if ($("#location").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Location </li>";
-                //    $("#location").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#location");
-                //}
+                if ($("#manager").val() == "") {
+                    errormsgsummary += "<li> Please Enter Manager Name </li>";
+                    $("#manager").addClass('has-error');
+                    if (control == "")
+                        control = $("#manager");
+                }
 
+                if ($("#location").val() == "") {
+                    errormsgsummary += "<li> Please Enter Location </li>";
+                    $("#location").addClass('has-error');
+                    if (control == "")
+                        control = $("#location");
+                }
 
-                //if ($("#exempt").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Exempt Position  </li>";
-                //    $("#exempt").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#exempt");
-                //}
+                // check either exempt or non exemppt checked
 
-                //if ($("#nonexempt").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Non Exempt Position  </li>";
-                //    $("#nonexempt").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#nonexempt");
-                //}
+                if (!$("#exempt").is(":checked") && !$("#nonexempt").is(":checked"))
+                {
+                    errormsgsummary += "<li> Please Select Position Exempt or Non Exempt </li>";
+                    $("#exempt").addClass('has-error');
+                    if (control == "")
+                        control = $("#exempt");
+                }
+
+                // check status choosen full time or part time
 
 
-
-                //if ($("#position").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Position  </li>";
-                //    $("#position").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#position");
-                //}
+                if (!$("#fullstatus").is(":checked") && !$("#partstatus").is(":checked")) {
+                    errormsgsummary += "<li> Please Select Status Option either Full Time or Part Time </li>";
+                    $("#fullstatus").addClass('has-error');
+                    if (control == "")
+                        control = $("#fullstatus");
+                }
 
 
 
-                //if ($("#status1").val() == "") {
-                //    errormsgsummary += "<li> Please Choose Status  </li>";
-                //    $("#status1").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#status1");
-                //}
+                if ($("#salary").val() == "") {
+                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                    $("#salary").addClass('has-error');
+                    if (control == "")
+                        control = $("#salary");
+                }
+
+                if ($("#kitorderdate").val() == "") {
+                    errormsgsummary += "<li> Please Enter Kit Ordered Date  </li>";
+                    $("#kitorderdate").addClass('has-error');
+                    if (control == "")
+                        control = $("#kitorderdate");
+                }
 
 
+                if ($("#onboardcall").val() == "") {
+                    errormsgsummary += "<li> Please Enter OnBoard Call Date </li>";
+                    $("#onboardcall").addClass('has-error');
+                    if (control == "")
+                        control = $("#onboardcall");
+                }
 
-                //if ($("#salary").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                //    $("#salary").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#salary");
-                //}
+                if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                    $("#la_Prop1per").addClass('has-error');
+                    if (control == "")
+                        control = $("#la_Prop1per");
+                }
 
 
-                //if ($("#allocation").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Allocation </li>";
-                //    $("#allocation").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#allocation");
-                //}
+                if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "") {
+                    errormsgsummary += "<li> Please Enter Division Of Labout Percentage </li>";
+                    $("#la_Prop1").addClass('has-error');
+                    $("#la_Prop2").addClass('has-error');
+                    if (control == "")
+                        control = $("#la_Prop2");
+                }
+                else
+                {
+                    var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val());
+                    if (total < 100)
+                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                }
 
+                if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) == 100))
+                {
+
+                    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
+                    {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                        $("#la_Prop1").addClass('has-error');
+                     
+                        if (control == "")
+                            control = $("#la_Prop1");
+                    }
+
+
+                    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                        $("#la_Prop2").addClass('has-error');
+
+                        if (control == "")
+                            control = $("#la_Prop2");
+                    }
+
+
+                }
 
                 if (errormsgsummary != "")
                 {
@@ -553,6 +603,7 @@
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show');
                     $("#Submit").prop('disabled', false);
+
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
                     insertForm.append('startdate', $("#startdate").val());
@@ -560,11 +611,13 @@
                     insertForm.append('email', $("#email").val());
                     insertForm.append('manager', $("#manager").val());
                     insertForm.append('location', $("#location").val());
+
                     if ($("#exempt").is(":checked"))
                     {
                         insertForm.append('exempt', '1');
                     }
-                    else {
+                    else
+                    {
                         insertForm.append('exempt', '0');
                     }
 
@@ -575,11 +628,37 @@
                     else {
                         insertForm.append('nonexempt', '0');
                     }
-                   
+
+                    var status = "";
+
+                    if ($("#fullstatus").is(":checked"))
+                    {
+                        status = "FULL TIME";
+                    }
+                    else if ($("#partstatus").is(":checked"))
+                    {                             
+                            status = "PART TIME";
+                    }
+
+                    var saltime = "";
+
+                    if ($("#salhourly").is(":checked"))
+                    {
+                        saltime = "Hourly";
+                    }
+                    else if ($("#annualsalary").is(":checked"))
+                    {
+                        saltime = "Annually";
+                    }
                    
                     insertForm.append('position', $("#position").val());
-                    insertForm.append('status', $("#status1").val());
+                    insertForm.append('status',status);
                     insertForm.append('salary', $("#salary").val());
+                    insertForm.append('salarytime', saltime);
+                    insertForm.append('prop1', $("#la_Prop1").val());
+                    insertForm.append('prop1per', $("#la_Prop1per").val());
+                    insertForm.append('prop2', $("#la_Prop2").val());
+                    insertForm.append('prop2per', $("#la_Prop2per").val());
                     insertForm.append('kitordered', $("#kitorderdate").val());
                     insertForm.append('callscheduled', $("#onboardcall").val());
                     insertForm.append('allocation', $("#allocation").val());

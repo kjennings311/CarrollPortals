@@ -1,7 +1,7 @@
 ﻿
- // var $BaseApiUrl = "http://localhost:1002/"; 
+  var $BaseApiUrl = "http://localhost:1002/"; 
 
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -371,11 +371,8 @@ function LoadUserProperty() {
             alert('error' + ts.errorMessage);
         }
     });
-
     return val;
-
 }
-
 
 
 function getForm(FormName, RecordId)
@@ -2832,6 +2829,25 @@ function getParameterByName(name, url) {
 }
 var claimbody = "";
 var $details = "";
+
+
+function LoadHrPositions() {
+
+    var options = "";
+
+    $.get($BaseApiUrl + "api/Data/GetAllCarrollPositions", function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            options += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+
+        }
+        // now let's load options into select box
+        $('#position').append(options);
+
+    });
+}
+
 
 function LoadClaim()
 {

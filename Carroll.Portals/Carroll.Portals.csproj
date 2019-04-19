@@ -905,6 +905,8 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\UserRoles.cshtml" />
     <Content Include="Views\User\UserProperties.cshtml" />
+    <Content Include="Views\User\CarrollPositions.cshtml" />
+    <Content Include="Views\User\PayPeriods.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

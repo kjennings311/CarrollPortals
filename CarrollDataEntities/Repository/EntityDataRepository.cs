@@ -294,9 +294,86 @@ namespace Carroll.Data.Entities.Repository
                                 return _result;
                                 // return true;
                             }
-                    #endregion
+                        #endregion
 
-                    case EntityType.UserInRole:
+
+                        case EntityType.PayPeriods:
+                            #region [ PayPeriods ] 
+
+                            CarrollPayPeriod _payperiod = obj;
+                            var _dbpayperild = _entities.CarrollPayPeriods.Where(x => x.PeriodId == _payperiod.PeriodId).FirstOrDefault();
+                            if (_dbpayperild == null)
+                            {
+                                if ((_payperiod.PeriodId.ToString() == "00000000-0000-0000-0000-000000000000") || (_payperiod.PeriodId == null))
+                                {
+                                    _payperiod.PeriodId = Guid.NewGuid();
+                                }
+                                _payperiod.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
+
+                                _entities.CarrollPayPeriods.Add(_payperiod);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
+                                // return true;
+                                //return true;
+                                _result.RecordId = _payperiod.PeriodId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
+                            else
+                            {
+                                _payperiod.ModifiedDate = DateTime.Now;
+                                _entities.Entry(_dbpayperild).CurrentValues.SetValues(_payperiod);
+                                int i = _entities.SaveChanges();
+                                _result.RecordId = _payperiod.PeriodId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                                // return true;
+                            }
+                        #endregion
+
+
+
+                        case EntityType.CarrollPositions:
+                            #region [ CarrollPositions ] 
+
+                            CarrollPosition _cp = obj;
+                            var _dbcp = _entities.CarrollPositions.Where(x => x.PositionId == _cp.PositionId).FirstOrDefault();
+                            if (_dbcp == null)
+                            {
+                                if ((_cp.PositionId.ToString() == "00000000-0000-0000-0000-000000000000") || (_cp.PositionId == null))
+                                {
+                                    _cp.PositionId = Guid.NewGuid();
+                                }
+                                _cp.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
+
+                                _entities.CarrollPositions.Add(_cp);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
+                                // return true;
+                                //return true;
+                                _result.RecordId = _cp.PositionId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                            }
+                            else
+                            {
+                                _cp.ModifiedDat = DateTime.Now;
+                                _entities.Entry(_dbcp).CurrentValues.SetValues(_cp);
+                                int i = _entities.SaveChanges();
+                                _result.RecordId = _cp.PositionId.ToString();
+                                _result.Succeded = true;
+
+                                return _result;
+                                // return true;
+                            }
+                        #endregion
+
+                        case EntityType.UserInRole:
                         #region [ User Roles ] 
 
                         UserInRole _userrole = obj;
@@ -794,8 +871,55 @@ namespace Carroll.Data.Entities.Repository
                         return config;
 
                     #endregion
+                    case EntityType.PayPeriods:
 
-                   
+                        #region [PayPeriod]
+
+                        // we are calling stored procedure spProperties_Result here..
+                        if (string.IsNullOrEmpty(optionalSeachText))
+                            config.Rows = _entities.proc_getallcarrollpayperiods().ToList();
+                        else
+                            config.Rows = _entities.proc_getallcarrollpayperiods().Where(x => x.PayFrom.Value.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.PayTo.Value.ToString().ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                        config.EtType = entityType.ToString();
+                        PropertyInfo[] userprop1 = typeof(CarrollPayPeriod).GetProperties();
+                        config.PkName = FirstChartoLower(userprop1.ToList().FirstOrDefault().Name);
+                        config.Columns = new List<DtableConfigArray>();
+
+                        config.Columns.Add(new DtableConfigArray { name = "payFrom", label = "Pay From", type = DFieldType.IsDate, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "payTo", label = "Pay To", type = DFieldType.IsDate, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                      
+
+                        return config;
+
+                    #endregion
+
+                    case EntityType.CarrollPositions:
+
+                        #region [PayPeriod]
+
+                        // we are calling stored procedure spProperties_Result here..
+                        if (string.IsNullOrEmpty(optionalSeachText))
+                            config.Rows = _entities.proc_getallcarrollpositions().ToList();
+                        else
+                            config.Rows = _entities.proc_getallcarrollpositions().Where(x => x.Position.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                        config.EtType = entityType.ToString();
+                        PropertyInfo[] userprop11 = typeof(CarrollPosition).GetProperties();
+                        config.PkName = FirstChartoLower(userprop11.ToList().FirstOrDefault().Name);
+                        config.Columns = new List<DtableConfigArray>();
+
+                        config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = 0, href = "" });
+                     //   config.Columns.Add(new DtableConfigArray { name = "payTo", label = "Pay To", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type = DFieldType.IsDate, href = "" });
+
+
+                        return config;
+
+                    #endregion
                     default:
                         break;
                 }
@@ -1057,8 +1181,7 @@ namespace Carroll.Data.Entities.Repository
         public dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
-            {
-                
+            {                
                 try
                 {
                     EmployeeLeaseRaider _property = formAttachment;
@@ -2046,6 +2169,56 @@ namespace Carroll.Data.Entities.Repository
                     return null;
             }
         }
+
+        public List<CarrollPayPeriod> GetAllCarrollPayPerilds()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                                             
+                //us
+                var propertyres =  _entities.CarrollPayPeriods.ToList();
+
+
+
+                if (propertyres != null)
+                    return propertyres;
+                else
+                    return null;
+            }
+        }
+
+        public string GetPropertyName(int PropertyNumber)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+
+                //us
+                var propertyres = (from tbl in _entities.Properties
+                                   where tbl.PropertyNumber == PropertyNumber
+                                   select tbl.PropertyName).FirstOrDefault();
+
+                if (propertyres != null)
+                    return propertyres;
+                else
+                    return "";
+            }
+        }
+
+        public List<CarrollPosition> GetAllCarrollPositions()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                var propertyres =  _entities.CarrollPositions.ToList();
+
+                if (propertyres != null)
+                    return propertyres;
+                else
+                    return null;
+
+            }
+        }
+
+       
 
         //public Config GetDatatableConfig(EntityType entityType,)
         //{

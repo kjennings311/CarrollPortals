@@ -41,6 +41,12 @@ namespace Carroll.Data.Services.Models
             return _repository.GetUserPropertyForClaimPrint(userid);
         }
 
+
+        public string GetPropertyName(int PropertyNumber)
+        {
+            return _repository.GetPropertyName(PropertyNumber);
+        }
+
         #region [Records]
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {
@@ -193,5 +199,15 @@ namespace Carroll.Data.Services.Models
             return _repository.GetHrFormCount();
         }
         #endregion
+
+        public List<CarrollPosition> GetAllCarrollPositions()
+        {
+            return _repository.GetAllCarrollPositions();
+        }
+
+        public List<CarrollPayPeriod> GetAllCarrollPayPerilds( )
+        {
+            return _repository.GetAllCarrollPayPerilds();
+        }
     }
 }

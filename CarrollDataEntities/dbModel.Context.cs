@@ -51,6 +51,8 @@ namespace Carroll.Data.Entities
         public virtual DbSet<MileageLogDetail> MileageLogDetails { get; set; }
         public virtual DbSet<MileageLogHeader> MileageLogHeaders { get; set; }
         public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
+        public virtual DbSet<CarrollPayPeriod> CarrollPayPeriods { get; set; }
+        public virtual DbSet<CarrollPosition> CarrollPositions { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -167,6 +169,16 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("userid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallexpensemileagelogs_Result>("proc_getallexpensemileagelogs", useridParameter);
+        }
+    
+        public virtual ObjectResult<proc_getallcarrollpayperiods_Result> proc_getallcarrollpayperiods()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallcarrollpayperiods_Result>("proc_getallcarrollpayperiods");
+        }
+    
+        public virtual ObjectResult<proc_getallcarrollpositions_Result> proc_getallcarrollpositions()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallcarrollpositions_Result>("proc_getallcarrollpositions");
         }
     }
 }

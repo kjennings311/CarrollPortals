@@ -11,6 +11,8 @@ namespace Carroll.Portals.Controllers
     [CustomAuthorize]
     [BaseModel]
     [AdminFilter]
+
+
     public class UserController : Controller
     {
         // GET: User
@@ -25,6 +27,19 @@ namespace Carroll.Portals.Controllers
         }
         // GET: User
         public ActionResult UserProperties()
+        {
+            return View(new BaseViewModel());
+        }
+
+        // GET: User
+        public ActionResult CarrollPositions()
+        {
+            return View(new BaseViewModel());
+        }
+
+
+        // GET: User
+        public ActionResult PayPeriods()
         {
             return View(new BaseViewModel());
         }

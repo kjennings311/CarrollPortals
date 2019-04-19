@@ -270,7 +270,7 @@ namespace Carroll.Data.Services.Controllers
             EmployeeNewHireNotice fa = new EmployeeNewHireNotice();
             fa.StartDate =Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["startdate"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
-            fa.EmployeeSocialSecuirtyNumber = HttpContext.Current.Request.Params["securitynumber"].ToString();
+         //   fa.EmployeeSocialSecuirtyNumber = HttpContext.Current.Request.Params["securitynumber"].ToString();
             fa.EmailAddress =HttpContext.Current.Request.Params["email"].ToString();
             fa.Manager = HttpContext.Current.Request.Params["manager"].ToString();
             fa.Location = HttpContext.Current.Request.Params["location"].ToString();           
@@ -279,7 +279,13 @@ namespace Carroll.Data.Services.Controllers
             fa.Position_Exempt = HttpContext.Current.Request.Params["exempt"].ToString();
             fa.Position_NonExempt = HttpContext.Current.Request.Params["nonexempt"].ToString();
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
+            fa.Sal_Time = HttpContext.Current.Request.Params["salarytime"].ToString();
             fa.Wage_Salary = HttpContext.Current.Request.Params["salary"].ToString();
+            fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
+            fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
+            fa.La_Property2 = HttpContext.Current.Request.Params["propw"].ToString();
+            fa.La_Property2_Per =Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+            fa.Status = HttpContext.Current.Request.Params["status"].ToString();
             fa.kitordered = Convert.ToDateTime(HttpContext.Current.Request.Params["kitordered"]);
             fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
@@ -403,6 +409,16 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetPayRollStatusChangeNotice(new Guid(riderid));
         }
 
+
+        [ActionName("GetPropertyName")]
+        [HttpGet]
+        public dynamic GetPropertyName(int PropertyNumber)
+        {
+
+            return _service.GetPropertyName(PropertyNumber);
+        }
+
+
         [ActionName("InsertNoticeOfEmployeeSeperation")]
         [HttpPost]
         public dynamic InsertNoticeOfEmployeeSeperation()
@@ -417,25 +433,20 @@ namespace Carroll.Data.Services.Controllers
             fa.EmployeeSeperationId = System.Guid.NewGuid();
             fa.Policty_Voilated = HttpContext.Current.Request.Params["policty"].ToString();
             fa.AdditionalRemarks = HttpContext.Current.Request.Params["remarks"].ToString();
-            fa.DocumentationAvailable = HttpContext.Current.Request.Params["documentaiton"].ToString();
-            fa.WarningGiven_Dates = HttpContext.Current.Request.Params["warningdates"].ToString();
+          
             fa.EquipmentKeysReturned =Convert.ToBoolean( HttpContext.Current.Request.Params["keysreturned"].ToString());
             fa.C2WeeeksNoticeGiven= Convert.ToBoolean(HttpContext.Current.Request.Params["noticegives"].ToString());
             fa.VacationPaidOut =Convert.ToBoolean( HttpContext.Current.Request.Params["vacationpaidout"].ToString());
             if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["balance"].ToString()))
             fa.VacationBalance = Convert.ToDouble(HttpContext.Current.Request.Params["balance"].ToString());
-            fa.Notes_Comments = HttpContext.Current.Request.Params["comments"].ToString();
+            fa.C2WeeksCompleted =Convert.ToBoolean(HttpContext.Current.Request.Params["weekscom"].ToString());
             fa.DischargedText = HttpContext.Current.Request.Params["discharge"].ToString();
             fa.QuitText = HttpContext.Current.Request.Params["quit"].ToString();
             fa.Reason = HttpContext.Current.Request.Params["reason"].ToString();
             fa.LackOfWork = HttpContext.Current.Request.Params["work"].ToString();
             fa.SSignature = HttpContext.Current.Request.Params["ssignature"].ToString();
             fa.SDate = Convert.ToDateTime(HttpContext.Current.Request.Params["sdate"]);
-            fa.SMSignature = HttpContext.Current.Request.Params["smsignature"].ToString();
-            fa.SMDate = Convert.ToDateTime(HttpContext.Current.Request.Params["smdate"]);
-            fa.HRMSignature = HttpContext.Current.Request.Params["hrmsignature"].ToString();
-            fa.HRMDate = Convert.ToDateTime(HttpContext.Current.Request.Params["hrmdate"]);
-
+       
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
             return _service.InsertNoticeOfEmployeeSeperation(fa);
@@ -614,7 +625,6 @@ namespace Carroll.Data.Services.Controllers
         [HttpGet]
         public dynamic GetRequisitionRequest(string riderid)
         {
-
             return _service.GetRequisitionRequest(new Guid(riderid));
         }
 
@@ -640,6 +650,43 @@ namespace Carroll.Data.Services.Controllers
         {
             return _service.GetHrFormCount();
         }
+
+
+        [ActionName("GetAllCarrollPayPerilds")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<KeyValuePair> GetAllCarrollPayPerilds()
+        {
+            List<KeyValuePair> _users = new List<KeyValuePair>();
+            //us
+
+            foreach (var item in _service.GetAllCarrollPayPerilds())
+            {
+                _users.Add(new KeyValuePair(item.PeriodId.ToString(), item.PayFrom.Value.ToShortDateString()+" - "+item.PayTo.Value.ToShortDateString()));
+            }
+            return _users;
+
+        }
+
+
+
+        [ActionName("GetAllCarrollPositions")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<KeyValuePair> GetAllCarrollPositions()
+        {
+            List<KeyValuePair> _users = new List<KeyValuePair>();
+            //us
+            
+            foreach (var item  in _service.GetAllCarrollPositions())
+            {
+                _users.Add(new KeyValuePair(item.PositionId.ToString(), item.Position));
+            }
+            return _users;
+
+
+        }
+
 
         #endregion
 
