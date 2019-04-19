@@ -84,9 +84,7 @@
                                         <p class="c1">
                                             <span class="c0">Location:<input type="text" id="location" style="width:83%;" /> </span>
                                         </p>
-                                        <p class="c1">
-                                            <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
-                                        </p>
+                                    
                                         <p class="c1">
                                             <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
@@ -109,7 +107,7 @@
                                                 <td colspan="1">
                                                     <h3 style="text-align: center;
     margin-left: 40%;">
-                                                        Labour Allocation
+                                                        Labor Allocation
                                                     </h3>
                                                 </td>
                                             </tr>
@@ -118,30 +116,26 @@
                                             <tr> <td> <input type="text" id="la_Prop1" /> </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
                                         </table>
 
-                                        <p class="c1">
+                                        <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">
                                                 New Hire Kit Ordered (date) : <input type="date" id="kitorderdate" style="width:63%;" />
                                             </span>
                                         </p>
-                                        <p class="c1">
-                                            <span class="c0"> Onboarding Call scheduled for (date):  <input type="date" id="onboardcall" style="width:55%;" /> </span>
-                                        </p>
-
-
+                                     
                                         <p class="c1">
                                             <span class="c0">Employee Signature <input type="text" id="esignature" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
                                         </p>
                                         <p class="c1">
                                             <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:30%;" /> Date <input type="date" style="width:24%;" name="name" id="mdate" value="" /> </span>
                                         </p>
-                                        <p class="c1">
+                                        <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
                                         </p>
-                                        <p class="c1" style="width:75%;">
-                                            <span class="c6">
-                                                Manager Responsibilities: Please return the signed form to Human Resources via email at HRNotifications@carrollmg.com with the I9 and appropriate documents.
+                                        <p class="c1" style="width:75%;text-align:center; font-weight:bold">
+                                           
 
-                                            </span>
+                                                Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
+                                           
                                         </p>
 
                                         <br /> <br />
@@ -531,12 +525,12 @@
                 }
 
 
-                if ($("#onboardcall").val() == "") {
-                    errormsgsummary += "<li> Please Enter OnBoard Call Date </li>";
-                    $("#onboardcall").addClass('has-error');
-                    if (control == "")
-                        control = $("#onboardcall");
-                }
+                //if ($("#onboardcall").val() == "") {
+                //    errormsgsummary += "<li> Please Enter OnBoard Call Date </li>";
+                //    $("#onboardcall").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#onboardcall");
+                //}
 
                 if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "")
                 {
@@ -660,7 +654,7 @@
                     insertForm.append('prop2', $("#la_Prop2").val());
                     insertForm.append('prop2per', $("#la_Prop2per").val());
                     insertForm.append('kitordered', $("#kitorderdate").val());
-                    insertForm.append('callscheduled', $("#onboardcall").val());
+                //    insertForm.append('callscheduled', $("#onboardcall").val());
                     insertForm.append('allocation', $("#allocation").val());
                     insertForm.append('esignature', $("#esignature").val());
                     insertForm.append('edate', $("#edate").val());
