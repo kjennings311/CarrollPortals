@@ -397,7 +397,7 @@
           <Property Name="PayChangePartTime" Type="bit" />
           <Property Name="PayChangeHourly" Type="bit" />
           <Property Name="PayChangeSalary" Type="bit" />
-          <Property Name="BeginPayPeriod" Type="date" />
+          <Property Name="BeginPayPeriod" Type="nvarchar" MaxLength="50" />
           <Property Name="La_Property1" Type="nvarchar" MaxLength="50" />
           <Property Name="La_Property1_Per" Type="float" />
           <Property Name="La_Property2" Type="nvarchar" MaxLength="50" />
@@ -424,6 +424,20 @@
           <Property Name="EDate" Type="date" />
           <Property Name="MSignature" Type="nvarchar" MaxLength="100" />
           <Property Name="MDate" Type="date" />
+          <Property Name="ShowPropertyChange" Type="bit" />
+          <Property Name="ShowPayChange" Type="bit" />
+          <Property Name="ShowDivisionOfLabor" Type="bit" />
+          <Property Name="ShowAllowances" Type="bit" />
+          <Property Name="ShowLeaves" Type="bit" />
+          <Property Name="ShowNotes" Type="bit" />
+          <Property Name="FromPosition" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromWageSalary" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromRate" Type="float" />
+          <Property Name="ToPosition" Type="nvarchar" MaxLength="50" />
+          <Property Name="ToStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="ToWageSalary" Type="nvarchar" MaxLength="50" />
+          <Property Name="ToRate" Type="float" />
         </EntityType>
         <EntityType Name="Properties">
           <Key>
@@ -755,7 +769,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="EmployeeLeaseRaiders" EntityType="Carroll.Data.Entities.EmployeeLeaseRaider" />
           <FunctionImport Name="proc_getallemployeeleaseriders" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeeleaseriders_Result)" />
           <EntitySet Name="EmployeeNewHireNotices" EntityType="Carroll.Data.Entities.EmployeeNewHireNotice" />
-          <EntitySet Name="PayrollStatusChangeNotices" EntityType="Carroll.Data.Entities.PayrollStatusChangeNotice" />
           <EntitySet Name="EquityPartnerContacts" EntityType="Carroll.Data.Entities.EquityPartnerContact" />
           <EntitySet Name="ExpenseReimbursementDetails" EntityType="Carroll.Data.Entities.ExpenseReimbursementDetail" />
           <EntitySet Name="ExpenseReimbursementHeaders" EntityType="Carroll.Data.Entities.ExpenseReimbursementHeader" />
@@ -774,6 +787,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="CarrollPositions" EntityType="Carroll.Data.Entities.CarrollPosition" />
           <FunctionImport Name="proc_getallcarrollpayperiods" ReturnType="Collection(Carroll.Data.Entities.proc_getallcarrollpayperiods_Result)" />
           <FunctionImport Name="proc_getallcarrollpositions" ReturnType="Collection(Carroll.Data.Entities.proc_getallcarrollpositions_Result)" />
+          <EntitySet Name="PayrollStatusChangeNotices" EntityType="Carroll.Data.Entities.PayrollStatusChangeNotice" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1416,54 +1430,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="La_Property2_Per" Type="Double" />
           <Property Name="Sal_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PayrollStatusChangeNotice">
-          <Key>
-            <PropertyRef Name="PayrollStatusChangeNoticeId" />
-          </Key>
-          <Property Name="PayrollStatusChangeNoticeId" Type="Guid" Nullable="false" />
-          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChangeEffectiveDate" Type="DateTime" Precision="0" />
-          <Property Name="TypeOfChange" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FromPropNum" Type="Double" />
-          <Property Name="FromPropName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FromManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ToPropNum" Type="Double" />
-          <Property Name="ToPropName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ToManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PayChangeTo" Type="Double" />
-          <Property Name="PayChangeFrom" Type="Double" />
-          <Property Name="PayChangeFullTime" Type="Boolean" />
-          <Property Name="PayChangePartTime" Type="Boolean" />
-          <Property Name="PayChangeHourly" Type="Boolean" />
-          <Property Name="PayChangeSalary" Type="Boolean" />
-          <Property Name="BeginPayPeriod" Type="DateTime" Precision="0" />
-          <Property Name="La_Property1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="La_Property1_Per" Type="Double" />
-          <Property Name="La_Property2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="La_Property2_Per" Type="Double" />
-          <Property Name="Chk_CarAmount" Type="Boolean" />
-          <Property Name="CarAmountPerMonth" Type="Double" />
-          <Property Name="Chk_PhoneAmount" Type="Boolean" />
-          <Property Name="PhoneAmountPerMonth" Type="Double" />
-          <Property Name="FmlaYes" Type="Boolean" />
-          <Property Name="FmlaNo" Type="Boolean" />
-          <Property Name="EnrolledBenefitsYes" Type="Boolean" />
-          <Property Name="EnrolledBenefitNo" Type="Boolean" />
-          <Property Name="Leave_Purpose" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Leave_End" Type="DateTime" Precision="0" />
-          <Property Name="Leave_Begin" Type="DateTime" Precision="0" />
-          <Property Name="Pto_Balance" Type="Double" />
-          <Property Name="Notes1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Notes2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedUser" Type="Guid" />
-          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedUser" Type="Guid" />
-          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ESignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="EDate" Type="DateTime" Precision="0" />
-          <Property Name="MSignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MDate" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="EquityPartnerContact">
           <Key>
             <PropertyRef Name="RowId" />
@@ -1734,6 +1700,68 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="ModifiedDat" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
         </ComplexType>
+        <EntityType Name="PayrollStatusChangeNotice">
+          <Key>
+            <PropertyRef Name="PayrollStatusChangeNoticeId" />
+          </Key>
+          <Property Name="PayrollStatusChangeNoticeId" Type="Guid" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ChangeEffectiveDate" Type="DateTime" Precision="0" />
+          <Property Name="TypeOfChange" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromPropNum" Type="Double" />
+          <Property Name="FromPropName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToPropNum" Type="Double" />
+          <Property Name="ToPropName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PayChangeTo" Type="Double" />
+          <Property Name="PayChangeFrom" Type="Double" />
+          <Property Name="PayChangeFullTime" Type="Boolean" />
+          <Property Name="PayChangePartTime" Type="Boolean" />
+          <Property Name="PayChangeHourly" Type="Boolean" />
+          <Property Name="PayChangeSalary" Type="Boolean" />
+          <Property Name="BeginPayPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property1_Per" Type="Double" />
+          <Property Name="La_Property2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property2_Per" Type="Double" />
+          <Property Name="Chk_CarAmount" Type="Boolean" />
+          <Property Name="CarAmountPerMonth" Type="Double" />
+          <Property Name="Chk_PhoneAmount" Type="Boolean" />
+          <Property Name="PhoneAmountPerMonth" Type="Double" />
+          <Property Name="FmlaYes" Type="Boolean" />
+          <Property Name="FmlaNo" Type="Boolean" />
+          <Property Name="EnrolledBenefitsYes" Type="Boolean" />
+          <Property Name="EnrolledBenefitNo" Type="Boolean" />
+          <Property Name="Leave_Purpose" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Leave_End" Type="DateTime" Precision="0" />
+          <Property Name="Leave_Begin" Type="DateTime" Precision="0" />
+          <Property Name="Pto_Balance" Type="Double" />
+          <Property Name="Notes1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Notes2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedUser" Type="Guid" />
+          <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ESignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EDate" Type="DateTime" Precision="0" />
+          <Property Name="MSignature" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MDate" Type="DateTime" Precision="0" />
+          <Property Name="ShowPropertyChange" Type="Boolean" />
+          <Property Name="ShowPayChange" Type="Boolean" />
+          <Property Name="ShowDivisionOfLabor" Type="Boolean" />
+          <Property Name="ShowAllowances" Type="Boolean" />
+          <Property Name="ShowLeaves" Type="Boolean" />
+          <Property Name="ShowNotes" Type="Boolean" />
+          <Property Name="FromPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromWageSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromRate" Type="Double" />
+          <Property Name="ToPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToWageSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ToRate" Type="Double" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2395,55 +2423,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PayrollStatusChangeNotices">
-            <EntityTypeMapping TypeName="Carroll.Data.Entities.PayrollStatusChangeNotice">
-              <MappingFragment StoreEntitySet="PayrollStatusChangeNotice">
-                <ScalarProperty Name="MDate" ColumnName="MDate" />
-                <ScalarProperty Name="MSignature" ColumnName="MSignature" />
-                <ScalarProperty Name="EDate" ColumnName="EDate" />
-                <ScalarProperty Name="ESignature" ColumnName="ESignature" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="Notes2" ColumnName="Notes2" />
-                <ScalarProperty Name="Notes1" ColumnName="Notes1" />
-                <ScalarProperty Name="Pto_Balance" ColumnName="Pto_Balance" />
-                <ScalarProperty Name="Leave_Begin" ColumnName="Leave_Begin" />
-                <ScalarProperty Name="Leave_End" ColumnName="Leave_End" />
-                <ScalarProperty Name="Leave_Purpose" ColumnName="Leave_Purpose" />
-                <ScalarProperty Name="EnrolledBenefitNo" ColumnName="EnrolledBenefitNo" />
-                <ScalarProperty Name="EnrolledBenefitsYes" ColumnName="EnrolledBenefitsYes" />
-                <ScalarProperty Name="FmlaNo" ColumnName="FmlaNo" />
-                <ScalarProperty Name="FmlaYes" ColumnName="FmlaYes" />
-                <ScalarProperty Name="PhoneAmountPerMonth" ColumnName="PhoneAmountPerMonth" />
-                <ScalarProperty Name="Chk_PhoneAmount" ColumnName="Chk_PhoneAmount" />
-                <ScalarProperty Name="CarAmountPerMonth" ColumnName="CarAmountPerMonth" />
-                <ScalarProperty Name="Chk_CarAmount" ColumnName="Chk_CarAmount" />
-                <ScalarProperty Name="La_Property2_Per" ColumnName="La_Property2_Per" />
-                <ScalarProperty Name="La_Property2" ColumnName="La_Property2" />
-                <ScalarProperty Name="La_Property1_Per" ColumnName="La_Property1_Per" />
-                <ScalarProperty Name="La_Property1" ColumnName="La_Property1" />
-                <ScalarProperty Name="BeginPayPeriod" ColumnName="BeginPayPeriod" />
-                <ScalarProperty Name="PayChangeSalary" ColumnName="PayChangeSalary" />
-                <ScalarProperty Name="PayChangeHourly" ColumnName="PayChangeHourly" />
-                <ScalarProperty Name="PayChangePartTime" ColumnName="PayChangePartTime" />
-                <ScalarProperty Name="PayChangeFullTime" ColumnName="PayChangeFullTime" />
-                <ScalarProperty Name="PayChangeFrom" ColumnName="PayChangeFrom" />
-                <ScalarProperty Name="PayChangeTo" ColumnName="PayChangeTo" />
-                <ScalarProperty Name="ToManager" ColumnName="ToManager" />
-                <ScalarProperty Name="ToPropName" ColumnName="ToPropName" />
-                <ScalarProperty Name="ToPropNum" ColumnName="ToPropNum" />
-                <ScalarProperty Name="FromManager" ColumnName="FromManager" />
-                <ScalarProperty Name="FromPropName" ColumnName="FromPropName" />
-                <ScalarProperty Name="FromPropNum" ColumnName="FromPropNum" />
-                <ScalarProperty Name="TypeOfChange" ColumnName="TypeOfChange" />
-                <ScalarProperty Name="ChangeEffectiveDate" ColumnName="ChangeEffectiveDate" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="PayrollStatusChangeNoticeId" ColumnName="PayrollStatusChangeNoticeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EquityPartnerContacts">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.EquityPartnerContact">
               <MappingFragment StoreEntitySet="EquityPartnerContacts">
@@ -2746,6 +2725,69 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="PayrollStatusChangeNotices">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.PayrollStatusChangeNotice">
+              <MappingFragment StoreEntitySet="PayrollStatusChangeNotice">
+                <ScalarProperty Name="ToRate" ColumnName="ToRate" />
+                <ScalarProperty Name="ToWageSalary" ColumnName="ToWageSalary" />
+                <ScalarProperty Name="ToStatus" ColumnName="ToStatus" />
+                <ScalarProperty Name="ToPosition" ColumnName="ToPosition" />
+                <ScalarProperty Name="FromRate" ColumnName="FromRate" />
+                <ScalarProperty Name="FromWageSalary" ColumnName="FromWageSalary" />
+                <ScalarProperty Name="FromStatus" ColumnName="FromStatus" />
+                <ScalarProperty Name="FromPosition" ColumnName="FromPosition" />
+                <ScalarProperty Name="ShowNotes" ColumnName="ShowNotes" />
+                <ScalarProperty Name="ShowLeaves" ColumnName="ShowLeaves" />
+                <ScalarProperty Name="ShowAllowances" ColumnName="ShowAllowances" />
+                <ScalarProperty Name="ShowDivisionOfLabor" ColumnName="ShowDivisionOfLabor" />
+                <ScalarProperty Name="ShowPayChange" ColumnName="ShowPayChange" />
+                <ScalarProperty Name="ShowPropertyChange" ColumnName="ShowPropertyChange" />
+                <ScalarProperty Name="MDate" ColumnName="MDate" />
+                <ScalarProperty Name="MSignature" ColumnName="MSignature" />
+                <ScalarProperty Name="EDate" ColumnName="EDate" />
+                <ScalarProperty Name="ESignature" ColumnName="ESignature" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="Notes2" ColumnName="Notes2" />
+                <ScalarProperty Name="Notes1" ColumnName="Notes1" />
+                <ScalarProperty Name="Pto_Balance" ColumnName="Pto_Balance" />
+                <ScalarProperty Name="Leave_Begin" ColumnName="Leave_Begin" />
+                <ScalarProperty Name="Leave_End" ColumnName="Leave_End" />
+                <ScalarProperty Name="Leave_Purpose" ColumnName="Leave_Purpose" />
+                <ScalarProperty Name="EnrolledBenefitNo" ColumnName="EnrolledBenefitNo" />
+                <ScalarProperty Name="EnrolledBenefitsYes" ColumnName="EnrolledBenefitsYes" />
+                <ScalarProperty Name="FmlaNo" ColumnName="FmlaNo" />
+                <ScalarProperty Name="FmlaYes" ColumnName="FmlaYes" />
+                <ScalarProperty Name="PhoneAmountPerMonth" ColumnName="PhoneAmountPerMonth" />
+                <ScalarProperty Name="Chk_PhoneAmount" ColumnName="Chk_PhoneAmount" />
+                <ScalarProperty Name="CarAmountPerMonth" ColumnName="CarAmountPerMonth" />
+                <ScalarProperty Name="Chk_CarAmount" ColumnName="Chk_CarAmount" />
+                <ScalarProperty Name="La_Property2_Per" ColumnName="La_Property2_Per" />
+                <ScalarProperty Name="La_Property2" ColumnName="La_Property2" />
+                <ScalarProperty Name="La_Property1_Per" ColumnName="La_Property1_Per" />
+                <ScalarProperty Name="La_Property1" ColumnName="La_Property1" />
+                <ScalarProperty Name="BeginPayPeriod" ColumnName="BeginPayPeriod" />
+                <ScalarProperty Name="PayChangeSalary" ColumnName="PayChangeSalary" />
+                <ScalarProperty Name="PayChangeHourly" ColumnName="PayChangeHourly" />
+                <ScalarProperty Name="PayChangePartTime" ColumnName="PayChangePartTime" />
+                <ScalarProperty Name="PayChangeFullTime" ColumnName="PayChangeFullTime" />
+                <ScalarProperty Name="PayChangeFrom" ColumnName="PayChangeFrom" />
+                <ScalarProperty Name="PayChangeTo" ColumnName="PayChangeTo" />
+                <ScalarProperty Name="ToManager" ColumnName="ToManager" />
+                <ScalarProperty Name="ToPropName" ColumnName="ToPropName" />
+                <ScalarProperty Name="ToPropNum" ColumnName="ToPropNum" />
+                <ScalarProperty Name="FromManager" ColumnName="FromManager" />
+                <ScalarProperty Name="FromPropName" ColumnName="FromPropName" />
+                <ScalarProperty Name="FromPropNum" ColumnName="FromPropNum" />
+                <ScalarProperty Name="TypeOfChange" ColumnName="TypeOfChange" />
+                <ScalarProperty Name="ChangeEffectiveDate" ColumnName="ChangeEffectiveDate" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="PayrollStatusChangeNoticeId" ColumnName="PayrollStatusChangeNoticeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -51,5 +51,6 @@ namespace Carroll.Data.Services.Models
         List<CarrollPosition> GetAllCarrollPositions();
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
         string GetPropertyName(int PropertyNumber);
+        string GetPropertyNameManager(int PropertyNumber);
     }
 }

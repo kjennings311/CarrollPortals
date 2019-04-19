@@ -2204,6 +2204,33 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+        public string GetPropertyNameManager(int PropertyNumber)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+
+                //us
+                var propertyres = (from tbl in _entities.Properties
+                                   where tbl.PropertyNumber == PropertyNumber
+                                   select new { tbl.PropertyName,tbl.PropertyManager }).FirstOrDefault();
+                var manager = "";
+                if(propertyres.PropertyManager != null)
+                {
+
+                    var mananger1 = (from tbl in _entities.Contacts
+                                   where tbl.ContactId == propertyres.PropertyManager
+                                   select new { tbl.FirstName, tbl.LastName, tbl.Email }).FirstOrDefault();
+                    manager = mananger1.FirstName + " " + mananger1.LastName;
+
+                }
+
+                if (propertyres != null)
+                    return propertyres.PropertyName+","+manager;
+                else
+                    return "";
+            }
+        }
+
         public List<CarrollPosition> GetAllCarrollPositions()
         {
             using (CarrollFormsEntities _entities = DBEntity)

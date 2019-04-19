@@ -330,13 +330,8 @@ namespace Carroll.Data.Services.Controllers
             fa.ToManager = HttpContext.Current.Request.Params["tomanager"].ToString();
 
             fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
-            fa.PayChangeTo =Convert.ToDouble(HttpContext.Current.Request.Params["paychangeto"].ToString());
-            fa.PayChangeFrom = Convert.ToDouble(HttpContext.Current.Request.Params["paychangefrom"].ToString());
-            fa.PayChangeFullTime = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfull"].ToString());
-            fa.PayChangePartTime = Convert.ToBoolean(HttpContext.Current.Request.Params["chkpart"].ToString());
-            fa.PayChangeHourly = Convert.ToBoolean(HttpContext.Current.Request.Params["chkhourly"].ToString());
-            fa.PayChangeSalary = Convert.ToBoolean(HttpContext.Current.Request.Params["chksalary"].ToString());
-            fa.BeginPayPeriod =Convert.ToDateTime(HttpContext.Current.Request.Params["beginpayperiod"].ToString());
+        
+            fa.BeginPayPeriod =HttpContext.Current.Request.Params["beginpayperiod"].ToString();
             fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
             fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
             fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
@@ -418,6 +413,14 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetPropertyName(PropertyNumber);
         }
 
+
+        [ActionName("GetPropertyNameMananger")]
+        [HttpGet]
+        public dynamic GetPropertyNameManager(int PropertyNumber)
+        {
+
+            return _service.GetPropertyNameManager(PropertyNumber);
+        }
 
         [ActionName("InsertNoticeOfEmployeeSeperation")]
         [HttpPost]

@@ -55,6 +55,6 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetRuntimeClassInstance(string className);
 
         string GetPropertyName(int PropertyNumber);
-        
+        string GetPropertyNameManager(int PropertyNumber);
     }
 }

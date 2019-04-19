@@ -44,7 +44,6 @@ namespace Carroll.Data.Entities
         public virtual DbSet<RequisitionRequest> RequisitionRequests { get; set; }
         public virtual DbSet<EmployeeLeaseRaider> EmployeeLeaseRaiders { get; set; }
         public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
-        public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
         public virtual DbSet<EquityPartnerContact> EquityPartnerContacts { get; set; }
         public virtual DbSet<ExpenseReimbursementDetail> ExpenseReimbursementDetails { get; set; }
         public virtual DbSet<ExpenseReimbursementHeader> ExpenseReimbursementHeaders { get; set; }
@@ -53,6 +52,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
         public virtual DbSet<CarrollPayPeriod> CarrollPayPeriods { get; set; }
         public virtual DbSet<CarrollPosition> CarrollPositions { get; set; }
+        public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {

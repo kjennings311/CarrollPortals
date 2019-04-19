@@ -47,6 +47,12 @@ namespace Carroll.Data.Services.Models
             return _repository.GetPropertyName(PropertyNumber);
         }
 
+        public string GetPropertyNameManager(int PropertyNumber)
+        {
+            return _repository.GetPropertyNameManager(PropertyNumber);
+        }
+
+
         #region [Records]
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {

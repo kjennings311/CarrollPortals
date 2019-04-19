@@ -30,7 +30,7 @@ namespace Carroll.Data.Entities
         public Nullable<bool> PayChangePartTime { get; set; }
         public Nullable<bool> PayChangeHourly { get; set; }
         public Nullable<bool> PayChangeSalary { get; set; }
-        public Nullable<System.DateTime> BeginPayPeriod { get; set; }
+        public string BeginPayPeriod { get; set; }
         public string La_Property1 { get; set; }
         public Nullable<double> La_Property1_Per { get; set; }
         public string La_Property2 { get; set; }
@@ -57,5 +57,19 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> EDate { get; set; }
         public string MSignature { get; set; }
         public Nullable<System.DateTime> MDate { get; set; }
+        public Nullable<bool> ShowPropertyChange { get; set; }
+        public Nullable<bool> ShowPayChange { get; set; }
+        public Nullable<bool> ShowDivisionOfLabor { get; set; }
+        public Nullable<bool> ShowAllowances { get; set; }
+        public Nullable<bool> ShowLeaves { get; set; }
+        public Nullable<bool> ShowNotes { get; set; }
+        public string FromPosition { get; set; }
+        public string FromStatus { get; set; }
+        public string FromWageSalary { get; set; }
+        public Nullable<double> FromRate { get; set; }
+        public string ToPosition { get; set; }
+        public string ToStatus { get; set; }
+        public string ToWageSalary { get; set; }
+        public Nullable<double> ToRate { get; set; }
     }
 }
