@@ -286,8 +286,8 @@ namespace Carroll.Data.Services.Controllers
             fa.La_Property2 = HttpContext.Current.Request.Params["propw"].ToString();
             fa.La_Property2_Per =Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
-            fa.kitordered = Convert.ToDateTime(HttpContext.Current.Request.Params["kitordered"]);
-            fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
+            fa.kitordered =HttpContext.Current.Request.Params["kitordered"].ToString();
+         //   fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
             fa.esignature = HttpContext.Current.Request.Params["esignature"].ToString();
             fa.edate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
@@ -350,7 +350,7 @@ namespace Carroll.Data.Services.Controllers
             fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
            fa.Pto_Balance=Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
                 fa.Notes1=HttpContext.Current.Request.Params["notes1"].ToString();
-            fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
+          // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
             fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
             fa.EDate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
 
@@ -429,7 +429,7 @@ namespace Carroll.Data.Services.Controllers
             NoticeOfEmployeeSeperation fa = new NoticeOfEmployeeSeperation();
             fa.EffectiveDateOfChange = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["datechange"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
-            fa.EligibleForReHire = Convert.ToBoolean(HttpContext.Current.Request.Params["rehire"].ToString());
+            fa.EligibleForReHire = HttpContext.Current.Request.Params["rehire"].ToString();
             fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
             fa.PropertyNumber = HttpContext.Current.Request.Params["propertynumber"].ToString();
             fa.JobTitle = HttpContext.Current.Request.Params["jobtitile"].ToString();

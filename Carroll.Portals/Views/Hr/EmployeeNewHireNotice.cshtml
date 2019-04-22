@@ -65,10 +65,9 @@
                                                 <img src="~/img/newhirenotice.png">
                                             </span>
                                         </p>
-                                        <p class="c1 c8" style="    margin-left: 20%;
+                                        <p class="c1 c8" style="margin-left: 20%;
     margin-top: 15px;
-    margin-bottom: 15px;">
-                                            <span class="c7"> NEW HIRE NOTICE </span>
+    margin-bottom: 15px;"> <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
                                             <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input data-date-format="MM-DD-YYYY" type="date" id="startdate" />  </span>
@@ -118,24 +117,24 @@
 
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">
-                                                New Hire Kit Ordered (date) : <input type="date" id="kitorderdate" style="width:63%;" />
+                                                New Hire Kit Ordered : <input type="checkbox" name="kitordered" id="kitorderdate" /> Yes  <input type="checkbox" name="kitordered" id="kitorderdate1" /> No
                                             </span>
                                         </p>
                                      
                                         <p class="c1">
                                             <span class="c0">Employee Signature <input type="text" id="esignature" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
                                         </p>
+
                                         <p class="c1">
                                             <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:30%;" /> Date <input type="date" style="width:24%;" name="name" id="mdate" value="" /> </span>
                                         </p>
+
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
                                         </p>
-                                        <p class="c1" style="width:75%;text-align:center; font-weight:bold">
-                                           
 
-                                                Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
-                                           
+                                        <p class="c1" style="width:75%;text-align:center; font-weight:bold">
+                                                Please Email I9 and Signed Documents to HRNotifications@carrollmg.com                                           
                                         </p>
 
                                         <br /> <br />
@@ -653,7 +652,17 @@
                     insertForm.append('prop1per', $("#la_Prop1per").val());
                     insertForm.append('prop2', $("#la_Prop2").val());
                     insertForm.append('prop2per', $("#la_Prop2per").val());
-                    insertForm.append('kitordered', $("#kitorderdate").val());
+
+                    if ($("#kitorderdate").is(":checked"))
+                    {
+                        insertForm.append('kitordered', 'Yes');
+                    }
+                    else if ($("#kitorderdate1").is(":checked"))
+                    {
+                        insertForm.append('kitordered', 'No');
+                    }
+
+                    
                 //    insertForm.append('callscheduled', $("#onboardcall").val());
                     insertForm.append('allocation', $("#allocation").val());
                     insertForm.append('esignature', $("#esignature").val());

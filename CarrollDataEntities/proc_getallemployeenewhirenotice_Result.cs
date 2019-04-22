@@ -26,7 +26,7 @@ namespace Carroll.Data.Entities
         public string Status { get; set; }
         public string Wage_Salary { get; set; }
         public string Allocation { get; set; }
-        public Nullable<System.DateTime> kitordered { get; set; }
+        public string kitordered { get; set; }
         public Nullable<System.DateTime> boardingcallscheduled { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
@@ -38,6 +38,11 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> mdate { get; set; }
         public string rpmsignature { get; set; }
         public Nullable<System.DateTime> rpmdate { get; set; }
+        public string La_Property1 { get; set; }
+        public Nullable<double> La_Property1_Per { get; set; }
+        public string La_Property2 { get; set; }
+        public Nullable<double> La_Property2_Per { get; set; }
+        public string Sal_Time { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }

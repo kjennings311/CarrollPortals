@@ -42,6 +42,12 @@ namespace Carroll.Data.Entities.Repository
                     case EntityType.User:
                         _entities.Database.ExecuteSqlCommand("DELETE FROM SiteUsers WHERE UserId={0} ", recordId);
                         break;
+                    case EntityType.PayPeriods:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM CarrollPayPeriods WHERE PeriodId={0} ", recordId);
+                        break;
+                    case EntityType.CarrollPositions:
+                        _entities.Database.ExecuteSqlCommand("DELETE FROM CarrollPositions WHERE PositionId={0} ", recordId);
+                        break;
                     case EntityType.UserInRole:
                         _entities.Database.ExecuteSqlCommand("DELETE FROM UserInRole WHERE UserRoleId={0} ", recordId);
                         break;
@@ -87,7 +93,19 @@ namespace Carroll.Data.Entities.Repository
                         var _cont = _entities.Contacts.Where(x => x.ContactId == _recId).FirstOrDefault();
                         if (_cont != null) { return _cont; }
                         return null;
-                        #endregion
+                    #endregion
+                    case EntityType.CarrollPositions: 
+                        #region [ carrollpositions ]
+                        var _pos = _entities.CarrollPositions.Where(x => x.PositionId == _recId).FirstOrDefault();
+                        if (_pos != null) { return _pos; }
+                        return null;
+                    #endregion
+                    case EntityType.PayPeriods:
+                        #region [ carrollpositions ]
+                        var _per = _entities.CarrollPayPeriods.Where(x => x.PeriodId == _recId).FirstOrDefault();
+                        if (_per != null) { return _per; }
+                        return null;
+                    #endregion
                     case EntityType.Partner:
                         #region [ Equity Partner ]
                         var _partner = _entities.EquityPartners.Where(x => x.EquityPartnerId == _recId).FirstOrDefault();

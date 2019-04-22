@@ -43,16 +43,16 @@ namespace Carroll.Data.Entities
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<RequisitionRequest> RequisitionRequests { get; set; }
         public virtual DbSet<EmployeeLeaseRaider> EmployeeLeaseRaiders { get; set; }
-        public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
         public virtual DbSet<EquityPartnerContact> EquityPartnerContacts { get; set; }
         public virtual DbSet<ExpenseReimbursementDetail> ExpenseReimbursementDetails { get; set; }
         public virtual DbSet<ExpenseReimbursementHeader> ExpenseReimbursementHeaders { get; set; }
         public virtual DbSet<MileageLogDetail> MileageLogDetails { get; set; }
         public virtual DbSet<MileageLogHeader> MileageLogHeaders { get; set; }
-        public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
         public virtual DbSet<CarrollPayPeriod> CarrollPayPeriods { get; set; }
         public virtual DbSet<CarrollPosition> CarrollPositions { get; set; }
         public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
+        public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
+        public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -143,11 +143,6 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
         }
     
-        public virtual ObjectResult<proc_getallemployeenewhirenotice_Result> proc_getallemployeenewhirenotice()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice_Result>("proc_getallemployeenewhirenotice");
-        }
-    
         public virtual ObjectResult<proc_getallmonthlyexpensedetails_Result> proc_getallmonthlyexpensedetails(Nullable<System.Guid> userid)
         {
             var useridParameter = userid.HasValue ?
@@ -179,6 +174,11 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_getallcarrollpositions_Result> proc_getallcarrollpositions()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallcarrollpositions_Result>("proc_getallcarrollpositions");
+        }
+    
+        public virtual ObjectResult<proc_getallemployeenewhirenotice_Result> proc_getallemployeenewhirenotice()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice_Result>("proc_getallemployeenewhirenotice");
         }
     }
 }

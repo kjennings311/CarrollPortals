@@ -27,7 +27,7 @@ namespace Carroll.Data.Entities
         public string Status { get; set; }
         public string Wage_Salary { get; set; }
         public string Allocation { get; set; }
-        public Nullable<System.DateTime> kitordered { get; set; }
+        public string kitordered { get; set; }
         public Nullable<System.DateTime> boardingcallscheduled { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

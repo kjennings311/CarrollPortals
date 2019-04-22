@@ -67,7 +67,7 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <select disabled id="rehire"><option value="true"> Yes </option><option value="false"> No </option> </select></p>
+                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <input type="text" disabled id="rehire" />< /p>
                                             <p class="p1 ft1">Property Name <input type="text" disabled id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
                                             <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <input type="text" id="jobtitle" style="width:46%" /></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
@@ -153,10 +153,10 @@
                                                     <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
                                                 </TR>
                                             </TABLE>
-                                            <P class="p11 ft1">**What Policy specifically was violated? <input type="text" id="polictyvoilated1" style="width:60%" /></P>
-                                            <P class="p12 ft1"><input type="text" id="polictyvoilated2" style="width:95%" /></P>
-                                            <P class="p13 ft1">Additional Remarks <input type="text" id="remarks1" style="width:78%" /></P>
-                                            <P class="p14 ft1"><input type="text" id="remarks2" style="width:96%" /></P>
+                                            <P class="p11 ft1">**What Policy specifically was violated? </P>
+                                            <P class="p12 ft1"><textarea type="text" id="polictyvoilated1" style="width:95%" /> </P>
+                                            <P class="p13 ft1">Additional Remarks </P>
+                                            <P class="p14 ft1"><textarea type="text" id="remarks1" style="width:95%" /></P>
                                           
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
                                             
@@ -648,10 +648,10 @@
             {
                 e.preventDefault();
                 if ($("2weekscom").val() == true) {
-                    $("#rehire").val("true");
+                    $("#rehire").val("Yes");
                 }
                 else {
-                    $("#rehire").val("false");
+                    $("#rehire").val("No");
                 }
                
             });
@@ -816,7 +816,7 @@
                         control = $("#jobtitle");
                 }
 
-                if ($("#chkviolated").is(":Checked") && ($("#polictyvoilated1").val() + $("#polictyvoilated2").val()) == "")
+                if ($("#chkviolated").is(":Checked") && ($("#polictyvoilated1").val()=="")
                 {
                     errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
                     $("#polictyvoilated1").addClass('has-error');
@@ -848,8 +848,8 @@
                     insertForm.append('rehire', $("#rehire").val());
                     insertForm.append('propertynumber', $("#propertynumber").val());
                     insertForm.append('jobtitile', $("#jobtitle").val());
-                    insertForm.append('policty', $("#polictyvoilated1").val() + " " + $("#polictyvoilated2").val());
-                    insertForm.append('remarks', $("#remarks1").val() + " " + $("#remarks2").val());
+                    insertForm.append('policty', $("#polictyvoilated1").val() );
+                    insertForm.append('remarks', $("#remarks1").val() );
               
                     insertForm.append('keysreturned', $("#keysreturned").val());
 
