@@ -15,7 +15,7 @@ namespace Carroll.Data.Entities
     {
         public System.Guid EmployeeSeperationId { get; set; }
         public Nullable<System.DateTime> EffectiveDateOfChange { get; set; }
-        public Nullable<bool> EligibleForReHire { get; set; }
+        public string EligibleForReHire { get; set; }
         public string PropertyName { get; set; }
         public string PropertyNumber { get; set; }
         public string EmployeeName { get; set; }
@@ -43,6 +43,7 @@ namespace Carroll.Data.Entities
         public string HRMSignature { get; set; }
         public Nullable<System.DateTime> HRMDate { get; set; }
         public string Reason { get; set; }
+        public Nullable<bool> C2WeeksCompleted { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }

@@ -63,21 +63,56 @@
                                               <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" /> Change effective date: <input style=" display:inline; " type="date" id="effdate" class="" /></P>
                                               <P class="p2 ft3"><SPAN class="ft2">Manager Responsibilities</SPAN>: Complete the Payroll Status Change Notice, sign the form, and submit to</P>
                                               <P class="p3 ft3">Human Resources to <A href="mailto:HRNotifications@carrollmg.com"><SPAN class="ft4">HRNotifications@carrollmg.com</SPAN></A> within 48 hours of change effective date.</P>
-                                             
-                                              <P class="p6 ft1"> <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divallowance" id="chkAllowances" /> Allowances  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leaves Of Absence   </P>
+                                              <P class="p3 ft3"> <h4>Select Type Of Change : </h4></P>
+
+                                              <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divallowance" id="chkAllowances" /> Allowances  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leaves Of Absence   </P>
 
                                               <P class="p6 ft1">  </P>
 
                                               <div class="" style="border: 2px solid black; width:100%">
                                                   <div style="width:100%;display:none;" id="divpropertychange">
+                                                     
 
                                                       <P class="p4 ft5">Property Change</P>
                                                       <P class="p5 ft6">Property Transfer:</P>
-                                                      <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum"  class="" /> From Property Name: <input disabled style=" display:inline; " type="text" id="frompropname" class="" />From Manager:  <input disabled style=" display:inline; " type="text" id="frommanager" class="" /></P>
+                                                      <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> From Property Name: <input disabled style=" display:inline; " type="text" id="frompropname" class="" />From Manager:  <input disabled style=" display:inline; " type="text" id="frommanager" class="" /></P>
                                                       <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " disabled type="text" id="topropname" class="" />To Manager: <input style=" display:inline; " disabled type="text" id="tomanager" class="" /></P>
                                                       <hr style="border-top: 2px solid black;" />
                                                   </div>
                                                   <div style="width:100%;display:none;" id="divpaychange">
+                                                      <div style="width:50%">
+                                                          <h4>From </h4>
+
+                                                          <p class="c1">
+                                                              <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
+                                                          </p>
+
+                                                          <p class="c1">
+                                                              <span class="c0">Status :  <input type="radio" style="margin-left:26.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
+                                                          </p>
+
+                                                          <p class="c1">
+                                                              <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
+                                                          </p>
+
+                                                      </div>
+                                                      <div style="width:50%">
+                                                          <h4> To </h4>
+
+                                                          <p class="c1">
+                                                              <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
+                                                          </p>
+
+                                                          <p class="c1">
+                                                              <span class="c0">Status :  <input type="radio" style="margin-left:26.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
+                                                          </p>
+
+                                                          <p class="c1">
+                                                              <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
+                                                          </p>
+
+                                                      </div>
+
                                                       <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                           <TR>
                                                               <TD class="tr0 td0"><P class="p7 ft7">Pay Change</P></TD>
@@ -98,7 +133,7 @@
                                                               <TD class="tr2 td3"><P class="p12 ft11">.</P></TD>
                                                           </TR>
                                                           <TR>
-                                                              <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod" >  </select>  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
+                                                              <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
                                                               <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
                                                           </TR>
                                                       </TABLE>
@@ -119,7 +154,7 @@
                                                               <TD class="tr6 td2"><P class="p8 ft14">&nbsp;</P></TD>
                                                               <TD class="tr6 td3"><P class="p8 ft14">&nbsp;</P></TD>
                                                           </TR>
-                                                      
+
                                                           <TR>
                                                               <TD class="tr7 td0"><P class="p14 ft1">Property</P></TD>
                                                               <TD class="tr7 td1"><P class="p10 ft1">Percentage</P></TD>
@@ -135,50 +170,48 @@
                                                               <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" id="prop2per" /></P></TD>
 
                                                           </TR>
-
                                                       </TABLE>
-
                                                       <hr style="border-top: 2px solid black;" />
-                                                      </div>
-
-                                                      <div id="divallowance" style="width:100%;display:none;">
-                                                          <P class="p15 ft5">Allowances</P>
-                                                          <P class="p16 ft15">(Corporate Only)</P>
-                                                          <TABLE cellpadding=0 cellspacing=0 class="t1">
-                                                              <TR>
-                                                                  <TD class="tr7 td9"><P class="p9 ft6">Select Type:</P></TD>
-                                                                  <TD class="tr7 td10"><P class="p8 ft1"><SPAN class="ft9"><input type="checkbox" id="chkcaramount" />  </SPAN>Car Amount: $ <input type="text" style="width:30%" id="txtcaramount" value="0" /> / month</P></TD>
-                                                                  <TD class="tr7 td11"><P class="p17 ft1"><SPAN class="ft9"><input type="checkbox" id="chkphoneamount" />  </SPAN>Phone Amount: $ <input type="text" style="width:30%" id="txtphoneamount" value="0" /> / month</P></TD>
-                                                              </TR>
-                                                          </TABLE>
-                                                          <hr style="border-top: 2px solid black;" />
-                                                      </div>
-
-                                                      <div style="width:100%;display:none" id="divleaveabsence">
-                                                          <TABLE cellpadding=0 cellspacing=0 class="t1">
-                                                              <TR>
-                                                                  <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
-                                                                  <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leaves of Absence</P></TD>
-                                                              </TR>
-                                                              <TR>
-                                                                  <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
-                                                                  <TD class="tr1 td10"><P class="p19 ft6">FMLA Eligible? <SPAN class="ft9"><input type="checkbox" id="chkfmlayes" />  </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkfmlano" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
-                                                                  <TD class="tr1 td11"><P class="p8 ft6">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
-                                                              </TR>
-                                                          </TABLE>
-                                                          <P class="p20 ft1">Purpose: <input type="text" style="width:32%" id="purpose" />  Begin: <input type="date" style="width:20%;" id="leavebegin" /> Expected End:<input type="date" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" id="ptobalance" /> </P>
-                                                          <hr style="border-top: 2px solid black;" />
-                                                      </div>
-
-                                                      <div id="divnotes" style="width:100%;">
-                                                          <P class="p21 ft5">Notes:</P>
-                                                          <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1" > </textarea></P>
-                                                          <P class="p6 ft1">  </P>
-                                                      </div>
-                                                      <P class="p6 ft1">Employee Signature: <input type="text" id="esignature" />  Date: <input type="date" id="edate" /> </P>
-                                                      <P class="p6 ft1">Manager Signature: <input type="text" id="msignature" /> Date: <input type="date" id="mdate" /></P>
                                                   </div>
-                                              </div>            
+
+                                                  <div id="divallowance" style="width:100%;display:none;">
+                                                      <P class="p15 ft5">Allowances</P>
+                                                      <P class="p16 ft15">(Corporate Only)</P>
+                                                      <TABLE cellpadding=0 cellspacing=0 class="t1">
+                                                          <TR>
+                                                              <TD class="tr7 td9"><P class="p9 ft6">Select Type:</P></TD>
+                                                              <TD class="tr7 td10"><P class="p8 ft1"><SPAN class="ft9"><input type="checkbox" id="chkcaramount" />  </SPAN>Car Amount: $ <input type="text" style="width:30%" id="txtcaramount" value="0" /> / month</P></TD>
+                                                              <TD class="tr7 td11"><P class="p17 ft1"><SPAN class="ft9"><input type="checkbox" id="chkphoneamount" />  </SPAN>Phone Amount: $ <input type="text" style="width:30%" id="txtphoneamount" value="0" /> / month</P></TD>
+                                                          </TR>
+                                                      </TABLE>
+                                                      <hr style="border-top: 2px solid black;" />
+                                                  </div>
+
+                                                  <div style="width:100%;display:none" id="divleaveabsence">
+                                                      <TABLE cellpadding=0 cellspacing=0 class="t1">
+                                                          <TR>
+                                                              <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
+                                                              <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leaves of Absence</P></TD>
+                                                          </TR>
+                                                          <TR>
+                                                              <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
+                                                              <TD class="tr1 td10"><P class="p19 ft6">FMLA Eligible? <SPAN class="ft9"><input type="checkbox" id="chkfmlayes" />  </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkfmlano" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
+                                                              <TD class="tr1 td11"><P class="p8 ft6">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
+                                                          </TR>
+                                                      </TABLE>
+                                                      <P class="p20 ft1">Purpose: <input type="text" style="width:32%" id="purpose" />  Begin: <input type="date" style="width:20%;" id="leavebegin" /> Expected End:<input type="date" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" id="ptobalance" /> </P>
+                                                      <hr style="border-top: 2px solid black;" />
+                                                  </div>
+
+                                                  <div id="divnotes" style="width:100%;">
+                                                      <P class="p21 ft5">Notes:</P>
+                                                      <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> </textarea></P>
+                                                      <P class="p6 ft1">  </P>
+                                                  </div>
+                                                  <P class="p6 ft1">Employee Signature: <input type="text" id="esignature" />  Date: <input type="date" id="edate" /> </P>
+                                                  <P class="p6 ft1">Manager Signature: <input type="text" id="msignature" /> Date: <input type="date" id="mdate" /></P>
+                                              </div>
+                                          </DIV>            
             <div id="status"> </div>
             <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
                 <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@

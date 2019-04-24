@@ -776,7 +776,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getallmonthlyexpensedetails" ReturnType="Collection(Carroll.Data.Entities.proc_getallmonthlyexpensedetails_Result)">
           <Parameter Name="userid" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
           <FunctionImport Name="proc_getallexpensemileagelogs" ReturnType="Collection(Carroll.Data.Entities.proc_getallexpensemileagelogs_Result)">
           <Parameter Name="userid" Mode="In" Type="Guid" />
           </FunctionImport>
@@ -788,6 +787,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="EmployeeNewHireNotices" EntityType="Carroll.Data.Entities.EmployeeNewHireNotice" />
           <EntitySet Name="NoticeOfEmployeeSeperations" EntityType="Carroll.Data.Entities.NoticeOfEmployeeSeperation" />
           <FunctionImport Name="proc_getallemployeenewhirenotice" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result)" />
+          <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1509,41 +1509,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="178" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="179" />
         </ComplexType>
-        <ComplexType Name="proc_getallnoticeofemployeeseparation_Result">
-          <Property Type="Guid" Name="EmployeeSeperationId" Nullable="false" />
-          <Property Type="DateTime" Name="EffectiveDateOfChange" Nullable="true" />
-          <Property Type="Boolean" Name="EligibleForReHire" Nullable="true" />
-          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="PropertyNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Policty_Voilated" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="AdditionalRemarks" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="DocumentationAvailable" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="WarningGiven_Dates" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="EquipmentKeysReturned" Nullable="true" />
-          <Property Type="Boolean" Name="C2WeeeksNoticeGiven" Nullable="true" />
-          <Property Type="Boolean" Name="VacationPaidOut" Nullable="true" />
-          <Property Type="Double" Name="VacationBalance" Nullable="true" />
-          <Property Type="String" Name="Notes_Comments" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="DischargedText" Nullable="true" />
-          <Property Type="String" Name="QuitText" Nullable="true" />
-          <Property Type="String" Name="LackOfWork" Nullable="true" />
-          <Property Type="Guid" Name="CreatedUser" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
-          <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
-          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
-          <Property Type="String" Name="SSignature" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="SDate" Nullable="true" />
-          <Property Type="String" Name="SMSignature" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="SMDate" Nullable="true" />
-          <Property Type="String" Name="HRMSignature" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="HRMDate" Nullable="true" />
-          <Property Type="String" Name="Reason" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
-          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="179" />
-          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="180" />
-        </ComplexType>
         <ComplexType Name="proc_getallexpensemileagelogs_Result">
           <Property Type="Guid" Name="MonthlyMileageLogId" Nullable="false" />
           <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="100" />
@@ -1766,6 +1731,42 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
+        </ComplexType>
+        <ComplexType Name="proc_getallnoticeofemployeeseparation_Result">
+          <Property Type="Guid" Name="EmployeeSeperationId" Nullable="false" />
+          <Property Type="DateTime" Name="EffectiveDateOfChange" Nullable="true" />
+          <Property Type="String" Name="EligibleForReHire" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PropertyNumber" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Policty_Voilated" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="AdditionalRemarks" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DocumentationAvailable" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="WarningGiven_Dates" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="EquipmentKeysReturned" Nullable="true" />
+          <Property Type="Boolean" Name="C2WeeeksNoticeGiven" Nullable="true" />
+          <Property Type="Boolean" Name="VacationPaidOut" Nullable="true" />
+          <Property Type="Double" Name="VacationBalance" Nullable="true" />
+          <Property Type="String" Name="Notes_Comments" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DischargedText" Nullable="true" />
+          <Property Type="String" Name="QuitText" Nullable="true" />
+          <Property Type="String" Name="LackOfWork" Nullable="true" />
+          <Property Type="Guid" Name="CreatedUser" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SSignature" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="SDate" Nullable="true" />
+          <Property Type="String" Name="SMSignature" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="SMDate" Nullable="true" />
+          <Property Type="String" Name="HRMSignature" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="HRMDate" Nullable="true" />
+          <Property Type="String" Name="Reason" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="C2WeeksCompleted" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="179" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="180" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2515,45 +2516,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_getallnoticeofemployeeseparation" FunctionName="Carroll.Data.Entities.Store.proc_getallnoticeofemployeeseparation">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result">
-                <ScalarProperty Name="EmployeeSeperationId" ColumnName="EmployeeSeperationId" />
-                <ScalarProperty Name="EffectiveDateOfChange" ColumnName="EffectiveDateOfChange" />
-                <ScalarProperty Name="EligibleForReHire" ColumnName="EligibleForReHire" />
-                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-                <ScalarProperty Name="Policty_Voilated" ColumnName="Policty_Voilated" />
-                <ScalarProperty Name="AdditionalRemarks" ColumnName="AdditionalRemarks" />
-                <ScalarProperty Name="DocumentationAvailable" ColumnName="DocumentationAvailable" />
-                <ScalarProperty Name="WarningGiven_Dates" ColumnName="WarningGiven_Dates" />
-                <ScalarProperty Name="EquipmentKeysReturned" ColumnName="EquipmentKeysReturned" />
-                <ScalarProperty Name="C2WeeeksNoticeGiven" ColumnName="2WeeeksNoticeGiven" />
-                <ScalarProperty Name="VacationPaidOut" ColumnName="VacationPaidOut" />
-                <ScalarProperty Name="VacationBalance" ColumnName="VacationBalance" />
-                <ScalarProperty Name="Notes_Comments" ColumnName="Notes_Comments" />
-                <ScalarProperty Name="DischargedText" ColumnName="DischargedText" />
-                <ScalarProperty Name="QuitText" ColumnName="QuitText" />
-                <ScalarProperty Name="LackOfWork" ColumnName="LackOfWork" />
-                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
-                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
-                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
-                <ScalarProperty Name="SSignature" ColumnName="SSignature" />
-                <ScalarProperty Name="SDate" ColumnName="SDate" />
-                <ScalarProperty Name="SMSignature" ColumnName="SMSignature" />
-                <ScalarProperty Name="SMDate" ColumnName="SMDate" />
-                <ScalarProperty Name="HRMSignature" ColumnName="HRMSignature" />
-                <ScalarProperty Name="HRMDate" ColumnName="HRMDate" />
-                <ScalarProperty Name="Reason" ColumnName="Reason" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
-                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_getallexpensemileagelogs" FunctionName="Carroll.Data.Entities.Store.proc_getallexpensemileagelogs">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallexpensemileagelogs_Result">
@@ -2792,6 +2754,46 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="La_Property2" ColumnName="La_Property2" />
                 <ScalarProperty Name="La_Property2_Per" ColumnName="La_Property2_Per" />
                 <ScalarProperty Name="Sal_Time" ColumnName="Sal_Time" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallnoticeofemployeeseparation" FunctionName="Carroll.Data.Entities.Store.proc_getallnoticeofemployeeseparation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result">
+                <ScalarProperty Name="EmployeeSeperationId" ColumnName="EmployeeSeperationId" />
+                <ScalarProperty Name="EffectiveDateOfChange" ColumnName="EffectiveDateOfChange" />
+                <ScalarProperty Name="EligibleForReHire" ColumnName="EligibleForReHire" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Policty_Voilated" ColumnName="Policty_Voilated" />
+                <ScalarProperty Name="AdditionalRemarks" ColumnName="AdditionalRemarks" />
+                <ScalarProperty Name="DocumentationAvailable" ColumnName="DocumentationAvailable" />
+                <ScalarProperty Name="WarningGiven_Dates" ColumnName="WarningGiven_Dates" />
+                <ScalarProperty Name="EquipmentKeysReturned" ColumnName="EquipmentKeysReturned" />
+                <ScalarProperty Name="C2WeeeksNoticeGiven" ColumnName="2WeeeksNoticeGiven" />
+                <ScalarProperty Name="VacationPaidOut" ColumnName="VacationPaidOut" />
+                <ScalarProperty Name="VacationBalance" ColumnName="VacationBalance" />
+                <ScalarProperty Name="Notes_Comments" ColumnName="Notes_Comments" />
+                <ScalarProperty Name="DischargedText" ColumnName="DischargedText" />
+                <ScalarProperty Name="QuitText" ColumnName="QuitText" />
+                <ScalarProperty Name="LackOfWork" ColumnName="LackOfWork" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
+                <ScalarProperty Name="SSignature" ColumnName="SSignature" />
+                <ScalarProperty Name="SDate" ColumnName="SDate" />
+                <ScalarProperty Name="SMSignature" ColumnName="SMSignature" />
+                <ScalarProperty Name="SMDate" ColumnName="SMDate" />
+                <ScalarProperty Name="HRMSignature" ColumnName="HRMSignature" />
+                <ScalarProperty Name="HRMDate" ColumnName="HRMDate" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="C2WeeksCompleted" ColumnName="2WeeksCompleted" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
