@@ -64,7 +64,6 @@
                                               <P class="p2 ft3"><SPAN class="ft2">Manager Responsibilities</SPAN>: Complete the Payroll Status Change Notice, sign the form, and submit to</P>
                                               <P class="p3 ft3">Human Resources to <A href="mailto:HRNotifications@carrollmg.com"><SPAN class="ft4">HRNotifications@carrollmg.com</SPAN></A> within 48 hours of change effective date.</P>
                                               <P class="p3 ft3"> <h4>Select Type Of Change : </h4></P>
-
                                               <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divallowance" id="chkAllowances" /> Allowances  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leaves Of Absence   </P>
 
                                               <P class="p6 ft1">  </P>
@@ -79,40 +78,7 @@
                                                       <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " disabled type="text" id="topropname" class="" />To Manager: <input style=" display:inline; " disabled type="text" id="tomanager" class="" /></P>
                                                       <hr style="border-top: 2px solid black;" />
                                                   </div>
-                                                  <div style="width:100%;display:none;" id="divpaychange">
-                                                      <div style="width:50%">
-                                                          <h4>From </h4>
-
-                                                          <p class="c1">
-                                                              <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
-                                                          </p>
-
-                                                          <p class="c1">
-                                                              <span class="c0">Status :  <input type="radio" style="margin-left:26.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
-                                                          </p>
-
-                                                          <p class="c1">
-                                                              <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
-                                                          </p>
-
-                                                      </div>
-                                                      <div style="width:50%">
-                                                          <h4> To </h4>
-
-                                                          <p class="c1">
-                                                              <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
-                                                          </p>
-
-                                                          <p class="c1">
-                                                              <span class="c0">Status :  <input type="radio" style="margin-left:26.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
-                                                          </p>
-
-                                                          <p class="c1">
-                                                              <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
-                                                          </p>
-
-                                                      </div>
-
+                                                  <div style="width:102%;display:none;" id="divpaychange">
                                                       <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                           <TR>
                                                               <TD class="tr0 td0"><P class="p7 ft7">Pay Change</P></TD>
@@ -120,25 +86,62 @@
                                                               <TD class="tr0 td2"><P class="p8 ft8">&nbsp;</P></TD>
                                                               <TD class="tr0 td3"><P class="p8 ft8">&nbsp;</P></TD>
                                                           </TR>
-                                                          <TR>
-                                                              <TD class="tr1 td0"><P class="p9 ft1"><SPAN class="ft6">Pay Rate Change: </SPAN>From $<input style=" display:inline; " type="text" id="paychangefrom" class="" /> To $<input style=" display:inline; " type="text" id="paychangeto" class="" /></P></TD>
-                                                              <TD class="tr1 td1"><P class="p8 ft10"><SPAN class="ft6">Select: </SPAN><SPAN class="ft9"><input type="checkbox" id="chkfull" /> </SPAN>Full Time</P></TD>
-                                                              <TD class="tr1 td2"><P class="p10 ft10"><SPAN class="ft9"><input type="checkbox" id="chkpart" />  </SPAN>Part Time</P></TD>
-                                                              <TD class="tr1 td3"><P class="p8 ft8">&nbsp;</P></TD>
-                                                          </TR>
-                                                          <TR>
-                                                              <TD class="tr2 td0"><P class="p8 ft8">&nbsp;</P></TD>
-                                                              <TD class="tr2 td1"><P class="p11 ft10"><SPAN class="ft9"><input type="checkbox" id="chkhourly" />  </SPAN>Hourly</P></TD>
-                                                              <TD class="tr2 td2"><P class="p8 ft10"><SPAN class="ft9"><input type="checkbox" id="chksalary" /> </SPAN>Salary</P></TD>
-                                                              <TD class="tr2 td3"><P class="p12 ft11">.</P></TD>
-                                                          </TR>
-                                                          <TR>
-                                                              <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
-                                                              <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
-                                                          </TR>
-                                                      </TABLE>
+                                                          </TABLE>
+                                                          <div style="width:50%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;">
+                                                              <h4 style="text-align: center;
+    font-weight: bold;
+    font-size: 15px;margin-top:-8px">
+                                                                  From
+                                                              </h4>
 
-                                                      <hr style="border-top: 2px solid black;" />
+                                                              <p class="c1">
+                                                                  <span class="c0">Position: <input type="radio" style="margin-left:17%;" value="1" name="exempt" id="fromexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="fromnonexempt" value="1" />  Non-exempt </span>
+                                                              </p>
+
+                                                              <p class="c1">
+                                                                  <span class="c0">Status :  <input type="radio" style="margin-left:19%;" value="1" name="time" id="fromfullstatus" />  Full Time  <input type="radio" style="margin-left:4%;" name="time" id="frompartstatus" value="1" />  Part Time </span>
+                                                              </p>
+
+                                                              <p class="c1">
+                                                                  <span class="c0">Wage / Salary  <input type="radio" style="margin-left:9.5%;" value="1" name="wage" id="fromsalhourly" />  Hourly  <input type="radio" style="margin-left:7.5%;" name="wage" id="fromannualsalary" value="1" />  Annual  </span>
+                                                              </p>
+
+                                                              <p class="c1">
+                                                                  <span class="c0">Rate  <input type="text" id="fromrate" style="width:30%;margin-left:26%;" />    </span>
+                                                              </p>
+                                                          </div>
+
+                                                          <div style="width:49%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;   margin-left: -3px !important;">
+                                                              <h4 style="text-align: center;
+    font-weight: bold;
+    font-size: 15px;margin-top:-8px; ">  To
+                                                              </h4>
+
+                                                              <p class="c1">
+                                                                  <span class="c0">Position: <input type="radio" style="margin-left:17%;" value="1" name="texempt" id="toexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="texempt" id="tononexempt" value="1" />  Non-exempt </span>
+                                                              </p>
+
+                                                              <p class="c1">
+                                                                  <span class="c0">Status :  <input type="radio" style="margin-left:19%;" value="1" name="ttime" id="tofullstatus" />  Full Time  <input type="radio" style="margin-left:4%;" name="ttime" id="topartstatus" value="1" />  Part Time </span>
+                                                              </p>
+
+                                                              <p class="c1">
+                                                                  <span class="c0">Wage / Salary  <input type="radio" style="margin-left:9.5%;" value="1" name="twage" id="tosalhourly" />  Hourly  <input type="radio" style="margin-left:7.5%;" name="wtage" id="toannualsalary" value="1" />  Annual  </span>
+                                                              </p>
+                                                              <p class="c1">
+                                                                  <span class="c0">Rate  <input type="text" id="torate" style="width:30%;margin-left:26%;" />    </span>
+                                                              </p>
+                                                          </div>
+
+                                                          <TABLE cellpadding=0 cellspacing=0 class="t0">
+
+                                                              <TR>
+                                                                  <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
+                                                                  <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
+                                                              </TR>
+                                                          </TABLE>
+
+                                                          <hr style="border-top: 2px solid black;" />
                                                   </div>
                                                   <div style="width:100%;display:none" id="divlaborallocation">
                                                       <TABLE id="divlaborallocation" cellpadding=0 cellspacing=0 class="t0">
@@ -268,7 +271,7 @@
             text-decoration: none;
             vertical-align: baseline;
             font-size: 12pt;
-            font-family: "Times";
+            font-family: inherit;
             font-style: normal
         }
 
@@ -277,8 +280,8 @@
             font-weight: 400;
             text-decoration: none;
             vertical-align: baseline;
-            font-size: 11pt;
-            font-family: "Times";
+            font-size: 9pt;
+            font-family: inherit;
             font-style: normal
         }
 
@@ -288,7 +291,7 @@
             text-decoration: none;
             vertical-align: baseline;
             font-size: 11pt;
-            font-family: "Times";
+            font-family: inherit;
             font-style: italic
         }
 
@@ -314,14 +317,14 @@
 
         .c2 {
             font-size: 14pt;
-            font-family: "Times";
+            font-family: inherit;
             font-weight: 700
         }
 
         .c8 {
             font-weight: 700;
             font-size: 11pt;
-            font-family: "Times"
+            font-family: inherit;
         }
 
         .c5 {
@@ -1173,19 +1176,59 @@
                     insertForm.append('paychangeto', $("#paychangeto").val());
                     insertForm.append('paychangefrom', $("#paychangefrom").val());
 
-                    //if ($("#chkfull").is(":checked")) {
+                    if ($("#fromexempt").is(":checked"))
+                    {
+                        insertForm.append('fromposition', 'Exempt');
+                    }
+                    else if ($("#fromnonexempt").is(":checked"))
+                    {
+                        insertForm.append('fromposition', 'NonExempt');
+                    }
 
-                    //}
-                    //else
-                    //{
+                    if ($("#fromfullstatus").is(":checked")) {
+                        insertForm.append('fromstatus', 'FULL');
+                    }
+                    else if ($("#frompartstatus").is(":checked")) {
+                        insertForm.append('fromstatus', 'PART');
+                    }
 
-                    //}
 
-                    insertForm.append('chkfull', $("#chkfull").is(":checked"));
-                    insertForm.append('chkpart', $("#chkpart").is(":checked"));
-                    insertForm.append('chkhourly', $("#chkhourly").is(":checked"));
-                    insertForm.append('chksalary', $("#chksalary").is(":checked"));
 
+                    if ($("#fromannualsalary").is(":checked")) {
+                        insertForm.append('fromwage', 'Annual');
+                    }
+                    else if ($("#fromsalhourly").is(":checked"))
+                    {
+                        insertForm.append('fromwage', 'Hourly');
+                    }
+                    insertForm.append('fromrate', $("#fromrate").val());
+
+                    if ($("#toexempt").is(":checked")) {
+                        insertForm.append('toposition', 'Exempt');
+                    }
+                    else if ($("#tononexempt").is(":checked")) {
+                        insertForm.append('toposition', 'NonExempt');
+                    }
+
+                    if ($("#tofullstatus").is(":checked")) {
+                        insertForm.append('tostatus', 'FULL');
+                    }
+                    else if ($("#topartstatus").is(":checked")) {
+                        insertForm.append('tostatus', 'PART');
+                    }
+
+
+
+                    if ($("#toannualsalary").is(":checked")) {
+                        insertForm.append('towage', 'Annual');
+                    }
+                    else if ($("#tosalhourly").is(":checked")) {
+                        insertForm.append('towage', 'Hourly');
+                    }
+                    insertForm.append('torate', $("#torate").val());
+
+
+                    
                     insertForm.append('beginpayperiod', $("#beginpayperiod").val());
                     insertForm.append('prop1', $("#prop1").val());
                     insertForm.append('prop2', $("#prop2").val());

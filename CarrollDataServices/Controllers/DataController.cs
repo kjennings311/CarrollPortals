@@ -283,7 +283,7 @@ namespace Carroll.Data.Services.Controllers
             fa.Wage_Salary = HttpContext.Current.Request.Params["salary"].ToString();
             fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
             fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
-            fa.La_Property2 = HttpContext.Current.Request.Params["propw"].ToString();
+            fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
             fa.La_Property2_Per =Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
             fa.kitordered =HttpContext.Current.Request.Params["kitordered"].ToString();
@@ -321,7 +321,7 @@ namespace Carroll.Data.Services.Controllers
             PayrollStatusChangeNotice fa = new PayrollStatusChangeNotice();
             fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
-            fa.TypeOfChange = HttpContext.Current.Request.Params["typeofchange"].ToString();
+         //   fa.TypeOfChange = HttpContext.Current.Request.Params["typeofchange"].ToString();
             fa.FromPropNum =Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
             fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
             fa.FromManager = HttpContext.Current.Request.Params["frommanager"].ToString();
@@ -330,7 +330,18 @@ namespace Carroll.Data.Services.Controllers
             fa.ToManager = HttpContext.Current.Request.Params["tomanager"].ToString();
 
             fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
-        
+
+            fa.FromPosition= HttpContext.Current.Request.Params["fromposition"].ToString();
+            fa.FromStatus = HttpContext.Current.Request.Params["fromstatus"].ToString();
+            fa.FromWageSalary = HttpContext.Current.Request.Params["fromwage"].ToString();
+            fa.FromRate =Convert.ToDouble(HttpContext.Current.Request.Params["fromrate"].ToString());
+
+            fa.ToPosition = HttpContext.Current.Request.Params["toposition"].ToString();
+            fa.ToStatus = HttpContext.Current.Request.Params["tostatus"].ToString();
+            fa.ToWageSalary = HttpContext.Current.Request.Params["towage"].ToString();
+            fa.ToRate = Convert.ToDouble(HttpContext.Current.Request.Params["torate"].ToString());
+
+
             fa.BeginPayPeriod =HttpContext.Current.Request.Params["beginpayperiod"].ToString();
             fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
             fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());

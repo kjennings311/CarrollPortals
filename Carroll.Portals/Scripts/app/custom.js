@@ -217,7 +217,9 @@ function BindElements()
                     //  alert(JSON.stringify($data));
                     // now that we have updated Form record.. Let's pass it back to server with all  data for validation..
 
-                    /**************************************************************************************/
+                /**************************************************************************************/
+
+                    console.log($data);
                     
                     $.ajax({
                         type: "POST",
@@ -385,7 +387,7 @@ function getForm(FormName, RecordId)
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $datebox = '<div class="form-group"><label class="col-sm-12 control-label">  <a  class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="date" validationformat="{1}" data-date-format="mm/dd/yyyy" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $datebox = '<div class="form-group"><label class="col-sm-12 control-label">  <a  class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="date" validationformat="{1}"  class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
@@ -412,8 +414,8 @@ function getForm(FormName, RecordId)
         
     $.ajax({
         type: "get",
-        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
-        url: $BaseApiUrl + formUrl ,
+        dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
+        url: $BaseApiUrl + formUrl,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
 
@@ -426,28 +428,44 @@ function getForm(FormName, RecordId)
 
             var $fields = $data["formFields"];
             for (var i = 0; i < $fields.length; i++) {
-               // alert($fields[i]["fieldLabel"]+ " " + $fields[i]["fieldType"]);
+                // alert($fields[i]["fieldLabel"]+ " " + $fields[i]["fieldType"]);
                 // Build the form elements here
                 switch ($fields[i]["fieldType"]) {
                     case "Text":
 
                         var $req = $fields[i]["required"];
                         var $datamask = "";
-                     
 
-                        if ($fields[i]["fieldValidationType"] == "DateTime" && $fields[i]["fieldValue"] != null)
-                        {
-                            var s = $fields[i]["fieldValue"];
-                            
-                            var bits = s.split(/\D/);
-                          //  console.log(bits);
 
-                            var datestring = bits[1]+"/"+bits[0]+"/"+bits[2];
-                           // console.log(datestring);
-                         
-                          //  var datestring = d.getMonth()+"/"+d.getDate() + "/"  + d.getFullYear();
+                        if ($fields[i]["fieldValidationType"] == "DateTime") {
+                          //  alert($fields[i]["fieldValue"] + " inde datetime");
 
-                            $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring);
+                            if ($fields[i]["fieldValue"] == null)
+                            {
+                               
+                             //   $fields[i]["fieldValue"] = "";
+                               
+                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, "");
+
+                            }
+                            else
+                            {
+                              
+                                var s = $fields[i]["fieldValue"];
+
+                                var bits = s.split(/\D/);
+                                //  console.log(bits);
+
+                                var datestring = bits[1] + "/" + bits[0] + "/" + bits[2];
+                                // console.log(datestring);
+
+                                //  var datestring = d.getMonth()+"/"+d.getDate() + "/"  + d.getFullYear();
+
+                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring);
+
+                            }
+                           
+
                         }
                         else
                         {

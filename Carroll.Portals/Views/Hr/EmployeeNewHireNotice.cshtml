@@ -112,7 +112,7 @@
                                             </tr>
                                             <tr> <td> Property </td> <td> Percentage </td> </tr>
                                             <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
-                                            <tr> <td> <input type="text" id="la_Prop1" /> </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop2" /> </td> <td> <input type="number" id="la_Prop2per" /> </td> </tr>
                                         </table>
 
                                         <p class="c1" style="margin-bottom: 60px;">
@@ -516,12 +516,12 @@
                         control = $("#salary");
                 }
 
-                if ($("#kitorderdate").val() == "") {
-                    errormsgsummary += "<li> Please Enter Kit Ordered Date  </li>";
-                    $("#kitorderdate").addClass('has-error');
-                    if (control == "")
-                        control = $("#kitorderdate");
-                }
+                //if ($("#kitorderdate").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Kit Ordered Date  </li>";
+                //    $("#kitorderdate").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#kitorderdate");
+                //}
 
 
                 //if ($("#onboardcall").val() == "") {
@@ -703,7 +703,8 @@
                                 $("#kitorderdate").val('');
                                 $("#onboardcall").val('');
                                 $("#allocation").val('');
-
+                                $("#status").html('');
+                                document.getElementById("submitform").reset();
 
                                 GetAllHRFORMs('New Hire Notice');
                                 $(".alert").html('Record Successfully Updated !');
