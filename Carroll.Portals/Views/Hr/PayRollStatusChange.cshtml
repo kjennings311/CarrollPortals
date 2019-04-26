@@ -1166,6 +1166,49 @@
                     insertForm.append('empname', $("#empname").val());
                     insertForm.append('effectivedate', $("#effdate").val());
                 //   insertForm.append('typeofchange', $("#typeofchange").val());
+
+
+                    if ($("#chkpropertychange").is(":checked"))
+                    {
+                        insertForm.append('showproperty', 'true');
+                    }
+                    else
+                    {
+                        insertForm.append('showproperty', 'false');
+                    }
+
+                    if ($("#chkpaychange").is(":checked"))
+                    {
+                        insertForm.append('showpay', 'true');
+                    }
+                    else {
+                        insertForm.append('showpay', 'false');
+                    }
+                    
+
+
+                    if ($("#chklaborallocation").is(":checked")) {
+                        insertForm.append('showlab', 'true');
+                    }
+                    else {
+                        insertForm.append('showlab', 'false');
+                    }
+
+                    if ($("#chkAllowances").is(":checked")) {
+                        insertForm.append('showall', 'true');
+                    }
+                    else {
+                        insertForm.append('showall', 'false');
+                    }
+
+                    if ($("#chkleave").is(":checked"))
+                    {
+                        insertForm.append('showleave', 'true');
+                    }
+                    else {
+                        insertForm.append('showleave', 'false');
+                    }
+
                     insertForm.append('frompropnum', $("#frompropnum").val());
                   
                     insertForm.append('frompropname', $("#frompropname").val());
@@ -1315,35 +1358,7 @@
 
             });
 
-            $("#print").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-
-                    var printWindow = window.open("/Hr/PrintPayRollStatusChange/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.print();
-                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-                        }, 1000);
-                    }, true);
-                }
-            });
-
-
-            $("#pdf").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-                    var printWindow = window.open("/Hr/PdfPayRollStatusChange/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.close();
-                        }, 2000);
-                    }, true);
-
-                }
-
-            });
-
+       
 
         });
 

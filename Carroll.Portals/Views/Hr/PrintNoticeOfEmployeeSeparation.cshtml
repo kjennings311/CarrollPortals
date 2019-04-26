@@ -62,6 +62,7 @@
             overflow: hidden;
         }
 
+
         .ft0 {
             font: 19px 'Arial';
             line-height: 22px;
@@ -70,6 +71,7 @@
         .ft1 {
             font: 15px 'Arial';
             line-height: 17px;
+            margin-bottom: 10px !important;
         }
 
         .ft2 {
@@ -141,13 +143,6 @@
             text-align: left;
             padding-left: 233px;
             /*margin-top: 96px;*/
-            margin-bottom: 0px;
-        }
-
-        .p0 {
-            text-align: left;
-            padding-left: 233px;
-            /*margin-top: 96px;*/
             margin-bottom: 10px;
         }
 
@@ -170,7 +165,6 @@
             padding-left: 215px;
             margin-top: 10px;
             margin-bottom: 10px;
-        
         }
 
         .p4 {
@@ -237,7 +231,7 @@
 
         .p12 {
             text-align: left;
-            padding-left: 9px;
+            padding-left: 3px;
             margin-top: 0px;
             margin-bottom: 0px;
         }
@@ -415,6 +409,13 @@
             border-bottom: 1px solid #0c0606;
             padding: 5px;
         }
+
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
@@ -430,24 +431,8 @@
         <DIV id="page_1">
             <DIV class="dclr"></DIV>
             <p class="p0 ft0" style="font-weight: bolder;margin-left:-5%">Notice of Employee Separation</p>
-            <p class="p1 ft1">Effective Date of Change <input type="text" value="@Model.EffectiveDateOfChange.Value.ToShortDateString()" id="effectivedate" /> Eligible for Rehire 
-                                                       <select id="rehire">
-                                                           @{
-                                                               if (Model.EligibleForReHire == true)
-                                                               {
-                                                                   <option selected value="true"> Yes </option>
-                                                                   <option value="false"> No </option>
-                                                               }
-                                                               else
-                                                               {
-                                                                   <option  value="true"> Yes </option>
-                                                                   <option selected value="false"> No </option>
-                                                               }
-
-
-                                                           }
-
-                                                       </select>
+            <p class="p1 ft1">Effective Date of Change <input type="text" value="@Model.EffectiveDateOfChange.Value.ToShortDateString()" id="effectivedate" /> Eligible for Rehire  <input type="text" value="@Model.EligibleForReHire" readonly />
+                                                     
             
             </p>
             <p class="p1 ft1">Property Name <input type="text" id="propertyname" value="@Model.PropertyName" style="width:30%" /> Property Number<input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:40%" /></p>
@@ -807,14 +792,11 @@
                     <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
             </TABLE>
-            <P class="p11 ft1">**What Policy specifically was violated? <input value="@Model.Policty_Voilated" type="text" id="polictyvoilated1" style="width:60%" /></P>
-            <P class="p12 ft1"><input type="text" id="polictyvoilated2" style="width:95%" /></P>
-            <P class="p13 ft1">Additional Remarks <input type="text" id="remarks1" value="@Model.AdditionalRemarks" style="width:78%" /></P>
-            <P class="p14 ft1"><input type="text" id="remarks2" style="width:96%" /></P>
-            <P class="p15 ft8">(Documentation Available?<input type="text" value="@Model.DocumentationAvailable" id="documentsavailable1" style="width:72%" /></P>
-            <P class="p16 ft1"><input type="text" id="documentsavailable2" style="width:96%" /></P>
-            <P class="p17 ft1">Warnings Given? Dates?) <input type="text" value="@Model.WarningGiven_Dates" id="warningsgiven1" style="width:73%" /></P>
-            <P class="p14 ft1"><input type="text" id="warningsgiven2" style="width:96%" /></P>
+            <P class="p11 ft1">**What Policy specifically was violated?  </P>
+            <P class="p12 ft1"> @Model.Policty_Voilated </P>
+            <P class="p13 ft1">Additional Remarks  </P>
+            <P class="p14 ft1"> @Model.AdditionalRemarks </P>
+         
             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned">
     @{
 
@@ -830,7 +812,7 @@
             <option selected value="false"> No </option>
         }
     }
-</select><SPAN style="padding-left:148px;">2 weeks’ notice given? <select id="noticegiven">
+</select><SPAN style="padding-left:10px;">2 weeks’ notice given? <select id="noticegiven">
     @{
 
         if (Model.C2WeeeksNoticeGiven == true)
@@ -844,7 +826,23 @@
             <option selected value="false"> No </option>
         }
     }
-</select></SPAN></P>
+</select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom">
+
+    @{
+
+        if (Model.C2WeeksCompleted == true)
+        {
+            <option selected value="true"> Yes </option>
+            <option value="false"> No </option>
+        }
+        else
+        {
+            <option value="true"> Yes </option>
+            <option selected value="false"> No </option>
+        }
+    }
+
+</select></SPAN> </P>
             <P class="p13 ft9"><SPAN class="ft1">Should vacation be paid out? <select id="vacationpaid">
     @{
 
@@ -860,12 +858,10 @@
         }
     }
 </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" style="width:10%" />)</P>
-            <P class="p17 ft1">Immediate Supervisor’s Signature: <input type="text" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
-            <P class="p13 ft1">Senior Manager’s Signature: <input type="text" name="name" value="@Model.SMSignature" />Date: <input type="text" name="name" value="@Model.SMDate.Value.ToShortDateString()" /></P>
-            <P class="p17 ft1">Human Resources Manager’s Signature: <input type="text" name="name" value="@Model.HRMSignature" /> Date: <input type="text" name="name" value="@Model.HRMDate.Value.ToShortDateString()" /></P>
-            <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input value="@Model.Notes_Comments" type="text" id="notes1" style="width:82%" /></P>
-            <P class="p14 ft1"><input type="text" id="notes2" style="width:96%;" /></P>
-            <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
+            <P class="p17 ft1">Supervisor’s Signature: <input type="text" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
+         <P class="p19 ft1"><SPAN class="ft10">Notes/Comments</SPAN>: <input value="@Model.Notes_Comments" type="text" id="notes1" style="width:82%" /></P>
+          
+            <P class="p20 ft11" style="margin-top:15px;">Once completed, send to HRNotifications@carrollmg.com</P>
             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
         </DIV>
     </div>

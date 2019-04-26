@@ -47,83 +47,127 @@
                         <TD class="tr0 td1"><P class="p0 ft3"><SPAN class="ft2"> Date: </SPAN><input type="text" id="datechoosen" value="@Model.Date.Value.ToShortDateString()" /> </P></TD>
                     </TR>
                     <TR>
-                        <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0"> Requestor’s Name & Position </SPAN>: <input type="text" id="requestorname"  value="@Model.RequestorName"/></P></TD>
+                        <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0"> Requestor’s Name & Position </SPAN>: <input type="text" id="requestorname" value="@Model.RequestorName" /></P></TD>
                         <TD class="tr1 td1"><P class="p0 ft4">&nbsp;</P></TD>
                     </TR>
                 </TABLE>
-                <P class="p1 ft0">Position (please indicate number of requested open needs for each position for this property):</P>
-                <P class="p2 ft1"> @{ if (Model.PositionCombined.Contains("Property Manager")) { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> } else { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                }  Property Manager</P>
-                <P class="p3 ft1">
-                    @{ if (Model.PositionCombined.Contains("Assistant Property Manager"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                                }  Assistant Property Manager
-                            </P>
-                <P class="p2 ft1">
-                    @{ if (Model.PositionCombined.Contains("Leasing Manager"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    }  Leasing Manager
-                </P>
-                <P class="p3 ft1">
-                    @{ if (Model.PositionCombined.Contains("Leasing Consultant"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    }  Leasing Consultant
-                </P>
-                <P class="p2 ft1">
-                    @{ if (Model.PositionCombined.Contains("Maintenance Supervisor"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    } Maintenance Supervisor
-                </P>
-                <P class="p3 ft1">
-                    @{ if (Model.PositionCombined.Contains("Maintenance Technician"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    }  Maintenance Technician
-                </P>
-                <P class="p2 ft1">
-                    @{ if (Model.PositionCombined.Contains("Groundskeeper"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    }  Groundskeeper
-                </P>
-                <P class="p3 ft1">
-                    @{ if (Model.PositionCombined.Contains("Housekeeper"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    }  Housekeeper
-                </P>
-                <P class="p2 ft1">
-                    @{ if (Model.PositionCombined.Contains("Other"))
-                        { <input type="checkbox" class="chkposition" checked id="chkposition" value="Property Manager" /> }
-                        else
-                        { <input type="checkbox" class="chkposition" id="chkposition" value="Property Manager" /> }
-                    } Other: <input type="text" id="txtother" value="@Model.PositionOther" />
-                </P>
-                <P class="p1 ft0">Circle One: <SPAN class="ft1">
-    @{
-        if (@Model.ChkNewPosition == true)
-        {
-            <input type="radio" name="position" class="" id="chknewposition" checked />
-        }
-        else
-        {
-            <input type="radio" name="position" class="" id="chknewposition" />
-        }
+              
+                @if(@Model.PositionCombined.ToString() != "")
+                {
 
-    }
-    New Position
-</SPAN></P>
+                <table style="width:60%;margin:20px;">
+                    <thead><tr style="width:70%;"><th> Position  </th> <th> How Many</th></tr></thead>
+                    <tbody>
+                        @{ if (Model.PositionCombined.Contains("Property Manager"))
+                            {
+
+                                <tr> <td>  Property Manager  </td><td> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
+
+                            }
+
+                            if (Model.PositionCombined.Contains("Assistant Property Manager"))
+                            {
+                                <tr>
+                                    <td> Assistant Property Manager  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Assistant Property Manager--")) + 28, 1)
+                                    </td>
+                                </tr>
+                            }
+                       if (Model.PositionCombined.Contains("Leasing Manager"))
+                            {
+                                <tr>
+                                    <td> Leasing Manager  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Manager--")) + 17, 1)
+                                    </td>
+                                </tr>
+                            }
+
+                      if (Model.PositionCombined.Contains("Leasing Consultant"))
+                            {
+                                <tr>
+                                    <td>  Leasing Consultant  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Consultant")) + 20, 1)
+                                    </td>
+                                </tr>
+                            }
+                       if (Model.PositionCombined.Contains("Maintenance Supervisor"))
+                            {
+                                <tr>
+                                    <td> Maintenance Supervisor  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Supervisor")) + 24, 1)
+                                    </td>
+                                </tr>
+                            }
+
+                            if (Model.PositionCombined.Contains("Maintenance Technician"))
+                            {
+                                <tr>
+                                    <td> Maintenance Technician  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Technician")) + 24, 1)
+                                    </td>
+                                </tr>
+                            } 
+                            if (Model.PositionCombined.Contains("Groundskeeper"))
+                            {
+                                <tr>
+                                    <td> Groundskeeper</td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Groundskeeper")) + 15, 1)
+                                    </td>
+                                </tr>
+                            } 
+                            if (Model.PositionCombined.Contains("Housekeeper"))
+                            {
+                                <tr>
+                                    <td> Housekeeper  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Housekeeper")) + 13, 1)
+
+                                    </td>
+                                </tr>
+                            }
+
+                            if (Model.PositionCombined.Contains("Other"))
+                            {
+                                <tr>
+                                    <td>  @Model.PositionOther  </td>
+                                    <td>
+                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Other--")) + 7, 1)
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                        
+
+
+                    </tbody>
+                </table>
+
+                }
+
+              
+                <P class="p1 ft0">
+                    Circle One: <SPAN class="ft1">
+                        @{
+                            if (@Model.ChkNewPosition == true)
+                            {
+                                <input type="radio" name="position" class="" id="chknewposition" checked />
+                            }
+                            else
+                            {
+                                <input type="radio" name="position" class="" id="chknewposition" />
+                            }
+
+                        }
+                        New Position
+                    </SPAN>
+                </P>
                 <P class="p4 ft1">
                     @{
                         if (@Model.ChkReplacementPosition == true)
@@ -138,54 +182,56 @@
                         }
                     } Replacement Position
                 </P>
-                            
-<P class="p5 ft1">Name of Person(s) Replacing: <input type = "text" id="replaceperson" value="@Model.ReplacingPerson" /> </P>
-<P class="p1 ft1">
-    <SPAN class="ft0">Post to: </SPAN>   @{
-        if (@Model.ChkCarrollCareersIndeed == true)
-        {
-            <input type="checkbox" id="postindeed" checked />
-        }
-        else
-        {
-            <input type="checkbox" id="postindeed" />
-        }
-    } Carroll Careers/ Indeed </P>
+
+                <P class="p5 ft1">Name of Person(s) Replacing: <input type="text" id="replaceperson" value="@Model.ReplacingPerson" /> </P>
+                <P class="p1 ft1">
+                    <SPAN class="ft0">Post to: </SPAN>   @{
+                        if (@Model.ChkCarrollCareersIndeed == true)
+                        {
+                            <input type="checkbox" id="postindeed" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="postindeed" />
+                        }
+                    } Carroll Careers/ Indeed
+                </P>
 
 
 
-<P class="p6 ft1">
-    @{
-        if (@Model.ChkApartmentAssociation == true)
-        {
-            <input type="checkbox" id="postassociation" checked />
-        }
-        else
-        {
-            <input type="checkbox" id="postassociation" />
-        }
-    } Apartment Association
-</P>
-<P class="p4 ft1">
-    @{
-        if (@Model.ChkOtherPost == true)
-        {
-                 <input type="checkbox" id="chkotherpost" checked />
-        }
-        else
-        {
-               <input type="checkbox" id="chkotherpost" />
-        }
-    }  Other:   <input type="text" id="otherpost"  value="@Model.PostOther"/>
-</P>
-                        <P class="p7 ft1">Special Instructions(i.e.confidential posting, etc.)</P>
-                        <P class="p2 ft1"><p> @Model.SpecailInstructions </p> </P>                       
-                        <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
-                        <P class="p7 ft1">Requisition Number(s): <input type = "text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
-                        <P class="p7 ft1">Date Posted:<input type = "text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" /></P>
-                        <P class="p7 ft1">Notes:</P>
-                        <P class="p3 ft1">@Model.Notes</P>
-                                              
+                <P class="p6 ft1">
+                    @{
+                        if (@Model.ChkApartmentAssociation == true)
+                        {
+                            <input type="checkbox" id="postassociation" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="postassociation" />
+                        }
+
+                    } Apartment Association
+                </P>
+                <P class="p4 ft1">
+                    @{
+                        if (@Model.ChkOtherPost == true)
+                        {
+                            <input type="checkbox" id="chkotherpost" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="chkotherpost" />
+                        }
+                    }  Other:   <input type="text" id="otherpost" value="@Model.PostOther" />
+                </P>
+                <P class="p7 ft1">Special Instructions(i.e.confidential posting, etc.)</P>
+                <P class="p2 ft1"><p> @Model.SpecailInstructions </p> </P>
+                <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
+                <P class="p7 ft1">Requisition Number(s): <input type="text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
+                <P class="p7 ft1">Date Posted:<input type="text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" /></P>
+                <P class="p7 ft1">Notes:</P>
+                <P class="p3 ft1">@Model.Notes</P>
+
             </div>
         </form>
     </div>

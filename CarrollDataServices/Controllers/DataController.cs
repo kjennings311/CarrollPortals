@@ -321,7 +321,12 @@ namespace Carroll.Data.Services.Controllers
             PayrollStatusChangeNotice fa = new PayrollStatusChangeNotice();
             fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
-         //   fa.TypeOfChange = HttpContext.Current.Request.Params["typeofchange"].ToString();
+            fa.ShowPayChange = Convert.ToBoolean(HttpContext.Current.Request.Params["showpay"].ToString());
+            fa.ShowPropertyChange = Convert.ToBoolean(HttpContext.Current.Request.Params["showproperty"].ToString());
+            fa.ShowAllowances = Convert.ToBoolean(HttpContext.Current.Request.Params["showall"].ToString());
+            fa.ShowDivisionOfLabor = Convert.ToBoolean(HttpContext.Current.Request.Params["showlab"].ToString());
+            fa.ShowLeaves = Convert.ToBoolean(HttpContext.Current.Request.Params["showleave"].ToString());
+            //   fa.TypeOfChange = HttpContext.Current.Request.Params["typeofchange"].ToString();
             fa.FromPropNum =Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
             fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
             fa.FromManager = HttpContext.Current.Request.Params["frommanager"].ToString();
@@ -676,7 +681,7 @@ namespace Carroll.Data.Services.Controllers
 
             foreach (var item in _service.GetAllCarrollPayPerilds())
             {
-                _users.Add(new KeyValuePair(item.PeriodId.ToString(), item.PayFrom.Value.ToShortDateString()+" - "+item.PayTo.Value.ToShortDateString()));
+                _users.Add(new KeyValuePair(item.PayFrom.Value.ToShortDateString()+" - "+ item.PayTo.Value.ToShortDateString(), item.PayFrom.Value.ToShortDateString() + " - " + item.PayTo.Value.ToShortDateString()));
             }
             return _users;
 

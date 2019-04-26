@@ -1,7 +1,7 @@
 ﻿
- // var $BaseApiUrl = "http://localhost:1002/"; 
+//  var $BaseApiUrl = "http://localhost:1002/"; 
 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -2880,7 +2880,7 @@ function LoadPayRoles() {
 
         }
         // now let's load options into select box
-        $('#beginpayperiod').append(options);
+        $('#beginpayperiod').html(options);
 
     });
 }

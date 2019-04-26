@@ -180,5 +180,10 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
+    
+        public virtual ObjectResult<string> proc_getpayperiodsforcurrentyear()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("proc_getpayperiodsforcurrentyear");
+        }
     }
 }
