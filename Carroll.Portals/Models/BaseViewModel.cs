@@ -11,5 +11,6 @@ namespace Carroll.Portals.Models
         public string UserId { get; set; }
         public string RoleType { get; set; }
         public string Name { get; set; }
+        public string PropertyId { get; set; }
     }
 }

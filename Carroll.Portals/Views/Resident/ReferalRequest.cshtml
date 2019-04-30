@@ -1,0 +1,754 @@
+﻿@{
+    ViewBag.Title = "Referal Request";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <ol class="breadcrumb" style="padding: 8px 15px;">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li class="active">
+                <strong> Referal Request </strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
+
+                <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Referal Request </b></h1>
+
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                {
+
+                    <div class="ibox-tools" style="margin-top:-55px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
+
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('ReferalRequest'); ">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:60%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="padding: 0px;
+    border: none;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;display:none;" id="gridSystemModalLabel">
+                                    Referal Request Sheet
+                                </h1>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;padding-left:110px;
+    border: 2px solid black;">
+                                    <form id="submitform" onsubmit="return false;">
+                                        <p style="line-height: 99%; text-autospace: none; margin: 0cm 0cm .0001pt 3.0pt;"><strong><span style="font-size: 18.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL SHEET</span></strong></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 19.1pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <table style="margin-left: .5pt; border-collapse: collapse;" width="712">
+                                            <tbody>
+                                                <tr style="height: 17.65pt;">
+                                                    <td style="width: 209.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="279">
+                                                        <p style="line-height: normal; text-autospace: none; margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Code: </span></strong></p>
+                                                    </td>
+                                                    <td style="width: 325.0pt; border: solid windowtext 1.0pt; border-left: none; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="433">
+                                                        <p style="line-height: normal; text-autospace: none; margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Name: </span></strong></p>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 16.65pt;">
+                                                    <td style="width: 209.0pt; border: solid windowtext 1.0pt; border-top: none; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="279">
+                                                        <p style="line-height: 16.6pt; text-autospace: none; margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Code: </span></strong></p>
+                                                    </td>
+                                                    <td style="width: 325.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="433">
+                                                        <p style="line-height: 16.6pt; text-autospace: none; margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Name: </span></strong></p>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 70.4pt;">
+                                                    <td style="width: 209.0pt; border-top: none; border-left: solid windowtext 1.0pt; border-bottom: solid windowtext 1.0pt; border-right: none; padding: 0cm 0cm 0cm 0cm; height: 70.4pt;" width="279">
+                                                        <p style="margin-bottom: .0001pt; line-height: 16.6pt; text-autospace: none;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">&nbsp; Notes:</span></strong></p>
+                                                    </td>
+                                                    <td style="width: 325.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 70.4pt;" width="433">
+                                                        <p style="margin-bottom: .0001pt; line-height: normal; text-autospace: none;"><span style="font-size: 9.0pt; font-family: 'Times New Roman',serif; color: windowtext;">&nbsp;</span></p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p><strong><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></strong></p>
+                                        <table width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) _________________________ and (Resident&rsquo;s Name) ________________________ , concerning the referral of (Referred Resident) ____________________________ in unit number ________________.&nbsp; </strong></p>
+                                                        <p style="text-indent: 36.0pt;"><strong>In consideration of the referral, the Property now agrees to credit rent of the referring resident for &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;$ __________ as a referral bonus. This amount will be credited after the referred resident has lived on-site for a full 30 days and has paid a full month&rsquo;s rent with no concessions. &nbsp;&nbsp;</strong></p>
+                                                        <p style="text-indent: 36.0pt;"><strong>&nbsp;</strong></p>
+                                                        <p><strong>&nbsp;Submit for Rent Credit: </strong></p>
+                                                        <p style="text-indent: -18.0pt;"><span style="font-family: Symbol;"><span style="font: 7.0pt 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><strong>Copy of application or KNOCK listing the referring resident&rsquo;s name. &nbsp;</strong></p>
+                                                        <p style="text-indent: -18.0pt;"><span style="font-family: Symbol;"><span style="font: 7.0pt 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><strong>Copy of executed lease of referred resident. </strong></p>
+                                                        <p style="text-indent: -18.0pt;"><span style="font-family: Symbol;"><span style="font: 7.0pt 'Times New Roman';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><strong>Completed Resident Referral Sheet (this form). </strong></p>
+                                                        <p>&nbsp;</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p style="margin-bottom: .0001pt; line-height: 10.0pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 10.0pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 19.95pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 99%; text-autospace: none;"><span style="font-size: 12.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;_____________________________ Dated ___________</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 17.25pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: normal; tab-stops: 165.0pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Century Gothic',sans-serif;">Property Manager&rsquo;s Approval:</span> <span style="font-size: 12.0pt; font-family: 'Century Gothic',sans-serif;">______________________________ Dated ___________</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 10.0pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 10.0pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 10.0pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 10.05pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 99%; text-autospace: none;"><strong><span style="font-size: 14.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">ACCOUNTING USE ONLY:</span></strong></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 8.7pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 99%; text-autospace: none;"><span style="font-size: 14.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 99%; text-autospace: none;"><span style="font-size: 14.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">Received: __________ Credit Applied: ___________________</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: 99%; text-autospace: none;"><span style="font-size: 12.0pt; line-height: 99%; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: .1pt; text-autospace: none;"><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                                        <p style="margin-bottom: .0001pt; line-height: normal; text-autospace: none;">&nbsp;</p>
+                                        <p style="margin-bottom: .0001pt; line-height: normal; text-autospace: none;">&nbsp;</p>
+                                        <p>&nbsp;</p>
+                                        <p><strong><span style="font-size: 14.0pt; line-height: 107%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL PROGRAM</span></strong></p>
+                                        <p style="text-indent: 36.0pt;">The Resident Referral Program is designed to reward our current residents for referring others to a Carroll Community. Each resident will receive a credit to their ledger for the referral bonus amount, which is set on a property-by-property basis.</p>
+                                        <p><strong>Residents are eligible to receive a referral fee after the described requirements are met:</strong></p>
+                                        <ul>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Referred Applicant(s) must add referring residents&rsquo; name on application or KNOCK during their visit.</li>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Referred Applicant(s) must be approved per the community requirements and execute a valid minimum six-month lease with a Carroll Property.</li>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Referred Resident(s) must establish a minimum 30-day residency and pay one full month&rsquo;s rent (full-month concessions are not considered payments).</li>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Referred or Referring Resident(s) cannot at any time withhold payments. If the referring residents&rsquo; rent is due and credit has not been posted to the ledger, the resident must pay rent in full and the credit will be applied to the following month.</li>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">All appropriate documents must be submitted to the Accounts Payable Team before a credit can be applied to the referring tenant(s) ledger.</li>
+                                        </ul>
+                                        <p>&nbsp;</p>
+                                        <p><strong>Submitting Documents: </strong></p>
+                                        <p>Please submit the following documents to have the credit applied:</p>
+                                        <ol>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Copy of the referred applicants&rsquo; application or KNOCK referring tenant(s) name.</li>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Copy of referred residents Terms and Signature Lease pages.</li>
+                                            <li style="text-indent: -18.0pt; line-height: 106%;">Completed Referral Request Form.</li>
+                                        </ol>
+                                        <p>&nbsp;</p>
+                                        <p><strong>Applying Credits: </strong></p>
+                                        <p>All applied credits will be added to the referring resident(s) ledger by the Accounts Payable Department.&nbsp; Once all supporting documentations have been uploaded to the resident(s) profile as an attachment, please notify your properties Accounts Payable personnel via email as follows:</p>
+                                        <p style="margin-left: 36.0pt;"><strong>Subject</strong>: Resident Referral &ndash; (Last Name)</p>
+                                        <p style="margin-left: 36.0pt;"><strong>Body</strong>: Please process the credit (amount) for (Last Name).</p>
+                                        <p style="margin-left: 36.0pt;">All required documents have been uploaded.</p>
+                                        <p style="margin-left: 36.0pt;">Thank You.</p>
+                                        <p>Once the team receives the appropriate documents, a credit charge for the approved amount will be added to the resident&rsquo;s ledger and a confirmation email will be sent to the property within 48 hours of receipt.</p>
+                                        <p>&nbsp;</p>
+                                        <p>&nbsp;</p>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table  dtprops" width="100%"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+    <style type="text/css">
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        table
+        .c0 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c6 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: italic
+        }
+
+        .c9 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 12pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c7 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 14pt;
+            font-style: normal
+        }
+
+        .c4 {
+            color: #000000;
+            font-weight: 700;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Times";
+            font-style: normal
+        }
+
+        .c5 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: justify
+        }
+
+        .c1 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: left
+        }
+
+        .c2 {
+            background-color: #ffffff;
+            max-width: 468pt;
+            padding: 72pt 72pt 72pt 72pt
+        }
+
+        .c8 {
+            margin-left: 144pt;
+            text-indent: 36pt
+        }
+
+        .c3 {
+            height: 11pt
+        }
+
+        .title {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 36pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 18pt;
+            color: #666666;
+            font-size: 24pt;
+            padding-bottom: 4pt;
+            font-family: "Georgia";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        /*li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        /*p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        h1 {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 24pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 18pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 14pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 12pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 12pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 11pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 11pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 10pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 10pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function ()
+        {
+            var leaseid = "";
+
+            GetAllHRFORMs('New Hire Notice');
+
+            $("input").change(function (e)
+            {
+                e.preventDefault();
+
+                if ($(this).val() == "") {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+
+
+
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
+
+                if ($("#startdate").val() == "") {
+                    errormsgsummary += "<li> Please Enter Date </li>";
+                    $("#startdate").addClass('has-error');
+                    if (control == "")
+                        control = $("#startdate");
+                }
+
+
+
+                if (!validateEmail($("#email").val()))
+                {
+                    errormsgsummary += "<li> Please Enter Valid Email Address </li>";
+                    $("#email").addClass('has-error');
+                    if (control == "")
+                        control = $("#email");
+                }
+
+
+
+                if ($("#manager").val() == "") {
+                    errormsgsummary += "<li> Please Enter Manager Name </li>";
+                    $("#manager").addClass('has-error');
+                    if (control == "")
+                        control = $("#manager");
+                }
+
+                if ($("#location").val() == "") {
+                    errormsgsummary += "<li> Please Enter Location </li>";
+                    $("#location").addClass('has-error');
+                    if (control == "")
+                        control = $("#location");
+                }
+
+                // check either exempt or non exemppt checked
+
+                if (!$("#exempt").is(":checked") && !$("#nonexempt").is(":checked"))
+                {
+                    errormsgsummary += "<li> Please Select Position Exempt or Non Exempt </li>";
+                    $("#exempt").addClass('has-error');
+                    if (control == "")
+                        control = $("#exempt");
+                }
+
+                // check status choosen full time or part time
+
+
+                if (!$("#fullstatus").is(":checked") && !$("#partstatus").is(":checked")) {
+                    errormsgsummary += "<li> Please Select Status Option either Full Time or Part Time </li>";
+                    $("#fullstatus").addClass('has-error');
+                    if (control == "")
+                        control = $("#fullstatus");
+                }
+
+
+
+                if ($("#salary").val() == "") {
+                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                    $("#salary").addClass('has-error');
+                    if (control == "")
+                        control = $("#salary");
+                }
+
+                //if ($("#kitorderdate").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Kit Ordered Date  </li>";
+                //    $("#kitorderdate").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#kitorderdate");
+                //}
+
+
+                //if ($("#onboardcall").val() == "") {
+                //    errormsgsummary += "<li> Please Enter OnBoard Call Date </li>";
+                //    $("#onboardcall").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#onboardcall");
+                //}
+
+                if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
+                    $("#la_Prop1per").addClass('has-error');
+                    if (control == "")
+                        control = $("#la_Prop1per");
+                }
+
+
+                if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "") {
+                    errormsgsummary += "<li> Please Enter Division Of Labout Percentage </li>";
+                    $("#la_Prop1").addClass('has-error');
+                    $("#la_Prop2").addClass('has-error');
+                    if (control == "")
+                        control = $("#la_Prop2");
+                }
+                else
+                {
+                    var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val());
+                    if (total < 100)
+                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                }
+
+                if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) == 100))
+                {
+
+                    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
+                    {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                        $("#la_Prop1").addClass('has-error');
+
+                        if (control == "")
+                            control = $("#la_Prop1");
+                    }
+
+
+                    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                        $("#la_Prop2").addClass('has-error');
+
+                        if (control == "")
+                            control = $("#la_Prop2");
+                    }
+
+
+                }
+
+                if (errormsgsummary != "")
+                {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+                    $('#myModal').modal('hide');
+
+                    $(".alert").html('Processing');
+                    $('#toastnotification').modal('show');
+                    $("#Submit").prop('disabled', false);
+
+                    var insertForm = new FormData();
+                    insertForm.append('empname', $("#empname").val());
+                    insertForm.append('startdate', $("#startdate").val());
+                    insertForm.append('securitynumber', $("#securitynumber").val());
+                    insertForm.append('email', $("#email").val());
+                    insertForm.append('manager', $("#manager").val());
+                    insertForm.append('location', $("#location").val());
+
+                    if ($("#exempt").is(":checked"))
+                    {
+                        insertForm.append('exempt', '1');
+                    }
+                    else
+                    {
+                        insertForm.append('exempt', '0');
+                    }
+
+                    if ($("#nonexempt").is(":checked"))
+                    {
+                        insertForm.append('nonexempt', '1');
+                    }
+                    else {
+                        insertForm.append('nonexempt', '0');
+                    }
+
+                    var status = "";
+
+                    if ($("#fullstatus").is(":checked"))
+                    {
+                        status = "FULL TIME";
+                    }
+                    else if ($("#partstatus").is(":checked"))
+                    {
+                            status = "PART TIME";
+                    }
+
+                    var saltime = "";
+
+                    if ($("#salhourly").is(":checked"))
+                    {
+                        saltime = "Hourly";
+                    }
+                    else if ($("#annualsalary").is(":checked"))
+                    {
+                        saltime = "Annually";
+                    }
+
+                    insertForm.append('position', $("#position").val());
+                    insertForm.append('status',status);
+                    insertForm.append('salary', $("#salary").val());
+                    insertForm.append('salarytime', saltime);
+                    insertForm.append('prop1', $("#la_Prop1").val());
+                    insertForm.append('prop1per', $("#la_Prop1per").val());
+                    insertForm.append('prop2', $("#la_Prop2").val());
+                    insertForm.append('prop2per', $("#la_Prop2per").val());
+
+                    if ($("#kitorderdate").is(":checked"))
+                    {
+                        insertForm.append('kitordered', 'Yes');
+                    }
+                    else if ($("#kitorderdate1").is(":checked"))
+                    {
+                        insertForm.append('kitordered', 'No');
+                    }
+
+
+                //    insertForm.append('callscheduled', $("#onboardcall").val());
+                    insertForm.append('allocation', $("#allocation").val());
+                    insertForm.append('esignature', $("#esignature").val());
+                    insertForm.append('edate', $("#edate").val());
+                    insertForm.append('mdate', $("#mdate").val());
+                    insertForm.append('msignature', $("#msignature").val());
+                    insertForm.append('rpmsignature', $("#rpmsignature").val());
+                    insertForm.append('rpmdate', $("#rpmdate").val());
+
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertEmployeeNewHireNotice",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
+
+                            if (data['error'] == false) {
+                                leaseid = data['insertedId'];
+
+                                $("#empname").val('');
+                                $("#startdate").val('');
+                                $("#securitynumber").val('');
+                                $("#email").val('');
+                                $("#manager").val('');
+                                $("#location").val('');
+                                $("#exempt").val('');
+                                $("#nonexempt").val('');
+                                $("#position").val('');
+                                $("#status1").val('');
+                                $("#salary").val('');
+                                $("#kitorderdate").val('');
+                                $("#onboardcall").val('');
+                                $("#allocation").val('');
+                                $("#status").html('');
+                                document.getElementById("submitform").reset();
+
+                                GetAllHRFORMs('New Hire Notice');
+                                $(".alert").html('Record Successfully Updated !');
+                                $('#toastnotification').modal('show');
+
+
+                                setTimeout(function () {
+
+                                    $("#print").attr('disabled', false);
+                                    $("#pdf").attr('disabled', false);
+                                    $("#Submit").attr('disabled', false);
+                                    $('#toastnotification').modal('hide');
+                                }, 3000);
+                            }
+                            else {
+                                $("#status").html(data['errorMsg']);
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
+                    });
+
+                }
+
+
+            });
+
+
+
+      });
+
+    </script>
+
+}

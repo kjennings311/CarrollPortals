@@ -194,19 +194,27 @@ namespace Carroll.Data.Services.Controllers
                     if (_field.FieldValidationType == FieldValidationTypes.DateTime)
                         try
                         {
-                            if( id == EntityType.FormGeneralLiabilityClaim || id == EntityType.FormPropertyDamageClaim || id == EntityType.FormMoldDamageClaim)
-                            {
-                                obj.SetPropertyValue(_field.FieldName, Convert.ToDateTime(_field.FieldValue.Trim()));
-                            }
-                            else
-                            {
+                            //if( id == EntityType.FormGeneralLiabilityClaim || id == EntityType.FormPropertyDamageClaim || id == EntityType.FormMoldDamageClaim)
+                            //{
+                            //    obj.SetPropertyValue(_field.FieldName, Convert.ToDateTime(_field.FieldValue.Trim()));
+                            //}
+                            //else
+                            //{
 
-                         
-                            if(DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy", null) != null)
-                            obj.SetPropertyValue(_field.FieldName, DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy", null));
-                            else
+                            if(Convert.ToDateTime(_field.FieldValue.Trim()) != null)
+                            {
                                 obj.SetPropertyValue(_field.FieldName, Convert.ToDateTime(_field.FieldValue.Trim()));
                             }
+                            else
+                            {
+                                if (DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy", null) != null)
+                                    obj.SetPropertyValue(_field.FieldName, DateTime.ParseExact(_field.FieldValue.Trim(), "MM/dd/yyyy", null));
+                                else
+                                    obj.SetPropertyValue(_field.FieldName, Convert.ToDateTime(_field.FieldValue.Trim()));
+                            }
+                         
+                          
+                            //}
                         }
                         catch (Exception ex) { }
                     else

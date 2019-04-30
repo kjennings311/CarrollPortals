@@ -1,5 +1,5 @@
 ﻿
-//  var $BaseApiUrl = "http://localhost:1002/"; 
+ // var $BaseApiUrl = "http://localhost:1002/"; 
 
 var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
@@ -41,7 +41,8 @@ function encodeImageFileAsURL(element)
     }
 }
 
-function closereviewmodal() {
+function closereviewmodal()
+{
 
     $("#reviewmodal").modal('hide'); 
 }
@@ -57,76 +58,80 @@ function submitformdata()
 
 
 
-function BindElements()
-{
+function BindElements() {
 
     $form = $('.dynamicForm');
 
+    var processing = false;
+
     $('.dynamicForm #savechanges').click(function ()
     {
-        if ($("#homeval").length > 0)
-        {
-            if ($("#homeval").val() == '1')
-            {
-                $("#reviewmodal").modal('show'); 
-                return false;
-            }
-        }
-        
-        $('.dynamicForm #savechanges').attr('disabled', true);
-        $('.success-message').hide();
-        $('.failure-message').hide();
-
-    //    if (!CheckFormErrors($form)) {
-
-        var $this = $(this);
-
-        var RecordId = $('.btnEdit').attr("itemId");
-        var FormName = $('.dynamicForm #savechanges').attr("formname");
-        if (RecordId == '' || RecordId=== undefined) formUrl = "api/form/GenerateForm/" + FormName;
-        else formUrl = "api/form/GenerateEditForm?entitytype=" + FormName + "&RECORDID=" + RecordId;
-
-
-     //   var formUrl = "api/form/GenerateForm/" + $('.dynamicForm #savechanges').attr("formname");
-
-        // if form is user then check if user exists with email id or not
-
-      
-        if ($('.dynamicForm #savechanges').attr("formname") == "user" && RecordId == '')
+        if (processing == false)
         {
 
-       
-        $.ajax({
-            type: "GET",
-            url: $BaseApiUrl + "api/user/checkifuserexists/",
-            data:"id="+$("#UserEmail").val(),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
-            async: false,
-            success: function (data) {
 
-                if (data == true)
-                {
-                    alert('success insdie');
-                    var _err = "<b>Please correct the following errors</b><ul>";
-
-                    _err += "<li> User with given Email Already Exists, Please Use Another </li>";
-                    $form.find($this).closest('.form-group').addClass('has-error');
-                    $form.find('#failureMessage').html(_err);
-                    $form.find('.failure-message').show('slow');
-                    ScrollToElement($form.find('.failure-message'));
-                    setTimeout(ScrollToElement($form), 3000);
-
+            if ($("#homeval").length > 0) {
+                if ($("#homeval").val() == '1') {
+                    $("#reviewmodal").modal('show');
+                    return false;
                 }
-                else
-                {
-                    return;
-                }
-               
             }
-          
-            });
-        }
+
+            $('.dynamicForm #savechanges').attr('disabled', true);
+            $('.success-message').hide();
+            $('.failure-message').hide();
+
+            //    if (!CheckFormErrors($form)) {
+
+            var $this = $(this);
+
+            var RecordId = $('.btnEdit').attr("itemId");
+            var FormName = $('.dynamicForm #savechanges').attr("formname");
+            if (RecordId == '' || RecordId === undefined) formUrl = "api/form/GenerateForm/" + FormName;
+            else formUrl = "api/form/GenerateEditForm?entitytype=" + FormName + "&RECORDID=" + RecordId;
+
+
+            //   var formUrl = "api/form/GenerateForm/" + $('.dynamicForm #savechanges').attr("formname");
+
+            // if form is user then check if user exists with email id or not
+            processing = true;
+
+            $(".modal-alert").html('Processing');
+            $('#toastnotification').modal('toggle');
+
+            if ($('.dynamicForm #savechanges').attr("formname") == "user" && RecordId == '') {
+              
+                $.ajax({
+                    type: "GET",
+                    url: $BaseApiUrl + "api/user/checkifuserexists/",
+                    data: "id=" + $("#UserEmail").val(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
+                    async: false,
+                    success: function (data) {
+
+                        if (data == true) {
+                           
+                            var _err = "<b>Please correct the following errors</b><ul>";
+
+                            _err += "<li> User with given Email Already Exists, Please Use Another </li>";
+                            $form.find($this).closest('.form-group').addClass('has-error');
+                            $form.find('#failureMessage').html(_err);
+                            $form.find('.failure-message').show('slow');
+                            ScrollToElement($form.find('.failure-message'));
+                            $(".modal-alert").html('');
+                            $('#toastnotification').modal('hide');
+                            setTimeout(ScrollToElement($form), 3000);
+
+                        }
+                        else {
+                            return;
+                        }
+
+                    }
+
+                });
+            }
 
 
             //*****************************************************************************
@@ -134,17 +139,16 @@ function BindElements()
 
             $.ajax({
                 type: "get",
-                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
+                dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
                 url: $BaseApiUrl + formUrl,
-                beforeSend: function (xhr)
-                {
+                beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
 
                 },
                 success: function (data) {
                     // var $FormElements = $formBegin;
                     var $data = data;
-                  
+
                     var $fields = $data["formFields"];
                     for (var i = 0; i < $fields.length; i++) {
                         // alert($fields[i]["fieldLabel"]+ " " + $fields[i]["fieldType"]);
@@ -152,46 +156,44 @@ function BindElements()
                         switch ($fields[i]["fieldType"]) {
                             case "Text":
                             case "LongText":
-                            case "Password":                         
-                            case "Select":                           
-                            case "Person":    
+                            case "Password":
+                            case "Select":
+                            case "Person":
                                 $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
                                 break;
                             case "Check":
-                                if ($('#' + $fields[i]["fieldName"]).prop('checked') == true)
-                                {
+                                if ($('#' + $fields[i]["fieldName"]).prop('checked') == true) {
                                     //.is(":checked")
                                     $fields[i]["fieldValue"] = true;
-                                   // console.log("check field value" + true);
+                                    // console.log("check field value" + true);
                                 }
-                                else
-                                {
+                                else {
                                     $fields[i]["fieldValue"] = false;
                                 }
                                 break;
                             case "File":
-                               // console.log('before assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
-                                if(imagebase64!="")
-                                $fields[i]["fieldValue"] = imagebase64;
+                                // console.log('before assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
+                                if (imagebase64 != "")
+                                    $fields[i]["fieldValue"] = imagebase64;
 
-                               // console.log('after assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
+                                // console.log('after assign ' + $fields[i]["fieldValue"] + " " + imagebase64);
                                 break;
                             case "Hidden":
                                 //// Let's populate Created and CreatedName'
                                 //switch ($fields[i]["fieldName"].toLowerCase()) {
-                                
+
                                 //    case "createdby":
-                                       
-                                 
+
+
                                 //            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                     
+
                                 //                                                break;
                                 //    case "createdbyname":
-                                      
-                                      
+
+
                                 //            $fields[i]["fieldValue"] = $('#' + $fields[i]["fieldName"]).val();
-                                  
-                                        
+
+
                                 //        break;
                                 //    case "UserPhoto":
                                 //        $fields[i]["fieldValue"] = imagebase64;
@@ -205,28 +207,28 @@ function BindElements()
                             default:
 
                                 break;
-                                
+
                         }
-                        
+
                     }
 
-                    
-                    
+
+
                     // Let's set user id field so we can use that as a reference
-                 //   $data["userId"] = User.UserId + "~" + User.FirstName + " " + User.LastName
+                    //   $data["userId"] = User.UserId + "~" + User.FirstName + " " + User.LastName
                     //  alert(JSON.stringify($data));
                     // now that we have updated Form record.. Let's pass it back to server with all  data for validation..
 
-                /**************************************************************************************/
+                    /**************************************************************************************/
 
-                    console.log($data);
-                    
+                  
+
                     $.ajax({
                         type: "POST",
                         url: $BaseApiUrl + "api/Form/CreateUpdateFormData/" + $('.dynamicForm #savechanges').attr("formname"),
                         data: JSON.stringify($data),
                         contentType: "application/json; charset=utf-8",
-                        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
+                        dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
                         async: false,
                         statusCode: {
                             200: function (data) {
@@ -241,10 +243,10 @@ function BindElements()
                                     //$form.find('.success-message').show('slow');
                                     //ScrollToElement($form.find('.success-message'));
                                     $('.dynamicForm #savechanges').attr('disabled', false);
-                                    $(".alert").html('Record Successfully Updated !');
-                                    $('#toastnotification').modal('show'); 
+                                    $(".modal-alert").html('Record Successfully Updated');
+                                    $('#toastnotification').modal('show');
                                     // go back to previous screen after 8 seconds
-                                   setTimeout(function () {  location.reload(); } , 3000);
+                                    // setTimeout(function () { location.reload(); }, 3000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -252,7 +254,7 @@ function BindElements()
                                 }
                             },
 
-                           
+
                             500: function (data) {
                                 alert(data.responseText);
                             },
@@ -270,7 +272,11 @@ function BindElements()
                                     $form.find('#failureMessage').html(_err);
                                     $form.find('.failure-message').show('slow');
                                     ScrollToElement($form.find('.failure-message'));
+                                    $('.dynamicForm #savechanges').attr('disabled', false);
                                     setTimeout(ScrollToElement($form), 3000);
+                                    $(".modal-alert").html('');
+                                    $('#toastnotification').modal('hide');
+
                                 } catch (err) { alert(err.message); }
 
                             }
@@ -278,87 +284,21 @@ function BindElements()
                     });
                     /******************************update/create end************************************/
 
+                    processing = false;
                 }
 
             });
 
-            //*****************************************************************************
+        }
 
-            //switch ($('.dynamicForm #savechanges').attr("formname")) {
-            //    case "property":
-            //        // Create property object that we can post to the server
-
-            //        var jsonObject = {};
-            //        jsonObject["PropertyName"] = $('.dynamicForm #PropertyName').val();
-            //        jsonObject["PropertyNumber"] = $('.dynamicForm #PropertyNumber').val();
-            //        jsonObject["LegalName"] = $('.dynamicForm #LegalName').val();
-            //        jsonObject["Units"] = $('.dynamicForm #Units').val();
-            //        jsonObject["TaxId"] = $('.dynamicForm #TaxId').val();
-            //        jsonObject["PropertyAddress"] = $('.dynamicForm #PropertyAddress').val();
-            //        jsonObject["City"] = $('.dynamicForm #City').val();
-            //        jsonObject["State"] = $('.dynamicForm #State').val();
-            //        jsonObject["ZipCode"] = $('.dynamicForm #ZipCode').val();
-            //        jsonObject["PhoneNumber"] = $('.dynamicForm #PhoneNumber').val();
-            //        jsonObject["PropertyEmail"] = $('.dynamicForm #PropertyEmail').val();
-            //        jsonObject["AcquisitionDate"] = $('.dynamicForm #AcquisitionDate').val();
-            //        jsonObject["DispositionDate"] = $('.dynamicForm #DispositionDate').val();
-            //        jsonObject["IsOwned"] = $('.dynamicForm #IsOwned').val();
-            //        jsonObject["IsActive"] = $('.dynamicForm #IsActive').val();               
-            //        jsonObject["VicePresident"] = $('.dynamicForm #VicePresident').val();
-            //        jsonObject["PropertyManager"] = $('.dynamicForm #PropertyManager').val();
-            //        jsonObject["RegionalManager"] = $('.dynamicForm #RegionalManager').val();
-            //        jsonObject["AssetManager1"] = $('.dynamicForm #AssetManager1').val();
-            //        jsonObject["AssetManager2"] = $('.dynamicForm #AssetManager2').val();
-            //        jsonObject["ConstructionManager"] = $('.dynamicForm #ConstructionManager').val();
-            //        jsonObject["PropertyId"] = ($('.dynamicForm #PropertyId').val() == '') ? "0" : $('.dynamicForm #PropertyId').val();
-            //        jsonObject["CreatedBy"] = User.UserId;
-            //        jsonObject["CreatedByName"] = User.FirstName + " " + User.LastName;
-            //        jsonObject["EmailAddress"] = $('.dynamicForm #PropertyEmail').val();
-
-
-
-
-            //                 $.ajax({
-            //                    type: "post",
-            //                    url: $BaseApiUrl + "api/Property/CUProperty",
-            //                    data: JSON.stringify(jsonObject),
-            //                    contentType: "application/json; charset=utf-8",
-            //                    dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
-            //                    async: true,                            
-            //                    beforeSend: function (xhr) {
-            //                        xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
-
-            //                    },
-            //                    success: function (result) {
-            //                        alert("Saved changes.");
-            //                        ToggleAdd('property');
-            //                    },
-            //                    error: function (msg) {
-            //                        // if(msg.statusCode != 401) alert('Error getting info..');
-            //                        alert("Error occured! Please try again later.");
-            //                    }
-
-            //        });
-
-            //                 break;
-            //    case "contact":
-
-            //        break;
-            //    default:
-            //        break;
-
-
-            //}
-
-
- //       }
-
-//*********
     });
+
 }
 
 
-function LoadUserProperty() {
+function LoadUserProperty()
+{
+
     var val = "";
 
     $.ajax({
@@ -499,7 +439,6 @@ function getForm(FormName, RecordId)
                         var checkedtext = "";
                         var checked = ($fields[i]["fieldValue"] == null) ? false : $fields[i]["fieldValue"];
                      
-
                         if (checked=="True") checkedtext = "checked=checked";
                         else checkedtext = "";
                      
@@ -515,8 +454,7 @@ function getForm(FormName, RecordId)
                         //Let's Load select options from websevice
                       
                         if ($fields[i]["fieldName"] == "PropertyId")
-                        {
-                          
+                        {                          
                             if (RecordId == '')
                             {                              
                                 LoadOptionsProp($fields[i]["fieldName"], dataurl, $("#UserPropertyAccess").val());

@@ -30,7 +30,7 @@ namespace Carroll.Portals.Helpers
                     bm.UserName = LoggedInUser.Current.UserEmail;
                     bm.Name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(LoggedInUser.Current.FirstName.ToLower()) + " " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(LoggedInUser.Current.LastName.ToLower());
                     bm.RoleType = LoggedInUser.AssignedRole();
-
+                    bm.PropertyId = LoggedInUser.AssignedUserProperty();
                 }
             }
             base.OnActionExecuted(filterContext);

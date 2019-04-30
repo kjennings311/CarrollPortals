@@ -266,7 +266,7 @@
         .p17 {
             text-align: left;
             padding-left: 4px;
-            margin-top: 8px;
+            margin-top: 20px;
             margin-bottom: 0px;
         }
 
@@ -430,10 +430,9 @@
         </p>
         <DIV id="page_1">
             <DIV class="dclr"></DIV>
-            <p class="p0 ft0" style="font-weight: bolder;margin-left:-5%">Notice of Employee Separation</p>
+            <p class="p0 ft0" style="font-weight: bolder;margin-left:-5%;margin-top:10px;"> Notice of Employee Separation </p>
             <p class="p1 ft1">Effective Date of Change <input type="text" value="@Model.EffectiveDateOfChange.Value.ToShortDateString()" id="effectivedate" /> Eligible for Rehire  <input type="text" value="@Model.EligibleForReHire" readonly />
-                                                     
-            
+             
             </p>
             <p class="p1 ft1">Property Name <input type="text" id="propertyname" value="@Model.PropertyName" style="width:30%" /> Property Number<input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:40%" /></p>
             <p class="p2 ft1">Employee Name <input type="text" id="empname" value="@Model.EmployeeName" style="width:30%" /> Job Title <input type="text" id="jobtitle" value="@Model.JobTitle" style="width:46%" /></p>
@@ -792,9 +791,9 @@
                     <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
                 </TR>
             </TABLE>
-            <P class="p11 ft1">**What Policy specifically was violated?  </P>
+            <P class="p11 ft1" style="margin-top: 17px;">**What Policy specifically was violated?  </P>
             <P class="p12 ft1"> @Model.Policty_Voilated </P>
-            <P class="p13 ft1">Additional Remarks  </P>
+            <P class="p13 ft1" style="margin-top: 17px;">Additional Remarks  </P>
             <P class="p14 ft1"> @Model.AdditionalRemarks </P>
          
             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned">

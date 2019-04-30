@@ -12,13 +12,13 @@
                             <strong class="font-bold"> @Model.Name </strong>
                             <input type="hidden" id="CreatedByName" value="@Model.Name" />
                             <input type="hidden" id="CreatedBy" value="@Model.UserId" />
-                            <input type="hidden" id="UserPropertyAccess" value="" />
+                            <input type="hidden" id="UserPropertyAccess" value="@Model.PropertyId" />
                             <input type="hidden" id="UserR" value="@Model.RoleType" />
                         </span> <span class="text-muted text-xs block">Access Level -  @Model.RoleType </span>
                     </a>
                     @*<ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="~/Account/Logout">Logout</a></li>
-                    </ul>*@
+                    <li><a href="~/Account/Logout">Logout</a></li>
+                </ul>*@
                 </div>
                 <div class="logo-element">
                     <img src="~/img/LogoC.png" />
@@ -101,6 +101,20 @@
 
                             </li>
 
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0)"><i class="fa fa-user-times"></i> <span class="nav-label"> Resident Reports  </span></a>
+
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="~/Resident/ReferalRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referal Request  </span></a>
+                            </li>
+                            <li>
+                                <a href="~/Resident/ReferalContact/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referal Contact </span></a>
+                            </li>
+                           
                         </ul>
                     </li>
                     <li>

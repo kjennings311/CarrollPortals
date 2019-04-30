@@ -38,7 +38,15 @@ namespace Carroll.Portals.Models
             FormsAuthenticationTicket authTicket =  FormsAuthentication.Decrypt(authCookie.Value);
             string[] roles = authTicket.UserData.Split(new Char[] { '|' });
             if (roles != null) return roles[0];
+            return string.Empty;
+        }
 
+        public static string AssignedUserProperty()
+        {
+            HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            string[] roles = authTicket.UserData.Split(new Char[] { '|' });
+            if (roles != null && roles.Length ==2) return roles[1];
             return string.Empty;
         }
         public static void AssignRolesToUser()

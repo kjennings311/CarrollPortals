@@ -193,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HrController.cs" />
     <Compile Include="Controllers\MileageController.cs" />
+    <Compile Include="Controllers\ResidentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
     <Compile Include="GetCurrentUser.ashx.cs">
@@ -889,6 +890,7 @@
     <Content Include="Views\Mileage\PrintExpenseReimbursement.cshtml" />
     <Content Include="Views\Hr\PrintPayRollStatusChange - Copy.cshtml" />
     <Content Include="Views\Hr\PrintEmployeeNewHireNotice - Copy.cshtml" />
+    <Content Include="Views\Resident\ReferalRequest.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

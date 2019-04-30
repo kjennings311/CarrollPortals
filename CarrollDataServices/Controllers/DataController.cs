@@ -321,12 +321,63 @@ namespace Carroll.Data.Services.Controllers
             PayrollStatusChangeNotice fa = new PayrollStatusChangeNotice();
             fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
+
+            string TypeofChange = "";
+
             fa.ShowPayChange = Convert.ToBoolean(HttpContext.Current.Request.Params["showpay"].ToString());
             fa.ShowPropertyChange = Convert.ToBoolean(HttpContext.Current.Request.Params["showproperty"].ToString());
             fa.ShowAllowances = Convert.ToBoolean(HttpContext.Current.Request.Params["showall"].ToString());
             fa.ShowDivisionOfLabor = Convert.ToBoolean(HttpContext.Current.Request.Params["showlab"].ToString());
             fa.ShowLeaves = Convert.ToBoolean(HttpContext.Current.Request.Params["showleave"].ToString());
-            //   fa.TypeOfChange = HttpContext.Current.Request.Params["typeofchange"].ToString();
+
+            if (fa.ShowPayChange == true)
+                TypeofChange = "Pay Change";
+
+            if (fa.ShowPropertyChange == true)
+            {
+                if (TypeofChange != "")
+                    TypeofChange = "Multiple";
+                     else
+                    TypeofChange = "Property Change";
+
+            }
+
+
+            if (fa.ShowPropertyChange == true)
+            {
+                if (TypeofChange != "")
+                    TypeofChange = "Multiple";
+                else
+                    TypeofChange = "Property Change";
+
+            }
+
+            if (fa.ShowAllowances == true)
+            {
+                if (TypeofChange != "")
+                    TypeofChange = "Multiple";
+                else
+                    TypeofChange = "Allowances";
+
+            }
+
+
+            if (fa.ShowDivisionOfLabor == true)
+            {
+                if (TypeofChange != "")
+                    TypeofChange = "Multiple";
+                else
+                    TypeofChange = "Labor Allocation";
+            }
+
+            if (fa.ShowLeaves == true)
+            {
+                if (TypeofChange != "")
+                    TypeofChange = "Multiple";
+                else
+                    TypeofChange = "Leaves";
+            }
+               fa.TypeOfChange =TypeofChange;
             fa.FromPropNum =Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
             fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
             fa.FromManager = HttpContext.Current.Request.Params["frommanager"].ToString();
