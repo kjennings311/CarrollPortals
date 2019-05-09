@@ -197,8 +197,16 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetAllMileageForms(FormType, new Guid(userid), OptionalSeachText);
         }
+        public dynamic InsertResidentReferralRequest(ResidentReferalSheet eh)
+        {
+            return _repository.InsertResidentReferralRequest(eh);
+        }
 
-        
+        public dynamic GetResidentReferralRequest(Guid obj)
+        {
+            return _repository.GetResidentReferralRequest(obj);
+        }
+
 
         public dynamic GetHrFormCount()
         {

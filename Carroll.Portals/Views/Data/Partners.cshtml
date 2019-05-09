@@ -26,17 +26,21 @@
             <div class="ibox-title" style="background:url('/img/equitybg.png');background-size: cover;padding: 240px 15px 7px;">
 
                 <h1 style="padding-top:5px;color:white;text-transform:uppercase;margin-top:-10px;"> <b>  Equity Partners </b></h1>
-                <div class="ibox-tools" style="margin-top:-40px;color:white; font-size:20px;">
-                    <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
+                <div class="ibox-tools" style="margin-top:-40px;color:white; font-size:20px;min-height:50px;">
 
-                    <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>
+                    @if (@Model.RoleType.ToLower() == "administrator")
+                    {
+                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
-                        <i class="fa fa-plus-circle"></i> New
-                    </a>
-                </div>
+                        <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>
+
+                        <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
+                    }
+                    </div>
             </div>
             
 

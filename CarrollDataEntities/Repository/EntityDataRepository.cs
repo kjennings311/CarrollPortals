@@ -737,13 +737,16 @@ namespace Carroll.Data.Entities.Repository
                 else
                 {
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                      where tbl.CreatedBy == userid
+                                      join tblpropertyusers in _entities.UserInProperties on tbl.PropertyId equals tblpropertyusers.PropertyId 
+                                      where tblpropertyusers.UserId == userid
                                       select tbl).Count();
                     var _damagecount = (from tbl in _entities.FormMoldDamageClaims
-                                        where tbl.CreatedBy == userid
+                                        join tblpropertyusers in _entities.UserInProperties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                        where tblpropertyusers.UserId == userid
                                         select tbl).Count();
                     var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
-                                           where tbl.CreatedBy == userid
+                                           join tblpropertyusers in _entities.UserInProperties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                           where tblpropertyusers.UserId == userid
                                            select tbl).Count();
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
                 }                
@@ -1530,6 +1533,52 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+        public dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    ResidentReferalSheet _property = mlh;
+
+                    // No record exists create a new property record here
+                    _entities.ResidentReferalSheets.Add(_property);
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.ResidentReferalId };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+
+        public dynamic GetResidentReferralRequest(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var res = (from tbl in _entities.ResidentReferalSheets
+                               where tbl.ResidentReferalId == riderid
+                               select tbl).FirstOrDefault();
+
+
+                    return  res;
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
         public dynamic GetHrFormCount()
         {
             using (CarrollFormsEntities _entities = DBEntity)
@@ -1572,11 +1621,11 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns = new List<DtableConfigArray>();
 
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Submitter Name", type = 0, href = "" });
-                  //  config.Columns.Add(new DtableConfigArray { name = "reportedMonthMileage", label = "Month Mileage", type = DFieldType.IsDate, href = "" });
+                    //  config.Columns.Add(new DtableConfigArray { name = "reportedMonthMileage", label = "Month Mileage", type = DFieldType.IsDate, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "emailAddress", label = "EmailAddress", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "manager", label = "Manager", type = 0, href = "" });
-                 //   config.Columns.Add(new DtableConfigArray { name = "totalNumberOfMiles", label = "Total Miles", type = 0, href = "" });
+                    //   config.Columns.Add(new DtableConfigArray { name = "totalNumberOfMiles", label = "Total Miles", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "totalPrice", label = "Total Price", type = DFieldType.IsText, href = "" });
@@ -1589,6 +1638,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
+
                 else if (FormType == "Expense Reimbursement")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
@@ -1609,24 +1659,44 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "totalExpenses", label = "Total Expenses", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
-                 //   config.Columns.Add(new DtableConfigArray { name = "balanceDue", label = "Balance Due", type = DFieldType.IsText, href = "" });
+                    //   config.Columns.Add(new DtableConfigArray { name = "balanceDue", label = "Balance Due", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "status", label = "Status", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                 //   config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    //   config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
 
 
+                else if (FormType == "ResidentReferal")
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.proc_getallresidentreferals(userid).ToList();
+                    else
+                        config.Rows = _entities.proc_getallresidentreferals(userid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.ResidentName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                    config.EtType = EntityType.AllClaims.ToString();
+                    PropertyInfo[] userprop = typeof(proc_getallresidentreferals_Result).GetProperties();
+                    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                    config.Columns = new List<DtableConfigArray>();
+
+                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "residentName", label = "Resident Name", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "referredResident", label = "Resident Referral", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "unitNumber", label = "UnitNumber", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "referalBonus", label = "ReferralBonus", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                }
                 return config;
 
             }
 
-
-            }
+           }
 
 
             public dynamic GetAllHrForms(string FormType, string optionalSeachText)

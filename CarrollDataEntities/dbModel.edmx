@@ -506,6 +506,96 @@
           <Property Name="ModifiedUser" Type="uniqueidentifier" />
           <Property Name="ModifiedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="ResidentContactInformation">
+          <Key>
+            <PropertyRef Name="Contactid" />
+          </Key>
+          <Property Name="Contactid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Building" Type="nvarchar" MaxLength="100" />
+          <Property Name="Apartment" Type="nvarchar" MaxLength="100" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReturnEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fax1" Type="nvarchar" MaxLength="10" />
+          <Property Name="Fax11" Type="nvarchar" MaxLength="25" />
+          <Property Name="Fax2" Type="nvarchar" MaxLength="10" />
+          <Property Name="Fax22" Type="nvarchar" MaxLength="25" />
+          <Property Name="InsuranceDeclaration" Type="nvarchar" MaxLength="3" />
+          <Property Name="Em_name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Em_Address" Type="nvarchar" MaxLength="299" />
+          <Property Name="Em_Phone" Type="nvarchar" MaxLength="25" />
+          <Property Name="Em_Relation" Type="nvarchar" MaxLength="25" />
+          <Property Name="ResidentSingature1" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentSignDate1" Type="date" />
+          <Property Name="ResidentSingature2" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentSignDate2" Type="date" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation_OtherOccupants">
+          <Key>
+            <PropertyRef Name="OccupantId" />
+          </Key>
+          <Property Name="OccupantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResidentContactInformationId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOB" Type="date" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation_Residents">
+          <Key>
+            <PropertyRef Name="ResidentId" />
+          </Key>
+          <Property Name="ResidentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResidentContactInformationId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="25" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Home_Work" Type="bit" />
+          <Property Name="Home_Work_Phone" Type="nvarchar" MaxLength="25" />
+          <Property Name="CurrentEmployer" Type="nvarchar" MaxLength="100" />
+          <Property Name="Position" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation_Vehicles">
+          <Key>
+            <PropertyRef Name="VehicleId" />
+          </Key>
+          <Property Name="VehicleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResidentContactInformationId" Type="uniqueidentifier" />
+          <Property Name="Make" Type="varchar" MaxLength="50" />
+          <Property Name="Model" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="nvarchar" MaxLength="5" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="LicensePlate" Type="nvarchar" MaxLength="20" />
+          <Property Name="LicensePlatState" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ResidentReferalSheet">
+          <Key>
+            <PropertyRef Name="ResidentReferalId" />
+          </Key>
+          <Property Name="ResidentReferalId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Notes" Type="text" />
+          <Property Name="AgriPropertyName" Type="nvarchar" MaxLength="100" />
+          <Property Name="AgriResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReferredResident" Type="nvarchar" MaxLength="100" />
+          <Property Name="UnitNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReferalBonus" Type="float" />
+          <Property Name="ReferingResident" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentDate" Type="date" />
+          <Property Name="PropertyManager" Type="nvarchar" MaxLength="100" />
+          <Property Name="PropertyManagerDate" Type="date" />
+          <Property Name="Acc_Received" Type="nvarchar" MaxLength="20" />
+          <Property Name="Acc_CreditApplied" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreatedUser" Type="uniqueidentifier" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedUser" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -582,6 +672,42 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
         </EntityType>
+        <Association Name="FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation">
+          <End Role="ResidentContactInformation" Type="Self.ResidentContactInformation" Multiplicity="0..1" />
+          <End Role="ResidentContactInformation_OtherOccupants" Type="Self.ResidentContactInformation_OtherOccupants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentContactInformation">
+              <PropertyRef Name="Contactid" />
+            </Principal>
+            <Dependent Role="ResidentContactInformation_OtherOccupants">
+              <PropertyRef Name="ResidentContactInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentContactInformation_Residents_ResidentContactInformation">
+          <End Role="ResidentContactInformation" Type="Self.ResidentContactInformation" Multiplicity="0..1" />
+          <End Role="ResidentContactInformation_Residents" Type="Self.ResidentContactInformation_Residents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentContactInformation">
+              <PropertyRef Name="Contactid" />
+            </Principal>
+            <Dependent Role="ResidentContactInformation_Residents">
+              <PropertyRef Name="ResidentContactInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentContactInformation_Vehicles_ResidentContactInformation">
+          <End Role="ResidentContactInformation" Type="Self.ResidentContactInformation" Multiplicity="0..1" />
+          <End Role="ResidentContactInformation_Vehicles" Type="Self.ResidentContactInformation_Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentContactInformation">
+              <PropertyRef Name="Contactid" />
+            </Principal>
+            <Dependent Role="ResidentContactInformation_Vehicles">
+              <PropertyRef Name="ResidentContactInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserInProperty_Properties">
           <End Role="Properties" Type="Self.Properties" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -624,6 +750,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="f_proc_getallresidentreferals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="[proc_getallresidentreferals">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallcarrollpayperiods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallcarrollpositions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -637,6 +766,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getallnoticeofemployeeseparation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallpayrollstatuschange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallrequisitionrequests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Proc_getallresidentcontacts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallresidentreferals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="proc_getallresidentreferalsheets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpayperiodsforcurrentyear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -676,6 +810,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="PayrollStatusChangeNotice" EntityType="Self.PayrollStatusChangeNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequisitionRequest" EntityType="Self.RequisitionRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentContactInformation" EntityType="Self.ResidentContactInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentContactInformation_OtherOccupants" EntityType="Self.ResidentContactInformation_OtherOccupants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentContactInformation_Residents" EntityType="Self.ResidentContactInformation_Residents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentContactInformation_Vehicles" EntityType="Self.ResidentContactInformation_Vehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResidentReferalSheet" EntityType="Self.ResidentReferalSheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SiteUsers" EntityType="Self.SiteUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInProperty" EntityType="Self.UserInProperty" Schema="dbo" store:Type="Tables" />
@@ -700,6 +839,18 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
     [view_getallclaims].[CreatedBy] AS [CreatedBy]
     FROM [dbo].[view_getallclaims] AS [view_getallclaims]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation" Association="Self.FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation">
+            <End Role="ResidentContactInformation" EntitySet="ResidentContactInformation" />
+            <End Role="ResidentContactInformation_OtherOccupants" EntitySet="ResidentContactInformation_OtherOccupants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentContactInformation_Residents_ResidentContactInformation" Association="Self.FK_ResidentContactInformation_Residents_ResidentContactInformation">
+            <End Role="ResidentContactInformation" EntitySet="ResidentContactInformation" />
+            <End Role="ResidentContactInformation_Residents" EntitySet="ResidentContactInformation_Residents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentContactInformation_Vehicles_ResidentContactInformation" Association="Self.FK_ResidentContactInformation_Vehicles_ResidentContactInformation">
+            <End Role="ResidentContactInformation" EntitySet="ResidentContactInformation" />
+            <End Role="ResidentContactInformation_Vehicles" EntitySet="ResidentContactInformation_Vehicles" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserInProperty_Properties" Association="Self.FK_UserInProperty_Properties">
             <End Role="Properties" EntitySet="Properties" />
             <End Role="UserInProperty" EntitySet="UserInProperty" />
@@ -790,6 +941,28 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getallemployeenewhirenotice" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice_Result)" />
           <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
           <FunctionImport Name="proc_getpayperiodsforcurrentyear" ReturnType="Collection(String)" />
+          <FunctionImport Name="proc_getallresidentreferalsheets" ReturnType="Collection(Carroll.Data.Entities.proc_getallresidentreferalsheets_Result)" />
+          <FunctionImport Name="proc_getallresidentreferals" ReturnType="Collection(Carroll.Data.Entities.proc_getallresidentreferals_Result)">
+          <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="ResidentReferalSheets" EntityType="Carroll.Data.Entities.ResidentReferalSheet" />
+          <EntitySet Name="ResidentContactInformations" EntityType="Carroll.Data.Entities.ResidentContactInformation" />
+          <EntitySet Name="ResidentContactInformation_OtherOccupants" EntityType="Carroll.Data.Entities.ResidentContactInformation_OtherOccupants" />
+          <EntitySet Name="ResidentContactInformation_Residents" EntityType="Carroll.Data.Entities.ResidentContactInformation_Residents" />
+          <EntitySet Name="ResidentContactInformation_Vehicles" EntityType="Carroll.Data.Entities.ResidentContactInformation_Vehicles" />
+          <AssociationSet Name="FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation" Association="Carroll.Data.Entities.FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation">
+            <End Role="ResidentContactInformation" EntitySet="ResidentContactInformations" />
+            <End Role="ResidentContactInformation_OtherOccupants" EntitySet="ResidentContactInformation_OtherOccupants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentContactInformation_Residents_ResidentContactInformation" Association="Carroll.Data.Entities.FK_ResidentContactInformation_Residents_ResidentContactInformation">
+            <End Role="ResidentContactInformation" EntitySet="ResidentContactInformations" />
+            <End Role="ResidentContactInformation_Residents" EntitySet="ResidentContactInformation_Residents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResidentContactInformation_Vehicles_ResidentContactInformation" Association="Carroll.Data.Entities.FK_ResidentContactInformation_Vehicles_ResidentContactInformation">
+            <End Role="ResidentContactInformation" EntitySet="ResidentContactInformations" />
+            <End Role="ResidentContactInformation_Vehicles" EntitySet="ResidentContactInformation_Vehicles" />
+          </AssociationSet>
+          <FunctionImport Name="Proc_getallresidentcontacts" ReturnType="Collection(Carroll.Data.Entities.Proc_getallresidentcontacts_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1769,6 +1942,201 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="179" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="180" />
+        </ComplexType>
+        <ComplexType Name="proc_getallresidentreferalsheets_Result">
+          <Property Type="Guid" Name="ResidentReferalId" Nullable="true" />
+          <Property Type="String" Name="PropertyCode" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ResidentCode" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="AgriPropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AgriResidentName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ReferredResident" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UnitNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="ReferalBonus" Nullable="true" />
+          <Property Type="String" Name="ReferingResident" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ResidentDate" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="PropertyManagerDate" Nullable="true" />
+          <Property Type="String" Name="Acc_Received" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Acc_CreditApplied" Nullable="true" MaxLength="20" />
+          <Property Type="Guid" Name="CreatedUser" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
+        </ComplexType>
+        <ComplexType Name="proc_getallresidentreferals_Result">
+          <Property Type="Guid" Name="ResidentReferalId" Nullable="true" />
+          <Property Type="String" Name="PropertyCode" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ResidentCode" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="AgriPropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AgriResidentName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ReferredResident" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UnitNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="ReferalBonus" Nullable="true" />
+          <Property Type="String" Name="ReferingResident" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ResidentDate" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="PropertyManagerDate" Nullable="true" />
+          <Property Type="String" Name="Acc_Received" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Acc_CreditApplied" Nullable="true" MaxLength="20" />
+          <Property Type="Guid" Name="CreatedUser" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
+        </ComplexType>
+        <EntityType Name="ResidentReferalSheet">
+          <Key>
+            <PropertyRef Name="ResidentReferalId" />
+          </Key>
+          <Property Name="ResidentReferalId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AgriPropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AgriResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReferredResident" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UnitNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReferalBonus" Type="Double" />
+          <Property Name="ReferingResident" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentDate" Type="DateTime" Precision="0" />
+          <Property Name="PropertyManager" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyManagerDate" Type="DateTime" Precision="0" />
+          <Property Name="Acc_Received" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Acc_CreditApplied" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUser" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedUser" Type="Guid" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation">
+          <Key>
+            <PropertyRef Name="Contactid" />
+          </Key>
+          <Property Name="Contactid" Type="Guid" Nullable="false" />
+          <Property Name="Building" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apartment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReturnEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Fax11" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Fax2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Fax22" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceDeclaration" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Em_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Em_Address" Type="String" MaxLength="299" FixedLength="false" Unicode="true" />
+          <Property Name="Em_Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Em_Relation" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentSingature1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentSignDate1" Type="DateTime" Precision="0" />
+          <Property Name="ResidentSingature2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentSignDate2" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ResidentContactInformation_OtherOccupants" Relationship="Carroll.Data.Entities.FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation" FromRole="ResidentContactInformation" ToRole="ResidentContactInformation_OtherOccupants" />
+          <NavigationProperty Name="ResidentContactInformation_Residents" Relationship="Carroll.Data.Entities.FK_ResidentContactInformation_Residents_ResidentContactInformation" FromRole="ResidentContactInformation" ToRole="ResidentContactInformation_Residents" />
+          <NavigationProperty Name="ResidentContactInformation_Vehicles" Relationship="Carroll.Data.Entities.FK_ResidentContactInformation_Vehicles_ResidentContactInformation" FromRole="ResidentContactInformation" ToRole="ResidentContactInformation_Vehicles" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation_OtherOccupants">
+          <Key>
+            <PropertyRef Name="OccupantId" />
+          </Key>
+          <Property Name="OccupantId" Type="Guid" Nullable="false" />
+          <Property Name="ResidentContactInformationId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ResidentContactInformation" Relationship="Carroll.Data.Entities.FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation" FromRole="ResidentContactInformation_OtherOccupants" ToRole="ResidentContactInformation" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation_Residents">
+          <Key>
+            <PropertyRef Name="ResidentId" />
+          </Key>
+          <Property Name="ResidentId" Type="Guid" Nullable="false" />
+          <Property Name="ResidentContactInformationId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Home_Work" Type="Boolean" />
+          <Property Name="Home_Work_Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentEmployer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResidentContactInformation" Relationship="Carroll.Data.Entities.FK_ResidentContactInformation_Residents_ResidentContactInformation" FromRole="ResidentContactInformation_Residents" ToRole="ResidentContactInformation" />
+        </EntityType>
+        <EntityType Name="ResidentContactInformation_Vehicles">
+          <Key>
+            <PropertyRef Name="VehicleId" />
+          </Key>
+          <Property Name="VehicleId" Type="Guid" Nullable="false" />
+          <Property Name="ResidentContactInformationId" Type="Guid" />
+          <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LicensePlate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LicensePlatState" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResidentContactInformation" Relationship="Carroll.Data.Entities.FK_ResidentContactInformation_Vehicles_ResidentContactInformation" FromRole="ResidentContactInformation_Vehicles" ToRole="ResidentContactInformation" />
+        </EntityType>
+        <Association Name="FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation">
+          <End Type="Carroll.Data.Entities.ResidentContactInformation" Role="ResidentContactInformation" Multiplicity="0..1" />
+          <End Type="Carroll.Data.Entities.ResidentContactInformation_OtherOccupants" Role="ResidentContactInformation_OtherOccupants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentContactInformation">
+              <PropertyRef Name="Contactid" />
+            </Principal>
+            <Dependent Role="ResidentContactInformation_OtherOccupants">
+              <PropertyRef Name="ResidentContactInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentContactInformation_Residents_ResidentContactInformation">
+          <End Type="Carroll.Data.Entities.ResidentContactInformation" Role="ResidentContactInformation" Multiplicity="0..1" />
+          <End Type="Carroll.Data.Entities.ResidentContactInformation_Residents" Role="ResidentContactInformation_Residents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentContactInformation">
+              <PropertyRef Name="Contactid" />
+            </Principal>
+            <Dependent Role="ResidentContactInformation_Residents">
+              <PropertyRef Name="ResidentContactInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResidentContactInformation_Vehicles_ResidentContactInformation">
+          <End Type="Carroll.Data.Entities.ResidentContactInformation" Role="ResidentContactInformation" Multiplicity="0..1" />
+          <End Type="Carroll.Data.Entities.ResidentContactInformation_Vehicles" Role="ResidentContactInformation_Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResidentContactInformation">
+              <PropertyRef Name="Contactid" />
+            </Principal>
+            <Dependent Role="ResidentContactInformation_Vehicles">
+              <PropertyRef Name="ResidentContactInformationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Proc_getallresidentcontacts_Result">
+          <Property Type="Guid" Name="Contactid" Nullable="false" />
+          <Property Type="String" Name="Building" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Apartment" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="InsuranceDeclaration" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2803,6 +3171,176 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_getpayperiodsforcurrentyear" FunctionName="Carroll.Data.Entities.Store.proc_getpayperiodsforcurrentyear" />
+          <FunctionImportMapping FunctionImportName="proc_getallresidentreferalsheets" FunctionName="Carroll.Data.Entities.Store.proc_getallresidentreferalsheets">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallresidentreferalsheets_Result">
+                <ScalarProperty Name="ResidentReferalId" ColumnName="ResidentReferalId" />
+                <ScalarProperty Name="PropertyCode" ColumnName="PropertyCode" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="ResidentCode" ColumnName="ResidentCode" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="AgriPropertyName" ColumnName="AgriPropertyName" />
+                <ScalarProperty Name="AgriResidentName" ColumnName="AgriResidentName" />
+                <ScalarProperty Name="ReferredResident" ColumnName="ReferredResident" />
+                <ScalarProperty Name="UnitNumber" ColumnName="UnitNumber" />
+                <ScalarProperty Name="ReferalBonus" ColumnName="ReferalBonus" />
+                <ScalarProperty Name="ReferingResident" ColumnName="ReferingResident" />
+                <ScalarProperty Name="ResidentDate" ColumnName="ResidentDate" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyManagerDate" ColumnName="PropertyManagerDate" />
+                <ScalarProperty Name="Acc_Received" ColumnName="Acc_Received" />
+                <ScalarProperty Name="Acc_CreditApplied" ColumnName="Acc_CreditApplied" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallresidentreferals" FunctionName="Carroll.Data.Entities.Store.proc_getallresidentreferals">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallresidentreferals_Result">
+                <ScalarProperty Name="ResidentReferalId" ColumnName="ResidentReferalId" />
+                <ScalarProperty Name="PropertyCode" ColumnName="PropertyCode" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="ResidentCode" ColumnName="ResidentCode" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="AgriPropertyName" ColumnName="AgriPropertyName" />
+                <ScalarProperty Name="AgriResidentName" ColumnName="AgriResidentName" />
+                <ScalarProperty Name="ReferredResident" ColumnName="ReferredResident" />
+                <ScalarProperty Name="UnitNumber" ColumnName="UnitNumber" />
+                <ScalarProperty Name="ReferalBonus" ColumnName="ReferalBonus" />
+                <ScalarProperty Name="ReferingResident" ColumnName="ReferingResident" />
+                <ScalarProperty Name="ResidentDate" ColumnName="ResidentDate" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyManagerDate" ColumnName="PropertyManagerDate" />
+                <ScalarProperty Name="Acc_Received" ColumnName="Acc_Received" />
+                <ScalarProperty Name="Acc_CreditApplied" ColumnName="Acc_CreditApplied" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ResidentReferalSheets">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ResidentReferalSheet">
+              <MappingFragment StoreEntitySet="ResidentReferalSheet">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="Acc_CreditApplied" ColumnName="Acc_CreditApplied" />
+                <ScalarProperty Name="Acc_Received" ColumnName="Acc_Received" />
+                <ScalarProperty Name="PropertyManagerDate" ColumnName="PropertyManagerDate" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="ResidentDate" ColumnName="ResidentDate" />
+                <ScalarProperty Name="ReferingResident" ColumnName="ReferingResident" />
+                <ScalarProperty Name="ReferalBonus" ColumnName="ReferalBonus" />
+                <ScalarProperty Name="UnitNumber" ColumnName="UnitNumber" />
+                <ScalarProperty Name="ReferredResident" ColumnName="ReferredResident" />
+                <ScalarProperty Name="AgriResidentName" ColumnName="AgriResidentName" />
+                <ScalarProperty Name="AgriPropertyName" ColumnName="AgriPropertyName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="ResidentCode" ColumnName="ResidentCode" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyCode" ColumnName="PropertyCode" />
+                <ScalarProperty Name="ResidentReferalId" ColumnName="ResidentReferalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResidentContactInformations">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ResidentContactInformation">
+              <MappingFragment StoreEntitySet="ResidentContactInformation">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ResidentSignDate2" ColumnName="ResidentSignDate2" />
+                <ScalarProperty Name="ResidentSingature2" ColumnName="ResidentSingature2" />
+                <ScalarProperty Name="ResidentSignDate1" ColumnName="ResidentSignDate1" />
+                <ScalarProperty Name="ResidentSingature1" ColumnName="ResidentSingature1" />
+                <ScalarProperty Name="Em_Relation" ColumnName="Em_Relation" />
+                <ScalarProperty Name="Em_Phone" ColumnName="Em_Phone" />
+                <ScalarProperty Name="Em_Address" ColumnName="Em_Address" />
+                <ScalarProperty Name="Em_name" ColumnName="Em_name" />
+                <ScalarProperty Name="InsuranceDeclaration" ColumnName="InsuranceDeclaration" />
+                <ScalarProperty Name="Fax22" ColumnName="Fax22" />
+                <ScalarProperty Name="Fax2" ColumnName="Fax2" />
+                <ScalarProperty Name="Fax11" ColumnName="Fax11" />
+                <ScalarProperty Name="Fax1" ColumnName="Fax1" />
+                <ScalarProperty Name="ReturnEmail" ColumnName="ReturnEmail" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Contactid" ColumnName="Contactid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResidentContactInformation_OtherOccupants">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ResidentContactInformation_OtherOccupants">
+              <MappingFragment StoreEntitySet="ResidentContactInformation_OtherOccupants">
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ResidentContactInformationId" ColumnName="ResidentContactInformationId" />
+                <ScalarProperty Name="OccupantId" ColumnName="OccupantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResidentContactInformation_Residents">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ResidentContactInformation_Residents">
+              <MappingFragment StoreEntitySet="ResidentContactInformation_Residents">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="CurrentEmployer" ColumnName="CurrentEmployer" />
+                <ScalarProperty Name="Home_Work_Phone" ColumnName="Home_Work_Phone" />
+                <ScalarProperty Name="Home_Work" ColumnName="Home_Work" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ResidentContactInformationId" ColumnName="ResidentContactInformationId" />
+                <ScalarProperty Name="ResidentId" ColumnName="ResidentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResidentContactInformation_Vehicles">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ResidentContactInformation_Vehicles">
+              <MappingFragment StoreEntitySet="ResidentContactInformation_Vehicles">
+                <ScalarProperty Name="LicensePlatState" ColumnName="LicensePlatState" />
+                <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="ResidentContactInformationId" ColumnName="ResidentContactInformationId" />
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_getallresidentcontacts" FunctionName="Carroll.Data.Entities.Store.Proc_getallresidentcontacts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.Proc_getallresidentcontacts_Result">
+                <ScalarProperty Name="Contactid" ColumnName="Contactid" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="InsuranceDeclaration" ColumnName="InsuranceDeclaration" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
+                <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

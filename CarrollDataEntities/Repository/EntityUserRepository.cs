@@ -48,11 +48,19 @@ namespace Carroll.Data.Entities.Repository
                 string role = "";
                 // _entities.Configuration.ProxyCreationEnabled = false;
                 var _userRoles = _entities.UserInRoles.Where(x => x.UserId == userid).ToList();
-                var propid = _entities.UserInProperties.Where(x => x.UserId == userid).Select(x=>x.PropertyId).FirstOrDefault();
+                var propid = _entities.UserInProperties.Where(x => x.UserId == userid).Select(x=>x.PropertyId).ToList();
                 string prop = "";
+
                 if(propid != null)
                 {
-                    prop = propid.ToString();
+                    foreach (var item in propid)
+                    {
+                        if (prop == "")
+                            prop = item.ToString();
+                        else
+                            prop += "se" + item.ToString() ;
+                    }
+                  
                 }
 
                 foreach (var item in _userRoles)
@@ -65,6 +73,7 @@ namespace Carroll.Data.Entities.Repository
                     else
                         role += "," + res;
                 }
+
                 if(prop!="")
                 role += "," + prop;
                 return role;

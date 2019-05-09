@@ -10,7 +10,8 @@ function validateEmail(emailID)
 {
     atpos = emailID.indexOf("@");
     dotpos = emailID.lastIndexOf(".");
-    if (atpos < 1 || (dotpos - atpos < 2)) {
+    if (atpos < 1 || (dotpos - atpos < 2))
+    {
     
         return false;
     }
@@ -48,10 +49,10 @@ function closereviewmodal()
 }
 
 
-function submitformdata()
-{
-    $("#reviewmodal").modal('hide'); 
+function submitformdata() {
+    $("#reviewmodal").modal('hide');
     $("#homeval").val('0');
+    $("#toastnotificationhome").modal('hide');
     $('.dynamicForm #savechanges').click();
    
 }
@@ -77,6 +78,7 @@ function BindElements() {
                 }
             }
 
+
             $('.dynamicForm #savechanges').attr('disabled', true);
             $('.success-message').hide();
             $('.failure-message').hide();
@@ -95,9 +97,6 @@ function BindElements() {
 
             // if form is user then check if user exists with email id or not
             processing = true;
-
-            $(".modal-alert").html('Processing');
-            $('#toastnotification').modal('toggle');
 
             if ($('.dynamicForm #savechanges').attr("formname") == "user" && RecordId == '') {
               
@@ -133,6 +132,10 @@ function BindElements() {
                 });
             }
 
+
+            if ($("#divprocessingbtn").length > 0) {
+                $("#divprocessingbtn").show();
+            }
 
             //*****************************************************************************
             // Let's get the original form and then load values into original form to send back to server for validation
@@ -221,8 +224,7 @@ function BindElements() {
 
                     /**************************************************************************************/
 
-                  
-
+                -
                     $.ajax({
                         type: "POST",
                         url: $BaseApiUrl + "api/Form/CreateUpdateFormData/" + $('.dynamicForm #savechanges').attr("formname"),
@@ -242,11 +244,16 @@ function BindElements() {
                                     //$form.find('#successMessage').html("Record successfully updated!");
                                     //$form.find('.success-message').show('slow');
                                     //ScrollToElement($form.find('.success-message'));
+
+                                    if ($("#divprocessingbtn").length > 0) {
+                                        $("#divprocessingbtn").hide();
+                                    }
+
                                     $('.dynamicForm #savechanges').attr('disabled', false);
                                     $(".modal-alert").html('Record Successfully Updated');
                                     $('#toastnotification').modal('show');
                                     // go back to previous screen after 8 seconds
-                                    // setTimeout(function () { location.reload(); }, 3000);
+                                     setTimeout(function () { location.reload(); }, 3000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -276,6 +283,9 @@ function BindElements() {
                                     setTimeout(ScrollToElement($form), 3000);
                                     $(".modal-alert").html('');
                                     $('#toastnotification').modal('hide');
+                                    if ($("#divprocessingbtn").length > 0) {
+                                        $("#divprocessingbtn").hide();
+                                    }
 
                                 } catch (err) { alert(err.message); }
 
@@ -286,13 +296,9 @@ function BindElements() {
 
                     processing = false;
                 }
-
             });
-
         }
-
     });
-
 }
 
 
@@ -314,6 +320,7 @@ function LoadUserProperty()
             alert('error' + ts.errorMessage);
         }
     });
+
     return val;
 }
 
@@ -334,7 +341,7 @@ function getForm(FormName, RecordId)
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
     var $checkbox = ' <div class="form-group"><label class="col-sm-3 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-6"> <div class="col-md-1" > <input class="form-control" type="checkbox" style="width:18px;"  id="{1}" value="1"   {2}></div> </div></div>';
     var $person = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
-    var $savebuttons = '  <div class="hr-line-dashed"></div>'
+    var $savebuttons = '<div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
         + '<div class="col-sm-4 col-sm-offset-4">'
@@ -523,6 +530,8 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
     var options = "";
     var selected = "";
 
+    var propertyarray=value.split('se')
+
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
 
         for (var i = 0; i < data.length; i++)
@@ -538,7 +547,7 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
             }
             else
             {
-                if (value.toLowerCase().indexOf(data[i]["key"]) >= 0)
+                if (propertyarray.includes(data[i]["key"]))
            {
                     selected = "selected=selected";
                     options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";

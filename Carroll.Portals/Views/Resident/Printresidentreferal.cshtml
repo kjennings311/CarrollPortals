@@ -1,0 +1,148 @@
+﻿@model Carroll.Portals.Models.PrintResidentReferralSheet
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Print Resident Referral sheet   </title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+
+        body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 10px;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        p {
+            margin-bottom: 10px !important;
+        }
+
+        ol li span {
+            margin-top: 10px !important;
+        }
+    </style>
+
+    <link href="/Content/a4css.css" rel="stylesheet" />
+
+</head>
+<body class="document">
+    <div class="page" style="padding: 30px;">
+        <div class="col-md-12" style="    width: 100%;
+    border: 1px solid black;
+    padding: 40px;    margin-top: 20px;">
+            <form id="submitform" onsubmit="return false;">
+                <p style="line-height: 99%;  margin: 0cm 0cm .0001pt 3.0pt;"><strong><span style="font-size: 18.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL SHEET</span></strong> <img style="float:right;" src="~/img/residentreferaltop.png" /> </p>
+                <p style=" line-height: 19.1pt; "><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+                <table style="margin-left: .5pt; border-collapse: collapse;width:100%">
+                    <tbody>
+                        <tr style="height: 17.65pt;">
+                            <td style="width: 209.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="279">
+                                <p style="line-height: normal;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Code: <input type="text" value="@Model.PropertyCode" style="width:50%;" id="propertynumber" />  </span></strong></p>
+                            </td>
+                            <td style="width: 325.0pt; border: solid windowtext 1.0pt; border-left: none; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="433">
+                                <p style="line-height: normal;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Name: <input type="text" value="@Model.PropertyName" id="propertyname" /> </span></strong></p>
+                            </td>
+                        </tr>
+                        <tr style="height: 16.65pt;">
+                            <td style="width: 209.0pt; border: solid windowtext 1.0pt; border-top: none; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="279">
+                                <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Code: <input type="text" style="width:35%;" value="@Model.ResidentCode" id="refresidentcode" /> </span></strong></p>
+                            </td>
+                            <td style="width: 325.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="433">
+                                <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Name: <input type="text" value="@Model.ResidentName" id="refresidentname" /> </span></strong></p>
+                            </td>
+                        </tr>
+                        <tr style="height: 70.4pt;">
+                            <td colspan="2" style="width: 209.0pt; border-top: none; border-left: solid windowtext 1.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 70.4pt;" width="279">
+
+                                <p style=" line-height: 16.6pt; width:10%; display:inline-block "><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">&nbsp; Notes: </span></strong> </p> <textarea id="notes" style="width:80%; display:inline-block;"> @Model.Notes  </textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></strong></p>
+                <table style="width:100%;border:1px solid black;margin-bottom:30px;">
+                    <tbody>
+                        <tr>
+                            <td style="padding:10px">
+                                <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) <input type="text" value="@Model.AgriPropertyName" id="propertyname1" /> and (Resident&rsquo;s Name)<input type="text" value="@Model.AgriResidentName" id="residentname1" /> , concerning the referral of (Referred Resident) <input type="text" value="@Model.ReferredResident" style="width:19%" id="refferedresident" /> in unit number<input type="text" style="width:8%;" value="@Model.UnitNumber" id="unitnumber" />.&nbsp; </strong></p>
+                                <p style="text-indent: 36.0pt;"><strong>In consideration of the referral, the Property now agrees to credit rent of the referring resident for $ <input type="text" style="width:10%" value="@Model.ReferalBonus" id="referalbonus" /> as a referral bonus. This amount will be credited after the referred resident has lived on-site for a full 30 days and has paid a full month&rsquo;s rent with no concessions. &nbsp;&nbsp;</strong></p>
+                                <p style="text-indent: 36.0pt;"><strong>&nbsp;</strong></p>
+                                <p><strong>&nbsp;Submit for Rent Credit: </strong></p>
+                                <ul style="list-style-type:decimal">
+                                    <li> Copy of application or KNOCK listing the referring resident&rsquo;s name. &nbsp; </li>
+                                    <li> Copy of executed lease of referred resident. </li>
+                                    <li> Completed Resident Referral Sheet (this form).  </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style=" line-height: 99%; ">
+                    <span style=" line-height: 99%; ">
+                        Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" style="    width: 46.5%;
+    margin-right: 3%;
+    margin-left: 3.5%;" id="refresidentsign"  value="@Model.ReferingResident" /> Dated <input type="text" value="@Model.ResidentDate.Value.ToShortDateString()" id="refresdate" />
+                    </span>
+                </p>
+
+                <p style=" line-height: normal;">
+                    <span style="">Property Manager&rsquo;s Approval:</span>
+                    <span style="">
+                        <input style="width: 46.5%;
+    margin-right: 3%;" type="text" id="properymanagersign" value="@Model.PropertyManager" /> Dated<input value="@Model.PropertyManagerDate.Value.ToShortDateString()" type="date" id="properymanagerdate" />
+                    </span>
+                </p>
+                <p style=" line-height: 99%;margin: 41px 0px 0px 0px; "><strong><span style="font-size: 14.0pt; line-height: 99%;">ACCOUNTING USE ONLY:</span></strong></p>
+
+                <p style=" line-height: 99%;margin-top:10px; margin-bottom:20px;"><span style=" ">Received: <input type="text" style="margin-right:18%;" value="@Model.Acc_Received" id="receivedamount" /> Credit Applied:<input type="text" value="@Model.Acc_CreditApplied" id="creditapplied" /></span></p>
+
+                <p style="margin-top: 30px !important;"><strong><span style="font-size: 14.0pt; line-height: 107%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL PROGRAM</span></strong></p>
+                <p style="text-indent: 36.0pt;">The Resident Referral Program is designed to reward our current residents for referring others to a Carroll Community. Each resident will receive a credit to their ledger for the referral bonus amount, which is set on a property-by-property basis.</p>
+                <p><strong>Residents are eligible to receive a referral fee after the described requirements are met:</strong></p>
+                <ul>
+                    <li>Referred Applicant(s) must add referring residents&rsquo; name on application or KNOCK during their visit.</li>
+                    <li>Referred Applicant(s) must be approved per the community requirements and execute a valid minimum six-month lease with a Carroll Property.</li>
+                    <li>Referred Resident(s) must establish a minimum 30-day residency and pay one full month&rsquo;s rent (full-month concessions are not considered payments).</li>
+                    <li>Referred or Referring Resident(s) cannot at any time withhold payments. If the referring residents&rsquo; rent is due and credit has not been posted to the ledger, the resident must pay rent in full and the credit will be applied to the following month.</li>
+                    <li>All appropriate documents must be submitted to the Accounts Payable Team before a credit can be applied to the referring tenant(s) ledger.</li>
+                </ul>
+                <p>&nbsp;</p>
+                <p><strong>Submitting Documents: </strong></p>
+                <p>Please submit the following documents to have the credit applied:</p>
+                <ol style="margin-left:5%">
+                    <li>Copy of the referred applicants&rsquo; application or KNOCK referring tenant(s) name.</li>
+                    <li>Copy of referred residents Terms and Signature Lease pages.</li>
+                    <li>Completed Referral Request Form.</li>
+                </ol>
+                <p>&nbsp;</p>
+                <p><strong>Applying Credits: </strong></p>
+                <p>All applied credits will be added to the referring resident(s) ledger by the Accounts Payable Department.&nbsp; Once all supporting documentations have been uploaded to the resident(s) profile as an attachment, please notify your properties Accounts Payable personnel via email as follows:</p>
+                <p style="margin-left: 36.0pt;"><strong>Subject</strong>: Resident Referral &ndash; (Last Name)</p>
+                <p style="margin-left: 36.0pt;"><strong>Body</strong>: Please process the credit (amount) for (Last Name).</p>
+                <p style="margin-left: 36.0pt;">All required documents have been uploaded.</p>
+                <p style="margin-left: 36.0pt;">Thank You.</p>
+                <p>Once the team receives the appropriate documents, a credit charge for the approved amount will be added to the resident&rsquo;s ledger and a confirmation email will be sent to the property within 48 hours of receipt.</p>
+                
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>
+
+

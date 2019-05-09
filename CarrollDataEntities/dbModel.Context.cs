@@ -53,6 +53,11 @@ namespace Carroll.Data.Entities
         public virtual DbSet<PayrollStatusChangeNotice> PayrollStatusChangeNotices { get; set; }
         public virtual DbSet<EmployeeNewHireNotice> EmployeeNewHireNotices { get; set; }
         public virtual DbSet<NoticeOfEmployeeSeperation> NoticeOfEmployeeSeperations { get; set; }
+        public virtual DbSet<ResidentReferalSheet> ResidentReferalSheets { get; set; }
+        public virtual DbSet<ResidentContactInformation> ResidentContactInformations { get; set; }
+        public virtual DbSet<ResidentContactInformation_OtherOccupants> ResidentContactInformation_OtherOccupants { get; set; }
+        public virtual DbSet<ResidentContactInformation_Residents> ResidentContactInformation_Residents { get; set; }
+        public virtual DbSet<ResidentContactInformation_Vehicles> ResidentContactInformation_Vehicles { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -184,6 +189,25 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<string> proc_getpayperiodsforcurrentyear()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("proc_getpayperiodsforcurrentyear");
+        }
+    
+        public virtual ObjectResult<proc_getallresidentreferalsheets_Result> proc_getallresidentreferalsheets()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallresidentreferalsheets_Result>("proc_getallresidentreferalsheets");
+        }
+    
+        public virtual ObjectResult<proc_getallresidentreferals_Result> proc_getallresidentreferals(Nullable<System.Guid> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallresidentreferals_Result>("proc_getallresidentreferals", useridParameter);
+        }
+    
+        public virtual ObjectResult<Proc_getallresidentcontacts_Result> Proc_getallresidentcontacts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_getallresidentcontacts_Result>("Proc_getallresidentcontacts");
         }
     }
 }

@@ -38,9 +38,7 @@
     background-color: #FFFFFF;border-bottom:none;padding-bottom:0px;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h1 class="modal-title form-heading" style="font-weight:bold;text-align: center;
-    color: black;" id="gridSystemModalLabel">
-                        
-                    </h1>
+    color: black;" id="gridSystemModalLabel"></h1>
                 </div>
                 <div class="modal-content" style="border: none !important;
     border-radius: 4px;
@@ -170,19 +168,42 @@
                 </div>
             </div>
         </div>
-
-
     </div>
+
+    <div id="divprocessingbtn" style="    position: fixed;
+    top: 6%;
+    right: 2%;
+    background: green;
+    color: white;
+    font-weight: bold;
+    width: 200px;
+    text-align: left;
+    padding: 15px;
+    border-radius: 10px;display:none;z-index:2147483648 !important;">
+        Processing
+    </div>
+
+
+    <div class="modal fade bs-example-modal-lg" style="z-index:2147483649 !important;" id="toastnotificationhome" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" style="width:20%; float:right;" role="document">
+            <div class="modal-content alert alert-success modal-alert" style="background:green; color:white; font-weight:bold">
+                Processing
+            </div>
+        </div>
+    </div>
+
 
     <div class="row hidewhenformopen" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
         <div class="col-lg-4" onclick="GetAllClaims('PropertyDamage')" style="width:30%;margin-left:2%;cursor:pointer; border-right:1px solid #797979">
             <div class="widget style1 navy-bg" style="background:none !important">
-                <div class="row">                    
+                <div class="row">
                     <div class="col-xs-12 text-center">
                         <h3 class="font-bold" style="font-size: 20px;
     text-transform: uppercase;
     color: #797979;
-    margin-bottom: 10px;"> Property Damage Claim </h3>
+    margin-bottom: 10px;">
+                            Property Damage Claim
+                        </h3>
                         <div class="claimcount" style="display:none; text-align:center;">
                             <div class="font-bold hclaimcount" style="width: 100px;
     text-align: center;
@@ -191,22 +212,24 @@
     background:#797979;
     padding-top: 1px;
     padding-bottom: 0px;
-    height: 100px;">  <h1 class="propcount" style="font-weight:bold;"> </h1>  <p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+    height: 100px;"><h1 class="propcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-4" style="width:30%;margin-left:2%; cursor:pointer;border-right:1px solid #797979"  onclick="GetAllClaims('General Liability')">
+        <div class="col-lg-4" style="width:30%;margin-left:2%; cursor:pointer;border-right:1px solid #797979" onclick="GetAllClaims('General Liability')">
             <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
-                 
-                    <div class="col-xs-12 text-center" >
+
+                    <div class="col-xs-12 text-center">
                         <h3 class="font-bold" style="font-size: 20px;
     text-transform: uppercase;
     color: #797979;
-    margin-bottom: 10px;"> General Liability Claim </h3>
+    margin-bottom: 10px;">
+                            General Liability Claim
+                        </h3>
                         <div class="claimcount" style="display:none;text-align:center;">
                             <div class="font-bold hclaimcount" style="width: 100px;
     text-align: center;
@@ -217,7 +240,7 @@
     padding-bottom: 0px;
     height: 100px;"><h1 class="liabcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
 
-                           
+
 
                         </div>
                     </div>
@@ -226,14 +249,16 @@
 
         </div>
 
-        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;" onclick="GetAllClaims('Mold Damage')" >
+        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;" onclick="GetAllClaims('Mold Damage')">
             <div class="widget style1 yellow-bg" style="background:none !important">
-                <div class="row">                   
+                <div class="row">
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold"  style="font-size: 20px;
+                        <h3 class="font-bold" style="font-size: 20px;
     text-transform: uppercase;
     color: #797979;
-    margin-bottom: 10px;"> Mold Damage Claim </h3>
+    margin-bottom: 10px;">
+                            Mold Damage Claim
+                        </h3>
                         <div class="claimcount" style="display:none;text-align:center">
                             <div class="font-bold hclaimcount " style="width: 100px;
     text-align: center;
@@ -244,7 +269,7 @@
     padding-bottom: 0px;
     height: 100px;"><h1 class="damagecount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
 
-                           
+
                         </div>
                     </div>
                 </div>
@@ -254,7 +279,7 @@
     </div>
 
 
- 
+
 
 
     <div class="row">
@@ -274,7 +299,7 @@
 
             </div>
 
-     
+
 
             <div class="AddEditContainer row" style="display:none;">
                 <div class="col-lg-12">
@@ -283,24 +308,24 @@
                             <h5 class="form-heading">  </h5>
                             <div class="ibox-tools">
                                 @*<a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>*@
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>*@
 
                                 @*<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('UserInRole');">
-                                <i class="fa fa-minus-circle"></i> Cancel
-                            </a>*@
+                                        <i class="fa fa-minus-circle"></i> Cancel
+                                    </a>*@
                                 @*<ul class="dropdown-menu dropdown-user">
-                                <li>
-                                    <a href="#" >Cancel</a>
-                                </li>
+                                        <li>
+                                            <a href="#" >Cancel</a>
+                                        </li>
 
-                            </ul>*@
+                                    </ul>*@
                                 @*<a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>*@
+                                        <i class="fa fa-times"></i>
+                                    </a>*@
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
 

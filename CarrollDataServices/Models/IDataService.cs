@@ -46,7 +46,8 @@ namespace Carroll.Data.Services.Models
         dynamic GetMileageLog(Guid riderid);
         dynamic InsertExpenseReimbursement(ExpenseReimbursementHeader mlh, List<ExpenseReimbursementDetail> mld);
         dynamic GetExpenseReimbursement(Guid riderid);
-        
+        dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh);
+        dynamic GetResidentReferralRequest(Guid riderid);
         dynamic GetHrFormCount();
         List<CarrollPosition> GetAllCarrollPositions();
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();

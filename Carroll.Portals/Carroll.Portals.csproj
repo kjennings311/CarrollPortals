@@ -411,6 +411,10 @@
     <Content Include="img\propbg-min.jpg" />
     <Content Include="img\propbg-min.png" />
     <Content Include="img\requistionrequestheader.jpg" />
+    <Content Include="img\residentbg-min.jpg" />
+    <Content Include="img\residentbg.jpg" />
+    <Content Include="img\residentreferaltop.png" />
+    <Content Include="img\resrel.jpg" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
@@ -891,6 +895,9 @@
     <Content Include="Views\Hr\PrintPayRollStatusChange - Copy.cshtml" />
     <Content Include="Views\Hr\PrintEmployeeNewHireNotice - Copy.cshtml" />
     <Content Include="Views\Resident\ReferalRequest.cshtml" />
+    <Content Include="Views\Resident\Printresidentreferal.cshtml" />
+    <Content Include="Views\Resident\ReferalContact.cshtml" />
+    <Content Include="Views\Resident\Printresidentcontact.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

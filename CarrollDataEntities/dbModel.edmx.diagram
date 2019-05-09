@@ -34,6 +34,14 @@
         <EntityTypeShape EntityType="Carroll.Data.Entities.PayrollStatusChangeNotice" Width="1.5" PointX="3.375" PointY="16.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.EmployeeNewHireNotice" Width="1.5" PointX="13.375" PointY="14.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.NoticeOfEmployeeSeperation" Width="1.5" PointX="18.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.ResidentReferalSheet" Width="1.5" PointX="18.375" PointY="15.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.ResidentContactInformation" Width="1.5" PointX="5.375" PointY="22" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.ResidentContactInformation_OtherOccupants" Width="1.5" PointX="7.625" PointY="20.25" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.ResidentContactInformation_Residents" Width="1.5" PointX="7.625" PointY="23" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.ResidentContactInformation_Vehicles" Width="1.5" PointX="7.625" PointY="26.75" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_ResidentContactInformation_Residents_ResidentContactInformation" />
+        <AssociationConnector Association="Carroll.Data.Entities.FK_ResidentContactInformation_Vehicles_ResidentContactInformation" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

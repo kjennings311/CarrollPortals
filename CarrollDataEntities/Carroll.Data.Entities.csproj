@@ -155,6 +155,15 @@
     <Compile Include="proc_getallrequisitionrequests_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Proc_getallresidentcontacts_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallresidentreferalsheets_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallresidentreferals_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetGeneralLiabilityClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -186,6 +195,21 @@
     <Compile Include="Repository\IDataRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="RequisitionRequest.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentContactInformation.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentContactInformation_OtherOccupants.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentContactInformation_Residents.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentContactInformation_Vehicles.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResidentReferalSheet.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">

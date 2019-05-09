@@ -135,7 +135,7 @@ namespace Carroll.Portals.Models
         public Nullable<bool> ChkOtherPost { get; set; }
     }
 
-    public  class PrintViewClaim
+    public class PrintViewClaim
     {
         public char Type { get; set; }
         public PrintGeneralLiabilityClaim GLC { get; set; }
@@ -211,7 +211,7 @@ namespace Carroll.Portals.Models
         public string ClaimNumber { get; set; }
     }
 
-    public  class PrintMoldDamageClaim
+    public class PrintMoldDamageClaim
     {
         public System.Guid MDLId { get; set; }
         public System.Guid PropertyId { get; set; }
@@ -296,6 +296,31 @@ namespace Carroll.Portals.Models
         public Nullable<double> La_Property2_Per { get; set; }
         public string Sal_Time { get; set; }
 
+    }
+
+    public class PrintResidentReferralSheet
+        {
+        public System.Guid ResidentReferalId { get; set; }
+        public string PropertyCode { get; set; }
+        public string PropertyName { get; set; }
+        public string ResidentCode { get; set; }
+        public string ResidentName { get; set; }
+        public string Notes { get; set; }
+        public string AgriPropertyName { get; set; }
+        public string AgriResidentName { get; set; }
+        public string ReferredResident { get; set; }
+        public string UnitNumber { get; set; }
+        public Nullable<double> ReferalBonus { get; set; }
+        public string ReferingResident { get; set; }
+        public Nullable<System.DateTime> ResidentDate { get; set; }
+        public string PropertyManager { get; set; }
+        public Nullable<System.DateTime> PropertyManagerDate { get; set; }
+        public string Acc_Received { get; set; }
+        public string Acc_CreditApplied { get; set; }
+        public Nullable<System.Guid> CreatedUser { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.Guid> ModifiedUser { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
 
     public class PrintPayRollStatusChange

@@ -45,6 +45,9 @@ namespace Carroll.Data.Entities.Repository
         dynamic InsertExpenseReimbursement(ExpenseReimbursementHeader mlh, List<ExpenseReimbursementDetail> mld);
         dynamic GetExpenseReimbursement(Guid riderid);
 
+        dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh);
+        dynamic GetResidentReferralRequest(Guid riderid);
+
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
          dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
 

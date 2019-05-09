@@ -36,7 +36,7 @@ namespace Carroll.Data.Services.Controllers
         private IDataService _service;
         private IValidationDictionary _modelState;
 
-    //    MongoClient _client;
+        //    MongoClient _client;
         IMongoDatabase _db;
 
         public DataController()
@@ -90,7 +90,7 @@ namespace Carroll.Data.Services.Controllers
             return _db.GetCollection<Models.MongoModels.Form>("Forms").ToJson();
         }
 
-       
+
 
 
         [ActionName("GetRecordsWithConfig")]
@@ -143,10 +143,10 @@ namespace Carroll.Data.Services.Controllers
         }
 
         [ActionName("InsertComment")]
-        [HttpPost]      
+        [HttpPost]
         public dynamic InsertComment([FromBody] FormComment obj)
-        {           
-            return _service.InsertComment(obj);           
+        {
+            return _service.InsertComment(obj);
         }
 
         [ActionName("InsertAttachment")]
@@ -156,7 +156,7 @@ namespace Carroll.Data.Services.Controllers
 
             FormAttachment fa = new FormAttachment();
 
-            var randomstring= DateTime.Now.ToString("yyMMddHHmmssff");
+            var randomstring = DateTime.Now.ToString("yyMMddHHmmssff");
             var filename = "";
 
             if (HttpContext.Current.Request.Files.AllKeys.Any())
@@ -170,19 +170,19 @@ namespace Carroll.Data.Services.Controllers
 
                     // Get the complete file path
                     filename = httpPostedFile.FileName;
-                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring+httpPostedFile.FileName);
+                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring + httpPostedFile.FileName);
 
                     // Save the uploaded file to "UploadedFiles" folder
                     httpPostedFile.SaveAs(fileSavePath);
                 }
             }
-            fa.RefFormType=Convert.ToInt16(HttpContext.Current.Request.Params["RefFormType"]);
+            fa.RefFormType = Convert.ToInt16(HttpContext.Current.Request.Params["RefFormType"]);
             fa.RefId = new Guid(HttpContext.Current.Request.Params["RefId"]);
             fa.UploadedBy = new Guid(HttpContext.Current.Request.Params["UploadedBy"]);
             fa.UploadedByName = HttpContext.Current.Request.Params["UploadedByName"];
-            fa.At_Name =filename;
-            fa.At_FileName = randomstring+filename;
-            return _service.InsertAttachment(fa);            
+            fa.At_Name = filename;
+            fa.At_FileName = randomstring + filename;
+            return _service.InsertAttachment(fa);
         }
 
 
@@ -195,7 +195,7 @@ namespace Carroll.Data.Services.Controllers
         #endregion
 
 
-        
+
         [ActionName("DeleteRecord")]
         [HttpPost]
         //[ValidateInput(false)]
@@ -204,7 +204,7 @@ namespace Carroll.Data.Services.Controllers
 
             if (!string.IsNullOrEmpty(entityType.ToString()) && (!string.IsNullOrEmpty(recordId)))
             {
-                return _service.DeleteRecord(entityType,recordId);
+                return _service.DeleteRecord(entityType, recordId);
             }
             else return false;
 
@@ -216,7 +216,7 @@ namespace Carroll.Data.Services.Controllers
         public IEnumerable<TokenInput> GetTokenInputUser(string q)
         {
 
-            var _users = _service.GetRecords(EntityType.Contact,q.ToLower());
+            var _users = _service.GetRecords(EntityType.Contact, q.ToLower());
             List<TokenInput> _coll = new List<TokenInput>();
             foreach (Contact _user in _users)
             {
@@ -246,9 +246,9 @@ namespace Carroll.Data.Services.Controllers
             fa.PropertyManager = "";
             fa.SignatureOfPropertyManager = HttpContext.Current.Request.Params["propertymanager"].ToString();
             fa.SignatureOfEmployee = HttpContext.Current.Request.Params["signature"].ToString();
-            fa.EmployeeLeaseRiderId= System.Guid.NewGuid();
+            fa.EmployeeLeaseRiderId = System.Guid.NewGuid();
             fa.Position = HttpContext.Current.Request.Params["position"].ToString();
-            fa.CreatedUser = new Guid( HttpContext.Current.Request.Params["CreatedBy"]);
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDatetime = DateTime.Now;
 
             return _service.InsertEmployeeLeaseRider(fa);
@@ -268,12 +268,12 @@ namespace Carroll.Data.Services.Controllers
         public dynamic InsertEmployeeNewHireNotice()
         {
             EmployeeNewHireNotice fa = new EmployeeNewHireNotice();
-            fa.StartDate =Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["startdate"]));
+            fa.StartDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["startdate"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
-         //   fa.EmployeeSocialSecuirtyNumber = HttpContext.Current.Request.Params["securitynumber"].ToString();
-            fa.EmailAddress =HttpContext.Current.Request.Params["email"].ToString();
+            //   fa.EmployeeSocialSecuirtyNumber = HttpContext.Current.Request.Params["securitynumber"].ToString();
+            fa.EmailAddress = HttpContext.Current.Request.Params["email"].ToString();
             fa.Manager = HttpContext.Current.Request.Params["manager"].ToString();
-            fa.Location = HttpContext.Current.Request.Params["location"].ToString();           
+            fa.Location = HttpContext.Current.Request.Params["location"].ToString();
             fa.EmployeeHireNoticeId = System.Guid.NewGuid();
             fa.Position = HttpContext.Current.Request.Params["position"].ToString();
             fa.Position_Exempt = HttpContext.Current.Request.Params["exempt"].ToString();
@@ -284,10 +284,10 @@ namespace Carroll.Data.Services.Controllers
             fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
             fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
             fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
-            fa.La_Property2_Per =Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+            fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
-            fa.kitordered =HttpContext.Current.Request.Params["kitordered"].ToString();
-         //   fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
+            fa.kitordered = HttpContext.Current.Request.Params["kitordered"].ToString();
+            //   fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
             fa.esignature = HttpContext.Current.Request.Params["esignature"].ToString();
             fa.edate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
@@ -298,7 +298,7 @@ namespace Carroll.Data.Services.Controllers
             fa.rpmsignature = HttpContext.Current.Request.Params["rpmsignature"].ToString();
             fa.rpmdate = Convert.ToDateTime(HttpContext.Current.Request.Params["rpmdate"]);
 
-          
+
 
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
@@ -337,7 +337,7 @@ namespace Carroll.Data.Services.Controllers
             {
                 if (TypeofChange != "")
                     TypeofChange = "Multiple";
-                     else
+                else
                     TypeofChange = "Property Change";
 
             }
@@ -377,8 +377,8 @@ namespace Carroll.Data.Services.Controllers
                 else
                     TypeofChange = "Leaves";
             }
-               fa.TypeOfChange =TypeofChange;
-            fa.FromPropNum =Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
+            fa.TypeOfChange = TypeofChange;
+            fa.FromPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
             fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
             fa.FromManager = HttpContext.Current.Request.Params["frommanager"].ToString();
             fa.ToPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["topropnum"].ToString());
@@ -387,10 +387,10 @@ namespace Carroll.Data.Services.Controllers
 
             fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
 
-            fa.FromPosition= HttpContext.Current.Request.Params["fromposition"].ToString();
+            fa.FromPosition = HttpContext.Current.Request.Params["fromposition"].ToString();
             fa.FromStatus = HttpContext.Current.Request.Params["fromstatus"].ToString();
             fa.FromWageSalary = HttpContext.Current.Request.Params["fromwage"].ToString();
-            fa.FromRate =Convert.ToDouble(HttpContext.Current.Request.Params["fromrate"].ToString());
+            fa.FromRate = Convert.ToDouble(HttpContext.Current.Request.Params["fromrate"].ToString());
 
             fa.ToPosition = HttpContext.Current.Request.Params["toposition"].ToString();
             fa.ToStatus = HttpContext.Current.Request.Params["tostatus"].ToString();
@@ -398,7 +398,7 @@ namespace Carroll.Data.Services.Controllers
             fa.ToRate = Convert.ToDouble(HttpContext.Current.Request.Params["torate"].ToString());
 
 
-            fa.BeginPayPeriod =HttpContext.Current.Request.Params["beginpayperiod"].ToString();
+            fa.BeginPayPeriod = HttpContext.Current.Request.Params["beginpayperiod"].ToString();
             fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
             fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
             fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
@@ -407,23 +407,23 @@ namespace Carroll.Data.Services.Controllers
             fa.CarAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtcaramount"].ToString());
             fa.Chk_PhoneAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkphoneamount"].ToString());
             fa.PhoneAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtphoneamount"].ToString());
-          
-                fa.FmlaYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlayes"].ToString());
+
+            fa.FmlaYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlayes"].ToString());
             fa.FmlaNo = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlano"].ToString());
-                fa.EnrolledBenefitsYes =Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefityes"].ToString());
+            fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefityes"].ToString());
             fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefitno"].ToString());
-                fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
+            fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
             fa.Leave_Begin = Convert.ToDateTime(HttpContext.Current.Request.Params["leavebegin"].ToString());
             fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
-           fa.Pto_Balance=Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
-                fa.Notes1=HttpContext.Current.Request.Params["notes1"].ToString();
-          // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
+            fa.Pto_Balance = Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
+            fa.Notes1 = HttpContext.Current.Request.Params["notes1"].ToString();
+            // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
             fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
             fa.EDate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
 
             fa.MSignature = HttpContext.Current.Request.Params["msignature"].ToString();
             fa.MDate = Convert.ToDateTime(HttpContext.Current.Request.Params["mdate"]);
-            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);        
+            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
 
             return _service.InsertPayRollStatusChangeNotice(fa);
@@ -453,11 +453,11 @@ namespace Carroll.Data.Services.Controllers
             fa.ChkApartmentAssociation = Convert.ToBoolean(HttpContext.Current.Request.Params["postassociation"].ToString());
             fa.PostOther = HttpContext.Current.Request.Params["otherpost"].ToString();
             fa.ChkOtherPost = Convert.ToBoolean(HttpContext.Current.Request.Params["chkotherpost"].ToString());
-            fa.SpecailInstructions =HttpContext.Current.Request.Params["specialinstructions"].ToString();
+            fa.SpecailInstructions = HttpContext.Current.Request.Params["specialinstructions"].ToString();
             fa.RequistionNumber = HttpContext.Current.Request.Params["requisitionnumber"].ToString();
             fa.DatePosted = Convert.ToDateTime(HttpContext.Current.Request.Params["dateposted"].ToString());
             fa.Notes = HttpContext.Current.Request.Params["notes"].ToString();
-            
+
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
 
@@ -503,20 +503,20 @@ namespace Carroll.Data.Services.Controllers
             fa.EmployeeSeperationId = System.Guid.NewGuid();
             fa.Policty_Voilated = HttpContext.Current.Request.Params["policty"].ToString();
             fa.AdditionalRemarks = HttpContext.Current.Request.Params["remarks"].ToString();
-          
-            fa.EquipmentKeysReturned =Convert.ToBoolean( HttpContext.Current.Request.Params["keysreturned"].ToString());
-            fa.C2WeeeksNoticeGiven= Convert.ToBoolean(HttpContext.Current.Request.Params["noticegives"].ToString());
-            fa.VacationPaidOut =Convert.ToBoolean( HttpContext.Current.Request.Params["vacationpaidout"].ToString());
-            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["balance"].ToString()))
-            fa.VacationBalance = Convert.ToDouble(HttpContext.Current.Request.Params["balance"].ToString());
-            fa.C2WeeksCompleted =Convert.ToBoolean(HttpContext.Current.Request.Params["weekscom"].ToString());
+
+            fa.EquipmentKeysReturned = Convert.ToBoolean(HttpContext.Current.Request.Params["keysreturned"].ToString());
+            fa.C2WeeeksNoticeGiven = Convert.ToBoolean(HttpContext.Current.Request.Params["noticegives"].ToString());
+            fa.VacationPaidOut = Convert.ToBoolean(HttpContext.Current.Request.Params["vacationpaidout"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["balance"].ToString()))
+                fa.VacationBalance = Convert.ToDouble(HttpContext.Current.Request.Params["balance"].ToString());
+            fa.C2WeeksCompleted = Convert.ToBoolean(HttpContext.Current.Request.Params["weekscom"].ToString());
             fa.DischargedText = HttpContext.Current.Request.Params["discharge"].ToString();
             fa.QuitText = HttpContext.Current.Request.Params["quit"].ToString();
             fa.Reason = HttpContext.Current.Request.Params["reason"].ToString();
             fa.LackOfWork = HttpContext.Current.Request.Params["work"].ToString();
             fa.SSignature = HttpContext.Current.Request.Params["ssignature"].ToString();
             fa.SDate = Convert.ToDateTime(HttpContext.Current.Request.Params["sdate"]);
-       
+
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
             return _service.InsertNoticeOfEmployeeSeperation(fa);
@@ -529,12 +529,51 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetNoticeOfEmployeeSeperation(new Guid(riderid));
         }
 
+        #region Resident Relations
+
+        [ActionName("InsertResidentReferralRequest")]
+        [HttpPost]
+        public dynamic InsertResidentReferralRequest()
+        {
+            ResidentReferalSheet RS = new ResidentReferalSheet();
+            RS.ResidentReferalId = Guid.NewGuid();
+            RS.PropertyCode = HttpContext.Current.Request.Params["propertynumber"].ToString();
+            RS.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
+            RS.ResidentCode = HttpContext.Current.Request.Params["refresidentcode"].ToString();
+            RS.ResidentName = HttpContext.Current.Request.Params["refresidentname"].ToString();
+            RS.Notes = HttpContext.Current.Request.Params["notes"].ToString();
+            RS.AgriPropertyName = HttpContext.Current.Request.Params["propertyname1"].ToString();
+            RS.AgriResidentName = HttpContext.Current.Request.Params["residentname1"].ToString();
+            RS.ReferredResident = HttpContext.Current.Request.Params["refferedresident"].ToString();
+            RS.UnitNumber = HttpContext.Current.Request.Params["unitnumber"].ToString();
+            RS.ReferalBonus = Convert.ToDouble(HttpContext.Current.Request.Params["referalbonus"].ToString());
+            RS.Acc_Received = HttpContext.Current.Request.Params["receivedamount"].ToString();
+            RS.Acc_CreditApplied =HttpContext.Current.Request.Params["creditapplied"].ToString();
+            RS.ReferingResident = HttpContext.Current.Request.Params["refresidentsign"].ToString();
+            RS.ResidentDate =Convert.ToDateTime(HttpContext.Current.Request.Params["refresdate"].ToString());
+            RS.PropertyManager = HttpContext.Current.Request.Params["properymanagersign"].ToString();
+            RS.PropertyManagerDate = Convert.ToDateTime(HttpContext.Current.Request.Params["properymanagerdate"].ToString());
+            RS.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"].ToString());
+            RS.CreatedDate = DateTime.Now;
+           return _service.InsertResidentReferralRequest(RS);
+        }
+        
+        [ActionName("GetResidentReferralRequest")]
+        [HttpGet]
+        public dynamic GetResidentReferralRequest(string riderid)
+        {
+            return _service.GetResidentReferralRequest(new Guid(riderid));
+        }
+
+        #endregion
+
+
         [ActionName("InsertMileageLog")]
         [HttpPost]
         public dynamic InsertMileageLog(List<string> rows)
         {
             MileageLogHeader fa = new MileageLogHeader();
-           
+
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.OfficeAddress = HttpContext.Current.Request.Params["officeaddress"].ToString();
             // fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
@@ -542,12 +581,12 @@ namespace Carroll.Data.Services.Controllers
             fa.TotalNumberOfMiles = Convert.ToDouble(HttpContext.Current.Request.Params["totalmiles"].ToString());
             fa.MonthlyMileageLogId = System.Guid.NewGuid();
             fa.TotalPrice = Convert.ToDouble(HttpContext.Current.Request.Params["totalprice"].ToString());
-            fa.Signature =  HttpContext.Current.Request.Params["signature"].ToString();
+            fa.Signature = HttpContext.Current.Request.Params["signature"].ToString();
             fa.ApprovedBy = HttpContext.Current.Request.Params["approvedby"].ToString();
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDatetime = DateTime.Now;
 
-          var totalrows = HttpContext.Current.Request.Params["rows"].ToString();
+            var totalrows = HttpContext.Current.Request.Params["rows"].ToString();
             var allrows = totalrows.Split('|');
 
             List<MileageLogDetail> md = new List<MileageLogDetail>();
@@ -566,7 +605,7 @@ namespace Carroll.Data.Services.Controllers
                 md.Add(m);
             }
 
-            return _service.InsertMileageLog(fa,md);
+            return _service.InsertMileageLog(fa, md);
         }
 
         [ActionName("GetMileageLog")]
@@ -642,7 +681,7 @@ namespace Carroll.Data.Services.Controllers
                     m.Col1Expense = 0;
 
                 if (values[3].ToString() != "")
-                    m.Col2Epense= Convert.ToDouble(values[3].ToString());
+                    m.Col2Epense = Convert.ToDouble(values[3].ToString());
                 else
                     m.Col2Epense = 0;
 
@@ -676,7 +715,7 @@ namespace Carroll.Data.Services.Controllers
                 else
                     m.Col7Expense = 0;
 
-              
+
                 md.Add(m);
             }
 
@@ -700,7 +739,7 @@ namespace Carroll.Data.Services.Controllers
 
         [ActionName("GetAllHrForms")]
         [HttpGet]
-        public dynamic GetAllHrForms(string FormType, string OptionalSeachText="")
+        public dynamic GetAllHrForms(string FormType, string OptionalSeachText = "")
         {
             return _service.GetAllHrForms(FormType, OptionalSeachText);
         }
@@ -709,7 +748,7 @@ namespace Carroll.Data.Services.Controllers
         [HttpGet]
         public dynamic GetAllMileageForms(string FormType, string userid)
         {
-            return _service.GetAllMileageForms(FormType,userid, "");
+            return _service.GetAllMileageForms(FormType, userid, "");
         }
 
 
@@ -732,7 +771,7 @@ namespace Carroll.Data.Services.Controllers
 
             foreach (var item in _service.GetAllCarrollPayPerilds())
             {
-                _users.Add(new KeyValuePair(item.PayFrom.Value.ToShortDateString()+" - "+ item.PayTo.Value.ToShortDateString(), item.PayFrom.Value.ToShortDateString() + " - " + item.PayTo.Value.ToShortDateString()));
+                _users.Add(new KeyValuePair(item.PayFrom.Value.ToShortDateString() + " - " + item.PayTo.Value.ToShortDateString(), item.PayFrom.Value.ToShortDateString() + " - " + item.PayTo.Value.ToShortDateString()));
             }
             return _users;
 
@@ -747,14 +786,12 @@ namespace Carroll.Data.Services.Controllers
         {
             List<KeyValuePair> _users = new List<KeyValuePair>();
             //us
-            
-            foreach (var item  in _service.GetAllCarrollPositions())
+
+            foreach (var item in _service.GetAllCarrollPositions())
             {
                 _users.Add(new KeyValuePair(item.PositionId.ToString(), item.Position));
             }
             return _users;
-
-
         }
 
 
@@ -853,21 +890,47 @@ namespace Carroll.Data.Services.Controllers
         {
             var _partners = _service.GetEquityPartners();
             List<KeyValuePair> _equityPartners = new List<KeyValuePair>();
-            foreach(EquityPartner _partner in _partners)
+            foreach (EquityPartner _partner in _partners)
             {
-              
+
                 _equityPartners.Add(new KeyValuePair(_partner.EquityPartnerId.ToString(), _partner.PartnerName));
             }
 
             _partners = null;
 
-              //us
+            //us
 
 
 
             return _equityPartners;
 
 
+        }
+
+        public class InsertResidentReferal
+
+        {
+            public string propertynumber { get; set; }
+            public string propertyname { get; set; }
+            public string refresidentcode { get; set; }
+            public string refresidentname { get; set; }
+            public string notes { get; set; }
+            public string propertyname1 { get; set; }
+            public string residentname1 { get; set; }
+            public string refferedresident { get; set; }
+            public string unitnumber { get; set; }
+            public string referalbonus { get; set; }
+            public string MyProperty { get; set; }
+            public string refresidentsign { get; set; }
+            public DateTime? refresdate { get; set; }
+            public string properymanagersign { get; set; }
+            public DateTime? properymanagerdate { get; set; }
+            public double? receivedamount { get; set; }
+            public double? creditapplied { get; set; }
+            public string CreatedBy { get; set; }
+            public string CreatedByName { get; set; }
+
+           
         }
     }
 }

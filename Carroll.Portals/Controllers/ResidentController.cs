@@ -33,7 +33,7 @@ namespace Carroll.Portals.Controllers
         }
 
         // GET: Hr
-        public async Task<ActionResult> PrintEmployeeLeaseRider(string id)
+        public async Task<ActionResult> Printresidentreferal(string id)
         {
 
 
@@ -50,7 +50,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetResidentReferralRequest?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -58,7 +58,7 @@ namespace Carroll.Portals.Controllers
                     var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
-                    obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
+                    obj = JsonConvert.DeserializeObject<PrintResidentReferralSheet>(EmpResponse);
 
                 }
 
@@ -69,7 +69,7 @@ namespace Carroll.Portals.Controllers
 
         }
 
-        public async Task<ActionResult> PdfEmployeeLeaseRider(string id)
+        public async Task<ActionResult> PdfResidentReferal(string id)
         {
 
             dynamic obj = new { };
@@ -85,7 +85,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetResidentReferralRequest?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -93,13 +93,13 @@ namespace Carroll.Portals.Controllers
                     var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
-                    obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
+                    obj = JsonConvert.DeserializeObject<PrintResidentReferralSheet>(EmpResponse);
 
                 }
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("Printresidentreferal", obj) { FileName = "ResidentReferralSheet - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 
@@ -115,7 +115,7 @@ namespace Carroll.Portals.Controllers
             return View(new BaseViewModel());
         }
 
-        public async Task<ActionResult> PrintEmployeeNewHireNotice(string id)
+        public async Task<ActionResult> Printresidentcontact(string id)
         {
 
 
