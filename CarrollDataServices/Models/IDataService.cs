@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Carroll.Data.Entities;
+using Carroll.Data.Entities.Repository;
+
 namespace Carroll.Data.Services.Models
 {
     public interface IDataService
@@ -48,6 +50,9 @@ namespace Carroll.Data.Services.Models
         dynamic GetExpenseReimbursement(Guid riderid);
         dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh);
         dynamic GetResidentReferralRequest(Guid riderid);
+        dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs);
+        PrintResidentContact GetResidentReferralContact(Guid riderid);
+
         dynamic GetHrFormCount();
         List<CarrollPosition> GetAllCarrollPositions();
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();

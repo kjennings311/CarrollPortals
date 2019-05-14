@@ -323,6 +323,77 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     }
 
+    public class ResidentContactInformation
+    {
+        public System.Guid Contactid { get; set; }
+        public string Building { get; set; }
+        public string Apartment { get; set; }
+        public string PropertyName { get; set; }
+        public string ReturnEmail { get; set; }
+        public string Fax1 { get; set; }
+        public string Fax11 { get; set; }
+        public string Fax2 { get; set; }
+        public string Fax22 { get; set; }
+        public string InsuranceDeclaration { get; set; }
+        public string Em_name { get; set; }
+        public string Em_Address { get; set; }
+        public string Em_Phone { get; set; }
+        public string Em_Relation { get; set; }
+        public string ResidentSingature1 { get; set; }
+        public Nullable<System.DateTime> ResidentSignDate1 { get; set; }
+        public string ResidentSingature2 { get; set; }
+        public Nullable<System.DateTime> ResidentSignDate2 { get; set; }
+        public Nullable<System.Guid> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.Guid> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+    }
+
+    public class ResidentReferralResidents
+    {
+        public System.Guid ResidentId { get; set; }
+        public Nullable<System.Guid> ResidentContactInformationId { get; set; }
+        public string Name { get; set; }
+        public string MobilePhone { get; set; }
+        public string Email { get; set; }
+        public Nullable<bool> Home_Work { get; set; }
+        public string Home_Work_Phone { get; set; }
+        public string CurrentEmployer { get; set; }
+        public string Position { get; set; }
+
+    }
+
+    public class ResidentReferralOthers
+    {
+        public System.Guid OccupantId { get; set; }
+        public Nullable<System.Guid> ResidentContactInformationId { get; set; }
+        public string Name { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+    }
+
+    public class ResidentReferralVehicles
+    {
+        public System.Guid VehicleId { get; set; }
+        public Nullable<System.Guid> ResidentContactInformationId { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public string Type { get; set; }
+        public string Year { get; set; }
+        public string Color { get; set; }
+        public string LicensePlate { get; set; }
+        public string LicensePlatState { get; set; }
+    }
+
+
+
+    public class PrintResidentContact
+    {
+        public ResidentContactInformation contact { get; set; }
+        public List<ResidentReferralResidents> rrs { get; set; }
+        public List<ResidentReferralOthers> ros { get; set; }
+        public List<ResidentReferralVehicles> rvs { get; set; }
+    }
+
     public class PrintPayRollStatusChange
     {
 

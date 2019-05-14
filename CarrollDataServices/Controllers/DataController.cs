@@ -565,6 +565,115 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetResidentReferralRequest(new Guid(riderid));
         }
 
+
+        [ActionName("InsertResidentReferralContact")]
+        [HttpPost]
+        public dynamic InsertResidentReferralContact()
+        {
+            ResidentContactInformation RS = new ResidentContactInformation();
+            RS.Contactid = Guid.NewGuid();
+            RS.Apartment = HttpContext.Current.Request.Params["apartment"].ToString();
+            RS.PropertyName = HttpContext.Current.Request.Params["property"].ToString();
+            RS.Building = HttpContext.Current.Request.Params["building"].ToString();
+            RS.ReturnEmail = HttpContext.Current.Request.Params["returnemail"].ToString();
+            RS.Fax1 = HttpContext.Current.Request.Params["fax1"].ToString();
+            RS.Fax11 = HttpContext.Current.Request.Params["fax11"].ToString();
+            RS.Fax2 = HttpContext.Current.Request.Params["fax2"].ToString();
+            RS.Fax22 = HttpContext.Current.Request.Params["fax22"].ToString();
+            RS.InsuranceDeclaration = HttpContext.Current.Request.Params["insurancedeclaration"].ToString();
+            RS.Em_name = HttpContext.Current.Request.Params["emname"].ToString();
+            RS.Em_Address = HttpContext.Current.Request.Params["emaddress"].ToString();
+            RS.Em_Phone = HttpContext.Current.Request.Params["emphone"].ToString();
+            RS.Em_Relation = HttpContext.Current.Request.Params["emrelation"].ToString();
+            RS.ResidentSingature1 = HttpContext.Current.Request.Params["sign1"].ToString();
+            RS.ResidentSignDate1 = Convert.ToDateTime(HttpContext.Current.Request.Params["sign1date"].ToString());
+            if(HttpContext.Current.Request.Params["sign2"].ToString()!="")
+            RS.ResidentSingature2 = HttpContext.Current.Request.Params["sign2"].ToString();
+            if (HttpContext.Current.Request.Params["sign2date"].ToString() != "")
+                RS.ResidentSignDate2 = Convert.ToDateTime(HttpContext.Current.Request.Params["sign2date"].ToString());
+            RS.CreatedBy = new Guid(HttpContext.Current.Request.Params["CreatedBy"].ToString());
+            RS.CreatedDate = DateTime.Now;
+
+            //Residents Updation
+
+            var totalrows = HttpContext.Current.Request.Params["residents"].ToString();
+            var allrows = totalrows.Split('|');
+
+            List<ResidentContactInformation_Residents> md = new List<ResidentContactInformation_Residents>();
+
+            foreach (var item in allrows)
+            {
+                var values = item.ToString().Split(',');
+                var m = new ResidentContactInformation_Residents();
+                m.ResidentId = System.Guid.NewGuid();
+                m.ResidentContactInformationId = RS.Contactid;
+                m.Name = values[0];
+                m.MobilePhone = values[1].ToString();
+                m.Email = values[2].ToString();
+                m.Home_Work = Convert.ToBoolean(values[3].ToString());
+                m.Home_Work_Phone =values[4].ToString();
+                m.CurrentEmployer = values[5];
+                m.Position = values[6];
+                md.Add(m);
+            }
+
+            // Other Contacts Updation
+
+            var otherscontacts = HttpContext.Current.Request.Params["others"].ToString();
+            var allcontacts = otherscontacts.Split('|');
+
+            List<ResidentContactInformation_OtherOccupants> contactlist = new List<ResidentContactInformation_OtherOccupants>();
+
+            foreach (var item in allcontacts)
+            {
+                var values = item.ToString().Split(',');
+                var m = new ResidentContactInformation_OtherOccupants();
+                m.OccupantId = System.Guid.NewGuid();
+                m.ResidentContactInformationId = RS.Contactid;
+                m.Name = values[0];
+                if(!string.IsNullOrEmpty(values[1]))
+                m.DOB = Convert.ToDateTime(values[1]);
+                contactlist.Add(m);
+            }
+
+
+            // Vehicles
+
+
+            var vehicles = HttpContext.Current.Request.Params["vehicles"].ToString();
+            var allvehicles = vehicles.Split('|');
+
+            List<ResidentContactInformation_Vehicles> vehiclelist = new List<ResidentContactInformation_Vehicles>();
+
+            foreach (var item in vehiclelist)
+            {
+                var values = item.ToString().Split(',');
+                var m = new ResidentContactInformation_Vehicles();
+                m.VehicleId = System.Guid.NewGuid();
+                m.ResidentContactInformationId = RS.Contactid;
+                m.Make = values[0];
+                m.Model = values[1];
+                m.Type = values[2];
+                m.Year = values[3];
+                m.Color = values[4];
+                m.LicensePlate = values[5];
+                m.LicensePlatState = values[6];              
+                vehiclelist.Add(m);
+            }
+
+
+
+            return _service.InsertResidentReferralContact(RS,md,contactlist,vehiclelist);
+        }
+
+        [ActionName("GetResidentReferralContact")]
+        [HttpGet]
+        public PrintResidentContact GetResidentReferralContact(string riderid)
+        {
+            return _service.GetResidentReferralContact(new Guid(riderid));
+        }
+
+
         #endregion
 
 

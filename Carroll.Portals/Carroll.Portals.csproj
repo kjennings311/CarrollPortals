@@ -897,6 +897,7 @@
     <Content Include="Views\Resident\ReferalRequest.cshtml" />
     <Content Include="Views\Resident\Printresidentreferal.cshtml" />
     <Content Include="Views\Resident\ReferalContact.cshtml" />
+    <Content Include="Views\Resident\Printresidentcontact123.cshtml" />
     <Content Include="Views\Resident\Printresidentcontact.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />

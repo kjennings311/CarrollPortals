@@ -10,10 +10,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Carroll.Data.Entities.Helpers;
 
+
+
+
 namespace Carroll.Data.Entities.Repository
 {
     public class EntityDataRepository:IDataRepository
     {
+
         public CarrollFormsEntities DBEntity => new EFConnectionAccessor().Entities;
 
         /// <summary>
@@ -1579,6 +1583,130 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+        public dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                    ResidentContactInformation _property = mlh;
+
+                    // No record exists create a new property record here
+                    _entities.ResidentContactInformations.Add(_property);
+
+                    foreach (var item in rrs)
+                    {
+                        _entities.ResidentContactInformation_Residents.Add(item);
+                    }
+
+                    foreach (var item in ors)
+                    {
+                        _entities.ResidentContactInformation_OtherOccupants.Add(item);
+                    }
+
+                    foreach (var item in vhs)
+                    {
+                        _entities.ResidentContactInformation_Vehicles.Add(item);
+                    }
+
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+
+                    return new { Error = false, ErrorMsg = "", InsertedId = _property.Contactid };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+
+        public PrintResidentContact GetResidentReferralContact(Guid riderid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+
+                    PrintResidentContact prc = new PrintResidentContact();
+
+                 var resident = (from tbl in _entities.ResidentContactInformations
+                               where tbl.Contactid == riderid
+                               select tbl).FirstOrDefault();
+
+                  var  res1 = (from tbl in _entities.ResidentContactInformation_Residents
+                                where tbl.ResidentContactInformationId == riderid
+                                select tbl).ToList();
+
+                   var res2 = (from tbl in _entities.ResidentContactInformation_OtherOccupants
+                                where tbl.ResidentContactInformationId == riderid
+                                select tbl).ToList();
+
+                    var res3 = (from tbl in _entities.ResidentContactInformation_Vehicles
+                                where tbl.ResidentContactInformationId == riderid
+                                select tbl).ToList();
+
+                    prc.Contactid = resident.Contactid;
+                    prc.Apartment = resident.Apartment;
+                    prc.Building = resident.Building;
+                    prc.PropertyName = resident.PropertyName;
+                    prc.ReturnEmail = resident.ReturnEmail;
+                    prc.Fax1 = resident.Fax1;
+                    prc.Fax11 = resident.Fax11;
+                    prc.Fax2 = resident.Fax2;
+                    prc.Fax22 = resident.Fax22;
+                    prc.InsuranceDeclaration = resident.InsuranceDeclaration;
+                    prc.Em_name = resident.Em_name;
+                    prc.Em_Address = resident.Em_Address;
+                    prc.Em_Phone = resident.Em_Phone;
+                    prc.Em_Relation = resident.Em_Relation;
+                    prc.ResidentSignDate1 = resident.ResidentSignDate1;
+                    prc.ResidentSignDate2 = resident.ResidentSignDate2;
+                    prc.ResidentSingature1 = resident.ResidentSingature1;
+                    prc.ResidentSingature2 = resident.ResidentSingature2;
+
+                    List<ResidentReferralResidents> rrs = new List<ResidentReferralResidents>();
+
+                    foreach (var item in res1)
+                    {
+                       rrs.Add(new ResidentReferralResidents { Name=item.Name,MobilePhone=item.MobilePhone,Email=item.Email,Home_Work=item.Home_Work,Home_Work_Phone=item.Home_Work_Phone,CurrentEmployer=item.CurrentEmployer,Position=item.Position });
+                    }
+                    prc.rrs = rrs;
+
+                    List<ResidentReferralOthers> ros = new List<ResidentReferralOthers>();
+
+                    foreach (var item in res2)
+                    {
+                        ros.Add(new ResidentReferralOthers { Name=item.Name,DOB=item.DOB });
+
+                    }
+
+                    prc.ros = ros;
+
+
+                    List<ResidentReferralVehicles> rvs = new List<ResidentReferralVehicles>();
+
+                    foreach (var item in res3)
+                    {
+                       rvs.Add(new ResidentReferralVehicles { Make = item.Make, Model = item.Model, Type = item.Type,Year=item.Year,Color=item.Color,LicensePlate=item.LicensePlate,LicensePlatState=item.LicensePlatState });
+                    }
+
+                    prc.rvs = rvs;
+
+
+
+                    return prc;
+                }
+                catch (Exception ex)
+                {
+                    return new PrintResidentContact { };
+                }
+            }
+        }
         public dynamic GetHrFormCount()
         {
             using (CarrollFormsEntities _entities = DBEntity)
@@ -1688,6 +1816,28 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "referredResident", label = "Resident Referral", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "unitNumber", label = "UnitNumber", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "referalBonus", label = "ReferralBonus", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                }
+
+                else if (FormType == "ResidentContact")
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.Proc_getallresidentcontacts().ToList();
+                    else
+                        config.Rows = _entities.Proc_getallresidentcontacts().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.ResidentName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                    config.EtType = EntityType.AllClaims.ToString();
+                    PropertyInfo[] userprop = typeof(Proc_getallresidentcontacts_Result).GetProperties();
+                    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                    config.Columns = new List<DtableConfigArray>();
+
+                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "building", label = "Building Number", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "apartment", label = "Apartment Number", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "residentName", label = "Resident #1 Name", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "insuranceDeclaration", label = "Renter's Insurance on File", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -2347,4 +2497,85 @@ namespace Carroll.Data.Entities.Repository
         //    }
         //}
     }
+
+    public class ResidentReferralResidents
+    {
+        public System.Guid ResidentId { get; set; }
+        public Nullable<System.Guid> ResidentContactInformationId { get; set; }
+        public string Name { get; set; }
+        public string MobilePhone { get; set; }
+        public string Email { get; set; }
+        public Nullable<bool> Home_Work { get; set; }
+        public string Home_Work_Phone { get; set; }
+        public string CurrentEmployer { get; set; }
+        public string Position { get; set; }
+
+    }
+
+
+    public class ResidentReferralOthers
+    {
+        public System.Guid OccupantId { get; set; }
+        public Nullable<System.Guid> ResidentContactInformationId { get; set; }
+        public string Name { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+    }
+
+    public class ResidentReferralVehicles
+    {
+        public System.Guid VehicleId { get; set; }
+        public Nullable<System.Guid> ResidentContactInformationId { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public string Type { get; set; }
+        public string Year { get; set; }
+        public string Color { get; set; }
+        public string LicensePlate { get; set; }
+        public string LicensePlatState { get; set; }
+    }
+
+
+    public class PrintResidentContact
+    {
+        public System.Guid Contactid { get; set; }
+        public string Building { get; set; }
+        public string Apartment { get; set; }
+        public string PropertyName { get; set; }
+        public string ReturnEmail { get; set; }
+        public string Fax1 { get; set; }
+        public string Fax11 { get; set; }
+        public string Fax2 { get; set; }
+        public string Fax22 { get; set; }
+        public string InsuranceDeclaration { get; set; }
+        public string Em_name { get; set; }
+        public string Em_Address { get; set; }
+        public string Em_Phone { get; set; }
+        public string Em_Relation { get; set; }
+        public string ResidentSingature1 { get; set; }
+        public Nullable<System.DateTime> ResidentSignDate1 { get; set; }
+        public string ResidentSingature2 { get; set; }
+        public Nullable<System.DateTime> ResidentSignDate2 { get; set; }
+        public Nullable<System.Guid> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.Guid> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public List<ResidentReferralResidents> rrs { get; set; }
+        public List<ResidentReferralOthers> ros { get; set; }
+        public List<ResidentReferralVehicles> rvs { get; set; }
+        
+    }
+
+
+
+
+
+
+    //public class PrintResidentContact
+    //{
+    //    public ResidentContactInformation contact { get; set; }
+    //    public List<ResidentContactInformation_Residents> rrs { get; set; }
+    //    public List<ResidentContactInformation_OtherOccupants> ros { get; set; }
+    //    public List<ResidentContactInformation_Vehicles> rvs { get; set; }
+    //}
+
 }

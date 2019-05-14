@@ -132,7 +132,7 @@ namespace Carroll.Portals.Controllers
 
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
-                HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeNewHireNotice?riderid=" + id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetResidentReferralContact?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Res.IsSuccessStatusCode)
                 {
@@ -140,13 +140,48 @@ namespace Carroll.Portals.Controllers
                     var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
-                    obj = JsonConvert.DeserializeObject<PrintEmployeeNewHireNotice>(EmpResponse);
+                    obj = JsonConvert.DeserializeObject<Carroll.Data.Entities.Repository.PrintResidentContact>(EmpResponse);
 
                 }
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return View("PrintEmployeeNewHireNotice", obj);
+                return View(obj);
+            }
+        }
+
+        public async Task<ActionResult> PdfResidentContact(string id)
+        {
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetResidentReferralContact?riderid=" + id);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintResidentContact>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                return new ViewAsPdf("Printresidentcontact", obj) { FileName = "ResidentReferralContact - " + DateTime.Now.ToShortDateString() + ".pdf" };
+
             }
 
         }

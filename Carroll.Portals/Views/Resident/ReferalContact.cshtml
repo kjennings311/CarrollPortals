@@ -73,7 +73,7 @@
     font-style: italic;
     color: black;">
                                                 <p style=""> Office Use Only:</p>
-                                                <p> Copy Of Renter's <br /> Insurance Declaration <br /> in File <input type="checkbox" id="insurancedeclaration" > </p>
+                                                <p> Copy Of Renter's <br /> Insurance Declaration <br /> in File <input type="checkbox" style="margin-left:10px;" id="insurancedeclaration" > </p>
                                             </div>
 
                                             <div class="form-div" style="width:85%;float:right;">
@@ -146,7 +146,7 @@
                                             <thead style="background-color:#808080"> <tr><th style="text-align:center"> FULL NAME  </th><th> DATE OF BIRTH     </th> <th> FULL NAME  </th><th> DATE OF BIRTH     </th></tr></thead>
                                             <tbody>
                                                 <tr> <td> <input type="text" id="o1name" style="width:90%" /> </td> <td> <input type="date" id="o1date" style="width:90%" /> </td><td> <input id="o2name" type="text" style="width:90%" /> </td><td> <input type="date" id="o2date" style="width:90%" /> </td></tr>
-                                                <tr> <td> <input type="text" id="o3name" style="width:90%" /> </td> <td> <input type="date" id="o3date" style="width:90%" /> </td><td> <input type="text" id="o4name" style="width:90%" /> </td><td> <input type="text" id="o4date" style="width:90%" /> </td></tr>
+                                                <tr> <td> <input type="text" id="o3name" style="width:90%" /> </td> <td> <input type="date" id="o3date" style="width:90%" /> </td><td> <input type="text" id="o4name" style="width:90%" /> </td><td> <input type="date" id="o4date" style="width:90%" /> </td></tr>
                                             </tbody>
                                         </table>
 
@@ -258,6 +258,7 @@
         .dtprops td, .dtprops th 
         {
             white-space: nowrap;
+
         }
 
         input {
@@ -282,6 +283,13 @@
         .has-error {
             border-color: red;
         }
+
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+            color: #686666 !important;
+        }
+
     </style>
 }
 
@@ -297,7 +305,7 @@
         {
             var leaseid = "";
 
-            GetAllMileageForms('ResidentReferal');
+            GetAllMileageForms('ResidentContact');
 
             $("input").change(function (e)
             {
@@ -373,63 +381,172 @@
                         control = $("#apartment");
                 }
 
-                if ($("#returnemail").val() == "") {
+                if ($("#returnemail").val() == "")
+                {
                     errormsgsummary += "<li> Please Enter Return Email  </li>";
                     $("#returnemail").addClass('has-error');
                     if (control == "")
                         control = $("#returnemail");
                 }
 
+                if ($("#r1name").val() == "") {
+                    errormsgsummary += "<li> Please Enter Resident1 Name  </li>";
+                    $("#r1name").addClass('has-error');
+                    if (control == "")
+                        control = $("#r1name");
+                }
 
-                if ($("#fax1").val() == "" || $("#fax1").val() == "") {
-                    errormsgsummary += "<li> Please Enter Fax Details  </li>";
-                    $("#fax1,fax11").addClass('has-error');
+                if ($("#r1cell").val() == "") {
+                    errormsgsummary += "<li> Please Enter Resident Cell Number  </li>";
+                    $("#r1cell").addClass('has-error');
                     if (control == "")
-                        control = $("#fax1,fax11");
+                        control = $("#r1cell");
                 }
-                if ($("#r1work").val() == "") {
-                    errormsgsummary += "<li> Please Enter Return Email  </li>";
-                    $("#returnemail").addClass('has-error');
-                    if (control == "")
-                        control = $("#returnemail");
-                }
-                if ($("#returnemail").val() == "") {
-                    errormsgsummary += "<li> Please Enter Return Email  </li>";
-                    $("#returnemail").addClass('has-error');
-                    if (control == "")
-                        control = $("#returnemail");
-                }
-                // if ($("#returnemail").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Return Email  </li>";
-                //    $("#returnemail").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#returnemail");
-                //}
 
-                //if ($("#residentname1").val() == "")
+              
+                if ($("#r1email").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Resident1 Email  </li>";
+                    $("#r1email").addClass('has-error');
+                    if (control == "")
+                        control = $("#r1email");
+                }
+
+                if ($("#ename").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Name of Person to Contact in Emergency  </li>";
+                    $("#ename").addClass('has-error');
+                    if (control == "")
+                        control = $("#ename");
+                }
+
+
+                if ($("#eaddress").val() == "") {
+                    errormsgsummary += "<li> Please Enter Emergency Contact Address  </li>";
+                    $("#eaddress").addClass('has-error');
+                    if (control == "")
+                        control = $("#eaddress");
+                }
+                if ($("#ephone").val() == "") {
+                    errormsgsummary += "<li> Please Enter Emergency Contact Phone  </li>";
+                    $("#ephone").addClass('has-error');
+                    if (control == "")
+                        control = $("#ephone");
+                }
+                if ($("#erelation").val() == "") {
+                    errormsgsummary += "<li> Please Enter  Your Relation to Emergency Contact Person  </li>";
+                    $("#erelation").addClass('has-error');
+                    if (control == "")
+                        control = $("#erelation");
+                }
+
+
+                 if ($("#r1sign").val() == "") {
+                    errormsgsummary += "<li> Please Enter Resident1 Signature  </li>";
+                     $("#r1sign").addClass('has-error');
+                    if (control == "")
+                        control = $("#r1sign");
+                }
+
+                if ($("#r1date").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Resident Date  </li>";
+                    $("#r1date").addClass('has-error');
+                    if (control == "")
+                        control = $("#r1date");
+                }
+
+
+                //if ($("#v1make").val() == "")
                 //{
-                //    errormsgsummary += "<li> Please Enter Resident Name </li>";
-                //    $("#residentname1").addClass('has-error');
+                //    errormsgsummary += "<li> Please Enter Vehicle 1 Make </li>";
+                //    $("#v1make").addClass('has-error');
                 //    if (control == "")
-                //        control = $("#residentname1");
+                //        control = $("#v1make");
                 //}
 
 
-                //if ($("#unitnumber").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Unit Number </li>";
-                //    $("#unitnumber").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#unitnumber");
-                //}
+                if ($("#v1model").val() == "") {
+                    errormsgsummary += "<li> Please Enter Vehicle 1 Model </li>";
+                    $("#v1model").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1model");
+                }
+
+                if ($("#v1type").val() == "") {
+                    errormsgsummary += "<li> Please Enter vehicle 1 Type </li>";
+                    $("#v1type").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1type");
+                }
 
 
-                //if ($("#referalbonus").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Referal Bonus </li>";
-                //    $("#referalbonus").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#referalbonus");
-                //}
+                if ($("#v1year").val() == "") {
+                    errormsgsummary += "<li> Please Enter Vehicle 1 Yar </li>";
+                    $("#v1year").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1year");
+                }
+
+                if ($("#v1color").val() == "") {
+                    errormsgsummary += "<li> Please Enter Unit Number </li>";
+                    $("#v1color").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1color");
+                }
+
+
+                if ($("#v1plat").val() == "") {
+                    errormsgsummary += "<li> Please Enter Vehicle 1 License Plat</li>";
+                    $("#v1plat").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1plat");
+                }
+
+
+
+               if ($("#v1state").val() == "") {
+                    errormsgsummary += "<li> Please Enter Referal Bonus </li>";
+                    $("#v1state").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1state");
+                }
+
+
+                if ($("#o1name").val() != "" && $("#o1date").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Other Occupant Date Of Birth </li>";
+                    $("#o1date").addClass('has-error');
+                    if (control == "")
+                        control = $("#o1date");
+                }
+
+
+
+                if ($("#o2name").val() != "" && $("#o2date").val() == "") {
+                    errormsgsummary += "<li> Please Enter Other Occupant Date Of Birth </li>";
+                    $("#o2date").addClass('has-error');
+                    if (control == "")
+                        control = $("#o2date");
+                }
+
+
+                if ($("#o3name").val() != "" && $("#o3date").val() == "") {
+                    errormsgsummary += "<li> Please Enter Other Occupant Date Of Birth </li>";
+                    $("#o3date").addClass('has-error');
+                    if (control == "")
+                        control = $("#o3date");
+                }
+
+
+
+                if ($("#o4name").val() != "" && $("#o4date").val() == "") {
+                    errormsgsummary += "<li> Please Enter Other Occupant Date Of Birth </li>";
+                    $("#o4date").addClass('has-error');
+                    if (control == "")
+                        control = $("#o4date");
+                }
+              
 
                 if (errormsgsummary != "")
                 {
@@ -449,32 +566,115 @@
                     $("#Submit").prop('disabled', false);
 
                     var insertForm = new FormData();
-                    insertForm.append('propertynumber', $("#propertynumber").val());
-                    insertForm.append('propertyname', $("#propertyname").val());
-                    insertForm.append('refresidentcode', $("#refresidentcode").val());
-                    insertForm.append('refresidentname', $("#refresidentname").val());
-                    insertForm.append('notes', $("#notes").val());
-                    insertForm.append('propertyname1', $("#propertyname1").val());
-                    insertForm.append('residentname1', $("#residentname1").val());
-                    insertForm.append('refferedresident', $("#refferedresident").val());
-                    insertForm.append('unitnumber', $("#unitnumber").val());
-                    insertForm.append('referalbonus', $("#referalbonus").val());
+                    insertForm.append('building', $("#building").val());
+                    insertForm.append('apartment', $("#apartment").val());
+                    insertForm.append('property', $("#propertyname").val());
+                    insertForm.append('returnemail', $("#returnemail").val());
+                    insertForm.append('fax1', $("#fax1").val());
+                    insertForm.append('fax11', $("#fax11").val());
+                    insertForm.append('fax2', $("#fax2").val());
+                    insertForm.append('fax22', $("#fax22").val());
+                    if ($("#insurancedeclaration").is("checked"))
+                        insertForm.append('insurancedeclaration', 'Yes');
+                    else
+                        insertForm.append('insurancedeclaration', 'No');
+                    insertForm.append('emname', $("#ename").val());
+                    insertForm.append('emaddress', $("#eaddress").val());
+                    insertForm.append('emphone', $("#ephone").val());
+                    insertForm.append('emrelation', $("#erelation").val());
+                    insertForm.append('sign1', $("#r1sign").val());
+                    insertForm.append('sign1date', $("#r1date").val());
+                    insertForm.append('sign2', $("#r2sign").val());
+                    insertForm.append('sign2date', $("#r2date").val());
 
-                    insertForm.append('refresidentsign', $("#refresidentsign").val());
-                    insertForm.append('refresdate', $("#refresdate").val());
-                    insertForm.append('properymanagersign', $("#properymanagersign").val());
-                    insertForm.append('properymanagerdate', $("#properymanagerdate").val());
+                    // residents
+                    var residents = "";
+                    var home_work1 = false;
+
+                    if ($("#r1home").is(":Checked"))
+                        home_work1 = true;
+                    else if ($("#r1work").is(":Checked"))
+                        home_work1 = false;
+
+                    residents = $("#r1name").val() + "," + $("#r1cell").val() + "," + $("#r1email").val() + "," + home_work1 + "," + $("#r1otherphone").val() + "," + $("#r1currentemployer").val() + "," + $("#r1position").val();
+
+                    if ($("#r2name").val() != "" && $("#r2cell").val() != "" && $("#r2email").val() != "")
+                    {
+                        residents += "|";
+                        if ($("#r2home").is(":Checked"))
+                            home_work1 = true;
+                        else if ($("#r2work").is(":Checked"))
+                            home_work1 = false;
+                        residents += $("#r2name").val() + "," + $("#r2cell").val() + "," + $("#r2email").val() + "," + home_work1 + "," + $("#r2otherphone").val() + "," + $("#r2currentemployer").val() + "," + $("#r2position").val();
 
 
-                    insertForm.append('receivedamount', $("#receivedamount").val());
-                    insertForm.append('creditapplied', $("#creditapplied").val());
+                    }
+                       
+                    // check before validations 
+                    // othercontacts
+                    var othercontacts = "";
+
+
+                    if ($("#o1name").val() != "" && $("#o1date").val() != "")
+                    {
+                        othercontacts = $("#o1name").val() + "," + $("#o1date").val();
+                    }
+
+
+
+                    if ($("#o2name").val() != "" && $("#o2date").val() != "") {
+                        if (othercontacts != "")
+                            othercontacts += "|";
+                        othercontacts += $("#o2name").val() + "," + $("#o2date").val();
+                    }
+
+
+                    if ($("#o3name").val() != "" && $("#o3date").val() != "")
+                    {
+                        if (othercontacts != "")
+                            othercontacts += "|";
+                        othercontacts += $("#o3name").val() + "," + $("#o3date").val();
+                    }
+
+
+
+                    if ($("#o4name").val() != "" && $("#o4date").val() == "")
+                        if (othercontacts != "")
+                            othercontacts += "|";
+                    othercontacts += $("#o4name").val() + "," + $("#o4date").val();
+                    }
+
+
+                    // vehicles
+                    var vehicles = "";
+
+                vehicles = $("#v1make").val() + "," + $("#v1model").val() + "," + $("#v1type").val() + "," + $("#v1year").val() + "," + $("#v1color").val() + "," + $("#v1plat").val() + "," + $("#v1state").val();
+
+                if ($("#v2make").val() != "" && $("#v2model").val() != "" && $("#v2type").val())
+                {
+                    if (vehicles != "")
+                        vehicles += "|";
+                    vehicles += $("#v2make").val() + "," + $("#v2model").val() + "," + $("#v2type").val() + "," + $("#v2year").val() + "," + $("#v2color").val() + "," + $("#v2plat").val() + "," + $("#v2state").val();
+                }
+
+
+                if ($("#v3make").val() != "" && $("#v3model").val() != "" && $("#v3type").val())
+                {
+                    if (vehicles != "")
+                        vehicles += "|";
+                    vehicles += $("#v3make").val() + "," + $("#v3model").val() + "," + $("#v3type").val() + "," + $("#v3year").val() + "," + $("#v3color").val() + "," + $("#v3plat").val() + "," + $("#v3state").val();
+                }
+
+                insertForm.append('residents', residents);
+                insertForm.append('others', othercontacts);
+                insertForm.append('vehicles', vehicles);
 
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
                     $("#status").html("<p style='color:green'> Processing ........ </p>");
                     $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertResidentReferralRequest",
+                        url: $BaseApiUrl + "api/data/InsertResidentReferralContact",
                         type: 'POST',
                         dataType: "JSON",
                         processData: false,
@@ -490,7 +690,7 @@
 
                                 document.getElementById("submitform").reset();
 
-                                GetAllMileageForms('ResidentReferal');
+                                GetAllMileageForms('ResidentContact');
                                 $(".alert").html('Record Successfully Updated !');
                                 $('#toastnotification').modal('show');
 
@@ -513,7 +713,7 @@
                         }
                     });
 
-                }
+                
 
 
             });

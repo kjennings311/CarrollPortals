@@ -197,6 +197,7 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetAllMileageForms(FormType, new Guid(userid), OptionalSeachText);
         }
+
         public dynamic InsertResidentReferralRequest(ResidentReferalSheet eh)
         {
             return _repository.InsertResidentReferralRequest(eh);
@@ -206,6 +207,18 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetResidentReferralRequest(obj);
         }
+
+
+       public dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs)
+        {
+            return _repository.InsertResidentReferralContact(mlh,rrs,ors,vhs);
+        }
+
+        public PrintResidentContact GetResidentReferralContact(Guid riderid)
+        {
+            return _repository.GetResidentReferralContact(riderid);
+        }
+
 
 
         public dynamic GetHrFormCount()
