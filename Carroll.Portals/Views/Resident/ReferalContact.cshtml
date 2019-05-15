@@ -548,8 +548,7 @@
                 }
               
 
-                if (errormsgsummary != "")
-                {
+                if (errormsgsummary != "") {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -557,8 +556,7 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');
@@ -598,8 +596,7 @@
 
                     residents = $("#r1name").val() + "," + $("#r1cell").val() + "," + $("#r1email").val() + "," + home_work1 + "," + $("#r1otherphone").val() + "," + $("#r1currentemployer").val() + "," + $("#r1position").val();
 
-                    if ($("#r2name").val() != "" && $("#r2cell").val() != "" && $("#r2email").val() != "")
-                    {
+                    if ($("#r2name").val() != "" && $("#r2cell").val() != "" && $("#r2email").val() != "") {
                         residents += "|";
                         if ($("#r2home").is(":Checked"))
                             home_work1 = true;
@@ -609,14 +606,13 @@
 
 
                     }
-                       
+
                     // check before validations 
                     // othercontacts
                     var othercontacts = "";
 
 
-                    if ($("#o1name").val() != "" && $("#o1date").val() != "")
-                    {
+                    if ($("#o1name").val() != "" && $("#o1date").val() != "") {
                         othercontacts = $("#o1name").val() + "," + $("#o1date").val();
                     }
 
@@ -629,8 +625,7 @@
                     }
 
 
-                    if ($("#o3name").val() != "" && $("#o3date").val() != "")
-                    {
+                    if ($("#o3name").val() != "" && $("#o3date").val() != "") {
                         if (othercontacts != "")
                             othercontacts += "|";
                         othercontacts += $("#o3name").val() + "," + $("#o3date").val();
@@ -638,36 +633,35 @@
 
 
 
-                    if ($("#o4name").val() != "" && $("#o4date").val() == "")
+                    if ($("#o4name").val() != "" && $("#o4date").val() == "") {
+
                         if (othercontacts != "")
                             othercontacts += "|";
-                    othercontacts += $("#o4name").val() + "," + $("#o4date").val();
+                        othercontacts += $("#o4name").val() + "," + $("#o4date").val();
                     }
 
 
                     // vehicles
                     var vehicles = "";
 
-                vehicles = $("#v1make").val() + "," + $("#v1model").val() + "," + $("#v1type").val() + "," + $("#v1year").val() + "," + $("#v1color").val() + "," + $("#v1plat").val() + "," + $("#v1state").val();
+                    vehicles = $("#v1make").val() + "," + $("#v1model").val() + "," + $("#v1type").val() + "," + $("#v1year").val() + "," + $("#v1color").val() + "," + $("#v1plat").val() + "," + $("#v1state").val();
 
-                if ($("#v2make").val() != "" && $("#v2model").val() != "" && $("#v2type").val())
-                {
-                    if (vehicles != "")
-                        vehicles += "|";
-                    vehicles += $("#v2make").val() + "," + $("#v2model").val() + "," + $("#v2type").val() + "," + $("#v2year").val() + "," + $("#v2color").val() + "," + $("#v2plat").val() + "," + $("#v2state").val();
-                }
+                    if ($("#v2make").val() != "" && $("#v2model").val() != "" && $("#v2type").val()) {
+                        if (vehicles != "")
+                            vehicles += "|";
+                        vehicles += $("#v2make").val() + "," + $("#v2model").val() + "," + $("#v2type").val() + "," + $("#v2year").val() + "," + $("#v2color").val() + "," + $("#v2plat").val() + "," + $("#v2state").val();
+                    }
 
 
-                if ($("#v3make").val() != "" && $("#v3model").val() != "" && $("#v3type").val())
-                {
-                    if (vehicles != "")
-                        vehicles += "|";
-                    vehicles += $("#v3make").val() + "," + $("#v3model").val() + "," + $("#v3type").val() + "," + $("#v3year").val() + "," + $("#v3color").val() + "," + $("#v3plat").val() + "," + $("#v3state").val();
-                }
+                    if ($("#v3make").val() != "" && $("#v3model").val() != "" && $("#v3type").val()) {
+                        if (vehicles != "")
+                            vehicles += "|";
+                        vehicles += $("#v3make").val() + "," + $("#v3model").val() + "," + $("#v3type").val() + "," + $("#v3year").val() + "," + $("#v3color").val() + "," + $("#v3plat").val() + "," + $("#v3state").val();
+                    }
 
-                insertForm.append('residents', residents);
-                insertForm.append('others', othercontacts);
-                insertForm.append('vehicles', vehicles);
+                    insertForm.append('residents', residents);
+                    insertForm.append('others', othercontacts);
+                    insertForm.append('vehicles', vehicles);
 
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
@@ -713,7 +707,7 @@
                         }
                     });
 
-                
+                }
 
 
             });

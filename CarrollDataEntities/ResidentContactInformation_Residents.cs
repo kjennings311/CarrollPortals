@@ -23,6 +23,7 @@ namespace Carroll.Data.Entities
         public string Home_Work_Phone { get; set; }
         public string CurrentEmployer { get; set; }
         public string Position { get; set; }
+        public byte[] CreatedDate { get; set; }
     
         public virtual ResidentContactInformation ResidentContactInformation { get; set; }
     }

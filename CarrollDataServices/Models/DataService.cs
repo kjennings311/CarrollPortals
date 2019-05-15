@@ -225,6 +225,7 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetHrFormCount();
         }
+
         #endregion
 
         public List<CarrollPosition> GetAllCarrollPositions()

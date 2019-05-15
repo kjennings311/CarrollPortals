@@ -58,6 +58,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<ResidentContactInformation_OtherOccupants> ResidentContactInformation_OtherOccupants { get; set; }
         public virtual DbSet<ResidentContactInformation_Residents> ResidentContactInformation_Residents { get; set; }
         public virtual DbSet<ResidentContactInformation_Vehicles> ResidentContactInformation_Vehicles { get; set; }
+        public virtual DbSet<DynamicLink> DynamicLinks { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -176,9 +177,9 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallcarrollpositions_Result>("proc_getallcarrollpositions");
         }
     
-        public virtual ObjectResult<proc_getallemployeenewhirenotice_Result> proc_getallemployeenewhirenotice()
+        public virtual int proc_getallemployeenewhirenotice()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice_Result>("proc_getallemployeenewhirenotice");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_getallemployeenewhirenotice");
         }
     
         public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
@@ -208,6 +209,11 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<Proc_getallresidentcontacts_Result> Proc_getallresidentcontacts()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_getallresidentcontacts_Result>("Proc_getallresidentcontacts");
+        }
+    
+        public virtual ObjectResult<proc_getallemployeenewhirenotice1_Result1> proc_getallemployeenewhirenotice1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice1_Result1>("proc_getallemployeenewhirenotice1");
         }
     }
 }

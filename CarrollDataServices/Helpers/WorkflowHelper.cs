@@ -18,6 +18,7 @@ namespace Carroll.Data.Services.Helpers
 
             if (ConfigurationManager.AppSettings["NotifyWorkFlow"] == "true")
             {
+
                 // run your logic here to 
                 EmailMessage _message = new EmailMessage();
 
@@ -135,7 +136,7 @@ namespace Carroll.Data.Services.Helpers
                                          select tbl.PartnerName).FirstOrDefault();
 
                     _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "General Liability Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate);
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" +equitypartner + " </td> </tr>    </table> <br> <br>  <table border='1' cellpadding='5' cellspacing='0' >";
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br>  <table border='1' cellpadding='5' cellspacing='0' >";
 
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Incident Date : </strong> </td><td>" + ClaimData.tbl.IncidentDateTime.Value.ToShortDateString() + "</td> </tr><tr> <td><strong> Incident Location : </strong> </td><td>" + ClaimData.tbl.IncidentLocation + "</td> </tr>";
 
@@ -215,7 +216,7 @@ namespace Carroll.Data.Services.Helpers
                                          select tbl.PartnerName).FirstOrDefault();
 
                     _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Mold Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate);
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner+ " </td> </tr>    </table>  <br> <br> <table border='1' cellpadding='5' cellspacing='0'>";
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table>  <br> <br> <table border='1' cellpadding='5' cellspacing='0'>";
 
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Location : </strong> </td><td>" + ClaimData.tbl.Location + "</td> </tr><tr> <td><strong> Description : </strong> </td><td>" + ClaimData.tbl.Description + "</td> </tr>";
 
@@ -272,13 +273,142 @@ namespace Carroll.Data.Services.Helpers
 
                     EmailHelper.SendEmail(_message, RecordId, ClaimData.tbl.CreatedByName, ClaimData.tbl.CreatedBy.ToString());
                 }
-               
+
             }
             return true;
 
         }
 
+        public static bool SendHrWorkFlowEmail(string RecordId, string FormType, string Action)
+        {
 
+            // Check Form Type 
+
+            if (FormType == "NewHire")
+            {
+                // Check Action whether Email is to Employee or Regional Manager Or HR
+                if (Action == "Employee Email")
+                {
+                    // Create a Dynamic Link to this form With Open Status 
+
+                    var propid = new Guid(RecordId);
+
+                    Guid propertyid = Guid.NewGuid();
+
+                    var _entities = new CarrollFormsEntities();
+
+                    DynamicLink dl = new DynamicLink();
+                    dl.DynamicLinkId = propertyid;
+                    dl.FormType = FormType;
+                    dl.OpenStatus = true;
+                    dl.ReferenceId = propid;
+                    dl.CreatedDate = DateTime.Now;
+                    _entities.DynamicLinks.Add(dl);
+                    _entities.SaveChanges();
+
+                    // Send Mail to Employee Email with Subject and Link to dyamic Page
+
+                    EmailMessage _message = new EmailMessage();
+
+                    _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+
+                    // get Employee Details i.e name and email
+
+                    var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
+                                          where tbl.EmployeeHireNoticeId == propid
+                                          select tbl).FirstOrDefault();
+                    if (NewhireDetails != null)
+                    {
+                        // subject and body
+
+                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        _message.Subject = "Employee New Hire Notice needs your Review";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link can only be accessed one time</i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        List<string> tos = new List<string>();
+                        tos.Add("sekharbabu101@gmail.com");
+                        _message.EmailTo = tos;
+
+                         return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+
+
+                }
+                else if (Action == "Regional Email")
+                {
+                    // Create a Dynamic Link to this form With Open Status 
+
+                    var propid = new Guid(RecordId);
+
+                    Guid propertyid = Guid.NewGuid();
+
+                    var _entities = new CarrollFormsEntities();
+
+                    DynamicLink dl = new DynamicLink();
+                    dl.DynamicLinkId = propertyid;
+                    dl.FormType = FormType;
+                    dl.OpenStatus = true;
+                    dl.ReferenceId = propid;
+                    dl.CreatedDate = DateTime.Now;
+                    _entities.DynamicLinks.Add(dl);
+                    _entities.SaveChanges();
+
+                    // Send Mail to Employee Email with Subject and Link to dyamic Page
+
+                    EmailMessage _message = new EmailMessage();
+
+                    _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+
+                    // get Employee Details i.e name and email
+
+                    var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
+                                          where tbl.EmployeeHireNoticeId == propertyid
+                                          select tbl).FirstOrDefault();
+                    if (NewhireDetails != null)
+                    {
+                        // subject and body
+
+                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        _message.Subject = "Employee New Hire Notice needs your Review";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link can only be accessed one time</i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        List<string> tos = new List<string>();
+                        tos.Add("sekharbabu101@gmail.com");
+                        _message.EmailTo = tos;
+
+                      return  EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
+
+
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
 
     }
 
@@ -339,7 +469,59 @@ namespace Carroll.Data.Services.Helpers
             return smtp;
 
         }
-        public static bool SendEmail(EmailMessage Message, string RecordId, string RecordCreatedBy, string RecordCreatedByGuid)
+
+    public static bool SendHrFormNotificationEmail(EmailMessage Message, string RecordId, string RecordCreatedBy)
+    {
+        // write your email function here..
+        using (MailMessage mail = new MailMessage())
+        {
+
+            AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                    null, MediaTypeNames.Text.Html);
+
+            SmtpClient smtp = SetMailServerSettings();
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            foreach (var item in Message.EmailTo)
+            {
+                if (!string.IsNullOrEmpty(item))
+                {
+                    Match match = regex.Match(item);
+                    if (match.Success)
+                    {
+                        mail.To.Add(item);
+                    }
+                }
+            }
+
+            mail.From = new MailAddress(Message.EmailFrom, "Carroll Organization");
+
+            foreach (var item in Message.EmailCc)
+            {
+                mail.CC.Add(new MailAddress(item));
+            }
+
+            mail.AlternateViews.Add(av1);
+
+            mail.IsBodyHtml = true;
+            mail.Subject = Message.Subject;
+            mail.Body = Message.Body;
+            mail.To.Clear();
+            // remove this line before going production
+            //  mail.To.Add("pavan.nanduri@carrollorg.com");
+            mail.To.Add("sekhar.babu@forcitude.com");
+          //  mail.To.Add("Shashank.Trivedi@carrollorg.com");
+
+            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mail.Priority = MailPriority.High;
+
+            smtp.Send(mail);
+
+
+        }
+        return true;
+    }
+
+    public static bool SendEmail(EmailMessage Message, string RecordId, string RecordCreatedBy, string RecordCreatedByGuid)
         {
             // write your email function here..
             using (MailMessage mail = new MailMessage())

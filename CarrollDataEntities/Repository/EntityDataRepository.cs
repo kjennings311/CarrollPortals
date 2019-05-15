@@ -1252,7 +1252,16 @@ namespace Carroll.Data.Entities.Repository
                 try
                 {
                     EmployeeNewHireNotice _property = formAttachment;
+                    //var propid = _property.ModifiedUser;
+                   
+                    // get Regional Manager Id for the Property
 
+                    var regionmrg = (from tbl in _entities.Properties
+                                     where tbl.PropertyId == _property.ModifiedUser
+                                     select tbl.RegionalManager).FirstOrDefault();
+
+                    _property.ModifiedUser = null;
+                    _property.RegionaManager = regionmrg;
                     // No record exists create a new property record here
                     _entities.EmployeeNewHireNotices.Add(_property);
                     // _entities.SaveChanges();
@@ -2014,12 +2023,12 @@ namespace Carroll.Data.Entities.Repository
                 else if (FormType == "New Hire Notice")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallemployeenewhirenotice().ToList();
+                        config.Rows = _entities.proc_getallemployeenewhirenotice1().ToList();
                     else
-                        config.Rows = _entities.proc_getallemployeenewhirenotice().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeSocialSecuirtyNumber.ToLower().Contains(optionalSeachText.ToLower()) || x.EmailAddress.ToLower().Contains(optionalSeachText.ToLower()) || x.Manager.ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallemployeenewhirenotice1().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
-                    PropertyInfo[] userprop = typeof(EmployeeNewHireNotice).GetProperties();
+                    PropertyInfo[] userprop = typeof(proc_getallemployeenewhirenotice1_Result).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
 
@@ -2032,11 +2041,11 @@ namespace Carroll.Data.Entities.Repository
                     //config.Columns.Add(new DtableConfigArray { name = "position_Exempt", label = "Position_Exempt", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "position_NonExempt", label = "Position_NonExempt", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "status", label = "Status", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage_Salary", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "pmSigned", label = "Manager Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "rpmSigned", label = "Regional Signed", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                  //  config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 

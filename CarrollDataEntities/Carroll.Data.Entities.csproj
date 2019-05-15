@@ -80,6 +80,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DynamicLink.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmployeeLeaseRaider.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -137,7 +140,10 @@
     <Compile Include="proc_getallemployeeleaseriders_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="proc_getallemployeenewhirenotice_Result.cs">
+    <Compile Include="proc_getallemployeenewhirenotice1_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getallemployeenewhirenotice1_Result1.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getallexpensemileagelogs_Result.cs">

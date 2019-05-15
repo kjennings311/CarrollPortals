@@ -290,20 +290,26 @@ namespace Carroll.Data.Services.Controllers
             //   fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
             fa.esignature = HttpContext.Current.Request.Params["esignature"].ToString();
+            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["edate"]))
             fa.edate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
 
             fa.msignature = HttpContext.Current.Request.Params["msignature"].ToString();
-            fa.mdate = Convert.ToDateTime(HttpContext.Current.Request.Params["mdate"]);
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["mdate"]))
+                fa.mdate = Convert.ToDateTime(HttpContext.Current.Request.Params["mdate"]);
 
             fa.rpmsignature = HttpContext.Current.Request.Params["rpmsignature"].ToString();
-            fa.rpmdate = Convert.ToDateTime(HttpContext.Current.Request.Params["rpmdate"]);
-
-
-
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["rpmdate"]))
+                fa.rpmdate = Convert.ToDateTime(HttpContext.Current.Request.Params["rpmdate"]);
+            
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
-
-            return _service.InsertEmployeeNewHireNotice(fa);
+            fa.EmployeeHireNoticeId = Guid.NewGuid();
+            // Property Id to Service Calling 
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyid"]))
+                fa.ModifiedUser = new Guid(HttpContext.Current.Request.Params["propertyid"]);
+            _service.InsertEmployeeNewHireNotice(fa);
+           return WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email");
+           
         }
 
         [ActionName("GetEmployeeNewHireNotice")]
@@ -645,7 +651,7 @@ namespace Carroll.Data.Services.Controllers
 
             List<ResidentContactInformation_Vehicles> vehiclelist = new List<ResidentContactInformation_Vehicles>();
 
-            foreach (var item in vehiclelist)
+            foreach (var item in allvehicles)
             {
                 var values = item.ToString().Split(',');
                 var m = new ResidentContactInformation_Vehicles();

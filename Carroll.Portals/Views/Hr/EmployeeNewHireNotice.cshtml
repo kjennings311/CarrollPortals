@@ -78,10 +78,12 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" /> </span>
+                                            <span class="c0">Manager:<input readonly type="text" id="manager" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Location:<input type="text" id="location" style="width:83%;" /> </span>
+                                            <span class="c0">Location:<select type="text" id="location" style="width:83%;" > 
+                                                 
+                                                 </select> </span>
                                         </p>
                                     
                                         <p class="c1">
@@ -603,8 +605,8 @@
                     insertForm.append('securitynumber', $("#securitynumber").val());
                     insertForm.append('email', $("#email").val());
                     insertForm.append('manager', $("#manager").val());
-                    insertForm.append('location', $("#location").val());
-
+                    insertForm.append('location', $("#location option:selected").val());
+                    insertForm.append('propertyid', $("#location").val());
                     if ($("#exempt").is(":checked"))
                     {
                         insertForm.append('exempt', '1');

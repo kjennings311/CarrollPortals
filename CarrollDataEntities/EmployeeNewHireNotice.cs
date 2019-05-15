@@ -44,5 +44,9 @@ namespace Carroll.Data.Entities
         public string La_Property2 { get; set; }
         public Nullable<double> La_Property2_Per { get; set; }
         public string Sal_Time { get; set; }
+        public Nullable<System.Guid> RegionaManager { get; set; }
+        public Nullable<System.DateTime> PmSignedDateTime { get; set; }
+        public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
+        public Nullable<System.DateTime> RegionalManagerSignedDateTime { get; set; }
     }
 }

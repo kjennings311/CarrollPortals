@@ -45,13 +45,13 @@
         <div class="col-md-12" style="    width: 100%;
     border: 1px solid black;
     padding: 10px;">
- <form id="submitform" onsubmit="return false;">
+            <form id="submitform" onsubmit="return false;">
                 <div style="width:100%; text-align:center;">
                     <img style="width:150px;" src="~/carroll.portals/img/residentreferaltop.png" />
                 </div>
-<div style="width:100%">
-  
-    <div class="form-div" style="width:15%; border:1px solid #e5d9d9; border: 1px solid #e5d9d9;
+                <div style="width:100%">
+
+                    <div class="form-div" style="width:15%; border:1px solid #e5d9d9; border: 1px solid #e5d9d9;
     float: left;
     padding: 10px;
     font-size: 10px;
@@ -59,7 +59,7 @@
     color: black;">
                         <p style=""> Office Use Only:</p>
                         <p>
-                            Copy Of Renter's <br /> Insurance Declaration <br /> in File @{ 
+                            Copy Of Renter's <br /> Insurance Declaration <br /> in File @{
 
                                 if (Model.InsuranceDeclaration == "Yes")
                                 {
@@ -100,47 +100,98 @@
                 </div>
 
                 @{
-                    foreach (var item in Model.rrs)
+
+                    if (Model.rrs.Count == 1)
                     {
                         <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
-                            <p> <b>Resident #1 </b>  : <input type="text" value="@item.Name" id="r1name" style="width:75%" /> </p>
-                            <p> * Cell Phone # : <input type="text" value="@item.MobilePhone" id="r1cell" style="width:72%" /> </p>
-                            <p> Email  <input type="text" id="r1email" value="@item.Email" style="width:88%" /> </p>
-                            <p> <input type="radio" name="resident1" id="r1home" /> Home
+                            <p> <b>Resident #1 </b>  : <input type="text" value="@Model.rrs[0].Name" id="r1name" style="width:75%" /> </p>
+                            <p> * Cell Phone # : <input type="text" value="@Model.rrs[0].MobilePhone" id="r1cell" style="width:72%" /> </p>
+                            <p> Email  <input type="text" id="r1email" value="@Model.rrs[0].Email" style="width:88%" /> </p>
+                            <p>
+                                if( @Model.rrs[0].Home_Work.ToString()== "True")
+                                {
+                                <input type="radio" name="resident1" checked id="r1home" /> Home
                                 <input type="radio" name="resident1" id="r1work" />  Work Phone #
-                                @item.Home_Work
-                                <input type="text" id="r1otherphone" value="@item.Home_Work_Phone" style="width:44%" />
+                                }
+                                else
+                                {
+                                <input type="radio" name="resident1" id="r1home" /> Home
+                                <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
+                                }
+                                <input type="text" id="r1otherphone" value="@Model.rrs[0].Home_Work_Phone" style="width:44%" />
                             </p>
-                            <p> Current Employer  <input type="text" value="@item.CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
-                            <p> Position  <input type="text" value="@item.Position" id="r1position" style="width:83%" /> </p>
+                            <p> Current Employer  <input type="text" value="@Model.rrs[0].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
+                            <p> Position  <input type="text" value="@Model.rrs[0].Position" id="r1position" style="width:83%" /> </p>
                         </div>
+
+                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                            <p> <b>Resident #1 </b>  : <input type="text" value="" id="r1name" style="width:75%" /> </p>
+                            <p> * Cell Phone # : <input type="text" value="" id="r1cell" style="width:72%" /> </p>
+                            <p> Email  <input type="text" id="r1email" value="" style="width:88%" /> </p>
+                            <p>
+                                <input type="radio" name="resident1" id="r1home" /> Home
+                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
+
+                                <input type="text" id="r1otherphone" value="" style="width:44%" />
+                            </p>
+                            <p> Current Employer  <input type="text" value="" id="r1currentemployer" style="width:68%" /> </p>
+                            <p> Position  <input type="text" value="" id="r1position" style="width:83%" /> </p>
+                        </div>
+
                     }
+                    else if (Model.rrs.Count == 2)
+                    {
+
+                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                            <p> <b>Resident #1 </b>  : <input type="text" value="@Model.rrs[0].Name" id="r1name" style="width:75%" /> </p>
+                            <p> * Cell Phone # : <input type="text" value="@Model.rrs[0].MobilePhone" id="r1cell" style="width:72%" /> </p>
+                            <p> Email  <input type="text" id="r1email" value="@Model.rrs[0].Email" style="width:88%" /> </p>
+                            <p>
+
+                                if( @Model.rrs[0].Home_Work.ToString()== "True")
+                                {
+                                <input type="radio" name="resident1" checked id="r1home" /> Home
+                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
+                                }
+                                else
+                                {
+                                    <input type="radio" name="resident1"  id="r1home" /> Home
+                                    <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
+                                }
+                                <input type="text" id="r1otherphone" value="@Model.rrs[0].Home_Work_Phone" style="width:44%" />
+                            </p>
+                            <p> Current Employer  <input type="text" value="@Model.rrs[0].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
+                            <p> Position  <input type="text" value="@Model.rrs[0].Position" id="r1position" style="width:83%" /> </p>
+                        </div>
+                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                            <p> <b>Resident #2 </b>  : <input type="text" value="@Model.rrs[1].Name" id="r1name" style="width:75%" /> </p>
+                            <p> * Cell Phone # : <input type="text" value="@Model.rrs[1].MobilePhone" id="r1cell" style="width:72%" /> </p>
+                            <p> Email  <input type="text" id="r1email" value="@Model.rrs[1].Email" style="width:88%" /> </p>
+                            <p>
+                                if( @Model.rrs[1].Home_Work.ToString()== "True")
+                                {
+                                <input type="radio" name="resident1" checked id="r1home" /> Home
+                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
+                                }
+                                else
+                                {
+                                <input type="radio" name="resident1" id="r1home" /> Home
+                                <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
+                                }
+                                <input type="text" id="r1otherphone" value="@Model.rrs[1].Home_Work_Phone" style="width:44%" />
+                            </p>
+                            <p> Current Employer  <input type="text" value="@Model.rrs[1].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
+                            <p> Position  <input type="text" value="@Model.rrs[1].Position" id="r1position" style="width:83%" /> </p>
+                        </div>
+
+                    }
+
+
                 }
-                @*<div class="form-div vinfo" style="width:50%;border:2px solid black;padding:15px; float:left;">
 
-                        <p> <b>Resident #1 </b>  : <input type="text" id="r1name" style="width:75%" /> </p>
-                        <p> * Cell Phone # : <input type="text" id="r1cell" style="width:72%" /> </p>
-                        <p> Email  <input type="text" id="r1email" style="width:88%" /> </p>
-                        <p>
-                            <input type="radio" name="resident1" id="r1home" /> Home
-                            <input type="radio" name="resident1" id="r1work" />  Work Phone #  <input type="text" id="r1otherphone" style="width:44%" />
-                        </p>
-                        <p> Current Employer  <input type="text" id="r1currentemployer" style="width:68%" /> </p>
-                        <p> Position  <input type="text" id="r1position" style="width:83%" /> </p>
-                    </div>
-                    <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:15px;float:left; ">
 
-                        <p> <b>Resident #2 </b>  : <input type="text" id="r2name" style="width:75%" /> </p>
-                        <p> * Cell Phone # : <input type="text" id="r2cell" style="width:72%" /> </p>
-                        <p> Email  <input type="text" id="r2email" style="width:88%" /> </p>
-                        <p>
-                            <input type="radio" name="resident2" id="r2home" /> Home
-                            <input type="radio" name="resident2" id="r2work" />  Work  Phone #  <input type="text" id="r2otherphone" style="width:44%" />
-                        </p>
-                        <p> Current Employer  <input type="text" id="r2currentemployer" style="width:68%" /> </p>
-                        <p> Position  <input type="text" id="r2position" style="width:83%" /> </p>
 
-                    </div>*@
+
                 <span style="clear:both;font-style: italic;font-size:12px;color:black;display:block;"> * Required information.  Carroll Management respects the privacy of its residents’ information and will only use it for the purposes of Resident-Leasing Office communication.  </span>
                 <p style="margin-top:5px !important;"> <b> EMERGENCY CONTACT </b>  - Person to contact and/or <span style="text-decoration:underline;"> allowed entry into your apartment </span> in case of emergency or death  </p>
                 <p style="text-align:center; margin:5px !important;">   <b> (someone <span style="text-decoration:underline">NOT </span> living in the household): </b> </p>
@@ -148,34 +199,106 @@
                     <p> Name :  <input type="text" value="@Model.Em_name" id="ename" style="width:68%" /> </p>
                     <p> Address :   <textarea id="eaddress" style="width:83%"> @Model.Em_Address </textarea>  </p>
                 </div>
-                <div class="form-div" style="width:50%;padding:0px;padding-left:30px;float:left;" >
+                <div class="form-div" style="width:50%;padding:0px;padding-left:30px;float:left;">
                     <p> Phone # :  <input type="text" id="ephone" value="@Model.Em_Phone" style="width:68%" /> </p>
                     <p> Relationship to you :  <input type="text" value="@Model.Em_Relation" id="erelation" style="width:50%" />  </p>
                 </div>
                 <p style="clear:both;">  <b> Please provide information for other occupants.</b> If you have other occupants living in the apartment, please list them below. More names may be added to additional pages.</p>
                 <table cellpadding="2" cellspacing="2" border="1" style="margin:0px; margin-left:30px !important">
-
                     <thead style="background-color:#808080"> <tr><th style="text-align:center "> FULL NAME  </th><th> DATE OF BIRTH     </th> <th> FULL NAME  </th><th> DATE OF BIRTH     </th></tr></thead>
                     <tbody>
                         @{
-                            foreach (var item in Model.ros)
+
+
+                            if (Model.ros.Count == 1)
                             {
                                 <tr>
-                                    <td> @item.Name  </td>
-                                    <td> @item.DOB.Value.ToShortDateString() </td>
-
+                                    <td> <input type="text" value="@Model.ros[0].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[0].DOB.Value.ToShortDateString()" />   </td>
+                                    <td> <input type="text" value="" />    </td>
+                                    <td>  <input type="text" value="" />   </td>
+                                </tr>
+                                <tr>
+                                    <td> <input type="text" value="" />    </td>
+                                    <td>  <input type="text" value="" />   </td>
+                                    <td> <input type="text" value="" />    </td>
+                                    <td>  <input type="text" value="" />   </td>
                                 </tr>
                             }
-                        }
+                            else if (Model.ros.Count == 2)
+                            {
+                                <tr>
+                                    <td> <input type="text" value="@Model.ros[0].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[0].DOB.Value.ToShortDateString()" />   </td>
+                                    <td> <input type="text" value="@Model.ros[1].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[1].DOB.Value.ToShortDateString()" />   </td>
+                                </tr>
+                                <tr>
+                                    <td> <input type="text" value="" />    </td>
+                                    <td>  <input type="text" value="" />   </td>
+                                    <td> <input type="text" value="" />    </td>
+                                    <td>  <input type="text" value="" />   </td>
+                                </tr>
+                            }
+                            else if (Model.ros.Count == 3)
+                            {
+                                <tr>
+                                    <td> <input type="text" value="@Model.ros[0].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[0].DOB.Value.ToShortDateString()" />   </td>
+                                    <td> <input type="text" value="@Model.ros[1].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[1].DOB.Value.ToShortDateString()" />   </td>
+                                </tr>
+                                <tr>
+                                    <td> <input type="text" value="@Model.ros[2].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[2].DOB.Value.ToShortDateString()" />   </td>
+                                    <td> <input type="text" value="" />    </td>
+                                    <td>  <input type="text" value="" />   </td>
+                                </tr>
+                            }
+                            else if (Model.ros.Count == 4)
+                            {
+                                <tr>
+                                    <td> <input type="text" value="@Model.ros[0].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[0].DOB.Value.ToShortDateString()" />   </td>
+                                    <td> <input type="text" value="@Model.ros[1].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[1].DOB.Value.ToShortDateString()" />   </td>
+                                </tr>
+                                <tr>
+                                    <td> <input type="text" value="@Model.ros[2].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[2].DOB.Value.ToShortDateString()" />   </td>
+                                    <td> <input type="text" value="@Model.ros[3].Name" />    </td>
+                                    <td>  <input type="text" value=" @Model.ros[3].DOB.Value.ToShortDateString()" />   </td>
+                                </tr>
+                            }
 
+
+                        }
                     </tbody>
                 </table>
 
                 <p style="width:25%;display:inline-block;"> <input id="r1sign" type="text" value="@Model.ResidentSingature1" style="width:90%" /> <br />  <b> Resident Signature </b> </p>
                 <p style="width:20%;display:inline-block;"> <input id="r1date" type="text" value="@Model.ResidentSignDate1.Value.ToShortDateString()" style="width:90%" /> <br />  <b> Date </b> </p>
-                <p style="width:25%;display:inline-block;"> <input id="r2sign" type="text" value="@Model.ResidentSingature2" style="width:90%" /> <br />  <b> Resident Signature </b> </p>
-                <p style="width:20%;display:inline-block;"> <input id="r2date" type="text" value="@Model.ResidentSignDate2.Value.ToShortDateString()" style="width:90%" /> <br />  <b> Date </b> </p>
-             
+                @if (Model.ResidentSingature2 != null)
+                {
+                    <p style="width:25%;display:inline-block;"> <input id="r2sign" type="text" value="@Model.ResidentSingature2" style="width:90%" /> <br />  <b> Resident Signature </b> </p>
+
+                }
+                else
+                {
+                    <p style="width:25%;display:inline-block;"> <input id="r2sign" type="text" value="" style="width:90%" /> <br />  <b> Resident Signature </b> </p>
+
+                }
+                @if (Model.ResidentSignDate2 != null)
+                {
+                    <p style="width:20%;display:inline-block;"> <input id="r2date" type="text" value="@Model.ResidentSignDate2.Value.ToShortDateString()" style="width:90%" /> <br />  <b> Date </b> </p>
+
+                }
+                else
+                {
+                    <p style="width:20%;display:inline-block;"> <input id="r2date" type="text" value="" style="width:90%" /> <br />  <b> Date </b> </p>
+
+                }
+
                 @{
                     foreach (var item in Model.rvs)
                     {
@@ -190,6 +313,51 @@
                             <p> License Plate #  <input id="v1plat" value="@item.LicensePlate" type="text" style="width:60%" /> </p>
                             <p> License Plat State   <input id="v1state" value="@item.LicensePlatState" type="text" style="width:53%" /> </p>
                         </div>
+                    }
+
+
+                    if (Model.rvs.Count == 1)
+                    {
+                        <div class="form-div vinfo" style="width:33%;border:2px solid black;padding:15px;">
+
+                            <p style="text-align:center"> <b>Resident - Vehicle Information  </b> </p>
+                            <p> Make  <input type="text" id="v1make" value="" style="width:82%" /> </p>
+                            <p> Model  <input type="text" id="v1model" value="" style="width:82%" /> </p>
+                            <p> Type (car,van,SUV) <input id="v1type" value="" type="text" style="width:51%" /> </p>
+                            <p> Year  <input type="text" id="v1year" value="" style="width:86%" /> </p>
+                            <p> Color  <input type="text" id="v1color" value="" style="width:84%" /> </p>
+                            <p> License Plate #  <input id="v1plat" value="" type="text" style="width:60%" /> </p>
+                            <p> License Plat State   <input id="v1state" value="" type="text" style="width:53%" /> </p>
+                        </div>
+                        <div class="form-div vinfo" style="width:33%;border:2px solid black;padding:15px;">
+
+                            <p style="text-align:center"> <b>Resident - Vehicle Information  </b> </p>
+                            <p> Make  <input type="text" id="v1make" value="" style="width:82%" /> </p>
+                            <p> Model  <input type="text" id="v1model" value="" style="width:82%" /> </p>
+                            <p> Type (car,van,SUV) <input id="v1type" value="" type="text" style="width:51%" /> </p>
+                            <p> Year  <input type="text" id="v1year" value="" style="width:86%" /> </p>
+                            <p> Color  <input type="text" id="v1color" value="" style="width:84%" /> </p>
+                            <p> License Plate #  <input id="v1plat" value="" type="text" style="width:60%" /> </p>
+                            <p> License Plat State   <input id="v1state" value="" type="text" style="width:53%" /> </p>
+                        </div>
+
+                    }
+
+                    if (Model.rvs.Count == 2)
+                    {
+                       
+                        <div class="form-div vinfo" style="width:33%;border:2px solid black;padding:15px;">
+
+                            <p style="text-align:center"> <b>Resident - Vehicle Information  </b> </p>
+                            <p> Make  <input type="text" id="v1make" value="" style="width:82%" /> </p>
+                            <p> Model  <input type="text" id="v1model" value="" style="width:82%" /> </p>
+                            <p> Type (car,van,SUV) <input id="v1type" value="" type="text" style="width:51%" /> </p>
+                            <p> Year  <input type="text" id="v1year" value="" style="width:86%" /> </p>
+                            <p> Color  <input type="text" id="v1color" value="" style="width:84%" /> </p>
+                            <p> License Plate #  <input id="v1plat" value="" type="text" style="width:60%" /> </p>
+                            <p> License Plat State   <input id="v1state" value="" type="text" style="width:53%" /> </p>
+                        </div>
+
                     }
                 }
 

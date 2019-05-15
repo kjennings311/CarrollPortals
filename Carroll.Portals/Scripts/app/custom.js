@@ -1,7 +1,7 @@
 ﻿
- var $BaseApiUrl = "http://localhost:1002/"; 
+// var $BaseApiUrl = "http://localhost:1002/"; 
 
-//var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -2793,25 +2793,42 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+
 var claimbody = "";
 var $details = "";
 
 
-function LoadHrPositions() {
-
+function LoadHrPositions()
+{
     var options = "";
 
     $.get($BaseApiUrl + "api/Data/GetAllCarrollPositions", function (data) {
 
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++)
+        {
             options += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+        }
+        // now let's load options into select box
+        $('#position').append(options);
+    });
+
+    var options1 = "";
+
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
             selected = "";
 
         }
         // now let's load options into select box
-        $('#position').append(options);
+        $('#location').append(options1);
 
     });
+
+
 }
 
 
