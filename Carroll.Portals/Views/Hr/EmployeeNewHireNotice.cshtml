@@ -78,12 +78,17 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager:<input readonly type="text" id="manager" style="width:83%;" /> </span>
+                                            <span class="c0">Manager:<input  type="text" id="manager" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Location:<select type="text" id="location" style="width:83%;" > 
-                                                 
-                                                 </select> </span>
+                                            <span class="c0">
+                                                Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="radio" id="chkproperty" name="loc" /> Property
+                                            </span>
+
+                                            <span class="c0" id="divproperty" style="display:none; padding:40px;" >
+                                                Property : <select type="text" id="location" ></select>
+                                            </span>
                                         </p>
                                     
                                         <p class="c1">
@@ -113,7 +118,7 @@
                                                 </td>
                                             </tr>
                                             <tr> <td> Property </td> <td> Percentage </td> </tr>
-                                            <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop1" style="margin-bottom:10px;" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
                                             <tr> <td> <input type="text" id="la_Prop2" /> </td> <td> <input type="number" id="la_Prop2per" /> </td> </tr>
                                         </table>
 
@@ -124,7 +129,7 @@
                                         </p>
                                      
                                         <p class="c1">
-                                            <span class="c0">Employee Signature <input type="text" id="esignature" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
+                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42%;" />    Date <input disabled type="date" name="name" id="edate" value="" /></span>
                                         </p>
 
                                         <p class="c1">
@@ -132,7 +137,7 @@
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
-                                            <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:47.5%;" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
+                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:47.5%;" />Date <input disabled type="date" name="name" id="rpmdate" value="" /></span>
                                         </p>
 
                                         <p class="c1" style="width:75%;text-align:center; font-weight:bold">
@@ -430,13 +435,70 @@
             {
                 e.preventDefault();
 
-                if ($(this).val() == "") {
+                if ($(this).val() == "")
+                {
                     $(this).addClass("has-error");
                 }
-                else {
+                else
+                {
                     $(this).removeClass("has-error");
                 }
 
+            });
+
+            var iscorporate = false;
+
+            $("#chkcorporate,#chkproperty").change(function (e) {
+
+                e.preventDefault();
+
+                if ($("#chkcorporate").is(":checked"))
+                {
+                    iscorporate = true;
+                    $("#divproperty").hide();
+                    $("#manager").val('');
+                }
+                if ($("#chkproperty").is(":checked")) {
+                    iscorporate = false;
+                    $("#divproperty").show();
+                }
+
+
+            });
+
+            var manager = "";
+
+            $("#location").change(function () {
+
+                if ($("#location").val() == "") {
+
+                    alert("Please Select Property");
+                    manager = "";
+                }
+                else {
+
+                    var pattern = /run/;
+
+                    $.get($BaseApiUrl + "api/Data/GetPropertyManager?PropertyId=" + $("#location").val(), function (data) {
+                      
+                        if (data == "No Manager") {
+                            manager = "";
+                            alert("Invalid Property Code");
+                            $("#manager").val('');
+                        }
+                        else if (data.indexOf("Error") == true)
+                        {
+                            manager = "";
+                            alert(data);
+                            $("#manager").val('');
+                        }
+                        else {
+                        //    var values = data.split(",");
+                            manager = data;
+                            $("#manager").val(data);
+                        }
+                    });
+                }
             });
 
      
@@ -482,7 +544,7 @@
                         control = $("#manager");
                 }
 
-                if ($("#location").val() == "") {
+                if ($("#location").val() == "" && iscorporate == false) {
                     errormsgsummary += "<li> Please Enter Location </li>";
                     $("#location").addClass('has-error');
                     if (control == "")
@@ -533,7 +595,7 @@
                 //        control = $("#onboardcall");
                 //}
 
-                if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "")
+                if ($("#la_Prop1per").val() == "" && $("#la_Prop2per").val() == "")
                 {
                     errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
                     $("#la_Prop1per").addClass('has-error');
@@ -542,7 +604,7 @@
                 }
 
 
-                if ($("#la_Prop1per").val() == "" || $("#la_Prop2per").val() == "") {
+                if ($("#la_Prop1per").val() == ""  &&  $("#la_Prop2per").val() == "") {
                     errormsgsummary += "<li> Please Enter Division Of Labout Percentage </li>";
                     $("#la_Prop1").addClass('has-error');
                     $("#la_Prop2").addClass('has-error');
@@ -598,14 +660,25 @@
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show');
                     $("#Submit").prop('disabled', false);
+                    $("input,select").prop('disabled', false);
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
                     insertForm.append('startdate', $("#startdate").val());
                     insertForm.append('securitynumber', $("#securitynumber").val());
                     insertForm.append('email', $("#email").val());
-                    insertForm.append('manager', $("#manager").val());
-                    insertForm.append('location', $("#location option:selected").val());
+                  
+                    insertForm.append('iscorporate', iscorporate);
+                    if (iscorporate == true) {
+                        insertForm.append('location', 'Corporate');
+                        insertForm.append('manager', $("#manager").val());
+                    }
+                    else
+                    {
+                        insertForm.append('location', $("#location option:selected").val());
+                        insertForm.append('manager', manager);    
+                    }
+                  
                     insertForm.append('propertyid', $("#location").val());
                     if ($("#exempt").is(":checked"))
                     {

@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Print Employee New Hire Notice  </title>
+    <title> Review Employee New Hire Notice  </title>
 
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
@@ -72,7 +72,7 @@
             text-decoration: none;
             vertical-align: baseline;
             font-size: 14pt;
-                      font-style: normal
+            font-style: normal
         }
 
         .c4 {
@@ -248,7 +248,6 @@
             border-bottom: 1px solid #666666;
             padding: 5px;
         }
-
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
@@ -256,6 +255,7 @@
 </head>
 <body class="document">
     <div class="page" style="padding-left:10%;">
+
         <form id="submitform" onsubmit="return false;">
             <p class="c1 c8" style="margin-left:19%;">
                 <span class="c7">
@@ -279,26 +279,13 @@
                 <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" value="@Model.Manager" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">
-
-                    Location: @if (Model.iscorporate.ToString() == "True")
-                    {
-                        <input type="text" id="location" style="width:35%;" value="@Model.Location" />
-
-                    }
-                    else
-                    {
-                        <span> Property </span>
-                        <input type="text" id="location" style="width:35%;" value="@Model.Location" />
-
-                    }
-                </span>
-                </p>
+                <span class="c0">Location:<input type="text" id="location" style="width:83%;" value="@Model.Location" /> </span>
+            </p>
             <p class="c1">
                 <span class="c0">
                     Position:  @if (Model.Position_Exempt == "1")
                     {
-                    <span> <input type="text" value=" Exempt" />  </span>
+                        <span> <input type="text" value=" Exempt" />  </span>
 
                     }  @if (Model.Position_NonExempt == "1")
                     {
@@ -307,7 +294,7 @@
                     }
                 </span>
             </p>
-                        <p class="c1">
+            <p class="c1">
                 <span class="c0">Status :  <input type="text" value=" @Model.Status" />  </span>
             </p>
 
@@ -336,51 +323,36 @@
 
             <p class="c1" style="margin-top: 60px;">
                 <span class="c0">
-                    New Hire Kit Ordered :  <span style="margin-left:10%;">  @Model.kitordered </span> 
+                    New Hire Kit Ordered :  <span style="margin-left:10%;">  @Model.kitordered </span>
                 </span>
             </p>
-            <p class="c1" style="margin-top:50px;">
-                <span class="c0">
-                    Employee Signature <input type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date
-                    @if (Model.edate != null)
-                    {
-                        <input type="text" name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" />
-                    }
-                    else
-                    {
-                        <input type="text" name="name" id="edate" value="" />
-                    }
-                   
-                </span>
-            </p>
-            <p class="c1">
-                <span class="c0">
-                    Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date
-                    @if (Model.mdate != null)
-                    {
-                        <input type="text" name="name" id="edate" value="@Model.mdate.Value.ToShortDateString()" />
-                    }
-                    else
-                    {
-                        <input type="text" name="name" id="edate" value="" />
-                    }
-                    
-                </span>
-            </p>
-            <p class="c1">
-                <span class="c0">
-                    RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="@Model.rpmsignature" />Date
-                    @if (Model.rpmdate != null)
-                    {
-                        <input type="text" name="name" id="edate" value="@Model.rpmdate.Value.ToShortDateString()" />
-                    }
-                    else
-                    {
-                        <input type="text" name="name" id="edate" value="" />
-                    }
-                    
-                </span>
-            </p>
+            @{
+                if (ViewBag.Action == "Employee Email")
+                {
+                    <p class="c1" style="margin-top:50px;">
+                        <span class="c0">Employee Signature <input type="text" id="esignature" value="" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
+                    </p>
+
+                    <p class="c1">
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                    </p>
+                }
+                else if (ViewBag.Action == "Regional Email")
+                {
+                    <p class="c1" style="margin-top:50px;">
+                        <span class="c0">Employee Signature <input disabled type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date <input type="text" disabled name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
+                    </p>
+
+                    <p class="c1">
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input  disabled type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                    </p>
+
+                    <p class="c1">
+                        <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
+                    </p>
+                }
+                <input type="hidden" id="Action" value="@ViewBag.Action" />
+            }
 
             <p class="c1" style="width:100%;text-align:center; font-weight:bold">
                 Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
@@ -388,10 +360,162 @@
 
             <br /> <br />
             <p>Rev. June 2018</p>
+            <div id="status"> </div>
+            <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
+                <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+            </div>
         </form>
+    </div>\
+    <style type="text/css">
 
-    </div>
+   
+    .has-error {
+    border-color: red;
+    }
+
+
+    </style>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $("input").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "") {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+
+                if ($("#Action").val() == "Employee Email") {
+                    if ($("#esignature").val() == "") {
+                        errormsgsummary += "<li> Please Enter Signature </li>";
+                        $("#esignature").addClass('has-error');
+                        if (control == "")
+                            control = $("#esignature");
+                    }
+
+                    if ($("#edate").val() == "") {
+                        errormsgsummary += "<li> Please Enter Date </li>";
+                        $("#edate").addClass('has-error');
+                        if (control == "")
+                            control = $("#edate");
+                    }
+
+                }
+                else if ($("#Action").val() == "Regional Email")
+                {
+                    if ($("#rpmsignature").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter Signature </li>";
+                        $("#rpmsignature").addClass('has-error');
+                        if (control == "")
+                            control = $("#rpmsignature");
+                    }
+
+                    if ($("#rpmdate").val() == "") {
+                        errormsgsummary += "<li> Please Enter Date </li>";
+                        $("#rpmdate").addClass('has-error');
+                        if (control == "")
+                            control = $("#rpmdate");
+                    }
+
+                }
+
+                if (errormsgsummary != "")
+                {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+
+                    var insertForm = new FormData();
+                   
+                    insertForm.append('action', $("#Action").val());
+                    insertForm.append('refid', '@ViewBag.ReferenceId');
+                    insertForm.append('iscorporate', '@ViewBag.IsCorporate');
+                    var axurl = "";
+                    var $BaseApiUrl = "http://localhost:1002/"; 
+
+                    if ($("#Action").val() == "Employee Email"  )
+                    {
+                        insertForm.append('signature', $("#esignature").val());
+                        insertForm.append('date', $("#edate").val());
+                        if('@ViewBag.IsCorporate' == 'True')
+                        axurl = "/Hr/UpdateWorkflowEmployeeNewHireNotice";
+                        else
+                        axurl = $BaseApiUrl +"api/data/UpdateWorkflowEmployeeNewHireNotice";
+
+                    }
+                    else
+                    {
+                        insertForm.append('signature', $("#rpmsignature").val());
+                        insertForm.append('date', $("#rpmdate").val());
+                        axurl = "/Hr/UpdateWorkflowEmployeeNewHireNotice";
+                    }
+
+                  
+
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $.ajax({
+                        url: axurl,
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data)
+                        {
+                            // To-do code if ajax request is successfull
+                            alert("Successfully Submitted");
+                            
+                            $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
+
+                           setTimeout(function () { window.close(); }, 2000);
+                            //}
+                            //else
+                            //{
+                            //    $("#status").html(data['errorMsg']);
+                            //}
+                        },
+                        error: function (ts) {
+                            alert("Successfully Submitted");
+                           setTimeout(function () { window.close(); }, 2000);
+                        }
+                    });
+
+                }
+
+
+            });
+
+        });
+
+    </script>
 </body>
 </html>
 

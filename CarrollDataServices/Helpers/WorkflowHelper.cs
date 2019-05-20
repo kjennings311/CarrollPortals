@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 using System.Web;
 using Carroll.Data.Entities;
 using Carroll.Data.Entities.Repository;
+using Newtonsoft.Json;
+//using Rotativa;
+
 namespace Carroll.Data.Services.Helpers
 {
     public sealed class WorkflowHelper
@@ -279,7 +282,8 @@ namespace Carroll.Data.Services.Helpers
 
         }
 
-        public static bool SendHrWorkFlowEmail(string RecordId, string FormType, string Action)
+
+        public static dynamic SendHrWorkFlowEmail(string RecordId, string FormType, string Action)
         {
 
             // Check Form Type 
@@ -301,6 +305,7 @@ namespace Carroll.Data.Services.Helpers
                     dl.DynamicLinkId = propertyid;
                     dl.FormType = FormType;
                     dl.OpenStatus = true;
+                    dl.Action = Action;
                     dl.ReferenceId = propid;
                     dl.CreatedDate = DateTime.Now;
                     _entities.DynamicLinks.Add(dl);
@@ -325,8 +330,9 @@ namespace Carroll.Data.Services.Helpers
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link can only be accessed one time</i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
+                        tos.Add("sekharbabu101@gmail.com");
                         tos.Add("sekharbabu101@gmail.com");
                         _message.EmailTo = tos;
 
@@ -354,6 +360,7 @@ namespace Carroll.Data.Services.Helpers
                     DynamicLink dl = new DynamicLink();
                     dl.DynamicLinkId = propertyid;
                     dl.FormType = FormType;
+                    dl.Action = Action;
                     dl.OpenStatus = true;
                     dl.ReferenceId = propid;
                     dl.CreatedDate = DateTime.Now;
@@ -370,7 +377,7 @@ namespace Carroll.Data.Services.Helpers
                     // get Employee Details i.e name and email
 
                     var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
-                                          where tbl.EmployeeHireNoticeId == propertyid
+                                          where tbl.EmployeeHireNoticeId == propid
                                           select tbl).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
@@ -379,7 +386,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link can only be accessed one time</i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekharbabu101@gmail.com");
                         _message.EmailTo = tos;
@@ -397,7 +404,55 @@ namespace Carroll.Data.Services.Helpers
                 }
                 else
                 {
-                    return false;
+
+                    var propid = new Guid(RecordId);
+
+                    Guid propertyid = Guid.NewGuid();
+
+                    var _entities = new CarrollFormsEntities();
+
+                    DynamicLink dl = new DynamicLink();
+                    dl.DynamicLinkId = propertyid;
+                    dl.FormType = FormType;
+                    dl.Action = Action;
+                    dl.OpenStatus = true;
+                    dl.ReferenceId = propid;
+                    dl.CreatedDate = DateTime.Now;
+                    _entities.DynamicLinks.Add(dl);
+                    _entities.SaveChanges();
+
+                    // Send Mail to Employee Email with Subject and Link to dyamic Page
+
+                    EmailMessage _message = new EmailMessage();
+
+                    _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+                 // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+
+                    // get Employee Details i.e name and email
+
+                    var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
+                                          where tbl.EmployeeHireNoticeId == propid
+                                          select tbl).FirstOrDefault();
+                    if (NewhireDetails != null)
+                    {
+                        // subject and body
+
+                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        _message.Subject = "Employee New Hire Notice has been successfully completed";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi, </h1> <br> <p> ";
+                        _message.Body += " Employee New Hire Notice  for "+NewhireDetails.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        List<string> tos = new List<string>();
+                        tos.Add("sekharbabu101@gmail.com");
+                        _message.EmailTo = tos;
+                        return _message;
+                       // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
                 }
 
             }
@@ -405,8 +460,6 @@ namespace Carroll.Data.Services.Helpers
             {
                 return false;
             }
-
-
 
         }
 
@@ -461,7 +514,7 @@ namespace Carroll.Data.Services.Helpers
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
-            smtp.UseDefaultCredentials = true;
+            smtp.UseDefaultCredentials = false;
             NetworkCredential networkCredential = new NetworkCredential("sekhar.babu@forcitude.com", "R21221.Skr");
 
             smtp.Credentials = networkCredential;
@@ -470,7 +523,91 @@ namespace Carroll.Data.Services.Helpers
 
         }
 
-    public static bool SendHrFormNotificationEmail(EmailMessage Message, string RecordId, string RecordCreatedBy)
+
+        public static bool SendHrFormNotificationEmailWithAttachment(EmailMessage Message, string RecordId, string RecordCreatedBy)
+        {
+            // write your email function here..
+            using (MailMessage mail = new MailMessage())
+            {
+
+                AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                        null, MediaTypeNames.Text.Html);
+
+                SmtpClient smtp = SetMailServerSettings();
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                foreach (var item in Message.EmailTo)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        Match match = regex.Match(item);
+                        if (match.Success)
+                        {
+                            mail.To.Add(item);
+                        }
+                    }
+                }
+
+                mail.From = new MailAddress(Message.EmailFrom, "Carroll Organization");
+
+                foreach (var item in Message.EmailCc)
+                {
+                    mail.CC.Add(new MailAddress(item));
+                }
+
+                mail.AlternateViews.Add(av1);
+
+                mail.IsBodyHtml = true;
+
+                //ProformaViewModel d = new ProformaViewModel();
+                //d.basicdetails = db.proc_getproformabasicdetails(item.OrderFormID).FirstOrDefault();
+                //d.productlist = db.proc_getproformadetails(item.OrderFormID).ToList();
+
+
+
+
+                //var actionPDF = new Rotativa.ViewAsPdf("SendProformaPDF", d)//some route values)
+                //{
+                //    //FileName = "TestView.pdf",
+                //    PageSize = Size.A4,
+                //    PageOrientation = Rotativa.Options.Orientation.Portrait,
+                //    PageMargins = { Left = 1, Right = 1 }
+                //};
+
+
+                //byte[] applicationPDFData = actionPDF.BuildPdf(ControllerContext);
+
+                //MemoryStream file = new MemoryStream(applicationPDFData);
+                //file.Seek(0, SeekOrigin.Begin);
+
+                //Attachment data = new Attachment(file, item.OrderFormNumber + " Invoice Details.pdf", "application/pdf");
+                //attachmsg = "";
+                //attachmsg += data.Name;
+                //ContentDisposition disposition = data.ContentDisposition;
+                //disposition.CreationDate = System.DateTime.Now;
+                //disposition.ModificationDate = System.DateTime.Now;
+                //disposition.DispositionType = DispositionTypeNames.Attachment;
+
+                //mail.Attachments.Add(data);
+
+                mail.Subject = Message.Subject;
+                mail.Body = Message.Body;
+                mail.To.Clear();
+                // remove this line before going production
+                //  mail.To.Add("pavan.nanduri@carrollorg.com");
+                mail.To.Add("sekhar.babu@forcitude.com");
+                  mail.To.Add("Shashank.Trivedi@carrollorg.com");
+
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mail.Priority = MailPriority.High;
+
+                smtp.Send(mail);
+
+
+            }
+            return true;
+        }
+
+        public static bool SendHrFormNotificationEmail(EmailMessage Message, string RecordId, string RecordCreatedBy)
     {
         // write your email function here..
         using (MailMessage mail = new MailMessage())
@@ -509,7 +646,7 @@ namespace Carroll.Data.Services.Helpers
             // remove this line before going production
             //  mail.To.Add("pavan.nanduri@carrollorg.com");
             mail.To.Add("sekhar.babu@forcitude.com");
-          //  mail.To.Add("Shashank.Trivedi@carrollorg.com");
+           mail.To.Add("Shashank.Trivedi@carrollorg.com");
 
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;

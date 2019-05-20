@@ -146,6 +146,9 @@
     <Compile Include="proc_getallemployeenewhirenotice1_Result1.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_getallemployeenewhirenoticenew_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_getallexpensemileagelogs_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

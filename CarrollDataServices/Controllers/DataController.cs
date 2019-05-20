@@ -262,6 +262,36 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetEmployeeLeaseRider(new Guid(riderid));
         }
 
+        [ActionName("UpdateWorkflowEmployeeNewHireNotice")]
+        [HttpPost]
+        public dynamic UpdateWorkflowEmployeeNewHireNotice()
+        {
+          
+            var Action = HttpContext.Current.Request.Params["action"].ToString();
+            var Refid = HttpContext.Current.Request.Params["refid"].ToString();
+            var Sign = HttpContext.Current.Request.Params["signature"].ToString();
+            var iscorporate = HttpContext.Current.Request.Params["iscorporate"].ToString();
+
+            DateTime? edate=null;
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["date"]))
+            {
+                 edate =Convert.ToDateTime(HttpContext.Current.Request.Params["date"].ToString());
+            }             
+
+            var retu = _service.UpdateWorkflowEmployeeNewHireNotice(Action,Refid,Sign,edate);
+
+            if(Action== "Employee Email" && iscorporate.ToLower() =="false")
+            {
+                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email");
+            }
+            else
+            {
+                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email");
+            }           
+
+            return retu;
+        }
+
 
         [ActionName("InsertEmployeeNewHireNotice")]
         [HttpPost]
@@ -274,6 +304,7 @@ namespace Carroll.Data.Services.Controllers
             fa.EmailAddress = HttpContext.Current.Request.Params["email"].ToString();
             fa.Manager = HttpContext.Current.Request.Params["manager"].ToString();
             fa.Location = HttpContext.Current.Request.Params["location"].ToString();
+            fa.iscorporate = Convert.ToBoolean(HttpContext.Current.Request.Params["iscorporate"].ToString());
             fa.EmployeeHireNoticeId = System.Guid.NewGuid();
             fa.Position = HttpContext.Current.Request.Params["position"].ToString();
             fa.Position_Exempt = HttpContext.Current.Request.Params["exempt"].ToString();
@@ -307,9 +338,11 @@ namespace Carroll.Data.Services.Controllers
             // Property Id to Service Calling 
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyid"]))
                 fa.ModifiedUser = new Guid(HttpContext.Current.Request.Params["propertyid"]);
-            _service.InsertEmployeeNewHireNotice(fa);
-           return WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email");
-           
+            var retu= _service.InsertEmployeeNewHireNotice(fa);
+               
+                WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email");
+
+            return retu;
         }
 
         [ActionName("GetEmployeeNewHireNotice")]
@@ -320,6 +353,13 @@ namespace Carroll.Data.Services.Controllers
         }
 
 
+        [ActionName("GetPropertyManager")]
+        [HttpGet]
+        public string GetPropertyManager(Guid PropertyId)
+        {
+            return _service.GetPropertyManager(PropertyId);
+        }
+        
         [ActionName("InsertPayRollStatusChangeNotice")]
         [HttpPost]
         public dynamic InsertPayRollStatusChangeNotice()
@@ -555,10 +595,14 @@ namespace Carroll.Data.Services.Controllers
             RS.ReferalBonus = Convert.ToDouble(HttpContext.Current.Request.Params["referalbonus"].ToString());
             RS.Acc_Received = HttpContext.Current.Request.Params["receivedamount"].ToString();
             RS.Acc_CreditApplied =HttpContext.Current.Request.Params["creditapplied"].ToString();
+//            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["refresidentsign"].ToString()))
             RS.ReferingResident = HttpContext.Current.Request.Params["refresidentsign"].ToString();
-            RS.ResidentDate =Convert.ToDateTime(HttpContext.Current.Request.Params["refresdate"].ToString());
-            RS.PropertyManager = HttpContext.Current.Request.Params["properymanagersign"].ToString();
-            RS.PropertyManagerDate = Convert.ToDateTime(HttpContext.Current.Request.Params["properymanagerdate"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["refresdate"].ToString()))
+                RS.ResidentDate =Convert.ToDateTime(HttpContext.Current.Request.Params["refresdate"].ToString());
+
+                RS.PropertyManager = HttpContext.Current.Request.Params["properymanagersign"].ToString();
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["properymanagerdate"].ToString()))            
+                RS.PropertyManagerDate = Convert.ToDateTime(HttpContext.Current.Request.Params["properymanagerdate"].ToString());
             RS.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"].ToString());
             RS.CreatedDate = DateTime.Now;
            return _service.InsertResidentReferralRequest(RS);
@@ -634,12 +678,16 @@ namespace Carroll.Data.Services.Controllers
             {
                 var values = item.ToString().Split(',');
                 var m = new ResidentContactInformation_OtherOccupants();
-                m.OccupantId = System.Guid.NewGuid();
-                m.ResidentContactInformationId = RS.Contactid;
-                m.Name = values[0];
-                if(!string.IsNullOrEmpty(values[1]))
-                m.DOB = Convert.ToDateTime(values[1]);
-                contactlist.Add(m);
+                DateTime dob;
+                if(DateTime.TryParse(values[1],out dob))
+                {
+                    m.OccupantId = System.Guid.NewGuid();
+                    m.ResidentContactInformationId = RS.Contactid;
+                    m.Name = values[0];
+                    if (!string.IsNullOrEmpty(values[1]))
+                        m.DOB = dob;
+                    contactlist.Add(m);
+                }
             }
 
 

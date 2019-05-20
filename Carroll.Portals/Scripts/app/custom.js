@@ -2814,7 +2814,7 @@ function LoadHrPositions()
         $('#position').append(options);
     });
 
-    var options1 = "";
+    var options1 = "<option value='' > Select Property </option>";
 
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
 

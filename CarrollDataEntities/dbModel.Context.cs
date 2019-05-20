@@ -215,5 +215,10 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice1_Result1>("proc_getallemployeenewhirenotice1");
         }
+    
+        public virtual ObjectResult<proc_getallemployeenewhirenoticenew_Result> proc_getallemployeenewhirenoticenew()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenoticenew_Result>("proc_getallemployeenewhirenoticenew");
+        }
     }
 }

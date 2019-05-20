@@ -99,92 +99,108 @@
                     <p> Please return this via email to   <input type="text" id="returnemail" value="@Model.ReturnEmail" style="width:20%;" />@@carrollmg.com, fax to ( <input type="text" id="fax1" value="@Model.Fax1" style="width:5%;" /> ) 	 <input type="text" id="fax11" value="@Model.Fax11" style="width:20%;" />			 or drop back at our onsite Management Office. Questions can be directed to ( <input type="text" id="fax2" value="@Model.Fax2" style="width:5%;" />)   <input type="text" id="fax22" value="@Model.Fax22" style="width:15%;" />			           . </p>
                 </div>
 
-                @{
 
-                    if (Model.rrs.Count == 1)
-                    {
-                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
-                            <p> <b>Resident #1 </b>  : <input type="text" value="@Model.rrs[0].Name" id="r1name" style="width:75%" /> </p>
-                            <p> * Cell Phone # : <input type="text" value="@Model.rrs[0].MobilePhone" id="r1cell" style="width:72%" /> </p>
-                            <p> Email  <input type="text" id="r1email" value="@Model.rrs[0].Email" style="width:88%" /> </p>
-                            <p>
-                                if( @Model.rrs[0].Home_Work.ToString()== "True")
-                                {
+
+                @if (Model.rrs.Count == 1)
+                {
+                    <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                        <p> <b>Resident #1 </b>  : <input type="text" value="@Model.rrs[0].Name" id="r1name" style="width:75%" /> </p>
+                        <p> * Cell Phone # : <input type="text" value="@Model.rrs[0].MobilePhone" id="r1cell" style="width:72%" /> </p>
+                        <p> Email  <input type="text" id="r1email" value="@Model.rrs[0].Email" style="width:88%" /> </p>
+
+                        @if (Model.rrs[0].Home_Work.ToString() == "True")
+                        {<p>
                                 <input type="radio" name="resident1" checked id="r1home" /> Home
                                 <input type="radio" name="resident1" id="r1work" />  Work Phone #
-                                }
-                                else
-                                {
-                                <input type="radio" name="resident1" id="r1home" /> Home
-                                <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
-                                }
                                 <input type="text" id="r1otherphone" value="@Model.rrs[0].Home_Work_Phone" style="width:44%" />
                             </p>
-                            <p> Current Employer  <input type="text" value="@Model.rrs[0].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
-                            <p> Position  <input type="text" value="@Model.rrs[0].Position" id="r1position" style="width:83%" /> </p>
-                        </div>
-
-                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
-                            <p> <b>Resident #1 </b>  : <input type="text" value="" id="r1name" style="width:75%" /> </p>
-                            <p> * Cell Phone # : <input type="text" value="" id="r1cell" style="width:72%" /> </p>
-                            <p> Email  <input type="text" id="r1email" value="" style="width:88%" /> </p>
+                        }
+                        else
+                        {
                             <p>
-                                <input type="radio" name="resident1" id="r1home" /> Home
-                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
-
-                                <input type="text" id="r1otherphone" value="" style="width:44%" />
-                            </p>
-                            <p> Current Employer  <input type="text" value="" id="r1currentemployer" style="width:68%" /> </p>
-                            <p> Position  <input type="text" value="" id="r1position" style="width:83%" /> </p>
-                        </div>
-
-                    }
-                    else if (Model.rrs.Count == 2)
-                    {
-
-                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
-                            <p> <b>Resident #1 </b>  : <input type="text" value="@Model.rrs[0].Name" id="r1name" style="width:75%" /> </p>
-                            <p> * Cell Phone # : <input type="text" value="@Model.rrs[0].MobilePhone" id="r1cell" style="width:72%" /> </p>
-                            <p> Email  <input type="text" id="r1email" value="@Model.rrs[0].Email" style="width:88%" /> </p>
-                            <p>
-
-                                if( @Model.rrs[0].Home_Work.ToString()== "True")
-                                {
-                                <input type="radio" name="resident1" checked id="r1home" /> Home
-                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
-                                }
-                                else
-                                {
-                                    <input type="radio" name="resident1"  id="r1home" /> Home
-                                    <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
-                                }
-                                <input type="text" id="r1otherphone" value="@Model.rrs[0].Home_Work_Phone" style="width:44%" />
-                            </p>
-                            <p> Current Employer  <input type="text" value="@Model.rrs[0].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
-                            <p> Position  <input type="text" value="@Model.rrs[0].Position" id="r1position" style="width:83%" /> </p>
-                        </div>
-                        <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
-                            <p> <b>Resident #2 </b>  : <input type="text" value="@Model.rrs[1].Name" id="r1name" style="width:75%" /> </p>
-                            <p> * Cell Phone # : <input type="text" value="@Model.rrs[1].MobilePhone" id="r1cell" style="width:72%" /> </p>
-                            <p> Email  <input type="text" id="r1email" value="@Model.rrs[1].Email" style="width:88%" /> </p>
-                            <p>
-                                if( @Model.rrs[1].Home_Work.ToString()== "True")
-                                {
-                                <input type="radio" name="resident1" checked id="r1home" /> Home
-                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
-                                }
-                                else
-                                {
                                 <input type="radio" name="resident1" id="r1home" /> Home
                                 <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
-                                }
+                                <input type="text" id="r1otherphone" value="@Model.rrs[0].Home_Work_Phone" style="width:44%" />
+                            </p>
+                        }
+
+                        <p> Current Employer  <input type="text" value="@Model.rrs[0].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
+                        <p> Position  <input type="text" value="@Model.rrs[0].Position" id="r1position" style="width:83%" /> </p>
+                    </div>
+
+                    <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                        <p> <b>Resident #1 </b>  : <input type="text" value="" id="r1name" style="width:75%" /> </p>
+                        <p> * Cell Phone # : <input type="text" value="" id="r1cell" style="width:72%" /> </p>
+                        <p> Email  <input type="text" id="r1email" value="" style="width:88%" /> </p>
+                        <p>
+                            <input type="radio" name="resident1" id="r1home" /> Home
+                            <input type="radio" name="resident1" id="r1work" />  Work Phone #
+
+                            <input type="text" id="r1otherphone" value="" style="width:44%" />
+                        </p>
+                        <p> Current Employer  <input type="text" value="" id="r1currentemployer" style="width:68%" /> </p>
+                        <p> Position  <input type="text" value="" id="r1position" style="width:83%" /> </p>
+                    </div>
+
+                }
+                else if (Model.rrs.Count == 2)
+                {
+
+                    <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                        <p> <b>Resident #1 </b>  : <input type="text" value="@Model.rrs[0].Name" id="r1name" style="width:75%" /> </p>
+                        <p> * Cell Phone # : <input type="text" value="@Model.rrs[0].MobilePhone" id="r1cell" style="width:72%" /> </p>
+                        <p> Email  <input type="text" id="r1email" value="@Model.rrs[0].Email" style="width:88%" /> </p>
+
+
+                        @if (Model.rrs[0].Home_Work.ToString() == "True")
+                        {
+                            <p>
+                                <input type="radio" name="resident1" checked id="r1home" /> Home
+                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
+                                <input type="text" id="r1otherphone" value="@Model.rrs[0].Home_Work_Phone" style="width:44%" />
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <input type="radio" name="resident1" id="r1home" /> Home
+                                <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
+                                < input type = "text" id = "r1otherphone" value = "@Model.rrs[0].Home_Work_Phone" style = "width:44%" />
+
+
+                            </p>
+                        }
+
+                        <p> Current Employer  <input type="text" value="@Model.rrs[0].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
+                        <p> Position  <input type="text" value="@Model.rrs[0].Position" id="r1position" style="width:83%" /> </p>
+                    </div>
+                    <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:5px; float:left;">
+                        <p> <b>Resident #2 </b>  : <input type="text" value="@Model.rrs[1].Name" id="r1name" style="width:75%" /> </p>
+                        <p> * Cell Phone # : <input type="text" value="@Model.rrs[1].MobilePhone" id="r1cell" style="width:72%" /> </p>
+                        <p> Email  <input type="text" id="r1email" value="@Model.rrs[1].Email" style="width:88%" /> </p>
+
+                        @if (Model.rrs[1].Home_Work.ToString() == "True")
+                        {
+                            <p>
+                                <input type="radio" name="resident1" checked id="r1home" /> Home
+                                <input type="radio" name="resident1" id="r1work" />  Work Phone #
                                 <input type="text" id="r1otherphone" value="@Model.rrs[1].Home_Work_Phone" style="width:44%" />
                             </p>
-                            <p> Current Employer  <input type="text" value="@Model.rrs[1].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
-                            <p> Position  <input type="text" value="@Model.rrs[1].Position" id="r1position" style="width:83%" /> </p>
-                        </div>
+                        }
+                        else
+                        {
+                            <p>
+                                <input type="radio" name="resident1" id="r1home" /> Home
+                                <input type="radio" name="resident1" checked id="r1work" />  Work Phone #
+                                <input type="text" id="r1otherphone" value="@Model.rrs[1].Home_Work_Phone" style="width:44%" />
+                            </p>
+                        }
 
-                    }
+                        <p> Current Employer  <input type="text" value="@Model.rrs[1].CurrentEmployer" id="r1currentemployer" style="width:68%" /> </p>
+                        <p> Position  <input type="text" value="@Model.rrs[1].Position" id="r1position" style="width:83%" /> </p>
+                    </div>
+
+                }
 
 
                 }
@@ -330,7 +346,6 @@
                             <p> License Plat State   <input id="v1state" value="" type="text" style="width:53%" /> </p>
                         </div>
                         <div class="form-div vinfo" style="width:33%;border:2px solid black;padding:15px;">
-
                             <p style="text-align:center"> <b>Resident - Vehicle Information  </b> </p>
                             <p> Make  <input type="text" id="v1make" value="" style="width:82%" /> </p>
                             <p> Model  <input type="text" id="v1model" value="" style="width:82%" /> </p>
@@ -345,7 +360,7 @@
 
                     if (Model.rvs.Count == 2)
                     {
-                       
+
                         <div class="form-div vinfo" style="width:33%;border:2px solid black;padding:15px;">
 
                             <p style="text-align:center"> <b>Resident - Vehicle Information  </b> </p>

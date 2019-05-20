@@ -47,13 +47,13 @@ namespace Carroll.Data.Entities.Repository
 
         dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh);
         dynamic GetResidentReferralRequest(Guid riderid);
-
+        dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate);
         dynamic InsertResidentReferralContact(ResidentContactInformation mlh,List<ResidentContactInformation_Residents> rrs,List<ResidentContactInformation_OtherOccupants> ors,List<ResidentContactInformation_Vehicles> vhs);
         PrintResidentContact GetResidentReferralContact(Guid riderid);
 
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
          dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
-
+        string GetPropertyManager(Guid PropertyId);
         List<CarrollPosition> GetAllCarrollPositions();
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
 
@@ -62,5 +62,6 @@ namespace Carroll.Data.Entities.Repository
 
         string GetPropertyName(int PropertyNumber);
         string GetPropertyNameManager(int PropertyNumber);
+       
     }
 }

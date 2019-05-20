@@ -127,9 +127,21 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetEmployeeNewHireNotice(obj);
         }
+
+      public  dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate)
+        {
+            return _repository.UpdateWorkflowEmployeeNewHireNotice(Action,RefId,Sign,edate);
+        }
+
+
         public dynamic InsertRequisitionRequest(RequisitionRequest obj)
         {
             return _repository.InsertRequistionRequest(obj);
+        }
+
+        public string GetPropertyManager(Guid PropertyId)
+        {
+            return _repository.GetPropertyManager(PropertyId);
         }
 
         public dynamic GetRequisitionRequest(Guid obj)

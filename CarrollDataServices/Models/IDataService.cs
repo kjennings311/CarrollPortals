@@ -51,6 +51,7 @@ namespace Carroll.Data.Services.Models
         dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh);
         dynamic GetResidentReferralRequest(Guid riderid);
         dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs);
+        dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate);
         PrintResidentContact GetResidentReferralContact(Guid riderid);
 
         dynamic GetHrFormCount();
@@ -58,5 +59,6 @@ namespace Carroll.Data.Services.Models
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
         string GetPropertyName(int PropertyNumber);
         string GetPropertyNameManager(int PropertyNumber);
+        string GetPropertyManager(Guid PropertyId);
     }
 }

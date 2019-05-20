@@ -20,5 +20,6 @@ namespace Carroll.Data.Entities
         public Nullable<bool> OpenStatus { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string Action { get; set; }
     }
 }

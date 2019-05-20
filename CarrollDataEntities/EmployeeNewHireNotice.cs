@@ -48,5 +48,6 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> PmSignedDateTime { get; set; }
         public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
         public Nullable<System.DateTime> RegionalManagerSignedDateTime { get; set; }
+        public Nullable<bool> iscorporate { get; set; }
     }
 }

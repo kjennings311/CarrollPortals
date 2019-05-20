@@ -1225,6 +1225,54 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+        public dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var dlink = new Guid(RefId);
+                    var drow = (from tbl in _entities.DynamicLinks
+                                where tbl.DynamicLinkId == dlink
+                                select tbl).FirstOrDefault();
+                    var newhirerow = (from tbl in _entities.EmployeeNewHireNotices
+                                      where tbl.EmployeeHireNoticeId == drow.ReferenceId
+                                      select tbl).FirstOrDefault();
+                    if(Action=="Employee Email")
+                    {
+
+                    newhirerow.esignature = Sign;
+                    newhirerow.edate = edate;
+                        newhirerow.EmployeeSignedDateTime = DateTime.Now;
+
+                    }
+                    else
+                    {
+
+                        newhirerow.rpmsignature = Sign;
+                        newhirerow.rpmdate = edate;
+                        newhirerow.RegionalManagerSignedDateTime = DateTime.Now;
+
+                    }
+                    drow.OpenStatus = false;
+
+
+                  // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    return  newhirerow.EmployeeHireNoticeId.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+        
+
+
+
         public dynamic GetEmployeeLeaseRider(Guid riderid)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
@@ -1262,6 +1310,7 @@ namespace Carroll.Data.Entities.Repository
 
                     _property.ModifiedUser = null;
                     _property.RegionaManager = regionmrg;
+                    _property.PmSignedDateTime = DateTime.Now;
                     // No record exists create a new property record here
                     _entities.EmployeeNewHireNotices.Add(_property);
                     // _entities.SaveChanges();
@@ -1275,6 +1324,39 @@ namespace Carroll.Data.Entities.Repository
                 }
             }
         }
+
+
+        public string GetPropertyManager(Guid PropertyId)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                try
+                {
+                 
+                    var regionmrg = (from tbl in _entities.Properties
+                                     join tblcontact in _entities.Contacts on tbl.RegionalManager equals tblcontact.ContactId
+                                     where tbl.PropertyId == PropertyId
+                                     select new { tblcontact.FirstName, tblcontact.LastName } ).FirstOrDefault();
+                    if (regionmrg != null)
+                    {
+                        return regionmrg.FirstName+" "+regionmrg.LastName;
+                    }
+                    else
+                    {
+                        return "No Manager";
+
+                    }                  
+                }
+                catch (Exception ex)
+                {
+                    return "Error :"+ex.Message;
+                }
+            }
+
+
+        }
+
 
         public dynamic GetEmployeeNewHireNotice(Guid riderid)
         {
@@ -2023,9 +2105,9 @@ namespace Carroll.Data.Entities.Repository
                 else if (FormType == "New Hire Notice")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallemployeenewhirenotice1().ToList();
+                        config.Rows = _entities.proc_getallemployeenewhirenoticenew().ToList();
                     else
-                        config.Rows = _entities.proc_getallemployeenewhirenotice1().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallemployeenewhirenoticenew().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(proc_getallemployeenewhirenotice1_Result).GetProperties();

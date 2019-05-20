@@ -457,13 +457,13 @@
                 }
 
 
-                //if ($("#v1make").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Vehicle 1 Make </li>";
-                //    $("#v1make").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#v1make");
-                //}
+                if ($("#v1make").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Vehicle 1 Make </li>";
+                    $("#v1make").addClass('has-error');
+                    if (control == "")
+                        control = $("#v1make");
+                }
 
 
                 if ($("#v1model").val() == "") {

@@ -193,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HrController.cs" />
     <Compile Include="Controllers\MileageController.cs" />
+    <Compile Include="Controllers\OutlinkController.cs" />
     <Compile Include="Controllers\ResidentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
@@ -899,6 +900,7 @@
     <Content Include="Views\Resident\ReferalContact.cshtml" />
     <Content Include="Views\Resident\Printresidentcontact123.cshtml" />
     <Content Include="Views\Resident\Printresidentcontact.cshtml" />
+    <Content Include="Views\Outlink\VerifyEmployeeNewHireNotice.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
