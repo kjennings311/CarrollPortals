@@ -44,6 +44,7 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> HRMDate { get; set; }
         public string Reason { get; set; }
         public Nullable<bool> C2WeeksCompleted { get; set; }
+        public string TimeStamp { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }

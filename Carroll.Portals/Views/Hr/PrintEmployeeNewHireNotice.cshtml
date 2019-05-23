@@ -28,6 +28,12 @@
             padding: 5px;
         }
 
+        .italic {
+            font-family: "Satisfy script=all rev=2";
+            font-weight: 400;
+            font-style: italic;
+        }
+
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
 
         ol {
@@ -330,8 +336,22 @@
                     </td>
                 </tr>
                 <tr> <td> Property </td> <td> Percentage </td> </tr>
-                <tr> <td> <input type="text" id="la_Prop1" value="@Model.La_Property1" />  </td> <td> <input type="number" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
-                <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property2" /> </td> <td> <input type="number" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
+
+                @if (!string.IsNullOrEmpty(Model.La_Property1))
+                {
+                    <tr> <td> <input type="text" id="la_Prop1" value="@Model.La_Property1" />  </td> <td> <input type="text" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
+                    if (!string.IsNullOrEmpty(Model.La_Property2))
+                    {
+                        <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                    <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                }
+
             </table>
 
             <p class="c1" style="margin-top: 60px;">
@@ -341,7 +361,7 @@
             </p>
             <p class="c1" style="margin-top:50px;">
                 <span class="c0">
-                    Employee Signature <input type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date
+                    Employee Signature <input type="text" id="esignature" class="italic" value="@Model.esignature" style="width:42%;" />    Date
                     @if (Model.edate != null)
                     {
                         <input type="text" name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" />
@@ -355,7 +375,7 @@
             </p>
             <p class="c1">
                 <span class="c0">
-                    Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date
+                    Manager&rsquo;s Authorizing Signature <input type="text" class="italic" id="msignature" value="@Model.msignature" style="width:30%;" /> Date
                     @if (Model.mdate != null)
                     {
                         <input type="text" name="name" id="edate" value="@Model.mdate.Value.ToShortDateString()" />
@@ -369,10 +389,10 @@
             </p>
             <p class="c1">
                 <span class="c0">
-                    RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="@Model.rpmsignature" />Date
+                    RPM Signature<input type="text" id="rpmsignature" class="italic" style="width:48%;" value="@Model.rpmsignature" />Date
                     @if (Model.rpmdate != null)
                     {
-                        <input type="text" name="name" id="edate" value="@Model.rpmdate.Value.ToShortDateString()" />
+                        <input type="text" name="name" id="edate"  value="@Model.rpmdate.Value.ToShortDateString()" />
                     }
                     else
                     {

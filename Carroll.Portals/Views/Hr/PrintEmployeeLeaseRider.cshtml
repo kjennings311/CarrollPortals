@@ -22,6 +22,12 @@
             font-size: 10px;
         }
 
+        .italic {
+            font-family: "Satisfy script=all rev=2";
+            font-weight: 400;
+            font-style: italic;
+        }
+
         input {
             border: none;
             border-bottom: 1px solid #0c0606;
@@ -76,9 +82,9 @@
                 </ol>
               
                 <p style="text-align: justify;    margin-top: 20px !important;
-"><span style="font-size: 9pt; line-height: 115%;"><input type="text" value="@Model.SignatureOfEmployee" /> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 9pt; line-height: 115%;margin-left:36%;"> <input type="tex" name="name" value="@Model.SignatureOfPropertyManager" /></span></p>
+"><span style="font-size: 9pt; line-height: 115%;"><input type="text" class="italic" value="@Model.SignatureOfEmployee" /> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 9pt; line-height: 115%;margin-left:36%;"> <input type="text" class="italic" name="name" value="@Model.SignatureOfPropertyManager" /></span></p>
                 <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 9pt; line-height: 115%;margin-left:23%;"> Signature of Property Manager</span></p>
-                <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;"><input type="text" id="leasedate" class="" value="@Model.EmployeeName" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+                <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;"><input type="text" id="leasedate" class="italic"value="@Model.EmployeeName" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
                 <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;">Printed Name of Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cc: Propery Lease Folder &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
                 @*<p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;">_____________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cc: Property Lease Folder</span></p>*@
                 <p style="text-align: justify; border: none; padding: 0cm;    border-bottom: 2px solid black;

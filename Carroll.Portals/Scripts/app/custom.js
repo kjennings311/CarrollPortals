@@ -1,7 +1,7 @@
 ﻿
 // var $BaseApiUrl = "http://localhost:1002/"; 
 
-var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -2547,7 +2547,7 @@ function GetAllMileageForms(formtype) {
 
                         },
                         dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-                        select: 'single',     // enable single row selection
+                        select: false,     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
                         buttons: [
@@ -2707,7 +2707,7 @@ function GetAllHRFORMs(formtype) {
 
                         },                       
                         dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-                        select: 'single',     // enable single row selection
+                        select: false,     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
                         buttons: [
@@ -2804,7 +2804,7 @@ function LoadHrPositions()
     var options = "";
 
     $.get($BaseApiUrl + "api/Data/GetAllCarrollPositions", function (data) {
-
+       options = "<option value='' > Select  </option>";
         for (var i = 0; i < data.length; i++)
         {
             options += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";

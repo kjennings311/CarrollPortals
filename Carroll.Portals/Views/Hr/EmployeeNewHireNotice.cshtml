@@ -82,7 +82,7 @@
                                         </p>
                                         <p class="c1">
                                             <span class="c0">
-                                                Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                Location: <input type="radio"  id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" id="chkproperty" name="loc" /> Property
                                             </span>
 
@@ -124,7 +124,7 @@
 
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">
-                                                New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" id="kitorderdate1" /> No
+                                                New Hire Kit Ordered : <input type="radio"  name="kitordered" id="kitorderdate" /> Yes  <input type="radio"  name="kitordered" id="kitorderdate1" /> No
                                             </span>
                                         </p>
                                      
@@ -430,33 +430,81 @@
             var leaseid = "";
 
             GetAllHRFORMs('New Hire Notice');
-            
-            $("input").change(function (e) 
-            {
+
+            $("input").change(function (e) {
                 e.preventDefault();
 
-                if ($(this).val() == "")
-                {
+                if ($(this).val() == "") {
                     $(this).addClass("has-error");
                 }
-                else
-                {
+                else {
                     $(this).removeClass("has-error");
                 }
+            });
+
+            $(document).on('click', ".resendrpmmail,.resendempmail", function () {
+
+
+                alert("raizing");
+                var action = $(this).attr('data-action');
+                var refid = $(this).attr('data-ref');
+
+                var insertForm = new FormData();
+                insertForm.append('form', "NewHire");
+                insertForm.append('action', action);
+                insertForm.append('refid', refid);
+
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").show();
+                }
+
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/ResentHrWorkflow",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true) {
+                            GetAllHRFORMs('New Hire Notice');
+                            $(".alert").html('Email Resent Success');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.errorMessage);
+                    }
+                });
 
             });
 
-            var iscorporate = false;
+            var iscorporate = true;
 
             $("#chkcorporate,#chkproperty").change(function (e) {
 
                 e.preventDefault();
 
-                if ($("#chkcorporate").is(":checked"))
-                {
+                if ($("#chkcorporate").is(":checked")) {
                     iscorporate = true;
                     $("#divproperty").hide();
-                    $("#manager").val('');
+                    $("#manager").val($("#CreatedByName").val());
                 }
                 if ($("#chkproperty").is(":checked")) {
                     iscorporate = false;
@@ -480,20 +528,19 @@
                     var pattern = /run/;
 
                     $.get($BaseApiUrl + "api/Data/GetPropertyManager?PropertyId=" + $("#location").val(), function (data) {
-                      
+
                         if (data == "No Manager") {
                             manager = "";
                             alert("Invalid Property Code");
                             $("#manager").val('');
                         }
-                        else if (data.indexOf("Error") == true)
-                        {
+                        else if (data.indexOf("Error") == true) {
                             manager = "";
                             alert(data);
                             $("#manager").val('');
                         }
                         else {
-                        //    var values = data.split(",");
+                            //    var values = data.split(",");
                             manager = data;
                             $("#manager").val(data);
                         }
@@ -501,12 +548,10 @@
                 }
             });
 
-     
-            
 
             $("#Submit").click(function (e) {
                 e.preventDefault();
-
+                $("input,select").removeClass("has-error");
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
@@ -525,10 +570,9 @@
                         control = $("#startdate");
                 }
 
-              
 
-                if (!validateEmail($("#email").val())) 
-                {
+
+                if (!validateEmail($("#email").val())) {
                     errormsgsummary += "<li> Please Enter Valid Email Address </li>";
                     $("#email").addClass('has-error');
                     if (control == "")
@@ -553,8 +597,7 @@
 
                 // check either exempt or non exemppt checked
 
-                if (!$("#exempt").is(":checked") && !$("#nonexempt").is(":checked"))
-                {
+                if (!$("#exempt").is(":checked") && !$("#nonexempt").is(":checked")) {
                     errormsgsummary += "<li> Please Select Position Exempt or Non Exempt </li>";
                     $("#exempt").addClass('has-error');
                     if (control == "")
@@ -594,58 +637,58 @@
                 //    if (control == "")
                 //        control = $("#onboardcall");
                 //}
+                if (iscorporate == false) {
 
-                if ($("#la_Prop1per").val() == "" && $("#la_Prop2per").val() == "")
-                {
-                    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                    $("#la_Prop1per").addClass('has-error');
-                    if (control == "")
-                        control = $("#la_Prop1per");
-                }
-
-
-                if ($("#la_Prop1per").val() == ""  &&  $("#la_Prop2per").val() == "") {
-                    errormsgsummary += "<li> Please Enter Division Of Labout Percentage </li>";
-                    $("#la_Prop1").addClass('has-error');
-                    $("#la_Prop2").addClass('has-error');
-                    if (control == "")
-                        control = $("#la_Prop2");
-                }
-                else
-                {
-                    var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val());
-                    if (total < 100)
-                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                }
-
-                if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) == 100))
-                {
-
-                    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
-                    {
-
-                        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                        $("#la_Prop1").addClass('has-error');
-                     
+                    if ($("#la_Prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
+                        errormsgsummary += "<li> Please Enter Division Of Labour Percentage  </li>";
+                        $("#la_Prop1per").addClass('has-error');
                         if (control == "")
-                            control = $("#la_Prop1");
+                            control = $("#la_Prop1per");
                     }
 
+                    if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
 
-                    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+                        if ($("#la_Prop2per").val() == "") {
+                            errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
+                            $("#la_Prop1").addClass('has-error');
+                            $("#la_Prop2").addClass('has-error');
+                            if (control == "")
+                                control = $("#la_Prop2");
+                        }
+                        else {
+                            var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val());
+                            if (total < 100)
+                                errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                        }
 
-                        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                        $("#la_Prop2").addClass('has-error');
-
-                        if (control == "")
-                            control = $("#la_Prop2");
                     }
 
+                    if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) == 100)) {
 
+                        if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                            $("#la_Prop1").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop1");
+                        }
+
+
+                        if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                            $("#la_Prop2").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop2");
+                        }
+
+
+                    }
                 }
 
-                if (errormsgsummary != "")
-                {
+                if (errormsgsummary != "") {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -653,8 +696,7 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');
@@ -667,30 +709,26 @@
                     insertForm.append('startdate', $("#startdate").val());
                     insertForm.append('securitynumber', $("#securitynumber").val());
                     insertForm.append('email', $("#email").val());
-                  
+
                     insertForm.append('iscorporate', iscorporate);
                     if (iscorporate == true) {
                         insertForm.append('location', 'Corporate');
                         insertForm.append('manager', $("#manager").val());
                     }
-                    else
-                    {
+                    else {
                         insertForm.append('location', $("#location option:selected").val());
-                        insertForm.append('manager', manager);    
+                        insertForm.append('manager', manager);
                     }
-                  
+
                     insertForm.append('propertyid', $("#location").val());
-                    if ($("#exempt").is(":checked"))
-                    {
+                    if ($("#exempt").is(":checked")) {
                         insertForm.append('exempt', '1');
                     }
-                    else
-                    {
+                    else {
                         insertForm.append('exempt', '0');
                     }
 
-                    if ($("#nonexempt").is(":checked"))
-                    {
+                    if ($("#nonexempt").is(":checked")) {
                         insertForm.append('nonexempt', '1');
                     }
                     else {
@@ -699,28 +737,24 @@
 
                     var status = "";
 
-                    if ($("#fullstatus").is(":checked"))
-                    {
+                    if ($("#fullstatus").is(":checked")) {
                         status = "FULL TIME";
                     }
-                    else if ($("#partstatus").is(":checked"))
-                    {                             
-                            status = "PART TIME";
+                    else if ($("#partstatus").is(":checked")) {
+                        status = "PART TIME";
                     }
 
                     var saltime = "";
 
-                    if ($("#salhourly").is(":checked"))
-                    {
+                    if ($("#salhourly").is(":checked")) {
                         saltime = "Hourly";
                     }
-                    else if ($("#annualsalary").is(":checked"))
-                    {
+                    else if ($("#annualsalary").is(":checked")) {
                         saltime = "Annually";
                     }
-                   
+
                     insertForm.append('position', $("#position").val());
-                    insertForm.append('status',status);
+                    insertForm.append('status', status);
                     insertForm.append('salary', $("#salary").val());
                     insertForm.append('salarytime', saltime);
                     insertForm.append('prop1', $("#la_Prop1").val());
@@ -728,17 +762,15 @@
                     insertForm.append('prop2', $("#la_Prop2").val());
                     insertForm.append('prop2per', $("#la_Prop2per").val());
 
-                    if ($("#kitorderdate").is(":checked"))
-                    {
+                    if ($("#kitorderdate").is(":checked")) {
                         insertForm.append('kitordered', 'Yes');
                     }
-                    else if ($("#kitorderdate1").is(":checked"))
-                    {
+                    else if ($("#kitorderdate1").is(":checked")) {
                         insertForm.append('kitordered', 'No');
                     }
 
-                    
-                //    insertForm.append('callscheduled', $("#onboardcall").val());
+
+                    //    insertForm.append('callscheduled', $("#onboardcall").val());
                     insertForm.append('allocation', $("#allocation").val());
                     insertForm.append('esignature', $("#esignature").val());
                     insertForm.append('edate', $("#edate").val());
@@ -787,7 +819,6 @@
 
 
                                 setTimeout(function () {
-
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', false);

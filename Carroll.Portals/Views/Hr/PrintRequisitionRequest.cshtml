@@ -228,7 +228,16 @@
                 <P class="p2 ft1"><p> @Model.SpecailInstructions </p> </P>
                 <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
                 <P class="p7 ft1">Requisition Number(s): <input type="text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
-                <P class="p7 ft1">Date Posted:<input type="text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" /></P>
+                <P class="p7 ft1">
+                    Date Posted: @if (Model.DatePosted != null)
+                    {
+                        <input type="text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" />
+                    }
+                    else
+                    {
+                        <input type="text" id="dateposted" value="" />
+                    }
+                </P>
                 <P class="p7 ft1">Notes:</P>
                 <P class="p3 ft1">@Model.Notes</P>
 

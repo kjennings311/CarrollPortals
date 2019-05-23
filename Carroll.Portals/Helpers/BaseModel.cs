@@ -43,6 +43,10 @@ namespace Carroll.Portals.Helpers
                 }
                 base.OnActionExecuted(filterContext);
             }
+            else
+            {
+                base.OnActionExecuted(filterContext);
+            }
         }
 
         public bool HasMyIgnoreAttribute(ActionDescriptor actionDescriptor)

@@ -897,6 +897,29 @@
                             if (data['error'] == false)
                             {
                                 leaseid = data['insertedId'];
+
+
+                                var insertForm = new FormData();
+                                insertForm.append('refid', leaseid);
+                                insertForm.append('form', "NoticeOfEmployeeSeparation");
+
+
+                                $.ajax({
+                                    url: "/Hr/SendHrFormCompletionNotification/",
+                                    type: 'POST',
+                                    dataType: "JSON",
+                                    processData: false,
+                                    contentType: false,
+                                    data: insertForm,
+                                    success: function (data) {
+                                        // To-do code if ajax request is successful
+
+                                    },
+                                    error: function (ts) {
+                                        //  alert('error' + ts.errorMessage);
+                                    }
+                                });
+
                                 GetAllHRFORMs('EmployeeSeparation');
                                 $("#status").html('');
 

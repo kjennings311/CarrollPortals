@@ -265,8 +265,7 @@ namespace Carroll.Data.Services.Controllers
         [ActionName("UpdateWorkflowEmployeeNewHireNotice")]
         [HttpPost]
         public dynamic UpdateWorkflowEmployeeNewHireNotice()
-        {
-          
+        {          
             var Action = HttpContext.Current.Request.Params["action"].ToString();
             var Refid = HttpContext.Current.Request.Params["refid"].ToString();
             var Sign = HttpContext.Current.Request.Params["signature"].ToString();
@@ -287,10 +286,28 @@ namespace Carroll.Data.Services.Controllers
             else
             {
                 WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email");
-            }           
+            }         
 
             return retu;
         }
+
+
+
+
+        [ActionName("ResentHrWorkflow")]
+        [HttpPost]
+        public dynamic ResentHrWorkflow()
+        {
+            var Action = HttpContext.Current.Request.Params["action"].ToString();
+            var Refid = HttpContext.Current.Request.Params["refid"].ToString();
+            var FormType = HttpContext.Current.Request.Params["form"].ToString();
+
+            WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action);
+
+            return true;
+
+        }
+
 
 
         [ActionName("InsertEmployeeNewHireNotice")]
@@ -312,11 +329,18 @@ namespace Carroll.Data.Services.Controllers
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
             fa.Sal_Time = HttpContext.Current.Request.Params["salarytime"].ToString();
             fa.Wage_Salary = HttpContext.Current.Request.Params["salary"].ToString();
-            fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
-            fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
-            fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
-            fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+
+            if(fa.iscorporate == false)
+            {
+                fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
+                fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
+                fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
+                fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+            }
+         
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
+
+            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["kitordered"].ToString()))
             fa.kitordered = HttpContext.Current.Request.Params["kitordered"].ToString();
             //   fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
@@ -499,9 +523,13 @@ namespace Carroll.Data.Services.Controllers
             fa.ChkApartmentAssociation = Convert.ToBoolean(HttpContext.Current.Request.Params["postassociation"].ToString());
             fa.PostOther = HttpContext.Current.Request.Params["otherpost"].ToString();
             fa.ChkOtherPost = Convert.ToBoolean(HttpContext.Current.Request.Params["chkotherpost"].ToString());
+        //    if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["specialinstructions"].ToString()))
             fa.SpecailInstructions = HttpContext.Current.Request.Params["specialinstructions"].ToString();
-            fa.RequistionNumber = HttpContext.Current.Request.Params["requisitionnumber"].ToString();
-            fa.DatePosted = Convert.ToDateTime(HttpContext.Current.Request.Params["dateposted"].ToString());
+         //   if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["requisitionnumber"].ToString()))
+                fa.RequistionNumber = HttpContext.Current.Request.Params["requisitionnumber"].ToString();
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["dateposted"].ToString()))
+                fa.DatePosted = Convert.ToDateTime(HttpContext.Current.Request.Params["dateposted"].ToString());
+
             fa.Notes = HttpContext.Current.Request.Params["notes"].ToString();
 
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);

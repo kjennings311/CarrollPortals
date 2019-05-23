@@ -21,7 +21,6 @@ using Newtonsoft.Json;
 using Rotativa;
 using System.IO;
 using Rotativa.Options;
-
 namespace Carroll.Portals.Controllers
 {
     [CustomAuthorize]
@@ -126,7 +125,6 @@ namespace Carroll.Portals.Controllers
         }
 
         [AllowAnonymous]
-
         public async Task<ActionResult> PrintEmployeeNewHireNotice(string id)
         {
 
@@ -345,9 +343,210 @@ namespace Carroll.Portals.Controllers
         }
 
 
+        [MyIgnore]
+        [OverrideAuthorization]
+        [OverrideActionFilters]
+        [AllowAnonymous]
+        [ActionName("SendHrFormCompletionNotification")]
+        [HttpPost]
+       
+        public async Task<dynamic> SendHrFormCompletionNotification(string form, string refid)
+        {
+            
+            var Message = WorkflowHelper.ReSendHrWorkFlowEmail(refid,form,"");
+
+                // write your email function here..
+                MailMessage mail = new MailMessage();
+
+                AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                        null, MediaTypeNames.Text.Html);
+
+                SmtpClient smtp = EmailHelper.SetMailServerSettings();
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                foreach (var item in Message.EmailTo)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        Match match = regex.Match(item);
+                        if (match.Success)
+                        {
+                            mail.To.Add(item);
+                        }
+                    }
+                }
+
+                mail.From = new MailAddress("sekharbabu101@gmail.com", "Carroll Organization");
+
+
+                //foreach (var item in Message.EmailCc)
+                //{
+                //    mail.CC.Add(new MailAddress(item));
+                //}
+
+                mail.AlternateViews.Add(av1);
+
+                mail.IsBodyHtml = true;
+
+                dynamic obj = new { };
+
+                var client = new HttpClient();
+
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+
+                if(form == "EmployeeLeaseRider")
+                {
+                                HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid=" + refid);
+                                //Checking the response is successful or not which is sent using HttpClient  
+                                if (Res.IsSuccessStatusCode)
+                                {
+                                    //Storing the response details recieved from web api   
+                                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                                    //Deserializing the response recieved from web api and storing into the Employee list  
+                                    obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
+
+                                }
+
+                                var actionPDF = new Rotativa.ViewAsPdf("PrintEmployeeLeaseRider", obj)//some route values)
+                                {
+                                    //FileName = "TestView.pdf",
+                                    PageSize = Size.A4,
+                                    PageOrientation = Rotativa.Options.Orientation.Portrait,
+                                    PageMargins = { Left = 1, Right = 1 }
+                                };
+
+
+                                byte[] applicationPDFData = actionPDF.BuildFile(ControllerContext);
+
+                                MemoryStream file = new MemoryStream(applicationPDFData);
+                                file.Seek(0, SeekOrigin.Begin);
+
+                                Attachment data = new Attachment(file, (string)obj.EmployeeName + "_EmployeeLeaseRider" + ".pdf", "application/pdf");
+
+                                System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
+                                disposition.CreationDate = System.DateTime.Now;
+                                disposition.ModificationDate = System.DateTime.Now;
+                                disposition.DispositionType = DispositionTypeNames.Attachment;
+
+                                mail.Attachments.Add(data);
 
 
 
+                }
+                else if(form == "NoticeOfEmployeeSeparation")
+                {
+                    HttpResponseMessage Res = await client.GetAsync("api/data/GetNoticeOfEmployeeSeperation?riderid=" + refid);
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        obj = JsonConvert.DeserializeObject<PrintNoticeOfEmployeeSeparation>(EmpResponse);
+
+                    }
+
+
+
+                    var actionPDF = new Rotativa.ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj)//some route values)
+                    {
+                        //FileName = "TestView.pdf",
+                        PageSize = Size.A4,
+                        PageOrientation = Rotativa.Options.Orientation.Portrait,
+                        PageMargins = { Left = 1, Right = 1 }
+                    };
+
+
+                    byte[] applicationPDFData = actionPDF.BuildFile(ControllerContext);
+
+                    MemoryStream file = new MemoryStream(applicationPDFData);
+                    file.Seek(0, SeekOrigin.Begin);
+
+                    Attachment data = new Attachment(file, (string)obj.EmployeeName + "_NoticeOfEmployeeSeparation" + ".pdf", "application/pdf");
+
+                    System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
+                    disposition.CreationDate = System.DateTime.Now;
+                    disposition.ModificationDate = System.DateTime.Now;
+                    disposition.DispositionType = DispositionTypeNames.Attachment;
+
+                    mail.Attachments.Add(data);
+                }
+                else if(form == "RequisitionRequest")
+                {
+                    HttpResponseMessage Res = await client.GetAsync("api/data/GetRequisitionRequest?riderid=" + refid);
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        obj = JsonConvert.DeserializeObject<PrintRequisitionRequest>(EmpResponse);
+
+                    }
+
+
+
+                    var actionPDF = new Rotativa.ViewAsPdf("PrintRequisitionRequest", obj)//some route values)
+                    {
+                        //FileName = "TestView.pdf",
+                        PageSize = Size.A4,
+                        PageOrientation = Rotativa.Options.Orientation.Portrait,
+                        PageMargins = { Left = 1, Right = 1 }
+                    };
+
+
+                    byte[] applicationPDFData = actionPDF.BuildFile(ControllerContext);
+
+                    MemoryStream file = new MemoryStream(applicationPDFData);
+                    file.Seek(0, SeekOrigin.Begin);
+
+                    Attachment data = new Attachment(file, (string)obj.PropertyName + "_RequisitionRequest" + ".pdf", "application/pdf");
+
+                    System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
+                    disposition.CreationDate = System.DateTime.Now;
+                    disposition.ModificationDate = System.DateTime.Now;
+                    disposition.DispositionType = DispositionTypeNames.Attachment;
+
+                    mail.Attachments.Add(data);
+
+                }
+
+
+
+                mail.Subject = Message.Subject;
+                mail.Body = Message.Body;
+                mail.To.Clear();
+                // remove this line before going production
+                //  mail.To.Add("pavan.nanduri@carrollorg.com");
+                mail.To.Add("sekhar.babu@forcitude.com");
+                  mail.To.Add("Shashank.Trivedi@carrollorg.com");
+
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mail.Priority = MailPriority.High;
+                try
+                {
+                    smtp.Send(mail);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                return true;
+           
+        }
+
+        
         public ActionResult PayRollStatusChange()
         {
             return View(new BaseViewModel());

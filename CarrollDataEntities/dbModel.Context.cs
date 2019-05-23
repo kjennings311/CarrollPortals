@@ -144,11 +144,6 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallrequisitionrequests_Result>("proc_getallrequisitionrequests");
         }
     
-        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
-        }
-    
         public virtual ObjectResult<proc_getallmonthlyexpensedetails_Result> proc_getallmonthlyexpensedetails(Nullable<System.Guid> userid)
         {
             var useridParameter = userid.HasValue ?
@@ -180,11 +175,6 @@ namespace Carroll.Data.Entities
         public virtual int proc_getallemployeenewhirenotice()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_getallemployeenewhirenotice");
-        }
-    
-        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
     
         public virtual ObjectResult<string> proc_getpayperiodsforcurrentyear()
@@ -219,6 +209,16 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_getallemployeenewhirenoticenew_Result> proc_getallemployeenewhirenoticenew()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenoticenew_Result>("proc_getallemployeenewhirenoticenew");
+        }
+    
+        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
+        }
+    
+        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
     }
 }

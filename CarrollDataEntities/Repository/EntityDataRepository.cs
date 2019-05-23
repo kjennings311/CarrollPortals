@@ -1335,7 +1335,7 @@ namespace Carroll.Data.Entities.Repository
                 {
                  
                     var regionmrg = (from tbl in _entities.Properties
-                                     join tblcontact in _entities.Contacts on tbl.RegionalManager equals tblcontact.ContactId
+                                     join tblcontact in _entities.Contacts on tbl.PropertyManager equals tblcontact.ContactId
                                      where tbl.PropertyId == PropertyId
                                      select new { tblcontact.FirstName, tblcontact.LastName } ).FirstOrDefault();
                     if (regionmrg != null)
@@ -1956,7 +1956,7 @@ namespace Carroll.Data.Entities.Repository
                         config.Rows = _entities.proc_getallemployeeleaseriders().Where(x => x.Community.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.Position.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
-                    PropertyInfo[] userprop = typeof(EmployeeLeaseRaider).GetProperties();
+                    PropertyInfo[] userprop = typeof(proc_getallemployeeleaseriders_Result).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
 
@@ -1968,12 +1968,12 @@ namespace Carroll.Data.Entities.Repository
                     //config.Columns.Add(new DtableConfigArray { name = "rentalPaymentResidencyAt", label = "Rental Payment At", type = 0, href = "" });                   
                     //config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "createdDatetime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "date", label = "Date Signed", type = DFieldType.IsDate, href = "" });
+
+                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Time Stamp", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
-
-
-
+                    
                 }
 
                else if (FormType == "Requisition Request")
@@ -2014,61 +2014,12 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "changeEffectiveDate", label = "Effective Date", type = DFieldType.IsDate, href = "" });
                    config.Columns.Add(new DtableConfigArray { name = "typeOfChange", label = "Type Of Change", type = 0, href = "" });
-                   //config.Columns.Add(new DtableConfigArray { name = "todayDate", label = "Today Date", type = DFieldType.IsDate, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "client_Location", label = "Client Location", type = 0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "newHire", label = "NewHire", type = 0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "reHire", label = "ReHire", type = 0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "transfer", label = "Transfer", type = 0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = 0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "exempt", label = "Exempt", type =0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "ssHash", label = "SS", type =0, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "dob", label = "DOB", type = DFieldType.IsDate, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "status_FullTime_PartTime", label = "Status", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "wage_Salary", label = "Wage/Salary", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "allocation", label = "Allocation", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "streetAddress", label = "Street Address", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "city_State_Zip", label = "City/State/Zip", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "phone", label = "Phone", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "change_Pay_Rate_From", label = "Change Pay Rate From", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "change_Pay_Rate_To", label = "Change Pay Rate To", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "change_Property_From", label = "Change Property From", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "change_Property_To", label = "Change Property To", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "address_ContactInfo", label = "Address ContactInfo", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "date_Of_Suspence", label = "Date Of Suspence", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "suspence_Paid", label = "Suspence Paid", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "suspence_UnPaid", label = "Suspence UnPaid", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "leave_Absence", label = "Leave Absence", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "leave_Paid", label = "Leave Paid", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "leave_UnPaid", label = "Leave UnPaid", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "explanation", label = "Explanation", type = DFieldType.IsText, href = "" });
-                   // config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
-                //else if (FormType == "RequisitionRequest")
-                //{
-                //    if (string.IsNullOrEmpty(optionalSeachText))
-                //        config.Rows = _entities.proc_getallrequisitionrequests().ToList();
-                //    else
-                //        config.Rows = _entities.proc_getallrequisitionrequests().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.DatePosted.Value.ToShortDateString().ToLower().Contains(optionalSeachText.ToLower()) || x.RequestorName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
-
-                //    config.EtType = EntityType.AllClaims.ToString();
-                //    PropertyInfo[] userprop = typeof(PayrollStatusChangeNotice).GetProperties();
-                //    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
-                //    config.Columns = new List<DtableConfigArray>();
-
-                //    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "requestorName", label = "Requestor Name", type = DFieldType.IsDate, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "requstorPosition", label = "Position", type = 0, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "type", label = "Type", type = 0, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "post", label = "Post", type = 0, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
-                //    config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
-
-                //}
+               
                 else if (FormType == "EmployeeSeparation")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
@@ -2077,27 +2028,15 @@ namespace Carroll.Data.Entities.Repository
                         config.Rows = _entities.proc_getallnoticeofemployeeseparation().Where(x => x.EffectiveDateOfChange.Value.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.EligibleForReHire.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.PropertyNumber.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.JobTitle.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
-                    PropertyInfo[] userprop = typeof(NoticeOfEmployeeSeperation).GetProperties();
+                    PropertyInfo[] userprop = typeof(proc_getallnoticeofemployeeseparation_Result).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
-
-                    //config.Columns.Add(new DtableConfigArray { name = "effectiveDateOfChange", label = "EffectiveDateOfChange", type = 0, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "eligibleForReHire", label = "EligibleForReHire", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "propertyNumber", label = "PropertyNumber", type = 0, href = "" });
+  config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "jobTitle", label = "Employee Position", type = 0, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "policty_Voilated", label = "Policty_Voilated", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "reason", label = "Reason", type = 0, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "documentationAvailable", label = "DocumentationAvailable", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "warningGiven_Dates", label = "WarningGiven_Dates", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "equipmentKeysReturned", label = "EquipmentKeysReturned", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "c2WeeeksNoticeGiven", label = "C2WeeeksNoticeGiven", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "vacationPaidOut", label = "VacationPaidOut", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "vacationBalance", label = "VacationBalance", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "notes_Comments", label = "Notes_Comments", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "effectiveDateOfChange", label = "Effective Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Time Stamp", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 

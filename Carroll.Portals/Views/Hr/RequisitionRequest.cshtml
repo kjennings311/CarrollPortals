@@ -95,10 +95,10 @@
                                             <P class="p2 ft1"><textarea type="text" style="width:100%" id="specialinstructions1" > </textarea> </P>
                                             
                                             <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
-                                            <P class="p7 ft1">Requisition Number(s): <input type="text" id="requisitionnumber" /> </P>
-                                            <P class="p7 ft1">Date Posted:<input type="date" id="dateposted" /></P>
+                                            <P class="p7 ft1">Requisition Number(s): <input type="text" disabled id="requisitionnumber" /> </P>
+                                            <P class="p7 ft1">Date Posted:<input type="date" disabled id="dateposted" /></P>
                                             <P class="p7 ft1">Notes:</P>
-                                            <P class="p3 ft1"><textarea type="text" style="width:100%" id="notes1" > </textarea></P>
+                                            <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1" > </textarea></P>
                                             
                                             <br /> <br />
                                             <div id="status"> </div>
@@ -335,6 +335,13 @@
             var leaseid = "";
             GetAllHRFORMs('Requisition Request');
 
+            if ($("#UserR").val() == "HR Manager") {
+                $("#notes1,#requisitionnumber,dateposted").prop("disabled", false);
+
+            }
+            else {
+                $("#notes1,#requisitionnumber,dateposted").prop("disabled", true);
+            }
 
             $("input,select").change(function (e) {
                 e.preventDefault();
@@ -566,6 +573,25 @@
                             {
                                 leaseid = data['insertedId'];
 
+                                var insertForm = new FormData();
+                                insertForm.append('refid', leaseid);
+                                insertForm.append('form', "RequisitionRequest");
+
+                                $.ajax({
+                                    url: "/Hr/SendHrFormCompletionNotification/",
+                                    type: 'POST',
+                                    dataType: "JSON",
+                                    processData: false,
+                                    contentType: false,
+                                    data: insertForm,
+                                    success: function (data) {
+                                        // To-do code if ajax request is successful
+
+                                    },
+                                    error: function (ts) {
+                                        //  alert('error' + ts.errorMessage);
+                                    }
+                                });
                                 GetAllHRFORMs('Requisition Request');
                                 $(".alert").html('Record Successfully Updated !');
                                 $('#toastnotification').modal('show');
@@ -595,6 +621,14 @@
 
                 }
 
+
+                if ($("#UserR").val() == "HR Manager") {
+                    $("#notes1,#requisitionnumber,dateposted").prop("disabled", false);
+
+                }
+                else {
+                    $("#notes1,#requisitionnumber,dateposted").prop("disabled", true);
+                }
 
             });
 
