@@ -12,12 +12,60 @@
             </li>
 
             <li class="active">
-                <strong>Contacts</strong>
+                <strong> Contacts </strong>
             </li>
         </ol>
     </div>
     <div class="col-lg-2">
 
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:40%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding: 20px;
+    border: 2px solid black;">
+
+                    <h1 style="text-align: center;
+    margin-top: -20px;">
+                        <strong><span style="font-size: 18.0pt; line-height: 115%;">Upload Contacts  </span></strong>
+                    </h1>
+
+                    <form id="submitform" onsubmit="return false;" enctype="multipart/form-data">
+
+                        <input type="file" id="fileupload" accept=".xls, .xlsx" />
+
+                        <div class="col-md-12 " style="text-align:center;margin-bottom:20px;">
+                            <div class="uploadstatus"> </div>
+
+                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg " id="mobilepopup" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:95%" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:0px !important;border:none !important">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="padding: 0px 24px 25px 27px !important;">
+                <div class="row" style="padding: 5px;
+   ">
+                    <table class="table table-striped table-condensed dataTable"  cellspacing="2" cellpadding="1" id="mobilepopupbody"> </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -31,6 +79,10 @@
 
                     @if (@Model.RoleType.ToLower() == "administrator")
                     {
+
+                        <a class="export" style="color:white;" href="/Hr/ExportsContacts"> <i class="fa fa-download"></i> Export As Excel </a>
+                        <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
+
                         <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('contact');"><i class="fa fa-edit"></i> Edit</a>
 
                         <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
@@ -46,24 +98,24 @@
 
             </div>
             @*<div class="ibox-title">
-                <h5> Contacts <small></small></h5>
+                    <h5> Contacts <small></small></h5>
 
-                @if (@Model.RoleType.ToLower() == "administrator")
-                {
+                    @if (@Model.RoleType.ToLower() == "administrator")
+                    {
 
-                <div class="ibox-tools">
-                    <a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('contact');"><i class="fa fa-edit"></i> Edit</a>
+                    <div class="ibox-tools">
+                        <a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('contact');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a disabled="disabled" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>
+                        <a disabled="disabled" class="btnDelete" href="#">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>
 
-                    <a style="color:#1ab394;" href="#" onclick="ToggleAdd('contact');">
-                        <i class="fa fa-plus-circle"></i> Add New
-                    </a>
-                </div>
-                }
-            </div>*@
+                        <a style="color:#1ab394;" href="#" onclick="ToggleAdd('contact');">
+                            <i class="fa fa-plus-circle"></i> Add New
+                        </a>
+                    </div>
+                    }
+                </div>*@
             <div class="ibox-content">
                 <table class="table  dtprops" width="100%">
                     <thead>
@@ -74,7 +126,7 @@
                             <th>Title</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            
+
 
                         </tr>
                     </thead>
@@ -130,12 +182,12 @@
 
 
 @if (ViewBag.ErrorMessage == "AuthorizationRequired")
-            {
+{
     <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
 
 }
 @if (ViewBag.ErrorMessage == "UnexpectedError")
-            {
+{
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
 @section Styles {
@@ -149,7 +201,7 @@
     </style>
 }
 
-@section Scripts 
+@section Scripts
 {
 
     @Scripts.Render("~/scripts/plugins/dataTablesjs")
@@ -161,6 +213,73 @@
         $(document).ready(function () {
 
             LoadContacts();
+
+            $(".btnupload").click(function () {
+                $(".claimmodal").modal("show");
+
+            });
+
+            $("#Submit").click(function () {
+
+                if ($("#fileupload").val() != "") {
+                    var formData = new FormData();
+                    formData.append('attachment', $('#fileupload')[0].files[0]);
+
+                    formData.append('formname', "Contacts");
+                    $("#Submit").hide();
+                    $(".uploadstatus").html("<p style='color:blue;'> Uploading Changes  </p>");
+
+                    $.ajax({
+                        url: $BaseApiUrl + 'api/data/UploadContactsExcel',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false,  // tell jQuery not to set contentType
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data == true) {
+
+
+                                $(".uploadstatus").html("<p style='color:green;'> Upload Success </p>");
+
+                                LoadContacts();
+
+                                setTimeout(function () {
+
+
+                                    $("#submit").show();
+
+                                    $(".claimmodal").modal("hide");
+
+                                    document.getElementById("submitform").reset();
+
+
+
+                                }, 3000);
+                            }
+                            else {
+                                $(".uploadstatus").html("<p style='color:red;'> Upload Failed " + data + " </p>");
+                                $("#submit").show();
+
+
+                            }
+
+                        },
+                        error: function (ts) {
+                            alert('error Occured, Please Try Again');
+                        }
+
+                    });
+
+                }
+                else {
+
+
+                }
+
+
+
+            });
 
         });
     </script>

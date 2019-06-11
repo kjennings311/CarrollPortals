@@ -6,6 +6,13 @@
 //49786/";
 //   and UserOject are global variables can be used here.
 
+var $ismobile = false;
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+    // Take the user to a different screen here.
+    $ismobile = true;
+}
+
+
 function validateEmail(emailID)
 {
     atpos = emailID.indexOf("@");
@@ -783,12 +790,13 @@ function HandleRowClick(obj)
        
     //    $this.removeClass('selected');
 
-        $('.btnDelete').css("color", "red");
+        $('.btnDelete').css("color", "white");
         $('.btnDelete').removeAttr("disabled");
         $('.btnDelete').attr("itemId", $this.attr("id"));
         $('.btnDelete').attr("itemType", $this.attr("itemType"));
-        $('.btnEdit').css("color", "green");
+        $('.btnEdit').css("color", "white");
         $('.btnEdit').removeAttr("disabled");
+  
         $('.btnEdit').attr("itemId", $this.attr("id"));
         $('.btnEdit').attr("itemType", $this.attr("itemType"));
         // bind button events we can lookup item id on button attribute
@@ -842,7 +850,76 @@ function HandleRowClick(obj)
         });
     }
 }
+function HandleRowClickr(obj) {
+    var $this = jQuery(obj);
 
+    if ($("#homecontainer").length)
+        console.log(JSON.stringify(obj) + "Selected Item in Home");
+
+    if (!$this.hasClass('selected')) {
+
+        //    $this.removeClass('selected');
+
+        $('.btnDelete').css("color", "white");
+        $('.btnDelete').removeAttr("disabled");
+        $('.btnDelete').attr("itemId", $this.attr("id"));
+        $('.btnDelete').attr("itemType", $this.attr("itemType"));
+        $('.btnEdit').css("color", "white");
+        $('.btnEdit').show();
+        $('.btnEdit').removeAttr("disabled");
+
+        $('.btnEdit').attr("itemId", $this.attr("id"));
+        $('.btnEdit').attr("itemType", $this.attr("itemType"));
+        // bind button events we can lookup item id on button attribute
+
+        $('.btnDelete').unbind('click').bind('click', function () {
+            if (confirm("Are you sure you want to delete?")) {
+                var idToDelete = $(this).attr("itemId");
+                var ItemType = $(this).attr("itemType");
+
+                //  make ajax call to delete the row and remove the row.
+                $.ajax({
+                    type: "post",
+                    dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
+                    url: $BaseApiUrl + "api/data/deleterecord?entitytype=" + ItemType + "&recordid=" + idToDelete,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+
+                    },
+                    success: function (data) {
+                        if (data) {
+                            alert("record deleted!");
+                            $this.animate({ backgroundColor: "#fbc7c7" }, "fast")
+                                .animate({ opacity: "hide" }, "slow");
+
+                        }
+
+                    }
+
+                });
+
+
+            }
+        });
+    }
+    else {
+        //$('.dtprops tbody tr').removeClass('selected');
+        //$this.addClass('selected');
+        $('.btnDelete').css("color", "#ccc");
+        $('.btnDelete').attr("disabled", "disabled");
+        $('.btnDelete').removeAttr("itemId");
+        $('.btnDelete').removeAttr("itemType");
+        $('.btnEdit').css("color", "#ccc");
+        $('.btnEdit').hide();
+        $('.btnEdit').attr("disabled", "disabled");
+        $('.btnEdit').removeAttr("itemId");
+        $('.btnEdit').removeAttr("itemType");
+        $('.btnDelete').unbind('click').bind('click', function () {
+
+            return false;
+        });
+    }
+}
 function LoadFormView(data)
 {
     location.href = "http://"+location.hostname+"/Home/viewclaim/?Claim=" + data;
@@ -858,6 +935,14 @@ function CheckNull(variable)
         return variable;
 }
 
+function openmobilepopup(body)
+{
+    $("#mobilepopupbody").html(body);
+
+    $("#mobilepopup").modal('show');
+}
+
+
 // called from Contacts page
 function LoadContacts() {
     $.when(GetToken()).then(
@@ -871,7 +956,20 @@ function LoadContacts() {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
 
                 },
-                success: function (data) {
+                success: function (data)
+                {
+                    if ($.fn.DataTable.isDataTable('.dtprops')) {
+                        $('.dtprops').DataTable().destroy();
+                    }
+
+                    $('.dtprops tbody').empty();
+
+                 //   alert("is mobile" + $ismobile);
+
+                    var doms = '<"html5buttons"B>lTfgitp';
+                    if ($ismobile)
+                        doms = '<"top"i>rt<"bottom"flp><"clear">';
+
                     var datatableVariable = $('.dtprops').DataTable({
                         data: data,
                         processing: true,
@@ -882,11 +980,20 @@ function LoadContacts() {
                             // do anything row wise here
                             $(row).attr('id', data["contactId"]);
                             $(row).attr('itemType', "Contact");
-                            $(row).attr('onClick', 'HandleRowClick(this);');
+
+                            if (!$ismobile)
+                                $(row).attr('onClick', 'HandleRowClick(this);');
+                            else
+                            {
+                                var html = "<tr><td> First Name :  </td> <td> " + data["firstName"] + " </td> </tr><tr> <td> Last Name </td> <td>" + data["lastName"] + " </td></tr><tr> <td> Email:  </td> <td>" + data["email"] + " </td> </tr><tr><td> Title :  </td> <td> " + data["title"] + " </td> </tr><tr><td> Phone :  </td> <td>" + data["phone"] +" </td> </tr> ";
+                                html=html.replace("null", "");
+                                $(row).attr('onClick', 'openmobilepopup("' + html + '");');
+                            }
+                            console.log(data);
 
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: doms, //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -974,22 +1081,41 @@ function LoadPartners() {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
 
                 },
-                success: function (data) {
+                success: function (data)
+                {
+                    if ($.fn.DataTable.isDataTable('.dtprops'))
+                    {
+                        $('.dtprops').DataTable().destroy();
+                    }
+
+                    $('.dtprops tbody').empty();
+
+                    var doms = '<"html5buttons"B>lTfgitp';
+                    if ($ismobile)
+                        doms = '<"top"i>rt<"bottom"flp><"clear">';
+
                     var datatableVariable = $('.dtprops').DataTable({
                         data: data,
                         processing: true,
                         scrollY: '50vh',
                         scrollCollapse: true,
                         "scrollX": true,
-                        "rowCallback": function (row, data) {
+                        "rowCallback": function (row, data)
+                        {
                             // do anything row wise here
                             $(row).attr('id', data["equityPartnerId"]);
                             $(row).attr('itemType', "Partner");
-                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            if (!$ismobile)
+                                $(row).attr('onClick', 'HandleRowClick(this);');
+                            else {
+                                var html = "<tr><td> Partner Name :  </td> <td> " + data["partnerName"] + " </td> </tr><tr> <td> Address Line1 : </td> <td>" + data["addressLine1"] + " </td></tr><tr> <td> Address Line2 :  </td> <td>" + data["addressLine2"] + " </td> </tr><tr><td> City :  </td> <td> " + data["city"] + " </td> </tr><tr><td> State :  </td> <td>" + data["state"] + " </td> </tr> <tr><td> Contact Person :  </td> <td>" + data["contactId"] + " </td> </tr> ";
+                                html = html.replace("null", "");
+                                $(row).attr('onClick', 'openmobilepopup("' + html + '");');
+                            }                          
 
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: doms, //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -1119,19 +1245,103 @@ function LoadProperties() {
                     202: function () { }
                 },
                 success: function (data) {
+
+                    if ($.fn.DataTable.isDataTable('.dtprops')) {
+                        $('.dtprops').DataTable().destroy();
+                    }
+
+                    $('.dtprops tbody').empty();
+                    var doms = '<"html5buttons"B>lTfgitp';
+                    if ($ismobile)
+                        doms = '<"top"i>rt<"bottom"flp><"clear">';
                     var datatableVariable = $('.dtprops').DataTable({
                         data: data,
                         processing: true,
                         "scrollX": true,
-                        "rowCallback": function (row, data) {
+                        "rowCallback": function (row, data)
+                        {
                             // do anything row wise here
                             $(row).attr('id', data["propertyId"]);
                             $(row).attr('itemType', "property");
-                            $(row).attr('onClick', 'HandleRowClick(this);');
+                            if (!$ismobile)
+                                $(row).attr('onClick', 'HandleRowClick(this);');
+                            else
+                            {
+                                var html = "<tr><td> Property # :  </td> <td> " + data["propertyNumber"] + " </td> </tr><tr> <td> Property Name : </td> <td>" + data["propertyName"] + " </td></tr><tr> <td> Legal Name :  </td> <td>" + data["legalName"] + " </td> </tr><tr><td> Units :  </td> <td> " + data["units"] + " </td> </tr><tr><td> Owned :  </td> <td>" + data["isOwned"] + " </td> </tr> ";
+
+                                html = html + "<tr><td> Address :  </td> <td> " + data["propertyAddress"] + " </td> </tr><tr> <td> City : </td> <td>" + data["city"] + " </td></tr><tr> <td> State :  </td> <td>" + data["state"] + " </td> </tr><tr><td> Zip :  </td> <td> " + data["zipCode"] + " </td> </tr><tr><td> Phone :  </td> <td>" + data["phoneNumber"] + " </td> </tr> <tr><td> PM Email :  </td> <td>" + data["emailAddress"] + " </td> </tr> ";
+
+                                //eq
+                                if (data.equityPartner != null)
+                                {
+                                    html = html + "<tr><td> Equity Partner : </td><td>" + data.equityPartner.substring(9, data.equityPartner.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Equity Partner : </td><td> </td> </tr>";
+                                }
+
+
+                                //vice prese
+                                if (data.vicePresident != null) {
+                                    html = html + "<tr><td> Vice President : </td><td>" + data.vicePresident.substring(9, data.vicePresident.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Vice President : </td><td> </td> </tr>";
+                                }
+
+
+                                //vice prese
+                                if (data.regionalVicePresident != null) {
+                                    html = html + "<tr><td> Regional Vice President  </td><td>" + data.regionalVicePresident.substring(9, data.regionalVicePresident.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Regional Vice President  </td><td> </td> </tr>";
+                                }
+
+                                //RM
+                                if (data.regionalManager != null) {
+                                    html = html + "<tr><td> Regional Manager : </td><td>" + data.regionalManager.substring(9, data.regionalManager.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Regional Manager : </td><td> </td> </tr>";
+                                }
+
+
+                                //RM
+                                if (data.propertyManager != null) {
+                                    html = html + "<tr><td> Property Manager : </td><td>" + data.propertyManager.substring(9, data.propertyManager.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Property Manager : </td><td> </td> </tr>";
+                                }
+
+                                //RM
+                                if (data.constructionManager != null) {
+                                    html = html + "<tr><td> Construction Manager : </td><td>" + data.constructionManager.substring(9, data.constructionManager.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Construction Manager : </td><td> </td> </tr>";
+                                }
+
+
+                                //RM
+                                if (data.assetManager1 != null) {
+                                    html = html + "<tr><td> Asset Manager : </td><td>" + data.assetManager1.substring(9, data.assetManager1.indexOf('","')) + " </td> </tr>";
+                                }
+                                else {
+                                    html = html + "<tr><td> Asset Manager : </td><td> </td> </tr>";
+                                }
+
+                              //  html = html + "<tr><td> TakeOver Date: </td><td> "+data[""]+" </td> </tr>";
+
+
+                                html = html.replace("null", "");
+                                $(row).attr('onClick', 'openmobilepopup("' + html + '");');
+                            }                                                   
 
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: doms, //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
@@ -2684,7 +2894,12 @@ function GetAllHRFORMs(formtype) {
                     tablehead += "</tr>";
 
                     $(".dtprops").html("<thead> " + tablehead + "</thead><tbody> </tbody> <tfoot> " + tablehead + "</tfoot>");
+                    var selct = false;
 
+                    if (formtype == "Requisition Request") 
+                    {
+                        selct = 'single';
+                    }
 
                     var datatableVariable = $('.dtprops').DataTable({
                         data: configdata.rows,
@@ -2693,10 +2908,14 @@ function GetAllHRFORMs(formtype) {
                         scrollCollapse: true,
                         "scrollX": true,
                         "rowCallback": function (row, data) {
-                            // do anything row wise here      
+                            // do anything row wise here     
+                          //  var d = JSON.parse(data);
+                          //  alert(row + d);
+                          ////  console.log(row + " " + JSON.parse(data));
+                          //  $(row).attr('id', row.printOption);
+                          //  $(row).attr('itemType', configdata.etType);
+                            $(row).attr('onClick', 'HandleRowClickr(this);');
 
-                            $(row).attr('id', data[configdata.pkName]);
-                            $(row).attr('itemType', configdata.etType);
                             //var rowdata = JSON.parse(JSON.stringify(data));
                             //if (rowdata.claimType == "General Liability")
                             //    $(row).attr('onClick', "LoadFormView('" + rowdata.id + "g');");
@@ -2707,7 +2926,7 @@ function GetAllHRFORMs(formtype) {
 
                         },                       
                         dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-                        select: false,     // enable single row selection
+                        select: selct,     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
                         buttons: [

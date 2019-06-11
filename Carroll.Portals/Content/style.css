@@ -8606,6 +8606,13 @@ z-index:99999999 !important;
     .start-claim {
         width: 29% !important;
     }
+    .navbar-default {
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        height: 100%;
+    }
 
     /*.start-claim button 
     {
@@ -8618,12 +8625,18 @@ z-index:99999999 !important;
     .start-claim {
         width: 29% !important;
     }
-
+  
+}
 
     /* Extra Small Devices, Phones */
     @media only screen and (max-width : 480px) {
         .start-claim {
             width: 50% !important;
+        }
+
+        table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after {
+            opacity: 0 !important;
+            content:none !important;
         }
         }
 
@@ -8639,7 +8652,6 @@ z-index:99999999 !important;
 
   
 
-}
  .dataTable tfoot
 {
     display:none !important;
@@ -8650,4 +8662,131 @@ z-index:99999999 !important;
     background: #2f4050 !important;
     color: white;
     border: none !important;
+}
+
+.nav-header {
+    padding: 25px 10px;
+}
+/* Mobile View starts Here*/
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+    .ibox-tools, .html5buttons, .dataTables_length {
+        display: none !important;
+    }
+
+    .ibox-title {
+        padding: 120px 15px 7px !important;
+    }
+
+    .ibox-title h1{
+        margin-top:5px !important;
+    }
+
+    .ipbackground {
+        min-height: 300px !important;
+        background-size: contain !important;
+        margin-top: -40px !important;
+    }
+        .ipbackground h1 {
+            position: absolute !important;
+            margin-top: 100px !important;
+            font-size: 26px !important;
+            color: white !important;
+            text-align: center !important;
+            padding-left: 3% !important;
+        }
+
+    .homeheading
+    {
+        font-size:26px !important;
+        padding-left:2% !important;
+    }
+
+    .mobile-menu-dashboard div {
+        padding: 5px;
+        background-color: #293846;
+        color: white !important;
+        text-align: center;
+        font-size: 15px;
+        font-weight: normal;
+        margin: 10px;
+        width: 94%;
+        padding: 15px;
+    }
+
+    .nav
+    {
+        float:right !important;
+    }
+}
+
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) 
+{
+    .ibox-tools, .html5buttons, .dataTables_length 
+    {
+        display: none !important;
+    }
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) 
+{
+    .ibox-tools, .html5buttons, .dataTables_length {
+        display: block !important;
+    }
+
+
+    .nav {
+        float: right !important;
+    }
+
+    .navbar-default {
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        height: 100%;
+        overflow:scroll;
+        width:230px !important;
+    }
+    .ipbackground {
+        height: auto !important;
+        background-position: center !important;
+        width: 100%;
+        min-height: 900px !important;
+        background-size: cover !important;
+    }
+        /*.ipbackground h1 {
+            margin-top: 235px !important;
+            font-size: 30px !important;
+            color: white !important;
+            text-align: center !important;
+        }*/
+        .ipbackground h1 {
+            margin-top: 235px !important;
+            font-size: 98px !important;
+            color: white !important;
+            text-align: center !important;
+            position: inherit !important;
+        }
+    .ibox-title {
+        padding: 260px 15px 7px !important;
+    }
+
+    .ipbackground button {
+        top: 80% !important;
+        right: 0 !important;
+        font-size: 30px !important;
+    }
+   
+
+    }
+
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
 }

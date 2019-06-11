@@ -1,7 +1,8 @@
 ﻿
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+using System.Data;
+using System.Linq;
 using System.Web;
 
 namespace Carroll.Data.Entities.Repository
@@ -53,9 +54,20 @@ namespace Carroll.Data.Entities.Repository
 
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
          dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
+        dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted);
         string GetPropertyManager(Guid PropertyId);
         List<CarrollPosition> GetAllCarrollPositions();
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
+
+
+        List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel();
+        List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel();
+        List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel();
+
+        dynamic ImportContactTableFromExcel(DataTable dt);
+        dynamic ImportEquityPartnerTableFromExcel(DataTable dt);
+       dynamic ImportPropertiesTableFromExcel(DataTable dt);
+
 
         //List<spProperties_Result> GetProperties(string optionalSeachText = "");
         dynamic GetRuntimeClassInstance(string className);

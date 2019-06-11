@@ -329,7 +329,7 @@ namespace Carroll.Data.Services.Helpers
 
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -385,7 +385,7 @@ namespace Carroll.Data.Services.Helpers
 
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5><p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -439,7 +439,7 @@ namespace Carroll.Data.Services.Helpers
 
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi, </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for "+NewhireDetails.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -506,7 +506,7 @@ namespace Carroll.Data.Services.Helpers
 
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -562,7 +562,7 @@ namespace Carroll.Data.Services.Helpers
 
                         var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi " + NewhireDetails.EmployeeName + " </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -616,7 +616,7 @@ namespace Carroll.Data.Services.Helpers
 
                         //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi, </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -659,7 +659,7 @@ namespace Carroll.Data.Services.Helpers
 
                         //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider has been successfully completed";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi, </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Employee Lease Rider <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -682,7 +682,7 @@ namespace Carroll.Data.Services.Helpers
 
                         //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Notice Of Employee Separation has been successfully completed";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi, </h1> <br> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "Notice Of Employee Separation for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Notice Of Employee Separation <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
@@ -708,9 +708,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Requisition Request has been successfully completed";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> Hi, </h1> <br> <p> ";
-                        _message.Body += "Requisition Request   for " + NewhireDetails.PropertyName + " has been successfully reviewed and completed. Please find attached copy of Requisition Request  <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        _message.Subject = "Requisition Request has been Submitted";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
+                        _message.Body += "Requisition Request   for " + NewhireDetails.PropertyName + " has been submitted. Please find attached copy of Requisition Request  <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
                         tos.Add("shashank.trivedi@carrollorg.com");
@@ -779,11 +779,17 @@ namespace Carroll.Data.Services.Helpers
         {
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
+           // smtp.Host = "smtp.office365.com"; // smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.UseDefaultCredentials = false;
+        //    smtp.TargetName = "STARTTLS/smtp.office365.com";
+         //  NetworkCredential networkCredential = new NetworkCredential("iamnewemployee@carrollmg.com", "Carroll123!");
+
             NetworkCredential networkCredential = new NetworkCredential("sekhar.babu@forcitude.com", "R21221.Skr");
 
             smtp.Credentials = networkCredential;
+            
             smtp.Port = 587; //587
             return smtp;
 

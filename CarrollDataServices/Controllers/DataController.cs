@@ -22,6 +22,10 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 //using MongoDB.Driver.Builders;
 using Carroll.Data.Services.Models.MongoModels;
+using System.Data;
+using System.Reflection;
+using ClosedXML.Excel;
+using ClosedXML.Extensions;
 
 namespace Carroll.Data.Services.Controllers
 {
@@ -73,7 +77,7 @@ namespace Carroll.Data.Services.Controllers
         //}
 
         //**************************************************************************Record******************************************************//
-        [ActionName("GetRecords")]
+        [System.Web.Http.ActionName("GetRecords")]
         [HttpGet]
         public dynamic GetRecords(EntityType entityType, string optionalText = "")
         {
@@ -229,6 +233,300 @@ namespace Carroll.Data.Services.Controllers
             return _coll;
         }
 
+
+
+
+        #region ExportImport
+
+        public DataTable LINQResultToDataTable<T>(IEnumerable<T> Linqlist)
+        {
+            DataTable dt = new DataTable();
+
+
+            PropertyInfo[] columns = null;
+
+            if (Linqlist == null) return dt;
+
+            foreach (T Record in Linqlist)
+            {
+
+                if (columns == null)
+                {
+                    columns = ((Type)Record.GetType()).GetProperties();
+                    foreach (PropertyInfo GetProperty in columns)
+                    {
+                        Type colType = GetProperty.PropertyType;
+
+                        if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition()
+                        == typeof(Nullable<>)))
+                        {
+                            colType = colType.GetGenericArguments()[0];
+                        }
+
+                        dt.Columns.Add(new DataColumn(GetProperty.Name, colType));
+                    }
+                }
+
+                DataRow dr = dt.NewRow();
+
+                foreach (PropertyInfo pinfo in columns)
+                {
+                    dr[pinfo.Name] = pinfo.GetValue(Record, null) == null ? DBNull.Value : pinfo.GetValue
+                    (Record, null);
+                }
+
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
+
+
+        //[HttpGet]
+        //public dynamic ExportsContacts()
+        //{
+        //    using (var wb = new XLWorkbook())
+        //    {
+        //        // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+        //        DataTable dt = LINQResultToDataTable(_service.GetAllContactsForExcel());
+
+        //        // Add ClosedXML.Extensions in your using declarations
+
+        //        wb.Worksheets.Add(dt, "Contacts");
+
+        //        return wb.Deliver("Contacts List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+        //        // or specify the content type:
+        //        //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        //    }
+
+        //}
+
+
+        //[HttpGet]
+        //public dynamic ExportEquityPartners()
+        //{
+        //    using (var wb = new XLWorkbook())
+        //    {
+        //        // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+        //        DataTable dt = LINQResultToDataTable(_service.GetAllEquityPartnersForExcel());
+
+        //        // Add ClosedXML.Extensions in your using declarations
+
+        //        wb.Worksheets.Add(dt, "EquityPartners");
+
+        //        return wb.Deliver("EquityPartners List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+        //        // or specify the content type:
+        //        //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        //    }
+
+        //}
+
+        //[HttpGet]
+        //public dynamic ExportProperties()
+        //{
+        //    using (var wb = new XLWorkbook())
+        //    {
+        //        // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+        //        DataTable dt = LINQResultToDataTable(_service.GetAllPropertiesForExcel());
+
+        //        // Add ClosedXML.Extensions in your using declarations
+
+        //        wb.Worksheets.Add(dt, "Properties");
+
+        //        return wb.Deliver("Properties List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+        //        // or specify the content type:
+        //        //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        //    }
+
+        //}
+
+        [ActionName("UploadContactsExcel")]
+        [HttpPost]
+
+        public dynamic UploadContactsExcel()
+        {
+            // loop through each row and form query and 
+            List<proc_getcontactsforexcel_Result> list = new List<proc_getcontactsforexcel_Result>();
+            XLWorkbook wb = new XLWorkbook();
+            string formname = HttpContext.Current.Request.Params["formname"].ToString();
+            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            {
+                // Get the uploaded image from the Files collection
+                var httpPostedFile = HttpContext.Current.Request.Files["attachment"];
+
+                if (httpPostedFile != null)
+                {
+                    // Validate the uploaded image(optional)
+                                                 
+                wb = new XLWorkbook(httpPostedFile.InputStream);
+                }
+
+            IXLWorksheet workSheet = wb.Worksheet(1);
+
+            IXLTables xLTable = workSheet.Tables;
+
+            System.Data.DataTable dt = new System.Data.DataTable();
+            //Loop through the Worksheet rows.
+            bool firstRow = true;
+                foreach (IXLRow row in workSheet.Rows())
+                {
+                    //Use the first row to add columns to DataTable.
+
+                    if(!row.IsEmpty())
+                    {
+
+                   
+                            if (firstRow)
+                            {
+                      
+
+                                foreach (IXLCell cell in row.Cells())
+                                {
+                                    dt.Columns.Add(cell.Value.ToString());
+                                }
+                                firstRow = false;
+                            }
+                            else
+                            {
+                                //Add rows to DataTable.
+                                dt.Rows.Add();
+                              //  int i = 0;
+                                // if contacts, equity partner, properties
+
+                                if(formname == "Contacts")
+                                {
+                                    dt.Rows[dt.Rows.Count - 1][0] = row.Cell(1).Value.ToString();
+                                    dt.Rows[dt.Rows.Count - 1][1] = row.Cell(2).Value.ToString();
+                                    dt.Rows[dt.Rows.Count - 1][2] = row.Cell(3).Value.ToString();
+                                    dt.Rows[dt.Rows.Count - 1][3] = row.Cell(4).Value.ToString();
+                                    dt.Rows[dt.Rows.Count - 1][4] = row.Cell(5).Value.ToString();
+                                    dt.Rows[dt.Rows.Count - 1][5] = row.Cell(6).Value.ToString();
+                                }
+                                else if (formname == "EquityPartners")
+                            {
+                                dt.Rows[dt.Rows.Count - 1][0] = row.Cell(1).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][1] = row.Cell(2).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][2] = row.Cell(3).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][3] = row.Cell(4).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][4] = row.Cell(5).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][5] = row.Cell(6).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][6] = row.Cell(7).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][7] = row.Cell(8).Value.ToString();
+                            }
+                            else if (formname == "Properties")
+                            {
+                                dt.Rows[dt.Rows.Count - 1][0] = row.Cell(1).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][1] = row.Cell(2).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][2] = row.Cell(3).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][3] = row.Cell(4).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][4] = row.Cell(5).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][5] = row.Cell(6).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][6] = row.Cell(7).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][7] = row.Cell(8).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][8] = row.Cell(9).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][9] = row.Cell(10).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][10] = row.Cell(11).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][11] = row.Cell(12).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][12] = row.Cell(13).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][13] = row.Cell(14).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][14] = row.Cell(15).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][15] = row.Cell(16).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][16] = row.Cell(17).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][17] = row.Cell(18).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][18] = row.Cell(19).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][19] = row.Cell(20).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][20] = row.Cell(21).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][21] = row.Cell(22).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][22] = row.Cell(23).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][23] = row.Cell(24).Value.ToString();
+
+                            }
+
+
+                            //for (int i1 = 1; i1 < row.Cells().Count(); i1++)
+                            //{
+                            //    dt.Columns.Add(row.Cell(i1).Value.ToString());
+                            //     dt.Rows[dt.Rows.Count - 1][i]
+                            //}
+
+                            //foreach (IXLCell cell in row.Cells())
+                            //{
+                            //    = cell.Value.ToString();
+                            //    i++;
+                            //}
+                        }
+                    }
+                }
+            
+
+            if(formname == "Contacts" || formname == "" )
+            {
+                // Update datatable to db
+                _service.ImportContactTableFromExcel(dt);
+
+            }
+            else if(formname == "EquityPartners")
+            {
+                _service.ImportEquityPartnerTableFromExcel(dt);
+            }
+            else if (formname == "Properties")
+            {
+                _service.ImportPropertiesTableFromExcel(dt);
+            }
+    
+            }
+
+            return true;
+        }
+                
+
+        [HttpGet]
+        public dynamic ExportsContacts()
+        {
+            return _service.GetAllContactsForExcel();
+
+
+
+            //using (var wb = new XLWorkbook())
+            //{
+            //    // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+            //    DataTable dt = LINQResultToDataTable(_service.GetAllContactsForExcel());
+
+            //    // Add ClosedXML.Extensions in your using declarations
+
+            //    wb.Worksheets.Add(dt, "Contacts");
+
+            //    return wb.Deliver("Contacts List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+            //    // or specify the content type:
+            //    //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            //}
+
+        }
+
+
+        [HttpGet]
+        public dynamic ExportEquityPartners()
+        {
+            return _service.GetAllEquityPartnersForExcel();
+
+        }
+
+        [HttpGet]
+        public dynamic ExportProperties()
+        {
+           return _service.GetAllPropertiesForExcel();
+
+        }
+
+
+        #endregion
         #region  HR Forms
         [ActionName("InsertEmployeeLeaseRider")]
         [HttpPost]
@@ -906,12 +1204,24 @@ namespace Carroll.Data.Services.Controllers
                 else
                     m.Col7Expense = 0;
 
-
                 md.Add(m);
             }
 
             return _service.InsertExpenseReimbursement(fa, md);
         }
+
+        [ActionName("UpdateRequisitionRequest")]
+        [HttpPost]
+        public dynamic UpdateRequisitionRequest()
+        {
+           var refid= HttpContext.Current.Request.Params["refid"].ToString();
+            var requisitionnumber = HttpContext.Current.Request.Params["requisitionnumber"].ToString();
+            var notes = HttpContext.Current.Request.Params["notes"].ToString();
+            var dateposted = Convert.ToDateTime(HttpContext.Current.Request.Params["dateposted"].ToString());
+
+            return _service.UpdateRequisitionRequest(new Guid(refid),requisitionnumber,notes,dateposted);
+        }
+
 
         [ActionName("GetExpenseReimbursement")]
         [HttpGet]

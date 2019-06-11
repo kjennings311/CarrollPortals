@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -13,9 +14,10 @@ using Carroll.Data.Entities.Helpers;
 
 
 
+
 namespace Carroll.Data.Entities.Repository
 {
-    public class EntityDataRepository:IDataRepository
+    public class EntityDataRepository : IDataRepository
     {
 
         public CarrollFormsEntities DBEntity => new EFConnectionAccessor().Entities;
@@ -27,7 +29,7 @@ namespace Carroll.Data.Entities.Repository
         /// <param name="entityType"></param>
         /// <returns></returns>
         /// 
-        public bool DeleteRecord(EntityType entityType,string recordId)
+        public bool DeleteRecord(EntityType entityType, string recordId)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -69,20 +71,20 @@ namespace Carroll.Data.Entities.Repository
                         break;
                     default:
                         break;
-                }          
+                }
 
                 return true;
             }
         }
 
 
-        public dynamic GetRecord(EntityType entityType,string recordId)
+        public dynamic GetRecord(EntityType entityType, string recordId)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
                 _entities.Configuration.ProxyCreationEnabled = false;
                 Guid _recId = new Guid(recordId);
-                
+
                 switch (entityType)
                 {
 
@@ -91,14 +93,14 @@ namespace Carroll.Data.Entities.Repository
                         var _prop = _entities.Properties.Where(x => x.PropertyId == _recId).FirstOrDefault();
                         if (_prop != null) { return _prop; }
                         return null;
-                        #endregion
+                    #endregion
                     case EntityType.Contact:
                         #region [ Contact ]
                         var _cont = _entities.Contacts.Where(x => x.ContactId == _recId).FirstOrDefault();
                         if (_cont != null) { return _cont; }
                         return null;
                     #endregion
-                    case EntityType.CarrollPositions: 
+                    case EntityType.CarrollPositions:
                         #region [ carrollpositions ]
                         var _pos = _entities.CarrollPositions.Where(x => x.PositionId == _recId).FirstOrDefault();
                         if (_pos != null) { return _pos; }
@@ -115,7 +117,7 @@ namespace Carroll.Data.Entities.Repository
                         var _partner = _entities.EquityPartners.Where(x => x.EquityPartnerId == _recId).FirstOrDefault();
                         if (_partner != null) { return _partner; }
                         return null;
-                        #endregion
+                    #endregion
                     case EntityType.User:
                         #region [ User ]
                         var _user = _entities.SiteUsers.Where(x => x.UserId == _recId).FirstOrDefault();
@@ -136,7 +138,7 @@ namespace Carroll.Data.Entities.Repository
                     #endregion
                     case EntityType.FormPropertyDamageClaim:
                         #region [ FormPropertyDamageClaim]
-                        var _damageclaim= _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
+                        var _damageclaim = _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
                         if (_damageclaim != null) { return _damageclaim; }
                         return null;
                     #endregion
@@ -160,7 +162,7 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
-        public dynamic CreateUpdateRecord(EntityType entityType,dynamic obj)
+        public dynamic CreateUpdateRecord(EntityType entityType, dynamic obj)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -168,38 +170,38 @@ namespace Carroll.Data.Entities.Repository
                 try
                 {
 
-               
-                _entities.Configuration.ProxyCreationEnabled = false;
-                switch (entityType)
-                {   
-                    case EntityType.Property:
-                        #region [ Property ]
-                        Property _property = obj;
-                        var _dbProp = _entities.Properties.Where(x => x.PropertyId == _property.PropertyId).FirstOrDefault();
-                        if (_dbProp == null)
-                        {
-                            if ((_property.PropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_property.PropertyId == null))
+
+                    _entities.Configuration.ProxyCreationEnabled = false;
+                    switch (entityType)
+                    {
+                        case EntityType.Property:
+                            #region [ Property ]
+                            Property _property = obj;
+                            var _dbProp = _entities.Properties.Where(x => x.PropertyId == _property.PropertyId).FirstOrDefault();
+                            if (_dbProp == null)
                             {
-                                _property.PropertyId = Guid.NewGuid();
+                                if ((_property.PropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_property.PropertyId == null))
+                                {
+                                    _property.PropertyId = Guid.NewGuid();
+                                }
+                                _property.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
+                                _entities.Properties.Add(_property);
+                                // _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
+                                bool bSuccess = true;
+                                _result.RecordId = _property.PropertyId.ToString();
+                                _result.Succeded = bSuccess;
+
+                                return _result;
                             }
-                            _property.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
-                            _entities.Properties.Add(_property);
-                           // _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
-                            bool bSuccess = true;
-                            _result.RecordId = _property.PropertyId.ToString();
-                            _result.Succeded = bSuccess;
+                            else
+                            {
 
-                            return _result;
-                        }
-                        else
-                        {
-
-                            //_entities.Properties.Attach(Property);
-                            //_entities.Entry(Property).State = EntityState.Modified;
-                            _entities.Entry(_dbProp).CurrentValues.SetValues(_property);
-                            int i = _entities.SaveChanges();
+                                //_entities.Properties.Attach(Property);
+                                //_entities.Entry(Property).State = EntityState.Modified;
+                                _entities.Entry(_dbProp).CurrentValues.SetValues(_property);
+                                int i = _entities.SaveChanges();
                                 // return (i == 1) ? true : false;
                                 _result.RecordId = _property.PropertyId.ToString();
                                 _result.Succeded = true;
@@ -209,22 +211,22 @@ namespace Carroll.Data.Entities.Repository
 
                             }
                         #endregion
-                    case EntityType.Contact:
-                        #region [ Contact ] 
-                        Contact _contact = obj;
-                        var _dbcontact = _entities.Contacts.Where(x => x.ContactId == _contact.ContactId).FirstOrDefault();
-                        if (_dbcontact == null)
-                        {
-                            if ((_contact.ContactId.ToString() == "00000000-0000-0000-0000-000000000000") || (_contact.ContactId == null))
+                        case EntityType.Contact:
+                            #region [ Contact ] 
+                            Contact _contact = obj;
+                            var _dbcontact = _entities.Contacts.Where(x => x.ContactId == _contact.ContactId).FirstOrDefault();
+                            if (_dbcontact == null)
                             {
-                                _contact.ContactId = Guid.NewGuid();
-                            }
-                            _contact.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
-                            
-                            _entities.Contacts.Add(_contact);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                if ((_contact.ContactId.ToString() == "00000000-0000-0000-0000-000000000000") || (_contact.ContactId == null))
+                                {
+                                    _contact.ContactId = Guid.NewGuid();
+                                }
+                                _contact.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
+
+                                _entities.Contacts.Add(_contact);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
                                 _result.RecordId = _contact.ContactId.ToString();
                                 _result.Succeded = true;
 
@@ -232,34 +234,34 @@ namespace Carroll.Data.Entities.Repository
                                 // return (i == 1) ? true : false;
                                 // return true;
                             }
-                        else
-                        {
-                            _entities.Entry(_dbcontact).CurrentValues.SetValues(_contact);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                _entities.Entry(_dbcontact).CurrentValues.SetValues(_contact);
+                                int i = _entities.SaveChanges();
                                 _result.RecordId = _contact.ContactId.ToString();
                                 _result.Succeded = true;
 
                                 return _result;
                                 // return true;
                             }
-                    #endregion
-                    case EntityType.Partner:
-                        #region [ Partner ] 
-                        EquityPartner _partner = obj;
-                        var _dbpartner = _entities.EquityPartners.Where(x => x.EquityPartnerId == _partner.EquityPartnerId).FirstOrDefault();
-                        if (_dbpartner == null)
-                        {
-                            if ((_partner.EquityPartnerId.ToString() == "00000000-0000-0000-0000-000000000000") || (_partner.EquityPartnerId == null))
+                        #endregion
+                        case EntityType.Partner:
+                            #region [ Partner ] 
+                            EquityPartner _partner = obj;
+                            var _dbpartner = _entities.EquityPartners.Where(x => x.EquityPartnerId == _partner.EquityPartnerId).FirstOrDefault();
+                            if (_dbpartner == null)
                             {
-                                _partner.EquityPartnerId = Guid.NewGuid();
-                            }
-                            _partner.CreatedDate = DateTime.Now;
-                            //
-                            // No record exists create a new property record here
+                                if ((_partner.EquityPartnerId.ToString() == "00000000-0000-0000-0000-000000000000") || (_partner.EquityPartnerId == null))
+                                {
+                                    _partner.EquityPartnerId = Guid.NewGuid();
+                                }
+                                _partner.CreatedDate = DateTime.Now;
+                                //
+                                // No record exists create a new property record here
 
-                            _entities.EquityPartners.Add(_partner);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.EquityPartners.Add(_partner);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
                                 // return (i == 1) ? true : false;
                                 //return true;
                                 _result.RecordId = _partner.EquityPartnerId.ToString();
@@ -267,11 +269,11 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
+                            else
+                            {
 
-                            _entities.Entry(_dbpartner).CurrentValues.SetValues(_partner);
-                            int i = _entities.SaveChanges();
+                                _entities.Entry(_dbpartner).CurrentValues.SetValues(_partner);
+                                int i = _entities.SaveChanges();
                                 // return true;
                                 _result.RecordId = _partner.EquityPartnerId.ToString();
                                 _result.Succeded = true;
@@ -279,25 +281,25 @@ namespace Carroll.Data.Entities.Repository
                                 return _result;
 
                             }
-                    #endregion
+                        #endregion
 
-                    case EntityType.User:
-                        #region [ User ] 
-                        
-                        SiteUser _user = obj;
-                        var _dbuser = _entities.SiteUsers.Where(x => x.UserId == _user.UserId).FirstOrDefault();
-                        if (_dbuser == null)
-                        {
-                            if ((_user.UserId.ToString() == "00000000-0000-0000-0000-000000000000") || (_user.UserId == null))
+                        case EntityType.User:
+                            #region [ User ] 
+
+                            SiteUser _user = obj;
+                            var _dbuser = _entities.SiteUsers.Where(x => x.UserId == _user.UserId).FirstOrDefault();
+                            if (_dbuser == null)
                             {
-                                _user.UserId = Guid.NewGuid();
-                            }
-                            _user.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
+                                if ((_user.UserId.ToString() == "00000000-0000-0000-0000-000000000000") || (_user.UserId == null))
+                                {
+                                    _user.UserId = Guid.NewGuid();
+                                }
+                                _user.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
 
-                            _entities.SiteUsers.Add(_user);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.SiteUsers.Add(_user);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
                                 // return true;
                                 //return true;
                                 _result.RecordId = _user.UserId.ToString();
@@ -305,11 +307,11 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
-                            _user.CreatedDate = DateTime.Now;
-                            _entities.Entry(_dbuser).CurrentValues.SetValues(_user);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                _user.CreatedDate = DateTime.Now;
+                                _entities.Entry(_dbuser).CurrentValues.SetValues(_user);
+                                int i = _entities.SaveChanges();
                                 _result.RecordId = _user.UserId.ToString();
                                 _result.Succeded = true;
 
@@ -396,22 +398,22 @@ namespace Carroll.Data.Entities.Repository
                         #endregion
 
                         case EntityType.UserInRole:
-                        #region [ User Roles ] 
+                            #region [ User Roles ] 
 
-                        UserInRole _userrole = obj;
-                        var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _userrole.UserRoleId).FirstOrDefault();
-                        if (_dbuserinrole == null)
-                        {
-                            if ((_userrole.UserRoleId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userrole.UserRoleId == null))
+                            UserInRole _userrole = obj;
+                            var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _userrole.UserRoleId).FirstOrDefault();
+                            if (_dbuserinrole == null)
                             {
-                                _userrole.UserRoleId = Guid.NewGuid();
-                            }
-                            _userrole.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
+                                if ((_userrole.UserRoleId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userrole.UserRoleId == null))
+                                {
+                                    _userrole.UserRoleId = Guid.NewGuid();
+                                }
+                                _userrole.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
 
-                            _entities.UserInRoles.Add(_userrole);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.UserInRoles.Add(_userrole);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
                                 // return (i == 1) ? true : false;
                                 // return true;
                                 _result.RecordId = _userrole.UserRoleId.ToString();
@@ -419,36 +421,36 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
-                            _userrole.CreatedDate = DateTime.Now;
-                            _entities.Entry(_dbuserinrole).CurrentValues.SetValues(_userrole);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                _userrole.CreatedDate = DateTime.Now;
+                                _entities.Entry(_dbuserinrole).CurrentValues.SetValues(_userrole);
+                                int i = _entities.SaveChanges();
                                 //return true;
                                 _result.RecordId = _userrole.UserRoleId.ToString();
                                 _result.Succeded = true;
 
                                 return _result;
                             }
-                    #endregion
+                        #endregion
 
-                    case EntityType.UserInProperty:
-                        #region [ User Property ] 
+                        case EntityType.UserInProperty:
+                            #region [ User Property ] 
 
-                        UserInProperty _userProp = obj;
-                        var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _userProp.UserInPropertyId).FirstOrDefault();
-                        if (_dbuserproperty == null)
-                        {
-                            if ((_userProp.UserInPropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userProp.UserInPropertyId == null))
+                            UserInProperty _userProp = obj;
+                            var _dbuserproperty = _entities.UserInProperties.Where(x => x.UserInPropertyId == _userProp.UserInPropertyId).FirstOrDefault();
+                            if (_dbuserproperty == null)
                             {
-                                _userProp.UserInPropertyId = Guid.NewGuid();
-                            }
-                            _userProp.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
+                                if ((_userProp.UserInPropertyId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userProp.UserInPropertyId == null))
+                                {
+                                    _userProp.UserInPropertyId = Guid.NewGuid();
+                                }
+                                _userProp.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
 
-                            _entities.UserInProperties.Add(_userProp);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.UserInProperties.Add(_userProp);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
 
                                 // return (i == 1) ? true : false;
                                 // return true;
@@ -457,36 +459,36 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
-                            _userProp.CreatedDate = DateTime.Now;
-                            _entities.Entry(_dbuserproperty).CurrentValues.SetValues(_userProp);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                _userProp.CreatedDate = DateTime.Now;
+                                _entities.Entry(_dbuserproperty).CurrentValues.SetValues(_userProp);
+                                int i = _entities.SaveChanges();
                                 //return true;
                                 _result.RecordId = _userProp.UserInPropertyId.ToString();
                                 _result.Succeded = true;
 
                                 return _result;
                             }
-                    #endregion
+                        #endregion
 
-                    case EntityType.FormGeneralLiabilityClaim:
-                        #region [ FormGeneralLiabilityClaim ] 
+                        case EntityType.FormGeneralLiabilityClaim:
+                            #region [ FormGeneralLiabilityClaim ] 
 
-                        FormGeneralLiabilityClaim _glc = obj;
-                        var _dbglc = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _glc.GLLId).FirstOrDefault();
-                        if (_dbglc == null)
-                        {
-                            if ((_glc.GLLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_glc.GLLId == null))
+                            FormGeneralLiabilityClaim _glc = obj;
+                            var _dbglc = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _glc.GLLId).FirstOrDefault();
+                            if (_dbglc == null)
                             {
-                                _glc.GLLId = Guid.NewGuid();
-                            }
-                            _glc.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
+                                if ((_glc.GLLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_glc.GLLId == null))
+                                {
+                                    _glc.GLLId = Guid.NewGuid();
+                                }
+                                _glc.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
 
-                            _entities.FormGeneralLiabilityClaims.Add(_glc);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.FormGeneralLiabilityClaims.Add(_glc);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
 
                                 string Comment = "FormGeneralLiabilityClaim Record was added on " + _glc.CreatedDate.ToString();
                                 LogActivity(Comment, _glc.CreatedByName, _glc.CreatedBy.ToString(), _glc.GLLId.ToString(), "New GL Claim");
@@ -497,11 +499,11 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
-                            //_glc.mod = DateTime.Now;
-                            _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                //_glc.mod = DateTime.Now;
+                                _entities.Entry(_dbglc).CurrentValues.SetValues(_glc);
+                                int i = _entities.SaveChanges();
                                 // return true;
                                 _result.RecordId = _glc.GLLId.ToString();
                                 _result.Succeded = true;
@@ -509,25 +511,25 @@ namespace Carroll.Data.Entities.Repository
                                 return _result;
                             }
 
-                    #endregion
+                        #endregion
 
-                    case EntityType.FormMoldDamageClaim:
-                        #region [ FormMoldDamageClaim ] 
+                        case EntityType.FormMoldDamageClaim:
+                            #region [ FormMoldDamageClaim ] 
 
-                        FormMoldDamageClaim _mdc = obj;
-                        var _dbmdc = _entities.FormMoldDamageClaims.Where(x => x.MDLId == _mdc.MDLId).FirstOrDefault();
-                        if (_dbmdc == null)
-                        {
-                            if ((_mdc.MDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_mdc.MDLId == null))
+                            FormMoldDamageClaim _mdc = obj;
+                            var _dbmdc = _entities.FormMoldDamageClaims.Where(x => x.MDLId == _mdc.MDLId).FirstOrDefault();
+                            if (_dbmdc == null)
                             {
-                                _mdc.MDLId = Guid.NewGuid();
-                            }
-                            _mdc.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
+                                if ((_mdc.MDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_mdc.MDLId == null))
+                                {
+                                    _mdc.MDLId = Guid.NewGuid();
+                                }
+                                _mdc.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
 
-                            _entities.FormMoldDamageClaims.Add(_mdc);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.FormMoldDamageClaims.Add(_mdc);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
                                 string Comment = "Mold Damage Claim Record was added on " + _mdc.CreatedDate.ToString();
                                 LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New MD Claim");
                                 // return (i == 1) ? true : false;
@@ -537,40 +539,40 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
-                            _mdc.CreatedDate = DateTime.Now;
-                            _entities.Entry(_dbmdc).CurrentValues.SetValues(_mdc);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                _mdc.CreatedDate = DateTime.Now;
+                                _entities.Entry(_dbmdc).CurrentValues.SetValues(_mdc);
+                                int i = _entities.SaveChanges();
                                 //return true;
                                 _result.RecordId = _mdc.MDLId.ToString();
                                 _result.Succeded = true;
 
                                 return _result;
                             }
-                    #endregion
+                        #endregion
 
-                    case EntityType.FormPropertyDamageClaim:
-                        #region [ FormPropertyDamageClaim ] 
+                        case EntityType.FormPropertyDamageClaim:
+                            #region [ FormPropertyDamageClaim ] 
 
-                        FormPropertyDamageClaim _pdc = obj;
-                        var _dbpdc = _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _pdc.PDLId).FirstOrDefault();
-                        if (_dbpdc == null)
-                        {
-                            if ((_pdc.PDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_pdc.PDLId == null))
+                            FormPropertyDamageClaim _pdc = obj;
+                            var _dbpdc = _entities.FormPropertyDamageClaims.Where(x => x.PDLId == _pdc.PDLId).FirstOrDefault();
+                            if (_dbpdc == null)
                             {
-                                _pdc.PDLId = Guid.NewGuid();
-                            }
-                            _pdc.CreatedDate = DateTime.Now;
-                            // No record exists create a new property record here
+                                if ((_pdc.PDLId.ToString() == "00000000-0000-0000-0000-000000000000") || (_pdc.PDLId == null))
+                                {
+                                    _pdc.PDLId = Guid.NewGuid();
+                                }
+                                _pdc.CreatedDate = DateTime.Now;
+                                // No record exists create a new property record here
 
-                            _entities.FormPropertyDamageClaims.Add(_pdc);
-                            _entities.SaveChanges();
-                            int i = _entities.SaveChanges();
+                                _entities.FormPropertyDamageClaims.Add(_pdc);
+                                _entities.SaveChanges();
+                                int i = _entities.SaveChanges();
 
 
-                            string Comment = "Property Damage Claim Record was added on " + _pdc.CreatedDate.ToString();
-                            LogActivity(Comment, _pdc.CreatedByName, _pdc.CreatedBy.ToString(), _pdc.PDLId.ToString(), "New PD Claim");
+                                string Comment = "Property Damage Claim Record was added on " + _pdc.CreatedDate.ToString();
+                                LogActivity(Comment, _pdc.CreatedByName, _pdc.CreatedBy.ToString(), _pdc.PDLId.ToString(), "New PD Claim");
                                 // return (i == 1) ? true : false;
                                 //return true;
                                 _result.RecordId = _pdc.PDLId.ToString();
@@ -578,25 +580,25 @@ namespace Carroll.Data.Entities.Repository
 
                                 return _result;
                             }
-                        else
-                        {
-                            _pdc.CreatedDate = DateTime.Now;
-                            _entities.Entry(_dbpdc).CurrentValues.SetValues(_pdc);
-                            int i = _entities.SaveChanges();
+                            else
+                            {
+                                _pdc.CreatedDate = DateTime.Now;
+                                _entities.Entry(_dbpdc).CurrentValues.SetValues(_pdc);
+                                int i = _entities.SaveChanges();
                                 //return true;
                                 _result.RecordId = _pdc.PDLId.ToString();
                                 _result.Succeded = true;
 
                                 return _result;
                             }
-                    #endregion
-                    default:
-                        // if we are here that means it must be a dynamic object.. Let's try to evaluate and insert..
+                        #endregion
+                        default:
+                            // if we are here that means it must be a dynamic object.. Let's try to evaluate and insert..
 
-                        Type _objType = obj?.GetType();
+                            Type _objType = obj?.GetType();
 
-                        break;
-                }
+                            break;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -609,67 +611,67 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
-        public dynamic GetRecords(EntityType entityType,string optionalSeachText = "")
+        public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-               
+
                 _entities.Configuration.ProxyCreationEnabled = false;
-               
+
                 switch (entityType)
                 {
-                   
+
 
                     case EntityType.Property:
                         #region [ Property ]
                         // we are calling stored procedure spProperties_Result here..
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.spProperties().ToList();
                         else return _entities.spProperties().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.LegalName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
-                        #endregion
+                    #endregion
                     case EntityType.Contact:
                         #region [ Contact ]
 
                         BaseRepository<Contact> rep = new BaseRepository<Contact>(_entities);
-                       
-                        List<Contact>  _result =  rep.GetAll().ToList();
+
+                        List<Contact> _result = rep.GetAll().ToList();
                         if (!string.IsNullOrEmpty(optionalSeachText))
                         {
                             dynamic _temp = _result.Where(s => s.FirstName.ToLower().Contains(optionalSeachText) || s.LastName.ToLower().Contains(optionalSeachText)).ToList();
                             return _temp;
                         }
                         return _result;
-                        //if (string.IsNullOrEmpty(optionalSeachText)) return _entities.Contacts.ToList();
-                        //else return _entities.Contacts.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Title.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.Email.Contains(optionalSeachText))).ToList();
-                        #endregion
+                    //if (string.IsNullOrEmpty(optionalSeachText)) return _entities.Contacts.ToList();
+                    //else return _entities.Contacts.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Title.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.Email.Contains(optionalSeachText))).ToList();
+                    #endregion
 
-                    case EntityType.Partner :
+                    case EntityType.Partner:
 
                         #region [Partner]
 
                         if (string.IsNullOrEmpty(optionalSeachText))
                         {
                             return (from tbl in _entities.EquityPartners
-                                       join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
-                                       select new { equityPartnerId=tbl.EquityPartnerId,  partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode,contactId=tblcontact.FirstName+" "+tblcontact.LastName,createdDate=tbl.CreatedDate, createdByName=tbl.CreatedByName }).ToList();
+                                    join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                                    select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
 
                         }
                         else
                         {
-                          return  (from tbl in _entities.EquityPartners
-                                       join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
-                                       where tbl.IsActive== true && ( tbl.PartnerName.Contains(optionalSeachText) || tbl.AddressLine1.Contains(optionalSeachText) || tbl.AddressLine2.Contains(optionalSeachText) ||  tbl.City.Contains(optionalSeachText ) || tbl.State.Contains(optionalSeachText))
-                                       select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
+                            return (from tbl in _entities.EquityPartners
+                                    join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                                    where tbl.IsActive == true && (tbl.PartnerName.Contains(optionalSeachText) || tbl.AddressLine1.Contains(optionalSeachText) || tbl.AddressLine2.Contains(optionalSeachText) || tbl.City.Contains(optionalSeachText) || tbl.State.Contains(optionalSeachText))
+                                    select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
                         }
 
 
-                        //if (string.IsNullOrEmpty(optionalSeachText))
-                        //    return _entities.EquityPartners.ToList();
-                        //else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
+                    //if (string.IsNullOrEmpty(optionalSeachText))
+                    //    return _entities.EquityPartners.ToList();
+                    //else return _entities.EquityPartners.Where(x => x.IsActive && (x.PartnerName.Contains(optionalSeachText) || x.AddressLine1.Contains(optionalSeachText) || x.AddressLine2.Contains(optionalSeachText) || x.City.Contains(optionalSeachText) || x.State.Contains(optionalSeachText))).ToList();
 
                     #endregion
                     case EntityType.UserInRole:
                         #region [ User In Role ]
-                        
+
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.sp_GetUserRoles().ToList();
                         else return _entities.sp_GetUserRoles().Where(x => x.userName.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText) || x.RoleName.Contains(optionalSeachText)).ToList();
                     #endregion
@@ -681,7 +683,7 @@ namespace Carroll.Data.Entities.Repository
                     case EntityType.User:
                         #region [ User ]
                         if (string.IsNullOrEmpty(optionalSeachText)) return _entities.SiteUsers.ToList();
-                        else return _entities.SiteUsers.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) ||  x.Phone.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText))).ToList();
+                        else return _entities.SiteUsers.Where(x => x.IsActive && (x.FirstName.Contains(optionalSeachText) || x.LastName.Contains(optionalSeachText) || x.Phone.Contains(optionalSeachText) || x.UserEmail.Contains(optionalSeachText))).ToList();
                     #endregion
                     case EntityType.FormPropertyDamageClaim:
                         #region [ FormPropertyDamageClaim ]
@@ -723,10 +725,10 @@ namespace Carroll.Data.Entities.Repository
                            where tbluserrole.UserId == userid && tbl.RoleName.Contains("admin")
                            select tbl).Count();
 
-                if(res == 1)
+                if (res == 1)
                 {
 
-                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims    
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
                                       join tbluser in _entities.SiteUsers on tbl.CreatedBy equals tbluser.UserId
                                       select tbl).Count();
                     var _damagecount = (from tbl in _entities.FormMoldDamageClaims
@@ -741,7 +743,7 @@ namespace Carroll.Data.Entities.Repository
                 else
                 {
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                      join tblpropertyusers in _entities.UserInProperties on tbl.PropertyId equals tblpropertyusers.PropertyId 
+                                      join tblpropertyusers in _entities.UserInProperties on tbl.PropertyId equals tblpropertyusers.PropertyId
                                       where tblpropertyusers.UserId == userid
                                       select tbl).Count();
                     var _damagecount = (from tbl in _entities.FormMoldDamageClaims
@@ -753,7 +755,7 @@ namespace Carroll.Data.Entities.Repository
                                            where tblpropertyusers.UserId == userid
                                            select tbl).Count();
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
-                }                
+                }
             }
         }
 
@@ -764,14 +766,14 @@ namespace Carroll.Data.Entities.Repository
                 var res = (from tbl in _entities.UserInProperties
                            where tbl.UserId == userid
                            select tbl.PropertyId).ToList();
-                var str= "";
+                var str = "";
 
                 foreach (var item in res)
                 {
-                    if(str!="")
-                    str += item.ToString();
+                    if (str != "")
+                        str += item.ToString();
                     else
-                    str +=","+ item.ToString();
+                        str += "," + item.ToString();
                 }
 
                 return res;
@@ -792,9 +794,9 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
-        
 
-        public dynamic GetAllClaims(Guid? userid,Guid? propertyid,string Type, string optionalSeachText)
+
+        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string Type, string optionalSeachText)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -802,49 +804,49 @@ namespace Carroll.Data.Entities.Repository
 
                 var config = new Config { };
 
-                        if (string.IsNullOrEmpty(optionalSeachText)  && string.IsNullOrEmpty(Type))
-                            config.Rows = _entities.SP_GetAllClaims1(userid,propertyid).ToList();
-                        else if(Type=="All")
-                            config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
-                        else
+                if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
+                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).ToList();
+                else if (Type == "All")
+                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                else
                     config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
 
                 config.EtType = EntityType.AllClaims.ToString();
-                        PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
-                        config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
-                        config.Columns = new List<DtableConfigArray>();
-                config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "Claim Number", type = 0, href = "" });
+                PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
+                config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                config.Columns = new List<DtableConfigArray>();
+                config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "Number", type = 0, href = "" });
 
-                config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Claim Type", type = 0, href = "" });
-                        config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
-                       // config.Columns.Add(new DtableConfigArray { name = "propertyNumber", label = "Property Number", type = 0, href = "" });
-                       // config.Columns.Add(new DtableConfigArray { name = "propertyManager", label = "Property Manager", type = 0, href = "" });
-                     //   config.Columns.Add(new DtableConfigArray { name = "propertyAddress", label = "Property Address", type = 0, href = "" });
-                    //    config.Columns.Add(new DtableConfigArray { name = "incidentLocation", label = "Incident Location", type = 0, href = "" });
-                      //  config.Columns.Add(new DtableConfigArray { name = "incidentDescription", label = "Incident Description", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Type", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
+                // config.Columns.Add(new DtableConfigArray { name = "propertyNumber", label = "Property Number", type = 0, href = "" });
+                // config.Columns.Add(new DtableConfigArray { name = "propertyManager", label = "Property Manager", type = 0, href = "" });
+                //   config.Columns.Add(new DtableConfigArray { name = "propertyAddress", label = "Property Address", type = 0, href = "" });
+                //    config.Columns.Add(new DtableConfigArray { name = "incidentLocation", label = "Incident Location", type = 0, href = "" });
+                //  config.Columns.Add(new DtableConfigArray { name = "incidentDescription", label = "Incident Description", type = 0, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "incidentDateTime", label = "Incident Date", type = DFieldType.IsDate, href = "" });
-               // config.Columns.Add(new DtableConfigArray { name = "reportedBy", label = "Reported By", type = 0, href = "" });
+                // config.Columns.Add(new DtableConfigArray { name = "reportedBy", label = "Reported By", type = 0, href = "" });
                 //config.Columns.Add(new DtableConfigArray { name = "dateReported", label = "Date Reported", type = DFieldType.IsDate, href = "" });
                 //config.Columns.Add(new DtableConfigArray { name = "reportedPhone", label = "Reported Phone", type = DFieldType.IsText, href = "" });
                 //config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type =  DFieldType.IsDate, href = "" });
 
-                return config;                
+                return config;
 
             }
 
-        } 
-        
+        }
+
 
         public dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "")
         {
-             using (CarrollFormsEntities _entities = DBEntity)
+            using (CarrollFormsEntities _entities = DBEntity)
             {
                 _entities.Configuration.ProxyCreationEnabled = false;
 
                 var config = new Config { };
 
                 switch (entityType)
-                {   
+                {
 
                     case EntityType.Property:
 
@@ -869,7 +871,7 @@ namespace Carroll.Data.Entities.Repository
                     //    return config;
 
                     //#endregion
-                            
+
                     case EntityType.User:
 
                         #region [User]
@@ -885,7 +887,7 @@ namespace Carroll.Data.Entities.Repository
                         config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                         config.Columns = new List<DtableConfigArray>();
 
-                        config.Columns.Add(new DtableConfigArray { name = "userEmail", label="User Email", type=0,href="" });
+                        config.Columns.Add(new DtableConfigArray { name = "userEmail", label = "User Email", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "firstName", label = "First Name", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "lastName", label = "Last Name", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "phone", label = "Phone", type = 0, href = "" });
@@ -915,7 +917,7 @@ namespace Carroll.Data.Entities.Repository
                         config.Columns.Add(new DtableConfigArray { name = "payTo", label = "Pay To", type = DFieldType.IsDate, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type = DFieldType.IsDate, href = "" });
-                      
+
 
                         return config;
 
@@ -937,7 +939,7 @@ namespace Carroll.Data.Entities.Repository
                         config.Columns = new List<DtableConfigArray>();
 
                         config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = 0, href = "" });
-                     //   config.Columns.Add(new DtableConfigArray { name = "payTo", label = "Pay To", type = 0, href = "" });
+                        //   config.Columns.Add(new DtableConfigArray { name = "payTo", label = "Pay To", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type = DFieldType.IsDate, href = "" });
 
@@ -1043,20 +1045,20 @@ namespace Carroll.Data.Entities.Repository
 
                 // Get All Attachment for this RowId and Type
                 var AllAttachments = (from tbl in _entities.FormAttachments
-                                      where tbl.RefFormType == formtype && tbl.RefId == _recId orderby 
+                                      where tbl.RefFormType == formtype && tbl.RefId == _recId orderby
                                       tbl.UploadedDate descending
                                       select tbl).ToList();
 
                 var AllActivity = (from tbl in _entities.Activities
                                    where tbl.RecordId == _recId
                                    orderby tbl.ActivityDate descending
-                                   select new { tbl.ActivityDescription,ActivityDate=tbl.ActivityDate,tbl.ActivityStatus,tbl.ActivityByName }).ToList();
+                                   select new { tbl.ActivityDescription, ActivityDate = tbl.ActivityDate, tbl.ActivityStatus, tbl.ActivityByName }).ToList();
 
 
                 cd.Comments = AllComments;
                 cd.Attchments = AllAttachments;
                 cd.Activity = AllActivity;
-                return cd;         
+                return cd;
             }
         }
 
@@ -1082,7 +1084,7 @@ namespace Carroll.Data.Entities.Repository
                     if (_generalclaim != null)
                     {
                         return _generalclaim.tbl;
-                    }                  
+                    }
                 }
                 else if (Type == 'm')
                 {
@@ -1093,8 +1095,8 @@ namespace Carroll.Data.Entities.Repository
 
                     //_entities.FormMoldDamageClaims.Where(x => x.MDLId == _recId).FirstOrDefault();
                     if (_formdamageclaim != null)
-                    {  return _formdamageclaim.tbl; }
-                  
+                    { return _formdamageclaim.tbl; }
+
                 }
                 else if (Type == 'p')
                 {
@@ -1108,7 +1110,7 @@ namespace Carroll.Data.Entities.Repository
                     {
                         return _damageclaim.tbl;
                     }
-                   
+
                 }
 
                 return cd;
@@ -1130,31 +1132,31 @@ namespace Carroll.Data.Entities.Repository
 
         public dynamic InsertComment(FormComment _property)
         {
-            using (CarrollFormsEntities _entities= new CarrollFormsEntities())
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
-                           _property.CommentId = Guid.NewGuid();
-                           _property.CommentDate = DateTime.Now;
-                    // No record exists create a new property record here
-                    _entities.FormComments.Add(_property);
-                    // _entities.SaveChanges();
-                    int i = _entities.SaveChanges();
+                _property.CommentId = Guid.NewGuid();
+                _property.CommentDate = DateTime.Now;
+                // No record exists create a new property record here
+                _entities.FormComments.Add(_property);
+                // _entities.SaveChanges();
+                int i = _entities.SaveChanges();
                 var AllComments = (from tbl in _entities.FormComments
                                    where tbl.RefFormID == _property.RefFormID && tbl.RefFormType == _property.RefFormType orderby
                                    tbl.CommentDate descending
                                    select tbl).ToList();
                 string Comment = "A new comment was added by " + _property.CommentByName;
                 LogActivity(Comment, _property.CommentByName, _property.CommentBy.ToString(), _property.RefFormID.ToString(), "New Comment");
-                return new { comments = AllComments, activity = GetAllActivity(_property.RefFormID) } ;
+                return new { comments = AllComments, activity = GetAllActivity(_property.RefFormID) };
             }
         }
-       
+
 
         public dynamic InsertAttachment(FormAttachment formAttachment)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
 
-               FormAttachment _property = formAttachment;               
+                FormAttachment _property = formAttachment;
                 _property.AttachmentId = Guid.NewGuid();
                 _property.UploadedDate = DateTime.Now;
                 // No record exists create a new property record here
@@ -1162,9 +1164,9 @@ namespace Carroll.Data.Entities.Repository
                 // _entities.SaveChanges();
                 int i = _entities.SaveChanges();
                 var AllAttachments = (from tbl in _entities.FormAttachments
-                                   where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
-                                   orderby tbl.UploadedDate descending
-                                   select tbl).ToList();
+                                      where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
+                                      orderby tbl.UploadedDate descending
+                                      select tbl).ToList();
                 string Comment = "A new attachement was added by " + _property.UploadedByName;
                 LogActivity(Comment, _property.UploadedByName, _property.UploadedBy.ToString(), _property.RefId.ToString(), "New Attachment");
                 return new { attachments = AllAttachments, activity = GetAllActivity(formAttachment.RefId) }; ;
@@ -1190,11 +1192,11 @@ namespace Carroll.Data.Entities.Repository
                     _entities.Activities.Add(_activity);
                     _entities.SaveChanges();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }
-             
+
 
             }
 
@@ -1206,7 +1208,7 @@ namespace Carroll.Data.Entities.Repository
         public dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
-            {                
+            {
                 try
                 {
                     EmployeeLeaseRaider _property = formAttachment;
@@ -1215,13 +1217,13 @@ namespace Carroll.Data.Entities.Repository
                     _entities.EmployeeLeaseRaiders.Add(_property);
                     // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
-              
+
                     return new { Error = false, ErrorMsg = "", InsertedId = _property.EmployeeLeaseRiderId };
                 }
                 catch (Exception ex)
                 {
-                   return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
-                }                                
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
             }
         }
 
@@ -1238,11 +1240,11 @@ namespace Carroll.Data.Entities.Repository
                     var newhirerow = (from tbl in _entities.EmployeeNewHireNotices
                                       where tbl.EmployeeHireNoticeId == drow.ReferenceId
                                       select tbl).FirstOrDefault();
-                    if(Action=="Employee Email")
+                    if (Action == "Employee Email")
                     {
 
-                    newhirerow.esignature = Sign;
-                    newhirerow.edate = edate;
+                        newhirerow.esignature = Sign;
+                        newhirerow.edate = edate;
                         newhirerow.EmployeeSignedDateTime = DateTime.Now;
 
                     }
@@ -1257,10 +1259,10 @@ namespace Carroll.Data.Entities.Repository
                     drow.OpenStatus = false;
 
 
-                  // _entities.SaveChanges();
+                    // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
 
-                    return  newhirerow.EmployeeHireNoticeId.ToString();
+                    return newhirerow.EmployeeHireNoticeId.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -1269,7 +1271,7 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
-        
+
 
 
 
@@ -1301,7 +1303,7 @@ namespace Carroll.Data.Entities.Repository
                 {
                     EmployeeNewHireNotice _property = formAttachment;
                     //var propid = _property.ModifiedUser;
-                   
+
                     // get Regional Manager Id for the Property
 
                     var regionmrg = (from tbl in _entities.Properties
@@ -1333,24 +1335,24 @@ namespace Carroll.Data.Entities.Repository
 
                 try
                 {
-                 
+
                     var regionmrg = (from tbl in _entities.Properties
                                      join tblcontact in _entities.Contacts on tbl.PropertyManager equals tblcontact.ContactId
                                      where tbl.PropertyId == PropertyId
-                                     select new { tblcontact.FirstName, tblcontact.LastName } ).FirstOrDefault();
+                                     select new { tblcontact.FirstName, tblcontact.LastName }).FirstOrDefault();
                     if (regionmrg != null)
                     {
-                        return regionmrg.FirstName+" "+regionmrg.LastName;
+                        return regionmrg.FirstName + " " + regionmrg.LastName;
                     }
                     else
                     {
                         return "No Manager";
 
-                    }                  
+                    }
                 }
                 catch (Exception ex)
                 {
-                    return "Error :"+ex.Message;
+                    return "Error :" + ex.Message;
                 }
             }
 
@@ -1514,7 +1516,7 @@ namespace Carroll.Data.Entities.Repository
 
 
 
-        public dynamic InsertMileageLog(MileageLogHeader mlh,List<MileageLogDetail> mld)
+        public dynamic InsertMileageLog(MileageLogHeader mlh, List<MileageLogDetail> mld)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
@@ -1562,7 +1564,7 @@ namespace Carroll.Data.Entities.Repository
                                 select tbl).ToList();
 
 
-                    return new { header=res,details=res2 };
+                    return new { header = res, details = res2 };
                 }
                 catch (Exception ex)
                 {
@@ -1665,7 +1667,7 @@ namespace Carroll.Data.Entities.Repository
                                select tbl).FirstOrDefault();
 
 
-                    return  res;
+                    return res;
                 }
                 catch (Exception ex)
                 {
@@ -1725,15 +1727,15 @@ namespace Carroll.Data.Entities.Repository
 
                     PrintResidentContact prc = new PrintResidentContact();
 
-                 var resident = (from tbl in _entities.ResidentContactInformations
-                               where tbl.Contactid == riderid
-                               select tbl).FirstOrDefault();
+                    var resident = (from tbl in _entities.ResidentContactInformations
+                                    where tbl.Contactid == riderid
+                                    select tbl).FirstOrDefault();
 
-                  var  res1 = (from tbl in _entities.ResidentContactInformation_Residents
+                    var res1 = (from tbl in _entities.ResidentContactInformation_Residents
                                 where tbl.ResidentContactInformationId == riderid
                                 select tbl).ToList();
 
-                   var res2 = (from tbl in _entities.ResidentContactInformation_OtherOccupants
+                    var res2 = (from tbl in _entities.ResidentContactInformation_OtherOccupants
                                 where tbl.ResidentContactInformationId == riderid
                                 select tbl).ToList();
 
@@ -1764,7 +1766,7 @@ namespace Carroll.Data.Entities.Repository
 
                     foreach (var item in res1)
                     {
-                       rrs.Add(new ResidentReferralResidents { Name=item.Name,MobilePhone=item.MobilePhone,Email=item.Email,Home_Work=item.Home_Work,Home_Work_Phone=item.Home_Work_Phone,CurrentEmployer=item.CurrentEmployer,Position=item.Position });
+                        rrs.Add(new ResidentReferralResidents { Name = item.Name, MobilePhone = item.MobilePhone, Email = item.Email, Home_Work = item.Home_Work, Home_Work_Phone = item.Home_Work_Phone, CurrentEmployer = item.CurrentEmployer, Position = item.Position });
                     }
                     prc.rrs = rrs;
 
@@ -1772,7 +1774,7 @@ namespace Carroll.Data.Entities.Repository
 
                     foreach (var item in res2)
                     {
-                        ros.Add(new ResidentReferralOthers { Name=item.Name,DOB=item.DOB });
+                        ros.Add(new ResidentReferralOthers { Name = item.Name, DOB = item.DOB });
 
                     }
 
@@ -1783,7 +1785,7 @@ namespace Carroll.Data.Entities.Repository
 
                     foreach (var item in res3)
                     {
-                       rvs.Add(new ResidentReferralVehicles { Make = item.Make, Model = item.Model, Type = item.Type,Year=item.Year,Color=item.Color,LicensePlate=item.LicensePlate,LicensePlatState=item.LicensePlatState });
+                        rvs.Add(new ResidentReferralVehicles { Make = item.Make, Model = item.Model, Type = item.Type, Year = item.Year, Color = item.Color, LicensePlate = item.LicensePlate, LicensePlatState = item.LicensePlatState });
                     }
 
                     prc.rvs = rvs;
@@ -1804,22 +1806,22 @@ namespace Carroll.Data.Entities.Repository
             {
 
 
-                var ClaimCounts = new { LeaseCount = 0, PayrollCount = 0, EmployeeSeparationCount = 0,NewHireCount=0 };
+                var ClaimCounts = new { LeaseCount = 0, PayrollCount = 0, EmployeeSeparationCount = 0, NewHireCount = 0 };
 
                 var leasecount = (from tbl in _entities.EmployeeLeaseRaiders
                                   select tbl).Count();
-                var payrollcount= (from tbl in _entities.PayrollStatusChangeNotices
-                                   select tbl).Count();
-                var seperationcount = (from tbl in _entities.NoticeOfEmployeeSeperations
+                var payrollcount = (from tbl in _entities.PayrollStatusChangeNotices
                                     select tbl).Count();
+                var seperationcount = (from tbl in _entities.NoticeOfEmployeeSeperations
+                                       select tbl).Count();
                 var newhirecount = (from tbl in _entities.EmployeeNewHireNotices
                                     select tbl).Count();
 
-                return new { LeaseCount = leasecount, PayRollCount = payrollcount, SeparationCount = seperationcount , HireCount=newhirecount};
+                return new { LeaseCount = leasecount, PayRollCount = payrollcount, SeparationCount = seperationcount, HireCount = newhirecount };
             }
         }
-        
-        public dynamic GetAllMileageForms(string FormType,Guid userid, string optionalSeachText)
+
+        public dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -1937,10 +1939,10 @@ namespace Carroll.Data.Entities.Repository
 
             }
 
-           }
+        }
 
 
-            public dynamic GetAllHrForms(string FormType, string optionalSeachText)
+        public dynamic GetAllHrForms(string FormType, string optionalSeachText)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -1948,7 +1950,7 @@ namespace Carroll.Data.Entities.Repository
 
                 var config = new Config { };
 
-                if(FormType == "LeaseRider")
+                if (FormType == "LeaseRider")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
                         config.Rows = _entities.proc_getallemployeeleaseriders().ToList();
@@ -1968,15 +1970,15 @@ namespace Carroll.Data.Entities.Repository
                     //config.Columns.Add(new DtableConfigArray { name = "rentalPaymentResidencyAt", label = "Rental Payment At", type = 0, href = "" });                   
                     //config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "date", label = "Date Signed", type = DFieldType.IsDate, href = "" });
+                    //  config.Columns.Add(new DtableConfigArray { name = "date", label = "Date Signed", type = DFieldType.IsDate, href = "" });
 
-                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Time Stamp", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Date Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
-                    
+
                 }
 
-               else if (FormType == "Requisition Request")
+                else if (FormType == "Requisition Request")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
                         config.Rows = _entities.proc_getallrequisitionrequests().ToList();
@@ -1988,18 +1990,19 @@ namespace Carroll.Data.Entities.Repository
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
 
-                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name" , type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "requestorName", label = "Requestor Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "requestorPosition", label = "Position", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "post", label = "How Many", type = DFieldType.IsText, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "type", label = "Type", type = DFieldType.IsText, href = "" });                  
+                    config.Columns.Add(new DtableConfigArray { name = "type", label = "Type", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
+                    //config.Columns.Add(new DtableConfigArray { name = "requisitionRequestId", label = "Id", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
-                else if(FormType=="PayRollChange")
+                else if (FormType == "PayRollChange")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
                         config.Rows = _entities.proc_getallpayrollstatuschange().ToList();
@@ -2013,13 +2016,13 @@ namespace Carroll.Data.Entities.Repository
 
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "changeEffectiveDate", label = "Effective Date", type = DFieldType.IsDate, href = "" });
-                   config.Columns.Add(new DtableConfigArray { name = "typeOfChange", label = "Type Of Change", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "typeOfChange", label = "Type Of Change", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
-               
+
                 else if (FormType == "EmployeeSeparation")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
@@ -2031,12 +2034,12 @@ namespace Carroll.Data.Entities.Repository
                     PropertyInfo[] userprop = typeof(proc_getallnoticeofemployeeseparation_Result).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
-  config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "jobTitle", label = "Employee Position", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "reason", label = "Reason", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "effectiveDateOfChange", label = "Effective Date", type = DFieldType.IsDate, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Time Stamp", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Date Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -2066,7 +2069,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "rpmSigned", label = "Regional Signed", type = DFieldType.IsText, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                  //  config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    //  config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -2436,13 +2439,41 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+        public List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                return _entities.proc_getcontactsforexcel().ToList();
+            }
+        }
+
+        public List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                return _entities.proc_getequitypartnersforexcel().ToList();
+            }
+
+        }
+
+
+        public List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel()
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                return _entities.proc_getpropertiesforexcel().ToList();
+            }
+        }
+
+
         public List<CarrollPayPeriod> GetAllCarrollPayPerilds()
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-                                             
+
                 //us
-                var propertyres =  _entities.CarrollPayPeriods.ToList();
+                var propertyres = _entities.CarrollPayPeriods.ToList();
 
 
 
@@ -2452,6 +2483,1306 @@ namespace Carroll.Data.Entities.Repository
                     return null;
             }
         }
+
+        public dynamic ImportContactTableFromExcel(DataTable dt)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    var isnewrow = false;
+
+                    if (row[0].ToString() != "")
+                    {
+                        var uid = new Guid(row[0].ToString());
+                        var change = false;
+
+                        var contact = (from tbl in _entities.Contacts
+                                       where tbl.ContactId == uid
+                                       select tbl).FirstOrDefault();
+                        if(contact == null)
+                        {
+                            isnewrow = true;
+
+
+                        }
+                        else
+                        {
+
+                            if (contact.FirstName != row[1].ToString().Trim())
+                            {
+                                contact.FirstName = row[1].ToString().Trim();
+                                change = true;
+                            }
+                            if (contact.LastName != row[2].ToString().Trim())
+                            {
+                                contact.LastName = row[2].ToString().Trim();
+                                change = true;
+                            }
+                            if (contact.Title != row[3].ToString().Trim())
+                            {
+                                contact.Title = row[3].ToString().Trim();
+                                change = true;
+                            }
+                            if (contact.Email != row[4].ToString().Trim())
+                            {
+                                contact.Email = row[4].ToString().Trim();
+                                change = true;
+                            }
+                            if (contact.Phone != row[5].ToString().Trim())
+                            {
+                                contact.Phone = row[5].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (change == true)
+                            {
+                                int i = _entities.SaveChanges();
+                                }
+
+
+                        
+                        }
+
+                    }
+
+                    if(row[0].ToString() == "" || isnewrow== true )
+                    {
+                        Contact cc = new Contact();
+                        cc.ContactId = Guid.NewGuid();
+                        cc.FirstName = row[1].ToString().Trim();
+                        cc.LastName = row[2].ToString().Trim();
+                        cc.Title = row[3].ToString().Trim();
+                        cc.Email = row[4].ToString().Trim();
+                        cc.Phone = row[5].ToString().Trim();
+                        cc.CreatedDate = DateTime.Now;
+                        cc.CreatedByName = "Excel Upload";
+                        _entities.Contacts.Add(cc);
+                        _entities.SaveChanges();
+                    }
+
+                }
+
+
+            }
+
+            return true;
+
+        }
+        public dynamic ImportEquityPartnerTableFromExcel(DataTable dt)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    var isnewrow = false;
+                    var change = false;
+
+
+                    if (row[0].ToString() != "")
+                    {
+                        var uid = new Guid(row[0].ToString());
+                       
+                       
+
+                        var contact = (from tbl in _entities.EquityPartners
+                                       join c in _entities.Contacts on tbl.ContactId equals c.ContactId into bg
+                                       from x in bg.DefaultIfEmpty()
+                                       where tbl.EquityPartnerId == uid
+                                       select new { tbl, ContactName =( x == null? string.Empty : x.FirstName+" "+x.LastName)  }).FirstOrDefault();
+                        if (contact == null)
+                            isnewrow = true;
+                        else
+                        {
+
+                                            if (contact.tbl.PartnerName != row[1].ToString().Trim())
+                                            {
+                                                contact.tbl.PartnerName = row[1].ToString().Trim();
+                                                change = true;
+                                            }
+
+                                            if (contact.tbl.AddressLine1 != row[2].ToString().Trim())
+                                            {
+                                                contact.tbl.AddressLine1 = row[2].ToString().Trim();
+                                                change = true;
+                                            }
+
+                                            if (contact.tbl.AddressLine2 != row[3].ToString().Trim())
+                                            {
+                                                contact.tbl.AddressLine2 = row[3].ToString().Trim();
+                                                change = true;
+                                            }
+
+                                            if (contact.tbl.City != row[4].ToString().Trim())
+                                            {
+                                                contact.tbl.City = row[4].ToString().Trim();
+                                                change = true;
+                                            }
+
+                                            if (contact.tbl.State != row[5].ToString().Trim())
+                                            {
+                                                contact.tbl.State = row[5].ToString().Trim();
+                                                change = true;
+                                            }
+
+                                            if (contact.tbl.ZipCode != row[6].ToString().Trim())
+                                            {
+                                                contact.tbl.ZipCode = row[6].ToString().Trim();
+                                                change = true;
+                                            }
+
+                            if (!string.IsNullOrEmpty(row[7].ToString()))
+                            {
+
+                                if (contact.ContactName != row[7].ToString().Trim() && !contact.ContactName.Contains(row[7].ToString()))
+                                {
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid(); ;
+                                    var sp = row[7].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[7].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[7].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Equity Partner Contact";
+                                    c.CreatedBy = contact.tbl.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                    c.CreatedByName = contact.tbl.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact.tbl.ContactId = c.ContactId;
+                                    change = true;
+                                }
+
+                                if (change == true)
+                                {
+                                    int i = _entities.SaveChanges();
+                                }
+                            }
+                            else
+                                contact.tbl.ContactId = null;
+                        }
+
+
+                      
+
+
+                    }
+
+                    if (row[0].ToString() == "" || isnewrow == true)
+                    {
+                        // check contact exist of not 
+                        Guid? contactid;
+
+                        var val = row[7].ToString().Trim();
+
+                        if (!string.IsNullOrEmpty(val))
+                        {
+
+                            var cct = (from tbl in _entities.Contacts
+
+                                       where tbl.FirstName.Contains(val) || tbl.LastName.Contains(val)
+                                       select tbl.ContactId).FirstOrDefault();
+                            if (cct == null)
+                            {
+                                contactid = cct;
+                            }
+                            else
+                            {
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[7].ToString().Split(new char[0]);
+
+                                c.FirstName = row[7].ToString().Split(new char[0])[0].ToString();
+                                c.Email = "";
+                                c.IsActive = true;
+                                if (sp.Length > 1)
+                                {
+                                    c.LastName = row[7].ToString().Replace(c.FirstName, "");
+
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
+
+                                }
+                                c.Title = "Equity Partner Contact";
+                                //   c.CreatedBy = contact.tbl.CreatedBy;
+                                c.CreatedDate = DateTime.Now;
+                                //   c.CreatedByName = contact.tbl.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contactid = c.ContactId;
+
+                            }
+                        }
+                        else
+                            contactid = null;
+
+                        EquityPartner cc = new EquityPartner();
+                        cc.EquityPartnerId = Guid.NewGuid();
+                        cc.PartnerName = row[1].ToString().Trim();
+                        cc.AddressLine1 = row[2].ToString().Trim();
+                        cc.AddressLine2 = row[3].ToString().Trim();
+                        cc.City = row[4].ToString().Trim();
+                        cc.State = row[5].ToString().Trim();
+                        cc.ZipCode = row[6].ToString().Trim();
+                        cc.ContactId = contactid;
+                        cc.CreatedDate = DateTime.Now;
+                        cc.CreatedByName = "Excel Upload";
+                        _entities.EquityPartners.Add(cc);
+                        _entities.SaveChanges();
+                    }
+
+
+                }
+
+
+            }
+            return true;
+
+        }
+            
+
+     public  dynamic ImportPropertiesTableFromExcel(DataTable dt)
+    {
+
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    var change = false;
+                    var isnewrow = false;
+
+                    if (row[0].ToString() != "")
+                    {
+                        var uid = new Guid(row[0].ToString());
+                       
+
+                        var contact = (from tbl in _entities.Properties                                     
+                                       where tbl.PropertyId == uid
+                                     select tbl).FirstOrDefault();
+
+                        if (contact == null)
+                            isnewrow = true;
+                        else
+                        {
+                            var othercontact = _entities.proc_getpropertydetailsforupdate(uid).FirstOrDefault();
+
+                            // check if name not changed, if changed check already exists, if exists, get contactid,
+                            // if not exists create new contact id, update id init, 
+
+                            // if name not changed, check contact number changed, if changed update in corresponding contact from property contact id
+
+                            // check if changed
+
+                            // For VP
+
+                            if (!string.IsNullOrEmpty(row[1].ToString()))
+                            {
+
+                                if (othercontact.VP != row[1].ToString().Trim())
+                                {
+                                    // if changed, check contact exist with given name
+
+                                    var searchstr = row[1].ToString().Trim();
+
+                                    var chkcontact = (from tbl in _entities.Contacts
+                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      select tbl).FirstOrDefault();
+
+                                    if (chkcontact != null)
+                                    {
+                                        contact.VicePresident = chkcontact.ContactId;
+                                        chkcontact.Phone = row[2].ToString();
+                                        change = true;
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[1].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[1].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[1].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Vice President";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.VicePresident = c.ContactId;
+                                        change = true;
+
+                                    }
+                                }
+                                else if (othercontact.VP_ != row[2].ToString().Trim())
+                                {
+                                    // get contact and update mobile number
+
+                                    var cn = (from tbl in _entities.Contacts
+                                              where tbl.ContactId == contact.VicePresident
+                                              select tbl).FirstOrDefault();
+
+                                    if (cn != null)
+                                    {
+                                        cn.Phone = row[2].ToString().Trim();
+                                    }
+                                    _entities.SaveChanges();
+                                }
+                            }
+                            else
+                            {
+                                contact.VicePresident = null;
+                            }
+
+
+
+                            // For RVP
+
+                            if (!string.IsNullOrEmpty(row[3].ToString()))
+                            {
+
+
+                                if (othercontact.RVP != row[3].ToString().Trim())
+                                {
+                                    // if changed, check contact exist with given name
+                                    var searchstr = row[3].ToString().Trim();
+                                    var chkcontact = (from tbl in _entities.Contacts
+                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      select tbl).FirstOrDefault();
+
+                                    if (chkcontact != null)
+                                    {
+                                        contact.RegionalVicePresident = chkcontact.ContactId;
+                                        chkcontact.Phone = row[4].ToString();
+                                        change = true;
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[3].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[3].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[3].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Regional Vice President";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.RegionalVicePresident = c.ContactId;
+                                        change = true;
+
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                contact.RegionalVicePresident = null;
+                            }
+
+                            if (othercontact.VP_ != row[4].ToString().Trim())
+                            {
+                                // get contact and update mobile number
+
+                                var cn = (from tbl in _entities.Contacts
+                                          where tbl.ContactId == contact.RegionalVicePresident
+                                          select tbl).FirstOrDefault();
+
+                                if (cn != null)
+                                {
+                                    cn.Phone = row[4].ToString().Trim();
+                                }
+                                _entities.SaveChanges();
+                            }
+
+
+
+                            // For Regional Manager
+
+                            if (!string.IsNullOrEmpty(row[5].ToString()))
+                            {
+
+                                if (othercontact.RVP != row[5].ToString().Trim())
+                                {
+                                    // if changed, check contact exist with given name
+                                    var searchstr = row[5].ToString().Trim();
+                                    var chkcontact = (from tbl in _entities.Contacts
+                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      select tbl).FirstOrDefault();
+
+                                    if (chkcontact != null)
+                                    {
+                                        contact.RegionalManager = chkcontact.ContactId;
+                                        chkcontact.Phone = row[6].ToString();
+                                        change = true;
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[5].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[5].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[5].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Regional Manager ";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.RegionalManager = c.ContactId;
+                                        change = true;
+
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                contact.RegionalManager = null;
+                            }
+
+                            if (othercontact.VP_ != row[6].ToString().Trim())
+                            {
+                                // get contact and update mobile number
+
+                                var cn = (from tbl in _entities.Contacts
+                                          where tbl.ContactId == contact.RegionalManager
+                                          select tbl).FirstOrDefault();
+
+                                if (cn != null)
+                                {
+                                    cn.Phone = row[6].ToString().Trim();
+                                }
+                                _entities.SaveChanges();
+                            }
+
+
+
+                            if (contact.PropertyNumber.ToString() != row[7].ToString().Trim())
+                            {
+                                if(!string.IsNullOrEmpty(row[7].ToString()))
+                                contact.PropertyNumber = Convert.ToInt16(row[7].ToString().Trim());
+                                change = true;
+                            }
+
+                            if (contact.Units.ToString() != row[8].ToString().Trim())
+                            {
+                                if (!string.IsNullOrEmpty(row[8].ToString()))
+                                    contact.Units = Convert.ToInt16(row[8].ToString().Trim());
+                                change = true;
+                            }
+
+                            if (contact.PropertyName != row[9].ToString().Trim())
+                            {
+                                contact.PropertyName = row[9].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (othercontact.EquityPartner != row[10].ToString().Trim())
+                            {
+                                // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
+                                var searchstr = row[10].ToString().Trim();
+
+                                var otherpartner = (from tbl in _entities.EquityPartners
+                                                    where tbl.PartnerName.Contains(searchstr)
+                                                    select tbl).FirstOrDefault();
+
+                                if(otherpartner!= null)
+                                {
+                                    contact.EquityPartner = otherpartner.EquityPartnerId;
+                                }
+                                else
+                                {
+                                    // create new partner and update
+
+                                    EquityPartner cc = new EquityPartner();
+                                    cc.EquityPartnerId = Guid.NewGuid();;
+                                    cc.PartnerName = row[10].ToString().Trim();
+                                 
+                                    cc.CreatedDate = DateTime.Now;
+                                    cc.CreatedBy = contact.CreatedBy;
+                                    cc.CreatedByName = "Excel Upload";
+                                    _entities.EquityPartners.Add(cc);
+                                    _entities.SaveChanges();
+                                    contact.EquityPartner = cc.EquityPartnerId;
+
+                                }
+
+                                change = true;
+                            }
+
+                            // Asset Manager
+
+                            if (!string.IsNullOrEmpty(row[11].ToString()))
+                            {
+
+                                if (othercontact.AssetManager != row[11].ToString().Trim())
+                                {
+                                    // if changed, check contact exist with given name
+                                    var searchstr = row[11].ToString().Trim();
+                                    var chkcontact = (from tbl in _entities.Contacts
+                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      select tbl).FirstOrDefault();
+
+                                    if (chkcontact != null)
+                                    {
+                                        contact.AssetManager1 = chkcontact.ContactId;
+                                        change = true;
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[11].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[11].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[11].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Asset Manager ";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.AssetManager1 = c.ContactId;
+                                        change = true;
+
+                                    }
+                                }
+
+                            }
+                            else
+                            {
+                                contact.AssetManager1 = null;
+                            }
+
+                            // Construction Manager -- 12 thc column
+                            if (!string.IsNullOrEmpty(row[12].ToString()))
+                            {
+                                if (othercontact.ConstructionManager != row[12].ToString().Trim())
+                            {
+                                // if changed, check contact exist with given name
+                                var searchstr = row[12].ToString().Trim();
+                                var chkcontact = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact != null)
+                                {
+                                    contact.ConstructionManager = chkcontact.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[12].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[12].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[12].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Construction Manager ";
+                                    c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                    c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact.ConstructionManager = c.ContactId;
+                                    change = true;
+
+                                }
+                            }
+                            }
+                            else
+                            {
+                                contact.ConstructionManager = null;
+                            }
+
+                            // Marketing Specialist= -- 13 thc column
+                            if (!string.IsNullOrEmpty(row[13].ToString()))
+                            {
+                                if (othercontact.MarketingSpecialist != row[13].ToString().Trim())
+                            {
+                                // if changed, check contact exist with given name
+                                var searchstr = row[13].ToString().Trim();
+                                var chkcontact = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact != null)
+                                {
+                                    contact.MarketingSpecialist = chkcontact.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[13].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[13].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[13].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Marketing Specialist ";
+                                    c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                    c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact.MarketingSpecialist = c.ContactId;
+                                    change = true;
+
+                                }
+                            }
+
+                            }
+                            else
+                            {
+                                contact.MarketingSpecialist = null;
+                            }
+
+
+                            // Property Manager = -- 14 thc column
+                            if (!string.IsNullOrEmpty(row[14].ToString()))
+                            {
+                                if (othercontact.PropertyManager != row[14].ToString().Trim())
+                            {
+                                // if changed, check contact exist with given name
+                                var searchstr = row[14].ToString().Trim();
+                                var chkcontact = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact != null)
+                                {
+                                    contact.PropertyManager = chkcontact.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[14].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[14].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[14].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Property Manager";
+                                    c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                    c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact.PropertyManager = c.ContactId;
+                                    change = true;
+
+                                }
+                            }
+                            }
+                            else
+                            {
+                                contact.PropertyManager = null;
+                            }
+
+
+
+                            if (contact.PhoneNumber != row[15].ToString().Trim())
+                            {
+                                contact.PhoneNumber = row[15].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (contact.PropertyAddress != row[16].ToString().Trim())
+                            {
+                                contact.PropertyAddress = row[16].ToString().Trim();
+                                change = true;
+                            }
+
+
+
+                            if (contact.City != row[17].ToString().Trim())
+                            {
+                                contact.City = row[17].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (contact.State != row[18].ToString().Trim())
+                            {
+                                contact.State = row[18].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (contact.ZipCode!= row[19].ToString().Trim())
+                            {
+                                contact.ZipCode = row[19].ToString().Trim();
+                                change = true;
+                            }
+
+
+                            if (contact.EmailAddress != row[20].ToString().Trim())
+                            {
+                                contact.EmailAddress = row[20].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (contact.LegalName != row[21].ToString().Trim())
+                            {
+                                contact.LegalName = row[21].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (contact.TaxId != row[23].ToString().Trim())
+                            {
+                                contact.TaxId = row[23].ToString().Trim();
+                                change = true;
+                            }
+
+                            if (contact.AcquisitionDate.ToString() != row[22].ToString().Trim())
+                            {
+                                if(! string.IsNullOrEmpty(row[22].ToString().Trim()))
+                                contact.AcquisitionDate = Convert.ToDateTime(row[22].ToString().Trim());
+                                change = true;
+                            }
+
+                            if (change == true)
+                            {
+                                int i = _entities.SaveChanges();
+                            }
+                        }
+
+                    }
+
+                    if (row[0].ToString() == "" || isnewrow == true)
+                        {
+                            // create new property update all other details
+
+                            // for all other contacts, if exist udpate contact or equitypartner id, if not create new and udpate 
+
+                            Property contact1 = new Property();
+                            contact1.PropertyId = Guid.NewGuid();;
+
+
+                        // vp
+
+                        // if changed, check contact exist with given name
+
+                        if (!string.IsNullOrEmpty(row[1].ToString()))
+                        {
+                            var searchstr = row[1].ToString().Trim();
+                            var chkcontact = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact != null)
+                                {
+                                    contact1.VicePresident = chkcontact.ContactId;
+                                    chkcontact.Phone = row[2].ToString();
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[1].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[1].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[1].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Vice President";
+                                  //  c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                  //  c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.VicePresident = c.ContactId;
+                                    change = true;
+
+                                }
+
+
+                        }
+                        else
+                        {
+                            contact1.VicePresident = null;
+                        }
+
+                        if (!string.IsNullOrEmpty(row[4].ToString()))
+                        {
+
+                            // if changed, check contact exist with given name
+                            var searchstr1 = row[3].ToString().Trim();
+                            var chkcontact1 = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr1)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact1 != null)
+                                {
+                                    contact1.RegionalVicePresident = chkcontact1.ContactId;
+                                    chkcontact1.Phone = row[4].ToString();
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[3].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[3].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[3].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Regional Vice President";
+                                 //   c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                 //   c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.RegionalVicePresident = c.ContactId;
+                                    change = true;
+
+                                }
+
+                        }
+                        else
+                        {
+                            contact1.RegionalVicePresident = null;
+                        }
+
+
+                        if (!string.IsNullOrEmpty(row[5].ToString()))
+                        {
+
+
+                            // For Regional Manager
+                            // if changed, check contact exist with given name
+                            var searchstr2 = row[5].ToString().Trim();
+                            var chkcontact2 = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr2)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact2 != null)
+                                {
+                                    contact1.RegionalManager = chkcontact2.ContactId;
+                                    chkcontact2.Phone = row[6].ToString();
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[5].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[5].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[5].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Regional Manager ";
+                                //    c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                  //  c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.RegionalManager = c.ContactId;
+                                    change = true;
+
+                                }
+
+
+                        }
+                        else
+                        {
+                            contact1.RegionalManager = null;
+                        }
+
+
+                        if (!string.IsNullOrEmpty(row[10].ToString()))
+                        {
+                            var searchstr3 = row[10].ToString().Trim();
+                            // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
+                            var otherpartner = (from tbl in _entities.EquityPartners
+                                                    where tbl.PartnerName.Contains(searchstr3)
+                                                    select tbl).FirstOrDefault();
+
+                                if (otherpartner != null)
+                                {
+                                    contact1.EquityPartner = otherpartner.EquityPartnerId;
+                                }
+                                else
+                                {
+                                    // create new partner and update
+
+                                    EquityPartner cc = new EquityPartner();
+                                    cc.EquityPartnerId = Guid.NewGuid();;
+                                    cc.PartnerName = row[10].ToString().Trim();
+
+                                    cc.CreatedDate = DateTime.Now;
+//cc.CreatedBy = contact.CreatedBy;
+                                  //  cc.CreatedByName = "Excel Upload";
+                                    _entities.EquityPartners.Add(cc);
+                                    _entities.SaveChanges();
+                                    contact1.EquityPartner = cc.EquityPartnerId;
+
+                                }
+
+                                change = true;
+                        }
+                        else
+                        {
+                            contact1.EquityPartner = null;
+                        }
+
+                        if (!string.IsNullOrEmpty(row[11].ToString()))
+                        {
+                            // Asset Manager
+                            // if changed, check contact exist with given name
+
+                            var searchstr4 = row[11].ToString().Trim();
+                            var chkcontact3 = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr4)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact3 != null)
+                                {
+                                    contact1.AssetManager1 = chkcontact3.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[11].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[11].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[11].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Asset Manager ";
+                                  //  c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                  //  c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.AssetManager1 = c.ContactId;
+                                    change = true;
+
+                                }
+                        }
+                        else
+                        {
+                            contact1.AssetManager1 = null;
+                        }
+
+                        // Construction Manager -- 12 thc column
+
+                        if (!string.IsNullOrEmpty(row[12].ToString()))
+                        {
+                            var searchstr5 = row[12].ToString().Trim();
+                            var chkcontact4 = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr5)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact4 != null)
+                                {
+                                    contact1.ConstructionManager = chkcontact4.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[12].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[12].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[12].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Construction Manager ";
+                            c.CreatedBy = new Guid("F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E"); 
+                                    c.CreatedDate = DateTime.Now;
+                                  //  c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.ConstructionManager = c.ContactId;
+                                    change = true;
+
+                                }
+
+                        }
+                        else
+                        {
+                            contact1.ConstructionManager = null;
+                        }
+
+                        if (!string.IsNullOrEmpty(row[13].ToString()))
+                        {
+                            // Marketing Specialist= -- 13 thc column
+                            var searchstr6 = row[13].ToString().Trim();
+                            var chkcontact5 = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr6)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact5 != null)
+                                {
+                                    contact1.MarketingSpecialist = chkcontact5.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[13].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[13].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[13].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Marketing Specialist ";
+                                  ///  c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                  //  c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.MarketingSpecialist = c.ContactId;
+                                    change = true;
+
+                                }
+
+                        }
+                        else
+                        {
+                            contact1.MarketingSpecialist = null;
+                        }
+
+
+
+                        // Property Manager = -- 14 thc column
+                        if (!string.IsNullOrEmpty(row[14].ToString()))
+                        {
+
+
+                            var searchstr7 = row[14].ToString().Trim();
+                            var chkcontact6 = (from tbl in _entities.Contacts
+                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr7)
+                                                  select tbl).FirstOrDefault();
+
+                                if (chkcontact6 != null)
+                                {
+                                    contact1.PropertyManager = chkcontact6.ContactId;
+                                    change = true;
+                                }
+                                else
+                                {
+                                    // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                    Contact c = new Contact();
+                                    c.ContactId = Guid.NewGuid();;
+                                    var sp = row[14].ToString().Split(new char[0]);
+
+                                    c.FirstName = row[14].ToString().Split(new char[0])[0].ToString();
+                                    if (sp.Length > 1)
+                                    {
+                                        c.LastName = row[14].ToString().Replace(c.FirstName, "");
+
+                                        //if (row[7].ToString().Split(new char[0])[1] != null)
+                                        //{
+                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                        //}
+
+                                    }
+                                    c.Title = "Property Manager";
+                                 //   c.CreatedBy = contact.CreatedBy;
+                                    c.CreatedDate = DateTime.Now;
+                                 //   c.CreatedByName = contact.CreatedByName;
+                                    _entities.Contacts.Add(c);
+                                    _entities.SaveChanges();
+                                    contact1.PropertyManager = c.ContactId;
+                                    change = true;
+
+                                }
+
+
+                        }
+                        else
+                        {
+                            contact1.PropertyManager = null;
+                        }
+
+                        if (!string.IsNullOrEmpty(row[7].ToString()))
+                                contact1.PropertyNumber = Convert.ToInt16(row[7].ToString().Trim());
+
+                            if (!string.IsNullOrEmpty(row[8].ToString()))
+                                contact1.Units = Convert.ToInt16(row[8].ToString().Trim());
+
+                            if (!string.IsNullOrEmpty(row[8].ToString()))
+                                contact1.Units = Convert.ToInt16(row[8].ToString().Trim());
+
+                            contact1.PropertyName = row[9].ToString().Trim();
+
+                            contact1.PhoneNumber = row[15].ToString().Trim();
+
+                            contact1.PropertyAddress = row[16].ToString().Trim();
+                            contact1.City = row[17].ToString().Trim();
+                            contact1.State = row[18].ToString().Trim();
+                            contact1.ZipCode = row[19].ToString().Trim();
+                            contact1.EmailAddress = row[20].ToString().Trim();
+                            contact1.LegalName = row[21].ToString().Trim();
+
+                            contact1.TaxId = row[23].ToString().Trim();
+                            if (!string.IsNullOrEmpty(row[22].ToString().Trim()))
+                                contact1.AcquisitionDate = Convert.ToDateTime(row[22].ToString().Trim());
+                            contact1.CreatedDate = DateTime.Now;
+                            contact1.CreatedByName = "Excel Upload";
+                            _entities.Properties.Add(contact1);
+                            _entities.SaveChanges();
+                        }
+                   
+                }
+
+
+            }
+            return true;
+                      
+    }
+
 
         public string GetPropertyName(int PropertyNumber)
         {
@@ -2469,8 +3800,24 @@ namespace Carroll.Data.Entities.Repository
                     return "";
             }
         }
+        public dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber,string Notes, DateTime dateposted)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                var res = (from tbl in _entities.RequisitionRequests
+                           where tbl.RequisitionRequestId == Refid
+                           select tbl).FirstOrDefault();
+                res.RequistionNumber = RequisitionNumber;
+                res.DatePosted = dateposted;
+                res.Notes = Notes;
+                res.ModifiedDateTime = DateTime.Now;
+                _entities.SaveChanges();
 
-        public string GetPropertyNameManager(int PropertyNumber)
+                return true;
+
+            }
+        }
+            public string GetPropertyNameManager(int PropertyNumber)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {

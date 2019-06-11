@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Carroll.Data.Entities;
 using Carroll.Data.Entities.Repository;
 using Carroll.Data.Services.Models.Validation;
-
+using System.Data;
 
 namespace Carroll.Data.Services.Models
 {
@@ -133,6 +133,10 @@ namespace Carroll.Data.Services.Models
             return _repository.UpdateWorkflowEmployeeNewHireNotice(Action,RefId,Sign,edate);
         }
 
+      public  dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted)
+        {
+            return _repository.UpdateRequisitionRequest(Refid, RequisitionNumber, notes, dateposted);
+        }
 
         public dynamic InsertRequisitionRequest(RequisitionRequest obj)
         {
@@ -178,9 +182,37 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetPayRollStatusChangeNotice(obj);
         }
+               
+        public List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel()
+        {           
+                return _repository.GetAllContactsForExcel().ToList();           
+        }
+
+        public List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel()
+        {         
+                return _repository.GetAllEquityPartnersForExcel().ToList();   
+        }
+
+        public List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel()
+        {          
+                return _repository.GetAllPropertiesForExcel().ToList();           
+        }
 
 
+        public dynamic ImportContactTableFromExcel(DataTable dt)
+        {
+            return _repository.ImportContactTableFromExcel(dt);
+        }
 
+        public dynamic ImportEquityPartnerTableFromExcel(DataTable dt)
+        {
+            return _repository.ImportEquityPartnerTableFromExcel(dt);
+        }
+
+        public dynamic ImportPropertiesTableFromExcel(DataTable dt)
+        {
+            return _repository.ImportPropertiesTableFromExcel(dt);
+        }
         public dynamic InsertNoticeOfEmployeeSeperation(NoticeOfEmployeeSeperation obj)
         {
             return _repository.InsertNoticeOfEmployeeSeperation(obj);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,10 +54,19 @@ namespace Carroll.Data.Services.Models
         dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs);
         dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate);
         PrintResidentContact GetResidentReferralContact(Guid riderid);
-
+        dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted);
         dynamic GetHrFormCount();
+
         List<CarrollPosition> GetAllCarrollPositions();
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
+
+        List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel();
+        List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel();
+        List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel();
+
+        dynamic ImportContactTableFromExcel(DataTable dt);
+        dynamic ImportEquityPartnerTableFromExcel(DataTable dt);
+        dynamic ImportPropertiesTableFromExcel(DataTable dt);
         string GetPropertyName(int PropertyNumber);
         string GetPropertyNameManager(int PropertyNumber);
         string GetPropertyManager(Guid PropertyId);

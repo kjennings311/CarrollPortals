@@ -9,7 +9,7 @@
             <li>
                 <a href="~/Home/Index">Home</a>
             </li>
-           
+
             <li class="active">
                 <strong>Equity Partners</strong>
             </li>
@@ -17,6 +17,53 @@
     </div>
     <div class="col-lg-2">
 
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:40%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding: 20px;
+    border: 2px solid black;">
+
+                    <h1 style="text-align: center;
+    margin-top: -20px;">
+                        <strong><span style="font-size: 18.0pt; line-height: 115%;">Upload Equity Partners  </span></strong>
+                    </h1>
+
+                    <form id="submitform" onsubmit="return false;" enctype="multipart/form-data">
+
+                        <input type="file" id="fileupload" accept=".xls, .xlsx" />
+
+                        <div class="col-md-12 " style="text-align:center;margin-bottom:20px;">
+                            <div class="uploadstatus"> </div>
+                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg " id="mobilepopup" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:95%" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:0px !important;border:none !important">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="padding: 0px 24px 25px 27px !important;">
+<div class="row" style="padding: 5px;">
+                    <table class="table table-striped table-condensed dataTable" cellspacing="2" cellpadding="1" id="mobilepopupbody"> </table>
+</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -30,8 +77,10 @@
 
                     @if (@Model.RoleType.ToLower() == "administrator")
                     {
-                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
+                        <a class="export" style="color:white;" href="/Hr/ExportEquityPartners"> <i class="fa fa-download"></i> Export As Excel </a>
+                        <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
 
+                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
                         <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
                             <i class="fa fa-trash"></i> Delete
                         </a>
@@ -40,9 +89,9 @@
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     }
-                    </div>
+                </div>
             </div>
-            
+
 
             <div class="ibox-content">
                 <table style="width:100%;" class="table  dtprops">
@@ -76,20 +125,20 @@
                 <h5>Add/Edit Partner</h5>
                 <div class="ibox-tools">
                     @*<a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>*@
-                    <a class="warning"  href="#" onclick="ToggleAdd('partner');">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>*@
+                    <a class="warning" href="#" onclick="ToggleAdd('partner');">
                         <i class="fa fa-minus-circle"></i> Cancel
                     </a>
                     @*<ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a href="#" >Cancel</a>
-                        </li>
-                   
-                    </ul>*@
+                            <li>
+                                <a href="#" >Cancel</a>
+                            </li>
+
+                        </ul>*@
                     @*<a class="close-link">
-                        <i class="fa fa-times"></i>
-                    </a>*@
+                            <i class="fa fa-times"></i>
+                        </a>*@
                 </div>
             </div>
             <div class="ibox-content dynamicForm">
@@ -99,22 +148,22 @@
     </div>
 
 </div>
-    
+
 @if (ViewBag.ErrorMessage == "AuthorizationRequired")
-            {
+{
     <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
 
 }
 @if (ViewBag.ErrorMessage == "UnexpectedError")
-            {
+{
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
 
 @section Styles {
-@Styles.Render("~/content/plugins/jquery-ui/jqueryuiStylescss")
+    @Styles.Render("~/content/plugins/jquery-ui/jqueryuiStylescss")
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")
-@Styles.Render("~/content/plugins/dataPickerStylescss")
+    @Styles.Render("~/content/plugins/dataPickerStylescss")
 
 
 
@@ -123,19 +172,28 @@
         .dtprops td, .dtprops th {
             white-space: nowrap;
         }
+
         ul.token-input-list-facebook {
             width: 100%;
         }
-     
+
+        @@media only screen and (max-width : 767px) {
+
+
+            .dtprops td:nth-child(2), .dtprops td:nth-child(3), .dtprops td:nth-child(4), .dtprops td:nth-child(5), .dtprops td:nth-child(6), .dtprops td:nth-child(8), .dtprops td:nth-child(9),
+            .dtprops th:nth-child(2), .dtprops th:nth-child(3), .dtprops th:nth-child(4), .dtprops th:nth-child(5), .dtprops th:nth-child(6), .dtprops th:nth-child(8), .dtprops th:nth-child(9) {
+                display: none;
+            }
+        }
     </style>
 }
 
 @section Scripts {
-@Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/scripts/plugins/dataTablesjs")
     @Scripts.Render("~/scripts/plugins/input-maskjs")
     @Scripts.Render("~/scripts/plugins/token-inputjs")
-@Scripts.Render("~/scripts/plugins/dataPickerjs")
+    @Scripts.Render("~/scripts/plugins/dataPickerjs")
 
 
 
@@ -145,14 +203,81 @@
 
         $(document).ready(function () {
             LoadPartners();
-          
+
+            $(".btnupload").click(function () {
+                $(".claimmodal").modal("show");
+
+            });
+
+            $("#Submit").click(function () {
+
+                if ($("#fileupload").val() != "") {
+                    var formData = new FormData();
+                    formData.append('attachment', $('#fileupload')[0].files[0]);
+
+                    formData.append('formname', "EquityPartners");
+                    $("#submit").hide();
+                    $(".uploadstatus").html("<p style='color:blue;'> Uploading Changes  </p>");
+
+                    $.ajax({
+                        url: $BaseApiUrl + 'api/data/UploadContactsExcel',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,  // tell jQuery not to process the data
+                        contentType: false,  // tell jQuery not to set contentType
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data == true) {
+
+
+                                $(".uploadstatus").html("<p style='color:green;'> Upload Success </p>");
+
+                                LoadPartners();
+
+                                setTimeout(function () {
+
+
+                                    $("#submit").show();
+
+                                    $(".claimmodal").modal("hide");
+
+                                    document.getElementById("submitform").reset();
+
+
+
+                                }, 3000);
+                            }
+                            else {
+                                $(".uploadstatus").html("<p style='color:red;'> Upload Failed " + data + " </p>");
+                                $("#submit").show();
+
+
+                            }
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.errorMessage);
+                        }
+
+                    });
+
+                }
+                else {
+
+
+                }
+
+            });
+
+
+
             //$('body').on('click', '.dtprops tbody tr', function () {
 
             //});
 
-            $('.dataTables_scrollBody').css('height', '600px'); 
+            $('.dataTables_scrollBody').css('height', '600px');
             $('#button').click(function () {
-               // table.row('.selected').remove().draw(false);
+                // table.row('.selected').remove().draw(false);
             });
         });
     </script>
@@ -173,98 +298,98 @@
 
 
 
- @*$(document).ready(function () {
-            $("#Data").jqGrid({
-                url: '/Home/LoadData',
-                loadonce:true,
-                datatype: "json",
-                mtype: "GET",
-                colNames:["ID"],
-                colModel: [
-            { name: "Id",index:'ID',width:800, align: "center"}
-                          ],
-                pager: "#Pager",
-                rowNum: '10',
-                rowList: [10, 20, 30],
-                sortname: "ID",
-                sortorder: "asc",
-                height: "auto",
-                gridview:true,
-                sortname: "ID",
-                viewrecords: true,
-                caption: "My First Grid",
-                loadComplete: function (data) {
-    var $this = $(this),
-        datatype = $this.getGridParam('datatype');
+@*$(document).ready(function () {
+                $("#Data").jqGrid({
+                    url: '/Home/LoadData',
+                    loadonce:true,
+                    datatype: "json",
+                    mtype: "GET",
+                    colNames:["ID"],
+                    colModel: [
+                { name: "Id",index:'ID',width:800, align: "center"}
+                              ],
+                    pager: "#Pager",
+                    rowNum: '10',
+                    rowList: [10, 20, 30],
+                    sortname: "ID",
+                    sortorder: "asc",
+                    height: "auto",
+                    gridview:true,
+                    sortname: "ID",
+                    viewrecords: true,
+                    caption: "My First Grid",
+                    loadComplete: function (data) {
+        var $this = $(this),
+            datatype = $this.getGridParam('datatype');
 
-    if (datatype === "xml" || datatype === "json") {
-        setTimeout(function () {
-            $this.trigger("reloadGrid");
-        }, 100);
+        if (datatype === "xml" || datatype === "json") {
+            setTimeout(function () {
+                $this.trigger("reloadGrid");
+            }, 100);
+        }
     }
-}
-            });
-        });*@
+                });
+            });*@
 
 
 @*$(document).ready(function () {
-         $.ajax({
-             type: "POST",
-             dataType: "json",
-             url: "studentService.asmx/GetStudents",
-             success: function (data) {
-                 var datatableVariable = $('#studentTable').DataTable({
-                     data: data,
-                     columns: [
-                         { 'data': 'iD' },
-                         { 'data': 'firstName' },
-                         { 'data': 'lastName' },
-                         {
-                             'data': 'feesPaid', 'render': function (feesPaid) {
-                                 return '$ ' + feesPaid;
-                             }
-                         },
-                         { 'data': 'gender' },
-                         { 'data': 'emailId' },
-                         { 'data': 'telephoneNumber' },
-                         {
-                             'data': 'dateOfBirth', 'render': function (date) {
-                                 var date = new Date(parseInt(date.substr(6)));
-                                 var month = date.getMonth() + 1;
-                                 return date.getDate() + "/" + month + "/" + date.getFullYear();
-                             }
-                         }]
-                 });
-                 $('#studentTable tfoot th').each(function () {
-                     var placeHolderTitle = $('#studentTable thead th').eq($(this).index()).text();
-                     $(this).html('<input type="text" class="form-control input input-sm" placeholder="Search ' + placeHolderTitle + '" />');
-                 });
-                 datatableVariable.columns().every(function () {
-                     var column = this;
-                     $(this.footer()).find('input').on('keyup change', function () {
-                         column.search(this.value).draw();
-                     });
-                 });
-                 $('.showHide').on('click', function () {
-                     var tableColumn = datatableVariable.column($(this).attr('data-columnindex'));
-                     tableColumn.visible(!tableColumn.visible());
-                 });
-             }
-         });
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "studentService.asmx/GetStudents",
+                success: function (data) {
+                    var datatableVariable = $('#studentTable').DataTable({
+                        data: data,
+                        columns: [
+                            { 'data': 'iD' },
+                            { 'data': 'firstName' },
+                            { 'data': 'lastName' },
+                            {
+                                'data': 'feesPaid', 'render': function (feesPaid) {
+                                    return '$ ' + feesPaid;
+                                }
+                            },
+                            { 'data': 'gender' },
+                            { 'data': 'emailId' },
+                            { 'data': 'telephoneNumber' },
+                            {
+                                'data': 'dateOfBirth', 'render': function (date) {
+                                    var date = new Date(parseInt(date.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return date.getDate() + "/" + month + "/" + date.getFullYear();
+                                }
+                            }]
+                    });
+                    $('#studentTable tfoot th').each(function () {
+                        var placeHolderTitle = $('#studentTable thead th').eq($(this).index()).text();
+                        $(this).html('<input type="text" class="form-control input input-sm" placeholder="Search ' + placeHolderTitle + '" />');
+                    });
+                    datatableVariable.columns().every(function () {
+                        var column = this;
+                        $(this.footer()).find('input').on('keyup change', function () {
+                            column.search(this.value).draw();
+                        });
+                    });
+                    $('.showHide').on('click', function () {
+                        var tableColumn = datatableVariable.column($(this).attr('data-columnindex'));
+                        tableColumn.visible(!tableColumn.visible());
+                    });
+                }
+            });
 
-     });
- </script>*@  
+        });
+    </script>*@
 
 @*{ data: null, render: function ( data, type, row ) {
-                // Combine the first and last names into a single table field
-                return data.first_name+' '+data.last_name;
-            } },*@
+        // Combine the first and last names into a single table field
+        return data.first_name+' '+data.last_name;
+    } },*@
 
 
 @*$('#RectifiedCount tbody tr').live('click', function (event) {
-    var aData = oTable.fnGetData(this); // get datarow
-    if (null != aData)  // null if we clicked on title row
-    {
-        //now aData[0] - 1st column(count_id), aData[1] -2nd, etc.
-    }
-});*@
+        var aData = oTable.fnGetData(this); // get datarow
+        if (null != aData)  // null if we clicked on title row
+        {
+            //now aData[0] - 1st column(count_id), aData[1] -2nd, etc.
+        }
+    });*@
