@@ -1,8 +1,6 @@
 ﻿@{
     ViewBag.Title = "Carroll Portals";
-
 }
-
 
 <div class="wrapper wrapper-content">
     <div class="row hidewhenformopen">
@@ -16,9 +14,8 @@
 
     color: white;
     position: absolute;
-  bottom: 0%;
-    right: 0%; font-size:30px;font-weight: bold;background:none !important;" data-target=".claimmodal">
-                <i style="font-size: 30px;
+  font-weight: bold;background:none !important;" data-target=".claimmodal">
+                <i style="
     font-weight: bold;" class="fa fa-plus-circle "></i><span style="font-family:inherit;"> New </span>
             </button>
             <h1 style="color: white;
@@ -170,7 +167,7 @@
         </div>
     </div>
 
-    <div id="divprocessingbtn" style="    position: fixed;
+    <div id="divprocessingbtn" style="position: fixed;
     top: 6%;
     right: 2%;
     background: green;
@@ -193,55 +190,31 @@
     </div>
 
 
-    <div class="row hidewhenformopen" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
-        <div class="col-lg-4" onclick="GetAllClaims('PropertyDamage')" style="width:30%;margin-left:2%;cursor:pointer; border-right:1px solid #797979">
+    <div class="row hidewhenformopen visible-md visible-lg" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
+        <div class="col-lg-4 db" onclick="GetAllClaims('PropertyDamage')" style="">
             <div class="widget style1 navy-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold" style="font-size: 20px;
-    text-transform: uppercase;
-    color: #797979;
-    margin-bottom: 10px;">
+                        <h3 class="font-bold" style="">
                             Property Damage Claim
                         </h3>
                         <div class="claimcount" style="display:none; text-align:center;">
-                            <div class="font-bold hclaimcount" style="width: 100px;
-    text-align: center;
-   display:inline-block;
-    border-radius: 100px;
-    background:#797979;
-    padding-top: 1px;
-    padding-bottom: 0px;
-    height: 100px;"><h1 class="propcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+                            <div class="font-bold hclaimcount" style=""><h1 class="propcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-4" style="width:30%;margin-left:2%; cursor:pointer;border-right:1px solid #797979" onclick="GetAllClaims('General Liability')">
+        <div class="col-lg-4 db" onclick="GetAllClaims('General Liability')">
             <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
-
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold" style="font-size: 20px;
-    text-transform: uppercase;
-    color: #797979;
-    margin-bottom: 10px;">
+                        <h3 class="font-bold" style="">
                             General Liability Claim
                         </h3>
                         <div class="claimcount" style="display:none;text-align:center;">
-                            <div class="font-bold hclaimcount" style="width: 100px;
-    text-align: center;
-   display:inline-block;
-    border-radius: 100px;
-    background:#797979;
-    padding-top: 1px;
-    padding-bottom: 0px;
-    height: 100px;"><h1 class="liabcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
-
-
-
+                            <div class="font-bold hclaimcount" style=""><h1 class="liabcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
                         </div>
                     </div>
                 </div>
@@ -249,156 +222,301 @@
 
         </div>
 
-        <div class="col-lg-4" style="width:30%;margin-left:2%;cursor:pointer;" onclick="GetAllClaims('Mold Damage')">
+        <div class="col-lg-4 db" onclick="GetAllClaims('Mold Damage')">
             <div class="widget style1 yellow-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
-                        <h3 class="font-bold" style="font-size: 20px;
-    text-transform: uppercase;
-    color: #797979;
-    margin-bottom: 10px;">
+                        <h3 class="font-bold" style="">
                             Mold Damage Claim
                         </h3>
                         <div class="claimcount" style="display:none;text-align:center">
-                            <div class="font-bold hclaimcount " style="width: 100px;
-    text-align: center;
-    display:inline-block;
-    border-radius: 100px;
-    background:#797979;
-    padding-top: 1px;
-    padding-bottom: 0px;
-    height: 100px;"><h1 class="damagecount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
-
+                            <div class="font-bold hclaimcount " style=""><h1 class="damagecount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
 
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
+    <div class="row hidewhenformopen visible-xs visible-xs" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
+
+        <table style="WIDTH: 90%;
+    margin-top: 15PX;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    margin-left: 5%; clear:both; border:1px solid black">
+            <tr style="" onclick="GetAllClaims('PropertyDamage')"> <td style="width:80%;    background: #797979;padding:10PX;"> PROPERTY DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="propcount" style="font-weight:bold;"> </span> </td></tr>
+            <tr onclick="GetAllClaims('General Liability')"> <td style="width:80%; background: #797979;padding:10PX;"> GENERAL LIABILITY CLAIM </td> <td style="background:#2f4050"> <span class="liabcount" style="font-weight:bold;"> </span> </td></tr>
+            <tr onclick="GetAllClaims('Mold Damage')"> <td style="width:80%; background: #797979;padding:10PX;"> MOLD DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="damagecount" style="font-weight:bold;"> </span> </td></tr>
+        </table>
+        </div>
 
 
 
-
-    <div class="row">
-        <div class="col-lg-12 no-padding">
-            <input type="hidden" id="homeval" value="1" />
-            <div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5> All Claims <small></small></h5>
-                        </div>
-                        <div class="ibox-content">
-                            <table class="table  dtprops" width="100%"></table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div class="AddEditContainer row" style="display:none;">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5 class="form-heading">  </h5>
-                            <div class="ibox-tools">
-                                @*<a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
-                                    </a>*@
-
-                                @*<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('UserInRole');">
-                                        <i class="fa fa-minus-circle"></i> Cancel
-                                    </a>*@
-                                @*<ul class="dropdown-menu dropdown-user">
-                                        <li>
-                                            <a href="#" >Cancel</a>
-                                        </li>
-
-                                    </ul>*@
-                                @*<a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>*@
+        <div class="row">
+            <div class="col-lg-12 no-padding">
+                <input type="hidden" id="homeval" value="1" />
+                <div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5> All Claims <small></small></h5>
+                            </div>
+                            <div class="ibox-content">
+                                <table class="table  dtprops" width="100%"></table>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
 
+
+
+                <div class="AddEditContainer row" style="display:none;">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5 class="form-heading">  </h5>
+                                <div class="ibox-tools">
+                                    @*<a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>*@
+
+                                    @*<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('UserInRole');">
+                                            <i class="fa fa-minus-circle"></i> Cancel
+                                        </a>*@
+                                    @*<ul class="dropdown-menu dropdown-user">
+                                            <li>
+                                                <a href="#" >Cancel</a>
+                                            </li>
+
+                                        </ul>*@
+                                    @*<a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>*@
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
         </div>
+
 
     </div>
 
 
-</div>
 
-
-
-@if (ViewBag.ErrorMessage == "AuthorizationRequired")
-{
-    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
-
-}
-@if (ViewBag.ErrorMessage == "UnexpectedError")
-{
-    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
-}
-
-@section Styles 
+    @if (ViewBag.ErrorMessage == "AuthorizationRequired")
     {
-    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
-    @Styles.Render("~/content/plugins/token-inputcss")
+        <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+    }
+    @if (ViewBag.ErrorMessage == "UnexpectedError")
+    {
+        <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+    }
+
+    @section Styles
+    {
+        @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+        @Styles.Render("~/content/plugins/token-inputcss")
+
+    }
+
+    @section Scripts
+{
+        @Scripts.Render("~/scripts/plugins/dataTablesjs")
+        @Scripts.Render("~/scripts/plugins/input-maskjs")
+        @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+        <script>
+
+            function LoadClaimsFilter(val) {
+
+                $('.dtprops').DataTable().search(val)
+                    .draw();
+
+            }
+
+
+            $(document).ready(function () {
+                $("#helpid").show();
+                LoadUserClaims();
+                GetAllClaims("All");
+
+
+
+
+            });
+
+
+
+        </script>
+
+    }
+
 
     <style type="text/css">
 
 
-        .dtprops td, .dtprops th 
-        {
+        .dtprops td, .dtprops th {
             white-space: nowrap;
         }
 
         .hclaimcount:hover {
             background: #2f4050 !important;
         }
-        
 
-    </style>
-}
+        @@media only screen and (max-width : 768px) {
+            .ipbackground {
+                margin-top: 0px !important;
+            }
 
-@section Scripts
-{
-    @Scripts.Render("~/scripts/plugins/dataTablesjs")
-    @Scripts.Render("~/scripts/plugins/input-maskjs")
-    @Scripts.Render("~/scripts/plugins/token-inputjs")
+                .ipbackground button {
+                    top: 56.5% !important;
+                    right: 0% !important;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
 
-    <script>
+                    .ipbackground button i {
+                        font-size: 15px !important;
+                    }
 
-        function LoadClaimsFilter(val) {
-         
-            $('.dtprops').DataTable().search(val)
-                .draw();
+                .ipbackground h1 {
+                    top: 28%;
+                    left: -1%;
+                    font-weight: bold;
+                    font-size: 10px !important;
+                }
 
+            .db {
+                width: 95%;
+                margin-left: 0%;
+                cursor: pointer;
+                border-right: none !important;
+            }
+
+            .hidewhenformopen {
+                margin-top: -100px !important;
+                margin-bottom: 0px !important;
+            }
+
+            .ibox-title {
+                padding: 15px 15px 7px !important;
+            }
+
+            .db h3.font-bold {
+                font-size: 15px !important;
+                text-transform: uppercase;
+                color: #797979 !important;
+                margin-bottom: 5px !important;
+            }
+
+            .widget {
+                margin-bottom: -30px !important;
+                margin-top: 10px !important;
+            }
+
+            .hclaimcount {
+                width: 70px !important;
+                text-align: center !important;
+                display: inline-block;
+                border-radius: 70px !important;
+                background: #797979;
+                padding-top: 0px !important;
+                padding-bottom: 0px;
+                height: 70px !important;
+            }
+
+                .hclaimcount h1 {
+                    font-size: 15px !important;
+                }
+
+                .hclaimcount p {
+                    font-size: 10px;
+                }
+
+
+            .RowsContatiner {
+                margin-top: 20px !important;
+            }
+
+            .dtprops td:nth-child(5), .dtprops th:nth-child(5), .dtprops td:nth-child(0), .dtprops th:nth-child(0) {
+                display: none !important;
+            }
+
+            .start-claim {
+                width: 100% !important;
+                margin-left: 0px !important;
+                clear: both;
+                margin-top: 10px;
+            }
+
+                .start-claim button {
+                    margin-left: 65%;
+                }
+
+            .claimmodal .modal-title {
+                font-size: 20px !important;
+            }
+
+            .claimmodal .modal-dialog, .incidentformmodal .modal-dialog {
+                width: 95% !important;
+            }
         }
 
+        @@media only screen and (min-width : 768px) {
+            .ipbackground h1 {
+                font-size: 30px !important;
+                color: white !important;
+                text-align: left !important;
+            }
 
-        $(document).ready(function () {
-            $("#helpid").show();     
-            LoadUserClaims();
-            GetAllClaims("All");
+            .db {
+                width: 30%;
+                margin-left: 2%;
+                cursor: pointer;
+                border-right: 1px solid #797979
+            }
 
-                 
+                .db h3 {
+                    font-size: 20px;
+                    text-transform: uppercase;
+                    color: #797979;
+                    margin-bottom: 10px;
+                }
 
+            .hclaimcount {
+                width: 100px;
+                text-align: center;
+                display: inline-block;
+                border-radius: 100px;
+                background: #797979;
+                padding-top: 1px;
+                padding-bottom: 0px;
+                height: 100px;
+            }
 
-        });
+                .hclaimcount h1 {
+                    font-size: 30px !important;
+                }
 
-      
-
-</script>
-
-}
-
+                .hclaimcount p {
+                    font-size: 10px;
+                }
+            /*.dtprops td, .dtprops th
+        {
+            display:block !important;
+        }*/
+            .ibox-title {
+                padding: 17px !important;
+            }
+        }
+    </style>

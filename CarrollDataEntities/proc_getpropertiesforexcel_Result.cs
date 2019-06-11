@@ -10,16 +10,9 @@
 namespace Carroll.Data.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Property
+    public partial class proc_getpropertiesforexcel_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Property()
-        {
-            this.UserInProperties = new HashSet<UserInProperty>();
-        }
-    
         public System.Guid PropertyId { get; set; }
         public string PropertyName { get; set; }
         public Nullable<int> PropertyNumber { get; set; }
@@ -37,24 +30,18 @@ namespace Carroll.Data.Entities
         public bool IsOwned { get; set; }
         public bool IsActive { get; set; }
         public string EquityPartnerSiteCode { get; set; }
-        public Nullable<System.Guid> EquityPartner { get; set; }
-        public Nullable<System.Guid> EquityPartnerContact { get; set; }
-        public Nullable<System.Guid> InsuranceContact { get; set; }
-        public Nullable<System.Guid> VicePresident { get; set; }
-        public Nullable<System.Guid> RegionalVicePresident { get; set; }
-        public Nullable<System.Guid> PropertyManager { get; set; }
-        public Nullable<System.Guid> AssetManager1 { get; set; }
-        public Nullable<System.Guid> AssetManager2 { get; set; }
-        public Nullable<System.Guid> RegionalManager { get; set; }
-        public Nullable<System.Guid> ConstructionManager { get; set; }
-        public string Field1 { get; set; }
-        public string Field2 { get; set; }
+        public string InsuranceContact { get; set; }
+        public string EquityPartnerContact { get; set; }
+        public string EquityPartner { get; set; }
+        public string VicePresident { get; set; }
+        public string RegionalVicePresident { get; set; }
+        public string PropertyManager { get; set; }
+        public string AssetManager2 { get; set; }
+        public string AssetManager1 { get; set; }
+        public string RegionalManager { get; set; }
+        public string ConstructionManager { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string CreatedByName { get; set; }
-        public Nullable<System.Guid> MarketingSpecialist { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInProperty> UserInProperties { get; set; }
     }
 }

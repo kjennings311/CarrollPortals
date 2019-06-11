@@ -13,20 +13,18 @@
 
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
 
-   
 
     <link href="/Content/a4css.css" rel="stylesheet" />
 
 </head>
 <body class="document">
     <div class="page">
-        <div id="page_1" style="padding:15px;">
-           
-            <img style="margin-left: 33%;
-    MARGIN-TOP: 22PX;" src="/img/payroll.png" id="p1img1">
+        <div id="page_1" style="width:96%;">           
+            <img style="margin-left: 33%;margin-top:-35px;" src="/img/payroll.png" id="p1img1">
             <P class="p0 ft0" style="    margin-top: 10PX;
-    margin-bottom: 15px;">PAYROLL STATUS CHANGE NOTICE</P>
+    margin-bottom: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
             <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" value="@Model.EmployeeName" /> Change effective date: <input style=" display:inline;" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" type="text" id="effdate" class="" /></P>
             <P class="p2 ft3"><SPAN class="ft2">Manager Responsibilities</SPAN>: Complete the Payroll Status Change Notice, sign the form, and submit to</P>
             <P class="p3 ft3">Human Resources to <A href="mailto:HRNotifications@carrollmg.com"><SPAN class="ft4">HRNotifications@carrollmg.com</SPAN></A> within 48 hours of change effective date.</P>
@@ -311,7 +309,7 @@
                                 </TD>
                             </TR>
                         </TABLE>
-                        <P class="p20 ft1">Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" />  Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToShortDateString()" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@Model.Leave_End.Value.ToShortDateString()" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" /> </P>
+                        <P class="p20 ft1">Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" />  Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToShortDateString()" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@Model.Leave_End.Value.ToShortDateString()" style="width:23%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" /> </P>
                         <hr style="border-top: 2px solid black;" />
                     </div>
                 }
@@ -319,10 +317,10 @@
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
                     <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @Model.Notes1 </textarea></P>
-                    <P class="p6 ft1">  </P>
+                  
                 </div>
-                <P class="p6 ft1">Employee Signature:<input type="text" style="width:53%" value="@Model.ESignature" />  Date: <input type="text" name="name" value="@Model.EDate.Value.ToShortDateString()" /> </P>
-                <P class="p6 ft1">Manager Signature: <input type="text" style="width:53%" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToShortDateString()" /> </P>
+                <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.ESignature" />  Date: <input type="text" name="name" value="@Model.EDate.Value.ToShortDateString()" /> </P>
+                <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToShortDateString()" /> </P>
             </div>
      
             </div>
@@ -554,10 +552,10 @@
         #page_1 {
             position: relative;
             overflow: hidden;
-            margin: -80px 0px 9px 30px;
+            /*margin: -80px 0px 9px 30px;*/
             padding: 0px;
             border: none;
-            width: 768px;
+            /*width: 768px;*/
         }
 
             #page_1 #p1dimg1 {
@@ -592,8 +590,8 @@
         }
 
         .ft1 {
-            font: 15px 'Calibri';
-            line-height: 18px;
+            font: 13px 'Calibri';
+            line-height: 10px;
         }
 
         .ft2 {
@@ -723,8 +721,8 @@
         .p6 {
             text-align: left;
             padding-left: 8px;
-            margin-top: 3px;
-            margin-bottom: 10px;
+            margin-top: 1px;
+            margin-bottom: 0px;
         }
 
         .p7 {
@@ -858,35 +856,35 @@
             padding: 0px;
             margin: 0px;
             width: 474px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td1 {
             padding: 0px;
             margin: 0px;
             width: 147px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td2 {
             padding: 0px;
             margin: 0px;
             width: 83px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td3 {
             padding: 0px;
             margin: 0px;
             width: 16px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td4 {
             padding: 0px;
             margin: 0px;
             width: 704px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td5 {
@@ -894,7 +892,7 @@
             padding: 0px;
             margin: 0px;
             width: 474px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td6 {
@@ -902,7 +900,7 @@
             padding: 0px;
             margin: 0px;
             width: 147px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td7 {
@@ -910,7 +908,7 @@
             padding: 0px;
             margin: 0px;
             width: 83px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td8 {
@@ -918,28 +916,28 @@
             padding: 0px;
             margin: 0px;
             width: 16px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td9 {
             padding: 0px;
             margin: 0px;
             width: 125px;
-            vertical-align: bottom;
+            /*vertical-align: bottom;*/
         }
 
         .td10 {
             padding: 0px;
             margin: 0px;
             width: 241px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td11 {
             padding: 0px;
             margin: 0px;
             width: 354px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td12 {
@@ -947,7 +945,7 @@
             padding: 0px;
             margin: 0px;
             width: 125px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td13 {
@@ -955,14 +953,14 @@
             padding: 0px;
             margin: 0px;
             width: 595px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .td14 {
             padding: 0px;
             margin: 0px;
             width: 595px;
-            vertical-align: bottom;
+           /*vertical-align: bottom;*/
         }
 
         .tr0 {
@@ -978,7 +976,7 @@
         }
 
         .tr3 {
-            height: 36px;
+            height: 15px;
         }
 
         .tr4 {
@@ -1007,6 +1005,17 @@
             width: 720px;
             font: italic 15px 'Calibri';
         }
+        .sign {
+            font-family: 'Herr Von Muellerhoff', cursive;
+        }
+
+        .italic {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+
     </style>
 </body>
 </html>

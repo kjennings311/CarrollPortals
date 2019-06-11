@@ -13,7 +13,7 @@
 
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
 
@@ -22,6 +22,11 @@
             color: #555555;
             font-size: 13px;
         }*/
+        .sign {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            font-weight: bold;
+            font-size: 22px;
+        }
 
         p {
             margin: 0;
@@ -857,7 +862,7 @@
         }
     }
 </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" style="width:10%" />)</P>
-            <P class="p17 ft1">Supervisor’s Signature: <input type="text" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
+            <P class="p17 ft1">Supervisor’s Signature: <input type="text" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
         
             <P class="p20 ft11" style="margin-top:15px;">Once completed, send to HRNotifications@carrollmg.com</P>
             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>

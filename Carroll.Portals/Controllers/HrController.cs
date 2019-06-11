@@ -21,6 +21,11 @@ using Newtonsoft.Json;
 using Rotativa;
 using System.IO;
 using Rotativa.Options;
+using ClosedXML.Excel;
+using System.Data;
+using ClosedXML.Extensions;
+using System.Reflection;
+
 namespace Carroll.Portals.Controllers
 {
     [CustomAuthorize]
@@ -108,7 +113,7 @@ namespace Carroll.Portals.Controllers
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { PageSize= Size.A4, CustomSwitches= "--disable-smart-shrinking", FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 
@@ -196,7 +201,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintEmployeeNewHireNotice", obj) { FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintEmployeeNewHireNotice", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
         }
@@ -297,8 +302,9 @@ namespace Carroll.Portals.Controllers
                     {
                         //FileName = "TestView.pdf",
                         PageSize = Size.A4,
-                    PageOrientation = Rotativa.Options.Orientation.Portrait,
-                    PageMargins = { Left = 1, Right = 1 }
+                    PageOrientation = Rotativa.Options.Orientation.Portrait,                       
+                        CustomSwitches = "--disable-smart-shrinking",
+                        PageMargins = { Left = 1, Right = 1 }
                 };
 
 
@@ -420,6 +426,7 @@ namespace Carroll.Portals.Controllers
                                 {
                                     //FileName = "TestView.pdf",
                                     PageSize = Size.A4,
+                                    CustomSwitches = "--disable-smart-shrinking",
                                     PageOrientation = Rotativa.Options.Orientation.Portrait,
                                     PageMargins = { Left = 1, Right = 1 }
                                 };
@@ -462,6 +469,7 @@ namespace Carroll.Portals.Controllers
                     {
                         //FileName = "TestView.pdf",
                         PageSize = Size.A4,
+                        CustomSwitches = "--disable-smart-shrinking",
                         PageOrientation = Rotativa.Options.Orientation.Portrait,
                         PageMargins = { Left = 1, Right = 1 }
                     };
@@ -501,6 +509,7 @@ namespace Carroll.Portals.Controllers
                     {
                         //FileName = "TestView.pdf",
                         PageSize = Size.A4,
+                        CustomSwitches = "--disable-smart-shrinking",
                         PageOrientation = Rotativa.Options.Orientation.Portrait,
                         PageMargins = { Left = 1, Right = 1 }
                     };
@@ -623,7 +632,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintPayRollStatusChange", obj) { FileName = "PayROll Status Change - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintPayRollStatusChange", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayROll Status Change - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 
@@ -707,7 +716,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj) { FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 
@@ -716,7 +725,191 @@ namespace Carroll.Portals.Controllers
         #endregion
 
 
+        public DataTable LINQResultToDataTable<T>(IEnumerable<T> Linqlist)
+        {
+            DataTable dt = new DataTable();
+
+
+            PropertyInfo[] columns = null;
+
+            if (Linqlist == null) return dt;
+
+            foreach (T Record in Linqlist)
+            {
+                if (columns == null)
+                {
+                    columns = ((Type)Record.GetType()).GetProperties();
+                    foreach (PropertyInfo GetProperty in columns)
+                    {
+                        Type colType = GetProperty.PropertyType;
+
+                        if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition()
+                        == typeof(Nullable<>)))
+                        {
+                            colType = colType.GetGenericArguments()[0];
+                        }
+
+                        dt.Columns.Add(new DataColumn(GetProperty.Name, colType));
+                    }
+                }
+
+                DataRow dr = dt.NewRow();
+
+                foreach (PropertyInfo pinfo in columns)
+                {
+                    dr[pinfo.Name] = pinfo.GetValue(Record, null) == null ? DBNull.Value : pinfo.GetValue
+                    (Record, null);
+                }
+
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ExportsContacts()
+        {
+            using (var wb = new XLWorkbook())
+            {
+                // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+                dynamic obj = new { };
+
+                using (var client = new HttpClient())
+                {
+                    //Passing service base url  
+                    client.BaseAddress = new Uri(Baseurl);
+
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                    HttpResponseMessage Res = await client.GetAsync("api/data/ExportsContacts");
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        obj = JsonConvert.DeserializeObject<List<proc_getcontactsforexcel_Result>>(EmpResponse);
+                    }
+
+                    DataTable dt = LINQResultToDataTable(obj);
+
+                    // Add ClosedXML.Extensions in your using declarations
+
+                    var ws=wb.Worksheets.Add(dt, "Contacts");
+                    ws.Columns("A").Hide();
+
+                    return wb.Deliver("Contacts List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+                    // or specify the content type:
+                    //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                }
+            }
+
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> ExportEquityPartners()
+        {
+            using (var wb = new XLWorkbook())
+            {
+                // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+                dynamic obj = new { };
+
+                using (var client = new HttpClient())
+                {
+                    //Passing service base url  
+                    client.BaseAddress = new Uri(Baseurl);
+
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                    HttpResponseMessage Res = await client.GetAsync("api/data/ExportEquityPartners");
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        obj = JsonConvert.DeserializeObject<List<proc_getequitypartnersforexcel_Result>>(EmpResponse);
+                    }
+
+                    DataTable dt = LINQResultToDataTable(obj);
+
+                    // Add ClosedXML.Extensions in your using declarations
+
+                   var ws= wb.Worksheets.Add(dt, "EquityPartners");
+                    ws.Columns("A").Hide();
+
+                    return wb.Deliver("EquityPartners List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+                    // or specify the content type:
+                    //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                }
+            }
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ExportProperties()
+        {
+            using (var wb = new XLWorkbook())
+            {
+                // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
+
+                dynamic obj = new { };
+
+                using (var client = new HttpClient())
+                {
+                    //Passing service base url  
+                    client.BaseAddress = new Uri(Baseurl);
+
+                    client.DefaultRequestHeaders.Clear();
+                    //Define request data format  
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                    //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                    HttpResponseMessage Res = await client.GetAsync("api/data/ExportProperties");
+                    //Checking the response is successful or not which is sent using HttpClient  
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        //Storing the response details recieved from web api   
+                        var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                        //Deserializing the response recieved from web api and storing into the Employee list  
+                        obj = JsonConvert.DeserializeObject<List<proc_getpropertiesforexcel_Result>>(EmpResponse);
+                    }
+
+                    DataTable dt = LINQResultToDataTable(obj);
+
+                    // Add ClosedXML.Extensions in your using declarations
+
+                   var ws= wb.Worksheets.Add(dt, "Properties");
+                    ws.Columns("A").Hide();
+
+                    return wb.Deliver("Properties List -" + DateTime.Now.ToShortDateString() + ".xlsx");
+
+                    // or specify the content type:
+                    //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                }
+            }
+
+        }
+
+
         #region RequisitionRequest 
+
+
+
 
         public ActionResult RequisitionRequest()
         {
@@ -791,7 +984,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintRequisitionRequest", obj) { FileName = "RequisitionRequest - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintRequisitionRequest", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "RequisitionRequest - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
 

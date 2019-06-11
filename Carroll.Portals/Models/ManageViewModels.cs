@@ -593,4 +593,55 @@ namespace Carroll.Portals.Models
 
     }
 
+    public partial class proc_getcontactsforexcel_Result
+    {
+        public System.Guid Contactid { get; set; }
+        public string Firstname { get; set; }
+        public string LastName { get; set; }
+        public string Title { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+    }
+
+    public partial class proc_getequitypartnersforexcel_Result
+    {
+        public System.Guid EquityPartnerId { get; set; }
+        public string PartnerName { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string ContactPerson { get; set; }
+    }
+
+    public partial class proc_getpropertiesforexcel_Result
+    {
+
+        public System.Guid PropertyId { get; set; }
+        public string VP { get; set; }
+        public string VP_ { get; set; }
+        public string RVP { get; set; }
+        public string RVP_ { get; set; }
+        public string RM { get; set; }
+        public string RM_ { get; set; }
+        public Nullable<int> PropertyNumber { get; set; }
+        public Nullable<int> Units { get; set; }
+        public string PropertyName { get; set; }
+        public string EquityPartner { get; set; }
+        public string AssetManager { get; set; }
+        public string ConstructionManager { get; set; }
+        public string MarketingSpecialist { get; set; }
+        public string PropertyManager { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PropertyAddress { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string EmailAddress { get; set; }
+        public string LegalName { get; set; }
+        public Nullable<System.DateTime> TakeOverDate { get; set; }
+        public string TaxId { get; set; }
+    }
+
 }

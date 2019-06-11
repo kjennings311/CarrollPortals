@@ -29,12 +29,14 @@
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
 
-                    <div class="ibox-tools" style="margin-top:-55px;">
-                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+                <div class="ibox-tools" style="margin-top:-55px;">
 
-                            <a disabled="disabled" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>*@
+                    @if (@Model.RoleType.ToLower() == "hr")
+                    {
+                        <a disabled="disabled" class="btnEdit" href="#" style="font-size:30px; color:white; font-weight:bold"><i class="fa fa-edit"></i> Edit</a>                       }   @*
+            <a disabled="disabled" class="btnDelete" href="#">
+                <i class="fa fa-trash"></i> Delete
+            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('Requistion Request');">
                             <i class="fa fa-plus-circle"></i> New
@@ -68,7 +70,18 @@
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                 <TR>
                                                     <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><input type="text" id="propertyname" /></P></TD>
-                                                    <TD class="tr0 td1"><P class="p0 ft3"><SPAN class="ft2"> Date: </SPAN><input type="date" id="datechoosen" /> </P></TD>
+
+                                                    <TD class="tr0 td1"><P class="p0 ft3">
+    <SPAN class="ft2"> Date: </SPAN>
+    @if (@Model.RoleType.ToLower() == "hr")
+    {
+        <input type="text" id="datechoosen" />
+    }
+    else
+    {
+        <input type="date" id="datechoosen" />
+    }
+</P></TD>
                                                 </TR>
                                                 <TR>
                                                     <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0"> Requestor’s Name & Position </SPAN>: <input type="text" id="requestorname" /></P></TD>
@@ -77,29 +90,28 @@
                                             </TABLE>
                                             <P class="p1 ft0"> <span style="margin-left:5%">  Position </span> <span style="margin-left:18%"> How Many </span>  </P>
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s1" id="chkposition" value="Property Manager" />  Property Manager <select style="margin-left:15%;" class="chkposition" id="s1"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select></P>
-                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s2" id="chkpropertymananger" value="Assistant Property Manager" />  Assistant Property Manager <select style="margin-left:7%;" class="chkposition" id="s2"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s3" id="chkpropertymananger" value="Leasing Manager" />  Leasing Manager <select style="margin-left:16.1%;" class="chkposition" id="s3"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s4" id="chkpropertymananger" value="Leasing Consultant" />  Leasing Consultant <select style="margin-left:14.5%;" class="chkposition" id="s4"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s5" id="chkpropertymananger" value="Maintenance Supervisor" />  Maintenance Supervisor <select style="margin-left:9.8%;" class="chkposition" id="s5"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select>  </P>
-                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s6" id="chkpropertymananger" value="Maintenance Technician" />  Maintenance Technician  <select style="margin-left:10%;" class="chkposition" id="s6"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select></P>
-                                            <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s7" id="chkpropertymananger" value=" Groundskeeper" />  Groundskeeper<select style="margin-left:18%;" class="chkposition" id="s7"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s8" id="chkpropertymananger" value="Housekeeper" />  Housekeeper <select style="margin-left:19.4%;" class="chkposition" id="s8"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
+                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s2" id="chkassist" value="Assistant Property Manager" />  Assistant Property Manager <select style="margin-left:7%;" class="chkposition" id="s2"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
+                                            <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s3" id="chklease" value="Leasing Manager" />  Leasing Manager <select style="margin-left:16.1%;" class="chkposition" id="s3"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
+                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s4" id="chkleasec" value="Leasing Consultant" />  Leasing Consultant <select style="margin-left:14.5%;" class="chkposition" id="s4"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
+                                            <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s5" id="chkmas" value="Maintenance Supervisor" />  Maintenance Supervisor <select style="margin-left:9.8%;" class="chkposition" id="s5"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select>  </P>
+                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s6" id="chkmt" value="Maintenance Technician" />  Maintenance Technician  <select style="margin-left:10%;" class="chkposition" id="s6"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select></P>
+                                            <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s7" id="chkgs" value=" Groundskeeper" />  Groundskeeper<select style="margin-left:18%;" class="chkposition" id="s7"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
+                                            <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s8" id="chkhk" value="Housekeeper" />  Housekeeper <select style="margin-left:19.4%;" class="chkposition" id="s8"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s9" id="chkother" value="Other" /> Other: <input type="text" id="txtother" /> <select style="margin-left:2%;" class="chkposition" id="s9"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p1 ft0">Select One: <SPAN class="ft1"><input type="radio" name="position" class="" id="chknewposition"  />  New Position</SPAN></P>
                                             <P class="p4 ft1"><input type="radio" class="" name="position" style="margin-left:0.5%;" id="chkreplacementposition" /> Replacement Position</P>
-                                            <P class="p5 ft1">Name of Person(s) Replacing: <input type="text" id="replaceperson" /> </P>
+                                            <P class="p5 ft1">Name of Person(s) Replacing: <input type="text" id="replaceperson1" /> </P>
                                             <P class="p1 ft1"><SPAN class="ft0">Post to: </SPAN>  <input type="checkbox" id="postindeed"  />  Carroll Careers/Indeed</P>
                                             <P class="p6 ft1"> <input type="checkbox" id="postassociation" />  Apartment Association</P>
                                             <P class="p4 ft1"> <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost" /> </P>
                                             <P class="p7 ft1">Special Instructions (i.e. confidential posting, etc.)</P>
                                             <P class="p2 ft1"><textarea type="text" style="width:100%" id="specialinstructions1" > </textarea> </P>
                                             
-                                            <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
+                                            <P class="p8 ft0">For Recruiting Use <SPAN class="ft1">:</SPAN> </P>
                                             <P class="p7 ft1">Requisition Number(s): <input type="text" disabled id="requisitionnumber" /> </P>
                                             <P class="p7 ft1">Date Posted:<input type="date" disabled id="dateposted" /></P>
                                             <P class="p7 ft1">Notes:</P>
                                             <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1" > </textarea></P>
-                                            
                                             <br /> <br />
                                             <div id="status"> </div>
                                             <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
@@ -109,7 +121,6 @@
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
@@ -333,9 +344,189 @@
         $(document).ready(function ()
         {
             var leaseid = "";
+
+            var insertoredit = true;
+
+            var editid = "";
+            $(".btnEdit").hide();
+
+            $(".btnEdit").click(function ()
+            {
+//$("input,select,textarea").clear();
+                document.getElementById("submitform").reset();
+                var ht = $("tr.selected").find('td:eq(8)').html();
+                editid = ht.substring(ht.indexOf("?id=") + 4, ht.indexOf(" target=")-1);
+
+              
+                $('#myModal').modal('show');
+
+                insertoredit = false;
+            
+                $.get($BaseApiUrl + "api/Data/GetRequisitionRequest?riderid=" + editid, function (data)
+                {
+                    if (data != "")
+                    {
+
+                        $("#propertyname").val(data.propertyName);
+                        var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
+                        $("#datechoosen").val(d);
+
+                      
+                        $("#requestorname").val(data.requestorName);
+
+                        if (data.chkApartmentAssociation != "false")
+                        {
+                            $("#postassociation").prop("checked", true);
+                        }
+                        else
+                            $("#postassociation").prop("checked", false);
+
+                        if (data.chkNewPosition != "false")
+                        {
+                            $("#chknewposition").prop("checked", true);
+                        }
+                        else
+                            $("#chknewposition").prop("checked", false);
+
+
+                        if (data.chkReplacementPosition != "false")
+                        {
+                            $("#chkreplacementposition").prop("checked", true);
+                            $("#replaceperson1").val(data.replacingPerson);
+                        }
+                        else
+                            $("#chkreplacementposition").prop("checked", false);
+
+                        if (data.chkCarrollCareersIndeed != "false")
+                        {
+                            $("#postindeed").prop("checked", true);
+                        }
+                        else
+                            $("#postindeed").prop("checked", false);
+
+                        if (data.chkOtherPost != "false")
+                        {
+                            $("#chkotherpost").prop("checked", true);
+                            $("#otherpost").val(data.postOther);
+                        }
+                        else
+                            $("#chkotherpost").prop("checked", false);
+
+
+                        //if (data.chkOtherPost != "false") {
+                        //    $("#chkotherpost").prop("checked", true);
+                        //    $("#otherpost").val(data.postOther);
+                        //}
+                        //else
+                        //    $("#chkotherpost").prop("checked", false);
+
+
+
+                        $("#specialinstructions1").val(data.specailInstructions);
+
+
+                        if (data.positionCombined.includes("Other")) {
+                            $("#chkother").prop("checked", true);
+                            $("#txtother").val(data.positionOther);
+                            var i = parseInt(data.positionCombined.indexOf("Other--")) + 7;
+                            $("#s9").val(data.positionCombined.substring(i, i + 1));
+
+                        }
+
+
+                        if (data.positionCombined.includes("Property Manager"))
+                        {
+                            $("#chkposition").prop("checked", true);      
+                            var i = parseInt(data.positionCombined.indexOf("Property Manager--")) + 18;
+                            $("#s1").val(data.positionCombined.substring(i, i+1));
+
+                        }
+
+                        if (data.positionCombined.includes("Assistant Property Manager")) {
+                            $("#chkassist").prop("checked", true);
+                            var i = parseInt(data.positionCombined.indexOf("Assistant Property Manager--")) + 28;
+                            $("#s2").val(data.positionCombined.substring(i, i + 1));
+                           
+                        }
+
+                        if (data.positionCombined.includes("Leasing Manager")) {
+                            $("#chklease").prop("checked", true);
+                            var i = parseInt(data.positionCombined.indexOf("Leasing Manager--")) + 17;
+                            $("#s3").val(data.positionCombined.substring(i, i+1));
+
+                        }
+
+
+                        if (data.positionCombined.includes("Leasing Consultant")) {
+                            $("#chkleasec").prop("checked", true);
+                          
+                            var i = parseInt(data.positionCombined.indexOf("Leasing Consultant--")) + 20;
+                           
+                            $("#s4").val(data.positionCombined.substring(i, i+1));
+
+                        }
+
+
+                        if (data.positionCombined.includes("Maintenance Supervisor")) {
+                            $("#chkmas").prop("checked", true);
+                            var i = parseInt(data.positionCombined.indexOf("Maintenance Supervisor--")) + 24;
+                            $("#s5").val(data.positionCombined.substring(i, i+1));
+
+                        }
+
+
+                        if (data.positionCombined.includes("Maintenance Technician"))
+                        {
+                            $("#chkmt").prop("checked", true);
+                            var i = parseInt(data.positionCombined.indexOf("Maintenance Technician--")) + 24;
+                            $("#s6").val(data.positionCombined.substring(i, i+1));
+
+                        }
+
+
+                        if (data.positionCombined.includes("Groundskeeper"))
+                        {
+                            $("#chkgs").prop("checked", true);
+                            var i = parseInt(data.positionCombined.indexOf("Groundskeeper")) + 15;
+                            $("#s7").val(data.positionCombined.substring(i, i+1));
+                        }
+
+
+                        if (data.positionCombined.includes("Housekeeper"))
+                        {
+                            $("#chkhk").prop("checked", true);
+                            var i = parseInt(data.positionCombined.indexOf("Housekeeper")) + 13;
+                            $("#s8").val(data.positionCombined.substring(i, i+1));
+                        }
+
+                        $("#requisitionnumber").val(data.requistionNumber);
+
+                        if (data.datePosted != null)
+                        {
+
+                        var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
+                            $("#dateposted").val(d1);
+
+                        }
+
+                     //   $("#dateposted").val(data.datePosted);
+                        $("#notes1").val(data.notes);
+                    }
+                   
+                });
+
+                // gray out all input fields
+
+                $("input,select,textarea").prop("disabled", true);
+
+                $("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
+             
+            });
+
+
             GetAllHRFORMs('Requisition Request');
 
-            if ($("#UserR").val() == "HR Manager") {
+            if ($("#UserR").val() == "hr") {
                 $("#notes1,#requisitionnumber,dateposted").prop("disabled", false);
 
             }
@@ -365,269 +556,342 @@
 
                 $("#status").html('');
 
-                if ($("#propertyname").val() == "") {
-                    errormsgsummary += "<li> Please Enter Property Name </li>";
-                    $("#propertyname").addClass('has-error');
-                    if (control == "")
-                        control = $("#propertyname");
-                }
-
-                if ($("#datechoosen").val() == "") {
-                    errormsgsummary += "<li> Please Enter Date </li>";
-                    $("#datechoosen").addClass('has-error');
-                    if (control == "")
-                        control = $("#datechoosen");
-                }
-
-                if ($("#requestorname").val() == "") {
-                    errormsgsummary += "<li> Please Enter Requestor Name </li>";
-                    $("#requestorname").addClass('has-error');
-                    if (control == "")
-                        control = $("#requestorname");
-                }
+                if (insertoredit) {
 
 
-                if (!$("#chknewposition").is(":checked") && !$("#chkreplacementposition").is(":checked")) {
-                    errormsgsummary += "<li> Please Select New Position Or Replacement Position </li>";
-                    $("#chknewposition").addClass('has-error');
-                    if (control == "")
-                        control = $("#chknewposition");
-                }
-
-                if (!$("#postindeed").is(":checked") && !$("#postassociation").is(":checked")) {
-                    errormsgsummary += "<li> Please Select Post Option </li>";
-                    $("#postindeed").addClass('has-error');
-                    if (control == "")
-                        control = $("#postindeed");
-                }
-
-
-                if ($("#chkreplacementposition").is(":checked") && $("#replaceperson").val()=="" ) {
-                    errormsgsummary += "<li> Please Enter Replacement Person Name </li>";
-                    $("#replaceperson").addClass('has-error');
-                    if (control == "")
-                        control = $("#replaceperson");
-                }
-
-
-                //if ($("#requisitionnumber").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Requisition Number </li>";
-                //    $("#requisitionnumber").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#requisitionnumber");
-                //}
-
-                //if ($("#dateposted").val() == "") {
-                //    errormsgsummary += "<li> Please Select Date Posted </li>";
-                //    $("#dateposted").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#dateposted");
-                //}
-                var pscount = false;
-                $('.chkposition').each(function (index, obj) {
-                    if (this.checked === true) {
-                        if ($("#" + $(this).attr("data-tr")).val() == "") {
-                          
-                            $("#" + $(this).attr("data-tr")).addClass('has-error');
-                            pscount = true;
-                        }
+                    if ($("#propertyname").val() == "") {
+                        errormsgsummary += "<li> Please Enter Property Name </li>";
+                        $("#propertyname").addClass('has-error');
+                        if (control == "")
+                            control = $("#propertyname");
                     }
-                });
 
-                if (pscount == true) {
-                    errormsgsummary += "<li> Please Select How Many Option for the Selected Positions </li>";
-                }
-                if (errormsgsummary != "")
-                {
+                    if ($("#datechoosen").val() == "") {
+                        errormsgsummary += "<li> Please Enter Date </li>";
+                        $("#datechoosen").addClass('has-error');
+                        if (control == "")
+                            control = $("#datechoosen");
+                    }
 
-                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                    if ($("#requestorname").val() == "") {
+                        errormsgsummary += "<li> Please Enter Requestor Name </li>";
+                        $("#requestorname").addClass('has-error');
+                        if (control == "")
+                            control = $("#requestorname");
+                    }
 
-                    setTimeout(ScrollToElement(control), 3000);
-                    $("#Submit").prop('disabled', false);
-                    return false;
-                }
-                else
-                {
-                    $('#myModal').modal('hide');
 
-                    var quittext = "";
-                    var i = 0;
+                    if (!$("#chknewposition").is(":checked") && !$("#chkreplacementposition").is(":checked")) {
+                        errormsgsummary += "<li> Please Select New Position Or Replacement Position </li>";
+                        $("#chknewposition").addClass('has-error');
+                        if (control == "")
+                            control = $("#chknewposition");
+                    }
 
-                    $('.chkposition').each(function (index, obj)
-                    {
+                    if (!$("#postindeed").is(":checked") && !$("#postassociation").is(":checked")) {
+                        errormsgsummary += "<li> Please Select Post Option </li>";
+                        $("#postindeed").addClass('has-error');
+                        if (control == "")
+                            control = $("#postindeed");
+                    }
+
+
+                    if ($("#chkreplacementposition").is(":checked") && $("#replaceperson").val() == "") {
+                        errormsgsummary += "<li> Please Enter Replacement Person Name </li>";
+                        $("#replaceperson").addClass('has-error');
+                        if (control == "")
+                            control = $("#replaceperson");
+                    }
+
+
+                    //if ($("#requisitionnumber").val() == "") {
+                    //    errormsgsummary += "<li> Please Enter Requisition Number </li>";
+                    //    $("#requisitionnumber").addClass('has-error');
+                    //    if (control == "")
+                    //        control = $("#requisitionnumber");
+                    //}
+
+                    //if ($("#dateposted").val() == "") {
+                    //    errormsgsummary += "<li> Please Select Date Posted </li>";
+                    //    $("#dateposted").addClass('has-error');
+                    //    if (control == "")
+                    //        control = $("#dateposted");
+                    //}
+                    var pscount = false;
+                    $('.chkposition').each(function (index, obj) {
                         if (this.checked === true) {
-                            quittext += $(this).val() +"--"+$("#"+$(this).attr("data-tr")).val()+ ",";
-                            i++;
+                            if ($("#" + $(this).attr("data-tr")).val() == "") {
 
-                        }
-                    });
-                    quittext = quittext.replace(/(^,)|(,$)/g);
-                    quittext=quittext.replace("undefined", "");
-
-
-                    $(".alert").html('Processing');
-                    $('#toastnotification').modal('show'); 
-
-                    var insertForm = new FormData();
-                    insertForm.append('property', $("#propertyname").val());
-                    insertForm.append('date', $("#datechoosen").val());
-                    insertForm.append('requestorname', $("#requestorname").val());
-                  
-                    if (i > 1)
-                    {
-                        insertForm.append('position', "Multiple");
-                        insertForm.append('positioncombined', quittext);
-                    }
-                    else
-                    {
-                        insertForm.append('position', quittext);
-                        insertForm.append('positioncombined', quittext);
-                    }
-
-                    if ($("#chkother").is(":checked")) {
-                        insertForm.append('chkposition', true);
-                        insertForm.append('txtother', $("#txtother").val());
-                    }
-                    else
-                    {
-                        insertForm.append('chkposition', false);
-                        insertForm.append('txtother', '');
-                    }
-                  
-                    if ($("#chknewposition").is(":checked"))
-                    {
-                        insertForm.append('chknewposition', true);
-                        insertForm.append('type', 'new position');
-                    }
-                    else
-                    {
-                        insertForm.append('chknewposition', false);
-                    }
-
-                    if ($("#chkreplacementposition").is(":checked")) {
-                        insertForm.append('chkreplacementposition', true);
-
-                        insertForm.append('replaceperson', $("#replaceperson").val());
-                        insertForm.append('type', 'replacement position');
-                    }
-                    else
-                    {
-                        insertForm.append('chkreplacementposition', false);
-                        insertForm.append('replaceperson', "");
-                    }
-                    insertForm.append('post', "");
-                    if ($("#postindeed").is(":checked"))
-                    {
-                        insertForm.append('postindeed', true);   
-                        insertForm.append('post', "Post Indeed");
-                    }
-                    else
-                    {
-                        insertForm.append('postindeed', false);                     
-                    }
-
-                    if ($("#postassociation").is(":checked"))
-                    {
-                        insertForm.append('postassociation', true);
-                        insertForm.append('post', "Association");
-
-                    } 
-                    else
-                    {
-                        insertForm.append('postassociation', false);
-                    }
-
-                    if ($("#chkotherpost").is(":checked"))
-                    {
-                        insertForm.append('chkotherpost', true);
-                        insertForm.append('otherpost', $("#otherpost").val());
-                        insertForm.append('post', "Other");
-                    }
-                    else
-                    {
-                        insertForm.append('chkotherpost', false);
-                        insertForm.append('otherpost', '');
-                    }
-
-                    
-                    
-                    insertForm.append('specialinstructions', $("#specialinstructions1").val() );
-              
-                    insertForm.append('requisitionnumber', $("#requisitionnumber").val());
-                    insertForm.append('dateposted', $("#dateposted").val());
-                    insertForm.append('notes', $("#notes1").val());                   
-                    insertForm.append('CreatedBy', $("#CreatedBy").val());
-                    insertForm.append('CreatedByName', $("#CreatedByName").val());
-                   
-                    $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertRequisitionRequest",
-                        type: 'POST',
-                        dataType: "JSON",
-                        processData: false,
-                        contentType: false,
-                        data: insertForm,
-                        success: function (data) {
-                            // To-do code if ajax request is successful
-
-                            if (data['error'] == false)
-                            {
-                                leaseid = data['insertedId'];
-
-                                var insertForm = new FormData();
-                                insertForm.append('refid', leaseid);
-                                insertForm.append('form', "RequisitionRequest");
-
-                                $.ajax({
-                                    url: "/Hr/SendHrFormCompletionNotification/",
-                                    type: 'POST',
-                                    dataType: "JSON",
-                                    processData: false,
-                                    contentType: false,
-                                    data: insertForm,
-                                    success: function (data) {
-                                        // To-do code if ajax request is successful
-
-                                    },
-                                    error: function (ts) {
-                                        //  alert('error' + ts.errorMessage);
-                                    }
-                                });
-                                GetAllHRFORMs('Requisition Request');
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
-
-
-                                document.getElementById("submitform").reset();
-                                $("#Submit").prop('disabled', false);
-                                setTimeout(function () {
-
-                                    $("#print").attr('disabled', false);
-                                    $("#pdf").attr('disabled', false);
-                                    $("#Submit").attr('disabled', false);
-                                    $('#toastnotification').modal('hide');
-                                }, 3000);
+                                $("#" + $(this).attr("data-tr")).addClass('has-error');
+                                pscount = true;
                             }
-                            else {
-                                $("#status").html(data['errorMsg']);
-
-                            }
-
-
-                        },
-                        error: function (ts) {
-                            alert('error' + ts.errorMessage);
                         }
                     });
 
-                }
+                    if (pscount == true) {
+                        errormsgsummary += "<li> Please Select How Many Option for the Selected Positions </li>";
+                    }
+                    if (errormsgsummary != "") {
+
+                        $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                        setTimeout(ScrollToElement(control), 3000);
+                        $("#Submit").prop('disabled', false);
+                        return false;
+                    }
+                    else {
+                        $('#myModal').modal('hide');
+
+                        var quittext = "";
+                        var i = 0;
+
+                        $('.chkposition').each(function (index, obj) {
+                            if (this.checked === true) {
+                                quittext += $(this).val() + "--" + $("#" + $(this).attr("data-tr")).val() + ",";
+                                i++;
+
+                            }
+                        });
+                        quittext = quittext.replace(/(^,)|(,$)/g);
+                        quittext = quittext.replace("undefined", "");
 
 
-                if ($("#UserR").val() == "HR Manager") {
-                    $("#notes1,#requisitionnumber,dateposted").prop("disabled", false);
+                        $(".alert").html('Processing');
+                        $('#toastnotification').modal('show');
+
+                        var insertForm = new FormData();
+                        insertForm.append('property', $("#propertyname").val());
+                        insertForm.append('date', $("#datechoosen").val());
+                        insertForm.append('requestorname', $("#requestorname").val());
+
+                        if (i > 1) {
+                            insertForm.append('position', "Multiple");
+                            insertForm.append('positioncombined', quittext);
+                        }
+                        else {
+                            insertForm.append('position', quittext);
+                            insertForm.append('positioncombined', quittext);
+                        }
+
+                        if ($("#chkother").is(":checked")) {
+                            insertForm.append('chkposition', true);
+                            insertForm.append('txtother', $("#txtother").val());
+                        }
+                        else {
+                            insertForm.append('chkposition', false);
+                            insertForm.append('txtother', '');
+                        }
+
+                        if ($("#chknewposition").is(":checked")) {
+                            insertForm.append('chknewposition', true);
+                            insertForm.append('type', 'new position');
+                        }
+                        else {
+                            insertForm.append('chknewposition', false);
+                        }
+
+                        if ($("#chkreplacementposition").is(":checked")) {
+                            insertForm.append('chkreplacementposition', true);
+
+                            insertForm.append('replaceperson', $("#replaceperson1").val());
+                            insertForm.append('type', 'replacement position');
+                        }
+                        else {
+                            insertForm.append('chkreplacementposition', false);
+                            insertForm.append('replaceperson', "");
+                        }
+                        insertForm.append('post', "");
+                        if ($("#postindeed").is(":checked")) {
+                            insertForm.append('postindeed', true);
+                            insertForm.append('post', "Post Indeed");
+                        }
+                        else {
+                            insertForm.append('postindeed', false);
+                        }
+
+                        if ($("#postassociation").is(":checked")) {
+                            insertForm.append('postassociation', true);
+                            insertForm.append('post', "Association");
+
+                        }
+                        else {
+                            insertForm.append('postassociation', false);
+                        }
+
+                        if ($("#chkotherpost").is(":checked")) {
+                            insertForm.append('chkotherpost', true);
+                            insertForm.append('otherpost', $("#otherpost").val());
+                            insertForm.append('post', "Other");
+                        }
+                        else {
+                            insertForm.append('chkotherpost', false);
+                            insertForm.append('otherpost', '');
+                        }
+
+
+
+                        insertForm.append('specialinstructions', $("#specialinstructions1").val());
+
+                        insertForm.append('requisitionnumber', $("#requisitionnumber").val());
+                        insertForm.append('dateposted', $("#dateposted").val());
+                        insertForm.append('notes', $("#notes1").val());
+                        insertForm.append('CreatedBy', $("#CreatedBy").val());
+                        insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                        $.ajax({
+                            url: $BaseApiUrl + "api/data/InsertRequisitionRequest",
+                            type: 'POST',
+                            dataType: "JSON",
+                            processData: false,
+                            contentType: false,
+                            data: insertForm,
+                            success: function (data) {
+                                // To-do code if ajax request is successful
+
+                                if (data['error'] == false) {
+                                    leaseid = data['insertedId'];
+
+                                    var insertForm = new FormData();
+                                    insertForm.append('refid', leaseid);
+                                    insertForm.append('form', "RequisitionRequest");
+
+                                    $.ajax({
+                                        url: "/Hr/SendHrFormCompletionNotification/",
+                                        type: 'POST',
+                                        dataType: "JSON",
+                                        processData: false,
+                                        contentType: false,
+                                        data: insertForm,
+                                        success: function (data) {
+                                            // To-do code if ajax request is successful
+
+                                        },
+                                        error: function (ts) {
+                                            //  alert('error' + ts.errorMessage);
+                                        }
+                                    });
+                                    GetAllHRFORMs('Requisition Request');
+                                    $(".alert").html('Record Successfully Updated');
+                                    $('#toastnotification').modal('show');
+
+
+                                    document.getElementById("submitform").reset();
+                                    $("#Submit").prop('disabled', false);
+                                    setTimeout(function () {
+
+                                        $("#print").attr('disabled', false);
+                                        $("#pdf").attr('disabled', false);
+                                        $("#Submit").attr('disabled', false);
+                                        $('#toastnotification').modal('hide');
+                                    }, 3000);
+                                }
+                                else {
+                                    $("#status").html(data['errorMsg']);
+
+                                }
+
+
+                            },
+                            error: function (ts) {
+                                alert('error' + ts.errorMessage);
+                            }
+                        });
+
+                    }
+
+
+                    if ($("#UserR").val() == "hr") {
+                        $("#notes1,#requisitionnumber,dateposted").prop("disabled", false);
+
+                    }
+                    else {
+                        $("#notes1,#requisitionnumber,#dateposted").prop("disabled", true);
+                    }
 
                 }
                 else {
-                    $("#notes1,#requisitionnumber,dateposted").prop("disabled", true);
+
+                    var errormsgsummary = "";
+
+                    if ($("#requisitionnumber").val() == "") {
+                        errormsgsummary += "<li> Please Enter Requistion Number </li>";
+                        $("#requisitionnumber").addClass('has-error');
+                        if (control == "")
+                            control = $("#requisitionnumber");
+                    }
+
+                    if ($("#dateposted").val() == "") {
+                        errormsgsummary += "<li> Please Enter Date Posted </li>";
+                        $("#dateposted").addClass('has-error');
+                        if (control == "")
+                            control = $("#dateposted");
+                    }
+
+                    //if ($("#requestorname").val() == "") {
+                    //    errormsgsummary += "<li> Please Enter Requestor Name </li>";
+                    //    $("#requestorname").addClass('has-error');
+                    //    if (control == "")
+                    //        control = $("#requestorname");
+                    //}
+
+                    if (errormsgsummary != "") {
+
+                        $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                        setTimeout(ScrollToElement(control), 3000);
+                        $("#Submit").prop('disabled', false);
+                        return false;
+                    }
+                    else {
+                        $('#myModal').modal('hide');
+
+
+                        $(".alert").html('Processing');
+                        $('#toastnotification').modal('show');
+
+                        var insertForm = new FormData();
+                        insertForm.append('refid', editid);
+                        insertForm.append('requisitionnumber', $("#requisitionnumber").val());
+                        insertForm.append('notes', $("#notes1").val());
+                        insertForm.append('dateposted', $("#dateposted").val());
+
+                        $.ajax({
+                            url: $BaseApiUrl + "api/data/updaterequisitionrequest/",
+                            type: 'POST',
+                            dataType: "JSON",
+                            processData: false,
+                            contentType: false,
+                            data: insertForm,
+                            success: function (data)
+                            {
+
+                                // To-do code if ajax request is successful
+
+                                if (data  == true) {
+
+                                    GetAllHRFORMs('Requisition Request');
+                                    $(".alert").html('Record Successfully Updated');
+                                    $('#toastnotification').modal('show');
+                                    $(".btnEdit").hide();
+
+                                    document.getElementById("submitform").reset();
+                                    $("#Submit").prop('disabled', false);
+                                    setTimeout(function () {
+
+                                        $('#toastnotification').modal('hide');
+                                    }, 3000);
+                                }
+                                else {
+                                    $("#status").html(data);
+
+                                }
+
+                            },
+                            error: function (ts) {
+                                //  alert('error' + ts.errorMessage);
+                            }
+                        });
+                    }
                 }
 
             });

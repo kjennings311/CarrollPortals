@@ -220,5 +220,29 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
         }
+    
+        public virtual ObjectResult<proc_getcontactsforexcel_Result1> proc_getcontactsforexcel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getcontactsforexcel_Result1>("proc_getcontactsforexcel");
+        }
+    
+        public virtual ObjectResult<proc_getequitypartnersforexcel_Result1> proc_getequitypartnersforexcel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getequitypartnersforexcel_Result1>("proc_getequitypartnersforexcel");
+        }
+    
+        public virtual ObjectResult<proc_getpropertiesforexcel_Result1> proc_getpropertiesforexcel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertiesforexcel_Result1>("proc_getpropertiesforexcel");
+        }
+    
+        public virtual ObjectResult<proc_getpropertydetailsforupdate_Result> proc_getpropertydetailsforupdate(Nullable<System.Guid> propertyid)
+        {
+            var propertyidParameter = propertyid.HasValue ?
+                new ObjectParameter("propertyid", propertyid) :
+                new ObjectParameter("propertyid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertydetailsforupdate_Result>("proc_getpropertydetailsforupdate", propertyidParameter);
+        }
     }
 }
