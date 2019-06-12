@@ -19,11 +19,18 @@
                 <i style="
     font-weight: bold;" class="fa fa-plus-circle "></i><span style="font-family:inherit;"> New </span>
             </button>
-            <h1 style="color: white;
+            <h1 class="visible-lg visible-md" style="color: white;
     position: absolute;
   bottom: 0%;
     left: 1%;font-weight:bold;">
                 INCIDENT DASHBOARD & REPORTING
+            </h1>
+
+            <h1 class="visible-xs visible-sm" style="color: white;
+    position: absolute;
+  bottom: 0%;
+    left: 1%;font-weight:bold;">
+                INCIDENT DASHBOARD
             </h1>
         </div>
 
@@ -246,11 +253,11 @@
     margin-top: 15PX;
     text-align: center;
     color: white;
-    font-weight: bold;
-    margin-left: 5%; clear:both; border:1px solid black">
-            <tr style="" onclick="GetAllClaims('PropertyDamage')"> <td style="width:80%;    background: #797979;padding:10PX;"> PROPERTY DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="propcount" style="font-weight:bold;"> </span> </td></tr>
-            <tr onclick="GetAllClaims('General Liability')"> <td style="width:80%; background: #797979;padding:10PX;"> GENERAL LIABILITY CLAIM </td> <td style="background:#2f4050"> <span class="liabcount" style="font-weight:bold;"> </span> </td></tr>
-            <tr onclick="GetAllClaims('Mold Damage')"> <td style="width:80%; background: #797979;padding:10PX;"> MOLD DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="damagecount" style="font-weight:bold;"> </span> </td></tr>
+    font-weight: bold; font-size:12px;
+    margin-left: 5%; clear:both;">
+            <tr style="border-bottom: 1px solid;" onclick="GetAllClaims('PropertyDamage')"> <td style="width:80%;border-right: 3px solid white !important;    background: #797979;padding:10PX;"> PROPERTY DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="propcount" style="font-weight:bold;"> </span> </td></tr>
+            <tr style="border-bottom: 1px solid;" onclick="GetAllClaims('General Liability')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> GENERAL LIABILITY CLAIM </td> <td style="background:#2f4050"> <span class="liabcount" style="font-weight:bold;"> </span> </td></tr>
+            <tr onclick="GetAllClaims('Mold Damage')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> MOLD DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="damagecount" style="font-weight:bold;"> </span> </td></tr>
         </table>
         </div>
 
@@ -381,7 +388,7 @@
 
                 .ipbackground button {
                     top: 54.5% !important;
-                    right: -1% !important;
+                    right: -2% !important;
                     font-size: 14px;
                     font-weight: bold;
                 }
@@ -391,10 +398,11 @@
                     }
 
                 .ipbackground h1 {
-                    top: 24%;
-                    left: -1%;
+                    top: 22%;
+                    left: -11% !important;
                     font-weight: bold;
-                    font-size: 14px !important;
+                    font-size: 20px !important;
+                    width: 90%;
                 }
 
             .db {
@@ -538,7 +546,9 @@
         {
             display:block !important;
         }*/
-            .ibox-title {
+
+
+            .RowsContatiner .ibox-title {
                 padding: 17px !important;
             }
         }

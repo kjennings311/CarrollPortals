@@ -332,7 +332,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamnewemployee@carrollmg.com");
                         tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
@@ -388,6 +389,10 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5><p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
+                       
+                        tos.Add("iamregionalmanager@carrollmg.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                      //  tos.Add("iamnewemployee@carrollmg.com");
                         tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
@@ -443,6 +448,9 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += " Employee New Hire Notice  for "+NewhireDetails.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamhr@carrollmg.com ");
+                      //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
                         return _message;
                        // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -509,7 +517,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamnewemployee@carrollmg.com");
                         tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
@@ -566,6 +575,9 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamregionalmanager@carrollmg.com");
+                       // tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
                         return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -620,6 +632,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                         return _message;
                         // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -663,7 +677,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Employee Lease Rider <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
-                        tos.Add("shashank.trivedi@carrollorg.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                         return _message;
                     }
@@ -686,7 +701,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "Notice Of Employee Separation for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Notice Of Employee Separation <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
-                        tos.Add("shashank.trivedi@carrollorg.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                         return _message;
 
@@ -713,7 +729,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "Requisition Request   for " + NewhireDetails.PropertyName + " has been submitted. Please find attached copy of Requisition Request  <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com");
-                        tos.Add("shashank.trivedi@carrollorg.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                         return _message;
 
@@ -863,7 +880,7 @@ namespace Carroll.Data.Services.Helpers
 
                 mail.Subject = Message.Subject;
                 mail.Body = Message.Body;
-                mail.To.Clear();
+              //  mail.To.Clear();
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
                 mail.To.Add("sekhar.babu@forcitude.com");
@@ -965,7 +982,7 @@ namespace Carroll.Data.Services.Helpers
                 mail.IsBodyHtml = true;
                 mail.Subject = Message.Subject;
                 mail.Body = Message.Body;
-                mail.To.Clear();
+              //  mail.To.Clear();
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
                 mail.To.Add("sekhar.babu@forcitude.com");

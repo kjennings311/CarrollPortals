@@ -9,7 +9,6 @@
             <li>
                 <a href="~/Home/Index">Home</a>
             </li>
-
             <li class="active">
                 <strong>Equity Partners</strong>
             </li>
@@ -69,56 +68,26 @@
     </div>
 </div>
 
-<div class="RowsContatiner animated fadeInRight">
-    <div class="col-lg-12">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title" style="background:url('/img/equitybg.png');background-size: cover;padding: 240px 15px 7px;">
+<div class="modal fade bs-example-modal-lg " id="mobilepopup" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:95%" role="document">
+        <div class="modal-content" style="border-radius:25px">
+            <div class="modal-header" style="display:none">
 
-                <h1 style="padding-top:5px;color:white;text-transform:uppercase;margin-top:-10px;"> <b>  Equity Partners </b></h1>
-                <div class="ibox-tools" style="margin-top:-40px;color:white; font-size:20px;min-height:50px;">
-
-                    @if (@Model.RoleType.ToLower() == "administrator")
-                    {
-                        <a class="export" style="color:white;" href="/Hr/ExportEquityPartners"> <i class="fa fa-download"></i> Export As Excel </a>
-                        <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
-
-                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
-                        <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
-                            <i class="fa fa-trash"></i> Delete
-                        </a>
-
-                        <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
-                            <i class="fa fa-plus-circle"></i> New
-                        </a>
-                    }
-                </div>
+                <button style="" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
+            <div class="modal-body" style="padding: 0px 24px 25px 27px !important;">
 
+                <div class="row" style="padding: 5px;
+   ">
+                    <button style="" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-            <div class="ibox-content">
-                <table style="width:100%;" class="table  dtprops">
-                    <thead>
-                        <tr>
-                            @*<th></th>*@
-                            <th>Partner Name</th>
-                            <th>Address Line1</th>
-                            <th>Address Line2</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Zip</th>
-                            <th>Contact Person</th>
-                            <th>Record Date</th>
-                            <th>Created By</th>
-
-                        </tr>
-                    </thead>
-
-                </table>
+                    <table class="table table-striped table-condensed dataTable" cellspacing="2" cellpadding="1" id="mobilepopupbody"> </table>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
+
 <div class="AddEditContainer row" style="display:none;">
 
     <div class="col-lg-12">
@@ -181,7 +150,6 @@
 
         @@media only screen and (max-width : 767px) {
 
-
             .dtprops td:nth-child(2), .dtprops td:nth-child(3), .dtprops td:nth-child(4), .dtprops td:nth-child(5), .dtprops td:nth-child(6), .dtprops td:nth-child(8), .dtprops td:nth-child(9),
             .dtprops th:nth-child(2), .dtprops th:nth-child(3), .dtprops th:nth-child(4), .dtprops th:nth-child(5), .dtprops th:nth-child(6), .dtprops th:nth-child(8), .dtprops th:nth-child(9) {
                 display: none;
@@ -190,7 +158,8 @@
     </style>
 }
 
-@section Scripts {
+@section Scripts
+{
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/scripts/plugins/dataTablesjs")
     @Scripts.Render("~/scripts/plugins/input-maskjs")

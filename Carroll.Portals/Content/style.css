@@ -8668,6 +8668,15 @@ z-index:99999999 !important;
 /* Mobile View starts Here*/
 /* Custom, iPhone Retina */
 @media only screen and (max-width : 760px) {
+
+    div.dataTables_wrapper div.dataTables_filter input {
+        margin-left: 0.5em;
+        display: inline-block;
+        width: auto;
+        margin-bottom: 15px;
+    }
+
+
     .ibox-tools, .html5buttons, .dataTables_length {
         display: none !important;
     }
