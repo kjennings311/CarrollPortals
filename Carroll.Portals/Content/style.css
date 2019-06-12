@@ -8714,9 +8714,9 @@ z-index:99999999 !important;
         padding: 15px;
     }
 
-    .nav
+    .navbar-top-links 
     {
-        float:right !important;
+        float: right !important;
     }
 }
 
@@ -8740,19 +8740,19 @@ z-index:99999999 !important;
     }
 
 
-    .nav {
-        float: right !important;
-    }
+    /*.nav {
+        float: left !important;
+    }*/
 
-    .navbar-default {
-        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-        z-index: 1; /* Stay on top */
-        top: 0; /* Stay at the top */
+    /*.navbar-default {
+        position: fixed; 
+        z-index: 1;
+        top: 0; 
         left: 0;
         height: 100%;
         overflow:scroll;
         width:230px !important;
-    }
+    }*/
     .ipbackground {
         height: auto !important;
         background-position: center !important;

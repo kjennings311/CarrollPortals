@@ -3022,39 +3022,44 @@ namespace Carroll.Data.Entities.Repository
                                 change = true;
                             }
 
-                            if (othercontact.EquityPartner != row[10].ToString().Trim())
+                            if (!string.IsNullOrEmpty(row[11].ToString()))
                             {
-                                // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
-                                var searchstr = row[10].ToString().Trim();
 
-                                var otherpartner = (from tbl in _entities.EquityPartners
-                                                    where tbl.PartnerName.Contains(searchstr)
-                                                    select tbl).FirstOrDefault();
-
-                                if(otherpartner!= null)
+                                if (othercontact.EquityPartner != row[10].ToString().Trim())
                                 {
-                                    contact.EquityPartner = otherpartner.EquityPartnerId;
+                                    // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
+                                    var searchstr = row[10].ToString().Trim();
+
+                                    var otherpartner = (from tbl in _entities.EquityPartners
+                                                        where tbl.PartnerName.Contains(searchstr)
+                                                        select tbl).FirstOrDefault();
+
+                                    if (otherpartner != null)
+                                    {
+                                        contact.EquityPartner = otherpartner.EquityPartnerId;
+                                    }
+                                    else
+                                    {
+                                        // create new partner and update
+
+                                        EquityPartner cc = new EquityPartner();
+                                        cc.EquityPartnerId = Guid.NewGuid(); ;
+                                        cc.PartnerName = row[10].ToString().Trim();
+
+                                        cc.CreatedDate = DateTime.Now;
+                                        cc.CreatedBy = contact.CreatedBy;
+                                        cc.CreatedByName = "Excel Upload";
+                                        _entities.EquityPartners.Add(cc);
+                                        _entities.SaveChanges();
+                                        contact.EquityPartner = cc.EquityPartnerId;
+
+                                    }
+
+                                    change = true;
                                 }
-                                else
-                                {
-                                    // create new partner and update
-
-                                    EquityPartner cc = new EquityPartner();
-                                    cc.EquityPartnerId = Guid.NewGuid();;
-                                    cc.PartnerName = row[10].ToString().Trim();
-                                 
-                                    cc.CreatedDate = DateTime.Now;
-                                    cc.CreatedBy = contact.CreatedBy;
-                                    cc.CreatedByName = "Excel Upload";
-                                    _entities.EquityPartners.Add(cc);
-                                    _entities.SaveChanges();
-                                    contact.EquityPartner = cc.EquityPartnerId;
-
-                                }
-
-                                change = true;
                             }
-
+                            else
+                                contact.EquityPartner = null;
                             // Asset Manager
 
                             if (!string.IsNullOrEmpty(row[11].ToString()))
