@@ -816,9 +816,9 @@ namespace Carroll.Data.Entities.Repository
                 config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                 config.Columns = new List<DtableConfigArray>();
                 config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "Number", type = 0, href = "" });
-
-                config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Type", type = 0, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Type", type = 0, href = "" });
+              
                 // config.Columns.Add(new DtableConfigArray { name = "propertyNumber", label = "Property Number", type = 0, href = "" });
                 // config.Columns.Add(new DtableConfigArray { name = "propertyManager", label = "Property Manager", type = 0, href = "" });
                 //   config.Columns.Add(new DtableConfigArray { name = "propertyAddress", label = "Property Address", type = 0, href = "" });

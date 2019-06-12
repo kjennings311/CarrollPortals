@@ -1,6 +1,6 @@
-﻿
+﻿ 
 // var $BaseApiUrl = "http://localhost:1002/"; 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -50,12 +50,12 @@ function encodeImageFileAsURL(element)
 
 function closereviewmodal()
 {
-
     $("#reviewmodal").modal('hide'); 
 }
 
 
-function submitformdata() {
+function submitformdata()
+{
     $("#reviewmodal").modal('hide');
     $("#homeval").val('0');
     $("#toastnotificationhome").modal('hide');
@@ -936,7 +936,16 @@ function CheckNull(variable)
 
 function openmobilepopup(body)
 {
+    body = body.replace('null', '');
+    
     $("#mobilepopupbody").html(body);
+
+    $(".table td").each(function () {
+        $(this).text().replace("null", "");
+        $(this).text().replace("General Liability", "GL");
+        $(this).text().replace("Mold Damage", "ML");
+        $(this).text().replace("PropertyDamage", "PM");
+    });
 
     $("#mobilepopup").modal('show');
 }
@@ -975,6 +984,7 @@ function LoadContacts() {
                         scrollY: '50vh',
                         scrollCollapse: true,
                         "scrollX": true,
+                        "pagingType": "full",
                         "rowCallback": function (row, data) {
                             // do anything row wise here
                             $(row).attr('id', data["contactId"]);
@@ -988,7 +998,7 @@ function LoadContacts() {
                                 html=html.replace("null", "");
                                 $(row).attr('onClick', 'openmobilepopup("' + html + '");');
                             }
-                            console.log(data);
+                            //console.log(data);
 
                         },
                         "order": [[2, 'asc']],
@@ -1099,6 +1109,7 @@ function LoadPartners() {
                         scrollY: '50vh',
                         scrollCollapse: true,
                         "scrollX": true,
+                        "pagingType": "full",
                         "rowCallback": function (row, data)
                         {
                             // do anything row wise here
@@ -1257,6 +1268,7 @@ function LoadProperties() {
                         data: data,
                         processing: true,
                         "scrollX": true,
+                        "pagingType": "full",
                         "rowCallback": function (row, data)
                         {
                             // do anything row wise here
@@ -2571,7 +2583,9 @@ function GetAllClaims(Type) {
 
                     $(".dtprops").html("<thead> " + tablehead + "</thead><tbody> </tbody> <tfoot> " + tablehead + "</tfoot>");
 
-
+                    var doms = '<"html5buttons"B>lTfgitp';
+                    if ($ismobile)
+                        doms = '<"top"i>rt<"bottom"flp><"clear">';
 
                     var datatableVariable = $('.dtprops').DataTable({
                         data: configdata.rows,
@@ -2579,6 +2593,7 @@ function GetAllClaims(Type) {
                         scrollY: '50vh',
                         scrollCollapse: true,
                         "scrollX": true,
+                        "pagingType": "full",
                         "rowCallback": function (row, data)
                         {
                             // do anything row wise here      
@@ -2595,7 +2610,7 @@ function GetAllClaims(Type) {
                            
                         },
                         "order": [[2, 'asc']],
-                        dom: '<"html5buttons"B>lTfgitp', //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+                        dom: doms, //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
                         altEditor: false,      // Enable altEditor ****
