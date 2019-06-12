@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome to Carroll Portals</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg" @*onload='javascript:document.getElementById("demo").click();'*@>
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name"> <img src="~/img/Logo.png" /></h1>
+
+            </div>
+            <h3>You have successfully logged in using Carroll Single Sign-On platform.</h3>
+
+
+            <form class="m-t" role="form" action="~/Account/CheckLogin/" method="post">
+
+               
+                
+                <div class="form-group">
+                   redirecting you to the forms portal...
+                </div>
+             
+
+             
+            </form>
+            <p class="m-t"> <small>&copy; COPYRIGHT. CARROLL ORGANIZATION.</small> </p>
+        </div>
+    </div>
+    <script>
+        setTimeout("location.href='/home/index'", 5000);
+    </script>
+</body>
+
+
+</html>
+
+

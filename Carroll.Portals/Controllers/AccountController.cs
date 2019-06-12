@@ -14,6 +14,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Web;
 using System;
+using System.Configuration;
 
 namespace Carroll.Portals.Controllers
 {
@@ -35,11 +36,23 @@ namespace Carroll.Portals.Controllers
         // GET: Account
         public ActionResult Login()
         {
-            if(Session["Vm_UserId"] == null)
+            if (Session["Vm_UserId"] == null)
+            {
+             
+                if (ConfigurationManager.AppSettings["UseOneLogin"] == "true")return Redirect("/sso.aspx");
+                else return View();               
 
-            return View();
+            }
             else
                 return RedirectToAction("Index", "Home");
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        // GET: Account
+        public ActionResult LoginSuccess()
+        {
+            return View();  
         }
 
         [AllowAnonymous]
@@ -207,7 +220,7 @@ namespace Carroll.Portals.Controllers
             cookie1.Expires = DateTime.Now.AddYears(-1);
             Response.Cookies.Add(cookie1);
 
-            return RedirectToAction("Login");
+            return Redirect("/loggedout.aspx");//RedirectToAction("Login");
         }
 
         public ActionResult Register()

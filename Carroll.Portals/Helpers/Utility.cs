@@ -14,6 +14,7 @@ namespace Carroll.Portals.Helpers
     {
         public static string ResizePhoto(int iWidth, int iHeight, Image image)
         {
+            
             // Resize the image
             Bitmap b = new Bitmap(iWidth,iHeight);
             Graphics g = Graphics.FromImage(b);
@@ -74,4 +75,6 @@ namespace Carroll.Portals.Helpers
             return JsonConvert.SerializeObject(_user);
         }
     }
+
+  
 }

@@ -9,12 +9,13 @@
                                 <img src="~/img/corpLogo.png" />
                             </span>
                             <p>&nbsp;</p>
-                            <strong class="font-bold"> @Model.Name </strong>
+                            <strong class="font-bold ">You are logged in as </strong>
                             <input type="hidden" id="CreatedByName" value="@Model.Name" />
                             <input type="hidden" id="CreatedBy" value="@Model.UserId" />
                             <input type="hidden" id="UserPropertyAccess" value="@Model.PropertyId" />
                             <input type="hidden" id="UserR" value="@Model.RoleType" />
-                        </span> <span class="text-muted text-xs block">Access Level -  @Model.RoleType </span>
+                        </span> <span class="text-muted text-xs block text-uppercase"> @Model.Name </span>
+                        <!-- Access Level -  Model.RoleType-->
                     </a>
                     @*<ul class="dropdown-menu animated fadeInRight m-t-xs">
                     <li><a href="~/Account/Logout">Logout</a></li>

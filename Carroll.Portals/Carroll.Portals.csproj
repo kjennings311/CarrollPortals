@@ -205,6 +205,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="accessdenied.aspx" />
+    <Content Include="App_Code\Saml.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -222,7 +224,9 @@
     <Compile Include="GetCurrentUser.ashx.cs">
       <DependentUpon>GetCurrentUser.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccountSettings.cs" />
     <Compile Include="Helpers\AdminFilter.cs" />
+    <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Helpers\BaseModel.cs" />
     <Compile Include="Helpers\MyAuthorize.cs" />
     <Compile Include="Helpers\MyExceptionHandler.cs" />
@@ -249,6 +253,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="consume.aspx" />
     <Content Include="Content\a4css.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -438,6 +443,8 @@
     <Content Include="img\residentbg.jpg" />
     <Content Include="img\residentreferaltop.png" />
     <Content Include="img\resrel.jpg" />
+    <Content Include="loggedout.aspx" />
+    <Content Include="loginsuccess.aspx" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
@@ -834,6 +841,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="sso.aspx" />
     <Content Include="ValidateUser.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -923,6 +931,7 @@
     <Content Include="Views\Resident\Printresidentcontact123.cshtml" />
     <Content Include="Views\Resident\Printresidentcontact.cshtml" />
     <Content Include="Views\Outlink\VerifyEmployeeNewHireNotice.cshtml" />
+    <Content Include="Views\Account\LoginSuccess.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
