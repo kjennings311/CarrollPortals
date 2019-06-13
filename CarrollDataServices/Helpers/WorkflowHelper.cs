@@ -327,7 +327,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+ "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -384,7 +384,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5><p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -442,7 +442,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for "+NewhireDetails.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -512,7 +512,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -569,7 +569,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <i style='font-size:9px;font-style:italic;'> **Please note that this link will expire within 48 hours </i> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -626,7 +626,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -671,7 +671,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Employee Lease Rider <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -695,7 +695,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                        //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Notice Of Employee Separation has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "Notice Of Employee Separation for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Notice Of Employee Separation <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -705,9 +705,6 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                         return _message;
-
-
-
                     }
                     else
                         return false;
@@ -722,8 +719,7 @@ namespace Carroll.Data.Services.Helpers
                     if (NewhireDetails != null)
                     {
                         // subject and body
-
-                        //   var link = "http://localhost/Outlink/Open?link=" + dl.DynamicLinkId;
+                        //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Requisition Request has been Submitted";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "Requisition Request   for " + NewhireDetails.PropertyName + " has been submitted. Please find attached copy of Requisition Request  <h5> Thank You, <br> Carroll Management Group   </div></div>";
@@ -733,9 +729,6 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                         return _message;
-
-
-
                     }
                     else
                         return false;

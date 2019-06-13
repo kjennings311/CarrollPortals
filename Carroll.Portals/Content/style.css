@@ -8773,7 +8773,8 @@ z-index:99999999 !important;
 
         .bottom
         {
-            margin-top:10px !important;
+            margin-top:15px !important;
+            margin-bottom:10px !important;
         }
         #mobilepopup {
             top: 20% !important;
@@ -8799,6 +8800,14 @@ z-index:99999999 !important;
     {
         padding-left: 0px !important;
     }
+
+    input[type=checkbox], input[type=radio] 
+    {
+        margin: -5px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+    }
+
 }
 
 

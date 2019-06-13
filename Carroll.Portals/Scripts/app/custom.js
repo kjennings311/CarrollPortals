@@ -1,12 +1,13 @@
 ﻿ 
-// var $BaseApiUrl = "http://localhost:1002/"; 
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ // var $BaseApiUrl = "http://localhost:1002/"; 
+var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
 
 var $ismobile = false;
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
+{
     // Take the user to a different screen here.
     $ismobile = true;
 }
@@ -17,8 +18,7 @@ function validateEmail(emailID)
     atpos = emailID.indexOf("@");
     dotpos = emailID.lastIndexOf(".");
     if (atpos < 1 || (dotpos - atpos < 2))
-    {
-    
+    {    
         return false;
     }
     return (true);
@@ -28,7 +28,8 @@ var imagebase64 = "";
 
 function encodeImageFileAsURL(element)
 {
-      var filesSelected = element.files;
+    var filesSelected = element.files;
+
     if (filesSelected.length > 0)
     {
         var fileToLoad = filesSelected[0];
@@ -75,7 +76,6 @@ function BindElements() {
     {
         if (processing == false)
         {
-
 
             if ($("#homeval").length > 0) {
                 if ($("#homeval").val() == '1') {
@@ -333,6 +333,7 @@ function LoadUserProperty()
 
 function getForm(FormName, RecordId)
 {
+
     var formUrl = "";
     var TXT_ERROR = " <div class=\"alert alert-danger alert-dismissable failure-message\" style=\"display:none\"><div id=\"failureMessage\">there was an error!</div> </div>";
     var TXT_SUCCESS = "<div class=\"alert alert-success alert-dismissable success-message\" style=\"display:none\"><div id=\"successMessage\"></div> </div>";
@@ -345,7 +346,7 @@ function getForm(FormName, RecordId)
     var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-3 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-6"> <div class="col-md-1" > <input class="form-control" type="checkbox" style="width:18px;"  id="{1}" value="1"   {2}></div> </div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-3 col-xs-9 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-6 col-xs-3"> <div class="col-md-1 col-xs-12" > <input class="form-control" type="checkbox" style="width:18px;"  id="{1}" value="1"   {2}></div> </div></div>';
     var $person = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
     var $savebuttons = '<div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
@@ -502,6 +503,12 @@ function getForm(FormName, RecordId)
             BindElements();
             ApplyInputMask($(".dynamicForm"));
             ApplyTokenInput($(".dynamicForm"));
+
+            if ($("#DateReported").length > 0)
+            {
+                document.getElementById("DateReported").valueAsDate = new Date();
+                $("#DateReported").prop("disabled", true);
+            }
         }
 
     });
@@ -3747,7 +3754,7 @@ $(document).ready(function ()
         }      
         else
         {
-            var ext = $('#my_file_field').val().split('.').pop().toLowerCase();
+            var ext = $('#logo').val().split('.').pop().toLowerCase();
 
             if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv','avi','mov','mpg','wmv','3gp']) == -1)
             {
