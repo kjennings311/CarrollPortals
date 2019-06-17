@@ -193,7 +193,7 @@ namespace Carroll.Data.Services.Models
                 return _repository.GetAllEquityPartnersForExcel().ToList();   
         }
 
-        public List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel()
+        public List<proc_getpropertiesforexcelupdate_Result> GetAllPropertiesForExcel()
         {          
                 return _repository.GetAllPropertiesForExcel().ToList();           
         }

@@ -647,21 +647,28 @@ namespace Carroll.Data.Entities.Repository
                     case EntityType.Partner:
 
                         #region [Partner]
-
-                        if (string.IsNullOrEmpty(optionalSeachText))
+                        List<proc_getequitypartners_Result> _result1 = _entities.proc_getequitypartners().ToList();
+                        if (!string.IsNullOrEmpty(optionalSeachText))
                         {
-                            return (from tbl in _entities.EquityPartners
-                                    join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
-                                    select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
+                            dynamic _temp = _result1.Where(s => s.PartnerName.ToLower().Contains(optionalSeachText) || s.AddressLine1.ToLower().Contains(optionalSeachText) || s.AddressLine2.ToLower().Contains(optionalSeachText) || s.City.ToLower().Contains(optionalSeachText) || s.State.ToLower().Contains(optionalSeachText) || s.ZipCode.ToLower().Contains(optionalSeachText) || s.ContactPerson.ToLower().Contains(optionalSeachText)).ToList();
+                            return _temp;
+                        }
+                        return _result1;
 
-                        }
-                        else
-                        {
-                            return (from tbl in _entities.EquityPartners
-                                    join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
-                                    where tbl.IsActive == true && (tbl.PartnerName.Contains(optionalSeachText) || tbl.AddressLine1.Contains(optionalSeachText) || tbl.AddressLine2.Contains(optionalSeachText) || tbl.City.Contains(optionalSeachText) || tbl.State.Contains(optionalSeachText))
-                                    select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
-                        }
+                        //if (string.IsNullOrEmpty(optionalSeachText))
+                        //{
+                        //    return (from tbl in _entities.EquityPartners
+                        //            join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                        //            select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
+
+                        //}
+                        //else
+                        //{
+                        //    return (from tbl in _entities.EquityPartners
+                        //            join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                        //            where tbl.IsActive == true && (tbl.PartnerName.Contains(optionalSeachText) || tbl.AddressLine1.Contains(optionalSeachText) || tbl.AddressLine2.Contains(optionalSeachText) || tbl.City.Contains(optionalSeachText) || tbl.State.Contains(optionalSeachText))
+                        //            select new { equityPartnerId = tbl.EquityPartnerId, partnerName = tbl.PartnerName, addressLine1 = tbl.AddressLine1, addressLine2 = tbl.AddressLine2, city = tbl.City, state = tbl.State, zipCode = tbl.ZipCode, contactId = tblcontact.FirstName + " " + tblcontact.LastName, createdDate = tbl.CreatedDate, createdByName = tbl.CreatedByName }).ToList();
+                        //}
 
 
                     //if (string.IsNullOrEmpty(optionalSeachText))
@@ -2458,11 +2465,11 @@ namespace Carroll.Data.Entities.Repository
         }
 
 
-        public List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel()
+        public List<proc_getpropertiesforexcelupdate_Result> GetAllPropertiesForExcel()
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-                return _entities.proc_getpropertiesforexcel().ToList();
+                return _entities.proc_getpropertiesforexcelupdate().ToList();
             }
         }
 
@@ -2792,10 +2799,10 @@ namespace Carroll.Data.Entities.Repository
                                 {
                                     // if changed, check contact exist with given name
 
-                                    var searchstr = row[1].ToString().Trim();
+                                    var searchstr = row[1].ToString().Trim().ToLower();
 
                                     var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                       select tbl).FirstOrDefault();
 
                                     if (chkcontact != null)
@@ -2865,9 +2872,9 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.RVP != row[3].ToString().Trim())
                                 {
                                     // if changed, check contact exist with given name
-                                    var searchstr = row[3].ToString().Trim();
+                                    var searchstr = row[3].ToString().Trim().ToLower();
                                     var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                       select tbl).FirstOrDefault();
 
                                     if (chkcontact != null)
@@ -2937,9 +2944,9 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.RVP != row[5].ToString().Trim())
                                 {
                                     // if changed, check contact exist with given name
-                                    var searchstr = row[5].ToString().Trim();
+                                    var searchstr = row[5].ToString().Trim().ToLower();
                                     var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                       select tbl).FirstOrDefault();
 
                                     if (chkcontact != null)
@@ -3028,10 +3035,10 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.EquityPartner != row[10].ToString().Trim())
                                 {
                                     // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
-                                    var searchstr = row[10].ToString().Trim();
+                                    var searchstr = row[10].ToString().Trim().ToLower();
 
                                     var otherpartner = (from tbl in _entities.EquityPartners
-                                                        where tbl.PartnerName.Contains(searchstr)
+                                                        where tbl.PartnerName.ToLower().Contains(searchstr)
                                                         select tbl).FirstOrDefault();
 
                                     if (otherpartner != null)
@@ -3068,9 +3075,9 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.AssetManager != row[11].ToString().Trim())
                                 {
                                     // if changed, check contact exist with given name
-                                    var searchstr = row[11].ToString().Trim();
+                                    var searchstr = row[11].ToString().Trim().ToLower();
                                     var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                       select tbl).FirstOrDefault();
 
                                     if (chkcontact != null)
@@ -3121,9 +3128,9 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.ConstructionManager != row[12].ToString().Trim())
                             {
                                 // if changed, check contact exist with given name
-                                var searchstr = row[12].ToString().Trim();
+                                var searchstr = row[12].ToString().Trim().ToLower();
                                 var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact != null)
@@ -3173,9 +3180,9 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.MarketingSpecialist != row[13].ToString().Trim())
                             {
                                 // if changed, check contact exist with given name
-                                var searchstr = row[13].ToString().Trim();
+                                var searchstr = row[13].ToString().Trim().ToLower();
                                 var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact != null)
@@ -3227,9 +3234,9 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.PropertyManager != row[14].ToString().Trim())
                             {
                                 // if changed, check contact exist with given name
-                                var searchstr = row[14].ToString().Trim();
+                                var searchstr = row[14].ToString().Trim().ToLower();
                                 var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact != null)
@@ -3320,16 +3327,38 @@ namespace Carroll.Data.Entities.Repository
                                 change = true;
                             }
 
-                            if (contact.TaxId != row[23].ToString().Trim())
+                            if (contact.Purchase_TookOver != row[22].ToString().Trim())
                             {
-                                contact.TaxId = row[23].ToString().Trim();
+                                contact.Purchase_TookOver = row[22].ToString().Trim();
                                 change = true;
                             }
 
-                            if (contact.AcquisitionDate.ToString() != row[22].ToString().Trim())
+
+                            if (contact.AcquisitionDate.ToString() != row[23].ToString().Trim())
                             {
-                                if(! string.IsNullOrEmpty(row[22].ToString().Trim()))
-                                contact.AcquisitionDate = Convert.ToDateTime(row[22].ToString().Trim());
+                                if (!string.IsNullOrEmpty(row[23].ToString().Trim()))
+                                {
+                                    var str = row[23].ToString().Trim().Replace("/", "-").Split('-');
+                                    contact.AcquisitionDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
+                                }
+                                //    contact.AcquisitionDate = Convert.ToDateTime(row[23].ToString().Trim().Replace("/", "-"));
+                                change = true;
+                            }
+                            
+                            if (contact.RefinancedDate.ToString() != row[24].ToString().Trim())
+                            {
+                                if (!string.IsNullOrEmpty(row[24].ToString().Trim()))
+                                {
+                                    var str = row[24].ToString().Trim().Replace("/", "-").Split('-');
+                                    contact.RefinancedDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
+                                }
+                                   // contact.RefinancedDate = Convert.ToDateTime(row[24].ToString().Trim().Replace("/", "-"));
+                                change = true;
+                            }
+
+                            if (contact.TaxId != row[25].ToString().Trim())
+                            {
+                                contact.TaxId = row[25].ToString().Trim();
                                 change = true;
                             }
 
@@ -3357,12 +3386,15 @@ namespace Carroll.Data.Entities.Repository
 
                         if (!string.IsNullOrEmpty(row[1].ToString()))
                         {
-                            var searchstr = row[1].ToString().Trim();
-                            var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr)
-                                                  select tbl).FirstOrDefault();
+                            var searchstr = row[1].ToString().Trim().ToLower();
 
-                                if (chkcontact != null)
+                          //  var chkcontact = _entities.Contacts.ToList().Where(a => searchstr.All(p=>(a.FirstName+a.LastName).ToLower().Contains(p))).FirstOrDefault();
+
+                            var chkcontact = (from tbl in _entities.Contacts
+                                              where (tbl.FirstName.ToLower()+" "+tbl.LastName.ToLower()) == searchstr
+                                              select tbl).FirstOrDefault();
+
+                            if (chkcontact != null)
                                 {
                                     contact1.VicePresident = chkcontact.ContactId;
                                     chkcontact.Phone = row[2].ToString();
@@ -3409,10 +3441,10 @@ namespace Carroll.Data.Entities.Repository
                         {
 
                             // if changed, check contact exist with given name
-                            var searchstr1 = row[3].ToString().Trim();
+                            var searchstr1 = row[3].ToString().Trim().ToLower();
                             var chkcontact1 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr1)
-                                                  select tbl).FirstOrDefault();
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr1
+                                               select tbl).FirstOrDefault();
 
                                 if (chkcontact1 != null)
                                 {
@@ -3463,10 +3495,10 @@ namespace Carroll.Data.Entities.Repository
 
                             // For Regional Manager
                             // if changed, check contact exist with given name
-                            var searchstr2 = row[5].ToString().Trim();
+                            var searchstr2 = row[5].ToString().Trim().ToLower();
                             var chkcontact2 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr2)
-                                                  select tbl).FirstOrDefault();
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr2
+                                               select tbl).FirstOrDefault();
 
                                 if (chkcontact2 != null)
                                 {
@@ -3514,10 +3546,10 @@ namespace Carroll.Data.Entities.Repository
 
                         if (!string.IsNullOrEmpty(row[10].ToString()))
                         {
-                            var searchstr3 = row[10].ToString().Trim();
+                            var searchstr3 = row[10].ToString().Trim().ToLower();
                             // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
                             var otherpartner = (from tbl in _entities.EquityPartners
-                                                    where tbl.PartnerName.Contains(searchstr3)
+                                                    where tbl.PartnerName.ToLower().Contains(searchstr3)
                                                     select tbl).FirstOrDefault();
 
                                 if (otherpartner != null)
@@ -3553,10 +3585,10 @@ namespace Carroll.Data.Entities.Repository
                             // Asset Manager
                             // if changed, check contact exist with given name
 
-                            var searchstr4 = row[11].ToString().Trim();
+                            var searchstr4 = row[11].ToString().Trim().ToLower();
                             var chkcontact3 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr4)
-                                                  select tbl).FirstOrDefault();
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr4
+                                               select tbl).FirstOrDefault();
 
                                 if (chkcontact3 != null)
                                 {
@@ -3602,10 +3634,10 @@ namespace Carroll.Data.Entities.Repository
 
                         if (!string.IsNullOrEmpty(row[12].ToString()))
                         {
-                            var searchstr5 = row[12].ToString().Trim();
+                            var searchstr5 = row[12].ToString().Trim().ToLower();
                             var chkcontact4 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr5)
-                                                  select tbl).FirstOrDefault();
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr5
+                                               select tbl).FirstOrDefault();
 
                                 if (chkcontact4 != null)
                                 {
@@ -3651,10 +3683,10 @@ namespace Carroll.Data.Entities.Repository
                         if (!string.IsNullOrEmpty(row[13].ToString()))
                         {
                             // Marketing Specialist= -- 13 thc column
-                            var searchstr6 = row[13].ToString().Trim();
+                            var searchstr6 = row[13].ToString().Trim().ToLower();
                             var chkcontact5 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr6)
-                                                  select tbl).FirstOrDefault();
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr6
+                                               select tbl).FirstOrDefault();
 
                                 if (chkcontact5 != null)
                                 {
@@ -3704,10 +3736,10 @@ namespace Carroll.Data.Entities.Repository
                         {
 
 
-                            var searchstr7 = row[14].ToString().Trim();
+                            var searchstr7 = row[14].ToString().Trim().ToLower();
                             var chkcontact6 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName + tbl.LastName).Contains(searchstr7)
-                                                  select tbl).FirstOrDefault();
+                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr7
+                                               select tbl).FirstOrDefault();
 
                                 if (chkcontact6 != null)
                                 {
@@ -3770,10 +3802,23 @@ namespace Carroll.Data.Entities.Repository
                             contact1.ZipCode = row[19].ToString().Trim();
                             contact1.EmailAddress = row[20].ToString().Trim();
                             contact1.LegalName = row[21].ToString().Trim();
+                        contact1.Purchase_TookOver = row[22].ToString().Trim();
+                        if (!string.IsNullOrEmpty(row[23].ToString().Trim()))
+                        {
+                            var str = row[23].ToString().Trim().Replace("/", "-").Split('-');
+                            contact1.AcquisitionDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
+                        }
+                        //    contact1.AcquisitionDate = Convert.ToDateTime(row[23].ToString().Trim().Replace("/","-").Substring();
 
-                            contact1.TaxId = row[23].ToString().Trim();
-                            if (!string.IsNullOrEmpty(row[22].ToString().Trim()))
-                                contact1.AcquisitionDate = Convert.ToDateTime(row[22].ToString().Trim());
+                        if (!string.IsNullOrEmpty(row[24].ToString().Trim()))
+                        {
+                            var str = row[24].ToString().Trim().Replace("/", "-").Split('-');
+                            contact1.RefinancedDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
+                        }
+                         //   contact1.RefinancedDate = Convert.ToDateTime(row[24].ToString().Trim().Replace("/", "-"));
+                        contact1.TaxId = row[25].ToString().Trim();
+                       
+                     
                             contact1.CreatedDate = DateTime.Now;
                             contact1.CreatedByName = "Excel Upload";
                             _entities.Properties.Add(contact1);

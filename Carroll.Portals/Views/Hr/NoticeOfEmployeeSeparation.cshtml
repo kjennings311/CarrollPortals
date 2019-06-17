@@ -2,6 +2,7 @@
     ViewBag.Title = "Notice of Employee Separation";
 }
 
+<input type="hidden" id="pageid" value="empseparation" />
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
@@ -33,9 +34,9 @@
                     <div class="ibox-tools" style="margin-top:-55px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a disabled="disabled" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>*@
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeSeparation');">
                             <i class="fa fa-plus-circle"></i> New
@@ -51,9 +52,9 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 @*<h1 class="modal-title" style="font-weight:bold;text-align: center;
-                            color: black;" id="gridSystemModalLabel">
-                                                            Payroll Status Change
-                                                        </h1>*@
+                                    color: black;" id="gridSystemModalLabel">
+                                                                    Payroll Status Change
+                                                                </h1>*@
                             </div>
                             <div class="modal-body">
                                 <div class="row" style="padding: 20px;
@@ -154,20 +155,20 @@
                                                 </TR>
                                             </TABLE>
                                             <P class="p11 ft1" style="margin-top:15px;">**What Policy specifically was violated? </P>
-                                            <P class="p12 ft1"><textarea type="text" id="polictyvoilated1" style="width:95%" ></textarea> </P>
+                                            <P class="p12 ft1"><textarea type="text" id="polictyvoilated1" style="width:95%"></textarea> </P>
                                             <P class="p13 ft1">Additional Remarks </P>
-                                            <P class="p14 ft1"><textarea type="text" id="remarks1" style="width:95%" > </textarea></P>
-                                          
+                                            <P class="p14 ft1"><textarea type="text" id="remarks1" style="width:95%"> </textarea></P>
+
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
-                                            
+
                                             <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
                                             <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" />  Date: <input type="date" id="sdate" /></P>
-                                           <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
+                                            <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
 
                                         <br /> <br />
-                                       
+
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
@@ -203,7 +204,7 @@
 {
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
-@section Styles 
+@section Styles
  {
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")
@@ -224,8 +225,7 @@
             font-family: "Arial"
         }
 
-        #page_1 
-        {
+        #page_1 {
             position: relative;
             overflow: hidden;
             /*margin: 50px 0px 48px 52px;*/
@@ -234,41 +234,38 @@
             width: 764px;
         }
 
-       #page_1 #p1dimg1 
-       {
+            #page_1 #p1dimg1 {
                 position: absolute;
                 top: 0px;
                 left: 8px;
                 z-index: -1;
                 width: 708px;
                 height: 563px;
-       }
+            }
 
-       #page_1 #p1dimg1 #p1img1 
-       {
+                #page_1 #p1dimg1 #p1img1 {
                     width: 708px;
                     height: 563px;
-      }
-       
-    .dclr 
-    {
-        clear: both;
-        float: none;
-        height: 1px;
-        margin: 0px;
-        padding: 0px;
-        overflow: hidden;
-    }
+                }
 
-    .ft0 {
-        font: 19px 'Arial';
-        line-height: 22px;
-    }
+        .dclr {
+            clear: both;
+            float: none;
+            height: 1px;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .ft0 {
+            font: 19px 'Arial';
+            line-height: 22px;
+        }
 
         .ft1 {
             font: 15px 'Arial';
             line-height: 17px;
-            margin-bottom:10px !important;
+            margin-bottom: 10px !important;
         }
 
         .ft2 {
@@ -362,7 +359,6 @@
             padding-left: 215px;
             margin-top: 10px;
             margin-bottom: 10px;
-        
         }
 
         .p4 {
@@ -626,15 +622,13 @@
 
     <script>
 
-        $(document).ready(function () 
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             GetAllHRFORMs('EmployeeSeparation');
 
 
-            $("input").change(function (e)
-            {
+            $("input").change(function (e) {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
@@ -654,8 +648,7 @@
             }
 
 
-            $("#2weekscom").change(function (e)
-            {
+            $("#2weekscom").change(function (e) {
                 e.preventDefault();
                 console.log($("#2weekscom").val());
                 if ($("#2weekscom").val() == "true") {
@@ -664,15 +657,14 @@
                 else {
                     $("#rehire").val("No");
                 }
-               
+
             });
 
 
             // on focus out get the PropertyName for Property Number
 
 
-            $("#propertynumber").focusout(function ()
-            {
+            $("#propertynumber").focusout(function () {
 
                 if ($("#propertynumber").val() == "") {
 
@@ -688,18 +680,16 @@
 
                     alert("Please Enter Property Number");
 
-                 //   $("#propertynumber").focus();
+                    //   $("#propertynumber").focus();
                 }
-                else
-                {
-                    
-                    $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber="+$("#propertynumber").val(), function (data)
-                    {
+                else {
+
+                    $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber=" + $("#propertynumber").val(), function (data) {
                         if (data == "") {
 
                             alert("Invalid Property Code");
 
-                         //   $("#propertynumber").focus();
+                            //   $("#propertynumber").focus();
                             $("#propertyname").val('');
                             //$('#toastnotification').modal('show');
 
@@ -715,14 +705,13 @@
                         else {
 
                             $("#propertyname").val(data);
-                        }  
+                        }
                     });
                 }
 
             });
 
-            $("#Submit").click(function (e)
-            {
+            $("#Submit").click(function (e) {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -737,7 +726,7 @@
                 $('.dis').each(function (index, obj) {
                     if (this.checked === true) {
                         dischargetext += $(this).val() + ",";
-                        cnt++;                       
+                        cnt++;
                     }
                 });
 
@@ -755,13 +744,13 @@
                     if (this.checked === true) {
                         quittext += $(this).val() + ",";
                         cnt++;
-                       
+
                     }
                 });
-               
+
                 quittext = quittext.replace(/(^,)|(,$)/g, "");
 
-                if (cnt == 1 && dischargetext=="")
+                if (cnt == 1 && dischargetext == "")
                     reason = quittext;
                 else
                     reason = "Multiple";
@@ -771,7 +760,7 @@
 
                 $('.wor').each(function (index, obj) {
                     if (this.checked === true) {
-                        worktext += $(this).val() + ",";  
+                        worktext += $(this).val() + ",";
                         cnt++;
                     }
                 });
@@ -796,7 +785,7 @@
                         control = $("#rehire");
                 }
 
-              
+
                 if ($("#propertyname").val() == "") {
                     errormsgsummary += "<li> Please Enter Property Name </li>";
                     $("#propertyname").addClass('has-error');
@@ -827,29 +816,26 @@
                         control = $("#jobtitle");
                 }
 
-                if ($("#chkviolated").is(":Checked") && $("#polictyvoilated1").val()=="")
-                {
+                if ($("#chkviolated").is(":Checked") && $("#polictyvoilated1").val() == "") {
                     errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
                     $("#polictyvoilated1").addClass('has-error');
-                    if (control == "")    
+                    if (control == "")
                         control = $("#polictyvoilated1");
                 }
 
-                if (errormsgsummary != "")
-                {
+                if (errormsgsummary != "") {
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
                     setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
                     $(".alert").html('Processing');
-                    $('#toastnotification').modal('show'); 
+                    $('#toastnotification').modal('show');
 
 
                     var insertForm = new FormData();
@@ -859,16 +845,16 @@
                     insertForm.append('rehire', $("#rehire").val());
                     insertForm.append('propertynumber', $("#propertynumber").val());
                     insertForm.append('jobtitile', $("#jobtitle").val());
-                    insertForm.append('policty', $("#polictyvoilated1").val() );
-                    insertForm.append('remarks', $("#remarks1").val() );
-              
+                    insertForm.append('policty', $("#polictyvoilated1").val());
+                    insertForm.append('remarks', $("#remarks1").val());
+
                     insertForm.append('keysreturned', $("#keysreturned").val());
 
-                    if ($("#noticegiven").val()=="1")
+                    if ($("#noticegiven").val() == "1")
                         insertForm.append('noticegives', true);
                     else
                         insertForm.append('noticegives', false);
-                    
+
                     insertForm.append('vacationpaidout', $("#vacationpaid").val());
                     insertForm.append('balance', $("#vacationbalance").val());
                     insertForm.append('weekscom', $("#2weekscom").val());
@@ -879,7 +865,7 @@
                     insertForm.append('reason', reason);
                     insertForm.append('ssignature', $("#ssignature").val());
                     insertForm.append('sdate', $("#sdate").val());
-                 
+
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
                     $("#status").html("<p style='color:green'> Processing </p>");
@@ -894,8 +880,7 @@
                         success: function (data) {
                             // To-do code if ajax request is successful
 
-                            if (data['error'] == false)
-                            {
+                            if (data['error'] == false) {
                                 leaseid = data['insertedId'];
 
 
@@ -923,18 +908,18 @@
                                 GetAllHRFORMs('EmployeeSeparation');
                                 $("#status").html('');
 
-                                    $("#submitform").trigger('reset');
+                                $("#submitform").trigger('reset');
                                 document.getElementById("submitform").reset();
                                 $("#Submit").prop('disabled', false);
                                 $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show'); 
-                                
+                                $('#toastnotification').modal('show');
+
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', false);
-                                    $('#toastnotification').modal('hide'); 
+                                    $('#toastnotification').modal('hide');
                                 }, 3000);
                             }
                             else {
@@ -954,7 +939,7 @@
 
             });
 
-         
+
 
 
         });

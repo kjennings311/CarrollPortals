@@ -873,11 +873,9 @@ namespace Carroll.Portals.Controllers
                 {
                     //Passing service base url  
                     client.BaseAddress = new Uri(Baseurl);
-
                     client.DefaultRequestHeaders.Clear();
                     //Define request data format  
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
                     //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                     //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
                     HttpResponseMessage Res = await client.GetAsync("api/data/ExportProperties");

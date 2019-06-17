@@ -62,7 +62,7 @@ namespace Carroll.Data.Entities.Repository
 
         List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel();
         List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel();
-        List<proc_getpropertiesforexcel_Result1> GetAllPropertiesForExcel();
+        List<proc_getpropertiesforexcelupdate_Result> GetAllPropertiesForExcel();
 
         dynamic ImportContactTableFromExcel(DataTable dt);
         dynamic ImportEquityPartnerTableFromExcel(DataTable dt);

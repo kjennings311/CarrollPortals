@@ -2,6 +2,7 @@
     ViewBag.Title = "Requisition Request";
 }
 
+<input type="hidden" id="pageid" value="requisitionrequest" />
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <ol class="breadcrumb" style="padding: 8px 15px;">
@@ -29,14 +30,14 @@
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
 
-                <div class="ibox-tools" style="margin-top:-55px;">
+                    <div class="ibox-tools" style="margin-top:-55px;">
 
-                    @if (@Model.RoleType.ToLower() == "hr")
-                    {
-                        <a disabled="disabled" class="btnEdit" href="#" style="font-size:30px; color:white; font-weight:bold"><i class="fa fa-edit"></i> Edit</a>                       }   @*
-            <a disabled="disabled" class="btnDelete" href="#">
-                <i class="fa fa-trash"></i> Delete
-            </a>*@
+                        @if (@Model.RoleType.ToLower() == "hr")
+                        {
+                            <a disabled="disabled" class="btnEdit" href="#" style="font-size:30px; color:white; font-weight:bold"><i class="fa fa-edit"></i> Edit</a> } @*
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('Requistion Request');">
                             <i class="fa fa-plus-circle"></i> New
@@ -71,17 +72,19 @@
                                                 <TR>
                                                     <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><input type="text" id="propertyname" /></P></TD>
 
-                                                    <TD class="tr0 td1"><P class="p0 ft3">
-    <SPAN class="ft2"> Date: </SPAN>
-    @if (@Model.RoleType.ToLower() == "hr")
-    {
-        <input type="text" id="datechoosen" />
-    }
-    else
-    {
-        <input type="date" id="datechoosen" />
-    }
-</P></TD>
+                                                    <TD class="tr0 td1">
+                                                        <P class="p0 ft3">
+                                                            <SPAN class="ft2"> Date: </SPAN>
+                                                            @if (@Model.RoleType.ToLower() == "hr")
+                                                            {
+                                                                <input type="text" id="datechoosen" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="date" id="datechoosen" />
+                                                            }
+                                                        </P>
+                                                    </TD>
                                                 </TR>
                                                 <TR>
                                                     <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0"> Requestor’s Name & Position </SPAN>: <input type="text" id="requestorname" /></P></TD>
@@ -98,20 +101,20 @@
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s7" id="chkgs" value=" Groundskeeper" />  Groundskeeper<select style="margin-left:18%;" class="chkposition" id="s7"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p3 ft1"><input type="checkbox" class="chkposition" data-tr="s8" id="chkhk" value="Housekeeper" />  Housekeeper <select style="margin-left:19.4%;" class="chkposition" id="s8"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition" data-tr="s9" id="chkother" value="Other" /> Other: <input type="text" id="txtother" /> <select style="margin-left:2%;" class="chkposition" id="s9"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p1 ft0">Select One: <SPAN class="ft1"><input type="radio" name="position" class="" id="chknewposition"  />  New Position</SPAN></P>
+                                            <P class="p1 ft0">Select One: <SPAN class="ft1"><input type="radio" name="position" class="" id="chknewposition" />  New Position</SPAN></P>
                                             <P class="p4 ft1"><input type="radio" class="" name="position" style="margin-left:0.5%;" id="chkreplacementposition" /> Replacement Position</P>
                                             <P class="p5 ft1">Name of Person(s) Replacing: <input type="text" id="replaceperson1" /> </P>
-                                            <P class="p1 ft1"><SPAN class="ft0">Post to: </SPAN>  <input type="checkbox" id="postindeed"  />  Carroll Careers/Indeed</P>
+                                            <P class="p1 ft1"><SPAN class="ft0">Post to: </SPAN>  <input type="checkbox" id="postindeed" />  Carroll Careers/Indeed</P>
                                             <P class="p6 ft1"> <input type="checkbox" id="postassociation" />  Apartment Association</P>
                                             <P class="p4 ft1"> <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost" /> </P>
                                             <P class="p7 ft1">Special Instructions (i.e. confidential posting, etc.)</P>
-                                            <P class="p2 ft1"><textarea type="text" style="width:100%" id="specialinstructions1" > </textarea> </P>
-                                            
+                                            <P class="p2 ft1"><textarea type="text" style="width:100%" id="specialinstructions1"> </textarea> </P>
+
                                             <P class="p8 ft0">For Recruiting Use <SPAN class="ft1">:</SPAN> </P>
                                             <P class="p7 ft1">Requisition Number(s): <input type="text" disabled id="requisitionnumber" /> </P>
                                             <P class="p7 ft1">Date Posted:<input type="date" disabled id="dateposted" /></P>
                                             <P class="p7 ft1">Notes:</P>
-                                            <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1" > </textarea></P>
+                                            <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1"> </textarea></P>
                                             <br /> <br />
                                             <div id="status"> </div>
                                             <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
@@ -341,8 +344,7 @@
 
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             var insertoredit = true;
@@ -350,62 +352,54 @@
             var editid = "";
             $(".btnEdit").hide();
 
-            $(".btnEdit").click(function ()
-            {
-//$("input,select,textarea").clear();
+            $(".btnEdit").click(function () {
+                //$("input,select,textarea").clear();
                 document.getElementById("submitform").reset();
                 var ht = $("tr.selected").find('td:eq(8)').html();
-                editid = ht.substring(ht.indexOf("?id=") + 4, ht.indexOf(" target=")-1);
+                editid = ht.substring(ht.indexOf("?id=") + 4, ht.indexOf(" target=") - 1);
 
-              
+
                 $('#myModal').modal('show');
 
                 insertoredit = false;
-            
-                $.get($BaseApiUrl + "api/Data/GetRequisitionRequest?riderid=" + editid, function (data)
-                {
-                    if (data != "")
-                    {
+
+                $.get($BaseApiUrl + "api/Data/GetRequisitionRequest?riderid=" + editid, function (data) {
+                    if (data != "") {
 
                         $("#propertyname").val(data.propertyName);
                         var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
                         $("#datechoosen").val(d);
 
-                      
+
                         $("#requestorname").val(data.requestorName);
 
-                        if (data.chkApartmentAssociation != "false")
-                        {
+                        if (data.chkApartmentAssociation != "false") {
                             $("#postassociation").prop("checked", true);
                         }
                         else
                             $("#postassociation").prop("checked", false);
 
-                        if (data.chkNewPosition != "false")
-                        {
+                        if (data.chkNewPosition != "false") {
                             $("#chknewposition").prop("checked", true);
                         }
                         else
                             $("#chknewposition").prop("checked", false);
 
 
-                        if (data.chkReplacementPosition != "false")
-                        {
+                        if (data.chkReplacementPosition != "false") {
                             $("#chkreplacementposition").prop("checked", true);
                             $("#replaceperson1").val(data.replacingPerson);
                         }
                         else
                             $("#chkreplacementposition").prop("checked", false);
 
-                        if (data.chkCarrollCareersIndeed != "false")
-                        {
+                        if (data.chkCarrollCareersIndeed != "false") {
                             $("#postindeed").prop("checked", true);
                         }
                         else
                             $("#postindeed").prop("checked", false);
 
-                        if (data.chkOtherPost != "false")
-                        {
+                        if (data.chkOtherPost != "false") {
                             $("#chkotherpost").prop("checked", true);
                             $("#otherpost").val(data.postOther);
                         }
@@ -434,11 +428,10 @@
                         }
 
 
-                        if (data.positionCombined.includes("Property Manager"))
-                        {
-                            $("#chkposition").prop("checked", true);      
+                        if (data.positionCombined.includes("Property Manager")) {
+                            $("#chkposition").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Property Manager--")) + 18;
-                            $("#s1").val(data.positionCombined.substring(i, i+1));
+                            $("#s1").val(data.positionCombined.substring(i, i + 1));
 
                         }
 
@@ -446,23 +439,23 @@
                             $("#chkassist").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Assistant Property Manager--")) + 28;
                             $("#s2").val(data.positionCombined.substring(i, i + 1));
-                           
+
                         }
 
                         if (data.positionCombined.includes("Leasing Manager")) {
                             $("#chklease").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Leasing Manager--")) + 17;
-                            $("#s3").val(data.positionCombined.substring(i, i+1));
+                            $("#s3").val(data.positionCombined.substring(i, i + 1));
 
                         }
 
 
                         if (data.positionCombined.includes("Leasing Consultant")) {
                             $("#chkleasec").prop("checked", true);
-                          
+
                             var i = parseInt(data.positionCombined.indexOf("Leasing Consultant--")) + 20;
-                           
-                            $("#s4").val(data.positionCombined.substring(i, i+1));
+
+                            $("#s4").val(data.positionCombined.substring(i, i + 1));
 
                         }
 
@@ -470,49 +463,45 @@
                         if (data.positionCombined.includes("Maintenance Supervisor")) {
                             $("#chkmas").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Maintenance Supervisor--")) + 24;
-                            $("#s5").val(data.positionCombined.substring(i, i+1));
+                            $("#s5").val(data.positionCombined.substring(i, i + 1));
 
                         }
 
 
-                        if (data.positionCombined.includes("Maintenance Technician"))
-                        {
+                        if (data.positionCombined.includes("Maintenance Technician")) {
                             $("#chkmt").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Maintenance Technician--")) + 24;
-                            $("#s6").val(data.positionCombined.substring(i, i+1));
+                            $("#s6").val(data.positionCombined.substring(i, i + 1));
 
                         }
 
 
-                        if (data.positionCombined.includes("Groundskeeper"))
-                        {
+                        if (data.positionCombined.includes("Groundskeeper")) {
                             $("#chkgs").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Groundskeeper")) + 15;
-                            $("#s7").val(data.positionCombined.substring(i, i+1));
+                            $("#s7").val(data.positionCombined.substring(i, i + 1));
                         }
 
 
-                        if (data.positionCombined.includes("Housekeeper"))
-                        {
+                        if (data.positionCombined.includes("Housekeeper")) {
                             $("#chkhk").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Housekeeper")) + 13;
-                            $("#s8").val(data.positionCombined.substring(i, i+1));
+                            $("#s8").val(data.positionCombined.substring(i, i + 1));
                         }
 
                         $("#requisitionnumber").val(data.requistionNumber);
 
-                        if (data.datePosted != null)
-                        {
+                        if (data.datePosted != null) {
 
-                        var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
+                            var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
                             $("#dateposted").val(d1);
 
                         }
 
-                     //   $("#dateposted").val(data.datePosted);
+                        //   $("#dateposted").val(data.datePosted);
                         $("#notes1").val(data.notes);
                     }
-                   
+
                 });
 
                 // gray out all input fields
@@ -520,7 +509,7 @@
                 $("input,select,textarea").prop("disabled", true);
 
                 $("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
-             
+
             });
 
 
@@ -547,8 +536,7 @@
             });
 
 
-            $("#Submit").click(function (e)
-            {
+            $("#Submit").click(function (e) {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -862,12 +850,11 @@
                             processData: false,
                             contentType: false,
                             data: insertForm,
-                            success: function (data)
-                            {
+                            success: function (data) {
 
                                 // To-do code if ajax request is successful
 
-                                if (data  == true) {
+                                if (data == true) {
 
                                     GetAllHRFORMs('Requisition Request');
                                     $(".alert").html('Record Successfully Updated');

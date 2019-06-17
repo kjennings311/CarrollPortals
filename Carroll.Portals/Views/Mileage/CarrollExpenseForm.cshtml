@@ -2,6 +2,8 @@
     ViewBag.Title = "Expense Reimbursement";
 }
 
+<input type="hidden" id="pageid" value="expense" />
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
@@ -59,23 +61,24 @@
                             <div class="modal-body">
                                 <div class="row" style="padding: 20px;padding-left:20px;border: 2px solid black;">
                                     <form id="submitform" onsubmit="return false;">
- <p class="c1 c8" style="margin-left: 30%;
+                                        <p class="c1 c8" style="margin-left: 30%;
     margin-top: 0px; margin-bottom:0px;">
                                             <span class="c7"> Expense Reimbursement</span>
                                         </p>
                                         <div class="col-md-7"> <img src="~/img/newhirenotice.png" /> </div>
-                                        <div class="col-md-5"> <p class="c1" style="text-align:right">
-    <span class="c0" >  <span class="name">  Name: </span>    <input type="text" style="width:70%" id="name" />  </span>
-</p>
+                                        <div class="col-md-5">
+                                            <p class="c1" style="text-align:right">
+                                                <span class="c0">  <span class="name">  Name: </span>    <input type="text" style="width:70%" id="name" />  </span>
+                                            </p>
                                             <p class="c1" style="text-align:right">
                                                 <span class="c0"> <span class="name">   Date Of Submission : </span> <input type="date" id="date" style="width:70%;" /> </span>
                                             </p>
 
-<p class="c1" style="text-align:right">
-    <span class="c0"><span class="name">   Address : </span><input type="text" id="address" style="width:70%;" /> </span>
-</p>
- </div>
-                                        
+                                            <p class="c1" style="text-align:right">
+                                                <span class="c0"><span class="name">   Address : </span><input type="text" id="address" style="width:70%;" /> </span>
+                                            </p>
+                                        </div>
+
                                         <table id="allorders" style="height: 670px;overflow: scroll; display:inline-block;border-collapse:collapse;" class="table table-bordered">
 
                                             <tbody style="display: table-header-group;">
@@ -282,75 +285,77 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-<div class="col-md-12">
-    <div class="col-md-6">
-        <p style="color:red"> <b style="font-size:16px; font-weight:bold">* Property team members </b> are to use this form mileage/travel expenses ONLY</p>
-        <p style="color:red"> <b> * when billing back to a property use Code: 6390-0007 </b> </p>
-        <p style="color:red">* when billing back for a due diligence use Yardi ID:CMG and Code: 1130-0070</p>
-    </div>
-    <div class="col-md-6">
-        <table class="table table-bordered" style="width: 60%;
-    float: right;">
-            <tr>
-                <td style="width:80%;">TOTAL EXPENSES</td>
-                <td> $ <span id="totalexpenses"> </span></td> </tr>
-            <tr> 
-                <td style="color:red"><span>  LESS ANY CORRECTIONS</span> </td>
-                <td> <span class="corrections"> <input type="number" style="width:80px" id="corrections" name="name" value="" /> </span></td> </tr>
-            <tr>
-                <td style="font-size:20px;"><span> BALANCE DUE </span></td>
-                <td> $ <span id="balancedue"> </span></td>
-            </tr>
-        </table>
-    </div>
-</div>
-                                        
                                         <div class="col-md-12">
-    <div class="col-md-5">
+                                            <div class="col-md-6">
+                                                <p style="color:red"> <b style="font-size:16px; font-weight:bold">* Property team members </b> are to use this form mileage/travel expenses ONLY</p>
+                                                <p style="color:red"> <b> * when billing back to a property use Code: 6390-0007 </b> </p>
+                                                <p style="color:red">* when billing back for a due diligence use Yardi ID:CMG and Code: 1130-0070</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <table class="table table-bordered" style="width: 60%;
+    float: right;">
+                                                    <tr>
+                                                        <td style="width:80%;">TOTAL EXPENSES</td>
+                                                        <td> $ <span id="totalexpenses"> </span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color:red"><span>  LESS ANY CORRECTIONS</span> </td>
+                                                        <td> <span class="corrections"> <input type="number" style="width:80px" id="corrections" name="name" value="" /> </span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="font-size:20px;"><span> BALANCE DUE </span></td>
+                                                        <td> $ <span id="balancedue"> </span></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
 
-        <table id="footertable" class="table table-bordered">
-            <thead style="background-color:aliceblue;"><tr><th>Corporate team members please use codes below: </th></tr></thead>
-            <tbody>
-                <tr><td> 1130-0070 - All Due Diligence Expenses </td></tr>
-                <tr><td> 6542-0034 - Travel expenses for Training,Asset.Mgmt. and Marketing  </td></tr>
-                <tr><td> 6542-0037 - Travel expenses for Construction </td></tr>
-                <tr><td> 6542-0039 - Travel expenses for Operations </td></tr>
-                <tr><td> 6542-0035 - Travel expenses - Other </td></tr>
-                <tr><td> 6542-0058 - Pre-approved EDU fund expenses </td></tr>
-                <tr><td> 6542-0038 - Meals - Other </td></tr>
-                <tr><td> 6547-0010 - Office Supplies </td></tr>
-            </tbody>
-        </table>
-    </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-5">
 
-    <div class="col-md-6">
-        <p class="c1" style="margin-bottom:40px;">
-            <span class="c0"> Submitted By Signature <input type="text" id="signature" style="width:73%; margin-left:2%" />   </span> <br />
-            <span style="float:right;float: right;
-    margin-top: 20px;" class="c0">  Date : <input type="date" id="sdate" /> </span>
-        </p>
-        <br />
-        <br />
-        <p class="c1" style="margin-bottom:40px;" >
-            <span class="c0">Approved By Signature  <input type="text" id="approvedby" style="width:76%;" /> </span>
-            <span style="float:right;float: right;
-    margin-top:40px;" class="c0">  Date : <input type="date" id="adate" /> </span>
-        </p>
-    </div>
-</div>
+                                                <table id="footertable" class="table table-bordered">
+                                                    <thead style="background-color:aliceblue;"><tr><th>Corporate team members please use codes below: </th></tr></thead>
+                                                    <tbody>
+                                                        <tr><td> 1130-0070 - All Due Diligence Expenses </td></tr>
+                                                        <tr><td> 6542-0034 - Travel expenses for Training,Asset.Mgmt. and Marketing  </td></tr>
+                                                        <tr><td> 6542-0037 - Travel expenses for Construction </td></tr>
+                                                        <tr><td> 6542-0039 - Travel expenses for Operations </td></tr>
+                                                        <tr><td> 6542-0035 - Travel expenses - Other </td></tr>
+                                                        <tr><td> 6542-0058 - Pre-approved EDU fund expenses </td></tr>
+                                                        <tr><td> 6542-0038 - Meals - Other </td></tr>
+                                                        <tr><td> 6547-0010 - Office Supplies </td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p class="c1" style="margin-bottom:40px;">
+                                                    <span class="c0"> Submitted By Signature <input type="text" id="signature" style="width:73%; margin-left:2%" />   </span> <br />
+                                                    <span style="float:right;float: right;
+    margin-top: 20px;" class="c0">Date :<input type="date" id="sdate" /></span>
+                                                </p>
+                                                <br />
+                                                <br />
+                                                <p class="c1" style="margin-bottom:40px;">
+                                                    <span class="c0">Approved By Signature  <input type="text" id="approvedby" style="width:76%;" /> </span>
+                                                    <span style="float:right;float: right;
+    margin-top:40px;" class="c0">Date :<input type="date" id="adate" /></span>
+                                                </p>
+                                            </div>
+                                        </div>
 
 
-    <br />
-    <br />
-    <div id="status"> </div>
-    <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+                                        <br />
+                                        <br />
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
-        <input type="button" id="Submit" value="Submit" style="background:#2f4050 !important;border:none !important;" class="btn btn-primary" />
+                                            <input type="button" id="Submit" value="Submit" style="background:#2f4050 !important;border:none !important;" class="btn btn-primary" />
 
-        @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
-    </div>
-</form>
+                                        </div>
+                                    </form>
 
                                 </div>
                             </div>
@@ -384,64 +389,59 @@
     @Styles.Render("~/content/plugins/token-inputcss")
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
         #footertable td, #footertable th {
             text-align: left;
-            border:none !important;
+            border: none !important;
         }
+
         #footertable {
             border: 2px solid black;
         }
+
         .color-red {
             color: red;
         }
 
-        .un-selectable 
-        {
+        .un-selectable {
             background-color: #ddd;
             cursor: not-allowed;
         }
 
-        .txtshort
-        {
-            width:20%;
-
+        .txtshort {
+            width: 20%;
         }
 
-        .date-input
-        {
-            width:10%;
+        .date-input {
+            width: 10%;
         }
-        
+
         ol {
             margin: 0;
             padding: 0
         }
 
-        td.input-number
-        {
-            width:85px;
+        td.input-number {
+            width: 85px;
         }
 
-            td.input-number input
-            {
-                width:100%;
-                height:25px !important;
+            td.input-number input {
+                width: 100%;
+                height: 25px !important;
             }
-            
-            tfoot td
-            {
-                padding:5px !important;
-            }
-            
-            .hd {
-                font-weight: bold;
-                text-align: center;
-                vertical-align: middle !important;
-            }
-        
-        td 
-        {
-            text-align:center;
+
+        tfoot td {
+            padding: 5px !important;
+        }
+
+        .hd {
+            font-weight: bold;
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        td {
+            text-align: center;
         }
 
 
@@ -676,9 +676,8 @@
         }
 
         td.txtshort input {
-                width:90%;
-            }
-
+            width: 90%;
+        }
     </style>
 }
 
@@ -690,27 +689,23 @@
 
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             GetAllMileageForms('Expense Reimbursement');
 
-            $("input").change(function (e)
-            {
+            $("input").change(function (e) {
                 e.preventDefault();
 
-                if ($(this).val() == "")
-                {
+                if ($(this).val() == "") {
                     $(this).addClass("has-error");
                 }
-                else
-                {
+                else {
                     $(this).removeClass("has-error");
                 }
 
             });
-            
+
             var totalexpenses = 0;
             var corrections = 0;
             var totaldue = 0;
@@ -723,8 +718,7 @@
             var line7total = 0;
 
 
-            function writetotalsinhtml()
-            {
+            function writetotalsinhtml() {
 
                 totalexpenses = parseFloat(line1total + line2total + line3total + line4total + line5total + line6total + line7total).toFixed(2);
                 totaldue = parseFloat(totalexpenses - corrections).toFixed(2);
@@ -744,15 +738,11 @@
             }
 
 
-            function calculatetotalmiles(lineno)
-            {
-                if (lineno == 'numcol1') 
-                {
+            function calculatetotalmiles(lineno) {
+                if (lineno == 'numcol1') {
                     line1total = 0;
-                    $(".numcol1").each(function ()
-                    {
-                        if ($(this).val() != "" && $(this).val() != "0")
-                        {
+                    $(".numcol1").each(function () {
+                        if ($(this).val() != "" && $(this).val() != "0") {
                             line1total += parseFloat($(this).val());
                         }
                     });
@@ -850,7 +840,7 @@
                 writetotalsinhtml();
             });
 
-            
+
 
 
             var isfilled = true;
@@ -859,55 +849,50 @@
             var rowsarray = [];
 
 
-            function checkrowvalidation(controlid)
-            {
+            function checkrowvalidation(controlid) {
                 var allfilled = true;
 
-                if ($("#date" + controlid).val() == "")
-                {
+                if ($("#date" + controlid).val() == "") {
                     isfilled = false;
                     $("#date" + controlid).addClass('has-error');
                 }
-                else
-                {
+                else {
 
                     $("#date" + controlid).removeClass('has-error');
 
                 }
 
-                if ($("#origin" + controlid ).val() == "") {
+                if ($("#origin" + controlid).val() == "") {
                     isfilled = false;
-                    $("#origin" + controlid ).addClass('has-error');
+                    $("#origin" + controlid).addClass('has-error');
                 }
-                else
-                {
+                else {
                     $("#" + controlid + "property").removeClass('has-error');
                 }
 
                 if (!rowsarray.includes(controlid)) {
                     rowsarray.push(controlid);
-                if (totalrows != "")
-                    totalrows += "|";
-                console.log($("#origin" + controlid).val() + "  " + $("#date" + controlid).val());
-                if ($("#origin" + controlid).val() != "" && $("#date" + controlid).val())
-                totalrows += $("#date" + controlid).val() + "," + $("#origin" + controlid).val() + "," + $("#" + controlid + "numcol1").val() + "," + $("#" + controlid + "numcol2").val() + "," + $("#" + controlid + "numcol3").val() + "," + $("#" + controlid + "numcol4").val() + "," + $("#" + controlid + "numcol5").val() + "," + $("#" + controlid + "numcol6").val() + "," + $("#" + controlid + "numcol7").val();
+                    if (totalrows != "")
+                        totalrows += "|";
+                    console.log($("#origin" + controlid).val() + "  " + $("#date" + controlid).val());
+                    if ($("#origin" + controlid).val() != "" && $("#date" + controlid).val())
+                        totalrows += $("#date" + controlid).val() + "," + $("#origin" + controlid).val() + "," + $("#" + controlid + "numcol1").val() + "," + $("#" + controlid + "numcol2").val() + "," + $("#" + controlid + "numcol3").val() + "," + $("#" + controlid + "numcol4").val() + "," + $("#" + controlid + "numcol5").val() + "," + $("#" + controlid + "numcol6").val() + "," + $("#" + controlid + "numcol7").val();
 
                 }
             }
 
             var icount = 10;
 
-            $("#btnnewrow").click(function ()
-            {
+            $("#btnnewrow").click(function () {
                 icount++;
-                $("#allorders tbody").append('<tr class=""><td class= "date-input color-red" > <input type="date" id="date'+icount+'" name="" value="" />  </td><td class="txtshort color-red" colspan="2"> <input type="text" id="origin'+icount+'" name="" value="" /> </td><td class="input-number un-selectable">  </td>' +
-                    '<td class="input-number"> <input type="number" id="' + icount +'numcol1" class="numcol1" name="" value="" /> </td>'+
-                    '<td class="input-number"> <input type="number" id="' + icount +'numcol2" class="numcol2" name="" value="" />  </td>'+
-                    '<td class="input-number"> <input type="number" id="' + icount +'numcol3" class="numcol3" name="" value="" />  </td>'+
-                    '<td class= "input-number"> <input type="number" id="' + icount +'numcol4" class="numcol4" name="" value="" />  </td > '+
-                    '<td class= "input-number"> <input type="number" id="' + icount +'numcol5" class="numcol5" name="" value="" />  </td > '+
-                    '<td class= "input-number"> <input type="number" id="' + icount +'numcol6" class="numcol6" name="" value="" />  </td > '+
-                    '<td class="input-number"> <input type="number" id="' + icount +'numcol7" class="numcol7" name="" value="" />  </td></tr >');
+                $("#allorders tbody").append('<tr class=""><td class= "date-input color-red" > <input type="date" id="date' + icount + '" name="" value="" />  </td><td class="txtshort color-red" colspan="2"> <input type="text" id="origin' + icount + '" name="" value="" /> </td><td class="input-number un-selectable">  </td>' +
+                    '<td class="input-number"> <input type="number" id="' + icount + 'numcol1" class="numcol1" name="" value="" /> </td>' +
+                    '<td class="input-number"> <input type="number" id="' + icount + 'numcol2" class="numcol2" name="" value="" />  </td>' +
+                    '<td class="input-number"> <input type="number" id="' + icount + 'numcol3" class="numcol3" name="" value="" />  </td>' +
+                    '<td class= "input-number"> <input type="number" id="' + icount + 'numcol4" class="numcol4" name="" value="" />  </td > ' +
+                    '<td class= "input-number"> <input type="number" id="' + icount + 'numcol5" class="numcol5" name="" value="" />  </td > ' +
+                    '<td class= "input-number"> <input type="number" id="' + icount + 'numcol6" class="numcol6" name="" value="" />  </td > ' +
+                    '<td class="input-number"> <input type="number" id="' + icount + 'numcol7" class="numcol7" name="" value="" />  </td></tr >');
 
             });
 
@@ -915,8 +900,7 @@
 
 
 
-            $("#Submit").click(function (e)
-            {
+            $("#Submit").click(function (e) {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -926,15 +910,13 @@
                 // check validation whether for mile entered row other fields are filled properly
                 totalrows = "";
 
-                $(".numcol1").each(function ()
-                {
+                $(".numcol1").each(function () {
                     if ($(this).val() != "" && $(this).val() != "0") {
                         checkrowvalidation($(this).attr('id').replace('numcol1', ''));
                     }
                 });
 
-                $(".numcol2").each(function ()
-                {
+                $(".numcol2").each(function () {
                     if ($(this).val() != "" && $(this).val() != "0") {
                         checkrowvalidation($(this).attr('id').replace('numcol2', ''));
                     }
@@ -979,8 +961,7 @@
                     }
                 });
 
-                if ($("input.has-error").length > 0)
-                {
+                if ($("input.has-error").length > 0) {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the highlighted inputs </ul> ');
 
@@ -988,8 +969,7 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');
@@ -1015,9 +995,9 @@
                     insertForm.append('line6tot', line6total);
                     insertForm.append('line7tot', line7total);
 
-                    insertForm.append('totalexpenses', totalexpenses );
-                    insertForm.append('corrections', corrections );
-                    insertForm.append('totaldue', totaldue );
+                    insertForm.append('totalexpenses', totalexpenses);
+                    insertForm.append('corrections', corrections);
+                    insertForm.append('totaldue', totaldue);
 
                     insertForm.append('ssignature', $("#signature").val());
                     insertForm.append('sdate', $("#sdate").val());
@@ -1038,8 +1018,7 @@
                         success: function (data) {
                             // To-do code if ajax request is successful
 
-                            if (data['error'] == false)
-                            {
+                            if (data['error'] == false) {
                                 leaseid = data['insertedId'];
 
                                 GetAllMileageForms('Expense Reimbursement');
@@ -1050,16 +1029,16 @@
                                 document.getElementById("submitform").reset();
 
 
-                                 totalexpenses = 0;
-                                 corrections = 0;
-                                 totaldue = 0;
-                                 line1total = 0;
-                                 line2total = 0;
-                                 line3total = 0;
-                                 line4total = 0;
-                                 line5total = 0;
-                                 line6total = 0;
-                                 line7total = 0;
+                                totalexpenses = 0;
+                                corrections = 0;
+                                totaldue = 0;
+                                line1total = 0;
+                                line2total = 0;
+                                line3total = 0;
+                                line4total = 0;
+                                line5total = 0;
+                                line6total = 0;
+                                line7total = 0;
 
                                 writetotalsinhtml();
                                 icount = 10;
@@ -1090,7 +1069,7 @@
 
 
 
-      });
+        });
 
     </script>
 

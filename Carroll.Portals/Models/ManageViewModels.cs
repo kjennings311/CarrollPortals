@@ -617,14 +617,13 @@ namespace Carroll.Portals.Models
 
     public partial class proc_getpropertiesforexcel_Result
     {
-
         public System.Guid PropertyId { get; set; }
         public string VP { get; set; }
-        public string VP_ { get; set; }
+        public string VP_Phone { get; set; }
         public string RVP { get; set; }
-        public string RVP_ { get; set; }
+        public string RVP_Phone { get; set; }
         public string RM { get; set; }
-        public string RM_ { get; set; }
+        public string RM_Phone { get; set; }
         public Nullable<int> PropertyNumber { get; set; }
         public Nullable<int> Units { get; set; }
         public string PropertyName { get; set; }
@@ -640,7 +639,9 @@ namespace Carroll.Portals.Models
         public string ZipCode { get; set; }
         public string EmailAddress { get; set; }
         public string LegalName { get; set; }
+        public string Purchase_TookOver { get; set; }
         public Nullable<System.DateTime> TakeOverDate { get; set; }
+        public Nullable<System.DateTime> RefinancedDate { get; set; }
         public string TaxId { get; set; }
     }
 

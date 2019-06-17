@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Carroll Portals";
 }
+<input type="hidden" id="pageid" value="home" />
 
 <div class="wrapper wrapper-content" style="padding-top:0px !important">
     <div class="row hidewhenformopen">
@@ -10,16 +11,16 @@
         <div class="col-xs-12 visible-xs mobile-menu-dashboard" style="margin-top:-40px;">
             <div class="col-xs-6 ">
                 <a href="~/Home/Index" style="color:white;"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
-            </div>   <div class="col-xs-6" >
-                <a href="/Data/contacts" style="color:white;" ><i class="fa fa-envelope fa-star fa-user-"></i> <span class="nav-label">Contacts</span></a>
-            </div>   <div class="col-xs-6" >
-                <a style="color:white;"  href="/Data/properties"><i class="fa fa-building"></i> <span class="nav-label">Properties</span></a>
             </div>   <div class="col-xs-6">
-                <a href="/Data/partners" style="color:white;" ><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
+                <a href="/Data/contacts" style="color:white;"><i class="fa fa-envelope fa-star fa-user-"></i> <span class="nav-label">Contacts</span></a>
             </div>   <div class="col-xs-6">
-                <a style="color:white;"  href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
-            </div>   
-            
+                <a style="color:white;" href="/Data/properties"><i class="fa fa-building"></i> <span class="nav-label">Properties</span></a>
+            </div>   <div class="col-xs-6">
+                <a href="/Data/partners" style="color:white;"><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
+            </div>   <div class="col-xs-6">
+                <a style="color:white;" href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
+            </div>
+
 
         </div>
     </div>
@@ -35,7 +36,7 @@
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
 
-@section Styles 
+@section Styles
     {
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")
@@ -43,34 +44,29 @@
     <style type="text/css">
 
 
-        .dtprops td, .dtprops th
-        {
+        .dtprops td, .dtprops th {
             white-space: nowrap;
         }
 
 
-@@media only screen and (max-width : 480px)
-    {
+        @@media only screen and (max-width : 480px) {
 
-        .navbar-header {
-            display: none !important;
+            .navbar-header {
+                display: none !important;
+            }
         }
 
+        @@media only screen and (min-width: 320px) {
+
+            .ipbackground h1 {
+                position: absolute !important;
+                margin-top: 100px !important;
+                font-size: 26px !important;
+                color: white !important;
+                text-align: center !important;
+                padding-left: 2% !important;
+            }
         }
-
-@@media only screen and (min-width: 320px) {
-
-    .ipbackground h1 {
-        position: absolute !important;
-        margin-top: 100px !important;
-        font-size: 26px !important;
-        color: white !important;
-        text-align: center !important;
-        padding-left: 2% !important;
-    }
-}
-
-
     </style>
 }
 
@@ -79,19 +75,19 @@
 
     <script>
 
-      
+
 
 
         $(document).ready(function () {
 
-            $("#helpid").hide();                
+            $("#helpid").hide();
 
 
         });
 
-      
 
-</script>
+
+    </script>
 
 }
 

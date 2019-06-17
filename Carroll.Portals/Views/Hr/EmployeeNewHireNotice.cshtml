@@ -2,6 +2,8 @@
     ViewBag.Title = "Employee New Hire Notice";
 }
 
+<input type="hidden" id="pageid" value="newhire" />
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
@@ -33,9 +35,9 @@
                     <div class="ibox-tools" style="margin-top:-55px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a disabled="disabled" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>*@
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeLeaseRider'); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New
@@ -67,7 +69,8 @@
                                         </p>
                                         <p class="c1 c8" style="margin-left: 20%;
     margin-top: 15px;
-    margin-bottom: 15px;"> <span class="c7"> NEW HIRE NOTICE </span>
+    margin-bottom: 15px;">
+                                            <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
                                             <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input data-date-format="MM-DD-YYYY" type="date" id="startdate" />  </span>
@@ -78,19 +81,19 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager:<input  type="text" id="manager" style="width:83%;" /> </span>
+                                            <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" /> </span>
                                         </p>
                                         <p class="c1">
                                             <span class="c0">
-                                                Location: <input type="radio"  id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                 <input type="radio" id="chkproperty" name="loc" /> Property
                                             </span>
 
-                                            <span class="c0" id="divproperty" style="display:none; padding:40px;" >
-                                                Property : <select type="text" id="location" ></select>
+                                            <span class="c0" id="divproperty" style="display:none; padding:40px;">
+                                                Property : <select type="text" id="location"></select>
                                             </span>
                                         </p>
-                                    
+
                                         <p class="c1">
                                             <span class="c0">Position: <input type="radio" style="margin-left:25.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
@@ -124,10 +127,10 @@
 
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">
-                                                New Hire Kit Ordered : <input type="radio"  name="kitordered" id="kitorderdate" /> Yes  <input type="radio"  name="kitordered" id="kitorderdate1" /> No
+                                                New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" id="kitorderdate1" /> No
                                             </span>
                                         </p>
-                                     
+
                                         <p class="c1">
                                             <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42%;" />    Date <input disabled type="date" name="name" id="edate" value="" /></span>
                                         </p>
@@ -141,7 +144,7 @@
                                         </p>
 
                                         <p class="c1" style="width:75%;text-align:center; font-weight:bold">
-                                                Please Email I9 and Signed Documents to HRNotifications@carrollmg.com                                           
+                                            Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
                                         </p>
 
                                         <br /> <br />
@@ -229,7 +232,6 @@
             text-decoration: none;
             vertical-align: baseline;
             font-size: 14pt;
-          
             font-style: normal
         }
 
@@ -425,8 +427,7 @@
 
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             GetAllHRFORMs('New Hire Notice');
@@ -842,7 +843,7 @@
 
 
 
-      });
+        });
 
     </script>
 

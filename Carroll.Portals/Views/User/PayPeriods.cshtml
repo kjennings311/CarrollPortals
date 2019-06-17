@@ -4,6 +4,9 @@
 
 }
 
+
+<input type="hidden" id="pageid" value="payperiod" />
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2> Users </h2>
@@ -27,7 +30,7 @@
 <div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
-            <div class="ibox-title">
+            <div class="ibox-title no-padding">
                 <h5> Manage Pay Periods <small></small></h5>
                 <div class="ibox-tools">
                     <a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PayPeriods');"><i class="fa fa-edit"></i> Edit</a>
@@ -126,6 +129,13 @@
         .dtprops td, .dtprops th {
             white-space: nowrap;
         }
+
+
+        @@media only screen and (min-width: 768px) {
+            .RowsContatiner .ibox-title {
+                padding: 20px 15px 7px !important;
+            }
+        }
     </style>
 }
 
@@ -140,8 +150,8 @@
 
         $(document).ready(function () {
 
-          //  LoadUsers();
-          ConfigDatatable("PayPeriods");
+            //  LoadUsers();
+            ConfigDatatable("PayPeriods");
 
         });
     </script>

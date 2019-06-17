@@ -2,6 +2,8 @@
     ViewBag.Title = "Referral Contact";
 }
 
+<input type="hidden" id="pageid" value="referalcontact" />
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
@@ -72,7 +74,7 @@
     font-style: italic;
     color: black;">
                                                 <p style=""> Office Use Only:</p>
-                                                <p> Copy Of Renter's <br /> Insurance Declaration <br /> in File <input type="checkbox" style="margin-left:10px;" id="insurancedeclaration" > </p>
+                                                <p> Copy Of Renter's <br /> Insurance Declaration <br /> in File <input type="checkbox" style="margin-left:10px;" id="insurancedeclaration"> </p>
                                             </div>
 
                                             <div class="form-div" style="width:85%;float:right;">
@@ -105,11 +107,13 @@
                                             <p> <b>Resident #1 </b>  : <input type="text" id="r1name" style="width:75%" /> </p>
                                             <p> * Cell Phone # : <input type="text" id="r1cell" style="width:72%" /> </p>
                                             <p> Email  <input type="text" id="r1email" style="width:88%" /> </p>
-                                            <p> <input type="radio" name="resident1" id="r1home" /> Home 
-                                            <input type="radio" name="resident1" id="r1work" />  Work Phone #  <input type="text" id="r1otherphone" style="width:44%" /> </p>
+                                            <p>
+                                                <input type="radio" name="resident1" id="r1home" /> Home
+                                                <input type="radio" name="resident1" id="r1work" />  Work Phone #  <input type="text" id="r1otherphone" style="width:44%" />
+                                            </p>
                                             <p> Current Employer  <input type="text" id="r1currentemployer" style="width:68%" /> </p>
-                                            <p> Position  <input type="text"  id="r1position" style="width:83%" /> </p>
-                                        </div> 
+                                            <p> Position  <input type="text" id="r1position" style="width:83%" /> </p>
+                                        </div>
                                         <div class="form-div vinfo" style="width:50%;border:2px solid black;padding:15px;float:left; ">
 
                                             <p> <b>Resident #2 </b>  : <input type="text" id="r2name" style="width:75%" /> </p>
@@ -126,8 +130,8 @@
                                         <span style="  font-style: italic;font-size:12px;color:black;"> * Required information.  Carroll Management respects the privacy of its residents’ information and will only use it for the purposes of Resident-Leasing Office communication.  </span>
                                         <br />
                                         <p style="margin-top:10px !important;"> <b> EMERGENCY CONTACT </b>  - Person to contact and/or <span style="text-decoration:underline;"> allowed entry into your apartment </span> in case of emergency or death  </p>
-                                     <p style="text-align:center;">   <b > (someone <span style="text-decoration:underline">NOT </span> living in the household): </b> </p>
-                                        
+                                        <p style="text-align:center;">   <b> (someone <span style="text-decoration:underline">NOT </span> living in the household): </b> </p>
+
                                         <div class="form-div" style="width:50%;padding:0px;padding-left:30px;float:left; ">
                                             <p> Name :  <input type="text" id="ename" style="width:68%" /> </p>
                                             <p> Address :   <textarea id="eaddress" style="width:83%"> </textarea>  </p>
@@ -226,7 +230,7 @@
 {
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
-@section Styles 
+@section Styles
 {
 
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
@@ -243,21 +247,17 @@
             margin-bottom: 10px !important;
         }
 
-     
-        .clearfix
-        {
-            clear:both;
+
+        .clearfix {
+            clear: both;
         }
 
-        div.form-div
-        {
-            display:inline-block;
+        div.form-div {
+            display: inline-block;
         }
-     
-        .dtprops td, .dtprops th 
-        {
+
+        .dtprops td, .dtprops th {
             white-space: nowrap;
-
         }
 
         input {
@@ -266,15 +266,15 @@
             padding: 5px;
         }
 
-        th{
-            text-align:center !important;
-            color:white;
+        th {
+            text-align: center !important;
+            color: white;
         }
 
-        .vinfo p
-        {
-            margin-bottom:0px !important;
+        .vinfo p {
+            margin-bottom: 0px !important;
         }
+
         button {
             margin-left: 4%;
         }
@@ -288,7 +288,6 @@
             white-space: nowrap;
             color: #686666 !important;
         }
-
     </style>
 }
 
@@ -300,14 +299,12 @@
 
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             GetAllMileageForms('ResidentContact');
 
-            $("input").change(function (e)
-            {
+            $("input").change(function (e) {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
@@ -325,7 +322,7 @@
 
                 if ($("#propertynumber").val() == "") {
 
-               
+
                     alert("Please Enter Property Number");
 
                 }
@@ -339,7 +336,7 @@
                             //   $("#propertynumber").focus();
                             $("#propertyname").val('');
                             $("#propertyname1").val('');
-                         
+
                         }
                         else {
 
@@ -380,8 +377,7 @@
                         control = $("#apartment");
                 }
 
-                if ($("#returnemail").val() == "")
-                {
+                if ($("#returnemail").val() == "") {
                     errormsgsummary += "<li> Please Enter Return Email  </li>";
                     $("#returnemail").addClass('has-error');
                     if (control == "")
@@ -402,17 +398,15 @@
                         control = $("#r1cell");
                 }
 
-              
-                if ($("#r1email").val() == "")
-                {
+
+                if ($("#r1email").val() == "") {
                     errormsgsummary += "<li> Please Enter Resident1 Email  </li>";
                     $("#r1email").addClass('has-error');
                     if (control == "")
                         control = $("#r1email");
                 }
 
-                if ($("#ename").val() == "")
-                {
+                if ($("#ename").val() == "") {
                     errormsgsummary += "<li> Please Enter Name of Person to Contact in Emergency  </li>";
                     $("#ename").addClass('has-error');
                     if (control == "")
@@ -440,15 +434,14 @@
                 }
 
 
-                 if ($("#r1sign").val() == "") {
+                if ($("#r1sign").val() == "") {
                     errormsgsummary += "<li> Please Enter Resident1 Signature  </li>";
-                     $("#r1sign").addClass('has-error');
+                    $("#r1sign").addClass('has-error');
                     if (control == "")
                         control = $("#r1sign");
                 }
 
-                if ($("#r1date").val() == "")
-                {
+                if ($("#r1date").val() == "") {
                     errormsgsummary += "<li> Please Enter Resident Date  </li>";
                     $("#r1date").addClass('has-error');
                     if (control == "")
@@ -456,8 +449,7 @@
                 }
 
 
-                if ($("#v1make").val() == "")
-                {
+                if ($("#v1make").val() == "") {
                     errormsgsummary += "<li> Please Enter Vehicle 1 Make </li>";
                     $("#v1make").addClass('has-error');
                     if (control == "")
@@ -504,7 +496,7 @@
 
 
 
-               if ($("#v1state").val() == "") {
+                if ($("#v1state").val() == "") {
                     errormsgsummary += "<li> Please Enter Referal Bonus </li>";
                     $("#v1state").addClass('has-error');
                     if (control == "")
@@ -512,8 +504,7 @@
                 }
 
 
-                if ($("#o1name").val() != "" && $("#o1date").val() == "")
-                {
+                if ($("#o1name").val() != "" && $("#o1date").val() == "") {
                     errormsgsummary += "<li> Please Enter Other Occupant Date Of Birth </li>";
                     $("#o1date").addClass('has-error');
                     if (control == "")
@@ -545,7 +536,7 @@
                     if (control == "")
                         control = $("#o4date");
                 }
-              
+
 
                 if (errormsgsummary != "") {
 
@@ -606,7 +597,7 @@
 
                     }
 
-                    // check before validations 
+                    // check before validations
                     // othercontacts
                     var othercontacts = "";
 
@@ -713,7 +704,7 @@
 
 
 
-      });
+        });
 
     </script>
 

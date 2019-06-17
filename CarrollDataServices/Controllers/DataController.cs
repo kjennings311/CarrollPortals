@@ -405,7 +405,7 @@ namespace Carroll.Data.Services.Controllers
                                     dt.Rows[dt.Rows.Count - 1][2] = row.Cell(3).Value.ToString();
                                     dt.Rows[dt.Rows.Count - 1][3] = row.Cell(4).Value.ToString();
                                     dt.Rows[dt.Rows.Count - 1][4] = row.Cell(5).Value.ToString();
-                                    dt.Rows[dt.Rows.Count - 1][5] = row.Cell(6).Value.ToString();
+                                    dt.Rows[dt.Rows.Count - 1][5] = row.Cell(6).Value.ToString().Replace("(","").Replace(")","");
                                 }
                                 else if (formname == "EquityPartners")
                             {
@@ -422,11 +422,11 @@ namespace Carroll.Data.Services.Controllers
                             {
                                 dt.Rows[dt.Rows.Count - 1][0] = row.Cell(1).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][1] = row.Cell(2).Value.ToString();
-                                dt.Rows[dt.Rows.Count - 1][2] = row.Cell(3).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][2] = row.Cell(3).Value.ToString().Replace("(", "").Replace(")", "");
                                 dt.Rows[dt.Rows.Count - 1][3] = row.Cell(4).Value.ToString();
-                                dt.Rows[dt.Rows.Count - 1][4] = row.Cell(5).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][4] = row.Cell(5).Value.ToString().Replace("(", "").Replace(")", "");
                                 dt.Rows[dt.Rows.Count - 1][5] = row.Cell(6).Value.ToString();
-                                dt.Rows[dt.Rows.Count - 1][6] = row.Cell(7).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][6] = row.Cell(7).Value.ToString().Replace("(", "").Replace(")", "");
                                 dt.Rows[dt.Rows.Count - 1][7] = row.Cell(8).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][8] = row.Cell(9).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][9] = row.Cell(10).Value.ToString();
@@ -435,7 +435,7 @@ namespace Carroll.Data.Services.Controllers
                                 dt.Rows[dt.Rows.Count - 1][12] = row.Cell(13).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][13] = row.Cell(14).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][14] = row.Cell(15).Value.ToString();
-                                dt.Rows[dt.Rows.Count - 1][15] = row.Cell(16).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][15] = row.Cell(16).Value.ToString().Replace("(", "").Replace(")", "");
                                 dt.Rows[dt.Rows.Count - 1][16] = row.Cell(17).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][17] = row.Cell(18).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][18] = row.Cell(19).Value.ToString();
@@ -444,6 +444,8 @@ namespace Carroll.Data.Services.Controllers
                                 dt.Rows[dt.Rows.Count - 1][21] = row.Cell(22).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][22] = row.Cell(23).Value.ToString();
                                 dt.Rows[dt.Rows.Count - 1][23] = row.Cell(24).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][24] = row.Cell(25).Value.ToString();
+                                dt.Rows[dt.Rows.Count - 1][25] = row.Cell(26).Value.ToString();
 
                             }
 
@@ -490,8 +492,6 @@ namespace Carroll.Data.Services.Controllers
         {
             return _service.GetAllContactsForExcel();
 
-
-
             //using (var wb = new XLWorkbook())
             //{
             //    // IEnumerable<proc_order_excelproducts2_Result> = db.proc_order_excelproducts2(id);
@@ -507,7 +507,6 @@ namespace Carroll.Data.Services.Controllers
             //    // or specify the content type:
             //    //  return wb.Deliver("generatedFile.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             //}
-
         }
 
 

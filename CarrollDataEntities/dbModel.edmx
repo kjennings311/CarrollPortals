@@ -493,6 +493,8 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
+          <Property Name="Purchase_TookOver" Type="nvarchar" MaxLength="100" />
+          <Property Name="RefinancedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="RequisitionRequest">
           <Key>
@@ -677,11 +679,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ClaimType" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="ClaimType" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="PropertyName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PropertyNumber" Type="int" />
-          <Property Name="PropertyManager" Type="varchar" MaxLength="31" />
-          <Property Name="PropertyAddress" Type="varchar" MaxLength="74" />
+          <Property Name="PropertyManager" Type="varchar" MaxLength="301" />
+          <Property Name="PropertyAddress" Type="varchar" MaxLength="174" />
           <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
           <Property Name="IncidentDescription" Type="varchar(max)" />
           <Property Name="IncidentDateTime" Type="datetime" />
@@ -792,11 +794,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         </Function>
         <Function Name="proc_getallresidentreferalsheets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getcontactsforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getequitypartners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getequitypartnersforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpayperiodsforcurrentyear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getpropertiesforexcelupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetPropertyDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertydetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="propid" Type="uniqueidentifier" Mode="In" />
@@ -995,10 +999,12 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
           <FunctionImport Name="proc_getcontactsforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getcontactsforexcel_Result1)" />
           <FunctionImport Name="proc_getequitypartnersforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getequitypartnersforexcel_Result1)" />
-          <FunctionImport Name="proc_getpropertiesforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcel_Result1)" />
           <FunctionImport Name="proc_getpropertydetailsforupdate" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertydetailsforupdate_Result)">
           <Parameter Name="propertyid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="proc_getpropertiesforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcel_Result2)" />
+          <FunctionImport Name="proc_getpropertiesforexcelupdate" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcelupdate_Result)" />
+          <FunctionImport Name="proc_getequitypartners" ReturnType="Collection(Carroll.Data.Entities.proc_getequitypartners_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1312,11 +1318,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="PropertyId" Type="Guid" Nullable="false" />
-          <Property Name="ClaimType" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimType" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PropertyNumber" Type="Int32" />
-          <Property Name="PropertyManager" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="74" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyManager" Type="String" MaxLength="301" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="174" FixedLength="false" Unicode="false" />
           <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDateTime" Type="DateTime" Precision="3" />
@@ -1402,6 +1408,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserInProperties" Relationship="Carroll.Data.Entities.FK_UserInProperty_Properties" FromRole="Property" ToRole="UserInProperty" />
           <Property Name="MarketingSpecialist" Type="Guid" />
+          <Property Name="Purchase_TookOver" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RefinancedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_UserInProperty_Properties">
           <End Type="Carroll.Data.Entities.Property" Role="Property" Multiplicity="0..1">
@@ -2325,6 +2333,73 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="TakeOverDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="TaxId" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="proc_getpropertiesforexcel_Result2">
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="VP" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="VP_" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="RVP" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="RVP_" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="RM" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="RM_" Nullable="true" MaxLength="17" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="Int32" Name="Units" Nullable="true" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EquityPartner" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="AssetManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="ConstructionManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="MarketingSpecialist" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LegalName" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="TakeOverDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Purchase_TookOver" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TaxId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="proc_getpropertiesforexcelupdate_Result">
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="VP" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="VP_Phone" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="RVP" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="RVP_Phone" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="RM" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="RM_Phone" Nullable="true" MaxLength="17" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="Int32" Name="Units" Nullable="true" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EquityPartner" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="AssetManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="ConstructionManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="MarketingSpecialist" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="17" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LegalName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Purchase_TookOver" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="TakeOverDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="RefinancedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TaxId" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="proc_getequitypartners_Result">
+          <Property Type="Guid" Name="EquityPartnerId" Nullable="false" />
+          <Property Type="String" Name="PartnerName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="AddressLine1" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="AddressLine2" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ContactPerson" Nullable="true" MaxLength="301" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2695,6 +2770,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="Properties">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.Property">
               <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="RefinancedDate" ColumnName="RefinancedDate" />
+                <ScalarProperty Name="Purchase_TookOver" ColumnName="Purchase_TookOver" />
                 <ScalarProperty Name="MarketingSpecialist" ColumnName="MarketingSpecialist" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -3569,36 +3646,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_getpropertiesforexcel" FunctionName="Carroll.Data.Entities.Store.proc_getpropertiesforexcel">
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getpropertiesforexcel_Result1">
-                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
-                <ScalarProperty Name="VP" ColumnName="VP" />
-                <ScalarProperty Name="VP_" ColumnName="VP#" />
-                <ScalarProperty Name="RVP" ColumnName="RVP" />
-                <ScalarProperty Name="RVP_" ColumnName="RVP#" />
-                <ScalarProperty Name="RM" ColumnName="RM" />
-                <ScalarProperty Name="RM_" ColumnName="RM#" />
-                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
-                <ScalarProperty Name="Units" ColumnName="Units" />
-                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
-                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
-                <ScalarProperty Name="AssetManager" ColumnName="AssetManager" />
-                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
-                <ScalarProperty Name="MarketingSpecialist" ColumnName="MarketingSpecialist" />
-                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
-                <ScalarProperty Name="TakeOverDate" ColumnName="TakeOverDate" />
-                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_getpropertydetailsforupdate" FunctionName="Carroll.Data.Entities.Store.proc_getpropertydetailsforupdate">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getpropertydetailsforupdate_Result">
@@ -3626,6 +3673,85 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="LegalName" ColumnName="LegalName" />
                 <ScalarProperty Name="TakeOverDate" ColumnName="TakeOverDate" />
                 <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getpropertiesforexcel" FunctionName="Carroll.Data.Entities.Store.proc_getpropertiesforexcel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getpropertiesforexcel_Result2">
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="VP" ColumnName="VP" />
+                <ScalarProperty Name="VP_" ColumnName="VP#" />
+                <ScalarProperty Name="RVP" ColumnName="RVP" />
+                <ScalarProperty Name="RVP_" ColumnName="RVP#" />
+                <ScalarProperty Name="RM" ColumnName="RM" />
+                <ScalarProperty Name="RM_" ColumnName="RM#" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
+                <ScalarProperty Name="AssetManager" ColumnName="AssetManager" />
+                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
+                <ScalarProperty Name="MarketingSpecialist" ColumnName="MarketingSpecialist" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="TakeOverDate" ColumnName="TakeOverDate" />
+                <ScalarProperty Name="Purchase_TookOver" ColumnName="Purchase_TookOver" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getpropertiesforexcelupdate" FunctionName="Carroll.Data.Entities.Store.proc_getpropertiesforexcelupdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getpropertiesforexcelupdate_Result">
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="VP" ColumnName="VP" />
+                <ScalarProperty Name="VP_Phone" ColumnName="VP Phone" />
+                <ScalarProperty Name="RVP" ColumnName="RVP" />
+                <ScalarProperty Name="RVP_Phone" ColumnName="RVP Phone" />
+                <ScalarProperty Name="RM" ColumnName="RM" />
+                <ScalarProperty Name="RM_Phone" ColumnName="RM Phone" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="EquityPartner" ColumnName="EquityPartner" />
+                <ScalarProperty Name="AssetManager" ColumnName="AssetManager" />
+                <ScalarProperty Name="ConstructionManager" ColumnName="ConstructionManager" />
+                <ScalarProperty Name="MarketingSpecialist" ColumnName="MarketingSpecialist" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+                <ScalarProperty Name="Purchase_TookOver" ColumnName="Purchase_TookOver" />
+                <ScalarProperty Name="TakeOverDate" ColumnName="TakeOverDate" />
+                <ScalarProperty Name="RefinancedDate" ColumnName="RefinancedDate" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getequitypartners" FunctionName="Carroll.Data.Entities.Store.proc_getequitypartners">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getequitypartners_Result">
+                <ScalarProperty Name="EquityPartnerId" ColumnName="EquityPartnerId" />
+                <ScalarProperty Name="PartnerName" ColumnName="PartnerName" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

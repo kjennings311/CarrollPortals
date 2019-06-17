@@ -3,6 +3,8 @@
 
 }
 
+<input type="hidden" id="pageid" value="incidentdashboard" />
+
 <div class="wrapper wrapper-content">
     <div class="row hidewhenformopen">
         <div class="col-md-12 ipbackground" style="background-image: url(/img/dashboardbgnew.jpg);
@@ -196,7 +198,7 @@
 
 
     <div class="row hidewhenformopen visible-md visible-lg" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
-        <div class="col-lg-4 db" onclick="GetAllClaims('PropertyDamage')" style="">
+        <div class="col-lg-4 db" onclick="GetAllClaims('PropertyDamage')" style="border-right: 1px solid #797979;">
             <div class="widget style1 navy-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -211,7 +213,7 @@
             </div>
 
         </div>
-        <div class="col-lg-4 db" onclick="GetAllClaims('General Liability')">
+        <div class="col-lg-4 db" onclick="GetAllClaims('General Liability')" style="border-right: 1px solid #797979;">
             <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -477,6 +479,7 @@
 
             .claimmodal h2{
                 font-size:18px !important;
+                text-align:center;
             }
 
             .claimmodal, .claimmodal p {

@@ -231,11 +231,6 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getequitypartnersforexcel_Result1>("proc_getequitypartnersforexcel");
         }
     
-        public virtual ObjectResult<proc_getpropertiesforexcel_Result1> proc_getpropertiesforexcel()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertiesforexcel_Result1>("proc_getpropertiesforexcel");
-        }
-    
         public virtual ObjectResult<proc_getpropertydetailsforupdate_Result> proc_getpropertydetailsforupdate(Nullable<System.Guid> propertyid)
         {
             var propertyidParameter = propertyid.HasValue ?
@@ -243,6 +238,21 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("propertyid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertydetailsforupdate_Result>("proc_getpropertydetailsforupdate", propertyidParameter);
+        }
+    
+        public virtual ObjectResult<proc_getpropertiesforexcel_Result2> proc_getpropertiesforexcel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertiesforexcel_Result2>("proc_getpropertiesforexcel");
+        }
+    
+        public virtual ObjectResult<proc_getpropertiesforexcelupdate_Result> proc_getpropertiesforexcelupdate()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertiesforexcelupdate_Result>("proc_getpropertiesforexcelupdate");
+        }
+    
+        public virtual ObjectResult<proc_getequitypartners_Result> proc_getequitypartners()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getequitypartners_Result>("proc_getequitypartners");
         }
     }
 }

@@ -2,6 +2,7 @@
     ViewBag.Title = "Referral Request";
 }
 
+<input type="hidden" id="pageid" value="referalrequest" />
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
@@ -89,7 +90,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="padding:10px">
-                                                        <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) <input type="text" style="width:35%;" disabled id="propertyname1" /> and (Resident&rsquo;s Name)<input type="text" id="residentname1" /> , concerning the referral of (Referred Resident) <input type="text" style="width:19%;" id="refferedresident" /> in unit number<input style="width:8%"  type="text" id="unitnumber" />. </strong></p>
+                                                        <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) <input type="text" style="width:35%;" disabled id="propertyname1" /> and (Resident&rsquo;s Name)<input type="text" id="residentname1" /> , concerning the referral of (Referred Resident) <input type="text" style="width:19%;" id="refferedresident" /> in unit number<input style="width:8%" type="text" id="unitnumber" />. </strong></p>
                                                         <p style="text-indent: 36.0pt;"><strong>In consideration of the referral, the Property now agrees to credit rent of the referring resident for $ <input type="text" style="width:10%;" id="referalbonus" /> as a referral bonus. This amount will be credited after the referred resident has lived on-site for a full 30 days and has paid a full month&rsquo;s rent with no concessions. &nbsp;&nbsp;</strong></p>
                                                         <p style="text-indent: 36.0pt;"><strong>&nbsp;</strong></p>
                                                         <p><strong>&nbsp;Submit for Rent Credit: </strong></p>
@@ -102,17 +103,25 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                       <p style=" line-height: 99%; "><span style=" line-height: 99%; ">Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" style="    width: 46.5%;
+                                        <p style=" line-height: 99%; ">
+                                            <span style=" line-height: 99%; ">
+                                                Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" style="    width: 46.5%;
     margin-right: 3%;
-    margin-left: 3.5%;" id="refresidentsign" /> Dated <input type="date" id="refresdate" /></span></p>
-                                        
-                                        <p style=" line-height: normal;"><span style="">Property Manager&rsquo;s Approval:</span> 
-                                        <span style=""><input style="width: 46.5%;
-    margin-right: 3%;" type="text" id="properymanagersign" /> Dated<input type="date" id="properymanagerdate" /></span></p>
+    margin-left: 3.5%;" id="refresidentsign" /> Dated <input type="date" id="refresdate" />
+                                            </span>
+                                        </p>
+
+                                        <p style=" line-height: normal;">
+                                            <span style="">Property Manager&rsquo;s Approval:</span>
+                                            <span style="">
+                                                <input style="width: 46.5%;
+    margin-right: 3%;" type="text" id="properymanagersign" /> Dated<input type="date" id="properymanagerdate" />
+                                            </span>
+                                        </p>
                                         <p style=" line-height: 99%;margin: 41px 0px 0px 0px; "><strong><span style="font-size: 14.0pt; line-height: 99%;">ACCOUNTING USE ONLY:</span></strong></p>
-                                      
+
                                         <p style=" line-height: 99%;margin-top:10px; margin-bottom:20px;"><span style=" ">Received: <input type="text" style="margin-right:18%;" id="receivedamount" value="0" /> Credit Applied:<input type="text" value="0" id="creditapplied" /></span></p>
-                                     
+
                                         <p style="margin-top:20px;"><strong><span style="font-size: 14.0pt; line-height: 107%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL PROGRAM</span></strong></p>
                                         <p style="text-indent: 36.0pt;">The Resident Referral Program is designed to reward our current residents for referring others to a Carroll Community. Each resident will receive a credit to their ledger for the referral bonus amount, which is set on a property-by-property basis.</p>
                                         <p><strong>Residents are eligible to receive a referral fee after the described requirements are met:</strong></p>
@@ -183,15 +192,13 @@
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
 
-        ol 
-        {
+        ol {
             margin: 0;
             padding: 0
         }
 
-        p
-        {
-            margin-bottom:5px !important;
+        p {
+            margin-bottom: 5px !important;
         }
 
         table
@@ -426,14 +433,12 @@
 
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             GetAllMileageForms('ResidentReferal');
 
-            $("input").change(function (e)
-            {
+            $("input").change(function (e) {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
@@ -533,8 +538,7 @@
                 }
 
 
-                if ($("#residentname1").val() == "")
-                {
+                if ($("#residentname1").val() == "") {
                     errormsgsummary += "<li> Please Enter Resident Name </li>";
                     $("#residentname1").addClass('has-error');
                     if (control == "")
@@ -547,10 +551,9 @@
                     if (control == "")
                         control = $("#refferedresident");
                 }
-                
 
-                if ($("#unitnumber").val() == "")
-                {
+
+                if ($("#unitnumber").val() == "") {
                     errormsgsummary += "<li> Please Enter Unit Number </li>";
                     $("#unitnumber").addClass('has-error');
                     if (control == "")
@@ -565,8 +568,7 @@
                         control = $("#referalbonus");
                 }
 
-                if (errormsgsummary != "")
-                {
+                if (errormsgsummary != "") {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -574,8 +576,7 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');
@@ -593,16 +594,16 @@
                     insertForm.append('refferedresident', $("#refferedresident").val());
                     insertForm.append('unitnumber', $("#unitnumber").val());
                     insertForm.append('referalbonus', $("#referalbonus").val());
-                
+
                     insertForm.append('refresidentsign', $("#refresidentsign").val());
                     insertForm.append('refresdate', $("#refresdate").val());
                     insertForm.append('properymanagersign', $("#properymanagersign").val());
                     insertForm.append('properymanagerdate', $("#properymanagerdate").val());
 
-                    
+
                     insertForm.append('receivedamount', $("#receivedamount").val());
                     insertForm.append('creditapplied', $("#creditapplied").val());
-                   
+
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
@@ -630,7 +631,7 @@
 
 
                                 setTimeout(function () {
-                                   
+
                                     $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
@@ -654,7 +655,7 @@
 
 
 
-      });
+        });
 
     </script>
 

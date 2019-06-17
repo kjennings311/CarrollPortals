@@ -8733,11 +8733,11 @@ z-index:99999999 !important;
 
      
      #mobilepopupbody td {
-        border-top: 1px solid #e7eaec !important;
+        /*border-top: 1px solid #e7eaec !important;*/
         line-height: 1.42857 !important;
         padding: 8px !important;
         vertical-align: top !important;
-        border: 1px solid #e7e7e7 !important;
+        border-bottom: 1px solid #e7e7e7 !important;
     }
 
     #mobilepopupbody td:nth-child(1)
@@ -8867,6 +8867,9 @@ z-index:99999999 !important;
         padding: 260px 15px 7px !important;
     }
 
+    .RowsContatiner .no-padding {
+        padding: 20px 15px 7px !important;
+    }
     .ipbackground button {
         top: 80% !important;
         right: 0 !important;

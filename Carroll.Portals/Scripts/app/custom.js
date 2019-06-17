@@ -1,6 +1,6 @@
 ﻿ 
- // var $BaseApiUrl = "http://localhost:1002/"; 
-var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+//  var $BaseApiUrl = "http://localhost:1002/"; 
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -12,6 +12,40 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phon
     $ismobile = true;
 }
 
+
+function SelectCurrentMenu()
+{
+    if($ismobile == false)
+    if ($("#pageid").length > 0)
+    {
+        $("#" + $("#pageid").val()).addClass("active");
+        // hr
+        if (["empleaserider", "newhire", "payroll", "empseparation", "requisitionrequest"].includes($("#pageid").val()))
+        {
+            $("#hrforms").addClass("active");
+        }
+        //Admin
+        if (["users", "usertorole", "usertoproperty", "carrollpositions", "payperiod"].includes($("#pageid").val()))
+        {
+            $("#admin").addClass("active");
+        }
+
+        //expense        
+        if (["instructions", "expense", "mileagelog"].includes($("#pageid").val()))
+        {
+            $("#expensereports").addClass("active");
+        }
+
+        //Referal
+        if (["referalcontact", "referalrequest"].includes($("#pageid").val()))
+        {
+            $("#residentrelations").addClass("active");
+        }
+    }
+}
+
+if (!$ismobile)
+    SelectCurrentMenu();
 
 function validateEmail(emailID)
 {
@@ -1125,7 +1159,7 @@ function LoadPartners() {
                             if (!$ismobile)
                                 $(row).attr('onClick', 'HandleRowClick(this);');
                             else {
-                                var html = "<tr><td> Partner Name :  </td> <td> " + data["partnerName"] + " </td> </tr><tr> <td> Address Line1 : </td> <td>" + data["addressLine1"] + " </td></tr><tr> <td> Address Line2 :  </td> <td>" + data["addressLine2"] + " </td> </tr><tr><td> City :  </td> <td> " + data["city"] + " </td> </tr><tr><td> State :  </td> <td>" + data["state"] + " </td> </tr> <tr><td> Contact Person :  </td> <td>" + data["contactId"] + " </td> </tr> ";
+                                var html = "<tr><td> Partner Name :  </td> <td> " + data["partnerName"] + " </td> </tr><tr> <td> Address Line1 : </td> <td>" + data["addressLine1"] + " </td></tr><tr> <td> Address Line2 :  </td> <td>" + data["addressLine2"] + " </td> </tr><tr><td> City :  </td> <td> " + data["city"] + " </td> </tr><tr><td> State :  </td> <td>" + data["state"] + " </td> </tr> <tr><td> Contact Person :  </td> <td>" + data["contactPerson"] + " </td> </tr> ";
                                 html = html.replace("null", "");
                                 $(row).attr('onClick', 'openmobilepopup("' + html + '");');
                             }                          
@@ -1197,7 +1231,7 @@ function LoadPartners() {
                             { "data": "city", "name": "city", "autoWidth": false },
                             { "data": "state", "name": "state", "autoWidth": false },
                             { "data": "zipCode", "name": "zipCode", "autoWidth": false },                          
-                            { "data": "contactId", "name": "contactId", "autoWidth": false },
+                            { "data": "contactPerson", "name": "contactPerson", "autoWidth": false },
                             //{
                             //    //{"name":"Scott Gilpatrick","id":"71ED1F0C-EE49-4FE5-B379-859CAD723DA2"}
                             //    data: 'contactId',
@@ -2608,11 +2642,12 @@ function GetAllClaims(Type) {
                             $(row).attr('id', data[configdata.pkName]);
                             $(row).attr('itemType', configdata.etType);
                             var rowdata = JSON.parse(JSON.stringify(data));
-                            if (rowdata.claimType == "General Liability")
+                            console.log(rowdata.claimType.trim());
+                            if (rowdata.claimType.toLowerCase().trim() == "general")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id +"g');");
-                            else if (rowdata.claimType == "Mold Damage")
+                            else if (rowdata.claimType.toLowerCase().trim() == "mold")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id + "m');");
-                            else if (rowdata.claimType == "PropertyDamage")
+                            else if (rowdata.claimType.toLowerCase().trim() == "property")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");                          
                            
                         },

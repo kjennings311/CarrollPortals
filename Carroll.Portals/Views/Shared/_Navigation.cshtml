@@ -25,20 +25,20 @@
                     <img src="~/img/LogoC.png" />
                 </div>
             </li>
-            <li>
+            <li id="home">
                 <a href="~/Home/Index"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
             </li>
-            <li>
+            <li id="contact">
                 <a href="/Data/contacts"><i class="fa fa-envelope fa-star fa-user-"></i> <span class="nav-label">Contacts</span></a>
             </li>
-            <li>
+            <li id="properties">
                 <a href="/Data/properties"><i class="fa fa-building"></i> <span class="nav-label">Properties</span></a>
             </li>
 
-            <li>
+            <li id="equitypartners">
                 <a href="/Data/partners"><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
             </li>
-            <li>
+            <li id="incidentdashboard">
                 <a href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
             </li>
 
@@ -63,70 +63,75 @@
 
 
 
-                    <li>
+                    <li id="hrforms">
                         <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
 
                         <ul class="nav nav-second-level collapse">
-                            <li>
+                            <li id="empleaserider">
                                 <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
 
                             </li>
-                            <li>
+                            <li id="newhire">
                                 <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
                             </li>
-                            <li>
+                            <li id="payroll">
                                 <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
                             </li>
-                            <li>
+                            <li id="empseparation">
                                 <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
                             </li>
-                            <li>
+                            <li id="requisitionrequest">
                                 <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
                             </li>
 
                         </ul>
                     </li>
 
-                    <li>
+                    <li id="expensereports">
                         <a href="javascript:void(0)"><i class="fa fa-dollar"></i> <span class="nav-label"> Expense Reports </span></a>
 
                         <ul class="nav nav-second-level collapse">
-                            <li>
+                            <li id="instructions">
                                 <a href="~/Mileage/CarrollMileageLogInstructions/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Instructions  </span></a>
                             </li>
-                            <li>
+                            <li id="expense">
                                 <a href="~/Mileage/CarrollExpenseForm/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Expense Form  </span></a>
                             </li>
-                            <li>
+                            <li id="mileagelog">
                                 <a href="~/Mileage/CarrollMileageLog/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Mileage Log </span></a>
-
                             </li>
-
                         </ul>
                     </li>
 
-                    <li>
+                    <li id="residentrelations">
                         <a href="javascript:void(0)"><i class="fa fa-comments-o"></i> <span class="nav-label"> Resident Relations  </span></a>
 
                         <ul class="nav nav-second-level collapse">
-                            <li>
+                            <li id="referalrequest">
                                 <a href="~/Resident/ReferalRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referral Request  </span></a>
                             </li>
-                            <li>
+                            <li id="referalcontact">
                                 <a href="~/Resident/ReferalContact/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referral Contact </span></a>
                             </li>
-                           
                         </ul>
                     </li>
-                    <li>
+                    <li id="admin">
                         <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> Admin </span></a>
 
                         <ul class="nav nav-second-level collapse">
-                            <li>
+                            <li id="users">
                                 <a href="~/User/Index">  <i class="fa fa-angle-double-right"></i>  Manage Users </a>
+                            </li>
+                            <li id="usertorole">
                                 <a href="~/User/UserRoles">   <i class="fa fa-angle-double-right"></i>  Add User To Role  </a>
+                            </li>
+                            <li id="usertoproperty">
                                 <a href="~/User/UserProperties">  <i class="fa fa-angle-double-right"></i>  Add User To Property </a>
+                            </li>
+                            <li id="carrollpositions">
                                 <a href="~/User/CarrollPositions">  <i class="fa fa-angle-double-right"></i>   Carroll Positions </a>
+                            </li>
+                            <li id="payperiod">
                                 <a href="~/User/PayPeriods">  <i class="fa fa-angle-double-right"></i>   Pay Periods </a>
                             </li>
                         </ul>
@@ -145,27 +150,26 @@
                 }
                 else if (@Model.RoleType.ToLower() == "hr")
                 {
-                    <li>
-                        <a href="javascript:void(0)"><i class="fa fa-dollar"></i> <span class="nav-label"> HR Forms </span></a>
 
+                    <li id="hrforms">
+                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li>
+                            <li id="empleaserider">
                                 <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
 
                             </li>
-                            <li>
+                            <li id="newhire">
                                 <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
                             </li>
-                            <li>
+                            <li id="payroll">
                                 <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
                             </li>
-                            <li>
-                                <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Notice Of Employee Separation  </span></a>
+                            <li id="empseparation">
+                                <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
                             </li>
-                            <li>
+                            <li id="requisitionrequest">
                                 <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
                             </li>
-
                         </ul>
                     </li>
 

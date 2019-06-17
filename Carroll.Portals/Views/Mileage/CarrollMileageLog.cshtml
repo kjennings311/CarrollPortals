@@ -2,6 +2,7 @@
     ViewBag.Title = "Month Mileage Log";
 }
 
+<input type="hidden" id="pageid" value="mileagelog" />
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
@@ -57,139 +58,142 @@
                                 </h1>
                             </div>
                             <div class="modal-body">
-<div class="row" style="padding: 20px;padding-left:20px;border: 2px solid black;">
-    <form id="submitform" onsubmit="return false;">
+                                <div class="row" style="padding: 20px;padding-left:20px;border: 2px solid black;">
+                                    <form id="submitform" onsubmit="return false;">
 
-        <p class="c1 c8" style="    margin-left: 30%;
+                                        <p class="c1 c8" style="    margin-left: 30%;
     margin-top: 15px;
     margin-bottom: 15px;">
-            <span class="c7"> MONTHLY MILEAGE LOG </span>
-        </p>
-        <div class="" style="margin-left:20%;">
-            <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:59%;" id="empname" />  </span>
-            </p>
-            <p class="c1">
-                <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:60.5%;" /> </span>
-            </p>
-            <p class="c1">
-                <span class="c0">Monthly Mileage is Reported :<input type="text" id="location" style="width:50%;" /> </span>
-            </p>
-        </div>
-        <table id="allorders" style="height: 450px;
+                                            <span class="c7"> MONTHLY MILEAGE LOG </span>
+                                        </p>
+                                        <div class="" style="margin-left:20%;">
+                                            <p class="c1">
+                                                <span class="c0"> Employee Name:    <input type="text" style="width:59%;" id="empname" />  </span>
+                                            </p>
+                                            <p class="c1">
+                                                <span class="c0">Office Address :<input type="text" id="officeaddress" style="width:60.5%;" /> </span>
+                                            </p>
+                                            <p class="c1">
+                                                <span class="c0">Monthly Mileage is Reported :<input type="text" id="location" style="width:50%;" /> </span>
+                                            </p>
+                                        </div>
+                                        <table id="allorders" style="height: 450px;
     overflow: scroll; display:inline-block;border-collapse:collapse" class="table table-bordered">
-            <thead id="header-fixed" style="display: table-header-group;">
-                <tr>
-                    <th style="width:2%"> Date </th>
-                    <th style="width:10%" > Bill To Property  </th>
-                    <th style="width: 10%;"> Origin/Destination  </th>
-                    <th style="width: 25%;"> Purpose  </th>
-                    <th style="width: 5%;"> Miles </th>                 
-                </tr>
-            </thead>
-            <tbody style="display: table-header-group;">
-                <tr> <td> <input type="date" id="1tdate" />  </td>
-                <td> <input type="text" id="1property" />  </td>
-                <td> <input type="text" name="name" id="1destination" value="" />  </td>
-                <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
-                <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile"  />  </td> </tr>
-                <tr>
-                    <td> <input type="date" id="2tdate" />  </td>
-                    <td> <input type="text" id="2property" />  </td>
-                    <td> <input type="text" name="name" id="2destination" value="" />  </td>
-                    <td><input type="text" name="name" id="2purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="2miles" value="0" class="cmile" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="3tdate" />  </td>
-                    <td> <input type="text" id="3property" />  </td>
-                    <td> <input type="text" name="name" id="3destination" value="" />  </td>
-                    <td><input type="text" name="name" id="3purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="3miles" value="0" class="cmile"  />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="4tdate" />  </td>
-                    <td> <input type="text" id="4property" />  </td>
-                    <td> <input type="text" name="name" id="4destination" value="" />  </td>
-                    <td><input type="text" name="name" id="4purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="4miles" value="0" class="cmile" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="5tdate" />  </td>
-                    <td> <input type="text" id="5property" />  </td>
-                    <td> <input type="text" name="name" id="5destination" value="" />  </td>
-                    <td><input type="text" name="name" id="5purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="5miles" value="0" class="cmile" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="6tdate" />  </td>
-                    <td> <input type="text" id="6property" />  </td>
-                    <td> <input type="text" name="name" id="6destination" value="" />  </td>
-                    <td><input type="text" name="name" id="6purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" id="6miles" value="0" class="cmile" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="7tdate" />  </td>
-                    <td> <input type="text" id="7property" />  </td>
-                    <td> <input type="text" name="name" id="7destination" value="" />  </td>
-                    <td><input type="text" name="name" id="7purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" value="0" class="cmile"     id="7miles" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="8tdate" />  </td>
-                    <td> <input type="text" id="8property" />  </td>
-                    <td> <input type="text" name="name" id="8destination" value="" />  </td>
-                    <td><input type="text" name="name" id="8purpose" class="pur"  value="" /> </td>
-                    <td> <input type="number" style="width:70px;" class="cmile"  value="0" id="8miles" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="9tdate" />  </td>
-                    <td> <input type="text" id="9property" />  </td>
-                    <td> <input type="text" name="name" id="9destination" value="" />  </td>
-                    <td><input type="text" name="name" id="9purpose" class="pur" value="" /> </td>
-                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="9miles" />  </td>
-                </tr>
-                <tr>
-                    <td> <input type="date" id="10tdate" />  </td>
-                    <td> <input type="text" id="10property" />  </td>
-                    <td> <input type="text" name="name" id="10destination" value="" />  </td>
-                    <td><input type="text" name="name" id="10purpose" class="pur" /> </td>
-                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="10miles" />  </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td style="text-align:center;margin-left:20px;" colspan="5"> <a class="btn btn-sm  btn-lg" style="background:#2f4050 !important;color:white;" id="btnnewrow" href="#"> Add New Row </a></td> </tr>
-                <tr>
-                    <td colspan="4" style="text-align:right;font-size: 15px;
+                                            <thead id="header-fixed" style="display: table-header-group;">
+                                                <tr>
+                                                    <th style="width:2%"> Date </th>
+                                                    <th style="width:10%"> Bill To Property  </th>
+                                                    <th style="width: 10%;"> Origin/Destination  </th>
+                                                    <th style="width: 25%;"> Purpose  </th>
+                                                    <th style="width: 5%;"> Miles </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="display: table-header-group;">
+                                                <tr>
+                                                    <td> <input type="date" id="1tdate" />  </td>
+                                                    <td> <input type="text" id="1property" />  </td>
+                                                    <td> <input type="text" name="name" id="1destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="1purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" id="1miles" value="0" class="cmile" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="2tdate" />  </td>
+                                                    <td> <input type="text" id="2property" />  </td>
+                                                    <td> <input type="text" name="name" id="2destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="2purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" id="2miles" value="0" class="cmile" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="3tdate" />  </td>
+                                                    <td> <input type="text" id="3property" />  </td>
+                                                    <td> <input type="text" name="name" id="3destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="3purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" id="3miles" value="0" class="cmile" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="4tdate" />  </td>
+                                                    <td> <input type="text" id="4property" />  </td>
+                                                    <td> <input type="text" name="name" id="4destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="4purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" id="4miles" value="0" class="cmile" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="5tdate" />  </td>
+                                                    <td> <input type="text" id="5property" />  </td>
+                                                    <td> <input type="text" name="name" id="5destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="5purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" id="5miles" value="0" class="cmile" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="6tdate" />  </td>
+                                                    <td> <input type="text" id="6property" />  </td>
+                                                    <td> <input type="text" name="name" id="6destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="6purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" id="6miles" value="0" class="cmile" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="7tdate" />  </td>
+                                                    <td> <input type="text" id="7property" />  </td>
+                                                    <td> <input type="text" name="name" id="7destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="7purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" value="0" class="cmile" id="7miles" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="8tdate" />  </td>
+                                                    <td> <input type="text" id="8property" />  </td>
+                                                    <td> <input type="text" name="name" id="8destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="8purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="8miles" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="9tdate" />  </td>
+                                                    <td> <input type="text" id="9property" />  </td>
+                                                    <td> <input type="text" name="name" id="9destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="9purpose" class="pur" value="" /> </td>
+                                                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="9miles" />  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <input type="date" id="10tdate" />  </td>
+                                                    <td> <input type="text" id="10property" />  </td>
+                                                    <td> <input type="text" name="name" id="10destination" value="" />  </td>
+                                                    <td><input type="text" name="name" id="10purpose" class="pur" /> </td>
+                                                    <td> <input type="number" style="width:70px;" class="cmile" value="0" id="10miles" />  </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td style="text-align:center;margin-left:20px;" colspan="5"> <a class="btn btn-sm  btn-lg" style="background:#2f4050 !important;color:white;" id="btnnewrow" href="#"> Add New Row </a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="4" style="text-align:right;font-size: 15px;
     vertical-align: middle;
     font-weight: bold;">
-                        Total Miles
-                    </td>
-                    <td style="font-size: 15px;
+                                                        Total Miles
+                                                    </td>
+                                                    <td style="font-size: 15px;
     font-weight: bold;
     vertical-align: middle;">
-                        <span id="totalmiles"> </span>
-                    </td>
-                </tr>
-                <tr> <td colspan="4" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice"> </span> </td></tr>
-            </tfoot>
-                </table>
-        <p class="c1">
-                    <span class="c0"> Signature <input type="text" id="signature" style="width:42%; margin-left:2%" />   </span>
-                </p>
-                <p class="c1">
-                    <span class="c0">Approved By <input type="text" id="approvedby" style="width:42%;" /> </span>
-                </p>
+                                                        <span id="totalmiles"> </span>
+                                                    </td>
+                                                </tr>
+                                                <tr> <td colspan="4" style="text-align:right;font-weight:bold; "> Amount Due : ( Total Miles * 0.545 Cents ) </td><td style="color:red; font-weight:bold;font-size:20px;"> $ <span id="totalprice"> </span> </td></tr>
+                                            </tfoot>
+                                        </table>
+                                        <p class="c1">
+                                            <span class="c0"> Signature <input type="text" id="signature" style="width:42%; margin-left:2%" />   </span>
+                                        </p>
+                                        <p class="c1">
+                                            <span class="c0">Approved By <input type="text" id="approvedby" style="width:42%;" /> </span>
+                                        </p>
 
-                <br />
-                <br />
-                <div id="status"> </div>
-                <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
-                    <input type="button" id="Submit" value="Submit" class="btn" style="background:#2f4050 !important;color:white;height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                        <br />
+                                        <br />
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+                                            <input type="button" id="Submit" value="Submit" class="btn" style="background:#2f4050 !important;color:white;height:35px;" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
-                </div>
-    </form>
+                                        </div>
+                                    </form>
 
                                 </div>
                             </div>
@@ -442,9 +446,8 @@
             height: 18px;
         }
 
-        #submitform table td 
-        {
-            padding:5px !important;
+        #submitform table td {
+            padding: 5px !important;
         }
 
         button {
@@ -454,11 +457,13 @@
         .has-error {
             border-color: red;
         }
-        input.pur{
-            width:100%;
+
+        input.pur {
+            width: 100%;
         }
+
         table thead th {
-            text-align:center;
+            text-align: center;
         }
     </style>
 }
@@ -471,14 +476,12 @@
 
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
             var leaseid = "";
 
             GetAllMileageForms('Mileage Log');
 
-            $("input").change(function (e)
-            {
+            $("input").change(function (e) {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
@@ -497,54 +500,48 @@
             var totaldue = 0;
 
 
-            function calculatetotalmiles()
-            {
+            function calculatetotalmiles() {
                 totalmiles = 0;
 
-            $(".cmile").each(function () {
+                $(".cmile").each(function () {
 
-                if ($(this).val() != "" && $(this).val() != "0")
-                {
-                    totalmiles += parseFloat($(this).val());
-                }
-            });
+                    if ($(this).val() != "" && $(this).val() != "0") {
+                        totalmiles += parseFloat($(this).val());
+                    }
+                });
                 totaldue = parseFloat(totalmiles * 0.545).toFixed(2);
 
-            $("#totalmiles").html(totalmiles);
-            $("#totalprice").html(totaldue);
+                $("#totalmiles").html(totalmiles);
+                $("#totalprice").html(totaldue);
             }
 
             $(document).on('focusout', '.cmile', function (e) {
                 calculatetotalmiles();
-                
+
             });
 
             var isfilled = true;
             var totalrows = "";
 
-            function checkrowvalidation(controlid)
-            {
+            function checkrowvalidation(controlid) {
                 var allfilled = true;
 
-                if($("#" + controlid + "tdate").val() == "") {
+                if ($("#" + controlid + "tdate").val() == "") {
                     isfilled = false;
                     $("#" + controlid + "tdate").addClass('has-error');
                 }
-                else
-                {
-                   
+                else {
+
                     $("#" + controlid + "tdate").removeClass('has-error');
 
                 }
 
-                if ($("#" + controlid + "property").val() == "")
-                {
+                if ($("#" + controlid + "property").val() == "") {
                     isfilled = false;
                     $("#" + controlid + "property").addClass('has-error');
                 }
-                else
-                {
-                   
+                else {
+
                     $("#" + controlid + "property").removeClass('has-error');
                 }
 
@@ -553,39 +550,36 @@
                     $("#" + controlid + "destination").addClass('has-error');
                 }
                 else {
-                   
+
                     $("#" + controlid + "destination").removeClass('has-error');
                 }
 
-                if ($("#" + controlid + "purpose").val() == "")
-                {
-                   
+                if ($("#" + controlid + "purpose").val() == "") {
+
                     $("#" + controlid + "purpose").addClass('has-error');
                 }
-                else
-                {                  
+                else {
                     $("#" + controlid + "purpose").removeClass('has-error');
                 }
 
                 if (totalrows != "")
                     totalrows += "|";
-                    totalrows += $("#" + controlid + "tdate").val() + "," + $("#" + controlid + "property").val() + "," + $("#" + controlid + "destination").val() + "," + $("#" + controlid + "purpose").val() + "," + $("#" + controlid + "miles").val();
+                totalrows += $("#" + controlid + "tdate").val() + "," + $("#" + controlid + "property").val() + "," + $("#" + controlid + "destination").val() + "," + $("#" + controlid + "purpose").val() + "," + $("#" + controlid + "miles").val();
 
             }
 
 
             var icount = 10;
 
-            $("#btnnewrow").click(function ()
-            {
+            $("#btnnewrow").click(function () {
                 icount++;
-                $("#allorders tbody").append('<tr><td> <input type="date" id="' + icount + 'tdate" />  </td><td> <input type="text" id="' + icount + 'property" />  </td><td> <input type="text" name="name" id="' + icount + 'destination" value="" />  </td> <td><input type="text" name="name" id="' + icount + 'purpose"  class="pur" /> </td> <td> <input type="number" style="width:70px;" class="cmile" value="0" id="' + icount +'miles" />  </td> </tr>');
+                $("#allorders tbody").append('<tr><td> <input type="date" id="' + icount + 'tdate" />  </td><td> <input type="text" id="' + icount + 'property" />  </td><td> <input type="text" name="name" id="' + icount + 'destination" value="" />  </td> <td><input type="text" name="name" id="' + icount + 'purpose"  class="pur" /> </td> <td> <input type="number" style="width:70px;" class="cmile" value="0" id="' + icount + 'miles" />  </td> </tr>');
 
             });
 
 
 
-            
+
 
             $("#Submit").click(function (e) {
                 e.preventDefault();
@@ -595,7 +589,7 @@
                 $("#status").html('');
 
                 // check validation whether for mile entered row other fields are filled properly
-                totalrows="";
+                totalrows = "";
                 $(".cmile").each(function () {
 
                     if ($(this).val() != "" && $(this).val() != "0") {
@@ -603,17 +597,15 @@
                     }
                 });
 
-                if ($("input.has-error").length > 0)
-                {
+                if ($("input.has-error").length > 0) {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the highlighted inputs </ul> ');
 
-                   // setTimeout(ScrollToElement(control), 3000);
+                    // setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');
@@ -625,7 +617,7 @@
                     insertForm.append('mileagereported', $("#location").val());
                     insertForm.append('totalmiles', totalmiles);
                     insertForm.append('totalprice', totaldue);
-                   
+
                     insertForm.append('signature', $("#signature").val());
                     insertForm.append('approvedby', $("#approvedby").val());
                     insertForm.append('rows', totalrows);
@@ -639,14 +631,12 @@
                         processData: false,
                         contentType: false,
                         data: insertForm,
-                        success: function (data)
-                        {
+                        success: function (data) {
                             // To-do code if ajax request is successful
 
-                            if (data['error'] == false)
-                            {
+                            if (data['error'] == false) {
                                 leaseid = data['insertedId'];
-                                
+
                                 GetAllMileageForms('Mileage Log');
                                 $(".alert").html('Record Successfully Updated !');
                                 $('#toastnotification').modal('show');
@@ -661,7 +651,7 @@
 
                                 $("#Submit").prop('disabled', false);
                                 setTimeout(function () {
-                                    
+
                                     $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
@@ -683,8 +673,8 @@
 
             });
 
-            
-      });
+
+        });
 
     </script>
 
