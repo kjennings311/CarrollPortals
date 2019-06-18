@@ -256,7 +256,7 @@ namespace Carroll.Portals.Controllers
                         }
                     }
 
-                    mail.From = new MailAddress("sekharbabu101@gmail.com", "Carroll Organization");
+                    mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
 
                 
                     //foreach (var item in Message.EmailCc)
@@ -381,7 +381,7 @@ namespace Carroll.Portals.Controllers
                     }
                 }
 
-                mail.From = new MailAddress("sekharbabu101@gmail.com", "Carroll Organization");
+                mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
 
 
                 //foreach (var item in Message.EmailCc)
