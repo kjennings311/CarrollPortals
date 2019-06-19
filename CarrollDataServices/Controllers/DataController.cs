@@ -631,8 +631,16 @@ namespace Carroll.Data.Services.Controllers
             {
                 fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
                 fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
-                fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
-                fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+                if(fa.La_Property1_Per != 100)
+                {
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.Params["prop2per"].ToString()))
+                    { 
+                        fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
+                        fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+
+                    }
+                }
+              
             }
          
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();

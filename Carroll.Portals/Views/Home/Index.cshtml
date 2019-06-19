@@ -141,7 +141,7 @@
         </div>
 
 
-        <div class="modal fade bs-example-modal-lg reviewmodal" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade bs-example-modal-lg reviewmodal"  id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" style="width:60%" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -350,7 +350,8 @@
 
             $(document).ready(function () {
                 $("#helpid").show();
-                LoadUserClaims();
+
+                             LoadUserClaims();
                 GetAllClaims("All");
 
 
@@ -505,7 +506,12 @@
 
             .reviewmodal .modal-lg
             {
-                width: 95%;
+                width: 95% !important;
+            }
+
+            .reviewmodal .btn
+            {
+                margin-left:0px !important;
             }
         }
 

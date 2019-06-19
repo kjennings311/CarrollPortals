@@ -495,7 +495,9 @@
                             
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
 
-                           setTimeout(function () { window.close(); }, 2000);
+                            setTimeout(function () { window.close(); }, 2000);
+
+                            setTimeout(function () { window.top.close(); }, 5000);
                             //}
                             //else
                             //{
@@ -504,7 +506,11 @@
                         },
                         error: function (ts) {
                             alert("Successfully Submitted");
-                           setTimeout(function () { window.close(); }, 2000);
+                            $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
+
+                            setTimeout(function () { window.close(); }, 2000);
+
+                           setTimeout(function () { window.close(); }, 5000);
                         }
                     });
 
