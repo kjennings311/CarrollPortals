@@ -638,8 +638,7 @@
                                 leaseid = data['insertedId'];
 
                                 GetAllMileageForms('Mileage Log');
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
+                                ShowToastNotification('Record Successfully Updated', 3);
 
 
                                 document.getElementById("submitform").reset();

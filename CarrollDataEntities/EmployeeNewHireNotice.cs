@@ -49,5 +49,16 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
         public Nullable<System.DateTime> RegionalManagerSignedDateTime { get; set; }
         public Nullable<bool> iscorporate { get; set; }
+        public string SequenceNumber { get; set; }
+        public string La_Property3 { get; set; }
+        public Nullable<double> La_Property3_Per { get; set; }
+        public Nullable<bool> IsResumitted { get; set; }
+        public Nullable<System.Guid> ResubmittedBy { get; set; }
+        public Nullable<System.DateTime> ResubmittedDateTime { get; set; }
+        public Nullable<bool> IsRejected { get; set; }
+        public Nullable<System.Guid> RejectedBy { get; set; }
+        public Nullable<System.DateTime> RejectedDateTime { get; set; }
+        public string AdditionalText { get; set; }
+        public string RejectedReason { get; set; }
     }
 }

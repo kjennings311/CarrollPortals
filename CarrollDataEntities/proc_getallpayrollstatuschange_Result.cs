@@ -16,9 +16,12 @@ namespace Carroll.Data.Entities
         public string EmployeeName { get; set; }
         public Nullable<System.DateTime> ChangeEffectiveDate { get; set; }
         public string TypeOfChange { get; set; }
-        public Nullable<System.DateTime> CreatedDateTime { get; set; }
+        public string CreatedDateTime { get; set; }
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }
+        public string SequenceNumber { get; set; }
+        public string EmpSigned { get; set; }
+        public string Notes { get; set; }
     }
 }

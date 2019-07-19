@@ -302,12 +302,12 @@
 
                     }
                 </span>
-                </p>
+            </p>
             <p class="c1">
                 <span class="c0">
                     Position:  @if (Model.Position_Exempt == "1")
                     {
-                    <span> <input type="text" value=" Exempt" />  </span>
+                        <span> <input type="text" value=" Exempt" />  </span>
 
                     }  @if (Model.Position_NonExempt == "1")
                     {
@@ -316,7 +316,7 @@
                     }
                 </span>
             </p>
-                        <p class="c1">
+            <p class="c1">
                 <span class="c0">Status :  <input type="text" value=" @Model.Status" />  </span>
             </p>
 
@@ -325,7 +325,7 @@
             </p>
 
             <p class="c1">
-                <span class="c0">Position  :  <input type="text" id="salary" value="@Model.Position" style="width:15%;margin-left:2%;" /> </span>
+                <span class="c0">Position  :  <input type="text" id="salary" value="@Model.Position" style="width:55%;margin-left:2%;" /> </span>
             </p>
 
             <table style="width: 80%;
@@ -348,21 +348,35 @@
                         <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
                     }
 
+                    if (!string.IsNullOrEmpty(Model.La_Property3))
+                    {
+                        <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property3" /> </td> <td> <input type="text" value="@Model.La_Property3_Per" id="la_Prop2per" /> </td> </tr>
+                    }
+
+
                 }
                 else
                 {
+                    <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
                     <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
                     <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
                 }
 
             </table>
 
-            <p class="c1" style="margin-top: 60px;">
+            <p class="c1" style="margin-top: 20px;">
                 <span class="c0">
-                    New Hire Kit Ordered :  <span style="margin-left:10%;">  @Model.kitordered </span> 
+                    New Hire Kit Ordered :  <span style="margin-left:10%;">  @Model.kitordered </span>
                 </span>
             </p>
-            <p class="c1" style="margin-top:50px;">
+            <p class="c1" style="margin-top: 10px;">
+                <span class="c0">
+                    Additional Instructions :
+                </span>
+                @Model.AdditionalText
+            </p>
+
+            <p class="c1" style="margin-top:20px;">
                 <span class="c0">
                     Employee Signature <input type="text" id="esignature" class="italic" value="@Model.esignature" style="width:42%;" />    Date
                     @if (Model.edate != null)
@@ -373,7 +387,7 @@
                     {
                         <input type="text" name="name" id="edate" value="" />
                     }
-                   
+
                 </span>
             </p>
             <p class="c1">
@@ -387,7 +401,7 @@
                     {
                         <input type="text" name="name" id="edate" value="" />
                     }
-                    
+
                 </span>
             </p>
             <p class="c1">
@@ -395,18 +409,14 @@
                     RPM Signature<input type="text" id="rpmsignature" class="italic" style="width:48%;" value="@Model.rpmsignature" />Date
                     @if (Model.rpmdate != null)
                     {
-                        <input type="text" name="name" id="edate"  value="@Model.rpmdate.Value.ToShortDateString()" />
+                        <input type="text" name="name" id="edate" value="@Model.rpmdate.Value.ToShortDateString()" />
                     }
                     else
                     {
                         <input type="text" name="name" id="edate" value="" />
                     }
-                    
-                </span>
-            </p>
 
-            <p class="c1" style="width:100%;text-align:center; font-weight:bold">
-                Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
+                </span>
             </p>
 
             <br /> <br />

@@ -23,5 +23,8 @@ namespace Carroll.Data.Entities
         public string UserName { get; set; }
         public string PrintOption { get; set; }
         public string PDFOption { get; set; }
+        public string SequenceNumber { get; set; }
+        public string RejectionStatus { get; set; }
+        public string Notes { get; set; }
     }
 }

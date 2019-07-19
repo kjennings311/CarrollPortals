@@ -12,17 +12,14 @@ namespace Carroll.Data.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class DynamicLink
+    public partial class ActivityLogHrForm
     {
-        public System.Guid DynamicLinkId { get; set; }
+        public System.Guid ActivityId { get; set; }
+        public System.Guid RefId { get; set; }
         public string FormType { get; set; }
-        public Nullable<System.Guid> ReferenceId { get; set; }
-        public Nullable<bool> OpenStatus { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string Action { get; set; }
-        public string BrowserInformation { get; set; }
-        public string IpAddress { get; set; }
-        public Nullable<System.DateTime> Clientdatetime { get; set; }
+        public string ActivitySubject { get; set; }
+        public string ActivityDescription { get; set; }
+        public System.DateTime ActivityDate { get; set; }
+        public Nullable<System.Guid> ActivityBy { get; set; }
     }
 }

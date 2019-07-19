@@ -23,6 +23,120 @@
 </div>
 
 <div class="RowsContatiner animated fadeInRight">
+
+    <div class="modal fade bs-example-modal-lg reviewmodal" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" style="width:40%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                    <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                        Rejecting ?
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 regionalblock" id="regionalblock" style="text-align:center;display:none;">
+                            <div class="col-md-5"> Write Rejection Reason :</div>
+                            <textarea cols="40" rows="5" class="col-md-6" id="reason">
+</textarea>
+                            <div class="col-md-12" style="text-align:center; margin-top:50px; ">
+                                <button class="btn btn-danger" id="regionalreject">
+                                    Reject
+                                </button>
+                                <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"> Discard </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 managerblock" id="managerblock" style="display:none; text-align:center">
+
+                            <button class="btn btn-danger" id="resubmit">
+                                ReSubmit
+                            </button>
+                            <button type="button" id="hrcancel" class="btn btn-primary"> Cancel </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade bs-example-modal-lg rejectionmodal" id="rejectionmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" style="width:40%" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 regionalblock" id="regionalblock" style="text-align:center">
+                            <h3> Rejection Details :  </h3>
+                            <p style="text-align:left;"> Rejected By : <span id="rjby">  </span></p>
+                            <p style="text-align:left;"> Rejected Reason : <span id="rjreason">  </span></p>
+                            <p style="text-align:left;"> Rejected Date Time :<span id="rjdatetime">  </span></p>
+
+                            <div id="signaturemetadata"> </div>
+                        </div>
+
+                        <div class="col-md-12 managerblock" id="managerblock">
+
+
+                            <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"> Close </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg activitymodal" id="activitymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" style="width:70%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                        Activity Log
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center">
+                            <table id="viewlog" class="table table-striped col-md-6">
+                                <thead>
+                                    <tr>
+                                        <th style="width:40%">Description</th>
+                                        <th style="width:30%;text-align:center">Date</th>
+                                        <th style="width:20%"> Created By </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="hractivitybody"></tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12" style="text-align:center">
+                            <h2> Signature Meta Data </h2>
+                            <br />
+                            <table class="table table-striped col-md-6">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%"> Sign Type </th>
+                                        <th style="width:10%">Ip Address</th>
+                                        <th style="width:60%;text-align:center">Browser </th>
+                                        <th style="width:20%;text-align:center"> Date Time </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="hrsignmetadata"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
@@ -73,7 +187,7 @@
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input data-date-format="MM-DD-YYYY" type="date" id="startdate" />  </span>
+                                            <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input type="date" id="startdate" value="" />  </span>
                                         </p>
 
                                         <p class="c1">
@@ -121,8 +235,9 @@
                                                 </td>
                                             </tr>
                                             <tr> <td> Property </td> <td> Percentage </td> </tr>
-                                            <tr> <td> <input type="text" id="la_Prop1" style="margin-bottom:10px;" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
                                             <tr> <td> <input type="text" id="la_Prop2" /> </td> <td> <input type="number" id="la_Prop2per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop3" /> </td> <td> <input type="number" id="la_Prop3per" /> </td> </tr>
                                         </table>
 
                                         <p class="c1" style="margin-bottom: 60px;">
@@ -130,22 +245,24 @@
                                                 New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" id="kitorderdate1" /> No
                                             </span>
                                         </p>
-
+                                        <p class="c1" style="margin-bottom: 60px;">
+                                            <span class="c0">
+                                                Additional Instructions : <textarea id="additional" cols="50" rows="5" style="width:auto">  </textarea>
+                                            </span>
+                                        </p>
                                         <p class="c1">
                                             <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42%;" />    Date <input disabled type="date" name="name" id="edate" value="" /></span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:21%;" name="name" id="mdate" value="" /> </span>
+                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:47.5%;" />Date <input disabled type="date" name="name" id="rpmdate" value="" /></span>
                                         </p>
 
-                                        <p class="c1" style="width:75%;text-align:center; font-weight:bold">
-                                            Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
-                                        </p>
+
 
                                         <br /> <br />
                                         <p>Rev. June 2018</p>
@@ -163,16 +280,10 @@
                     </div>
                 </div>
                 <table class="table  dtprops" width="100%"></table>
-
-
             </div>
         </div>
     </div>
-
 </div>
-
-
-
 
 
 @if (ViewBag.ErrorMessage == "AuthorizationRequired")
@@ -195,6 +306,20 @@
             padding: 0
         }
 
+        a.rejectednotes 
+        {
+            color: #293846 !important;
+        }
+        .btn-danger, .btn-success, .btn-danger:active, .btn-danger:hover, .btn-success:active, .btn-success:hover {
+            background-color: #293846 !important;
+            border-color: #293846 !important;
+            color: #FFFFFF;
+            border-radius: 20px !important;
+        }
+        .btn
+        {
+            border-radius:20px !important;
+        }
         table
         .c0 {
             color: #000000;
@@ -427,7 +552,8 @@
 
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             var leaseid = "";
 
             GetAllHRFORMs('New Hire Notice');
@@ -443,6 +569,10 @@
                 }
             });
 
+             document.getElementById("mdate").valueAsDate = new Date();
+
+
+
             $(document).on('click', ".resendrpmmail,.resendempmail", function () {
 
                 var action = $(this).attr('data-action');
@@ -453,7 +583,8 @@
                 insertForm.append('action', action);
                 insertForm.append('refid', refid);
 
-                if ($("#divprocessingbtn").length > 0) {
+                if ($("#divprocessingbtn").length > 0)
+                {
                     $("#divprocessingbtn").show();
                 }
 
@@ -468,9 +599,161 @@
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true) {
+                        if (data == true)
+                        {
                             GetAllHRFORMs('New Hire Notice');
                             $(".alert").html('Email Resent Success');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.errorMessage);
+                    }
+                });
+            });
+
+
+            //  reject clicked
+            $(document).on('click', ".reject", function ()
+            {               
+                leaseid = $(this).attr('data-ref');
+                $(".reviewmodal").modal('show');
+
+                 if ($("#UserR").val() == "hr")
+             //  if ($("#UserR").val() == "Administrator")
+                {
+                    console.log($("#UserR").val()+"hr")
+                    $("#managerblock").show();
+                    $("#regionalblock").hide();
+
+
+                }
+                else
+                {
+                    console.log($("#UserR").val() + "other")
+                    $("#managerblock").hide();
+                    $("#regionalblock").show();
+                    $("#reason").val('');
+                }
+            });
+
+
+            // regional rejected 
+            $(document).on('click', ".rejectednotes", function ()
+            {
+                leaseid = $(this).attr('data-ref');
+                var insertForm = new FormData();
+             
+                insertForm.append('refid', leaseid);
+              
+                if ($("#divprocessingbtn").length > 0)
+                {
+                    $("#divprocessingbtn").show();
+                }
+
+                $('.reviewmodal').modal('hide');
+               
+                $(".alert").html('Processing');
+
+                $('#toastnotification').modal('show');
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/RejectionDetailsForNewHire",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data)
+                    {
+                        // To-do code if ajax request is successful
+
+                        if ($("#divprocessingbtn").length > 0) {
+                            $("#divprocessingbtn").hide();
+                        }
+
+                        $('#toastnotification').modal('hide');
+                        $('#rejectionmodal').modal('show');
+
+                        console.log(data);
+
+                        $("#rjby").html(data.newhiredetails.firstName + data.newhiredetails.lastName);
+                        $("#rjreason").html(data.newhiredetails.rejectedReason);
+                        $("#rjdatetime").html(data.newhiredetails.rejectedDateTime);
+                        var signm = "<h3> Signature Meta Data : </h3>";
+
+                        // for emp
+                        if (data.emp != null) {
+                            signm += "<h3> Employee </h3><p> Browser : " + data.emp.browserInformation + "   </p><p> Ip Address : " + data.emp.ipAddress + "   </p><p> Date Time : " + data.emp.clientdatetime +"   </p>";
+                        }
+                        // for pm
+                        if (data.pm != null) {
+                            signm += "<h3> Property Manager </h3><p> Browser : " + data.pm.browserInformation + "   </p><p> Ip Address : " + data.pm.ipAddress + "   </p><p> Date Time : " + data.pm.clientdatetime + "   </p>";
+                        }
+                        // regional 
+                        if (data.regional != null) {
+                            signm += "<h3> Regional Manager </h3><p> Browser : " + data.regional.browserInformation + "   </p><p> Ip Address : " + data.regional.ipAddress + "   </p><p> Date Time : " + data.regional.clientdatetime + "   </p>";
+                        }
+
+                        $("#rjdatetime").html(signm);
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.errorMessage);
+                    }
+                });
+
+            });
+
+
+
+            // regional rejected 
+            $(document).on('click', "#regionalreject ", function ()
+            {
+                var insertForm = new FormData();
+                insertForm.append('status', 'reject');
+                insertForm.append('reason', $("#reason").val());
+                insertForm.append('refid', leaseid);
+                insertForm.append('CreatedBy', $("#CreatedBy").val());
+
+                if ($("#divprocessingbtn").length > 0)
+                {
+                    $("#divprocessingbtn").show();
+                }
+
+                $('.reviewmodal').modal('hide');
+
+                $(".alert").html('Processing');
+                $('#toastnotification').modal('show');
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/newhirerejection",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true)
+                        {
+                            GetAllHRFORMs('New Hire Notice');
+                            $(".alert").html('New Hire Rejected Successfully');
                             if ($("#divprocessingbtn").length > 0) {
                                 $("#divprocessingbtn").hide();
                             }
@@ -494,13 +777,199 @@
 
             });
 
+            // Cancelled by HR 
+
+            // regional rejected 
+            $(document).on('click', "#hrcancel ", function () {
+                var insertForm = new FormData();
+                insertForm.append('status', 'cancell');
+                insertForm.append('reason', $("#reason").val());
+                insertForm.append('refid', leaseid);
+                insertForm.append('CreatedBy', $("#CreatedBy").val());
+
+                if ($("#divprocessingbtn").length > 0)
+                {
+                    $("#divprocessingbtn").show();
+                }
+
+                $('.reviewmodal').modal('hide');
+
+                $(".alert").html('Processing');
+                $('#toastnotification').modal('show');
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/newhirerejection",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true)
+                        {
+                            GetAllHRFORMs('New Hire Notice');
+                            $(".alert").html('New Hire Cancelled Successfully');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.errorMessage);
+                    }
+                });
+            });
+
+            // Resubmit
+            var insertoredit = true;
+
+            $(document).on('click', "#resubmit", function ()
+            {
+                $('.reviewmodal').modal('hide');
+                $('#myModal').modal('show');
+
+                insertoredit = false;
+
+                LoadHrPositions();
+
+                $.get($BaseApiUrl + "api/Data/GetEmployeeNewHireNotice?riderid=" + leaseid, function (data)
+                {
+
+                    console.log(data);
+
+                    if (data != "")
+                    {
+
+                        $("#empname").val(data.employeeName);
+                        var d = data.startDate.substring(5, 7) + "-" + data.startDate.substring(8, 10) + "-" + data.startDate.substring(0, 4);
+                        $("#startdate").val(d);
+
+                        $("#email").val(data.emailAddress);
+                        $("#manager").val(data.manager);
+
+                        if (data.location == "Corporate")
+                        {
+                            $("#chkcorporate").prop("checked", true);
+                            iscorporate = true;
+                            $("#divproperty").hide();
+                        }
+                        else
+                        {
+                            $("#chkproperty").prop("checked", true);
+                           
+                                iscorporate = false;
+                            $("#divproperty").show();      
+
+                            $("#location").attr('seloption', data.location);
+
+                            setTimeout(function () { $("#location").val(data.location);  }, 5000);
+
+                        }
+                        $("#email").val(data.emailAddress);
+                        $("#email").val(data.emailAddress);
+                        $("#email").val(data.emailAddress);
+
+                        if (data.position_Exempt == "1") {
+                            $("#exempt").prop("checked", true);
+                        }
+                        else
+                            $("#exempt").prop("checked", false);
+
+                        if (data.position_NonExempt == "1") {
+                            $("#nonexempt").prop("checked", true);
+                        }
+                        else
+                            $("#nonexempt").prop("checked", false);
+
+
+
+                        if (data.status == "FULL TIME") {
+                            $("#fullstatus").prop("checked", true);
+                            $("#partstatus").prop("checked", false);
+
+                        }
+                        else
+                        {
+                            $("#fullstatus").prop("checked", false);
+                            $("#partstatus").prop("checked", true);
+                        }
+
+
+
+                        if (data.sal_Time == "Annually")
+                        {
+                            $("#annualsalary").prop("checked", true);
+                            $("#salhourly").prop("checked", false);
+
+                        }
+                        else {
+                            $("#annualsalary").prop("checked", false);
+                            $("#salhourly").prop("checked", true);
+                        }
+
+
+                        if (data.kitordered == "Yes") {
+                            $("#kitorderdate").prop("checked", true);
+                            $("#kitorderdate1").prop("checked", false);
+                        }
+                        else {
+                            $("#kitorderdate").prop("checked", false);
+                            $("#kitorderdate1").prop("checked", true);
+                        }
+                           
+
+                        
+                        $("#position").val(data.position);
+                        $("#la_Prop1").val(data.la_Property1);
+                        $("#la_Prop2").val(data.la_Property2);
+
+                        $("#la_Prop3").val(data.la_Property3);
+                        $("#la_Prop1per").val(data.la_Property1_Per);
+                        $("#la_Prop2per").val(data.la_Property2_Per);
+                        $("#la_Prop3per").val(data.la_Property3_Per);
+                        $("#salary").val(data.wage_Salary);
+                        $("#additional").val(data.additionalText);
+                        $("#msignature").val(data.msignature);
+                      //  $("#salary").val(data.wage_Salary);
+
+                        document.getElementById("mdate").valueAsDate = new Date();
+                        document.getElementById("startdate").valueAsDate = new Date();
+
+                        //if (data.mdate != null) {
+
+                        //    var d1 = data.mdate.substring(0, 4) + "-" + data.mdate.substring(5, 7) + "-" + data.mdate.substring(8, 10);
+                        //    $("#mdate").val(d1);
+
+                        //}
+
+                        //   $("#dateposted").val(data.datePosted);
+                        $("#notes1").val(data.notes);
+                    }
+                });
+
+            });
+
             var iscorporate = true;
 
             $("#chkcorporate,#chkproperty").change(function (e) {
 
                 e.preventDefault();
 
-                if ($("#chkcorporate").is(":checked")) {
+                if ($("#chkcorporate").is(":checked"))
+                {
                     iscorporate = true;
                     $("#divproperty").hide();
                     $("#manager").val($("#CreatedByName").val());
@@ -535,11 +1004,12 @@
                         }
                         else if (data.indexOf("Error") == true) {
                             manager = "";
-                            alert(data);
+                          //  alert(data);
                             $("#manager").val('');
                         }
                         else {
                             //    var values = data.split(",");
+                            $("#la_Prop1").val($("#location option:selected").text());
                             manager = data;
                             $("#manager").val(data);
                         }
@@ -647,22 +1117,24 @@
 
                     if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
 
-                        if ($("#la_Prop2per").val() == "") {
+                        if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "")
+                        {
                             errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
                             $("#la_Prop1").addClass('has-error');
                             $("#la_Prop2").addClass('has-error');
+                            $("#la_Prop3").addClass('has-error');
                             if (control == "")
                                 control = $("#la_Prop2");
                         }
                         else {
-                            var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val());
+                            var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
                             if (total < 100)
                                 errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
                         }
 
                     }
 
-                    if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) == 100)) {
+                    if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val()) != 100)) {
 
                         if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
 
@@ -684,10 +1156,19 @@
                         }
 
 
+                        if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                            $("#la_Prop3").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop3");
+                        }
                     }
                 }
 
-                if (errormsgsummary != "") {
+                if (errormsgsummary != "")
+                {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -720,6 +1201,7 @@
                     }
 
                     insertForm.append('propertyid', $("#location").val());
+
                     if ($("#exempt").is(":checked")) {
                         insertForm.append('exempt', '1');
                     }
@@ -733,6 +1215,15 @@
                     else {
                         insertForm.append('nonexempt', '0');
                     }
+
+                    if (insertoredit == false)
+                    {
+                        insertForm.append('isedit', '1');
+                        insertForm.append('refid',leaseid);
+                    }
+                    else
+                        insertForm.append('isedit', '0');
+
 
                     var status = "";
 
@@ -760,6 +1251,9 @@
                     insertForm.append('prop1per', $("#la_Prop1per").val());
                     insertForm.append('prop2', $("#la_Prop2").val());
                     insertForm.append('prop2per', $("#la_Prop2per").val());
+                    insertForm.append('prop3', $("#la_Prop3").val());
+                    insertForm.append('prop3per', $("#la_Prop3per").val());
+                    insertForm.append('additional', $("#additional").val());
 
                     if ($("#kitorderdate").is(":checked")) {
                         insertForm.append('kitordered', 'Yes');
@@ -811,20 +1305,21 @@
                                 $("#allocation").val('');
                                 $("#status").html('');
                                 document.getElementById("submitform").reset();
-
+                                insertoredit = true;
                                 GetAllHRFORMs('New Hire Notice');
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
+                                ShowToastNotification('Record Successfully Updated', 3);
 
 
-                                setTimeout(function () {
+                                setTimeout(function ()
+                                {
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
                             }
-                            else {
+                            else
+                            {
                                 $("#status").html(data['errorMsg']);
 
                             }
@@ -837,12 +1332,7 @@
                     });
 
                 }
-
-
             });
-
-
-
         });
 
     </script>

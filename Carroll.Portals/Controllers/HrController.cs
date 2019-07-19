@@ -49,8 +49,6 @@ namespace Carroll.Portals.Controllers
         // GET: Hr
         public async Task<ActionResult> PrintEmployeeLeaseRider(string id)
         {
-
-
             dynamic obj = new { };
 
             using (var client = new HttpClient())
@@ -66,6 +64,7 @@ namespace Carroll.Portals.Controllers
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
                 HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid=" + id);
                 //Checking the response is successful or not which is sent using HttpClient  
+
                 if (Res.IsSuccessStatusCode)
                 {
                     //Storing the response details recieved from web api   
@@ -73,8 +72,10 @@ namespace Carroll.Portals.Controllers
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
-
                 }
+
+                WorkflowHelper.InsertHrLog("LeaseRider", id, "Print has been Requested ", "Print has been requested for Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -110,6 +111,7 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
 
                 }
+                WorkflowHelper.InsertHrLog("LeaseRider", id, "PDF has been requested", "PDF has been requestedfor Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -156,8 +158,9 @@ namespace Carroll.Portals.Controllers
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     obj = JsonConvert.DeserializeObject<PrintEmployeeNewHireNotice>(EmpResponse);
-
                 }
+
+                WorkflowHelper.InsertHrLog("NewHire", id, "Print has been requested ", "Print has been requested for New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -199,11 +202,373 @@ namespace Carroll.Portals.Controllers
                 //returning the employee list to view  
                 //      return View(obj);
 
+                WorkflowHelper.InsertHrLog("NewHire", id, "PDF has been requested", "PDF has been requestedfor New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
 
                 //returning the employee list to view  
                 return new ViewAsPdf("PrintEmployeeNewHireNotice", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
 
             }
+        }
+
+
+        [AllowAnonymous]
+        [ActionName("UpdateWorkflowEmployeeLeaseRiderAsync")]
+        [HttpPost]
+        [MyIgnore]
+        public async Task<dynamic> UpdateWorkflowEmployeeLeaseRiderAsync()
+        {
+
+            var action = Request.Params["action"].ToString();
+            var refid = Request.Params["refid"].ToString();
+            var signature = Request.Params["signature"].ToString();
+            var date = Convert.ToDateTime(Request.Params["date"].ToString());
+
+            // ip address 
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilitiesBase browser = HttpContext.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+
+
+            var _service = new EntityDataRepository();
+            var retu = _service.UpdateWorkflowEmployeeLeaseRider(action, refid, signature, date, browserDetails, VisitorsIPAddress);
+
+            WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been Submitted", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
+            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "LeaseRider", "Manager Email");
+
+            // write your email function here..
+            MailMessage mail = new MailMessage();
+
+
+            AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                    null, MediaTypeNames.Text.Html);
+
+            SmtpClient smtp = EmailHelper.SetMailServerSettings();
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            foreach (var item in Message.EmailTo)
+            {
+                if (!string.IsNullOrEmpty(item))
+                {
+                    Match match = regex.Match(item);
+                    if (match.Success)
+                    {
+                        mail.To.Add(item);
+                    }
+                }
+            }
+
+            mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+
+
+            //foreach (var item in Message.EmailCc)
+            //{
+            //    mail.CC.Add(new MailAddress(item));
+            //}
+
+            mail.AlternateViews.Add(av1);
+
+            mail.IsBodyHtml = true;
+
+            dynamic obj = new { };
+
+            var client = new HttpClient();
+
+            //Passing service base url  
+            client.BaseAddress = new Uri(Baseurl);
+
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format  
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+            //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+            HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid=" + retu);
+
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (Res.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
+            }
+
+            var actionPDF = new Rotativa.ViewAsPdf("PrintEmployeeLeaseRider", obj)//some route values)
+            {
+                //FileName = "TestView.pdf",
+                PageSize = Size.A4,
+                PageOrientation = Rotativa.Options.Orientation.Portrait,
+                CustomSwitches = "--disable-smart-shrinking",
+                PageMargins = { Left = 1, Right = 1 }
+            };
+
+
+            byte[] applicationPDFData = actionPDF.BuildFile(ControllerContext);
+
+            MemoryStream file = new MemoryStream(applicationPDFData);
+            file.Seek(0, SeekOrigin.Begin);
+
+            Attachment data = new Attachment(file, (string)obj.EmployeeName + "_EmployeeLeaseRider" + ".pdf", "application/pdf");
+
+            System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
+            disposition.CreationDate = System.DateTime.Now;
+            disposition.ModificationDate = System.DateTime.Now;
+            disposition.DispositionType = DispositionTypeNames.Attachment;
+
+            mail.Attachments.Add(data);
+
+            mail.Subject = Message.Subject;
+            mail.Body = Message.Body;
+            //   mail.To.Clear();
+            // remove this line before going production
+            //  mail.To.Add("pavan.nanduri@carrollorg.com");
+           mail.To.Add("sekhar.babu@forcitude.com");
+           mail.To.Add("Shashank.Trivedi@carrollorg.com");
+
+            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mail.Priority = MailPriority.High;
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+
+
+            return retu;
+        }
+
+
+        [AllowAnonymous]
+        [ActionName("UpdateWorkflowPayRollStatusChangeNoticeAsync")]
+        [HttpPost]
+        [MyIgnore]
+        public async Task<dynamic> UpdateWorkflowPayRollStatusChangeNoticeAsync()
+        {
+
+            var action = Request.Params["action"].ToString();
+            var refid = Request.Params["refid"].ToString();
+            var signature = Request.Params["signature"].ToString();
+            var date = Convert.ToDateTime(Request.Params["date"].ToString());
+
+            // ip address 
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilitiesBase browser = HttpContext.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+
+
+            var _service = new EntityDataRepository();
+            var retu = _service.UpdateWorkflowPayRollStatusChangeNotice(action, refid, signature, date, browserDetails, VisitorsIPAddress);
+
+
+            WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been Submitted", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
+            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Manager Email");
+
+            // write your email function here..
+            MailMessage mail = new MailMessage();
+
+
+            AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                    null, MediaTypeNames.Text.Html);
+
+            SmtpClient smtp = EmailHelper.SetMailServerSettings();
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            foreach (var item in Message.EmailTo)
+            {
+                if (!string.IsNullOrEmpty(item))
+                {
+                    Match match = regex.Match(item);
+                    if (match.Success)
+                    {
+                        mail.To.Add(item);
+                    }
+                }
+            }
+
+            mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+
+
+            //foreach (var item in Message.EmailCc)
+            //{
+            //    mail.CC.Add(new MailAddress(item));
+            //}
+
+            mail.AlternateViews.Add(av1);
+
+            mail.IsBodyHtml = true;
+
+            dynamic obj = new { };
+
+            var client = new HttpClient();
+
+            //Passing service base url  
+            client.BaseAddress = new Uri(Baseurl);
+
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format  
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+            //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+            HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChangeNotice?riderid=" + retu);
+
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (Res.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                obj = JsonConvert.DeserializeObject<PrintPayRollStatusChange>(EmpResponse);
+
+
+            }
+
+
+
+            var actionPDF = new Rotativa.ViewAsPdf("PrintPayRollStatusChange", obj)//some route values)
+            {
+                //FileName = "TestView.pdf",
+                PageSize = Size.A4,
+                PageOrientation = Rotativa.Options.Orientation.Portrait,
+                CustomSwitches = "--disable-smart-shrinking",
+                PageMargins = { Left = 1, Right = 1 }
+            };
+
+
+            byte[] applicationPDFData = actionPDF.BuildFile(ControllerContext);
+
+            MemoryStream file = new MemoryStream(applicationPDFData);
+            file.Seek(0, SeekOrigin.Begin);
+
+            Attachment data = new Attachment(file, (string)obj.EmployeeName + "_PayRollStatusChange" + ".pdf", "application/pdf");
+
+            System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
+            disposition.CreationDate = System.DateTime.Now;
+            disposition.ModificationDate = System.DateTime.Now;
+            disposition.DispositionType = DispositionTypeNames.Attachment;
+
+            mail.Attachments.Add(data);
+
+            mail.Subject = Message.Subject;
+            mail.Body = Message.Body;
+            //   mail.To.Clear();
+            // remove this line before going production
+            //  mail.To.Add("pavan.nanduri@carrollorg.com");
+            mail.To.Add("sekhar.babu@forcitude.com");
+             mail.To.Add("Shashank.Trivedi@carrollorg.com");
+
+            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mail.Priority = MailPriority.High;
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+
+
+            return retu;
         }
 
         [AllowAnonymous]
@@ -224,16 +589,72 @@ namespace Carroll.Portals.Controllers
                 edate = Convert.ToDateTime(Request.Params["date"].ToString());
             }
 
+
+            // ip address 
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilitiesBase browser = HttpContext.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+
             var _service = new EntityDataRepository();
-            var retu = _service.UpdateWorkflowEmployeeNewHireNotice(action, refid, signature, edate);
+
+            var retu = _service.UpdateWorkflowEmployeeNewHireNotice(action, refid, signature, edate,browserDetails,VisitorsIPAddress);
 
             if (action == "Employee Email" && iscorporate.ToLower() == "false")
             {
                 WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email");
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been Submitted", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
             }
             else
             {
-               var Message= WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email");
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature Submitted ", "Regional Signature Submitted for New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
+                WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
+
+                var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email");
 
                 // write your email function here..
                 MailMessage mail = new MailMessage();
@@ -328,7 +749,7 @@ namespace Carroll.Portals.Controllers
                     // remove this line before going production
                     //  mail.To.Add("pavan.nanduri@carrollorg.com");
                     mail.To.Add("sekhar.babu@forcitude.com");
-                     mail.To.Add("Shashank.Trivedi@carrollorg.com");
+                    mail.To.Add("Shashank.Trivedi@carrollorg.com");
 
                     mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                     mail.Priority = MailPriority.High;
@@ -347,6 +768,7 @@ namespace Carroll.Portals.Controllers
 
                 return retu;
         }
+
 
 
         [MyIgnore]
@@ -485,7 +907,7 @@ namespace Carroll.Portals.Controllers
                     System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
                     disposition.CreationDate = System.DateTime.Now;
                     disposition.ModificationDate = System.DateTime.Now;
-                    disposition.DispositionType = DispositionTypeNames.Attachment;
+                disposition.DispositionType = DispositionTypeNames.Attachment;
 
                     mail.Attachments.Add(data);
                 }
@@ -539,7 +961,7 @@ namespace Carroll.Portals.Controllers
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
                 mail.To.Add("sekhar.babu@forcitude.com");
-                  mail.To.Add("Shashank.Trivedi@carrollorg.com");
+                 mail.To.Add("Shashank.Trivedi@carrollorg.com");
                  mail.To.Add("iamhr@carrollmg.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
@@ -580,7 +1002,8 @@ namespace Carroll.Portals.Controllers
                 //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
                 //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
                 HttpResponseMessage Res = await client.GetAsync("api/data/GetPayRollStatusChangeNotice?riderid=" + id);
-                //Checking the response is successful or not which is sent using HttpClient  
+                //Checking the response is successful or not which is sent using HttpClient
+                
                 if (Res.IsSuccessStatusCode)
                 {
                     //Storing the response details recieved from web api   
@@ -588,8 +1011,10 @@ namespace Carroll.Portals.Controllers
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     obj = JsonConvert.DeserializeObject<PrintPayRollStatusChange>(EmpResponse);
-
                 }
+
+                WorkflowHelper.InsertHrLog("PayRoll", id, "Print has been requested ", "Print has been requested for Payroll Status Change on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -600,8 +1025,6 @@ namespace Carroll.Portals.Controllers
 
         public async Task<ActionResult> PdfPayRollStatusChange(string id)
         {
-
-
             dynamic obj = new { };
 
             using (var client = new HttpClient())
@@ -630,6 +1053,9 @@ namespace Carroll.Portals.Controllers
                 // o.Date=obj.
                 //returning the employee list to view  
                 //      return View(obj);
+
+
+                WorkflowHelper.InsertHrLog("PayRoll", id, "PDF has been requested", "PDF has been requestedfor Payroll Status Change on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
 
 
                 //returning the employee list to view  
@@ -676,6 +1102,8 @@ namespace Carroll.Portals.Controllers
 
                 }
 
+                WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "Print has been requested ", "Print has been requested for Notice Of Employee Separation on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
                 // o.Date=obj.
                 //returning the employee list to view  
                 return View("PrintNoticeOfEmployeeSeparation", obj);
@@ -714,6 +1142,8 @@ namespace Carroll.Portals.Controllers
                 // o.Date=obj.
                 //returning the employee list to view  
                 //      return View(obj);
+
+                WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "PDF has been requested", "PDF has been requestedfor Notice Of Employee Separation on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
 
 
                 //returning the employee list to view  
@@ -942,6 +1372,8 @@ namespace Carroll.Portals.Controllers
 
                 }
 
+                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "Print has been requested ", "Print has been requested for Requisition Request on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
                 // o.Date=obj.
                 //returning the employee list to view  
                 return View("PrintRequisitionRequest", obj);
@@ -976,6 +1408,10 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintRequisitionRequest>(EmpResponse);
 
                 }
+
+
+                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "PDF has been requested", "PDF has been requestedfor Requisition Request on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+
 
                 // o.Date=obj.
                 //returning the employee list to view  

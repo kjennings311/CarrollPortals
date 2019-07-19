@@ -1,17 +1,62 @@
 ﻿ 
- // var $BaseApiUrl = "http://localhost:1002/"; 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://localhost:1002/"; 
+// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
 
 var $ismobile = false;
+
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
 {
     // Take the user to a different screen here.
     $ismobile = true;
 }
 
+var $reloadpageformobile = false;
+var $isemailconfirmed = false;
+
+function ShowToastNotification(message,locationreload)
+{
+    $(".modal-alert").html(message);
+  
+
+    if ($ismobile)
+    {
+        $('#mobiletoastnotification').modal('show');
+        $(".toastconfirmation").show();
+
+        if (locationreload == "2") {
+            $reloadpageformobile = true;
+        }
+    }
+    else
+    {
+        $('#toastnotification').modal('show');
+
+        if (locationreload == "1" || locationreload == "2") {
+
+            setTimeout(function () { location.reload(); }, 3000);
+        }
+        else
+        {
+            setTimeout(function () { $('#toastnotification').modal('hide'); }, 3000);          
+
+        }
+    }
+}
+
+function ReloadLocation()
+{
+    if ($reloadpageformobile)
+        setTimeout(function () { location.reload(); }, 2000);
+    else
+    {
+        $('#toastnotification').modal('hide');
+        $(".toastconfirmation").hide();
+
+    }
+}
 
 function SelectCurrentMenu()
 {
@@ -57,6 +102,7 @@ function validateEmail(emailID)
     }
     return (true);
 }
+
 
 var imagebase64 = "";
 
@@ -290,10 +336,11 @@ function BindElements() {
                                     }
 
                                     $('.dynamicForm #savechanges').attr('disabled', false);
-                                    $(".modal-alert").html('Record Successfully Updated');
-                                    $('#toastnotification').modal('show');
-                                    // go back to previous screen after 8 seconds
-                                     setTimeout(function () { location.reload(); }, 3000);
+                                    ShowToastNotification('Record Successfully Updated', 2);
+                                    //$(".modal-alert").html('Record Successfully Updated');
+                                    //$('#toastnotification').modal('show');
+                                    //// go back to previous screen after 8 seconds
+                                    // setTimeout(function () { location.reload(); }, 3000);
                                 } else {
 
                                     //if (originatingrecord != '') location.href = "/viewrecord/" + originatingrecord;
@@ -376,7 +423,7 @@ function getForm(FormName, RecordId)
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $datebox = '<div class="form-group"><label class="col-sm-12 control-label">  <a  class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="date" validationformat="{1}"  class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> </div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}" onkeyup="countChar(this)"  class="form-control {2}" id="{3}" {4} > {5} </textarea> <span id="cnt{3}" > </span> </div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
@@ -433,7 +480,7 @@ function getForm(FormName, RecordId)
                                
                              //   $fields[i]["fieldValue"] = "";
                                
-                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, "");
+                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, "", ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
 
                             }
                             else
@@ -449,7 +496,7 @@ function getForm(FormName, RecordId)
 
                                 //  var datestring = d.getMonth()+"/"+d.getDate() + "/"  + d.getFullYear();
 
-                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring);
+                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
 
                             }
                            
@@ -543,6 +590,11 @@ function getForm(FormName, RecordId)
                 document.getElementById("DateReported").valueAsDate = new Date();
                 $("#DateReported").prop("disabled", true);
             }
+            if ($("#PoliceReportNumber").length > 0) {
+                
+                $("#PoliceReportNumber").closest('.form-group').hide();
+            }
+
         }
 
     });
@@ -2555,8 +2607,13 @@ function GetAllClaims(Type) {
 
 
     if ($.fn.DataTable.isDataTable('.dtprops')) {
-        $(".dtprops").DataTable().destroy();
-        $('.dtprops tbody').empty();
+
+        console.log($(".dtprops").DataTable());
+        if ($(".dtprops").DataTable() != undefined)
+        {
+            $(".dtprops").DataTable().clear().destroy();
+            $('.dtprops tbody').empty();
+        }
     }
        
 
@@ -3087,23 +3144,65 @@ function LoadHrPositions()
         }
         // now let's load options into select box
         $('#position').append(options);
+
+        if ($("#totitle").length > 0)
+        {
+            $('#totitle').append(options);
+        }
+        if ($("#fromtitle").length > 0)
+        {
+            $('#fromtitle').append(options);
+        }
     });
 
     var options1 = "<option value='' > Select Property </option>";
 
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+        var defaultsel = $("#location").attr('seloption');
 
         for (var i = 0; i < data.length; i++) {
-            options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            if (defaultsel == data[i]["key"])
+                options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            else
+                options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
             selected = "";
 
         }
         // now let's load options into select box
         $('#location').append(options1);
-
+        if ($("#property1").length > 0) {
+            $('#property1').append(options);
+        }
     });
 
 
+}
+
+
+function LoadPositions() {
+    var options = "";
+
+    $.get($BaseApiUrl + "api/Data/GetAllCarrollPositions", function (data) {
+        options = "<option value='' > Select  </option>";
+        for (var i = 0; i < data.length; i++) {
+            options += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+        }
+        // now let's load options into select box
+        $('#position').append(options);
+
+        if ($("#totitle").length > 0) {
+            $('#totitle').append(options);
+        }
+        if ($("#fromtitle").length > 0) {
+            $('#fromtitle').append(options);
+        }
+
+        if ($("#jobtitle").length > 0) {
+            $('#jobtitle').append(options);
+        }
+    });
+    
 }
 
 
@@ -3163,19 +3262,25 @@ function LoadClaim()
                                 $("#heading").html("Property Damage Claim");
                                 $("#property").html(ClaimData.claim.propertyName);
                                 claimbody += ' <table class="table">';
-                                claimbody += '<tr><td style="width:30%;">Weather Conditions:</td><td>' + CheckNull(ClaimData.claim.tbl.weatherConditions) + '</td></tr>'; 
-                                claimbody += '<tr><td style="width:30%;">Incident Date:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDateTime) + '</td></tr>'; 
-                                claimbody += '<tr><td style="width:30%;">Incident Location:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentLocation) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Weather Conditions:</td><td>' + CheckNull(ClaimData.claim.tbl.weatherConditions) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDateTime) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Incident Time:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentTime) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Incident Location:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentLocation) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;">  Resident Name :</td><td>' + ClaimData.claim.tbl.residentName + '</td></tr>';
+                                claimbody += '<tr><td style="width:30%;">  Resident Contact Information :</td><td>' + ClaimData.claim.tbl.residentContactInformation + '</td></tr>';
+                             
                                 claimbody += '<tr><td style="width:30%;">Incident Description:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDescription) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">Estimate of Damage:</td><td>' + CheckNull(ClaimData.claim.tbl.estimateOfDamage) + '</td></tr>';
 
                                 if (ClaimData.claim.tbl.authoritiesContacted == false)
                                     claimbody += '<tr><td style="width:30%;">Authorities Contacted:</td><td>No</td></tr>';
                                 else
+                                {
                                     claimbody += '<tr><td style="width:30%;">Authorities Contacted:</td><td>Yes</td></tr>'; 
-
-
-                                claimbody += '<tr><td style="width:30%;">Contact Person:</td><td>' + CheckNull(ClaimData.claim.tbl.contactPerson) + '</td></tr>';  
+                                    claimbody += '<tr><td style="width:30%;"> Police Report Number </td><td>' + CheckNull(ClaimData.claim.tbl.policeReportNumber) + '</td></tr>'; 
+                                }
+                                                                 
+                                claimbody += '<tr><td style="width:30%;"> Authority Contact Person:</td><td>' + CheckNull(ClaimData.claim.tbl.contactPerson) + '</td></tr>';  
                                 if (ClaimData.claim.tbl.lossOfRevenues == false)
                                     claimbody += '<tr><td style="width:30%;"> Loss Of Revenues:</td><td>No</td></tr>';
 
@@ -3189,8 +3294,9 @@ function LoadClaim()
                                 claimbody += '<tr><td style="width:30%;">Witness Name:</td><td>' + CheckNull(ClaimData.claim.tbl.witnessName) + '</td></tr>';    
                                 claimbody += '<tr><td style="width:30%;">Witness Address:</td><td>' + CheckNull(ClaimData.claim.tbl.witnessAddress) + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Witness Phone:</td><td>' + CheckNull(ClaimData.claim.tbl.witnessPhone) + '</td></tr>';    
+                                claimbody += '<tr><td style="width:30%;">Witness Phone (Alternate): </td><td>' + CheckNull(ClaimData.claim.tbl.reportedPhone) + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Reported By:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentReportedBy) + '</td></tr>';
-                                claimbody += '<tr><td style="width:30%;">Reported Phone:</td><td>' + CheckNull(ClaimData.claim.tbl.reportedPhone) + '</td></tr>';
+                             
                                 claimbody += '<tr><td style="width:30%;">Reported Date:</td><td>' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Created By:</td><td>' + CheckNull(ClaimData.claim.tbl.createdByName) + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;">Created Date:</td><td>' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10) + '</td></tr>';
@@ -3206,34 +3312,44 @@ function LoadClaim()
                             
                                // $('.claimDesc').html(ClaimData.claim.tbl.description);
                                 claimbody += ' <table class="table ">';
-                                claimbody += '<tr><td style="width:30%;"> Location :</td><td>' + ClaimData.claim.tbl.location + '</td></tr>';                               
+                                claimbody += '<tr><td  style="width:30%;"> Discovery Date : </td><td>' + CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Location :</td><td>' + ClaimData.claim.tbl.location + '</td></tr>';        
+                                
+                                claimbody += '<tr><td style="width:30%;"> Apartment Occupied :</td><td>' + (ClaimData.claim.tbl.apartmentOccupied == true ? "Yes ":"No")  + '</td></tr>';                               
+                                 claimbody += '<tr><td style="width:30%;"> Residents Affected :</td><td>' + ClaimData.claim.tbl.residentsAffected + '</td></tr>';                               
+                                claimbody += '<tr><td style="width:30%;">Resident Contact Information :</td><td>' + ClaimData.claim.tbl.residentContactInformation + '</td></tr>';                              
+                                claimbody += '<tr><td style="width:30%;"> Resident Relocating : </td><td>' + (ClaimData.claim.tbl.residentsRelocating == true ? "Yes":"No")  + '</td></tr>';                               
+
                                 claimbody += '<tr><td  style="width:30%;"> Description :</td><td>' + ClaimData.claim.tbl.description + '</td></tr>';  
+                                claimbody += '<tr><td  style="width:30%;"> Suspected Cause : </td><td>' + ClaimData.claim.tbl.suspectedCause + '</td></tr>';   
                                 console.log('building still wet'+ClaimData.claim.tbl.areBuildingMaterialsStillWet )
                                 if (ClaimData.claim.tbl.areBuildingMaterialsStillWet == false ) {
                                     claimbody += '<tr><td  style="width:30%;">Are Building Materials Still Wet: </td><td> No </td></tr>';
-                                    console.log('buidling still wet coiming false')
+                                    
                                 }
 
                                 else {
                                     claimbody += '<tr><td  style="width:30%;">Are Building Materials Still Wet: </td><td> Yes </td></tr>';
-                                    console.log('building still wet true');
-                                }
                                    
-
-                                claimbody += '<tr><td  style="width:30%;"> How Much Water Present :</td><td>' + ClaimData.claim.tbl.howMuchWater + '</td></tr>';
-                                claimbody += '<tr><td  style="width:30%;"> Estimated Time Damage Present: </td><td>' + ClaimData.claim.tbl.estimatedTimeDamagePresent + '</td></tr>';                                  
-                                claimbody += '<tr><td  style="width:30%;"> Planned Actions : </td><td>' + ClaimData.claim.tbl.plannedActions + '</td></tr>';
-                                claimbody += '<tr><td  style="width:30%;"> Discovery Date : </td><td>' + CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10) + '</td></tr>';                                 
-                                claimbody += '<tr><td  style="width:30%;"> Suspected Cause : </td><td>' + ClaimData.claim.tbl.suspectedCause + '</td></tr>';                                  
+                                }
                                 if (ClaimData.claim.tbl.isStandingWaterPresent == false)
                                     claimbody += '<tr><td  style="width:30%;"> Is Standing Water Present : </td><td>  No' + '</td></tr>';
                                 else
                                     claimbody += '<tr><td  style="width:30%;"> Is Standing Water Present : </td><td> Yes </td></tr>';
-                                claimbody += '<tr><td  style="width:30%;">Estimated Surface Area Affected : </td><td>' + ClaimData.claim.tbl.estimatedSurfaceAreaAffected + '</td></tr>';                                  
+
+                                claimbody += '<tr><td  style="width:30%;"> How Much Water Present :</td><td>' + ClaimData.claim.tbl.howMuchWater + '</td></tr>';
+                                claimbody += '<tr><td  style="width:30%;">Estimated Surface Area Affected : </td><td>' + ClaimData.claim.tbl.estimatedSurfaceAreaAffected + '</td></tr>'; 
+                                claimbody += '<tr><td  style="width:30%;"> Estimated Time Damage Present: </td><td>' + ClaimData.claim.tbl.estimatedTimeDamagePresent + '</td></tr>';                                  
+                                claimbody += '<tr><td  style="width:30%;"> Corrective Actions Taken : </td><td> ' + ClaimData.claim.tbl.correctiveActionsTaken + '</td></tr>';
+                                claimbody += '<tr><td  style="width:30%;"> Planned Actions : </td><td>' + ClaimData.claim.tbl.plannedActions + '</td></tr>';
+                                                          
+                                                            
+                            
+                                                          
                                 //if (ClaimData.claim.tbl.correctiveActionsTaken== false)
                                 //    claimbody += '<tr><td> Corrective Actions Taken : </td><td> No </td></tr>';
                                 //else
-                                claimbody += '<tr><td  style="width:30%;"> Corrective Actions Taken : </td><td> ' + ClaimData.claim.tbl.correctiveActionsTaken+'</td></tr>';
+                            
                                 claimbody += '<tr><td  style="width:30%;"> Additional Comments : </td><td>' + ClaimData.claim.tbl.additionalComments + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Reported By : </td><td>' + ClaimData.claim.tbl.reportedBy + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Reported Date : </td><td>' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';
@@ -3255,14 +3371,21 @@ function LoadClaim()
                                
                                 if (ClaimData.claim.tbl.authoritiesContacted == false)
                                     claimbody += '<tr><td>Authorities Contacted: </td><td> No </td></tr>';
-                                else
+                                else {
                                     claimbody += '<tr><td>Authorities Contacted: </td><td> Yes </td></tr>';
-                                claimbody += '<tr><td style="width:30%;"> Contact Person :</td><td>' + ClaimData.claim.tbl.contactPerson + '</td></tr>';
+                                    claimbody += '<tr><td style="width:30%;"> Police Report Number </td><td>' + CheckNull(ClaimData.claim.tbl.policeReportNumber) + '</td></tr>'; 
+                                }
+                                    
+                                claimbody += '<tr><td style="width:30%;"> Authority Contact Person :</td><td>' + ClaimData.claim.tbl.contactPerson + '</td></tr>';
+                                claimbody += '<tr><td style="width:30%;">   Resident Name :</td><td>' + ClaimData.claim.tbl.residentName + '</td></tr>';
+                                claimbody += '<tr><td style="width:30%;">  Resident Contact Information :</td><td>' + ClaimData.claim.tbl.residentContactInformation + '</td></tr>';
+
+                               
                                 
                                 claimbody += '<tr><td style="width:30%;"> Claimant Name:</td><td>' + ClaimData.claim.tbl.claimantName + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Claimant Address:</td><td>' + ClaimData.claim.tbl.claimantAddress + '</td></tr>'; 
-                                claimbody += '<tr><td style="width:30%;"> Claimant Phone1:</td><td>' + ClaimData.claim.tbl.claimantPhone1 + '</td></tr>'; 
-                                claimbody += '<tr><td style="width:30%;"> Claimant Phone2:</td><td>' + ClaimData.claim.tbl.claimantPhone2 + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Claimant Primary Phone :</td><td>' + ClaimData.claim.tbl.claimantPhone1 + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Claimant Secondary Phone :</td><td>' + ClaimData.claim.tbl.claimantPhone2 + '</td></tr>'; 
                               
                                 if (ClaimData.claim.tbl.anyInjuries == false)
                                     claimbody += '<tr><td> Any Injuries: </td><td> No </td></tr>';
@@ -3278,12 +3401,13 @@ function LoadClaim()
                                 claimbody += '<tr><td style="width:30%;">Witness Name:</td><td>' + ClaimData.claim.tbl.witnessName + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">Witness Address:</td><td>' + ClaimData.claim.tbl.witnessAddress + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Witness Phone:</td><td>' + ClaimData.claim.tbl.witnessPhone + '</td></tr>';
+                                claimbody += '<tr><td style="width:30%;">Witness Phone (Alternate) :</td><td>' + ClaimData.claim.tbl.reportedPhone + '</td></tr>'; 
 
-                                claimbody += '<tr><td style="width:30%;">Description Of Property:</td><td>' + ClaimData.claim.tbl.descriptionOfProperty + '</td></tr>'; 
+                              //  claimbody += '<tr><td style="width:30%;">Description Of Property:</td><td>' + ClaimData.claim.tbl.descriptionOfProperty + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">Description Of Damage:</td><td>' + ClaimData.claim.tbl.descriptionOfDamage + '</td></tr>'; 
                               
                                 claimbody += '<tr><td style="width:30%;">Reported By:</td><td>' + ClaimData.claim.tbl.reportedBy + '</td></tr>';                                 
-                                claimbody += '<tr><td style="width:30%;">Reported Phone:</td><td>' + ClaimData.claim.tbl.reportedPhone + '</td></tr>'; 
+                             
                                 if (ClaimData.claim.tbl.notifySecurityOfficer == true)
                                     claimbody += '<tr><td style="width:30%;">Notify Security Officer :</td><td> Yes </td></tr>';
                                 else
@@ -3435,228 +3559,6 @@ function LoadClaim()
             });
 }
 
-//function LoadClaim() {
-//    var claim = getParameterByName("Claim");
-//    var Type = claim[claim.length - 1];
-//    claim = claim.substr(0, claim.length - 1)
-
-//    $("#claim").val(claim);
-//    if (Type == "m")
-//        $("#type").val("3");
-//    else if (Type == "p")
-//        $("#type").val("1");
-//    else if (Type == "g")
-//        $("#type").val("2");
-
-
-//    $.ajax({
-//        type: "get",
-//        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
-//        url: $BaseApiUrl + "api/data/GetClaimDetails?claim=" + claim + "&Type=" + Type,
-//        async: false,
-//        beforeSend: function (xhr) {
-//            xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
-//        },
-//        statusCode: {
-//            200: function (data) {
-//                if (data != null) {
-
-//                    var ClaimData = JSON.parse(JSON.stringify(data));
-//                    var claimbody = "";
-
-//                    if (Type == "p") {
-//                        $("#heading").html("Property Damage Claim");
-//                        $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
-
-//                        claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.incidentLocation)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Weather Conditions : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.weatherConditions)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimate Of Damage : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.estimateOfDamage)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Contact Person : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.contactPerson)
-//                            + '</span></div></div>';
-//                        if (ClaimData.claim.tbl.witnessPresent == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.witnessPhone)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentReportedBy
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)
-//                            + '</span></div></div></div>';
-
-
-//                        claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDescription
-//                            + '</span></div></div>';
-//                        if (ClaimData.claim.tbl.authoritiesContacted == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Authorities Contacted : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Authorities Contacted : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-//                        if (ClaimData.claim.tbl.lossOfRevenues == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Loss Of Revenues : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Loss Of Revenues : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Name : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessName
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Address : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessAddress
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
-//                            + '</span></div></div></div>';
-
-//                        $("#claimbody").html(claimbody);
-
-//                    }
-//                    else if (Type == "m") {
-//                        $("#heading").html("Mold Damage Claim");
-//                        $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
-
-//                        claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.location
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.description
-//                            + '</span></div></div>';
-//                        if (ClaimData.claim.tbl.areBuildingMaterialsStillWet == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Are Building Materials Still Wet: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Are Building Materials Still Wet: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> How Much Water Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.howMuchWater
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimated Time Damage Present: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.estimatedTimeDamagePresent
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Planned Actions : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.plannedActions
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedBy
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)
-//                            + '</span></div></div></div>';
-
-
-//                        claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Discovery Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Suspected Cause : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.suspectedCause
-//                            + '</span></div></div>';
-//                        if (ClaimData.claim.tbl.isStandingWaterPresent == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Is Standing Water Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Is Standing Water Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Estimated Surface Area Affected : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.estimatedSurfaceAreaAffected
-//                            + '</span></div></div>';
-//                        if (ClaimData.claim.tbl.correctiveActionsTaken == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Corrective Actions Taken : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Corrective Actions Taken : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Additional Comments : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.additionalComments
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + (ClaimData.claim.tbl.dateReported).substring(0, 10)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
-//                            + '</span></div></div></div>';
-//                        $("#claimbody").html(claimbody);
-//                    }
-//                    else if (Type == "g") {
-//                        $("#heading").html("General Liability Claim");
-//                        $("#property").html("<strong> Property : </strong> " + ClaimData.claim.propertyName);
-
-//                        claimbody += '<div class="col-lg-6"> <div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Location : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentLocation
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.incidentDescription
-//                            + '</span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Contact Person : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.contactPerson
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Address : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantAddress
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Phone2 : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantPhone2
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Injury Description : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.injuryDescription
-//                            + '</span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Name </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessName
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Address </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessAddress
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description Of Damage </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.descriptionOfDamage
-//                            + '</span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported By: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedBy
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Reported Phone: </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.reportedPhone
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)
-//                            + '</span></div></div></div>';
-
-
-//                        claimbody += '<div class="col-lg-6"><div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Incident Date : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10)
-//                            + '</span></div></div>';
-
-//                        if (ClaimData.claim.tbl.authoritiesContacted == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Authorities Contacted : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Authorities Contacted : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Name : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantName
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Claimant Phone1 : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.claimantPhone1
-//                            + '</span></div></div>';
-//                        if (ClaimData.claim.tbl.anyInjuries == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Any Injuries : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Any Injuries : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-//                        if (ClaimData.claim.tbl.witnessPresent == 'false')
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> No </span></div></div>';
-//                        else
-//                            claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Present : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1"> Yes </span></div></div>';
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Witness Phone : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.witnessPhone
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Description Of Property : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.descriptionOfProperty
-//                            + '</span></div></div>';
-
-
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Date Reported : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + (ClaimData.claim.tbl.dateReported).substring(0, 10)
-//                            + '</span></div></div>';
-//                        claimbody += '<div class="row mb-0"><div class="col-sm-4 text-sm-right"><label> Created By : </label> </div><div class="col-sm-8 text-sm-left"><span class="mb-1">' + ClaimData.claim.tbl.createdByName
-//                            + '</span></div></div></div>';
-//                        $("#claimbody").html(claimbody);
-
-//                    }
-
-//                    $("#comm-att").show();
-
-//                    $("#commentbody").html();
-//                    $.each(ClaimData.comments, function (index, value) {
-//                        $("#commentbody").append('<tr><td> ' + value.comment + ' </td><td style="width:20%;" >' + value.commentDate.substring(0, 10) + ' </td> </tr>');
-//                    });
-
-
-//                    $("#attachmentbody").html('');
-
-//                    $.each(ClaimData.attchments, function (index, value) {
-//                        $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
-//                    });
-
-//                }
-//                else {
-//                    alert("No Claim Found");
-//                }
-//            }, 500: function (data) {
-//                alert(data.responseText);
-//            }
-//        }
-//    });
-//}
 
 function LoadUserClaims()
 {
@@ -3851,8 +3753,104 @@ $(document).ready(function ()
         }
     });
 
-    // HR Forms
+    $(document).on('keyup', 'textarea', function ()
+    {
+        var max = 1000;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#cnt' + $(this).attr('id')).html('<span style="color:red"> you have reached the limit </span>');
+            var str = $(this).val();
+            $(this).val(str.substring(1, 1000));
+            
+        } else {
+            var char = max - len;
+            $('#cnt' + $(this).attr('id')).html('<span style="color:green">'+char + ' characters left</span>');
+        }
 
-   
+    });
+
+    $(document).on('change', "#AuthoritiesContacted", function ()
+    {
+        if ($(this).is(":checked"))
+        {
+            if ($("#PoliceReportNumber").length > 0)
+            {
+                $("#PoliceReportNumber").closest('.form-group').show();
+            }
+        }
+        else
+        {
+           $("#PoliceReportNumber").closest('.form-group').hide();
+        }
+    });
+
+
+    // Activity Log
+
+    $(document).on('click', ".viewlog", function () {
+
+        var formtype = $(this).attr('data-formtype');
+        var refid = $(this).attr('data-ref');
+
+        var insertForm = new FormData();
+        insertForm.append('FormType', formtype);
+        //  insertForm.append('action', action);
+        insertForm.append('RecordId', refid);
+
+        if ($("#divprocessingbtn").length > 0) {
+            $("#divprocessingbtn").show();
+        }
+
+
+        $.ajax({
+            url: $BaseApiUrl + "api/data/GetHrFormLog",
+            type: 'POST',
+            dataType: "JSON",
+            processData: false,
+            contentType: false,
+            data: insertForm,
+            success: function (data) {
+                // To-do code if ajax request is successful
+
+                console.log(data);
+
+
+                $(".alert").html('');
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").hide();
+                }
+
+                $("#hractivitybody").html('');
+
+                $.each(data.log, function (index, value) {
+                    $("#hractivitybody").append('<tr><td style="float:left" >' + value.activitySubject + ' </td> <td> ' + value.activityDate.substring(0, 19) + '</td> <td style="float:left">' + value.activityByName + ' </td></tr>');
+                });
+
+                $("#hrsignmetadata").html('');
+
+                $.each(data.metadata, function (index, value) {
+                    $("#hrsignmetadata").append('<tr><td style="float:left" >' + value.action.replace("Email", "") + ' </td> <td > ' + value.ip + '</td> <td> ' + value.browserinfo + '</td> <td>' + value.datetime.substring(0, 19) + ' </td></tr>');
+                });
+
+
+                $('#activitymodal').modal('show');
+
+                $('#viewlog').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ]
+                });
+
+            },
+            error: function (ts) {
+                alert('error' + ts.errorMessage);
+            }
+        });
+    });
+
 
 });

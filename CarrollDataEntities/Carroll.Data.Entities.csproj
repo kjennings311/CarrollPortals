@@ -55,6 +55,9 @@
     <Compile Include="Activity.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ActivityLogHrForm.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CarrollPayPeriod.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -189,6 +192,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_GetGeneralLiabilityClaims_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_gethrformsactivity_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_GetMoldDamageClaims_Result.cs">

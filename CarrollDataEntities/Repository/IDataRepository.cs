@@ -48,12 +48,21 @@ namespace Carroll.Data.Entities.Repository
 
         dynamic InsertResidentReferralRequest(ResidentReferalSheet mlh);
         dynamic GetResidentReferralRequest(Guid riderid);
-        dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate);
+        dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate,string browser, string ipaddress);
+
+        dynamic UpdateWorkflowEmployeeLeaseRider(string Action, string RefId, string Sign, DateTime? edate,string browser,string ipaddress);
+        dynamic UpdateWorkflowPayRollStatusChangeNotice(string Action, string RefId, string Sign, DateTime? edate, string browser, string ipaddress);
+
         dynamic InsertResidentReferralContact(ResidentContactInformation mlh,List<ResidentContactInformation_Residents> rrs,List<ResidentContactInformation_OtherOccupants> ors,List<ResidentContactInformation_Vehicles> vhs);
+        dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser);
+
+        dynamic GetNewHireRejectionDetails(string Refid);
         PrintResidentContact GetResidentReferralContact(Guid riderid);
 
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
-         dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
+        void HrLogActivity(string FormType, string RecordId, string ActivitySubject, string ActivityDesc,string UserGuid);
+        dynamic GetHrFormLogActivity(string FormType, string RecordId);
+        dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
         dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted);
         string GetPropertyManager(Guid PropertyId);
         List<CarrollPosition> GetAllCarrollPositions();
@@ -74,6 +83,6 @@ namespace Carroll.Data.Entities.Repository
 
         string GetPropertyName(int PropertyNumber);
         string GetPropertyNameManager(int PropertyNumber);
-       
+        string GetPropertyNumberNameManager(string PropertyNumber);
     }
 }

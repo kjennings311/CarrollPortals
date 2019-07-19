@@ -303,7 +303,7 @@
             </p>
 
             <p class="c1">
-                <span class="c0">Position  :  <input type="text" id="salary" value="@Model.Position" style="width:15%;margin-left:2%;" /> </span>
+                <span class="c0">Position  :  <input type="text" id="salary" value="@Model.Position" style="width:55%;margin-left:2%;" /> </span>
             </p>
 
             <table style="width: 80%;
@@ -317,8 +317,28 @@
                     </td>
                 </tr>
                 <tr> <td> Property </td> <td> Percentage </td> </tr>
-                <tr> <td> <input type="text" id="la_Prop1" value="@Model.La_Property1" />  </td> <td> <input type="number" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
-                <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property2" /> </td> <td> <input type="number" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
+
+                @if (!string.IsNullOrEmpty(Model.La_Property1))
+                {
+                    <tr> <td> <input type="text" id="la_Prop1" value="@Model.La_Property1" />  </td> <td> <input type="text" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
+                    if (!string.IsNullOrEmpty(Model.La_Property2))
+                    {
+                        <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
+                    }
+
+                    if (!string.IsNullOrEmpty(Model.La_Property3))
+                    {
+                        <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property3" /> </td> <td> <input type="text" value="@Model.La_Property3_Per" id="la_Prop2per" /> </td> </tr>
+                    }
+
+
+                }
+                else
+                {
+                    <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                    <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                    <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                }
             </table>
 
             <p class="c1" style="margin-top: 60px;">
@@ -326,6 +346,14 @@
                     New Hire Kit Ordered :  <span style="margin-left:10%;">  @Model.kitordered </span>
                 </span>
             </p>
+
+            <p class="c1" style="margin-top: 10px;">
+                <span class="c0">
+                    Additional Instructions : 
+                </span>
+                @Model.AdditionalText
+            </p>
+
             @{
                 if (ViewBag.Action == "Employee Email")
                 {
@@ -344,7 +372,7 @@
                     </p>
 
                     <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input  disabled type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
                     </p>
 
                     <p class="c1">
@@ -353,10 +381,6 @@
                 }
                 <input type="hidden" id="Action" value="@ViewBag.Action" />
             }
-
-            <p class="c1" style="width:100%;text-align:center; font-weight:bold">
-                Please Email I9 and Signed Documents to HRNotifications@carrollmg.com
-            </p>
 
             <br /> <br />
             <p>Rev. June 2018</p>
@@ -384,6 +408,10 @@
 
         $(document).ready(function () {
 
+            function closeMe() {
+                var win = window.open("", "_self"); /* url = "" or "about:blank"; target="_self" */
+                win.close();
+            }
 
 
             $("input").change(function (e) {
@@ -397,6 +425,22 @@
                 }
 
             });
+            $("input").prop("disabled", true);
+          
+
+            if ($("#Action").val() == "Employee Email") {
+
+                document.getElementById("edate").valueAsDate = new Date();
+                $("#esignature,#Submit").prop("disabled", false);
+                $("#esignature").focus();
+
+            }
+            else {
+
+                document.getElementById("rpmdate").valueAsDate = new Date();
+                $("#rpmsignature,#Submit").prop("disabled", false);
+                $("#rpmsignature").focus();
+            }
 
 
             $("#Submit").click(function (e) {
@@ -465,10 +509,10 @@
                     {
                         insertForm.append('signature', $("#esignature").val());
                         insertForm.append('date', $("#edate").val());
-                        if('@ViewBag.IsCorporate' == 'True')
+                        //if('@ViewBag.IsCorporate' == 'True')
                         axurl = "/Hr/UpdateWorkflowEmployeeNewHireNotice";
-                        else
-                        axurl = $BaseApiUrl +"api/data/UpdateWorkflowEmployeeNewHireNotice";
+                     //   else
+                      //  axurl = $BaseApiUrl +"api/data/UpdateWorkflowEmployeeNewHireNotice";
 
                     }
                     else
@@ -495,9 +539,9 @@
                             
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
 
-                            setTimeout(function () { window.close(); }, 2000);
+                            setTimeout(function () { closeMe(); }, 2000);
 
-                            setTimeout(function () { window.top.close(); }, 5000);
+                            setTimeout(function () { closeMe(); }, 5000);
                             //}
                             //else
                             //{
@@ -508,9 +552,9 @@
                             alert("Successfully Submitted");
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
 
-                            setTimeout(function () { window.close(); }, 2000);
+                            setTimeout(function () { closeMe(); }, 2000);
 
-                           setTimeout(function () { window.close(); }, 5000);
+                            setTimeout(function () { closeMe(); }, 5000);
                         }
                     });
 

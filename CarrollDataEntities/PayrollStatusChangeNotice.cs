@@ -71,5 +71,15 @@ namespace Carroll.Data.Entities
         public string ToStatus { get; set; }
         public string ToWageSalary { get; set; }
         public Nullable<double> ToRate { get; set; }
+        public string SequenceNumber { get; set; }
+        public string Leave_Purpose_Other { get; set; }
+        public string FromTitle { get; set; }
+        public string ToTitle { get; set; }
+        public Nullable<System.Guid> Property { get; set; }
+        public string EmployeeEmail { get; set; }
+        public string La_Property3 { get; set; }
+        public Nullable<double> La_Property3_Per { get; set; }
+        public Nullable<System.DateTime> PmSignedDateTime { get; set; }
+        public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
     }
 }

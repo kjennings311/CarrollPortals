@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Opening in a new window </title>
+</head>
+<body>
+    <div>
+        <img src="~/carroll.portals/img/logo.png" />
+        <h1 id="msg"> Please wait while the link opens in a new window </h1>
+    </div>
+    <script type="text/javascript">
+      
+        var link = "/outlink/Verify?link=@ViewBag.link";
+        var child = window.open(link, "_blank", 'toolbar =1, status = 0, width = 1200, height = 750');
+        child.focus();
+        document.getElementById("msg").innerHTML = "Please fill out the form in the new window";
+        var timer = setInterval(checkChild, 1000);
+
+        function checkChild() {
+            if (child.closed) {
+                document.getElementById("msg").innerHTML = "Form has been successfully submitted. Thank You.";
+                clearInterval(timer);
+            }
+        }
+
+
+    </script>
+</body>
+</html>

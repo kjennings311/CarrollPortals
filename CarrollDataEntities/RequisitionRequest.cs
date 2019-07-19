@@ -39,5 +39,6 @@ namespace Carroll.Data.Entities
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
         public Nullable<bool> ChkOtherPosition { get; set; }
         public Nullable<bool> ChkOtherPost { get; set; }
+        public string SequenceNumber { get; set; }
     }
 }

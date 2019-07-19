@@ -8883,3 +8883,35 @@ z-index:99999999 !important;
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
 }
+
+.modal {
+    overflow-y: auto;
+}
+
+.modal-open {
+    overflow: auto;
+}
+
+.btn-danger, .btn-success, .btn-danger:active, .btn-danger:hover, .btn-success:active, .btn-success:hover {
+    background-color: #293846 !important;
+    border-color: #293846 !important;
+    color: #FFFFFF;
+    border-radius: 20px !important;
+}
+
+.btn {
+    border-radius: 20px !important;
+}
+
+a.resendempmail
+{
+    font-size: 20px !important;
+    color: black !important;
+    text-align: center !important;
+    padding-left: 30px !important;
+}
+
+
+#viewlog_paginate, #viewlog_info {
+    clear: both;
+}

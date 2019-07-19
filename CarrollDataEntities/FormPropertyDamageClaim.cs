@@ -37,5 +37,9 @@ namespace Carroll.Data.Entities
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string ClaimNumber { get; set; }
+        public string IncidentTime { get; set; }
+        public string ResidentName { get; set; }
+        public string ResidentContactInformation { get; set; }
+        public string PoliceReportNumber { get; set; }
     }
 }

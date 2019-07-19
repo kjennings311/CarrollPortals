@@ -34,16 +34,62 @@
                     <div class="ibox-tools" style="margin-top:-55px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                            <a disabled="disabled" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>*@
+                    <a disabled="disabled" class="btnDelete" href="#">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeSeparation');">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeSeparation'); LoadPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
                 }
             </div>
+
+            <div class="modal fade bs-example-modal-lg activitymodal" id="activitymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                                Activity Log
+                            </h1>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center">
+                                    <table id="viewlog" class="table table-striped col-md-6">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:40%">Description</th>
+                                                <th style="width:30%;text-align:center">Date</th>
+                                                <th style="width:20%"> Created By </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hractivitybody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12" style="text-align:center">
+                                    <h2> Signature Meta Data </h2>
+                                    <br />
+                                    <table class="table table-striped col-md-6">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%"> Sign Type </th>
+                                                <th style="width:10%">Ip Address</th>
+                                                <th style="width:60%;text-align:center">Browser </th>
+                                                <th style="width:20%;text-align:center"> Date Time </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hrsignmetadata"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="ibox-content" style="margin-left:0%; padding-top:0px;">
                 <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -52,9 +98,9 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 @*<h1 class="modal-title" style="font-weight:bold;text-align: center;
-                                    color: black;" id="gridSystemModalLabel">
-                                                                    Payroll Status Change
-                                                                </h1>*@
+                            color: black;" id="gridSystemModalLabel">
+                                                            Payroll Status Change
+                                                        </h1>*@
                             </div>
                             <div class="modal-body">
                                 <div class="row" style="padding: 20px;
@@ -70,7 +116,7 @@
                                             <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
                                             <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <input type="text" disabled id="rehire" /></p>
                                             <p class="p1 ft1">Property Name <input type="text" disabled id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
-                                            <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <input type="text" id="jobtitle" style="width:46%" /></p>
+                                            <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <select id="jobtitle" style="width:46%"> </select></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                 <TR>
@@ -162,8 +208,8 @@
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
 
                                             <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" />  Date: <input type="date" id="sdate" /></P>
-                                            <P class="p20 ft11">Once completed, send to HRNotifications@carrollmg.com</P>
+                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" />  Date: <input type="date" id="sdate" disabled /></P>
+
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
 
@@ -652,7 +698,7 @@
                 e.preventDefault();
                 console.log($("#2weekscom").val());
                 if ($("#2weekscom").val() == "true") {
-                    $("#rehire").val("Yes");
+                    $("#rehire").val("Yes");        
                 }
                 else {
                     $("#rehire").val("No");
@@ -660,6 +706,9 @@
 
             });
 
+            document.getElementById("sdate").valueAsDate = new Date();
+
+            
 
             // on focus out get the PropertyName for Property Number
 
@@ -711,7 +760,7 @@
 
             });
 
-            $("#Submit").click(function (e) {
+            $("#Submit").click(function (e) {   
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -911,8 +960,7 @@
                                 $("#submitform").trigger('reset');
                                 document.getElementById("submitform").reset();
                                 $("#Submit").prop('disabled', false);
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
+                                ShowToastNotification('Record Successfully Updated', 3);
 
                                 setTimeout(function () {
 

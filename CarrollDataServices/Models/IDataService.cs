@@ -63,12 +63,15 @@ namespace Carroll.Data.Services.Models
         List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel();
         List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel();
         List<proc_getpropertiesforexcelupdate_Result> GetAllPropertiesForExcel();
-
+        dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser);
         dynamic ImportContactTableFromExcel(DataTable dt);
         dynamic ImportEquityPartnerTableFromExcel(DataTable dt);
         dynamic ImportPropertiesTableFromExcel(DataTable dt);
         string GetPropertyName(int PropertyNumber);
         string GetPropertyNameManager(int PropertyNumber);
         string GetPropertyManager(Guid PropertyId);
+        string GetPropertyNumberNameManager(string PropertyNumber);
+        dynamic GetHrFormLogActivity(string FormType, string RecordId);
+        dynamic GetNewHireRejectionDetails(string Refid);
     }
 }

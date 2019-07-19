@@ -932,6 +932,9 @@
     <Content Include="Views\Resident\Printresidentcontact.cshtml" />
     <Content Include="Views\Outlink\VerifyEmployeeNewHireNotice.cshtml" />
     <Content Include="Views\Account\LoginSuccess.cshtml" />
+    <Content Include="Views\Outlink\VerifyEmployeeLeaseRider.cshtml" />
+    <Content Include="Views\Outlink\Open.cshtml" />
+    <Content Include="Views\Outlink\VerifyPayRollStatusChange.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

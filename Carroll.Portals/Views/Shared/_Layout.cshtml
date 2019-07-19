@@ -28,11 +28,27 @@
         @*class="@Html.PageClass()">*@
 
 
-        <div class="modal fade bs-example-modal-lg" style="z-index:2147483647 !important;"  id="toastnotification" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade bs-example-modal-lg" style="z-index:2147483647 !important;" id="toastnotification" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" style="width:20%; float:right;" role="document">
                 <div class="modal-content alert alert-success modal-alert" style="background:green; color:white; font-weight:bold">
 
+                   
                 </div>
+            </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg mobiletoast" style="z-index:2147483647 !important;" id="mobiletoastnotification" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg"  role="document">
+                <div class="modal-content alert alert-success " style="background:green; color:white; font-weight:bold">
+                    <div class="col-md-12 modal-alert">
+
+                    </div>
+                    <div class="modal-footer toastconfirmation" style="border:none !important">
+                        <button type="button" class="btn btn-default" onclick="ReloadLocation()" style="color:black;" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+               
             </div>
         </div>
         <!-- Navigation -->

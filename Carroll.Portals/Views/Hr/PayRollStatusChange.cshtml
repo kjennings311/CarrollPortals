@@ -17,6 +17,52 @@
     </div>
 </div>
 
+<div class="modal fade bs-example-modal-lg activitymodal" id="activitymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:70%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                    Activity Log
+                </h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" style="text-align:center">
+                        <table id="viewlog" class="table table-striped col-md-6">
+                            <thead>
+                                <tr>
+                                    <th style="width:40%">Description</th>
+                                    <th style="width:30%;text-align:center">Date</th>
+                                    <th style="width:20%"> Created By </th>
+                                </tr>
+                            </thead>
+                            <tbody id="hractivitybody"></tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12" style="text-align:center">
+                        <h2> Signature Meta Data </h2>
+                        <br />
+                        <table class="table table-striped col-md-6">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%"> Sign Type </th>
+                                    <th style="width:10%">Ip Address</th>
+                                    <th style="width:60%;text-align:center">Browser </th>
+                                    <th style="width:20%;text-align:center"> Date Time </th>
+                                </tr>
+                            </thead>
+                            <tbody id="hrsignmetadata"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -34,7 +80,7 @@
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('PayRollChange'); LoadPayRoles();">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -61,20 +107,17 @@
                                             <img style="margin-left: 33%;
     MARGIN-TOP: 22PX;" src="/img/payroll.png" id="p1img1">
                                             <P class="p0 ft0" style="margin-top:0PX;">PAYROLL STATUS CHANGE NOTICE</P>
-                                            <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" /> Change effective date: <input style=" display:inline; " type="date" id="effdate" class="" /></P>
-                                            <P class="p2 ft3"><SPAN class="ft2">Manager Responsibilities</SPAN>: Complete the Payroll Status Change Notice, sign the form, and submit to</P>
-                                            <P class="p3 ft3">Human Resources to <A href="mailto:HRNotifications@carrollmg.com"><SPAN class="ft4">HRNotifications@carrollmg.com</SPAN></A> within 48 hours of change effective date.</P>
-                                            <P class="p3 ft3"> <h4>Select Type Of Change : </h4></P>
-                                            <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divallowance" id="chkAllowances" /> Allowances  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leaves Of Absence   </P>
-
+                                            <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" />    Current Property : <select style=" display:inline; " id="location" class=""> </select></P>
+                                            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:40%;" type="text" step="" id="empemail" class="" /> </P>
+                                            <P class="p3 ft3"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
+                                            <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence   </P>
                                             <P class="p6 ft1">  </P>
 
                                             <div class="" style="border: 2px solid black; width:100%">
                                                 <div style="width:100%;display:none;" id="divpropertychange">
-
-
                                                     <P class="p4 ft5">Property Change</P>
-                                                    <P class="p5 ft6">Property Transfer:</P>
+                                                    <P class="p5 ft6"> Change Effective Date : <input type="date" id="effectivedate" /> </P>
+                                                    <P class="p5 ft6"> Property Transfer:</P>
                                                     <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> From Property Name: <input disabled style=" display:inline; " type="text" id="frompropname" class="" />From Manager:  <input disabled style=" display:inline; " type="text" id="frommanager" class="" /></P>
                                                     <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " disabled type="text" id="topropname" class="" />To Manager: <input style=" display:inline; " disabled type="text" id="tomanager" class="" /></P>
                                                     <hr style="border-top: 2px solid black;" />
@@ -82,7 +125,7 @@
                                                 <div style="width:102%;display:none;" id="divpaychange">
                                                     <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                         <TR>
-                                                            <TD class="tr0 td0"><P class="p7 ft7">Pay Change</P></TD>
+                                                            <TD class="tr0 td0"><P class="p7 ft7">Pay / Position Change</P></TD>
                                                             <TD class="tr0 td1"><P class="p8 ft8">&nbsp;</P></TD>
                                                             <TD class="tr0 td2"><P class="p8 ft8">&nbsp;</P></TD>
                                                             <TD class="tr0 td3"><P class="p8 ft8">&nbsp;</P></TD>
@@ -96,6 +139,10 @@
                                                         </h4>
 
                                                         <p class="c1">
+                                                            <span class="c0">Title:  <select id="fromtitle"> </select> </span>
+                                                        </p>
+
+                                                        <p class="c1">
                                                             <span class="c0">Position: <input type="radio" style="margin-left:17%;" value="1" name="exempt" id="fromexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="fromnonexempt" value="1" />  Non-exempt </span>
                                                         </p>
 
@@ -104,7 +151,7 @@
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Wage / Salary  <input type="radio" style="margin-left:9.5%;" value="1" name="wage" id="fromsalhourly" />  Hourly  <input type="radio" style="margin-left:7.5%;" name="wage" id="fromannualsalary" value="1" />  Annual  </span>
+                                                            <span class="c0">Wage / Salary  <input type="radio" style="margin-left:9.5%;" name="wage" id="fromannualsalary" />  Annual <input type="radio" style="margin-left:7.5%;" name="wage" id="fromsalhourly" />  Hourly   </span>
                                                         </p>
 
                                                         <p class="c1">
@@ -118,7 +165,9 @@
     font-size: 15px;margin-top:-8px; ">
                                                             To
                                                         </h4>
-
+                                                        <p class="c1">
+                                                            <span class="c0">Title:  <select id="totitle"> </select> </span>
+                                                        </p>
                                                         <p class="c1">
                                                             <span class="c0">Position: <input type="radio" style="margin-left:17%;" value="1" name="texempt" id="toexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="texempt" id="tononexempt" value="1" />  Non-exempt </span>
                                                         </p>
@@ -128,7 +177,7 @@
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Wage / Salary  <input type="radio" style="margin-left:9.5%;" value="1" name="twage" id="tosalhourly" />  Hourly  <input type="radio" style="margin-left:7.5%;" name="wtage" id="toannualsalary" value="1" />  Annual  </span>
+                                                            <span class="c0">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
                                                         </p>
                                                         <p class="c1">
                                                             <span class="c0">Rate  <input type="text" id="torate" style="width:30%;margin-left:26%;" />    </span>
@@ -138,7 +187,7 @@
                                                     <TABLE cellpadding=0 cellspacing=0 class="t0">
 
                                                         <TR>
-                                                            <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
+                                                            <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN> <br /> (pay and position changes can take place at the beginning of a pay period)</P></TD>
                                                             <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
                                                         </TR>
                                                     </TABLE>
@@ -175,6 +224,12 @@
                                                             <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" id="prop2per" /></P></TD>
 
                                                         </TR>
+
+                                                        <TR>
+                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop3" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" id="prop3per" /></P></TD>
+
+                                                        </TR>
                                                     </TABLE>
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
@@ -196,7 +251,7 @@
                                                     <TABLE cellpadding=0 cellspacing=0 class="t1">
                                                         <TR>
                                                             <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
-                                                            <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leaves of Absence</P></TD>
+                                                            <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leave of Absence</P></TD>
                                                         </TR>
                                                         <TR>
                                                             <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
@@ -204,7 +259,36 @@
                                                             <TD class="tr1 td11"><P class="p8 ft6">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
                                                         </TR>
                                                     </TABLE>
-                                                    <P class="p20 ft1">Purpose: <input type="text" style="width:32%" id="purpose" />  Begin: <input type="date" style="width:20%;" id="leavebegin" /> Expected End:<input type="date" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" id="ptobalance" /> </P>
+                                                    <P class="p20 ft1">
+                                                        Purpose: <select style="width:32%; margin-right:30px;" id="purpose">
+                                                            <option value="FMLA – Birth of a Child">
+                                                                FMLA – Birth of a Child
+                                                            </option>
+                                                            <option value="FMLA – Personal Medical">
+                                                                FMLA – Personal Medical
+                                                            </option>
+                                                            <option value="FMLA – Family Medical">
+                                                                FMLA – Family Medical
+                                                            </option>
+                                                            <option value="Personal Leave – Birth of a Child">
+                                                                Personal Leave – Birth of a Child
+                                                            </option>
+                                                            <option value="Personal Leave – Personal Medical">
+                                                                Personal Leave – Personal Medical
+                                                            </option>
+                                                            <option value="Personal Leave – Family Medical">
+                                                                Personal Leave – Family Medical
+                                                            </option>
+                                                            <option value="Military Leave">
+                                                                Military Leave
+                                                            </option>
+                                                            <option value="Other">
+                                                                Other
+                                                            </option>
+                                                        </select>   Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" />
+                                                    </P>
+                                                    <P class="p20 ft1">  Begin: <input type="date" style="width:20%;" id="leavebegin" /> Expected End:<input type="date" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" id="ptobalance" /> </P>
+
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
 
@@ -213,8 +297,8 @@
                                                     <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> </textarea></P>
                                                     <P class="p6 ft1">  </P>
                                                 </div>
-                                                <P class="p6 ft1">Employee Signature: <input type="text" id="esignature" />  Date: <input type="date" id="edate" /> </P>
-                                                <P class="p6 ft1">Manager Signature: <input type="text" id="msignature" /> Date: <input type="date" id="mdate" /></P>
+                                                <P class="p6 ft1">Employee Signature: <input type="text" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
+                                                <P class="p6 ft1">Manager Signature: <input type="text" id="msignature" /> Date: <input disabled type="date" id="mdate" /></P>
                                             </div>
                                         </DIV>
                                         <div id="status"> </div>
@@ -265,6 +349,10 @@
 
         table td, table th {
             padding: 0
+        }
+
+        .showchange {
+            margin-left: 20px !important;
         }
 
         .c3 {
@@ -958,6 +1046,11 @@
 
             });
 
+
+
+            document.getElementById("mdate").valueAsDate = new Date();
+
+
             $(".showchange").change(function (e) {
 
                 if ($(this).is(':checked')) {
@@ -971,26 +1064,120 @@
             });
 
 
-            $("#frompropnum").focusout(function () {
 
-                if ($("#frompropnum").val() == "") {
 
-                    alert("Please Enter From Property Number");
+            $(document).on('click', ".resendrpmmail,.resendempmail", function () {
+
+                var action = $(this).attr('data-action');
+                var refid = $(this).attr('data-ref');
+
+                var insertForm = new FormData();
+                insertForm.append('form', "PayRoll");
+                insertForm.append('action', action);
+                insertForm.append('refid', refid);
+
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").show();
+                }
+
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/ResentHrWorkflow",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true) {
+                            GetAllHRFORMs('PayRollChange');
+                            $(".alert").html('Email Resent Success');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.errorMessage);
+                    }
+                });
+            });
+
+
+            $("#purpose").change(function () {
+
+                if ($("#purpose").val() == "Other") {
+                    $("#purposeother").show();
+                }
+                else {
+                    $("#purposeother").hide();
+                }
+            });
+
+            $("#fromexempt").change(function () {
+
+                if ($("#fromexempt").is(":checked")) {
+                    $("#fromannualsalary").prop("checked", true);
+                    $("#fromsalhourly").prop("checked", false);
+                }
+            });
+
+            $("#fromnonexempt").change(function () {
+
+                if ($("#fromnonexempt").is(":checked")) {
+                    $("#fromannualsalary").prop("checked", false);
+                    $("#fromsalhourly").prop("checked", true);
+                }
+            });
+            $("#toexempt").change(function () {
+                if ($("#toexempt").is(":checked")) {
+                    $("#toannualsalary").prop("checked", true);
+                    $("#tosalhourly").prop("checked", false);
+                }
+
+            });
+
+            $("#tononexempt").change(function () {
+                if ($("#tononexempt").is(":checked")) {
+                    $("#toannualsalary").prop("checked", false);
+                    $("#tosalhourly").prop("checked", true);
+                }
+
+            });
+            $("#location").focusout(function () {
+
+                if ($("#location").val() == "") {
+
+                    alert("Please Select Property");
 
                 }
                 else {
 
-                    $.get($BaseApiUrl + "api/Data/GetPropertyNameMananger?PropertyNumber=" + $("#frompropnum").val(), function (data) {
+                    $.get($BaseApiUrl + "api/Data/GetPropertyNumberNameMananger?PropertyNumber=" + $("#location").val(), function (data) {
                         if (data == "") {
 
                             alert("Invalid Property Code");
                             $("#frompropname ").val('');
-                            $("#frommanager,  ").val('');
+                            $("#frommanager").val('');
                         }
                         else {
                             var values = data.split(",");
                             $("#frompropname ").val(values[0]);
                             $("#frommanager").val(values[1]);
+                            $("#frompropnum").val(values[2]);
                         }
                     });
                 }
@@ -1132,17 +1319,81 @@
                 //}
 
 
-                if ($("#prop1per").val() == "" || $("#prop2per").val() == "") {
-                    errormsgsummary += "<li> Please Enter Division Of Labout Percentage </li>";
-                    $("#prop1per").addClass('has-error');
-                    $("#prop2per").addClass('has-error');
+                //if ($("#prop1per").val() == "" || $("#prop2per").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
+                //    $("#prop1per").addClass('has-error');
+                //    $("#prop2per").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#prop2per");
+                //}
+                //else {
+                //    var total = parseFloat($("#prop1per").val()) + parseFloat($("#prop2per").val());
+                //    if (total < 100)
+                //        errormsgsummary += "<li> Division Of Labour Percentage should be 100% </li>";
+                //}
+
+                if ($("#la_Prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
+                    errormsgsummary += "<li> Please Enter Division Of Labour Percentage  </li>";
+                    $("#la_Prop1per").addClass('has-error');
                     if (control == "")
-                        control = $("#prop2per");
+                        control = $("#la_Prop1per");
                 }
-                else {
-                    var total = parseFloat($("#prop1per").val()) + parseFloat($("#prop2per").val());
-                    if (total < 100)
-                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+
+                if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
+
+                    if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "") {
+                        errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
+                        $("#la_Prop1").addClass('has-error');
+                        $("#la_Prop2").addClass('has-error');
+                        $("#la_Prop3").addClass('has-error');
+                        if (control == "")
+                            control = $("#la_Prop2");
+                    }
+                    else {
+                        var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
+                        if (total < 100)
+                            errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                    }
+
+                }
+
+                if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val()) == 100)) {
+
+                    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                        $("#la_Prop1").addClass('has-error');
+
+                        if (control == "")
+                            control = $("#la_Prop1");
+                    }
+
+
+                    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                        $("#la_Prop2").addClass('has-error');
+
+                        if (control == "")
+                            control = $("#la_Prop2");
+                    }
+
+
+                    if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
+
+                        errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                        $("#la_Prop3").addClass('has-error');
+
+                        if (control == "")
+                            control = $("#la_Prop3");
+                    }
+                }
+
+                if ($("#purpose").val() == "Other" && $("#purposeother").val() == "") {
+                    errormsgsummary += "<li> Please Enter Other Purpose  </li>";
+                    $("#purposeother").addClass('has-error');
+                    if (control == "")
+                        control = $("#purposeother");
                 }
 
                 if (errormsgsummary != "") {
@@ -1157,7 +1408,9 @@
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
-                    insertForm.append('effectivedate', $("#effdate").val());
+                    insertForm.append('property', $("#location").val());
+                    insertForm.append('empemail', $("#empemail").val());
+                    insertForm.append('effectivedate', $("#effectivedate").val());
                     //   insertForm.append('typeofchange', $("#typeofchange").val());
 
 
@@ -1207,7 +1460,8 @@
                     insertForm.append('tomanager', $("#tomanager").val());
                     insertForm.append('paychangeto', $("#paychangeto").val());
                     insertForm.append('paychangefrom', $("#paychangefrom").val());
-
+                    insertForm.append('fromtitle', $("#fromtitle").val());
+                    insertForm.append('totitle', $("#totitle").val());
                     if ($("#fromexempt").is(":checked")) {
                         insertForm.append('fromposition', 'Exempt');
                     }
@@ -1261,9 +1515,10 @@
                     insertForm.append('beginpayperiod', $("#beginpayperiod").val());
                     insertForm.append('prop1', $("#prop1").val());
                     insertForm.append('prop2', $("#prop2").val());
+                    insertForm.append('prop3', $("#prop3").val());
                     insertForm.append('prop1per', $("#prop1per").val());
                     insertForm.append('prop2per', $("#prop2per").val());
-
+                    insertForm.append('prop3per', $("#prop3per").val());
                     insertForm.append('chkcaramount', $("#chkcaramount").is(":checked"));
                     insertForm.append('chkphoneamount', $("#chkphoneamount").is(":checked"));
 
@@ -1283,6 +1538,7 @@
                     insertForm.append('chkbenefitno', $("#chkbenefitno").is(":checked"));
 
                     insertForm.append('purpose', $("#purpose").val());
+                    insertForm.append('purposeother', $("#purposeother").val());
                     insertForm.append('leavebegin', $("#leavebegin").val());
                     insertForm.append('leaveend', $("#leaveend").val());
                     insertForm.append('ptobalance', $("#ptobalance").val());
@@ -1317,8 +1573,8 @@
                                 $("#status").html('');
                                 document.getElementById("submitform").reset();
 
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
+                                ShowToastNotification('Record Successfully Updated', 3);
+
                                 setTimeout(function () {
 
                                     $("#print").attr('disabled', false);

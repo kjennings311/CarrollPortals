@@ -675,8 +675,7 @@
                                 document.getElementById("submitform").reset();
 
                                 GetAllMileageForms('ResidentContact');
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
+                                ShowToastNotification('Record Successfully Updated', 3);
 
 
                                 setTimeout(function () {

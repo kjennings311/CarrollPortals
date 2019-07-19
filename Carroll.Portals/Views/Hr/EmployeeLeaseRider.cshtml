@@ -34,16 +34,96 @@
                     <div class="ibox-tools" style="margin-top:-55px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                            <a disabled="disabled" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>*@
+                    <a disabled="disabled" class="btnDelete" href="#">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeLeaseRider');">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
                 }
+
             </div>
+
+            <div class="modal fade bs-example-modal-lg reviewmodal" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" style="width:60%" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                            <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                                Please verify employee email given below before submitting
+                            </h1>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center">
+
+                                    <input type="email" style="width:50%;" id="eemail" />
+                                    <br /> <br />
+                                    <a class="btn btn-success nocorrect" id="nocorrect" href="#" onclick="hidepopupleaserider();" style="margin-left: 75px;
+    margin-top: 10px;">
+                                        No, I want to review
+                                    </a>
+
+                                    <a class="btn btn-danger yescorrect" id="yescorrect" href="#" onclick="showleaserider();" style="margin-left: 75px;
+    margin-top: 10px;">  Yes,I want to submit
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="modal fade bs-example-modal-lg activitymodal" id="activitymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                               Activity Log
+                            </h1>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center">
+                                    <table id="viewlog" class="table table-striped col-md-6">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:40%">Description</th>
+                                                <th style="width:30%;text-align:center">Date</th>
+                                                <th style="width:20%"> Created By </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hractivitybody"></tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12" style="text-align:center">
+                                    <h2> Signature Meta Data </h2>
+                                    <br />
+                                    <table class="table table-striped col-md-6">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:10%"> Sign Type </th>
+                                                <th style="width:10%">Ip Address</th>
+                                                <th style="width:60%;text-align:center">Browser </th>
+                                                <th style="width:20%;text-align:center"> Date Time </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="hrsignmetadata"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="ibox-content" style="margin-left:0%; padding-top:20px;">
                 <div id="status1"> </div>
                 <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -63,16 +143,16 @@
                                         <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
                                     </h1>
                                     @*<h1 style="text-align: center;
-                                        margin-top: -30px;">
-                                                                            <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
-                                                                        </h1>*@
+                                margin-top: -30px;">
+                                                                    <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
+                                                                </h1>*@
                                     <form id="submitform" onsubmit="return false;">
 
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="date" id="leasedate" class="" /> </p>
 
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Property :  </span> <input style=" display:inline; " type="text" id="apartmentname" class="" />  </p>
 
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; " onchange="document.getElementById('printempname').value = this.value;document.getElementById('signature').value = this.value;" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; " onchange="document.getElementById('printempname').value = this.value;" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
 
                                         <ol>
                                             <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="text" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="text" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
@@ -84,42 +164,33 @@
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon vacating the apartment occupied by me, for any reason, I will leave the apartment clean and in good condition.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
                                         </ol>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="signature" disabled /> </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 10.0pt; line-height: 115%;margin-left:36%;"> <input type="text" id="signatureproperymanager" /> </span></p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Signature of Employee </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="font-size: 10.0pt; line-height: 115%;margin-left:25%;"> Signature of Property Manager</span></p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"><input type="text" id="printempname" disabled />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Printed Name of Employee&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
-                                        @*<p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">_____________________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cc: Property Lease Folder</span></p>*@
-                                        <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;">Position : <input type="text" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
+
+                                        <p style="text-align: justify;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" style="width:25%;" id="signatureproperymanager" /> </span>  <input type="date" style="float:right;margin-right:15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;margin-top:10px;" id="pmdatespan"> Date : </span> </p>
                                         <p style="text-align: justify;">
-                                            <span style="font-size: 10.0pt; line-height: 115%;">Date : </span> <input style="margin-left: 2%;
-    padding-left: 10px;" type="date" id="positiondate" />
+                                            <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" style="margin-left:45px;width:25%;" id="signature" disabled /> </span>  <input disabled style="float:right; margin-right:15%;" type="date" id="positiondate" />  <span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;"> Date : </span>
                                         </p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Printed Name of Employee <input type="text" disabled style="margin-left:25px;width:25%;" id="printempname" /> </span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:35%; margin-left:8%;" id="employeeemail" />  </span></p>
+
+                                        <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;"> Position : <input type="text" style="margin-left:135px;width:25%;" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
                                         <br /> <br />
                                         <div id="status"> </div>
-                                        <div class="col-md-12" style="text-align:right;margin-bottom:20px;">
-
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
                                             <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
-
                                         </div>
                                         <br /> <br />
-
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <table class="table  dtprops" width="100%"></table>
-
-
+                <table class="table  dtprops" width="100%"> </table>
             </div>
         </div>
     </div>
 
 </div>
-
-
-
 
 @if (ViewBag.ErrorMessage == "AuthorizationRequired")
 {
@@ -135,6 +206,7 @@
     @Styles.Render("~/content/plugins/token-inputcss")
 
     <style>
+
         .dtprops td, .dtprops th {
             white-space: nowrap;
         }
@@ -154,8 +226,19 @@
         }
 
         p {
-            margin-bottom: 10px !important;
+            margin-bottom: 15px !important;
         }
+
+
+        .modal {
+            overflow-y: auto !important;
+        }
+
+        .modal-open {
+            overflow: auto !important;
+        }
+
+
     </style>
 }
 
@@ -167,7 +250,22 @@
 
     <script>
 
+
+
+        function hidepopupleaserider() {
+            $('.reviewmodal').modal('hide');
+            // $('#myModal').modal('show');
+            LoadHrForm('EmployeeLeaseRider');
+        }
+       
+        function showleaserider() {
+          
+            $("#Submit").trigger('click');
+            $isemailconfirmed = true;
+        }
+
         $(document).ready(function () {
+
             GetAllHRFORMs('LeaseRider');
 
             var leaseid = "";
@@ -184,8 +282,73 @@
 
             });
 
+          
 
-            $("#Submit").click(function (e) {
+            document.getElementById("pmdate").valueAsDate = new Date();
+
+
+
+            $(document).on('click', ".resendrpmmail,.resendempmail", function () {
+
+                var action = $(this).attr('data-action');
+                var refid = $(this).attr('data-ref');
+
+                var insertForm = new FormData();
+                insertForm.append('form', "LeaseRider");
+                insertForm.append('action', action);
+                insertForm.append('refid', refid);
+
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").show();
+                }
+
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/ResentHrWorkflow",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true) {
+                            GetAllHRFORMs('LeaseRider');
+                            $(".alert").html('Email Resent Success');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.errorMessage);
+                    }
+                });
+            });
+
+
+
+            //$(".yescorrect").click(function ()
+            //{
+            //    $("#eemail").hide();
+            //    $("#employeeemail").val($("#eemail").val());
+            //    $("#Submit").click();
+            //});
+
+            $("#Submit").click(function (e)
+            {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -231,13 +394,21 @@
                 }
 
 
-                if ($("#residency").val() == "") {
+                if ($("#residency").val() == "")
+                {
                     errormsgsummary += "<li> Please Enter Residency Place  </li>";
                     $("#residency").addClass('has-error');
                     if (control == "")
                         control = $("#residency");
                 }
 
+                if ($("#employeeemail").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Employee Email  </li>";
+                    $("#employeeemail").addClass('has-error');
+                    if (control == "")
+                        control = $("#employeeemail");
+                }
 
                 if (errormsgsummary != "") {
 
@@ -247,97 +418,116 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else {
+                else
+                {
 
-                    $('#myModal').modal('hide');
-                    $("#Submit").prop('disabled', false);
-                    //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
-                    $(".alert").html('Processing');
-                    $('#toastnotification').modal('show');
+                    if ($isemailconfirmed)
+                    {
 
-                    $("input").prop('disabled', false);
+                        $('#myModal').modal('hide');
+                        $('.reviewmodal').modal('hide');
 
-                    var insertForm = new FormData();
-                    insertForm.append('date', $("#leasedate").val());
-                    insertForm.append('community', $("#apartmentname").val());
-                    insertForm.append('empname', $("#empname").val());
-                    insertForm.append('marketvalue', $("#marketvalue").val());
-                    insertForm.append('emprent', $("#monthlyrent").val());
-                    insertForm.append('residence', $("#residency").val());
-                    insertForm.append('position', $("#position").val());
-                    insertForm.append('signature', $("#signature").val());
-                    insertForm.append('positiondate', $("#positiondate").val());
-                    insertForm.append('propertymanager', $("#signatureproperymanager").val());
-                    insertForm.append('CreatedBy', $("#CreatedBy").val());
-                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+                        $("#Submit").prop('disabled', false);
+                        //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
+                        $(".alert").html('Processing');
+                        $('#toastnotification').modal('show');
 
-                    $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertEmployeeLeaseRider",
-                        type: 'POST',
-                        dataType: "JSON",
-                        processData: false,
-                        contentType: false,
-                        data: insertForm,
-                        success: function (data) {
-                            // To-do code if ajax request is successful
+                        $("input").prop('disabled', false);
 
-                            if (data['error'] == false) {
+                        var insertForm = new FormData();
+                        insertForm.append('date', $("#leasedate").val());
+                        insertForm.append('community', $("#apartmentname").val());
+                        insertForm.append('empname', $("#empname").val());
+                        insertForm.append('marketvalue', $("#marketvalue").val());
+                        insertForm.append('emprent', $("#monthlyrent").val());
+                        insertForm.append('residence', $("#residency").val());
+                        insertForm.append('position', $("#position").val());
+                        insertForm.append('empemail', $("#employeeemail").val());
+                        insertForm.append('signature', $("#signature").val());
+                        insertForm.append('pmdate', $("#pmdate").val());
+                        insertForm.append('positiondate', $("#positiondate").val());
+                        insertForm.append('propertymanager', $("#signatureproperymanager").val());
+                        insertForm.append('CreatedBy', $("#CreatedBy").val());
+                        insertForm.append('CreatedByName', $("#CreatedByName").val());
 
-                                leaseid = data['insertedId'];
+                        $.ajax({
+                            url: $BaseApiUrl + "api/data/InsertEmployeeLeaseRider",
+                            type: 'POST',
+                            dataType: "JSON",
+                            processData: false,
+                            contentType: false,
+                            data: insertForm,
+                            success: function (data)
+                            {
+                                // To-do code if ajax request is successful
+
+                                if (data['error'] == false) {
+
+                                    leaseid = data['insertedId'];
 
 
-                                var insertForm = new FormData();
-                                insertForm.append('refid', leaseid);
-                                insertForm.append('form', "EmployeeLeaseRider");
+                                    var insertForm = new FormData();
+                                    insertForm.append('refid', leaseid);
+                                    insertForm.append('form', "EmployeeLeaseRider");
 
 
-                                $.ajax({
-                                    url: "/Hr/SendHrFormCompletionNotification/",
-                                    type: 'POST',
-                                    dataType: "JSON",
-                                    processData: false,
-                                    contentType: false,
-                                    data: insertForm,
-                                    success: function (data) {
-                                        // To-do code if ajax request is successful
+                                    //$.ajax({
+                                    //    url: "/Hr/SendHrFormCompletionNotification/",
+                                    //    type: 'POST',
+                                    //    dataType: "JSON",
+                                    //    processData: false,
+                                    //    contentType: false,
+                                    //    data: insertForm,
+                                    //    success: function (data) {
+                                    //        // To-do code if ajax request is successful
 
-                                    },
-                                    error: function (ts) {
-                                        //  alert('error' + ts.errorMessage);
-                                    }
-                                });
+                                    //    },
+                                    //    error: function (ts) {
+                                    //        //  alert('error' + ts.errorMessage);
+                                    //    }
+                                    //});
 
-                                $("#status1").html('');
-                                GetAllHRFORMs('LeaseRider');
-                                $("#submitform").trigger('reset');
-
-                                $("#leasedate").val('');
-                                $("#apartmentname").val('');
-                                $("#empname").val('');
-                                $("#marketvalue").val('');
-                                $("#monthlyrent").val('');
-                                $("#residency").val('');
-                                $(".alert").html('Record Successfully Updated !');
-                                $('#toastnotification').modal('show');
-                                setTimeout(function () {
-
-                                    $("#print").attr('disabled', false);
-                                    $("#pdf").attr('disabled', false);
-                                    $("#Submit").attr('disabled', false);
                                     $("#status1").html('');
-                                    $('#toastnotification').modal('hide');
-                                }, 3000);
-                            }
-                            else {
-                                $('#myModal').modal('show');
-                                $("#status").html(data['errorMsg']);
-                            }
+                                    GetAllHRFORMs('LeaseRider');
+                                    $("#submitform").trigger('reset');
 
-                        },
-                        error: function (ts) {
-                            alert('error' + ts.errorMessage);
-                        }
-                    });
+                                    $("#leasedate").val('');
+                                    $("#apartmentname").val('');
+                                    $("#empname").val('');
+                                    $("#marketvalue").val('');
+                                    $("#monthlyrent").val('');
+                                    $("#residency").val('');
+                                    ShowToastNotification('Record Successfully Updated', 3);
+
+                                    setTimeout(function () {
+
+                                        $("#print").attr('disabled', false);
+                                        $("#pdf").attr('disabled', false);
+                                        $("#Submit").attr('disabled', false);
+                                        $("#status1").html('');
+                                        $('#toastnotification').modal('hide');
+                                    }, 3000);
+                                }
+                                else {
+                                    $('#myModal').modal('show');
+                                    $("#status").html(data['errorMsg']);
+                                }
+
+                            },
+                            error: function (ts) {
+                                alert('error' + ts.errorMessage);
+                            }
+                        });
+                    }
+                    else
+                    {                       
+                        $('#myModal').modal('hide');
+                        $('.reviewmodal').modal('show');
+                        $("#eemail").show();
+                        $("#eemail").val($("#employeeemail").val());
+                    }
+
+                    
 
                 }
 

@@ -137,6 +137,15 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetClaimDetails(Claim, Type);
         }
 
+        [ActionName("GetHrFormLog")]
+        [HttpPost]
+        public dynamic GetHrFormLog()
+        {
+            string FormType = HttpContext.Current.Request.Params["FormType"].ToString();
+            string RecordId = HttpContext.Current.Request.Params["RecordId"].ToString();
+            return _service.GetHrFormLogActivity(FormType, RecordId);
+        }
+
 
         [ActionName("GetClaimDetailsForPrint")]
         [HttpGet]
@@ -534,12 +543,14 @@ namespace Carroll.Data.Services.Controllers
 
             EmployeeLeaseRaider fa = new EmployeeLeaseRaider();
             fa.Date = Convert.ToDateTime(HttpContext.Current.Request.Params["date"]);
-            fa.PositionDate = Convert.ToDateTime(HttpContext.Current.Request.Params["positiondate"]);
+            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["pmdate"]))
+            fa.PMDate = Convert.ToDateTime(HttpContext.Current.Request.Params["pmdate"]);
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.Community = HttpContext.Current.Request.Params["community"].ToString();
             fa.ApartmentMarketRentalValue = Convert.ToDecimal(HttpContext.Current.Request.Params["marketvalue"]);
             fa.EmployeeMonthlyRent = Convert.ToDecimal(HttpContext.Current.Request.Params["emprent"]);
             fa.RentalPaymentResidencyAt = HttpContext.Current.Request.Params["residence"].ToString();
+            fa.EmployeeEmail = HttpContext.Current.Request.Params["empemail"].ToString();
             fa.PropertyManager = "";
             fa.SignatureOfPropertyManager = HttpContext.Current.Request.Params["propertymanager"].ToString();
             fa.SignatureOfEmployee = HttpContext.Current.Request.Params["signature"].ToString();
@@ -548,14 +559,65 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDatetime = DateTime.Now;
 
-            return _service.InsertEmployeeLeaseRider(fa);
+            var retu =_service.InsertEmployeeLeaseRider(fa);
+
+            WorkflowHelper.InsertHrLog("LeaseRider", fa.EmployeeLeaseRiderId.ToString(), " Employee Lease Rider has been Submitted", "Employee Lease Rider has been Submitted on" +DateTime.Now.ToString(), fa.CreatedUser.ToString());
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+            WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "PM Email", browserDetails, VisitorsIPAddress);
+
+            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "Employee Email");
+            return retu;
         }
 
         [ActionName("GetEmployeeLeaseRider")]
         [HttpGet]
         public dynamic GetEmployeeLeaseRider(string riderid)
         {
-
             return _service.GetEmployeeLeaseRider(new Guid(riderid));
         }
 
@@ -605,6 +667,13 @@ namespace Carroll.Data.Services.Controllers
 
         }
 
+        [ActionName("SendRemaindertoRMPforNewHires")]
+        [HttpPost]
+        public dynamic SendRemaindertoRMPforNewHires()
+        {           
+            WorkflowHelper.DailyRemainderToRPMForNewHireNotice();
+            return true;
+        }
 
 
         [ActionName("InsertEmployeeNewHireNotice")]
@@ -619,7 +688,26 @@ namespace Carroll.Data.Services.Controllers
             fa.Manager = HttpContext.Current.Request.Params["manager"].ToString();
             fa.Location = HttpContext.Current.Request.Params["location"].ToString();
             fa.iscorporate = Convert.ToBoolean(HttpContext.Current.Request.Params["iscorporate"].ToString());
-            fa.EmployeeHireNoticeId = System.Guid.NewGuid();
+            fa.IsRejected = false;
+
+            if (HttpContext.Current.Request.Params["isedit"].ToString() == "1")
+            {
+                fa.EmployeeHireNoticeId = new Guid(HttpContext.Current.Request.Params["refid"].ToString().ToUpper()); 
+                fa.IsResumitted = true;
+                fa.ResubmittedBy = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+                fa.ResubmittedDateTime = DateTime.Now;
+                fa.EmployeeSignedDateTime = null;
+                fa.RegionalManagerSignedDateTime = null;
+                WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), "New Hire Notice has been Resubmitted", "New Hire Notice has been Resubmitted  on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+
+            }
+            else
+            {
+                fa.ModifiedUser = Guid.NewGuid();
+                WorkflowHelper.InsertHrLog("NewHire", fa.ModifiedUser.ToString(), " New Hire Notice has been submitted", " New Hire Notice has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+
+            }
+            // fa.EmployeeHireNoticeId = System.Guid.NewGuid();
             fa.Position = HttpContext.Current.Request.Params["position"].ToString();
             fa.Position_Exempt = HttpContext.Current.Request.Params["exempt"].ToString();
             fa.Position_NonExempt = HttpContext.Current.Request.Params["nonexempt"].ToString();
@@ -639,13 +727,21 @@ namespace Carroll.Data.Services.Controllers
                         fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
 
                     }
+
+                    if (!String.IsNullOrEmpty(HttpContext.Current.Request.Params["prop3per"].ToString()))
+                    {
+                        fa.La_Property3 = HttpContext.Current.Request.Params["prop3"].ToString();
+                        fa.La_Property3_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop3per"].ToString());
+
+                    }
                 }
               
             }
          
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
+            fa.AdditionalText = HttpContext.Current.Request.Params["additional"].ToString();
 
-            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["kitordered"].ToString()))
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["kitordered"].ToString()))
             fa.kitordered = HttpContext.Current.Request.Params["kitordered"].ToString();
             //   fa.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
             fa.Allocation = HttpContext.Current.Request.Params["allocation"].ToString();
@@ -663,13 +759,61 @@ namespace Carroll.Data.Services.Controllers
             
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
-            fa.EmployeeHireNoticeId = Guid.NewGuid();
+            
+           // fa.EmployeeHireNoticeId = Guid.NewGuid();
             // Property Id to Service Calling 
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyid"]))
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyid"].ToString()))
                 fa.ModifiedUser = new Guid(HttpContext.Current.Request.Params["propertyid"]);
             var retu= _service.InsertEmployeeNewHireNotice(fa);
-               
-                WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email");
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+            WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeHireNoticeId.ToString(), "NewHire", "PM Email", browserDetails, VisitorsIPAddress);
+
+            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email");
 
             return retu;
         }
@@ -680,7 +824,25 @@ namespace Carroll.Data.Services.Controllers
         {
             return _service.GetEmployeeNewHireNotice(new Guid(riderid));
         }
+        [ActionName("newhirerejection")]
+        [HttpPost]
+        public dynamic newhirerejection()
+        {
+          var  status= HttpContext.Current.Request.Params["status"];
+           var refid = HttpContext.Current.Request.Params["refid"];
+           var reason = HttpContext.Current.Request.Params["reason"];
+          var  CreatedBy = HttpContext.Current.Request.Params["CreatedBy"];
 
+            var ret= _service.UpdateNewHireRejectionStatus(status,reason,refid,CreatedBy);
+
+            if(status=="reject")
+            {
+                WorkflowHelper.SendNewHireRejectionEmail(refid);
+            }
+
+            return ret;
+        }
+        
 
         [ActionName("GetPropertyManager")]
         [HttpGet]
@@ -696,7 +858,8 @@ namespace Carroll.Data.Services.Controllers
             PayrollStatusChangeNotice fa = new PayrollStatusChangeNotice();
             fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
-
+            fa.EmployeeEmail = HttpContext.Current.Request.Params["empemail"].ToString();
+            fa.Property = new Guid(HttpContext.Current.Request.Params["property"].ToString());
             string TypeofChange = "";
 
             fa.ShowPayChange = Convert.ToBoolean(HttpContext.Current.Request.Params["showpay"].ToString());
@@ -761,12 +924,12 @@ namespace Carroll.Data.Services.Controllers
             fa.ToManager = HttpContext.Current.Request.Params["tomanager"].ToString();
 
             fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
-
+            fa.FromTitle = HttpContext.Current.Request.Params["fromtitle"].ToString();
             fa.FromPosition = HttpContext.Current.Request.Params["fromposition"].ToString();
             fa.FromStatus = HttpContext.Current.Request.Params["fromstatus"].ToString();
             fa.FromWageSalary = HttpContext.Current.Request.Params["fromwage"].ToString();
             fa.FromRate = Convert.ToDouble(HttpContext.Current.Request.Params["fromrate"].ToString());
-
+            fa.ToTitle = HttpContext.Current.Request.Params["totitle"].ToString();
             fa.ToPosition = HttpContext.Current.Request.Params["toposition"].ToString();
             fa.ToStatus = HttpContext.Current.Request.Params["tostatus"].ToString();
             fa.ToWageSalary = HttpContext.Current.Request.Params["towage"].ToString();
@@ -775,33 +938,102 @@ namespace Carroll.Data.Services.Controllers
 
             fa.BeginPayPeriod = HttpContext.Current.Request.Params["beginpayperiod"].ToString();
             fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
-            fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop1per"].ToString()))
+                fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
+
             fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
-            fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
-            fa.Chk_CarAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkcaramount"].ToString());
-            fa.CarAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtcaramount"].ToString());
-            fa.Chk_PhoneAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkphoneamount"].ToString());
-            fa.PhoneAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtphoneamount"].ToString());
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop2per"].ToString()))
+                fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+            fa.La_Property3= HttpContext.Current.Request.Params["prop3"].ToString();
+            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop3per"].ToString()))
+                fa.La_Property3_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop3per"].ToString());
+            //fa.Chk_CarAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkcaramount"].ToString());
+            //fa.CarAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtcaramount"].ToString());
+            //fa.Chk_PhoneAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkphoneamount"].ToString());
+            //fa.PhoneAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtphoneamount"].ToString());
 
             fa.FmlaYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlayes"].ToString());
             fa.FmlaNo = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlano"].ToString());
             fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefityes"].ToString());
             fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefitno"].ToString());
             fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
+            fa.Leave_Purpose_Other = HttpContext.Current.Request.Params["purposeother"].ToString();
             fa.Leave_Begin = Convert.ToDateTime(HttpContext.Current.Request.Params["leavebegin"].ToString());
             fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
             fa.Pto_Balance = Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
             fa.Notes1 = HttpContext.Current.Request.Params["notes1"].ToString();
             // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
-            fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
-            fa.EDate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
+            //fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
+            //fa.EDate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
 
             fa.MSignature = HttpContext.Current.Request.Params["msignature"].ToString();
             fa.MDate = Convert.ToDateTime(HttpContext.Current.Request.Params["mdate"]);
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
+            fa.PmSignedDateTime = DateTime.Now;
 
-            return _service.InsertPayRollStatusChangeNotice(fa);
+            var re= _service.InsertPayRollStatusChangeNotice(fa);
+            WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "New Payroll Status Change has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+            WorkflowHelper.UpdatePmBrowserInfo(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "PM Email", browserDetails, VisitorsIPAddress);
+
+            WorkflowHelper.SendHrWorkFlowEmail(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "Employee Email");
+            return re;
+        }
+
+
+        [ActionName("RejectionDetailsForNewHire")]
+        [HttpPost]
+        public dynamic RejectionDetailsForNewHire()
+        {
+             string Refid= HttpContext.Current.Request.Params["refid"];
+            return _service.GetNewHireRejectionDetails(Refid);
         }
 
 
@@ -840,7 +1072,57 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
 
-            return _service.InsertRequisitionRequest(fa);
+            var re= _service.InsertRequisitionRequest(fa);
+            WorkflowHelper.InsertHrLog("RequisitionRequest", fa.RequisitionRequestId.ToString(), "New Requisition Request has been submitted", "New Requisition Request  has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+
+            WorkflowHelper.UpdatePmBrowserInfo(fa.RequisitionRequestId.ToString(), "RequisitionRequest", "PM Email", browserDetails, VisitorsIPAddress);
+         //   WorkflowHelper.ReSendHrWorkFlowEmail(fa.RequisitionRequestId.ToString(), "RequisitionRequest", "HR Email");
+            return re;
         }
         [ActionName("GetPayRollStatusChangeNotice")]
         [HttpGet]
@@ -866,6 +1148,13 @@ namespace Carroll.Data.Services.Controllers
         {
 
             return _service.GetPropertyNameManager(PropertyNumber);
+        }
+
+        [ActionName("GetPropertyNumberNameMananger")]
+        [HttpGet]
+        public dynamic GetPropertyNumberNameMananger(string PropertyNumber)
+        {
+            return _service.GetPropertyNumberNameManager(PropertyNumber);
         }
 
         [ActionName("InsertNoticeOfEmployeeSeperation")]
@@ -898,7 +1187,57 @@ namespace Carroll.Data.Services.Controllers
 
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
-            return _service.InsertNoticeOfEmployeeSeperation(fa);
+            var re = _service.InsertNoticeOfEmployeeSeperation(fa);
+            WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), "Notice Of Employee Separation has been submitted", "New Notice Of Employee Separation has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+
+            string VisitorsIPAddress = string.Empty;
+            try
+            {
+                if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                }
+                else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                {
+                    VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //Handle Exceptions  
+            }
+            // browser information 
+            string browserDetails = string.Empty;
+            System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+            browserDetails =
+            "Name = " + browser.Browser + "," +
+            "Type = " + browser.Type + ","
+            + "Version = " + browser.Version + ","
+            + "Major Version = " + browser.MajorVersion + ","
+            + "Minor Version = " + browser.MinorVersion + ","
+            + "Platform = " + browser.Platform + ","
+            + "Is Beta = " + browser.Beta + ","
+            + "Is Crawler = " + browser.Crawler + ","
+            + "Is AOL = " + browser.AOL + ","
+            + "Is Win16 = " + browser.Win16 + ","
+            + "Is Win32 = " + browser.Win32 + ","
+            + "Supports Frames = " + browser.Frames + ","
+            + "Supports Tables = " + browser.Tables + ","
+            + "Supports Cookies = " + browser.Cookies + ","
+            + "Supports VBScript = " + browser.VBScript + ","
+            + "Supports JavaScript = " + "," +
+            browser.EcmaScriptVersion.ToString() + ","
+            + "Supports Java Applets = " + browser.JavaApplets + ","
+            + "Supports ActiveX Controls = " + browser.ActiveXControls
+            + ","
+            + "Supports JavaScript Version = " +
+            browser["JavaScriptVersion"];
+
+            WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "PM Email", browserDetails, VisitorsIPAddress);
+        //    WorkflowHelper.ReSendHrWorkFlowEmail(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "HR Email");
+            return re;
+
         }
 
         [ActionName("GetNoticeOfEmployeeSeperation")]
@@ -1269,6 +1608,15 @@ namespace Carroll.Data.Services.Controllers
         }
 
 
+        public string ReturnDtFormat(string val)
+        {
+            var len = val.Length;
+            if (len == 10)
+                return val.Substring(4, 5) + "/" + val.Substring(1, 2) + "/" + val.Substring(7, 10);
+            else
+                return val;
+        }
+
         [ActionName("GetAllCarrollPayPerilds")]
         [HttpGet]
         [AllowAnonymous]
@@ -1279,7 +1627,9 @@ namespace Carroll.Data.Services.Controllers
 
             foreach (var item in _service.GetAllCarrollPayPerilds())
             {
-                _users.Add(new KeyValuePair(item.PayFrom.Value.ToShortDateString() + " - " + item.PayTo.Value.ToShortDateString(), item.PayFrom.Value.ToShortDateString() + " - " + item.PayTo.Value.ToShortDateString()));
+                _users.Add(new KeyValuePair( item.PayFrom.Value.ToString("MM/dd/yyyy") + " - " + item.PayTo.Value.ToString("MM/dd/yyyy"), item.PayFrom.Value.ToString("MM/dd/yyyy") + " - " + item.PayTo.Value.ToString("MM/dd/yyyy")));
+              //  _users.Add(new KeyValuePair(ReturnDtFormat(item.PayFrom.Value.ToShortDateString()) + " - " + ReturnDtFormat(item.PayTo.Value.ToShortDateString()), ReturnDtFormat(item.PayFrom.Value.ToShortDateString()) + " - " + ReturnDtFormat(item.PayTo.Value.ToShortDateString())));
+            
             }
             return _users;
 

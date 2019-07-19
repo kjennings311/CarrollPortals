@@ -17,6 +17,18 @@
           <Property Name="ActivityByName" Type="varchar" MaxLength="50" />
           <Property Name="ActivityBy" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="ActivityLogHrForms">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RefId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FormType" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ActivitySubject" Type="nvarchar" MaxLength="300" />
+          <Property Name="ActivityDescription" Type="text" />
+          <Property Name="ActivityDate" Type="datetime" Nullable="false" />
+          <Property Name="ActivityBy" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="CarrollPayPeriods">
           <Key>
             <PropertyRef Name="PeriodId" />
@@ -61,12 +73,15 @@
             <PropertyRef Name="DynamicLinkId" />
           </Key>
           <Property Name="DynamicLinkId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="FormType" Type="nvarchar" MaxLength="25" />
+          <Property Name="FormType" Type="nvarchar" MaxLength="35" />
           <Property Name="ReferenceId" Type="uniqueidentifier" />
           <Property Name="Action" Type="nvarchar" MaxLength="25" />
           <Property Name="OpenStatus" Type="bit" />
           <Property Name="CreatedDate" Type="date" />
           <Property Name="ModifiedDate" Type="date" />
+          <Property Name="BrowserInformation" Type="nvarchar" MaxLength="500" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="30" />
+          <Property Name="Clientdatetime" Type="datetime" />
         </EntityType>
         <EntityType Name="EmployeeLeaseRaider">
           <Key>
@@ -88,6 +103,10 @@
           <Property Name="SignatureOfPropertyManager" Type="nvarchar" MaxLength="50" />
           <Property Name="SignatureOfEmployee" Type="nvarchar" MaxLength="50" />
           <Property Name="PositionDate" Type="date" />
+          <Property Name="EmployeeEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeSignedDateTime" Type="datetime" />
+          <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="PMDate" Type="date" />
         </EntityType>
         <EntityType Name="EmployeeNewHireNotice">
           <Key>
@@ -122,12 +141,23 @@
           <Property Name="La_Property1_Per" Type="float" />
           <Property Name="La_Property2" Type="nvarchar" MaxLength="50" />
           <Property Name="La_Property2_Per" Type="float" />
+          <Property Name="La_Property3" Type="nvarchar" MaxLength="50" />
+          <Property Name="La_Property3_Per" Type="float" />
           <Property Name="Sal_Time" Type="nvarchar" MaxLength="50" />
           <Property Name="RegionaManager" Type="uniqueidentifier" />
           <Property Name="PmSignedDateTime" Type="datetime" />
           <Property Name="EmployeeSignedDateTime" Type="datetime" />
           <Property Name="RegionalManagerSignedDateTime" Type="datetime" />
           <Property Name="iscorporate" Type="bit" />
+          <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="IsResumitted" Type="bit" />
+          <Property Name="ResubmittedBy" Type="uniqueidentifier" />
+          <Property Name="ResubmittedDateTime" Type="datetime" />
+          <Property Name="IsRejected" Type="bit" />
+          <Property Name="RejectedBy" Type="uniqueidentifier" />
+          <Property Name="RejectedDateTime" Type="datetime" />
+          <Property Name="AdditionalText" Type="nvarchar" MaxLength="150" />
+          <Property Name="RejectedReason" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="EquityPartnerContacts">
           <Key>
@@ -262,7 +292,7 @@
           <Property Name="WitnessName" Type="varchar" MaxLength="50" />
           <Property Name="WitnessPhone" Type="varchar" MaxLength="17" />
           <Property Name="WitnessAddress" Type="varchar" MaxLength="100" />
-          <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="255" />
+          <Property Name="DescriptionOfProperty" Type="varchar(max)" />
           <Property Name="DescriptionOfDamage" Type="varchar" MaxLength="255" />
           <Property Name="ReportedBy" Type="varchar" MaxLength="50" />
           <Property Name="DateReported" Type="datetime" />
@@ -272,6 +302,9 @@
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="NotifySecurityOfficer" Type="bit" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
+          <Property Name="PoliceReportNumber" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaims">
           <Key>
@@ -280,7 +313,7 @@
           <Property Name="MDLId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DiscoveryDate" Type="datetime" />
-          <Property Name="Location" Type="varchar" MaxLength="50" />
+          <Property Name="Location" Type="varchar(max)" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="SuspectedCause" Type="varchar(max)" />
           <Property Name="AreBuildingMaterialsStillWet" Type="bit" />
@@ -298,6 +331,10 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="ApartmentOccupied" Type="bit" />
+          <Property Name="ResidentsAffected" Type="nvarchar" MaxLength="300" />
+          <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
+          <Property Name="ResidentsRelocating" Type="bit" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaims">
           <Key>
@@ -306,7 +343,7 @@
           <Property Name="PDLId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IncidentDateTime" Type="datetime" Nullable="false" />
-          <Property Name="WeatherConditions" Type="varchar" MaxLength="50" />
+          <Property Name="WeatherConditions" Type="varchar(max)" />
           <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
           <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="255" />
           <Property Name="IncidentDescription" Type="varchar(max)" />
@@ -326,6 +363,10 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="IncidentTime" Type="nvarchar" MaxLength="20" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
+          <Property Name="PoliceReportNumber" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="MileageLogDetails">
           <Key>
@@ -393,6 +434,7 @@
           <Property Name="HRMDate" Type="date" />
           <Property Name="Reason" Type="nvarchar" MaxLength="50" />
           <Property Name="2WeeksCompleted" Type="bit" />
+          <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="PayrollStatusChangeNotice">
           <Key>
@@ -419,6 +461,8 @@
           <Property Name="La_Property1_Per" Type="float" />
           <Property Name="La_Property2" Type="nvarchar" MaxLength="50" />
           <Property Name="La_Property2_Per" Type="float" />
+          <Property Name="La_Property3" Type="nvarchar" MaxLength="50" />
+          <Property Name="La_Property3_Per" Type="float" />
           <Property Name="Chk_CarAmount" Type="bit" />
           <Property Name="CarAmountPerMonth" Type="float" />
           <Property Name="Chk_PhoneAmount" Type="bit" />
@@ -428,6 +472,7 @@
           <Property Name="EnrolledBenefitsYes" Type="bit" />
           <Property Name="EnrolledBenefitNo" Type="bit" />
           <Property Name="Leave_Purpose" Type="nvarchar" MaxLength="300" />
+          <Property Name="Leave_Purpose_Other" Type="nvarchar" MaxLength="150" />
           <Property Name="Leave_End" Type="date" />
           <Property Name="Leave_Begin" Type="date" />
           <Property Name="Pto_Balance" Type="float" />
@@ -447,14 +492,21 @@
           <Property Name="ShowAllowances" Type="bit" />
           <Property Name="ShowLeaves" Type="bit" />
           <Property Name="ShowNotes" Type="bit" />
+          <Property Name="FromTitle" Type="nvarchar" MaxLength="150" />
           <Property Name="FromPosition" Type="nvarchar" MaxLength="50" />
           <Property Name="FromStatus" Type="nvarchar" MaxLength="50" />
           <Property Name="FromWageSalary" Type="nvarchar" MaxLength="50" />
           <Property Name="FromRate" Type="float" />
+          <Property Name="ToTitle" Type="nvarchar" MaxLength="150" />
           <Property Name="ToPosition" Type="nvarchar" MaxLength="50" />
           <Property Name="ToStatus" Type="nvarchar" MaxLength="50" />
           <Property Name="ToWageSalary" Type="nvarchar" MaxLength="50" />
           <Property Name="ToRate" Type="float" />
+          <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="Property" Type="uniqueidentifier" />
+          <Property Name="EmployeeEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="PmSignedDateTime" Type="datetime" />
+          <Property Name="EmployeeSignedDateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Properties">
           <Key>
@@ -525,6 +577,7 @@
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="ModifiedUser" Type="uniqueidentifier" />
           <Property Name="ModifiedDateTime" Type="datetime" />
+          <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
         </EntityType>
         <EntityType Name="ResidentContactInformation">
           <Key>
@@ -797,6 +850,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getequitypartners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getequitypartnersforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_gethrformsactivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="formtype" Type="varchar" Mode="In" />
+          <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpayperiodsforcurrentyear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -820,6 +877,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="CarrollDataEntitiesStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActivityLogHrForms" EntityType="Self.ActivityLogHrForms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarrollPayPeriods" EntityType="Self.CarrollPayPeriods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarrollPositions" EntityType="Self.CarrollPositions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
@@ -1005,6 +1063,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getpropertiesforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcel_Result2)" />
           <FunctionImport Name="proc_getpropertiesforexcelupdate" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcelupdate_Result)" />
           <FunctionImport Name="proc_getequitypartners" ReturnType="Collection(Carroll.Data.Entities.proc_getequitypartners_Result)" />
+          <EntitySet Name="ActivityLogHrForms" EntityType="Carroll.Data.Entities.ActivityLogHrForm" />
+          <FunctionImport Name="proc_gethrformsactivity" ReturnType="Collection(Carroll.Data.Entities.proc_gethrformsactivity_Result)">
+            <Parameter Name="formtype" Mode="In" Type="String" />
+            <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1060,7 +1123,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="WitnessName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="WitnessPhone" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
           <Property Name="WitnessAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DescriptionOfProperty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionOfProperty" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DescriptionOfDamage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ReportedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DateReported" Type="DateTime" Precision="3" />
@@ -1070,6 +1133,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="NotifySecurityOfficer" Type="Boolean" />
           <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PoliceReportNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaim">
           <Key>
@@ -1078,7 +1144,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="MDLId" Type="Guid" Nullable="false" />
           <Property Name="PropertyId" Type="Guid" Nullable="false" />
           <Property Name="DiscoveryDate" Type="DateTime" Precision="3" />
-          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="SuspectedCause" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AreBuildingMaterialsStillWet" Type="Boolean" />
@@ -1096,6 +1162,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="ApartmentOccupied" Type="Boolean" />
+          <Property Name="ResidentsAffected" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentsRelocating" Type="Boolean" />
+          <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaim">
           <Key>
@@ -1104,7 +1174,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="PDLId" Type="Guid" Nullable="false" />
           <Property Name="PropertyId" Type="Guid" Nullable="false" />
           <Property Name="IncidentDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="WeatherConditions" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WeatherConditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DescriptionOfProperty" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
@@ -1124,6 +1194,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="IncidentTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="PoliceReportNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1525,11 +1599,14 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <ComplexType Name="proc_getallpayrollstatuschange_Result">
           <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ChangeEffectiveDate" Nullable="true" />
-          <Property Type="String" Name="TypeOfChange" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TypeOfChange" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedDateTime" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="172" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="173" />
+          <Property Type="String" Name="SequenceNumber" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="EmpSigned" Nullable="true" MaxLength="193" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="205" />
         </ComplexType>
         <EntityType Name="RequisitionRequest">
           <Key>
@@ -1560,18 +1637,21 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ModifiedDateTime" Type="DateTime" Precision="3" />
           <Property Name="ChkOtherPosition" Type="Boolean" />
           <Property Name="ChkOtherPost" Type="Boolean" />
+          <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="proc_getallrequisitionrequests_Result">
           <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="RequestorName" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="RequestorPosition" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Post" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Post" Nullable="true" MaxLength="8" />
           <Property Type="DateTime" Name="DatePosted" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="171" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="172" />
+          <Property Type="String" Name="SequenceNumber" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="240" />
         </ComplexType>
         <EntityType Name="EmployeeLeaseRaider">
           <Key>
@@ -1593,6 +1673,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="SignatureOfPropertyManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SignatureOfEmployee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PositionDate" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeSignedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="PMDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="EquityPartnerContact">
           <Key>
@@ -1824,6 +1908,16 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ToStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ToWageSalary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ToRate" Type="Double" />
+          <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Leave_Purpose_Other" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FromTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ToTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Property" Type="Guid" />
+          <Property Name="EmployeeEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property3_Per" Type="Double" />
+          <Property Name="PmSignedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeSignedDateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="EmployeeNewHireNotice">
           <Key>
@@ -1864,6 +1958,17 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="EmployeeSignedDateTime" Type="DateTime" Precision="3" />
           <Property Name="RegionalManagerSignedDateTime" Type="DateTime" Precision="3" />
           <Property Name="iscorporate" Type="Boolean" />
+          <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="La_Property3_Per" Type="Double" />
+          <Property Name="IsResumitted" Type="Boolean" />
+          <Property Name="ResubmittedBy" Type="Guid" />
+          <Property Name="ResubmittedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsRejected" Type="Boolean" />
+          <Property Name="RejectedBy" Type="Guid" />
+          <Property Name="RejectedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AdditionalText" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NoticeOfEmployeeSeperation">
           <Key>
@@ -1900,6 +2005,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="HRMDate" Type="DateTime" Precision="0" />
           <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="C2WeeksCompleted" Type="Boolean" />
+          <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="proc_getallresidentreferalsheets_Result">
           <Property Type="Guid" Name="ResidentReferalId" Nullable="true" />
@@ -2102,12 +2208,15 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <PropertyRef Name="DynamicLinkId" />
           </Key>
           <Property Name="DynamicLinkId" Type="Guid" Nullable="false" />
-          <Property Name="FormType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FormType" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="ReferenceId" Type="Guid" />
           <Property Name="OpenStatus" Type="Boolean" />
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
           <Property Name="Action" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BrowserInformation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IpAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Clientdatetime" Type="DateTime" Precision="3" />
         </EntityType>
         <ComplexType Name="proc_getallemployeenewhirenotice1_Result">
           <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
@@ -2139,11 +2248,14 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="Location" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Position" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="PmSigned" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="EmpSigned" Nullable="true" MaxLength="119" />
-          <Property Type="String" Name="RpmSigned" Nullable="true" MaxLength="118" />
+          <Property Type="String" Name="EmpSigned" Nullable="true" MaxLength="286" />
+          <Property Type="String" Name="RpmSigned" Nullable="true" MaxLength="203" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="174" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="175" />
+          <Property Type="String" Name="SequenceNumber" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="RejectionStatus" Nullable="false" MaxLength="167" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="231" />
         </ComplexType>
         <ComplexType Name="proc_getallemployeeleaseriders_Result">
           <Property Type="Guid" Name="EmployeeLeaseRiderId" Nullable="false" />
@@ -2166,6 +2278,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="171" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="172" />
+          <Property Type="String" Name="EmployeeEmail" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EmployeeSignedDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SequenceNumber" Nullable="true" MaxLength="12" />
+          <Property Type="DateTime" Name="PMDate" Nullable="true" />
+          <Property Type="String" Name="EmpSigned" Nullable="true" MaxLength="193" />
+          <Property Type="String" Name="ManagerSigned" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="205" />
         </ComplexType>
         <ComplexType Name="proc_getallnoticeofemployeeseparation_Result">
           <Property Type="Guid" Name="EmployeeSeperationId" Nullable="false" />
@@ -2203,6 +2322,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="179" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="180" />
+          <Property Type="String" Name="SequenceNumber" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="205" />
         </ComplexType>
         <ComplexType Name="proc_getcontactsforexcel_Result">
           <Property Type="Guid" Name="ContactId" Nullable="false" />
@@ -2400,6 +2521,28 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
         </ComplexType>
+        <EntityType Name="ActivityLogHrForm">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Guid" Nullable="false" />
+          <Property Name="RefId" Type="Guid" Nullable="false" />
+          <Property Name="FormType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ActivitySubject" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActivityBy" Type="Guid" />
+        </EntityType>
+        <ComplexType Name="proc_gethrformsactivity_Result">
+          <Property Type="Guid" Name="ActivityId" Nullable="false" />
+          <Property Type="Guid" Name="RefId" Nullable="false" />
+          <Property Type="String" Name="FormType" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="ActivitySubject" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="ActivityDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="ActivityDate" Nullable="false" Precision="23" />
+          <Property Type="Guid" Name="ActivityBy" Nullable="true" />
+          <Property Type="String" Name="ActivityByName" Nullable="true" MaxLength="41" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2444,6 +2587,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormGeneralLiabilityClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormGeneralLiabilityClaim">
               <MappingFragment StoreEntitySet="FormGeneralLiabilityClaims">
+                <ScalarProperty Name="PoliceReportNumber" ColumnName="PoliceReportNumber" />
+                <ScalarProperty Name="ResidentContactInformation" ColumnName="ResidentContactInformation" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
                 <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="NotifySecurityOfficer" ColumnName="NotifySecurityOfficer" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -2477,6 +2623,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormMoldDamageClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormMoldDamageClaim">
               <MappingFragment StoreEntitySet="FormMoldDamageClaims">
+                <ScalarProperty Name="ResidentContactInformation" ColumnName="ResidentContactInformation" />
+                <ScalarProperty Name="ResidentsRelocating" ColumnName="ResidentsRelocating" />
+                <ScalarProperty Name="ResidentsAffected" ColumnName="ResidentsAffected" />
+                <ScalarProperty Name="ApartmentOccupied" ColumnName="ApartmentOccupied" />
                 <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
@@ -2504,6 +2654,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormPropertyDamageClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormPropertyDamageClaim">
               <MappingFragment StoreEntitySet="FormPropertyDamageClaims">
+                <ScalarProperty Name="PoliceReportNumber" ColumnName="PoliceReportNumber" />
+                <ScalarProperty Name="ResidentContactInformation" ColumnName="ResidentContactInformation" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
                 <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
@@ -2931,12 +3085,16 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="EmpSigned" ColumnName="EmpSigned" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="RequisitionRequests">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.RequisitionRequest">
               <MappingFragment StoreEntitySet="RequisitionRequest">
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
                 <ScalarProperty Name="ChkOtherPost" ColumnName="ChkOtherPost" />
                 <ScalarProperty Name="ChkOtherPosition" ColumnName="ChkOtherPosition" />
                 <ScalarProperty Name="ModifiedDateTime" ColumnName="ModifiedDateTime" />
@@ -2978,12 +3136,18 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="EmployeeLeaseRaiders">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.EmployeeLeaseRaider">
               <MappingFragment StoreEntitySet="EmployeeLeaseRaider">
+                <ScalarProperty Name="PMDate" ColumnName="PMDate" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="EmployeeSignedDateTime" ColumnName="EmployeeSignedDateTime" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
                 <ScalarProperty Name="PositionDate" ColumnName="PositionDate" />
                 <ScalarProperty Name="SignatureOfEmployee" ColumnName="SignatureOfEmployee" />
                 <ScalarProperty Name="SignatureOfPropertyManager" ColumnName="SignatureOfPropertyManager" />
@@ -3198,6 +3362,16 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="PayrollStatusChangeNotices">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.PayrollStatusChangeNotice">
               <MappingFragment StoreEntitySet="PayrollStatusChangeNotice">
+                <ScalarProperty Name="EmployeeSignedDateTime" ColumnName="EmployeeSignedDateTime" />
+                <ScalarProperty Name="PmSignedDateTime" ColumnName="PmSignedDateTime" />
+                <ScalarProperty Name="La_Property3_Per" ColumnName="La_Property3_Per" />
+                <ScalarProperty Name="La_Property3" ColumnName="La_Property3" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+                <ScalarProperty Name="Property" ColumnName="Property" />
+                <ScalarProperty Name="ToTitle" ColumnName="ToTitle" />
+                <ScalarProperty Name="FromTitle" ColumnName="FromTitle" />
+                <ScalarProperty Name="Leave_Purpose_Other" ColumnName="Leave_Purpose_Other" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
                 <ScalarProperty Name="ToRate" ColumnName="ToRate" />
                 <ScalarProperty Name="ToWageSalary" ColumnName="ToWageSalary" />
                 <ScalarProperty Name="ToStatus" ColumnName="ToStatus" />
@@ -3261,6 +3435,17 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="EmployeeNewHireNotices">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.EmployeeNewHireNotice">
               <MappingFragment StoreEntitySet="EmployeeNewHireNotice">
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="AdditionalText" ColumnName="AdditionalText" />
+                <ScalarProperty Name="RejectedDateTime" ColumnName="RejectedDateTime" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="IsRejected" ColumnName="IsRejected" />
+                <ScalarProperty Name="ResubmittedDateTime" ColumnName="ResubmittedDateTime" />
+                <ScalarProperty Name="ResubmittedBy" ColumnName="ResubmittedBy" />
+                <ScalarProperty Name="IsResumitted" ColumnName="IsResumitted" />
+                <ScalarProperty Name="La_Property3_Per" ColumnName="La_Property3_Per" />
+                <ScalarProperty Name="La_Property3" ColumnName="La_Property3" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
                 <ScalarProperty Name="iscorporate" ColumnName="iscorporate" />
                 <ScalarProperty Name="RegionalManagerSignedDateTime" ColumnName="RegionalManagerSignedDateTime" />
                 <ScalarProperty Name="EmployeeSignedDateTime" ColumnName="EmployeeSignedDateTime" />
@@ -3302,6 +3487,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="NoticeOfEmployeeSeperations">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.NoticeOfEmployeeSeperation">
               <MappingFragment StoreEntitySet="NoticeOfEmployeeSeperation">
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
                 <ScalarProperty Name="C2WeeksCompleted" ColumnName="2WeeksCompleted" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="HRMDate" ColumnName="HRMDate" />
@@ -3511,6 +3697,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="DynamicLinks">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.DynamicLink">
               <MappingFragment StoreEntitySet="DynamicLinks">
+                <ScalarProperty Name="Clientdatetime" ColumnName="Clientdatetime" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="BrowserInformation" ColumnName="BrowserInformation" />
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -3550,6 +3739,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="RejectionStatus" ColumnName="RejectionStatus" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3576,6 +3768,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+                <ScalarProperty Name="EmployeeSignedDateTime" ColumnName="EmployeeSignedDateTime" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="PMDate" ColumnName="PMDate" />
+                <ScalarProperty Name="EmpSigned" ColumnName="EmpSigned" />
+                <ScalarProperty Name="ManagerSigned" ColumnName="ManagerSigned" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3617,6 +3816,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PrintOption" ColumnName="PrintOption" />
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
+                <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3752,6 +3953,33 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ActivityLogHrForms">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ActivityLogHrForm">
+              <MappingFragment StoreEntitySet="ActivityLogHrForms">
+                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_gethrformsactivity" FunctionName="Carroll.Data.Entities.Store.proc_gethrformsactivity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_gethrformsactivity_Result">
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
+                <ScalarProperty Name="ActivityByName" ColumnName="ActivityByName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

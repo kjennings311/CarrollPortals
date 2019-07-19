@@ -30,5 +30,9 @@ namespace Carroll.Data.Entities
         public string SignatureOfPropertyManager { get; set; }
         public string SignatureOfEmployee { get; set; }
         public Nullable<System.DateTime> PositionDate { get; set; }
+        public string EmployeeEmail { get; set; }
+        public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
+        public string SequenceNumber { get; set; }
+        public Nullable<System.DateTime> PMDate { get; set; }
     }
 }

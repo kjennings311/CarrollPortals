@@ -59,6 +59,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<ResidentContactInformation_Residents> ResidentContactInformation_Residents { get; set; }
         public virtual DbSet<ResidentContactInformation_Vehicles> ResidentContactInformation_Vehicles { get; set; }
         public virtual DbSet<DynamicLink> DynamicLinks { get; set; }
+        public virtual DbSet<ActivityLogHrForm> ActivityLogHrForms { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -253,6 +254,19 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_getequitypartners_Result> proc_getequitypartners()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getequitypartners_Result>("proc_getequitypartners");
+        }
+    
+        public virtual ObjectResult<proc_gethrformsactivity_Result> proc_gethrformsactivity(string formtype, Nullable<System.Guid> refid)
+        {
+            var formtypeParameter = formtype != null ?
+                new ObjectParameter("formtype", formtype) :
+                new ObjectParameter("formtype", typeof(string));
+    
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_gethrformsactivity_Result>("proc_gethrformsactivity", formtypeParameter, refidParameter);
         }
     }
 }

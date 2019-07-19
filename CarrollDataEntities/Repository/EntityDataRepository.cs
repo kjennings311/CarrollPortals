@@ -813,8 +813,10 @@ namespace Carroll.Data.Entities.Repository
 
                 if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
                     config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).ToList();
-                else if (Type == "All")
+                else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
                     config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
+                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower())).ToList();
                 else
                     config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
 
@@ -822,7 +824,7 @@ namespace Carroll.Data.Entities.Repository
                 PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
                 config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                 config.Columns = new List<DtableConfigArray>();
-                config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "Number", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "ID", type = 0, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "claimType", label = "Type", type = 0, href = "" });
               
@@ -1137,6 +1139,22 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+        public dynamic GetAllHrFormActivity(Guid _recId,string FormType)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                var AllActivity = (from tbl in _entities.ActivityLogHrForms
+                                   join tbluser in _entities.SiteUsers on tbl.ActivityBy equals tbluser.UserId
+                                   where tbl.RefId == _recId && tbl.FormType ==  FormType
+
+                                   orderby tbl.ActivityDate descending
+                                   select new { tbl.ActivityDescription, ActivityDate = tbl.ActivityDate, tbl.ActivitySubject, tbluser.FirstName,tbluser.LastName }).ToList();
+
+                return AllActivity;
+            }
+        }
+
         public dynamic InsertComment(FormComment _property)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
@@ -1209,6 +1227,33 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
+      public  void HrLogActivity(string FormType, string RecordId, string ActivitySubject, string ActivityDesc, string UserGuid)
+      { 
+              using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    ActivityLogHrForm _activity = new ActivityLogHrForm();
+    _activity.ActivityId = System.Guid.NewGuid();
+                    _activity.ActivityDescription = ActivityDesc;
+                    _activity.ActivityDate = DateTime.Now;
+                    _activity.ActivityBy = new Guid(UserGuid);
+    _activity.ActivitySubject = ActivitySubject;
+                    _activity.RefId = new Guid(RecordId);
+                    _activity.FormType = FormType;  
+                    _entities.ActivityLogHrForms.Add(_activity);
+                    _entities.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+            }
+
+        }
+
         #region HR Forms
 
 
@@ -1234,7 +1279,7 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
-        public dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate)
+        public dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate, string browser, string ipaddress)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
@@ -1253,7 +1298,6 @@ namespace Carroll.Data.Entities.Repository
                         newhirerow.esignature = Sign;
                         newhirerow.edate = edate;
                         newhirerow.EmployeeSignedDateTime = DateTime.Now;
-
                     }
                     else
                     {
@@ -1264,7 +1308,9 @@ namespace Carroll.Data.Entities.Repository
 
                     }
                     drow.OpenStatus = false;
-
+                    drow.BrowserInformation = browser;
+                    drow.IpAddress = ipaddress;
+                    drow.Clientdatetime = DateTime.Now;
 
                     // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
@@ -1280,6 +1326,81 @@ namespace Carroll.Data.Entities.Repository
 
 
 
+        public dynamic UpdateWorkflowEmployeeLeaseRider(string Action, string RefId, string Sign, DateTime? edate,string browser,string ipaddress)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var dlink = new Guid(RefId);
+                    var drow = (from tbl in _entities.DynamicLinks
+                                where tbl.DynamicLinkId == dlink
+                                select tbl).FirstOrDefault();
+                    var newhirerow = (from tbl in _entities.EmployeeLeaseRaiders
+                                      where tbl.EmployeeLeaseRiderId == drow.ReferenceId
+                                      select tbl).FirstOrDefault();
+                  
+
+                        newhirerow.SignatureOfEmployee = Sign;
+                        newhirerow.PositionDate = edate;
+                        newhirerow.EmployeeSignedDateTime = DateTime.Now;
+                   
+
+                  
+                    drow.OpenStatus = false;
+                    drow.BrowserInformation = browser;
+                    drow.IpAddress = ipaddress;
+                    drow.Clientdatetime = DateTime.Now;
+
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    return newhirerow.EmployeeLeaseRiderId.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
+
+
+
+        public dynamic UpdateWorkflowPayRollStatusChangeNotice(string Action, string RefId, string Sign, DateTime? edate, string browser, string ipaddress)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var dlink = new Guid(RefId);
+                    var drow = (from tbl in _entities.DynamicLinks
+                                where tbl.DynamicLinkId == dlink
+                                select tbl).FirstOrDefault();
+                    var newhirerow = (from tbl in _entities.PayrollStatusChangeNotices
+                                      where tbl.PayrollStatusChangeNoticeId == drow.ReferenceId
+                                      select tbl).FirstOrDefault();
+
+
+                    newhirerow.ESignature = Sign;
+                    newhirerow.EDate = edate;
+                    newhirerow.EmployeeSignedDateTime = DateTime.Now;
+                                       
+                    drow.OpenStatus = false;
+                    drow.BrowserInformation = browser;
+                    drow.IpAddress = ipaddress;
+                    drow.Clientdatetime = DateTime.Now;
+
+                    // _entities.SaveChanges();
+                    int i = _entities.SaveChanges();
+
+                    return newhirerow.PayrollStatusChangeNoticeId.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
 
 
         public dynamic GetEmployeeLeaseRider(Guid riderid)
@@ -1313,6 +1434,15 @@ namespace Carroll.Data.Entities.Repository
 
                     // get Regional Manager Id for the Property
 
+                    if(_property.EmployeeHireNoticeId == null || _property.EmployeeHireNoticeId.ToString() == "00000000-0000-0000-0000-000000000000")
+                    {
+                        _property.EmployeeHireNoticeId = new Guid(_property.ModifiedUser.ToString());
+                        _property.ModifiedUser = null;
+                   
+                    _property.CreatedDateTime = DateTime.Now;
+                    // No record exists create a new property record here
+
+
                     var regionmrg = (from tbl in _entities.Properties
                                      where tbl.PropertyId == _property.ModifiedUser
                                      select tbl.RegionalManager).FirstOrDefault();
@@ -1320,11 +1450,81 @@ namespace Carroll.Data.Entities.Repository
                     _property.ModifiedUser = null;
                     _property.RegionaManager = regionmrg;
                     _property.PmSignedDateTime = DateTime.Now;
-                    // No record exists create a new property record here
-                    _entities.EmployeeNewHireNotices.Add(_property);
-                    // _entities.SaveChanges();
-                    int i = _entities.SaveChanges();
 
+                    _entities.EmployeeNewHireNotices.Add(_property);
+                    _entities.SaveChanges();
+
+                    }
+                    else
+                    {
+                        var res = (from tbl in _entities.EmployeeNewHireNotices
+                                   where tbl.EmployeeHireNoticeId == _property.EmployeeHireNoticeId
+                                   select tbl).FirstOrDefault();
+                        res.ModifiedDateTime = DateTime.Now;
+                        res.StartDate = _property.StartDate;
+                        res.EmployeeName = _property.EmployeeName;
+                        //   res.EmployeeSocialSecuirtyNumber = HttpContext.Current.Request.Params["securitynumber"].ToString();
+                        res.EmailAddress = _property.EmailAddress;
+                        res.Manager = _property.Manager;
+                        res.Location = _property.Location;
+                        res.iscorporate = _property.iscorporate;
+                        res.IsRejected = _property.IsRejected ;
+
+                      
+                            res.IsResumitted = true;
+                        res.ResubmittedBy = _property.ResubmittedBy;
+                            res.ResubmittedDateTime = DateTime.Now;
+                        
+
+                        // res.EmployeeHireNoticeId = System.Guid.NewGuid();
+                        res.Position = _property.Position ;
+                        res.Position_Exempt = _property.Position_Exempt;
+                        res.Position_NonExempt = _property.Position_NonExempt ;
+                        res.Status = _property.Status; ;
+                        res.Sal_Time = _property.Sal_Time; ;
+                        res.Wage_Salary = _property.Wage_Salary; ;
+
+                        if (res.iscorporate == false)
+                        {
+                            res.La_Property1 = _property.La_Property1;
+                            res.La_Property1_Per = _property.La_Property1_Per;
+                            if (res.La_Property1_Per != 100)
+                            {
+                                if (!String.IsNullOrEmpty(_property.La_Property2_Per.ToString()))
+                                {
+                                    res.La_Property2 = _property.La_Property2;
+                                    res.La_Property2_Per = _property.La_Property2_Per;
+
+                                }
+
+                                if (!String.IsNullOrEmpty(_property.La_Property3))
+                                {
+                                    res.La_Property3 = _property.La_Property3;
+                                    res.La_Property3_Per = _property.La_Property3_Per;
+
+                                }
+                            }
+
+                        }
+
+                        res.Status = _property.Status;
+                        res.AdditionalText = _property.AdditionalText;
+
+                            res.kitordered = _property.kitordered;
+                        //   res.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
+                        res.Allocation = _property.Allocation;
+                        res.esignature = null;
+                        res.edate = null;
+
+                        res.msignature =_property.msignature;
+                            res.mdate = _property.mdate;
+
+                        res.rpmsignature = null;
+                            res.rpmdate = null;
+                        int i1 = _entities.SaveChanges();
+                    }
+                       
+                                   
                     return new { Error = false, ErrorMsg = "", InsertedId = _property.EmployeeHireNoticeId };
                 }
                 catch (Exception ex)
@@ -1364,6 +1564,48 @@ namespace Carroll.Data.Entities.Repository
             }
 
 
+
+
+        }
+
+
+      public  dynamic GetNewHireRejectionDetails(string Refid)
+      {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var riderid = new Guid(Refid);
+
+                    var res = (from tbl in _entities.EmployeeNewHireNotices
+                               join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
+                               where tbl.EmployeeHireNoticeId == riderid
+                               select new { tbl.RejectedReason,tbluser.FirstName,tbluser.LastName, tbl.RejectedDateTime }).FirstOrDefault();
+
+                    // get meta data of pm
+
+                    var dl1 = (from tbl in _entities.DynamicLinks
+                               where tbl.FormType == "NewHire" && tbl.Action == "PM Email" && tbl.ReferenceId == riderid
+                               select tbl).FirstOrDefault();
+
+                    // get meta data of emp
+
+                    var dl2 = (from tbl in _entities.DynamicLinks
+                               where tbl.FormType == "NewHire" && tbl.Action == "Employee Email" && tbl.ReferenceId == riderid
+                               select tbl).FirstOrDefault();
+                    // get meta data of regional email
+
+                    var dl3 = (from tbl in _entities.DynamicLinks
+                               where tbl.FormType == "NewHire" && tbl.Action == "Regional Email" && tbl.ReferenceId == riderid
+                               select tbl).FirstOrDefault();
+
+                    return new { newhiredetails=res,pm=dl1,emp=dl2,regional=dl3 };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
         }
 
 
@@ -1376,6 +1618,15 @@ namespace Carroll.Data.Entities.Repository
                     var res = (from tbl in _entities.EmployeeNewHireNotices
                                where tbl.EmployeeHireNoticeId == riderid
                                select tbl).FirstOrDefault();
+
+                    if (res.iscorporate == false)
+                    {
+                        var propid = new Guid(res.Location);
+                        var propname = (from tbl in _entities.Properties
+                                        where tbl.PropertyId == propid
+                                        select tbl.PropertyName).FirstOrDefault();
+                        res.Location = propname;
+                    }
 
                     return res;
                 }
@@ -1811,8 +2062,6 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-
-
                 var ClaimCounts = new { LeaseCount = 0, PayrollCount = 0, EmployeeSeparationCount = 0, NewHireCount = 0 };
 
                 var leasecount = (from tbl in _entities.EmployeeLeaseRaiders
@@ -1823,7 +2072,6 @@ namespace Carroll.Data.Entities.Repository
                                        select tbl).Count();
                 var newhirecount = (from tbl in _entities.EmployeeNewHireNotices
                                     select tbl).Count();
-
                 return new { LeaseCount = leasecount, PayRollCount = payrollcount, SeparationCount = seperationcount, HireCount = newhirecount };
             }
         }
@@ -1969,6 +2217,7 @@ namespace Carroll.Data.Entities.Repository
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
 
+                    config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "community", label = "Property", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "date", label = "Date", type = DFieldType.IsDate, href = "" });
@@ -1977,9 +2226,11 @@ namespace Carroll.Data.Entities.Repository
                     //config.Columns.Add(new DtableConfigArray { name = "rentalPaymentResidencyAt", label = "Rental Payment At", type = 0, href = "" });                   
                     //config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    //  config.Columns.Add(new DtableConfigArray { name = "date", label = "Date Signed", type = DFieldType.IsDate, href = "" });
+                 
+                    config.Columns.Add(new DtableConfigArray { name = "managerSigned", label = "Manager Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
 
-                    config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Date Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -1996,7 +2247,7 @@ namespace Carroll.Data.Entities.Repository
                     PropertyInfo[] userprop = typeof(RequisitionRequest).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
-
+                    config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "requestorName", label = "Requestor Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "requestorPosition", label = "Position", type = DFieldType.IsText, href = "" });
@@ -2005,6 +2256,8 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "requisitionRequestId", label = "Id", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -2020,16 +2273,19 @@ namespace Carroll.Data.Entities.Repository
                     PropertyInfo[] userprop = typeof(PayrollStatusChangeNotice).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
-
+                    config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "changeEffectiveDate", label = "Effective Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "typeOfChange", label = "Type Of Change", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Manager Signed", type = DFieldType.IsText, href = "" });
+
+                    config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
                 }
-
                 else if (FormType == "EmployeeSeparation")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
@@ -2041,12 +2297,15 @@ namespace Carroll.Data.Entities.Repository
                     PropertyInfo[] userprop = typeof(proc_getallnoticeofemployeeseparation_Result).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
+                    config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "jobTitle", label = "Employee Position", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "reason", label = "Reason", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "effectiveDateOfChange", label = "Effective Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Date Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -2059,10 +2318,10 @@ namespace Carroll.Data.Entities.Repository
                         config.Rows = _entities.proc_getallemployeenewhirenoticenew().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
-                    PropertyInfo[] userprop = typeof(proc_getallemployeenewhirenotice1_Result).GetProperties();
+                    PropertyInfo[] userprop = typeof(proc_getallemployeenewhirenoticenew_Result).GetProperties();
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
-
+                    config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "startDate", label = "Start Date", type = DFieldType.IsDate, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "employeeSocialSecuirtyNumber", label = "Social SecuirtyNumber", type = DFieldType.IsText, href = "" });
@@ -2075,8 +2334,9 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "pmSigned", label = "Manager Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "rpmSigned", label = "Regional Signed", type = DFieldType.IsText, href = "" });
-                    //config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
-                    //  config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
+                    
+                    config.Columns.Add(new DtableConfigArray { name = "rejectionStatus", label = "RejectionStatus", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -2142,7 +2402,6 @@ namespace Carroll.Data.Entities.Repository
 
                 //}
 
-
                 return config;
 
             }
@@ -2153,11 +2412,7 @@ namespace Carroll.Data.Entities.Repository
 
         #endregion
 
-
-
-
-
-
+        
         /// <summary>
         /// 
         /// Send Email alerts to Corresponding Receipients based on the Claim Type and Work Flow
@@ -3894,6 +4149,34 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+
+        public string GetPropertyNumberNameManager(string PropertyNumber)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                var propid = new Guid(PropertyNumber);
+                //us
+                var propertyres = (from tbl in _entities.Properties
+                                   where tbl.PropertyId == propid
+                                   select new { tbl.PropertyName, tbl.PropertyManager,tbl.PropertyNumber }).FirstOrDefault();
+                var manager = "";
+                if (propertyres.PropertyManager != null)
+                {
+
+                    var mananger1 = (from tbl in _entities.Contacts
+                                     where tbl.ContactId == propertyres.PropertyManager
+                                     select new { tbl.FirstName, tbl.LastName, tbl.Email }).FirstOrDefault();
+                    manager = mananger1.FirstName + " " + mananger1.LastName;
+
+                }
+
+                if (propertyres != null)
+                    return propertyres.PropertyName + "," + manager+","+propertyres.PropertyNumber;
+                else
+                    return "";
+            }
+        }
+
         public List<CarrollPosition> GetAllCarrollPositions()
         {
             using (CarrollFormsEntities _entities = DBEntity)
@@ -3908,7 +4191,57 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
-       
+     public dynamic GetHrFormLogActivity(string FormType, string RecordId)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                
+                var rid = new Guid(RecordId);
+                var res = _entities.proc_gethrformsactivity(FormType, rid).ToList();
+                var dldetails = (from tbl in _entities.DynamicLinks
+                                 where tbl.FormType == FormType && tbl.ReferenceId == rid && tbl.IpAddress != null && tbl.BrowserInformation!= null
+                                 orderby tbl.CreatedDate descending
+                                 select new { browserinfo = tbl.BrowserInformation, ip = tbl.IpAddress, datetime = tbl.Clientdatetime, tbl.Action }).ToList();
+
+                return new { log=res,metadata=dldetails };
+            }
+        }
+
+        public dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+
+                var id = new Guid(refid);
+
+                var propertyres = (from tbl in _entities.EmployeeNewHireNotices
+                                   where tbl.EmployeeHireNoticeId == id
+                                   select tbl).FirstOrDefault();
+
+                if(propertyres != null)
+                {
+                    if(status == "reject")
+                    {
+                        propertyres.IsRejected = true;
+                        propertyres.RejectedBy = new Guid(refuser);
+                        propertyres.RejectedDateTime = DateTime.Now;
+                        propertyres.RejectedReason = reason;
+                        _entities.SaveChanges();
+                    }
+                    else if(status =="cancel")
+                    {
+                        propertyres.IsRejected = true;
+                        propertyres.RejectedBy = new Guid(refuser);
+                        propertyres.RejectedDateTime = DateTime.Now;
+                        propertyres.RejectedReason = "cancel";
+                        _entities.SaveChanges();
+                    }
+                }
+
+                return true;
+
+            }
+        }
 
         //public Config GetDatatableConfig(EntityType entityType,)
         //{

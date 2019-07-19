@@ -41,17 +41,30 @@ namespace Carroll.Data.Services.Models
             return _repository.GetUserPropertyForClaimPrint(userid);
         }
 
-
         public string GetPropertyName(int PropertyNumber)
         {
             return _repository.GetPropertyName(PropertyNumber);
+        }
+
+
+        public  dynamic GetNewHireRejectionDetails(string Refid)
+        {
+            return _repository.GetNewHireRejectionDetails(Refid);
+        }
+
+        public dynamic GetHrFormLogActivity(string FormType, string RecordId)
+        {
+            return _repository.GetHrFormLogActivity(FormType, RecordId);
         }
 
         public string GetPropertyNameManager(int PropertyNumber)
         {
             return _repository.GetPropertyNameManager(PropertyNumber);
         }
-
+        public string GetPropertyNumberNameManager(string PropertyNumber)
+        {
+            return _repository.GetPropertyNumberNameManager(PropertyNumber);
+        }
 
         #region [Records]
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
@@ -130,7 +143,7 @@ namespace Carroll.Data.Services.Models
 
       public  dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate)
         {
-            return _repository.UpdateWorkflowEmployeeNewHireNotice(Action,RefId,Sign,edate);
+            return _repository.UpdateWorkflowEmployeeNewHireNotice(Action,RefId,Sign,edate,"","");
         }
 
       public  dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted)
@@ -251,9 +264,8 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetResidentReferralRequest(obj);
         }
-
-
-       public dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs)
+        
+        public dynamic InsertResidentReferralContact(ResidentContactInformation mlh, List<ResidentContactInformation_Residents> rrs, List<ResidentContactInformation_OtherOccupants> ors, List<ResidentContactInformation_Vehicles> vhs)
         {
             return _repository.InsertResidentReferralContact(mlh,rrs,ors,vhs);
         }
@@ -263,6 +275,10 @@ namespace Carroll.Data.Services.Models
             return _repository.GetResidentReferralContact(riderid);
         }
 
+        public  dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser)
+        {
+            return _repository.UpdateNewHireRejectionStatus(status, reason, refid, refuser);
+        }
 
 
         public dynamic GetHrFormCount()

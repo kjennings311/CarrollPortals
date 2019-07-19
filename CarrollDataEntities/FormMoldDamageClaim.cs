@@ -35,5 +35,9 @@ namespace Carroll.Data.Entities
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string ClaimNumber { get; set; }
+        public Nullable<bool> ApartmentOccupied { get; set; }
+        public string ResidentsAffected { get; set; }
+        public Nullable<bool> ResidentsRelocating { get; set; }
+        public string ResidentContactInformation { get; set; }
     }
 }

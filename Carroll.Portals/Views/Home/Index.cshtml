@@ -77,13 +77,13 @@
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">
 
                                     <h2> <strong>  Property Damage Claim </strong> </h2>
-                                    <p> A Property Damage claim Report Should be filed when there is damage to the building or common areas. Examples include the following : </p>
+                                    <p> A Property Damage claim Report Should be filed when there is damage to the building or common areas. Examples include but are not limited to the following : </p>
                                     <ul>
                                         <li> Tree falling on a building </li>
                                         <li> Roof leak damage due to a storm </li>
                                         <li> Balcony Collapsing </li>
                                         <li> Mail Kiosk Support damage </li>
-                                        <li> Resident's guest damages gates while accessing community without authorization</li>
+                                        <li> Damage to Community Access Gates  </li>
                                         <li> Unit Flooding causing floor damage to the unit </li>
                                     </ul>
                                     <p> If there is injury to an individual due to property damage, both a Property Liability Claim Report and a General Liability Claim Report must be completed. </p>
@@ -101,14 +101,14 @@
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">
 
                                     <h2> <strong>  General Liability Claim</strong> </h2>
-                                    <p> A General Liability Claim Report should be filed when there is an injury to an individual at the property :</p>
+                                    <p> A General Liability Claim Report should be filed when there is an injury to an individual at the property examples include but are not limited to :</p>
                                     <ul>
-                                        <li>Resident trips on damage sidewalk and injuries themselves </li>
-                                        <li>One resident's Dog bites another resident</li>
-                                        <li> Resident reports their child is injured due to faulty playground equipment </li>
-                                        <li> Resident is injured due to stairs collapsing </li>
+                                        <li>Resident trips on sidewalk and injures themselves </li>
+                                        <li>One resident's Dog bites another resident/visitor/etc </li>
+                                        <li> Resident reports their child is injured on the playground or other equipment </li>
+                                        <li> Resident is injured on stairs </li>
                                         <li> Resident's reports being injured (Physically or emotionally) due to criminal activity on property grounds.</li>
-                                        <li> Resident drops weight on thier foot in fitness center and claims injury</li>
+                                        <li> Resident drops weight on their foot in fitness center and claims injury</li>
                                     </ul>
                                     <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immediately in addition to completing the General Liability Claim Report </p>
                                 </div>
@@ -126,6 +126,7 @@
                                         If there is either evidence of mold (sight or scent) or suspicion of mold due to a health concern being expressed by the resident, an incident report should be completed.
 
                                     </p>
+                                    <p> Please followup immediately with your Regional Manager and Regional Maintenance Supervisor for guidance on remediation as some properties may have partner specific guidelines/requirements    </p>
                                     <p>Carroll Protocol for remediating any incidents involving Mold, are found in Carroll U > Maintenance > Mold Operations Plan</p>
                                 </div>
                                 <div class="col-md-12 text-center" style="position:absolute; bottom:10px;">
@@ -196,7 +197,7 @@
 
 
     <div class="row hidewhenformopen visible-md visible-lg" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
-        <div class="col-lg-4 db" onclick="GetAllClaims('PropertyDamage')" style="border-right: 1px solid #797979;">
+        <div class="col-lg-4 db" onclick="GetAllClaims('Property')" style="border-right: 1px solid #797979;">
             <div class="widget style1 navy-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -211,7 +212,7 @@
             </div>
 
         </div>
-        <div class="col-lg-4 db" onclick="GetAllClaims('General Liability')" style="border-right: 1px solid #797979;">
+        <div class="col-lg-4 db" onclick="GetAllClaims('General')" style="border-right: 1px solid #797979;">
             <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -227,7 +228,7 @@
 
         </div>
 
-        <div class="col-lg-4 db" onclick="GetAllClaims('Mold Damage')">
+        <div class="col-lg-4 db" onclick="GetAllClaims('Mold')">
             <div class="widget style1 yellow-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -344,9 +345,12 @@
 
                 $('.dtprops').DataTable().search(val)
                     .draw();
-
             }
 
+// alert("Record Successfully added");
+
+          //  $(".modal-alert").html("Record Successfully added");
+           // $("#mobiletoastnotification").modal('show');
 
             $(document).ready(function () {
                 $("#helpid").show();
@@ -378,16 +382,25 @@
         }
 
         @@media only screen and (max-width : 768px) {
-            .ipbackground {
+            .ipbackground 
+            {
                 margin-top: 0px !important;
             }
 
-                .ipbackground button {
-                    top: 54.5% !important;
-                    right: -2% !important;
-                    font-size: 14px;
-                    font-weight: bold;
-                }
+           #mobiletoastnotification
+           {
+               top:30%;
+           }
+
+            .mobiletoast {
+            }
+
+            .ipbackground button {
+                top: 54.5% !important;
+                right: -2% !important;
+                font-size: 14px;
+                font-weight: bold;
+            }
 
                     .ipbackground button i {
                         font-size: 15px !important;

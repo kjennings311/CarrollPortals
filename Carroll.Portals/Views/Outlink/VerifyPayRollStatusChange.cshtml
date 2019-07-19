@@ -67,16 +67,16 @@
                 @if (Model.ShowPropertyChange == true)
                 {
 
-                <div style="width:100%;" id="divpropertychange">
+                    <div style="width:100%;" id="divpropertychange">
 
-                    <P class="p4 ft5">Property Change</P>
-                    <P class="p5 ft6"> Change Effective Date : <input type="text"    value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
-                    <P class="p5 ft6"> Property Transfer:</P>
+                        <P class="p4 ft5">Property Change</P>
+                        <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
+                        <P class="p5 ft6"> Property Transfer:</P>
 
-                    <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> From Property Name: <input style=" display:inline; " value="@Model.FromPropName" type="text" id="frompropname" class="" />From Manager:  <input style=" display:inline; " value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
-                    <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " type="text" value="@Model.ToPropName" id="topropname" class="" />To Manager: <input style=" display:inline; " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
-                    <hr style="border-top: 2px solid black;" />
-                </div>
+                        <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> From Property Name: <input style=" display:inline; " value="@Model.FromPropName" type="text" id="frompropname" class="" />From Manager:  <input style=" display:inline; " value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
+                        <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " type="text" value="@Model.ToPropName" id="topropname" class="" />To Manager: <input style=" display:inline; " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
+                        <hr style="border-top: 2px solid black;" />
+                    </div>
 
 
                 }
@@ -330,12 +330,20 @@
                     <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @Model.Notes1 </textarea></P>
 
                 </div>
-                <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.ESignature" />  Date: <input type="text" name="name" value="@Model.EDate.Value.ToShortDateString()" /> </P>
+                <P class="p6 ft1">Employee Signature: <input type="text" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
                 <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToShortDateString()" /> </P>
             </div>
+            <div id="status"> </div>
+            <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
-        </div>
+                <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+            </div>
+        </div> <input type="hidden" id="Action" value="@ViewBag.Action" />
+
+
     </div>
+   
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
 
@@ -348,9 +356,9 @@
             padding: 0
         }
 
-        hr{
-            margin-top:10px !important;
-            margin-bottom:0px !important;
+        hr {
+            margin-top: 10px !important;
+            margin-bottom: 0px !important;
         }
 
         .c3 {
@@ -867,35 +875,35 @@
             padding: 0px;
             margin: 0px;
             width: 474px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td1 {
             padding: 0px;
             margin: 0px;
             width: 147px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td2 {
             padding: 0px;
             margin: 0px;
             width: 83px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td3 {
             padding: 0px;
             margin: 0px;
             width: 16px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td4 {
             padding: 0px;
             margin: 0px;
             width: 704px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td5 {
@@ -903,7 +911,7 @@
             padding: 0px;
             margin: 0px;
             width: 474px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td6 {
@@ -911,7 +919,7 @@
             padding: 0px;
             margin: 0px;
             width: 147px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td7 {
@@ -919,7 +927,7 @@
             padding: 0px;
             margin: 0px;
             width: 83px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td8 {
@@ -927,7 +935,7 @@
             padding: 0px;
             margin: 0px;
             width: 16px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td9 {
@@ -941,14 +949,14 @@
             padding: 0px;
             margin: 0px;
             width: 241px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td11 {
             padding: 0px;
             margin: 0px;
             width: 354px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td12 {
@@ -956,7 +964,7 @@
             padding: 0px;
             margin: 0px;
             width: 125px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td13 {
@@ -964,14 +972,14 @@
             padding: 0px;
             margin: 0px;
             width: 595px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td14 {
             padding: 0px;
             margin: 0px;
             width: 595px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .tr0 {
@@ -1016,6 +1024,7 @@
             width: 720px;
             font: italic 15px 'Calibri';
         }
+
         .sign {
             font-family: 'Herr Von Muellerhoff', cursive;
         }
@@ -1025,9 +1034,132 @@
             font-weight: bold;
             font-size: 22px;
         }
-
-
     </style>
+    <style type="text/css">
+
+
+        .has-error {
+            border-color: red;
+        }
+    </style>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("input").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "") {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+            });
+
+            $("input").prop("disabled", true);
+            $("#esignature,#Submit").prop("disabled", false);
+
+            $("#esignature").focus();
+            document.getElementById("edate").valueAsDate = new Date();
+
+
+            function closeMe()
+            {
+                var win = window.open("", "_self"); /* url = "" or "about:blank"; target="_self" */
+               win.close();
+            }
+
+
+
+            $("#Submit").click(function (e)
+            {
+                e.preventDefault();
+
+                window.opener = window;
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+
+                    if ($("#esignature").val() == "") {
+                        errormsgsummary += "<li> Please Enter Signature </li>";
+                        $("#esignature").addClass('has-error');
+                        if (control == "")
+                            control = $("#esignature");
+                    }
+
+
+                if (errormsgsummary != "")
+                {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+
+                    var insertForm = new FormData();
+
+                    insertForm.append('action', $("#Action").val());
+                    insertForm.append('refid', '@ViewBag.ReferenceId');
+
+                    var axurl = "";
+                    var $BaseApiUrl = "http://localhost:1002/";
+
+                    insertForm.append('signature', $("#esignature").val());
+                    insertForm.append('date', $("#edate").val());
+                    axurl = "/Hr/UpdateWorkflowPayRollStatusChangeNoticeAsync";
+
+
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $.ajax({
+                        url: axurl,
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data)
+                        {
+                            // To-do code if ajax request is successfull
+                            alert("Successfully Submitted");
+
+                            $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
+
+                            setTimeout(function ()
+                            {
+
+                                closeMe();
+                            }, 2000);
+
+
+                        },
+                        error: function (ts)
+                        {
+                            alert("Successfully Submitted");
+                            $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
+
+                            setTimeout(function () { closeMe(); }, 2000);
+
+
+                        }
+                    });
+
+                }
+
+
+            });
+
+        });
+
+    </script>
 </body>
 </html>
 

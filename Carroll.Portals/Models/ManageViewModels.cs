@@ -91,7 +91,8 @@ namespace Carroll.Portals.Models
         public decimal ApartmentMarketRentalValue { get; set; }
         public string EmployeeName { get; set; }
         public System.DateTime Date { get; set; }
-        public System.DateTime PositionDate { get; set; }
+        public System.DateTime? PositionDate { get; set; }
+        public System.DateTime PmDate { get; set; }
         public string Community { get; set; }
         public decimal EmployeeMonthlyRent { get; set; }
         public string RentalPaymentResidencyAt { get; set; }
@@ -103,7 +104,8 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
-
+        public string EmployeeEmail { get; set; }
+        public DateTime? EmployeeSignedDateTime { get; set; }
     }
 
     public class PrintRequisitionRequest
@@ -295,7 +297,21 @@ namespace Carroll.Portals.Models
         public string La_Property2 { get; set; }
         public Nullable<double> La_Property2_Per { get; set; }
         public string Sal_Time { get; set; }
-        public bool iscorporate { get; set; }
+        public Nullable<System.Guid> RegionaManager { get; set; }
+        public Nullable<System.DateTime> PmSignedDateTime { get; set; }
+        public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
+        public Nullable<System.DateTime> RegionalManagerSignedDateTime { get; set; }
+        public Nullable<bool> iscorporate { get; set; }
+        public string SequenceNumber { get; set; }
+        public string La_Property3 { get; set; }
+        public Nullable<double> La_Property3_Per { get; set; }
+        public Nullable<bool> IsResumitted { get; set; }
+        public Nullable<System.Guid> ResubmittedBy { get; set; }
+        public Nullable<System.DateTime> ResubmittedDateTime { get; set; }
+        public Nullable<bool> IsRejected { get; set; }
+        public Nullable<System.Guid> RejectedBy { get; set; }
+        public Nullable<System.DateTime> RejectedDateTime { get; set; }
+        public string AdditionalText { get; set; }
 
     }
 
@@ -397,7 +413,6 @@ namespace Carroll.Portals.Models
 
     public class PrintPayRollStatusChange
     {
-
         public System.Guid PayrollStatusChangeNoticeId { get; set; }
         public string EmployeeName { get; set; }
         public Nullable<System.DateTime> ChangeEffectiveDate { get; set; }
@@ -455,6 +470,16 @@ namespace Carroll.Portals.Models
         public string ToStatus { get; set; }
         public string ToWageSalary { get; set; }
         public Nullable<double> ToRate { get; set; }
+        public string SequenceNumber { get; set; }
+        public string Leave_Purpose_Other { get; set; }
+        public string FromTitle { get; set; }
+        public string ToTitle { get; set; }
+        public Nullable<System.Guid> Property { get; set; }
+        public string EmployeeEmail { get; set; }
+        public string La_Property3 { get; set; }
+        public Nullable<double> La_Property3_Per { get; set; }
+        public Nullable<System.DateTime> PmSignedDateTime { get; set; }
+        public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
     }
 
     public class PrintNoticeOfEmployeeSeparation
