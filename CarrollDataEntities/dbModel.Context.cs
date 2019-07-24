@@ -256,7 +256,7 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getequitypartners_Result>("proc_getequitypartners");
         }
     
-        public virtual ObjectResult<proc_gethrformsactivity_Result> proc_gethrformsactivity(string formtype, Nullable<System.Guid> refid)
+        public virtual int proc_gethrformsactivity(string formtype, Nullable<System.Guid> refid)
         {
             var formtypeParameter = formtype != null ?
                 new ObjectParameter("formtype", formtype) :
@@ -266,7 +266,33 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("refid", refid) :
                 new ObjectParameter("refid", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_gethrformsactivity_Result>("proc_gethrformsactivity", formtypeParameter, refidParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_gethrformsactivity", formtypeParameter, refidParameter);
+        }
+    
+        public virtual ObjectResult<proc_gethrformsactivity1_Result> proc_gethrformsactivity1(string formtype, Nullable<System.Guid> refid)
+        {
+            var formtypeParameter = formtype != null ?
+                new ObjectParameter("formtype", formtype) :
+                new ObjectParameter("formtype", typeof(string));
+    
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_gethrformsactivity1_Result>("proc_gethrformsactivity1", formtypeParameter, refidParameter);
+        }
+    
+        public virtual ObjectResult<proc_getallhrformsactivity_Result> proc_getallhrformsactivity(string formtype, Nullable<System.Guid> refid)
+        {
+            var formtypeParameter = formtype != null ?
+                new ObjectParameter("formtype", formtype) :
+                new ObjectParameter("formtype", typeof(string));
+    
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallhrformsactivity_Result>("proc_getallhrformsactivity", formtypeParameter, refidParameter);
         }
     }
 }

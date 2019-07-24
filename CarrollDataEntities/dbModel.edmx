@@ -835,6 +835,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getallexpensemileagelogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="proc_getallhrformsactivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="formtype" Type="varchar(max)" Mode="In" />
+          <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallmonthlyexpensedetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -1063,11 +1067,19 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getpropertiesforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcel_Result2)" />
           <FunctionImport Name="proc_getpropertiesforexcelupdate" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcelupdate_Result)" />
           <FunctionImport Name="proc_getequitypartners" ReturnType="Collection(Carroll.Data.Entities.proc_getequitypartners_Result)" />
-          <FunctionImport Name="proc_gethrformsactivity" ReturnType="Collection(Carroll.Data.Entities.proc_gethrformsactivity_Result)">
+          <FunctionImport Name="proc_gethrformsactivity">
             <Parameter Name="formtype" Mode="In" Type="String" />
             <Parameter Name="refid" Mode="In" Type="Guid" />
           </FunctionImport>
           <EntitySet Name="ActivityLogHrForms" EntityType="Carroll.Data.Entities.ActivityLogHrForm" />
+          <FunctionImport Name="proc_gethrformsactivity1" ReturnType="Collection(Carroll.Data.Entities.proc_gethrformsactivity1_Result)">
+            <Parameter Name="formtype" Mode="In" Type="String" />
+            <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getallhrformsactivity" ReturnType="Collection(Carroll.Data.Entities.proc_getallhrformsactivity_Result)">
+            <Parameter Name="formtype" Mode="In" Type="String" />
+            <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -2521,16 +2533,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
         </ComplexType>
-        <ComplexType Name="proc_gethrformsactivity_Result">
-          <Property Type="Guid" Name="ActivityId" Nullable="false" />
-          <Property Type="Guid" Name="RefId" Nullable="false" />
-          <Property Type="String" Name="FormType" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="ActivitySubject" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="ActivityDescription" Nullable="true" MaxLength="Max" />
-          <Property Type="DateTime" Name="ActivityDate" Nullable="false" Precision="23" />
-          <Property Type="Guid" Name="ActivityBy" Nullable="true" />
-          <Property Type="String" Name="ActivityByName" Nullable="true" MaxLength="41" />
-        </ComplexType>
         <EntityType Name="ActivityLogHrForm">
           <Key>
             <PropertyRef Name="ActivityId" />
@@ -2543,6 +2545,21 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ActivityDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ActivityBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="proc_gethrformsactivity1_Result">
+          <Property Type="Guid" Name="ActivityId" Nullable="false" />
+          <Property Type="Guid" Name="RefId" Nullable="false" />
+          <Property Type="String" Name="FormType" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="ActivitySubject" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="ActivityDescription" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="ActivityDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ActivityBy" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ActivityByName" Nullable="true" MaxLength="41" />
+        </ComplexType>
+        <ComplexType Name="proc_getallhrformsactivity_Result">
+          <Property Type="String" Name="ActivitySubject" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="ActivityDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ActivityByName" Nullable="true" MaxLength="150" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3956,20 +3973,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_gethrformsactivity" FunctionName="Carroll.Data.Entities.Store.proc_gethrformsactivity">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_gethrformsactivity_Result">
-                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
-                <ScalarProperty Name="RefId" ColumnName="RefId" />
-                <ScalarProperty Name="FormType" ColumnName="FormType" />
-                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
-                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
-                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
-                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
-                <ScalarProperty Name="ActivityByName" ColumnName="ActivityByName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="ActivityLogHrForms">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.ActivityLogHrForm">
               <MappingFragment StoreEntitySet="ActivityLogHrForms">
@@ -3983,6 +3986,29 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_gethrformsactivity1" FunctionName="Carroll.Data.Entities.Store.proc_gethrformsactivity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_gethrformsactivity1_Result">
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
+                <ScalarProperty Name="ActivityByName" ColumnName="ActivityByName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallhrformsactivity" FunctionName="Carroll.Data.Entities.Store.proc_getallhrformsactivity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallhrformsactivity_Result">
+                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActivityByName" ColumnName="ActivityByName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

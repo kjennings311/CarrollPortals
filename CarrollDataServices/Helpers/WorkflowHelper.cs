@@ -544,7 +544,7 @@ namespace Carroll.Data.Services.Helpers
                      //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <p> ";
-                        _message.Body += " Employee New Hire Notice  for "+NewhireDetails.tbl.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> ************************************************************************************************************************* <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span> ";
+                        _message.Body += " Employee New Hire Notice  for "+NewhireDetails.tbl.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <br> <br> <br> <br> <br> *********************************************************************************************************************************************************  <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span> ";
                         _message.Body += "<br> <h6> Employee Signature Metadata : </h6> <p> Browser : " + br1 + " </p><p> Ip Address : " + ip1 + " </p> <p> Date Time : " + da1 + " </p>";
                         _message.Body += "<br> <h6> Regional Manager Signature Metadata : </h6> <p> Browser : " + br2 + " </p><p> Ip Address : " + ip2 + " </p> <p> Date Time : " + d2 + " </p>";
 
@@ -706,7 +706,7 @@ namespace Carroll.Data.Services.Helpers
                     //    var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <p> ";
-                        _message.Body += " Employee Lease Rider  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment of Employee Lease Rider <br> <br> ************************************************************************************************************************* <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span>  <h5> ";
+                        _message.Body += " Employee Lease Rider  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment of Employee Lease Rider <br> <br> <br> <br> <br> ******************************************************************************************************************************************************** <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span>  <h5> ";
                         _message.Body += "<br> <h6> Employee Signature Metadata : </h6> <p> Browser : "+br+ " </p><p> Ip Address : " + ip + " </p> <p> Date Time : " + dat+ " </p>";
                         _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";
 
@@ -862,11 +862,10 @@ namespace Carroll.Data.Services.Helpers
                     if (NewhireDetails != null)
                     {
                         // subject and body
-
                         //    var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Payroll Status Change has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"><p> ";
-                        _message.Body += "Payroll Status Change Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment Copy <br> <br>************************************************************************************************************************* <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span>  <h5> ";
+                        _message.Body += "Payroll Status Change Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment Copy <br> <br><br> <br> <br> *************************************************************************************************************************************************** <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span>  <h5> ";
                         _message.Body += "<br> <h6> Employee Signature Metadata : </h6> <p> Browser : " + br + " </p><p> Ip Address : " + ip + " </p> <p> Date Time : " + dat + " </p>";
 
                         _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";

@@ -11,7 +11,7 @@ namespace Carroll.Data.Entities
 {
     using System;
     
-    public partial class proc_gethrformsactivity_Result
+    public partial class proc_gethrformsactivity1_Result
     {
         public System.Guid ActivityId { get; set; }
         public System.Guid RefId { get; set; }
@@ -19,7 +19,7 @@ namespace Carroll.Data.Entities
         public string ActivitySubject { get; set; }
         public string ActivityDescription { get; set; }
         public System.DateTime ActivityDate { get; set; }
-        public Nullable<System.Guid> ActivityBy { get; set; }
+        public string ActivityBy { get; set; }
         public string ActivityByName { get; set; }
     }
 }

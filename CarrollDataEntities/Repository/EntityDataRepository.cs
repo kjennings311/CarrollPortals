@@ -3025,10 +3025,11 @@ namespace Carroll.Data.Entities.Repository
                     if (row[0].ToString() != "")
                     {
                         var uid = new Guid(row[0].ToString());
-                       
+
+                        var propnumber = Convert.ToInt32(row[7].ToString());
 
                         var contact = (from tbl in _entities.Properties                                     
-                                       where tbl.PropertyId == uid
+                                       where tbl.PropertyNumber == propnumber
                                      select tbl).FirstOrDefault();
 
                         if (contact == null)
@@ -3049,7 +3050,7 @@ namespace Carroll.Data.Entities.Repository
                             if (!string.IsNullOrEmpty(row[1].ToString()))
                             {
 
-                                if (othercontact.VP != row[1].ToString().Trim())
+                                if (othercontact.VP.ToLower().Trim() != row[1].ToString().ToLower().Trim())
                                 {
                                     // if changed, check contact exist with given name
 
@@ -3095,7 +3096,7 @@ namespace Carroll.Data.Entities.Repository
 
                                     }
                                 }
-                                else if (othercontact.VP_ != row[2].ToString().Trim())
+                                else if (othercontact.VP_.ToLower().Trim() != row[2].ToString().ToLower().Trim())
                                 {
                                     // get contact and update mobile number
 
@@ -3123,7 +3124,7 @@ namespace Carroll.Data.Entities.Repository
                             {
 
 
-                                if (othercontact.RVP != row[3].ToString().Trim())
+                                if (othercontact.RVP.ToLower().Trim() != row[3].ToString().ToLower().Trim())
                                 {
                                     // if changed, check contact exist with given name
                                     var searchstr = row[3].ToString().Trim().ToLower();
@@ -3173,7 +3174,7 @@ namespace Carroll.Data.Entities.Repository
                                 contact.RegionalVicePresident = null;
                             }
 
-                            if (othercontact.VP_ != row[4].ToString().Trim())
+                            if (othercontact.RVP_.ToLower().Trim() != row[4].ToString().ToLower().Trim())
                             {
                                 // get contact and update mobile number
 
@@ -3195,7 +3196,7 @@ namespace Carroll.Data.Entities.Repository
                             if (!string.IsNullOrEmpty(row[5].ToString()))
                             {
 
-                                if (othercontact.RVP != row[5].ToString().Trim())
+                                if (othercontact.RM.ToLower().Trim() != row[5].ToString().ToLower().Trim())
                                 {
                                     // if changed, check contact exist with given name
                                     var searchstr = row[5].ToString().Trim().ToLower();
@@ -3246,7 +3247,7 @@ namespace Carroll.Data.Entities.Repository
                                 contact.RegionalManager = null;
                             }
 
-                            if (othercontact.VP_ != row[6].ToString().Trim())
+                            if (othercontact.RM_.ToLower().Trim() != row[6].ToString().ToLower().Trim())
                             {
                                 // get contact and update mobile number
 
@@ -3277,7 +3278,7 @@ namespace Carroll.Data.Entities.Repository
                                 change = true;
                             }
 
-                            if (contact.PropertyName != row[9].ToString().Trim())
+                            if (contact.PropertyName.ToLower().Trim() != row[9].ToString().ToLower().Trim())
                             {
                                 contact.PropertyName = row[9].ToString().Trim();
                                 change = true;
@@ -3286,7 +3287,7 @@ namespace Carroll.Data.Entities.Repository
                             if (!string.IsNullOrEmpty(row[11].ToString()))
                             {
 
-                                if (othercontact.EquityPartner != row[10].ToString().Trim())
+                                if (othercontact.EquityPartner.ToLower().Trim() != row[10].ToString().ToLower().Trim())
                                 {
                                     // check if exist, exist udpate partnerid, if not then create new equitypartner, update id
                                     var searchstr = row[10].ToString().Trim().ToLower();
@@ -3326,7 +3327,7 @@ namespace Carroll.Data.Entities.Repository
                             if (!string.IsNullOrEmpty(row[11].ToString()))
                             {
 
-                                if (othercontact.AssetManager != row[11].ToString().Trim())
+                                if (othercontact.AssetManager.ToLower().Trim() != row[11].ToString().ToLower().Trim())
                                 {
                                     // if changed, check contact exist with given name
                                     var searchstr = row[11].ToString().Trim().ToLower();
@@ -3379,7 +3380,7 @@ namespace Carroll.Data.Entities.Repository
                             // Construction Manager -- 12 thc column
                             if (!string.IsNullOrEmpty(row[12].ToString()))
                             {
-                                if (othercontact.ConstructionManager != row[12].ToString().Trim())
+                                if (othercontact.ConstructionManager.ToLower().Trim() != row[12].ToString().ToLower().Trim())
                             {
                                 // if changed, check contact exist with given name
                                 var searchstr = row[12].ToString().Trim().ToLower();
@@ -3431,7 +3432,7 @@ namespace Carroll.Data.Entities.Repository
                             // Marketing Specialist= -- 13 thc column
                             if (!string.IsNullOrEmpty(row[13].ToString()))
                             {
-                                if (othercontact.MarketingSpecialist != row[13].ToString().Trim())
+                                if (othercontact.MarketingSpecialist.ToLower().Trim() != row[13].ToString().ToLower().Trim())
                             {
                                 // if changed, check contact exist with given name
                                 var searchstr = row[13].ToString().Trim().ToLower();
@@ -3485,7 +3486,7 @@ namespace Carroll.Data.Entities.Repository
                             // Property Manager = -- 14 thc column
                             if (!string.IsNullOrEmpty(row[14].ToString()))
                             {
-                                if (othercontact.PropertyManager != row[14].ToString().Trim())
+                                if (othercontact.PropertyManager.ToLower().Trim() != row[14].ToString().ToLower().Trim())
                             {
                                 // if changed, check contact exist with given name
                                 var searchstr = row[14].ToString().Trim().ToLower();
@@ -3536,13 +3537,13 @@ namespace Carroll.Data.Entities.Repository
 
 
 
-                            if (contact.PhoneNumber != row[15].ToString().Trim())
+                            if (contact.PhoneNumber.ToLower().Trim() != row[15].ToString().ToLower().Trim())
                             {
                                 contact.PhoneNumber = row[15].ToString().Trim();
                                 change = true;
                             }
 
-                            if (contact.PropertyAddress != row[16].ToString().Trim())
+                            if (contact.PropertyAddress.ToLower().Trim() != row[16].ToString().ToLower().Trim())
                             {
                                 contact.PropertyAddress = row[16].ToString().Trim();
                                 change = true;
@@ -3550,65 +3551,65 @@ namespace Carroll.Data.Entities.Repository
 
 
 
-                            if (contact.City != row[17].ToString().Trim())
+                            if (contact.City.ToLower().Trim() != row[17].ToString().ToLower().Trim())
                             {
                                 contact.City = row[17].ToString().Trim();
                                 change = true;
                             }
 
-                            if (contact.State != row[18].ToString().Trim())
+                            if (contact.State.ToLower().Trim() != row[18].ToString().ToLower().Trim())
                             {
                                 contact.State = row[18].ToString().Trim();
                                 change = true;
                             }
 
-                            if (contact.ZipCode!= row[19].ToString().Trim())
+                            if (contact.ZipCode.ToLower().Trim() != row[19].ToString().ToLower().Trim())
                             {
                                 contact.ZipCode = row[19].ToString().Trim();
                                 change = true;
                             }
 
 
-                            if (contact.EmailAddress != row[20].ToString().Trim())
+                            if (contact.EmailAddress.ToLower().Trim() != row[20].ToString().ToLower().Trim())
                             {
                                 contact.EmailAddress = row[20].ToString().Trim();
                                 change = true;
                             }
 
-                            if (contact.LegalName != row[21].ToString().Trim())
+                            if (contact.LegalName.ToLower().Trim() != row[21].ToString().ToLower().Trim())
                             {
                                 contact.LegalName = row[21].ToString().Trim();
                                 change = true;
                             }
 
-                            if (contact.Purchase_TookOver != row[22].ToString().Trim())
-                            {
-                                contact.Purchase_TookOver = row[22].ToString().Trim();
-                                change = true;
-                            }
+                            //if (contact.Purchase_TookOver.ToLower().Trim() != row[22].ToString().ToLower().Trim())
+                            //{
+                            //    contact.Purchase_TookOver = row[22].ToString().Trim();
+                            //    change = true;
+                            //}
 
 
-                            if (contact.AcquisitionDate.ToString() != row[23].ToString().Trim())
-                            {
-                                if (!string.IsNullOrEmpty(row[23].ToString().Trim()))
-                                {
-                                    var str = row[23].ToString().Trim().Replace("/", "-").Split('-');
-                                    contact.AcquisitionDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
-                                }
-                                //    contact.AcquisitionDate = Convert.ToDateTime(row[23].ToString().Trim().Replace("/", "-"));
-                                change = true;
-                            }
+                            //if (contact.AcquisitionDate.ToString() != row[23].ToString().Trim())
+                            //{
+                            //    if (!string.IsNullOrEmpty(row[23].ToString().Trim()))
+                            //    {
+                            //        var str = row[23].ToString().Trim().Replace("/", "-").Split('-');
+                            //        contact.AcquisitionDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
+                            //    }
+                            //    //    contact.AcquisitionDate = Convert.ToDateTime(row[23].ToString().Trim().Replace("/", "-"));
+                            //    change = true;
+                            //}
                             
-                            if (contact.RefinancedDate.ToString() != row[24].ToString().Trim())
-                            {
-                                if (!string.IsNullOrEmpty(row[24].ToString().Trim()))
-                                {
-                                    var str = row[24].ToString().Trim().Replace("/", "-").Split('-');
-                                    contact.RefinancedDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
-                                }
-                                   // contact.RefinancedDate = Convert.ToDateTime(row[24].ToString().Trim().Replace("/", "-"));
-                                change = true;
-                            }
+                            //if (contact.RefinancedDate.ToString() != row[24].ToString().Trim())
+                            //{
+                            //    if (!string.IsNullOrEmpty(row[24].ToString().Trim()))
+                            //    {
+                            //        var str = row[24].ToString().Trim().Replace("/", "-").Split('-');
+                            //        contact.RefinancedDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
+                            //    }
+                            //       // contact.RefinancedDate = Convert.ToDateTime(row[24].ToString().Trim().Replace("/", "-"));
+                            //    change = true;
+                            //}
 
                             if (contact.TaxId != row[25].ToString().Trim())
                             {
@@ -3681,9 +3682,7 @@ namespace Carroll.Data.Entities.Repository
                                     _entities.SaveChanges();
                                     contact1.VicePresident = c.ContactId;
                                     change = true;
-
                                 }
-
 
                         }
                         else
@@ -4196,7 +4195,7 @@ namespace Carroll.Data.Entities.Repository
             {
                 
                 var rid = new Guid(RecordId);
-                var res = _entities.proc_gethrformsactivity(FormType, rid).ToList();
+                var res = _entities.proc_getallhrformsactivity(FormType, rid).ToList();
                 var dldetails = (from tbl in _entities.DynamicLinks
                                  where tbl.FormType == FormType && tbl.ReferenceId == rid && tbl.IpAddress != null && tbl.BrowserInformation!= null
                                  orderby tbl.CreatedDate descending

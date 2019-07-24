@@ -155,6 +155,9 @@
     <Compile Include="proc_getallexpensemileagelogs_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_getallhrformsactivity_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_getallmonthlyexpensedetails_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -194,7 +197,7 @@
     <Compile Include="proc_GetGeneralLiabilityClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="proc_gethrformsactivity_Result.cs">
+    <Compile Include="proc_gethrformsactivity1_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_GetMoldDamageClaims_Result.cs">
