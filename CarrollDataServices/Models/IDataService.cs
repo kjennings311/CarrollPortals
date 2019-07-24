@@ -31,7 +31,7 @@ namespace Carroll.Data.Services.Models
         dynamic InsertAttachment(FormAttachment formAttachment);
         dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider Elr);
         dynamic GetEmployeeLeaseRider(Guid Elr);
-        dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice Elr);
+        dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice Elr,string Type);
         dynamic GetEmployeeNewHireNotice(Guid Elr);
         dynamic GetUserClaimCount(Guid userid);
         dynamic GetEquityPartners();

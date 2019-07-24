@@ -31,7 +31,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic InsertAttachment(FormAttachment formAttachment);
         dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment);
         dynamic GetEmployeeLeaseRider(Guid riderid);
-        dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment);
+        dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment,string Type);
         dynamic GetEmployeeNewHireNotice(Guid riderid);
 
         dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment);

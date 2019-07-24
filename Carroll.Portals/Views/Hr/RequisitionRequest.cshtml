@@ -20,50 +20,9 @@
     </div>
 </div>
 
-<div class="modal fade bs-example-modal-lg activitymodal" id="activitymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" style="width:70%" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title" style="font-weight:bold;text-align: center;
-    color: black;" id="gridSystemModalLabel">
-                    Activity Log
-                </h1>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12" style="text-align:center">
-                        <table id="viewlog" class="table table-striped col-md-6">
-                            <thead>
-                                <tr>
-                                    <th style="width:40%">Description</th>
-                                    <th style="width:30%;text-align:center">Date</th>
-                                    <th style="width:20%"> Created By </th>
-                                </tr>
-                            </thead>
-                            <tbody id="hractivitybody"></tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-12" style="text-align:center">
-                        <h2> Signature Meta Data </h2>
-                        <br />
-                        <table class="table table-striped col-md-6">
-                            <thead>
-                                <tr>
-                                    <th style="width:10%"> Sign Type </th>
-                                    <th style="width:10%">Ip Address</th>
-                                    <th style="width:60%;text-align:center">Browser </th>
-                                    <th style="width:20%;text-align:center"> Date Time </th>
-                                </tr>
-                            </thead>
-                            <tbody id="hrsignmetadata"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@{ Html.RenderPartial("HrFormLogActivity"); }
+
+
 
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
@@ -77,15 +36,15 @@
 
                     <div class="ibox-tools" style="margin-top:-55px;">
 
-                        @if (@Model.RoleType.ToLower() == "hr")
-                        {
+                        @*@if (@Model.RoleType.ToLower() == "hr")
+                        {*@
                             <a disabled="disabled" class="btnEdit" href="#" style="font-size:30px; color:white; font-weight:bold"><i class="fa fa-edit"></i> Edit</a> } @*
                             <a disabled="disabled" class="btnDelete" href="#">
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
-                    }
+                       @* }*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('Requistion Request');">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('Requistion Request');">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -392,6 +351,14 @@
 
         $(document).ready(function () {
 
+            $(".addnew").click(function () {
+                document.getElementById("submitform").reset();
+                document.getElementById("datechoosen").valueAsDate = new Date();
+                $("#notes1,#requisitionnumber,dateposted").prop("disabled", true);
+            });
+              
+             
+
             var leaseid = "";
 
             var insertoredit = true;
@@ -402,7 +369,8 @@
             $(".btnEdit").click(function () {
                 //$("input,select,textarea").clear();
                 document.getElementById("submitform").reset();
-                var ht = $("tr.selected").find('td:eq(8)').html();
+                var ht = $("tr.selected").find('td:eq(10)').html();
+            
                 editid = ht.substring(ht.indexOf("?id=") + 4, ht.indexOf(" target=") - 1);
 
 
@@ -415,8 +383,9 @@
 
                         $("#propertyname").val(data.propertyName);
                         var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
-                        $("#datechoosen").val(d);
-
+                        document.getElementById("datechoosen").valueAsDate = new Date(d);
+                        //$("#datechoosen").val(d);
+                        //alert(d);
 
                         $("#requestorname").val(data.requestorName);
 
@@ -661,10 +630,12 @@
                         }
                     });
 
-                    if (pscount == true) {
+                    if (pscount == true)
+                    {
                         errormsgsummary += "<li> Please Select How Many Option for the Selected Positions </li>";
                     }
-                    if (errormsgsummary != "") {
+                    if (errormsgsummary != "")
+                    {
 
                         $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -672,7 +643,8 @@
                         $("#Submit").prop('disabled', false);
                         return false;
                     }
-                    else {
+                    else
+                    {
                         $('#myModal').modal('hide');
 
                         var quittext = "";
@@ -682,9 +654,9 @@
                             if (this.checked === true) {
                                 quittext += $(this).val() + "--" + $("#" + $(this).attr("data-tr")).val() + ",";
                                 i++;
-
                             }
                         });
+
                         quittext = quittext.replace(/(^,)|(,$)/g);
                         quittext = quittext.replace("undefined", "");
 
@@ -787,7 +759,7 @@
                                     var insertForm = new FormData();
                                     insertForm.append('refid', leaseid);
                                     insertForm.append('form', "RequisitionRequest");
-
+                                    insertForm.append('CreatedByName', $("#CreatedByName").val());
                                     $.ajax({
                                         url: "/Hr/SendHrFormCompletionNotification/",
                                         type: 'POST',
@@ -887,6 +859,8 @@
                         insertForm.append('requisitionnumber', $("#requisitionnumber").val());
                         insertForm.append('notes', $("#notes1").val());
                         insertForm.append('dateposted', $("#dateposted").val());
+                        insertForm.append('CreatedByName', $("#CreatedByName").val());
+                        insertForm.append('CreatedBy', $("#CreatedBy").val());
 
                         $.ajax({
                             url: $BaseApiUrl + "api/data/updaterequisitionrequest/",

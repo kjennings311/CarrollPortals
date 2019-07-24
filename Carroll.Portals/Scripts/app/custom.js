@@ -5,7 +5,7 @@
 //49786/";
 //   and UserOject are global variables can be used here.
 
-var $ismobile = false;
+var $ismobile = true;
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent))
 {
@@ -432,9 +432,9 @@ function getForm(FormName, RecordId)
     var $savebuttons = '<div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
-        + '<div class="col-sm-4 col-sm-offset-4">'
-        + '<a class="btn btn-white" href="javascript:location.reload();">Cancel</a>&nbsp;'
-        + '<a id="savechanges" class="btn btn-primary btn-add" style="background:#2f4050 !important;border:none !important" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
+        + '<div class="col-sm-4 col-sm-offset-4">'       
+        + '<a id="savechanges" class="btn btn-primary col-xs-offset-3 btn-add" style="background:#2f4050 !important; margin-bottom:10px; border:none !important" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
+        + '<a class="btn btn-white col-xs-offset-4"  href="javascript:location.reload();">Cancel</a>&nbsp;'
         + '</div></div >';
     var $select = '<div class="form-group">'
         + '<label class="col-sm-12 control-label"> <a class="tooltipwala" data-container="body" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > i </a> {0} </label>'
@@ -684,15 +684,30 @@ function ToggleAdd(formaname) {
                 getForm(formaname, '');
                 if ($(".form-heading").length)
                 {
+                    if ($ismobile)
+                    {
+                        if (formaname == "FormPropertyDamageClaim")
+                            $(".form-heading").html("Property Damage Claim");
+                        else if (formaname == "FormGeneralLiabilityClaim")
+                            $(".form-heading").html("General Liability Claim");
+                        else if (formaname == "FormMoldDamageClaim")
+                            $(".form-heading").html("Mold Damage Claim");
+                        else
+                            $(".form-heading").html("");
+
+                    }
+                    else
+                    {
+
                     if (formaname =="FormPropertyDamageClaim")
-                        $(".form-heading").html("Add Property Damage Claim");
+                        $(".form-heading").html("Property Damage Claim");
                     else if (formaname == "FormGeneralLiabilityClaim")
-                        $(".form-heading").html("Add General Liability Claim");
+                        $(".form-heading").html("General Liability Claim");
                     else if (formaname == "FormMoldDamageClaim")
-                        $(".form-heading").html("Add Mold Damage Claim");
+                        $(".form-heading").html("Mold Damage Claim");
                     else
                         $(".form-heading").html("");
-
+                    }
                     $("#homeval").val('1');
 
                 }
@@ -727,11 +742,11 @@ function LoadForm(formaname)
     getForm(formaname, '');
     if ($(".form-heading").length) {
         if (formaname == "FormPropertyDamageClaim")
-            $(".form-heading").html("Add Property Damage Claim");
+            $(".form-heading").html("Property Damage Claim");
         else if (formaname == "FormGeneralLiabilityClaim")
-            $(".form-heading").html("Add General Liability Claim");
+            $(".form-heading").html("General Liability Claim");
         else if (formaname == "FormMoldDamageClaim")
-            $(".form-heading").html("Add Mold Damage Claim");
+            $(".form-heading").html("Mold Damage Claim");
         else
             $(".form-heading").html("");
 
@@ -3812,31 +3827,43 @@ $(document).ready(function ()
             success: function (data) {
                 // To-do code if ajax request is successful
 
-                console.log(data);
-
-
                 $(".alert").html('');
                 if ($("#divprocessingbtn").length > 0) {
                     $("#divprocessingbtn").hide();
                 }
 
+                if ($.fn.DataTable.isDataTable('#viewlog')) {
+                    $('#viewlog').DataTable().destroy();
+                }
+
+                if ($.fn.DataTable.isDataTable('#signaturelog')) {
+                    $('#signaturelog').DataTable().destroy();
+                }
+
+
                 $("#hractivitybody").html('');
+              
 
                 $.each(data.log, function (index, value) {
                     $("#hractivitybody").append('<tr><td style="float:left" >' + value.activitySubject + ' </td> <td> ' + value.activityDate.substring(0, 19) + '</td> <td style="float:left">' + value.activityByName + ' </td></tr>');
                 });
 
                 $("#hrsignmetadata").html('');
-
+             
                 $.each(data.metadata, function (index, value) {
-                    $("#hrsignmetadata").append('<tr><td style="float:left" >' + value.action.replace("Email", "") + ' </td> <td > ' + value.ip + '</td> <td> ' + value.browserinfo + '</td> <td>' + value.datetime.substring(0, 19) + ' </td></tr>');
+                    $("#hrsignmetadata").append('<tr><td style="float:left" >' + value.action.replace("Email", "Signature") + ' </td> <td > ' + value.ip + '</td> <td> ' + value.browserinfo + '</td> <td>' + value.datetime.substring(0, 19) + ' </td></tr>');
                 });
 
 
                 $('#activitymodal').modal('show');
 
+                
                 $('#viewlog').DataTable({
                     dom: 'Bfrtip',
+                    "aaSorting": [[1, "asc"]],
+                    "aoColumnDefs": [
+                        { 'bSortable': false, 'aTargets': [0] }
+                    ],
                     buttons: [
                         'copyHtml5',
                         'excelHtml5',
@@ -3844,6 +3871,53 @@ $(document).ready(function ()
                         'pdfHtml5'
                     ]
                 });
+
+              
+                $('#signaturelog').DataTable({
+                    dom: 'Bfrtip',
+                    "aaSorting": [[3, "asc"]],
+                    "aoColumnDefs": [
+                        { 'bSortable': false, 'aTargets': [1] }
+                    ],
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
+                    ]
+                });
+              
+                if (formtype == "NewHire" && data.rejection !="" && data.rejection != null)
+                {
+                    $(".rejectionblock").show();
+                    $("#rjmetadata").html('');
+                    if ($.fn.DataTable.isDataTable('#rejectionlog')) {
+                        $('#rejectionlog').DataTable().destroy();
+                    }
+                    $("#rjmetadata").html('');
+                    console.log(data.rejection);
+                    $.each(data.rejection, function (index, value) {
+                        console.log(value);
+                        $("#rjmetadata").append('<tr><td style="float:left" >' + value.firstName + ' ' + value.lastName + '</td> <td > ' + value.rejectedReason + '</td> <td>' + value.rejectedDateTime.substring(0, 19) + ' </td></tr>');
+                    });
+
+
+                  
+                    $('#rejectionlog').DataTable({
+                        dom: 'Bfrt',
+                        "aoColumnDefs": [
+                            { 'bSortable': false, 'aTargets': [1] }
+                        ],
+                        buttons: [
+                            'copyHtml5',
+                            'excelHtml5',
+                            'csvHtml5',
+                            'pdfHtml5'
+                        ]
+                    });
+                }
+                else
+                    $(".rejectionblock").hide();
 
             },
             error: function (ts) {

@@ -43,7 +43,7 @@
         <AssociationConnector Association="Carroll.Data.Entities.FK_ResidentContactInformation_Residents_ResidentContactInformation" />
         <AssociationConnector Association="Carroll.Data.Entities.FK_ResidentContactInformation_Vehicles_ResidentContactInformation" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.DynamicLink" Width="1.5" PointX="13.375" PointY="5.75" />
-        <EntityTypeShape EntityType="Carroll.Data.Entities.ActivityLogHrForm" Width="1.5" PointX="20.375" PointY="4.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.ActivityLogHrForm" Width="1.5" PointX="20.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

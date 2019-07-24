@@ -610,7 +610,7 @@ namespace Carroll.Data.Services.Controllers
 
             WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "PM Email", browserDetails, VisitorsIPAddress);
 
-            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "Employee Email");
+            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "Employee Email",fa.CreatedUser.ToString());
             return retu;
         }
 
@@ -638,13 +638,14 @@ namespace Carroll.Data.Services.Controllers
 
             var retu = _service.UpdateWorkflowEmployeeNewHireNotice(Action,Refid,Sign,edate);
 
+
             if(Action== "Employee Email" && iscorporate.ToLower() =="false")
             {
-                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email");
+                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email","");
             }
             else
             {
-                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email");
+                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email","");
             }         
 
             return retu;
@@ -660,9 +661,8 @@ namespace Carroll.Data.Services.Controllers
             var Action = HttpContext.Current.Request.Params["action"].ToString();
             var Refid = HttpContext.Current.Request.Params["refid"].ToString();
             var FormType = HttpContext.Current.Request.Params["form"].ToString();
-
-            WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action);
-
+            var UserId = HttpContext.Current.Request.Params["CreatedBy"].ToString();
+            WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action, UserId);
             return true;
 
         }
@@ -698,13 +698,16 @@ namespace Carroll.Data.Services.Controllers
                 fa.ResubmittedDateTime = DateTime.Now;
                 fa.EmployeeSignedDateTime = null;
                 fa.RegionalManagerSignedDateTime = null;
-                WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), "New Hire Notice has been Resubmitted", "New Hire Notice has been Resubmitted  on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+                WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), "New Hire Notice has been Resubmitted", "New Hire Notice has been Resubmitted  on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             }
             else
             {
-                fa.ModifiedUser = Guid.NewGuid();
-                WorkflowHelper.InsertHrLog("NewHire", fa.ModifiedUser.ToString(), " New Hire Notice has been submitted", " New Hire Notice has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+                fa.EmployeeHireNoticeId = System.Guid.NewGuid();
+                fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+                fa.CreatedDateTime = DateTime.Now;
+
+                WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), " New Hire Notice has been submitted", " New Hire Notice has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             }
             // fa.EmployeeHireNoticeId = System.Guid.NewGuid();
@@ -757,14 +760,20 @@ namespace Carroll.Data.Services.Controllers
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["rpmdate"]))
                 fa.rpmdate = Convert.ToDateTime(HttpContext.Current.Request.Params["rpmdate"]);
             
-            fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
-            fa.CreatedDateTime = DateTime.Now;
+          
             
            // fa.EmployeeHireNoticeId = Guid.NewGuid();
             // Property Id to Service Calling 
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["propertyid"].ToString()))
                 fa.ModifiedUser = new Guid(HttpContext.Current.Request.Params["propertyid"]);
-            var retu= _service.InsertEmployeeNewHireNotice(fa);
+            var type = "Insert";
+
+            if (HttpContext.Current.Request.Params["isedit"].ToString() == "1")
+            {
+              type= "Update";
+            }
+          
+             var   retu = _service.InsertEmployeeNewHireNotice(fa, type);
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -810,10 +819,9 @@ namespace Carroll.Data.Services.Controllers
             + "Supports JavaScript Version = " +
             browser["JavaScriptVersion"];
 
-
             WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeHireNoticeId.ToString(), "NewHire", "PM Email", browserDetails, VisitorsIPAddress);
 
-            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email");
+            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeHireNoticeId.ToString(), "NewHire", "Employee Email", HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             return retu;
         }
@@ -824,6 +832,7 @@ namespace Carroll.Data.Services.Controllers
         {
             return _service.GetEmployeeNewHireNotice(new Guid(riderid));
         }
+
         [ActionName("newhirerejection")]
         [HttpPost]
         public dynamic newhirerejection()
@@ -832,12 +841,57 @@ namespace Carroll.Data.Services.Controllers
            var refid = HttpContext.Current.Request.Params["refid"];
            var reason = HttpContext.Current.Request.Params["reason"];
           var  CreatedBy = HttpContext.Current.Request.Params["CreatedBy"];
-
+            var CreatedByName = HttpContext.Current.Request.Params["CreatedByName"];
             var ret= _service.UpdateNewHireRejectionStatus(status,reason,refid,CreatedBy);
 
             if(status=="reject")
             {
-                WorkflowHelper.SendNewHireRejectionEmail(refid);
+                string VisitorsIPAddress = string.Empty;
+                try
+                {
+                    if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                    {
+                        VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                    }
+                    else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                    {
+                        VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    //Handle Exceptions  
+                }
+                // browser information 
+                string browserDetails = string.Empty;
+                System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+                browserDetails =
+                "Name = " + browser.Browser + "," +
+                "Type = " + browser.Type + ","
+                + "Version = " + browser.Version + ","
+                + "Major Version = " + browser.MajorVersion + ","
+                + "Minor Version = " + browser.MinorVersion + ","
+                + "Platform = " + browser.Platform + ","
+                + "Is Beta = " + browser.Beta + ","
+                + "Is Crawler = " + browser.Crawler + ","
+                + "Is AOL = " + browser.AOL + ","
+                + "Is Win16 = " + browser.Win16 + ","
+                + "Is Win32 = " + browser.Win32 + ","
+                + "Supports Frames = " + browser.Frames + ","
+                + "Supports Tables = " + browser.Tables + ","
+                + "Supports Cookies = " + browser.Cookies + ","
+                + "Supports VBScript = " + browser.VBScript + ","
+                + "Supports JavaScript = " + "," +
+                browser.EcmaScriptVersion.ToString() + ","
+                + "Supports Java Applets = " + browser.JavaApplets + ","
+                + "Supports ActiveX Controls = " + browser.ActiveXControls
+                + ","
+                + "Supports JavaScript Version = " +
+                browser["JavaScriptVersion"];
+
+                WorkflowHelper.UpdatePmBrowserInfo(refid, "NewHire", "Rejection Email", browserDetails, VisitorsIPAddress);
+                WorkflowHelper.SendNewHireRejectionEmail(refid,CreatedByName);
             }
 
             return ret;
@@ -915,6 +969,7 @@ namespace Carroll.Data.Services.Controllers
                 else
                     TypeofChange = "Leaves";
             }
+
             fa.TypeOfChange = TypeofChange;
             fa.FromPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
             fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
@@ -1023,7 +1078,7 @@ namespace Carroll.Data.Services.Controllers
 
             WorkflowHelper.UpdatePmBrowserInfo(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "PM Email", browserDetails, VisitorsIPAddress);
 
-            WorkflowHelper.SendHrWorkFlowEmail(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "Employee Email");
+            WorkflowHelper.SendHrWorkFlowEmail(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "Employee Email", HttpContext.Current.Request.Params["CreatedByName"].ToString());
             return re;
         }
 
@@ -1271,7 +1326,6 @@ namespace Carroll.Data.Services.Controllers
             RS.ReferingResident = HttpContext.Current.Request.Params["refresidentsign"].ToString();
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["refresdate"].ToString()))
                 RS.ResidentDate =Convert.ToDateTime(HttpContext.Current.Request.Params["refresdate"].ToString());
-
                 RS.PropertyManager = HttpContext.Current.Request.Params["properymanagersign"].ToString();
             if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["properymanagerdate"].ToString()))            
                 RS.PropertyManagerDate = Convert.ToDateTime(HttpContext.Current.Request.Params["properymanagerdate"].ToString());
@@ -1564,8 +1618,11 @@ namespace Carroll.Data.Services.Controllers
             var requisitionnumber = HttpContext.Current.Request.Params["requisitionnumber"].ToString();
             var notes = HttpContext.Current.Request.Params["notes"].ToString();
             var dateposted = Convert.ToDateTime(HttpContext.Current.Request.Params["dateposted"].ToString());
-
-            return _service.UpdateRequisitionRequest(new Guid(refid),requisitionnumber,notes,dateposted);
+            var user = HttpContext.Current.Request.Params["CreatedByName"].ToString();
+            var userid = HttpContext.Current.Request.Params["CreatedBy"].ToString();
+            var re= _service.UpdateRequisitionRequest(new Guid(refid),requisitionnumber,notes,dateposted);
+            WorkflowHelper.InsertHrLog("RequisitionRequest", refid.ToString(), "Requisition Request has been Updated by HR("+user+")", "Requistion Request has been Updated on " + DateTime.Now,userid);
+             return re;
         }
 
 

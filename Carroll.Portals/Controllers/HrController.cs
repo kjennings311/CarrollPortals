@@ -25,6 +25,7 @@ using ClosedXML.Excel;
 using System.Data;
 using ClosedXML.Extensions;
 using System.Reflection;
+using Carroll.Data.Entities;
 
 namespace Carroll.Portals.Controllers
 {
@@ -73,8 +74,13 @@ namespace Carroll.Portals.Controllers
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
                 }
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
 
-                WorkflowHelper.InsertHrLog("LeaseRider", id, "Print has been Requested ", "Print has been requested for Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                    WorkflowHelper.InsertHrLog("LeaseRider", id, "Print has been Requested ", "Print has been requested for Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+
+                }
 
 
                 // o.Date=obj.
@@ -111,8 +117,13 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
 
                 }
-                WorkflowHelper.InsertHrLog("LeaseRider", id, "PDF has been requested", "PDF has been requestedfor Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
+                    WorkflowHelper.InsertHrLog("LeaseRider", id, "PDF has been requested", "PDF has been requestedfor Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
+                }
+               
                 // o.Date=obj.
                 //returning the employee list to view  
                 return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { PageSize= Size.A4, CustomSwitches= "--disable-smart-shrinking", FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
@@ -160,7 +171,14 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintEmployeeNewHireNotice>(EmpResponse);
                 }
 
-                WorkflowHelper.InsertHrLog("NewHire", id, "Print has been requested ", "Print has been requested for New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
+
+                    WorkflowHelper.InsertHrLog("NewHire", id, "Print has been requested ", "Print has been requested for New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+
+
+                }
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -202,8 +220,13 @@ namespace Carroll.Portals.Controllers
                 //returning the employee list to view  
                 //      return View(obj);
 
-                WorkflowHelper.InsertHrLog("NewHire", id, "PDF has been requested", "PDF has been requestedfor New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
+                    WorkflowHelper.InsertHrLog("NewHire", id, "PDF has been requested", "PDF has been requestedfor New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
+                }
+               
 
                 //returning the employee list to view  
                 return new ViewAsPdf("PrintEmployeeNewHireNotice", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
@@ -270,15 +293,18 @@ namespace Carroll.Portals.Controllers
             + "Supports JavaScript Version = " +
             browser["JavaScriptVersion"];
 
-
-
-
             var _service = new EntityDataRepository();
             var retu = _service.UpdateWorkflowEmployeeLeaseRider(action, refid, signature, date, browserDetails, VisitorsIPAddress);
 
-            WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been Submitted", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+            if (Session["user"] != null)
+            {
+                var user = (SiteUser)Session["user"];
+                WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+            }
+            else
+                WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now,"");
 
-            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "LeaseRider", "Manager Email");
+            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "LeaseRider", "Manager Email","");
 
             // write your email function here..
             MailMessage mail = new MailMessage();
@@ -453,10 +479,15 @@ namespace Carroll.Portals.Controllers
             var _service = new EntityDataRepository();
             var retu = _service.UpdateWorkflowPayRollStatusChangeNotice(action, refid, signature, date, browserDetails, VisitorsIPAddress);
 
+            if (Session["user"] != null)
+            {
+                var user = (SiteUser)Session["user"];
 
-            WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been Submitted", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+            WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                
+            }
 
-            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Manager Email");
+            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Manager Email","");
 
             // write your email function here..
             MailMessage mail = new MailMessage();
@@ -641,20 +672,27 @@ namespace Carroll.Portals.Controllers
             var _service = new EntityDataRepository();
 
             var retu = _service.UpdateWorkflowEmployeeNewHireNotice(action, refid, signature, edate,browserDetails,VisitorsIPAddress);
+            SiteUser user= new SiteUser();
+            if (Session["user"] != null)
+            {
+                 user = (SiteUser)Session["user"];              
+            }
 
             if (action == "Employee Email" && iscorporate.ToLower() == "false")
             {
-                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email");
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been Submitted", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
+                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email", user.FirstName + " " + user.LastName);
+
+              
             }
             else
             {
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature Submitted ", "Regional Signature Submitted for New Hire Notice on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Regional Signature Submitted for New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
-                WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
+               // WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
 
-                var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email");
+                var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email", user.FirstName + " " + user.LastName);
 
                 // write your email function here..
                 MailMessage mail = new MailMessage();
@@ -780,8 +818,13 @@ namespace Carroll.Portals.Controllers
        
         public async Task<dynamic> SendHrFormCompletionNotification(string form, string refid)
         {
-            
-            var Message = WorkflowHelper.ReSendHrWorkFlowEmail(refid,form,"");
+            SiteUser user = new SiteUser();
+            if (Session["user"] != null)
+            {
+                user = (SiteUser)Session["user"];
+            }
+
+            var Message = WorkflowHelper.ReSendHrWorkFlowEmail(refid,form,"",user.FirstName+ " "+user.LastName);
 
                 // write your email function here..
                 MailMessage mail = new MailMessage();
@@ -1013,7 +1056,13 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintPayRollStatusChange>(EmpResponse);
                 }
 
-                WorkflowHelper.InsertHrLog("PayRoll", id, "Print has been requested ", "Print has been requested for Payroll Status Change on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                SiteUser user = new SiteUser();
+                if (Session["user"] != null)
+                {
+                    user = (SiteUser)Session["user"];
+                }
+
+                WorkflowHelper.InsertHrLog("PayRoll", id, "Print has been requested ", "Print has been requested for Payroll Status Change on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
 
                 // o.Date=obj.
@@ -1054,8 +1103,13 @@ namespace Carroll.Portals.Controllers
                 //returning the employee list to view  
                 //      return View(obj);
 
+                SiteUser user = new SiteUser();
+                if (Session["user"] != null)
+                {
+                    user = (SiteUser)Session["user"];
+                }
 
-                WorkflowHelper.InsertHrLog("PayRoll", id, "PDF has been requested", "PDF has been requestedfor Payroll Status Change on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                WorkflowHelper.InsertHrLog("PayRoll", id, "PDF has been requested", "PDF has been requestedfor Payroll Status Change on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
 
                 //returning the employee list to view  
@@ -1101,8 +1155,16 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintNoticeOfEmployeeSeparation>(EmpResponse);
 
                 }
+               
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
 
-                WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "Print has been requested ", "Print has been requested for Notice Of Employee Separation on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                    WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "Print has been requested ", "Print has been requested for Notice Of Employee Separation on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+
+                }
+
+
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -1142,9 +1204,15 @@ namespace Carroll.Portals.Controllers
                 // o.Date=obj.
                 //returning the employee list to view  
                 //      return View(obj);
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
+                    WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "PDF has been requested", "PDF has been requestedfor Notice Of Employee Separation on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
-                WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "PDF has been requested", "PDF has been requestedfor Notice Of Employee Separation on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                }
 
+
+           
 
                 //returning the employee list to view  
                 return new ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
@@ -1224,7 +1292,7 @@ namespace Carroll.Portals.Controllers
                         //Storing the response details recieved from web api   
                         var EmpResponse = Res.Content.ReadAsStringAsync().Result;
                         //Deserializing the response recieved from web api and storing into the Employee list  
-                        obj = JsonConvert.DeserializeObject<List<proc_getcontactsforexcel_Result>>(EmpResponse);
+                        obj = JsonConvert.DeserializeObject<List<Carroll.Portals.Models.proc_getcontactsforexcel_Result>>(EmpResponse);
                     }
 
                     DataTable dt = LINQResultToDataTable(obj);
@@ -1271,7 +1339,7 @@ namespace Carroll.Portals.Controllers
                         //Storing the response details recieved from web api   
                         var EmpResponse = Res.Content.ReadAsStringAsync().Result;
                         //Deserializing the response recieved from web api and storing into the Employee list  
-                        obj = JsonConvert.DeserializeObject<List<proc_getequitypartnersforexcel_Result>>(EmpResponse);
+                        obj = JsonConvert.DeserializeObject<List<Carroll.Portals.Models.proc_getequitypartnersforexcel_Result>>(EmpResponse);
                     }
 
                     DataTable dt = LINQResultToDataTable(obj);
@@ -1315,7 +1383,7 @@ namespace Carroll.Portals.Controllers
                         //Storing the response details recieved from web api   
                         var EmpResponse = Res.Content.ReadAsStringAsync().Result;
                         //Deserializing the response recieved from web api and storing into the Employee list  
-                        obj = JsonConvert.DeserializeObject<List<proc_getpropertiesforexcel_Result>>(EmpResponse);
+                        obj = JsonConvert.DeserializeObject<List<Carroll.Portals.Models.proc_getpropertiesforexcel_Result>>(EmpResponse);
                     }
 
                     DataTable dt = LINQResultToDataTable(obj);
@@ -1371,8 +1439,13 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintRequisitionRequest>(EmpResponse);
 
                 }
+                SiteUser user = new SiteUser();
+                if (Session["user"] != null)
+                {
+                    user = (SiteUser)Session["user"];
+                }
 
-                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "Print has been requested ", "Print has been requested for Requisition Request on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "Print has been requested ", "Print has been requested for Requisition Request on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -1408,9 +1481,14 @@ namespace Carroll.Portals.Controllers
                     obj = JsonConvert.DeserializeObject<PrintRequisitionRequest>(EmpResponse);
 
                 }
+                SiteUser user = new SiteUser();
+                if (Session["user"] != null)
+                {
+                    user = (SiteUser)Session["user"];
+                }
 
 
-                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "PDF has been requested", "PDF has been requestedfor Requisition Request on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "PDF has been requested", "PDF has been requestedfor Requisition Request on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
 
                 // o.Date=obj.

@@ -20,6 +20,6 @@ namespace Carroll.Data.Entities
         public string ActivitySubject { get; set; }
         public string ActivityDescription { get; set; }
         public System.DateTime ActivityDate { get; set; }
-        public Nullable<System.Guid> ActivityBy { get; set; }
+        public string ActivityBy { get; set; }
     }
 }

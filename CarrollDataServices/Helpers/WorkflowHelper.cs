@@ -322,7 +322,7 @@ namespace Carroll.Data.Services.Helpers
 
         }
 
-        public static dynamic SendHrWorkFlowEmail(string RecordId, string FormType, string Action)
+        public static dynamic SendHrWorkFlowEmail(string RecordId, string FormType, string Action,string UserId)
         {
 
             // Check Form Type 
@@ -379,7 +379,7 @@ namespace Carroll.Data.Services.Helpers
 
                         if(EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent", "Employee Email sent for New Hire Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent", "Employee Email sent for New Hire Notice on" + DateTime.Now, NewhireDetails.EmailAddress);
 
                             return true;
                         }
@@ -427,8 +427,9 @@ namespace Carroll.Data.Services.Helpers
                     // get Employee Details i.e name and email
 
                     var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
+                                          join tblu in _entities.SiteUsers on tbl.RegionaManager equals tblu.UserId
                                           where tbl.EmployeeHireNoticeId == propid
-                                          select tbl).FirstOrDefault();
+                                          select new { tbl,tblu.FirstName,tblu.LastName }  ).FirstOrDefault();
 
                     if (NewhireDetails != null)
                     {
@@ -439,7 +440,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         _message.Subject = "Employee New Hire Notice needs your Review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5><p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.tbl.EmployeeName + " </h5><p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
                        
@@ -449,9 +450,9 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
-                        if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
+                        if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.tbl.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Regional Email sent", "Regional Email sent for New Hire Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Regional Email sent", "Regional Email sent for New Hire Notice on" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
 
                             return true;
                         }
@@ -533,8 +534,9 @@ namespace Carroll.Data.Services.Helpers
                     // get Employee Details i.e name and email
 
                     var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
+                                          join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.EmployeeHireNoticeId == propid
-                                          select tbl).FirstOrDefault();
+                                          select new { tbl, siteu.FirstName,siteu.LastName } ).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -542,7 +544,7 @@ namespace Carroll.Data.Services.Helpers
                      //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <p> ";
-                        _message.Body += " Employee New Hire Notice  for "+NewhireDetails.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> ";
+                        _message.Body += " Employee New Hire Notice  for "+NewhireDetails.tbl.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> ************************************************************************************************************************* <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span> ";
                         _message.Body += "<br> <h6> Employee Signature Metadata : </h6> <p> Browser : " + br1 + " </p><p> Ip Address : " + ip1 + " </p> <p> Date Time : " + da1 + " </p>";
                         _message.Body += "<br> <h6> Regional Manager Signature Metadata : </h6> <p> Browser : " + br2 + " </p><p> Ip Address : " + ip2 + " </p> <p> Date Time : " + d2 + " </p>";
 
@@ -555,8 +557,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                       //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
-                        InsertHrLog(FormType, propid.ToString(), "Hr Email sent", "Hr Email is sent For Employee New Hire Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
-
+                        InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For Employee New Hire Notice on" + DateTime.Now,NewhireDetails.FirstName +" "+NewhireDetails.LastName );
 
                         return _message;
                        // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -705,7 +706,7 @@ namespace Carroll.Data.Services.Helpers
                     //    var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <p> ";
-                        _message.Body += " Employee Lease Rider  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment of Employee Lease Rider <br> <br> <h5> ";
+                        _message.Body += " Employee Lease Rider  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment of Employee Lease Rider <br> <br> ************************************************************************************************************************* <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span>  <h5> ";
                         _message.Body += "<br> <h6> Employee Signature Metadata : </h6> <p> Browser : "+br+ " </p><p> Ip Address : " + ip + " </p> <p> Date Time : " + dat+ " </p>";
                         _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";
 
@@ -717,7 +718,7 @@ namespace Carroll.Data.Services.Helpers
                         //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
-                        InsertHrLog(FormType, propid.ToString(), "Hr Email sent ", "Hr Email is sent For Employee Lease Rider on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                        InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Employee Lease Rider on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
 
                         return _message;
                     }
@@ -780,7 +781,7 @@ namespace Carroll.Data.Services.Helpers
 
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent ", "Employee Email sent for Payroll Status Change Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent ", "Employee Email sent for Payroll Status Change Notice on" + DateTime.Now, NewhireDetails.EmployeeEmail);
 
                             return true;
                         }
@@ -855,8 +856,9 @@ namespace Carroll.Data.Services.Helpers
                     // get Employee Details i.e name and email
 
                     var NewhireDetails = (from tbl in _entities.PayrollStatusChangeNotices
+                                          join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.CreatedBy
                                           where tbl.PayrollStatusChangeNoticeId == propid
-                                          select tbl).FirstOrDefault();
+                                          select new {siteu.FirstName,siteu.LastName,tbl.EmployeeName }).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -864,7 +866,7 @@ namespace Carroll.Data.Services.Helpers
                         //    var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Payroll Status Change has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"><p> ";
-                        _message.Body += "Payroll Status Change Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment Copy <br> <br> <h5> ";
+                        _message.Body += "Payroll Status Change Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the Attachment Copy <br> <br>************************************************************************************************************************* <br> <span style='text-align:center;font-weight:bold:' > FOR IT USE ONLY </span>  <h5> ";
                         _message.Body += "<br> <h6> Employee Signature Metadata : </h6> <p> Browser : " + br + " </p><p> Ip Address : " + ip + " </p> <p> Date Time : " + dat + " </p>";
 
                         _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";
@@ -876,7 +878,7 @@ namespace Carroll.Data.Services.Helpers
                         //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
-                        InsertHrLog(FormType, propid.ToString(), "Hr Email sent ", "Hr Email is sent For Payroll Status Change on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                        InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Payroll Status Change on" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
 
                         return _message;
                     }
@@ -892,7 +894,7 @@ namespace Carroll.Data.Services.Helpers
 
         }
 
-        public static dynamic SendNewHireRejectionEmail(string RecordId)
+        public static dynamic SendNewHireRejectionEmail(string RecordId,string User)
         {
             var propid = new Guid(RecordId);
             var _entities = new CarrollFormsEntities();
@@ -929,7 +931,7 @@ namespace Carroll.Data.Services.Helpers
 
                 if (EmailHelper.SendHrFormNotificationEmail(_message, propid.ToString(), NewhireDetails.CreatedUser.ToString()))
                 {
-                    WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "New Hire Notice has been rejected", "New Hire Notice has been Rejected on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                    WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "New Hire Notice has been rejected by \" "+User+" \"", "New Hire Notice has been Rejected on" + DateTime.Now, User);
 
                     return true;
                 }
@@ -945,7 +947,7 @@ namespace Carroll.Data.Services.Helpers
             }
         }
 
-        public static dynamic ReSendHrWorkFlowEmail(string RecordId, string FormType, string Action)
+        public static dynamic ReSendHrWorkFlowEmail(string RecordId, string FormType, string Action,string UserId)
         {
 
             // Check Form Type 
@@ -1000,7 +1002,7 @@ namespace Carroll.Data.Services.Helpers
 
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "Optional :  Email Resent to Employee ", "Employee Email is resent for New Hire Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "Email RESENT to Employee ", "Employee Email is resent for New Hire Notice on" + DateTime.Now, UserId);
 
                             return true;
                         }
@@ -1064,7 +1066,7 @@ namespace Carroll.Data.Services.Helpers
                         
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "Email Resent for Regional", "Regional Email is resent for New Hire Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "Email RESENT to Regional", "Regional Email is resent for New Hire Notice on" + DateTime.Now, UserId);
 
                             return true;
                         }
@@ -1126,7 +1128,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                       
-                       InsertHrLog(FormType, propid.ToString(), "Email sent to Hr", "Hr Email is sent For New Hire Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                       InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For New Hire Notice on" + DateTime.Now, UserId);
                         
                         return _message;
                         // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -1191,7 +1193,7 @@ namespace Carroll.Data.Services.Helpers
                        
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Payroll Status Change Notice on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Payroll Status Change Notice on" + DateTime.Now,NewhireDetails.EmployeeEmail);
 
                             return true;
                         }
@@ -1263,7 +1265,7 @@ namespace Carroll.Data.Services.Helpers
                        
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Employee Lease Rider on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Employee Lease Rider on" + DateTime.Now, NewhireDetails.EmployeeEmail);
 
                             return true;
                         }
@@ -1302,8 +1304,9 @@ namespace Carroll.Data.Services.Helpers
                 {
 
                     var NewhireDetails = (from tbl in _entities.EmployeeLeaseRaiders
+                                          join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.EmployeeLeaseRiderId == propid
-                                          select tbl).FirstOrDefault();
+                                          select new { tbl.EmployeeName,siteu.FirstName,siteu.LastName } ).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -1317,7 +1320,8 @@ namespace Carroll.Data.Services.Helpers
                        tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
-                       InsertHrLog("LeaseRider", propid.ToString(), "Email sent to HR ", " Hr Email is sent for Employee Lease Rider" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                      
+                        InsertHrLog("LeaseRider", propid.ToString(), "HR Email sent", " Hr Email is sent for Employee Lease Rider" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
 
                         return _message;
                     }
@@ -1328,8 +1332,9 @@ namespace Carroll.Data.Services.Helpers
                 else if (FormType == "NoticeOfEmployeeSeparation")
                 {
                     var NewhireDetails = (from tbl in _entities.NoticeOfEmployeeSeperations
+                                          join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.EmployeeSeperationId == propid
-                                          select tbl).FirstOrDefault();
+                                          select new { tbl.EmployeeName, siteu.FirstName, siteu.LastName }) .FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -1344,7 +1349,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
 
-                       InsertHrLog("NoticeOfEmployeeSeparation", propid.ToString(), "Email sent to HR ", " Hr Email is sent for Notice of Employee Separation" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                       InsertHrLog("NoticeOfEmployeeSeparation", propid.ToString(), "Email sent to HR ", " Hr Email is sent for Notice of Employee Separation" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
 
                         return _message;
                     }
@@ -1356,8 +1361,9 @@ namespace Carroll.Data.Services.Helpers
                 {
 
                     var NewhireDetails = (from tbl in _entities.RequisitionRequests
+                                          join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.RequisitionRequestId == propid
-                                          select tbl).FirstOrDefault();
+                                          select new { tbl.PropertyName, siteu.FirstName, siteu.LastName }).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -1371,7 +1377,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
 
-                        InsertHrLog("RequisitionRequest", propid.ToString(), "Email sent to HR ", " Hr Email is sent for Requisition Request on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                        InsertHrLog("RequisitionRequest", propid.ToString(), "HR Email sent ", " Hr Email is sent for Requisition Request on" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
 
                         return _message;
                     }
@@ -1427,7 +1433,7 @@ namespace Carroll.Data.Services.Helpers
                             // tos.Add("sekhar.babu@forcitude.com");
                             _message.EmailTo = tos;
                    
-                        WorkflowHelper.InsertHrLog("NewHire", dl.ReferenceId.ToString(), "Remainder Email to Employee sent ", "Remainder Employee Email is sent for Employee Lease Rider on" + DateTime.Now, "F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                        WorkflowHelper.InsertHrLog("NewHire", dl.ReferenceId.ToString(), "Remainder Email to Employee sent ", "Remainder Employee Email is sent for Employee Lease Rider on" + DateTime.Now, "Remainder by Server");
 
                     
                     return EmailHelper.SendHrFormNotificationEmail(_message, dl.ReferenceId.ToString(), item.CreatedUser.ToString());

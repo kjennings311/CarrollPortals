@@ -27,7 +27,7 @@
           <Property Name="ActivitySubject" Type="nvarchar" MaxLength="300" />
           <Property Name="ActivityDescription" Type="text" />
           <Property Name="ActivityDate" Type="datetime" Nullable="false" />
-          <Property Name="ActivityBy" Type="uniqueidentifier" />
+          <Property Name="ActivityBy" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="CarrollPayPeriods">
           <Key>
@@ -851,7 +851,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getequitypartnersforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetGeneralLiabilityClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_gethrformsactivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="formtype" Type="varchar" Mode="In" />
+          <Parameter Name="formtype" Type="varchar(max)" Mode="In" />
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1063,11 +1063,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getpropertiesforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcel_Result2)" />
           <FunctionImport Name="proc_getpropertiesforexcelupdate" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertiesforexcelupdate_Result)" />
           <FunctionImport Name="proc_getequitypartners" ReturnType="Collection(Carroll.Data.Entities.proc_getequitypartners_Result)" />
-          <EntitySet Name="ActivityLogHrForms" EntityType="Carroll.Data.Entities.ActivityLogHrForm" />
           <FunctionImport Name="proc_gethrformsactivity" ReturnType="Collection(Carroll.Data.Entities.proc_gethrformsactivity_Result)">
             <Parameter Name="formtype" Mode="In" Type="String" />
             <Parameter Name="refid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <EntitySet Name="ActivityLogHrForms" EntityType="Carroll.Data.Entities.ActivityLogHrForm" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -2521,18 +2521,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
         </ComplexType>
-        <EntityType Name="ActivityLogHrForm">
-          <Key>
-            <PropertyRef Name="ActivityId" />
-          </Key>
-          <Property Name="ActivityId" Type="Guid" Nullable="false" />
-          <Property Name="RefId" Type="Guid" Nullable="false" />
-          <Property Name="FormType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="ActivitySubject" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ActivityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ActivityDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ActivityBy" Type="Guid" />
-        </EntityType>
         <ComplexType Name="proc_gethrformsactivity_Result">
           <Property Type="Guid" Name="ActivityId" Nullable="false" />
           <Property Type="Guid" Name="RefId" Nullable="false" />
@@ -2543,6 +2531,18 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="Guid" Name="ActivityBy" Nullable="true" />
           <Property Type="String" Name="ActivityByName" Nullable="true" MaxLength="41" />
         </ComplexType>
+        <EntityType Name="ActivityLogHrForm">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Guid" Nullable="false" />
+          <Property Name="RefId" Type="Guid" Nullable="false" />
+          <Property Name="FormType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ActivitySubject" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActivityBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3956,19 +3956,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="ActivityLogHrForms">
-            <EntityTypeMapping TypeName="Carroll.Data.Entities.ActivityLogHrForm">
-              <MappingFragment StoreEntitySet="ActivityLogHrForms">
-                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
-                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
-                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
-                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
-                <ScalarProperty Name="FormType" ColumnName="FormType" />
-                <ScalarProperty Name="RefId" ColumnName="RefId" />
-                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="proc_gethrformsactivity" FunctionName="Carroll.Data.Entities.Store.proc_gethrformsactivity">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_gethrformsactivity_Result">
@@ -3983,6 +3970,19 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ActivityLogHrForms">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.ActivityLogHrForm">
+              <MappingFragment StoreEntitySet="ActivityLogHrForms">
+                <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="ActivitySubject" ColumnName="ActivitySubject" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="RefId" ColumnName="RefId" />
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

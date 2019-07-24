@@ -13,6 +13,7 @@
 
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
 
     <style type="text/css">
 
@@ -21,6 +22,12 @@
             color: #555555;
             font-size: 13px;
         }
+        .italic {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
 
         input {
             border: none;
@@ -358,7 +365,7 @@
                 if (ViewBag.Action == "Employee Email")
                 {
                     <p class="c1" style="margin-top:50px;">
-                        <span class="c0">Employee Signature <input type="text" id="esignature" value="" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
+                        <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
                     </p>
 
                     <p class="c1">
@@ -368,11 +375,11 @@
                 else if (ViewBag.Action == "Regional Email")
                 {
                     <p class="c1" style="margin-top:50px;">
-                        <span class="c0">Employee Signature <input disabled type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date <input type="text" disabled name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
+                        <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:42%;" />    Date <input type="text" disabled name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
                     </p>
 
                     <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
                     </p>
 
                     <p class="c1">

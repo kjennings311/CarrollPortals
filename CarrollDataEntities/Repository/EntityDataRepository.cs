@@ -1144,12 +1144,11 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
-                var AllActivity = (from tbl in _entities.ActivityLogHrForms
-                                   join tbluser in _entities.SiteUsers on tbl.ActivityBy equals tbluser.UserId
+                var AllActivity = (from tbl in _entities.ActivityLogHrForms                                  
                                    where tbl.RefId == _recId && tbl.FormType ==  FormType
 
                                    orderby tbl.ActivityDate descending
-                                   select new { tbl.ActivityDescription, ActivityDate = tbl.ActivityDate, tbl.ActivitySubject, tbluser.FirstName,tbluser.LastName }).ToList();
+                                   select new { tbl.ActivityDescription, ActivityDate = tbl.ActivityDate, tbl.ActivitySubject, tbl.ActivityId }).ToList();
 
                 return AllActivity;
             }
@@ -1237,7 +1236,7 @@ namespace Carroll.Data.Entities.Repository
     _activity.ActivityId = System.Guid.NewGuid();
                     _activity.ActivityDescription = ActivityDesc;
                     _activity.ActivityDate = DateTime.Now;
-                    _activity.ActivityBy = new Guid(UserGuid);
+                    _activity.ActivityBy = UserGuid;
     _activity.ActivitySubject = ActivitySubject;
                     _activity.RefId = new Guid(RecordId);
                     _activity.FormType = FormType;  
@@ -1422,7 +1421,7 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
-        public dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment)
+        public dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment, string Type)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
@@ -1434,10 +1433,10 @@ namespace Carroll.Data.Entities.Repository
 
                     // get Regional Manager Id for the Property
 
-                    if(_property.EmployeeHireNoticeId == null || _property.EmployeeHireNoticeId.ToString() == "00000000-0000-0000-0000-000000000000")
+                    if(Type=="Insert")
                     {
-                        _property.EmployeeHireNoticeId = new Guid(_property.ModifiedUser.ToString());
-                        _property.ModifiedUser = null;
+                        //_property.EmployeeHireNoticeId = new Guid(_property.ModifiedUser.ToString());
+                        //_property.ModifiedUser = null;
                    
                     _property.CreatedDateTime = DateTime.Now;
                     // No record exists create a new property record here
@@ -4202,8 +4201,17 @@ namespace Carroll.Data.Entities.Repository
                                  where tbl.FormType == FormType && tbl.ReferenceId == rid && tbl.IpAddress != null && tbl.BrowserInformation!= null
                                  orderby tbl.CreatedDate descending
                                  select new { browserinfo = tbl.BrowserInformation, ip = tbl.IpAddress, datetime = tbl.Clientdatetime, tbl.Action }).ToList();
+                if(FormType =="NewHire")
+                {
+                    var res1 = (from tbl in _entities.EmployeeNewHireNotices
+                               join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
+                               where tbl.EmployeeHireNoticeId == rid
+                               select new { tbl.RejectedReason, tbluser.FirstName, tbluser.LastName, tbl.RejectedDateTime }).ToList();
+                    return new { log = res, metadata = dldetails,rejection=res1 };
+                }
+               else
+                    return new { log = res, metadata = dldetails,rejection="" };
 
-                return new { log=res,metadata=dldetails };
             }
         }
 
