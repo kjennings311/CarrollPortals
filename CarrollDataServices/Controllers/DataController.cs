@@ -561,7 +561,7 @@ namespace Carroll.Data.Services.Controllers
 
             var retu =_service.InsertEmployeeLeaseRider(fa);
 
-            WorkflowHelper.InsertHrLog("LeaseRider", fa.EmployeeLeaseRiderId.ToString(), " Employee Lease Rider has been Submitted", "Employee Lease Rider has been Submitted on" +DateTime.Now.ToString(), fa.CreatedUser.ToString());
+            WorkflowHelper.InsertHrLog("LeaseRider", fa.EmployeeLeaseRiderId.ToString(), " Employee Lease Rider has been Submitted", "Employee Lease Rider has been Submitted on" +DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -610,7 +610,7 @@ namespace Carroll.Data.Services.Controllers
 
             WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "PM Email", browserDetails, VisitorsIPAddress);
 
-            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "Employee Email",fa.CreatedUser.ToString());
+            WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeLeaseRiderId.ToString(), "LeaseRider", "Employee Email", HttpContext.Current.Request.Params["CreatedByName"].ToString());
             return retu;
         }
 
@@ -662,7 +662,9 @@ namespace Carroll.Data.Services.Controllers
             var Refid = HttpContext.Current.Request.Params["refid"].ToString();
             var FormType = HttpContext.Current.Request.Params["form"].ToString();
             var UserId = HttpContext.Current.Request.Params["CreatedBy"].ToString();
-            WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action, UserId);
+            var CreatedByName = HttpContext.Current.Request.Params["CreatedByName"].ToString();
+
+            WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action, CreatedByName);
             return true;
 
         }

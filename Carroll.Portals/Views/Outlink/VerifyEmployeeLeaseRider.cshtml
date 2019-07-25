@@ -148,7 +148,7 @@
                 win.close();
             }
 
-          
+
 
             $("#Submit").click(function (e)
             {
@@ -159,7 +159,7 @@
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
-        
+
                     if ($("#esignature").val() == "") {
                         errormsgsummary += "<li> Please Enter Signature </li>";
                         $("#esignature").addClass('has-error');
@@ -167,7 +167,7 @@
                             control = $("#esignature");
                     }
 
-                 
+
                 if (errormsgsummary != "")
                 {
 
@@ -184,14 +184,15 @@
 
                     insertForm.append('action', $("#Action").val());
                     insertForm.append('refid', '@ViewBag.ReferenceId');
-                
+                     insertForm.append('empname', ' @Model.EmployeeName');
+
                     var axurl = "";
                     var $BaseApiUrl = "http://localhost:1002/";
-                   
+
                     insertForm.append('signature', $("#esignature").val());
                     insertForm.append('date', $("#leasedate").val());
                     axurl = "/Hr/UpdateWorkflowEmployeeLeaseRiderAsync";
-                 
+
 
                     $("#status").html("<p style='color:green'> Processing ........ </p>");
                     $.ajax({
@@ -210,11 +211,11 @@
 
                             setTimeout(function ()
                             {
-                          
+
                                 closeMe();
                             }, 2000);
 
-                            
+
                         },
                         error: function (ts)
                         {
@@ -223,7 +224,7 @@
 
                             setTimeout(function () { closeMe(); }, 2000);
 
-                          
+
                         }
                     });
 

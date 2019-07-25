@@ -77,7 +77,6 @@ namespace Carroll.Portals.Controllers
                 if (Session["user"] != null)
                 {
                     var user = (SiteUser)Session["user"];
-
                     WorkflowHelper.InsertHrLog("LeaseRider", id, "Print has been Requested ", "Print has been requested for Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
 
                 }
@@ -246,8 +245,8 @@ namespace Carroll.Portals.Controllers
             var refid = Request.Params["refid"].ToString();
             var signature = Request.Params["signature"].ToString();
             var date = Convert.ToDateTime(Request.Params["date"].ToString());
-
-            // ip address 
+            var empname = Request.Params["empname"].ToString();
+            // ip address .
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -296,15 +295,9 @@ namespace Carroll.Portals.Controllers
             var _service = new EntityDataRepository();
             var retu = _service.UpdateWorkflowEmployeeLeaseRider(action, refid, signature, date, browserDetails, VisitorsIPAddress);
 
-            if (Session["user"] != null)
-            {
-                var user = (SiteUser)Session["user"];
-                WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
-            }
-            else
-                WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now,"");
+             WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now, empname);
 
-            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "LeaseRider", "Manager Email","");
+            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "LeaseRider", "Manager Email","System");
 
             // write your email function here..
             MailMessage mail = new MailMessage();
@@ -426,7 +419,7 @@ namespace Carroll.Portals.Controllers
             var refid = Request.Params["refid"].ToString();
             var signature = Request.Params["signature"].ToString();
             var date = Convert.ToDateTime(Request.Params["date"].ToString());
-
+            var empname = Request.Params["empname"].ToString();
             // ip address 
 
             string VisitorsIPAddress = string.Empty;
@@ -483,11 +476,11 @@ namespace Carroll.Portals.Controllers
             {
                 var user = (SiteUser)Session["user"];
 
-            WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+            WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, empname);
                 
             }
 
-            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Manager Email","");
+            var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Manager Email","System");
 
             // write your email function here..
             MailMessage mail = new MailMessage();
@@ -613,7 +606,7 @@ namespace Carroll.Portals.Controllers
             //var Refid = Request.Params["refid"].ToString();
             //var Sign = Request.Params["signature"].ToString();
             //var iscorporate = Request.Params["iscorporate"].ToString();
-
+           
             DateTime? edate = null;
             if (!string.IsNullOrEmpty(Request.Params["date"]))
             {
@@ -672,27 +665,25 @@ namespace Carroll.Portals.Controllers
             var _service = new EntityDataRepository();
 
             var retu = _service.UpdateWorkflowEmployeeNewHireNotice(action, refid, signature, edate,browserDetails,VisitorsIPAddress);
-            SiteUser user= new SiteUser();
-            if (Session["user"] != null)
-            {
-                 user = (SiteUser)Session["user"];              
-            }
+          
 
             if (action == "Employee Email" && iscorporate.ToLower() == "false")
             {
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                var empemail = Request.Params["empemail"].ToString();
 
-                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email", user.FirstName + " " + user.LastName);
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, empemail);
+
+                WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email", "System");
 
               
             }
             else
             {
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Regional Signature Submitted for New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Regional Signature Submitted for New Hire Notice on" + DateTime.Now, "System");
 
                // WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
 
-                var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email", user.FirstName + " " + user.LastName);
+                var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email", "System");
 
                 // write your email function here..
                 MailMessage mail = new MailMessage();
@@ -818,13 +809,9 @@ namespace Carroll.Portals.Controllers
        
         public async Task<dynamic> SendHrFormCompletionNotification(string form, string refid)
         {
-            SiteUser user = new SiteUser();
-            if (Session["user"] != null)
-            {
-                user = (SiteUser)Session["user"];
-            }
+          
 
-            var Message = WorkflowHelper.ReSendHrWorkFlowEmail(refid,form,"",user.FirstName+ " "+user.LastName);
+            var Message = WorkflowHelper.ReSendHrWorkFlowEmail(refid,form,"","System");
 
                 // write your email function here..
                 MailMessage mail = new MailMessage();

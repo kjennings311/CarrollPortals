@@ -379,7 +379,7 @@ namespace Carroll.Data.Services.Helpers
 
                         if(EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent", "Employee Email sent for New Hire Notice on" + DateTime.Now, NewhireDetails.EmailAddress);
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent", "Employee Email sent for New Hire Notice on" + DateTime.Now, "System");
 
                             return true;
                         }
@@ -557,7 +557,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                       //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
-                        InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For Employee New Hire Notice on" + DateTime.Now,NewhireDetails.FirstName +" "+NewhireDetails.LastName );
+                        InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For Employee New Hire Notice on" + DateTime.Now,"System" );
 
                         return _message;
                        // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -624,7 +624,7 @@ namespace Carroll.Data.Services.Helpers
 
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent ", "Employee Email sent for Employee Lease Rider on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent ", "Employee Email sent for Employee Lease Rider on" + DateTime.Now, "System");
 
                             return true;
                         }
@@ -718,7 +718,7 @@ namespace Carroll.Data.Services.Helpers
                         //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
-                        InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Employee Lease Rider on" + DateTime.Now, NewhireDetails.CreatedUser.ToString());
+                        InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Employee Lease Rider on" + DateTime.Now, "System");
 
                         return _message;
                     }
@@ -781,7 +781,7 @@ namespace Carroll.Data.Services.Helpers
 
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent ", "Employee Email sent for Payroll Status Change Notice on" + DateTime.Now, NewhireDetails.EmployeeEmail);
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email sent ", "Employee Email sent for Payroll Status Change Notice on" + DateTime.Now, "System");
 
                             return true;
                         }
@@ -877,7 +877,7 @@ namespace Carroll.Data.Services.Helpers
                         //  tos.Add("sekhar.babu@forcitude.com");
                         _message.EmailTo = tos;
 
-                        InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Payroll Status Change on" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
+                        InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Payroll Status Change on" + DateTime.Now, "System");
 
                         return _message;
                     }
@@ -1127,7 +1127,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                       
-                       InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For New Hire Notice on" + DateTime.Now, UserId);
+                       InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For New Hire Notice on" + DateTime.Now, "System");
                         
                         return _message;
                         // return EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString());
@@ -1192,7 +1192,7 @@ namespace Carroll.Data.Services.Helpers
                        
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Payroll Status Change Notice on" + DateTime.Now,NewhireDetails.EmployeeEmail);
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Payroll Status Change Notice on" + DateTime.Now,"System");
 
                             return true;
                         }
@@ -1264,7 +1264,7 @@ namespace Carroll.Data.Services.Helpers
                        
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Employee Lease Rider on" + DateTime.Now, NewhireDetails.EmployeeEmail);
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Employee Lease Rider on" + DateTime.Now, "System");
 
                             return true;
                         }
@@ -1320,7 +1320,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
                       
-                        InsertHrLog("LeaseRider", propid.ToString(), "HR Email sent", " Hr Email is sent for Employee Lease Rider" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
+                        InsertHrLog("LeaseRider", propid.ToString(), "HR Email sent", " Hr Email is sent for Employee Lease Rider" + DateTime.Now, "System" );
 
                         return _message;
                     }
@@ -1348,7 +1348,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
 
-                       InsertHrLog("NoticeOfEmployeeSeparation", propid.ToString(), "Email sent to HR ", " Hr Email is sent for Notice of Employee Separation" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
+                       InsertHrLog("NoticeOfEmployeeSeparation", propid.ToString(), "HR Email sent", " Hr Email is sent for Notice of Employee Separation" + DateTime.Now, "System");
 
                         return _message;
                     }
@@ -1376,7 +1376,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
 
-                        InsertHrLog("RequisitionRequest", propid.ToString(), "HR Email sent ", " Hr Email is sent for Requisition Request on" + DateTime.Now, NewhireDetails.FirstName+" "+NewhireDetails.LastName);
+                        InsertHrLog("RequisitionRequest", propid.ToString(), "HR Email sent ", " Hr Email is sent for Requisition Request on" + DateTime.Now, "System");
 
                         return _message;
                     }

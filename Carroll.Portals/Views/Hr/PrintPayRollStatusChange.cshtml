@@ -327,7 +327,10 @@
 
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
-                    <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @Model.Notes1 </textarea></P>
+                    <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @if (Model.Notes1 != null)
+                    {
+                        @Model.Notes1
+                    } </textarea></P>
 
                 </div>
                 <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.ESignature" />  Date: <input type="text" name="name" value="@Model.EDate.Value.ToShortDateString()" /> </P>

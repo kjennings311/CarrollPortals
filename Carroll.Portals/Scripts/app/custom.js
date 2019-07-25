@@ -1,6 +1,6 @@
 ﻿ 
-// var $BaseApiUrl = "http://localhost:1002/"; 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ //var $BaseApiUrl = "http://localhost:1002/"; 
+  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -12,6 +12,8 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phon
     // Take the user to a different screen here.
     $ismobile = true;
 }
+
+
 
 var $reloadpageformobile = false;
 var $isemailconfirmed = false;

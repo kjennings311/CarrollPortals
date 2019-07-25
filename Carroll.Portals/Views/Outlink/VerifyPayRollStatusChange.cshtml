@@ -1109,7 +1109,7 @@
 
                     insertForm.append('action', $("#Action").val());
                     insertForm.append('refid', '@ViewBag.ReferenceId');
-
+                     insertForm.append('empname', ' @Model.EmployeeName');
                     var axurl = "";
                     var $BaseApiUrl = "http://localhost:1002/";
 

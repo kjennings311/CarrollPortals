@@ -516,6 +516,7 @@
                     {
                         insertForm.append('signature', $("#esignature").val());
                         insertForm.append('date', $("#edate").val());
+                         insertForm.append('empname', ' @Model.EmployeeName');
                         //if('@ViewBag.IsCorporate' == 'True')
                         axurl = "/Hr/UpdateWorkflowEmployeeNewHireNotice";
                      //   else
