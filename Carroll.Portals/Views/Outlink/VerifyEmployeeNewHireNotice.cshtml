@@ -369,7 +369,7 @@
                     </p>
 
                     <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text"  class="italic" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
                     </p>
                 }
                 else if (ViewBag.Action == "Regional Email")
@@ -518,7 +518,7 @@
                         insertForm.append('date', $("#edate").val());
                          insertForm.append('empname', ' @Model.EmployeeName');
                         //if('@ViewBag.IsCorporate' == 'True')
-                        axurl = "/Hr/UpdateWorkflowEmployeeNewHireNotice";
+                        axurl = "/Outlink/UpdateWorkflowEmployeeNewHireNotice";
                      //   else
                       //  axurl = $BaseApiUrl +"api/data/UpdateWorkflowEmployeeNewHireNotice";
 
@@ -527,7 +527,7 @@
                     {
                         insertForm.append('signature', $("#rpmsignature").val());
                         insertForm.append('date', $("#rpmdate").val());
-                        axurl = "/Hr/UpdateWorkflowEmployeeNewHireNotice";
+                        axurl = "/Outlink/UpdateWorkflowEmployeeNewHireNotice";
                     }
 
                   

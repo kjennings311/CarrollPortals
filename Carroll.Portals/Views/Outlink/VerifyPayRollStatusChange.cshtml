@@ -340,8 +340,6 @@
 
             </div>
         </div> <input type="hidden" id="Action" value="@ViewBag.Action" />
-
-
     </div>
    
     <style type="text/css">
@@ -1035,6 +1033,7 @@
             font-size: 22px;
         }
     </style>
+
     <style type="text/css">
 
 
@@ -1074,7 +1073,6 @@
             }
 
 
-
             $("#Submit").click(function (e)
             {
                 e.preventDefault();
@@ -1085,19 +1083,18 @@
                 var control = "";
                 $("#status").html('');
 
-                    if ($("#esignature").val() == "") {
+                if ($("#esignature").val() == "")
+                {
                         errormsgsummary += "<li> Please Enter Signature </li>";
                         $("#esignature").addClass('has-error');
                         if (control == "")
                             control = $("#esignature");
-                    }
+                }
 
 
                 if (errormsgsummary != "")
                 {
-
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
-
                     setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
@@ -1115,7 +1112,7 @@
 
                     insertForm.append('signature', $("#esignature").val());
                     insertForm.append('date', $("#edate").val());
-                    axurl = "/Hr/UpdateWorkflowPayRollStatusChangeNoticeAsync";
+                    axurl = "/Outlink/UpdateWorkflowPayRollStatusChangeNoticeAsync";
 
 
                     $("#status").html("<p style='color:green'> Processing ........ </p>");

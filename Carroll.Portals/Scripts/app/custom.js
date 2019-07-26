@@ -1,6 +1,6 @@
 ﻿ 
- //var $BaseApiUrl = "http://localhost:1002/"; 
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://localhost:1002/"; 
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -3037,6 +3037,7 @@ function GetAllHRFORMs(formtype) {
                         scrollY: '80vh',
                         scrollCollapse: true,
                         "scrollX": true,
+                        "aaSorting": [[1, "desc"]],
                         "rowCallback": function (row, data) {
                             // do anything row wise here     
                           //  var d = JSON.parse(data);
@@ -3193,6 +3194,56 @@ function LoadHrPositions()
     });
 
 
+}
+
+function LoadPropertiesForSelect(iskey,control)
+{
+    var options1 = "<option value='' > Select Property </option>";
+
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+        var defaultsel = $("#"+control).attr('seloption');
+
+        if (iskey == true) {
+            for (var i = 0; i < data.length; i++) {
+                if (defaultsel == data[i]["key"])
+                    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                else
+                    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                selected = "";
+
+            }
+        }
+        else {
+            for (var i = 0; i < data.length; i++) {
+                if (defaultsel == data[i]["key"])
+                    options1 += "<option selected value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+                else
+                    options1 += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+                selected = "";
+
+            }
+        }
+
+     
+        // now let's load options into select box
+        if ($("#" + control).length > 0)
+        {
+            $("#" + control).append(options1);
+        }
+    //    if ($("#location").length > 0) {
+
+    //        $('#location').append(options1);
+
+    //    }
+
+    //if ($("#property1").length > 0) {
+    //        $('#property1').append(options);
+    //    }
+
+    //    if ($("#propertyname").length > 0) {
+    //        $('#propertyname').append(options);
+    //    }
+    });
 }
 
 

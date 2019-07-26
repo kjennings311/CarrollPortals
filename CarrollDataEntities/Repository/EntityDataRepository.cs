@@ -816,7 +816,7 @@ namespace Carroll.Data.Entities.Repository
                 else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
                     config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
                 else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower())).ToList();
+                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList();
                 else
                     config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
 

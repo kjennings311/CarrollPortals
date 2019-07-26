@@ -109,12 +109,12 @@
 
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="date" id="leasedate" class="" /> </p>
 
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Property :  </span> <input style=" display:inline; " type="text" id="apartmentname" class="" />  </p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Property :  </span> <input style=" display:inline;width:40%; " type="text" id="apartmentname" class="" />  </p>
 
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; " onchange="document.getElementById('printempname').value = this.value;" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; width:35%; " onchange="document.getElementById('printempname').value = this.value;" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
 
                                         <ol>
-                                            <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="text" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="text" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
+                                            <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="number" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="number" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline; " type="text" id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
@@ -223,9 +223,22 @@
             $isemailconfirmed = true;
         }
 
+
+      
+
+        
         $(".addnew").click(function () {
             $("#signature,#positiondate,#printempname").attr('disabled', true);
             document.getElementById("pmdate").valueAsDate = new Date();
+            document.getElementById("leasedate").valueAsDate = new Date();
+            $("#apartmentname").val('');
+            $("#empname").val('');
+            $("#marketvalue").val('');
+            $("#monthlyrent").val('');
+            $("#residency").val('');
+            $("#signatureproperymanager").val('');
+            $("#employeeemail").val('');
+            $("#position").val('');
 
         });
 

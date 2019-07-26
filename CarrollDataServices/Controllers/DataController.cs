@@ -1130,7 +1130,7 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedDateTime = DateTime.Now;
 
             var re= _service.InsertRequisitionRequest(fa);
-            WorkflowHelper.InsertHrLog("RequisitionRequest", fa.RequisitionRequestId.ToString(), "New Requisition Request has been submitted", "New Requisition Request  has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+            WorkflowHelper.InsertHrLog("RequisitionRequest", fa.RequisitionRequestId.ToString(), "New Requisition Request has been submitted", "New Requisition Request  has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -1245,7 +1245,7 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDateTime = DateTime.Now;
             var re = _service.InsertNoticeOfEmployeeSeperation(fa);
-            WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), "Notice Of Employee Separation has been submitted", "New Notice Of Employee Separation has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+            WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), "Notice Of Employee Separation has been submitted", "New Notice Of Employee Separation has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -1623,7 +1623,7 @@ namespace Carroll.Data.Services.Controllers
             var user = HttpContext.Current.Request.Params["CreatedByName"].ToString();
             var userid = HttpContext.Current.Request.Params["CreatedBy"].ToString();
             var re= _service.UpdateRequisitionRequest(new Guid(refid),requisitionnumber,notes,dateposted);
-            WorkflowHelper.InsertHrLog("RequisitionRequest", refid.ToString(), "Requisition Request has been Updated by HR("+user+")", "Requistion Request has been Updated on " + DateTime.Now,userid);
+            WorkflowHelper.InsertHrLog("RequisitionRequest", refid.ToString(), "Requisition Request has been Updated by HR", "Requistion Request has been Updated on " + DateTime.Now,user);
              return re;
         }
 

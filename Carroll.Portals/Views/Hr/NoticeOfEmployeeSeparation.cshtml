@@ -38,7 +38,7 @@
                         <i class="fa fa-trash"></i> Delete
                     </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('EmployeeSeparation'); LoadPositions();">
+                        <a style="color:white;font-size: 30px;font-weight:bold" class="addnew" href="#" onclick="LoadHrForm('EmployeeSeparation'); LoadPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -633,6 +633,18 @@
 
             GetAllHRFORMs('EmployeeSeparation');
 
+            $(".addnew").click(function ()
+            {
+                document.getElementById("submitform").reset();
+                document.getElementById("effectivedate").valueAsDate = new Date();
+                document.getElementById("sdate").valueAsDate = new Date();
+
+                $("input,select,textarea").prop("disabled", false);
+                $("#sdate").prop("disabled", true);
+
+                //$("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
+             
+            });
 
             $("input").change(function (e) {
                 e.preventDefault();
@@ -666,8 +678,7 @@
 
             });
 
-            document.getElementById("sdate").valueAsDate = new Date();
-
+           
             
 
             // on focus out get the PropertyName for Property Number
