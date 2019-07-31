@@ -315,6 +315,37 @@ namespace Carroll.Portals.Models
 
     }
 
+    public class ListActivity
+    {
+        public string ActivitySubject { get; set; }
+        public System.DateTime ActivityDate { get; set; }
+        public string ActivityByName { get; set; }
+    }
+
+    public class ListSigns
+    {
+        public string browserinfo { get; set; }
+        public string ip { get; set; }
+        public DateTime? datetime { get; set; }
+        public string Action { get; set; }
+
+    }
+
+    public class ListRejectReason
+    {
+        public string RejectedReason { get; set; }
+        public string FirstName { get; set; }
+        public DateTime? RejectedDateTime { get; set; }
+        public string LastName { get; set; }
+
+    }
+    public class PrintActivity
+    {
+        public List<ListActivity> log { get; set; }
+        public List<ListSigns> metadata { get; set; }
+        public List<ListRejectReason> rejection { get; set; }
+    }
+
     public class PrintResidentReferralSheet
         {
         public System.Guid ResidentReferalId { get; set; }

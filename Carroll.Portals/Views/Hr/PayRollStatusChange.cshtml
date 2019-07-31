@@ -1004,8 +1004,6 @@
 
             });
 
-
-
             document.getElementById("mdate").valueAsDate = new Date();
 
 
@@ -1070,7 +1068,7 @@
 
                     },
                     error: function (ts) {
-                        alert('error' + ts.errorMessage);
+                        alert('error' + ts.exceptionMessage);
                     }
                 });
             });
@@ -1290,6 +1288,14 @@
                 //    if (total < 100)
                 //        errormsgsummary += "<li> Division Of Labour Percentage should be 100% </li>";
                 //}
+
+                if ($("#msignature").val() == "") {
+                    errormsgsummary += "<li> Please Enter Manager's Signature  </li>";
+                    $("#msignature").addClass('has-error');
+                    if (control == "")
+                        control = $("#msignature");
+                }
+
 
                 if ($("#la_Prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
                     errormsgsummary += "<li> Please Enter Division Of Labour Percentage  </li>";
@@ -1550,7 +1556,7 @@
 
                         },
                         error: function (ts) {
-                            alert('error' + ts.errorMessage);
+                            alert('error' + ts.exceptionMessage);
                         }
                     });
 

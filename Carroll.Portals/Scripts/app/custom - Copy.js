@@ -2667,7 +2667,7 @@ function LoadUserClaims() {
           
         },
         error: function (ts) {
-            alert('error' + ts.errorMessage);
+            alert('error' + ts.exceptionMessage);
         }
     });
 
@@ -2728,7 +2728,7 @@ $(document).ready(function ()
                             }, 1000);
                         },
                         error: function (ts) {
-                            alert('error' + ts.errorMessage);
+                            alert('error' + ts.exceptionMessage);
                         }
                     });
                 }
@@ -2787,7 +2787,7 @@ $(document).ready(function ()
 
                 },
                 error: function (ts) {
-                    alert('error' + ts.errorMessage);
+                    alert('error' + ts.exceptionMessage);
                 }
             });
         }

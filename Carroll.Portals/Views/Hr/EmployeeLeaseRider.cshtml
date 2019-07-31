@@ -313,7 +313,7 @@
 
                     },
                     error: function (ts) {
-                        alert('error' + ts.errorMessage);
+                        alert('error' + ts.exceptionMessage);
                     }
                 });
             });
@@ -390,6 +390,13 @@
                         control = $("#employeeemail");
                 }
 
+                if ($("#signature").val() == "") {
+                    errormsgsummary += "<li> Please Enter PM Signature  </li>";
+                    $("#signature").addClass('has-error');
+                    if (control == "")
+                        control = $("#signature");
+                }
+
                 if (errormsgsummary != "") {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
@@ -463,7 +470,7 @@
 
                                     //    },
                                     //    error: function (ts) {
-                                    //        //  alert('error' + ts.errorMessage);
+                                    //        //  alert('error' + ts.exceptionMessage);
                                     //    }
                                     //});
 
@@ -495,7 +502,7 @@
 
                             },
                             error: function (ts) {
-                                alert('error' + ts.errorMessage);
+                                alert('error' + ts.exceptionMessage);
                             }
                         });
                     }

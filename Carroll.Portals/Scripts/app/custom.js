@@ -1,6 +1,6 @@
 ﻿ 
- // var $BaseApiUrl = "http://localhost:1002/"; 
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+//  var $BaseApiUrl = "http://localhost:1002/"; 
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -320,7 +320,8 @@ function BindElements() {
                         contentType: "application/json; charset=utf-8",
                         dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
                         async: false,
-                        statusCode: {
+                        statusCode:
+                        {
                             200: function (data) {
                                 // if we are here it means all good.. 
                                 alert(data.responseText);
@@ -406,7 +407,7 @@ function LoadUserProperty()
                      $("#UserPropertyAccess").val(""+data);           
         },
         error: function (ts) {
-            alert('error' + ts.errorMessage);
+            alert('error' + ts.exceptionMessage);
         }
     });
 
@@ -425,7 +426,7 @@ function getForm(FormName, RecordId)
     var $line = '<div class="hr-line-dashed"></div>';
     var $textbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
     var $datebox = '<div class="form-group"><label class="col-sm-12 control-label">  <a  class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="date" validationformat="{1}"  class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}" onkeyup="countChar(this)"  class="form-control {2}" id="{3}" {4} > {5} </textarea> <span id="cnt{3}" > </span> </div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} > {5} </textarea> <span id="cnt{3}" > </span> </div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
@@ -666,6 +667,7 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
 
 function LoadHrForm(formname) {
     $("#myModal").modal('show');
+   
 }
 
 function ToggleAdd(formaname) {
@@ -3128,7 +3130,7 @@ function LoadHrFormsCount()
 
         },
         error: function (ts) {
-            alert('error' + ts.errorMessage);
+            alert('error' + ts.exceptionMessage);
         }
     });
 
@@ -3179,7 +3181,7 @@ function LoadHrPositions()
         var defaultsel = $("#location").attr('seloption');
 
         for (var i = 0; i < data.length; i++) {
-            if (defaultsel == data[i]["key"])
+            if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
                 options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
             else
                 options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
@@ -3203,19 +3205,22 @@ function LoadPropertiesForSelect(iskey,control)
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
         var defaultsel = $("#"+control).attr('seloption');
 
-        if (iskey == true) {
-            for (var i = 0; i < data.length; i++) {
-                if (defaultsel == data[i]["key"])
+        if (iskey == true)
+        {
+            for (var i = 0; i < data.length; i++)
+            {
+                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
                     options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
                 else
                     options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
                 selected = "";
-
             }
         }
-        else {
-            for (var i = 0; i < data.length; i++) {
-                if (defaultsel == data[i]["key"])
+        else
+        {
+            for (var i = 0; i < data.length; i++)
+            {
+                if (defaultsel == data[i]["value"])
                     options1 += "<option selected value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
                 else
                     options1 += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
@@ -3649,14 +3654,13 @@ function LoadUserClaims()
           
         },
         error: function (ts) {
-            alert('error' + ts.errorMessage);
+            alert('error' + ts.exceptionMessage);
         }
     });
 
 }
 
-$(document).ready(function ()
-{
+$(document).ready(function () {
 
     $("#btnAddComment").click(function () {
 
@@ -3664,8 +3668,7 @@ $(document).ready(function ()
             alert("Please Write Comment to Proceed");
             $("#txtcomment").focus();
         }
-        else
-        {
+        else {
             $("#btnAddComment").attr('disabled', true);
             $("#btnAddComment").html('<p style="color:white"> Sending .... </p>');
             $("#btnAddComment").fadeTo(0.28);
@@ -3677,66 +3680,63 @@ $(document).ready(function ()
             data["RefFormType"] = $("#type").val();
             data["CommentBy"] = $("#CreatedBy").val();
             data["CommentByName"] = $("#CreatedByName").val();
-           
-               
-                    $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertComment",
-                        type: 'POST',
-                        dataType: "json",headers: { 'Access-Control-Allow-Origin': true },                      
-                        async: false,
-                        data: data,
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
-                        },
-                        success: function (data) {
 
-                            // To-do code if ajax request is successful
-                          //  $("#commentbody").html('');
-                            $(".feed-activity-list").html('');
-                            
-                            $.each(data.comments, function (index, value) {
-                                //$("#commentbody").append('<tr><td> ' + value.comment + ' </td><td style="width:20%;" >' + value.commentDate.substring(0, 10)+' </td> </tr>');
-                              
-                                $(".feed-activity-list").append('<div class=\"feed-element\"><div class=\"media-body\">Posted by:  <strong>' + value.commentByName + '</strong><br><small class=\"text-muted\">' + value.commentDate + '</small>');
-                                $(".feed-activity-list").append('<div class=\"well\">' + value.comment + '</div></div></div><hr/>');
-                            });
 
-                            $("#activitybody").html('');
+            $.ajax({
+                url: $BaseApiUrl + "api/data/InsertComment",
+                type: 'POST',
+                dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
+                async: false,
+                data: data,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
+                },
+                success: function (data) {
 
-                            $.each(data.activity, function (index, value) {
-                                $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
-                            });
+                    // To-do code if ajax request is successful
+                    //  $("#commentbody").html('');
+                    $(".feed-activity-list").html('');
 
-                            setTimeout(function ()
-                            {
-                                $("#btnAddComment").html('Send');
-                                $("#btnAddComment").attr('disabled', false);
-                                $("#btnAddComment").fadeIn();
-                                $("#txtcomment").val('');
-                               
-                                $("#txtcomment").attr('disabled', false);
-                            }, 1000);
-                        },
-                        error: function (ts) {
-                            alert('error' + ts.errorMessage);
-                        }
+                    $.each(data.comments, function (index, value) {
+                        //$("#commentbody").append('<tr><td> ' + value.comment + ' </td><td style="width:20%;" >' + value.commentDate.substring(0, 10)+' </td> </tr>');
+
+                        $(".feed-activity-list").append('<div class=\"feed-element\"><div class=\"media-body\">Posted by:  <strong>' + value.commentByName + '</strong><br><small class=\"text-muted\">' + value.commentDate + '</small>');
+                        $(".feed-activity-list").append('<div class=\"well\">' + value.comment + '</div></div></div><hr/>');
                     });
+
+                    $("#activitybody").html('');
+
+                    $.each(data.activity, function (index, value) {
+                        $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
+                    });
+
+                    setTimeout(function () {
+                        $("#btnAddComment").html('Send');
+                        $("#btnAddComment").attr('disabled', false);
+                        $("#btnAddComment").fadeIn();
+                        $("#txtcomment").val('');
+
+                        $("#txtcomment").attr('disabled', false);
+                    }, 1000);
+                },
+                error: function (ts) {
+                    alert('error' + ts.exceptionMessage);
                 }
-           
-    
+            });
+        }
+
+
     });
 
-    $("#printclaim").click(function (e)
-    {
+    $("#printclaim").click(function (e) {
 
         e.preventDefault();
         var claim = getParameterByName("Claim");
         var Type = claim[claim.length - 1];
         claim = claim.substr(0, claim.length - 1);
 
-        if (claim != "")
-        {
-            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim+"&Type="+Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
+        if (claim != "") {
+            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
 
             printWindow.addEventListener('load', function () {
                 setTimeout(function () {
@@ -3748,21 +3748,17 @@ $(document).ready(function ()
     });
 
 
-    $("#btnUpload").click(function ()
-    {
-        
 
-        if ($("#logo").val() == "")
-        {
+    $("#btnUpload").click(function () {
+
+        if ($("#logo").val() == "") {
             alert("Please Upload an Attachment to Proceed");
             $("#logo").focus();
-        }      
-        else
-        {
+        }
+        else {
             var ext = $('#logo').val().split('.').pop().toLowerCase();
 
-            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv','avi','mov','mpg','wmv','3gp']) == -1)
-            {
+            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp']) == -1) {
                 alert('invalid File Upload!');
                 return;
             }
@@ -3783,18 +3779,16 @@ $(document).ready(function ()
             $.ajax({
                 url: $BaseApiUrl + "api/data/InsertAttachment",
                 type: 'POST',
-                dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
+                dataType: "json", headers: { 'Access-Control-Allow-Origin': true },
                 processData: false,
                 contentType: false,
                 data: insertForm,
-                success: function (data)
-                {
+                success: function (data) {
                     // To-do code if ajax request is successful
 
                     $("#attachmentbody").html('');
 
-                    $.each(data.attachments, function (index, value)
-                    {
+                    $.each(data.attachments, function (index, value) {
                         $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
                     });
 
@@ -3815,27 +3809,46 @@ $(document).ready(function ()
 
                 },
                 error: function (ts) {
-                    alert('error' + ts.errorMessage);
+                    alert('error' + ts.exceptionMessage);
                 }
             });
         }
     });
 
-    $(document).on('keyup', 'textarea', function ()
-    {
+    $(document).on('keyup', 'textarea', function () {
         var max = 1000;
         var len = $(this).val().length;
         if (len >= max) {
             $('#cnt' + $(this).attr('id')).html('<span style="color:red"> you have reached the limit </span>');
             var str = $(this).val();
             $(this).val(str.substring(1, 1000));
-            
+
         } else {
             var char = max - len;
-            $('#cnt' + $(this).attr('id')).html('<span style="color:green">'+char + ' characters left</span>');
+            $('#cnt' + $(this).attr('id')).html('<span style="color:green">' + char + ' characters left</span>');
         }
 
     });
+
+
+    function Loadtextlength()
+    {
+
+        $(document).on('keyup', 'textarea', function () {
+            var max = 1000;
+            var len = $(this).val().length;
+            if (len >= max) {
+                $('#cnt' + $(this).attr('id')).html('<span style="color:red"> you have reached the limit </span>');
+                var str = $(this).val();
+                $(this).val(str.substring(1, 1000));
+
+            } else {
+                var char = max - len;
+                $('#cnt' + $(this).attr('id')).html('<span style="color:green">' + char + ' characters left</span>');
+            }
+
+        });
+    }
 
     $(document).on('change', "#AuthoritiesContacted", function ()
     {
@@ -3856,9 +3869,17 @@ $(document).ready(function ()
     // Activity Log
 
     $(document).on('click', ".viewlog", function () {
-
+        var currrowId = $(this).closest('tr').children('td:eq(1)').text();
         var formtype = $(this).attr('data-formtype');
         var refid = $(this).attr('data-ref');
+
+        //$("#printactivity").attr("data-ID", refid);
+        //$("#printactivity").attr("data-formtype", formtype);
+        $("#printactivity").attr("href", "/Hr/ExportActivity/?Id=" + refid + "&FormType=" + formtype + "&rid=" + currrowId);
+        
+       
+        //$("#printactivity").attr("data-rowid ", currrowId);
+        $(".titlemodal").html("Activity - " + currrowId);
 
         var insertForm = new FormData();
         insertForm.append('FormType', formtype);
@@ -3912,31 +3933,19 @@ $(document).ready(function ()
 
                 
                 $('#viewlog').DataTable({
-                    dom: 'Bfrtip',
+                    dom: 'frtip',
                     "aaSorting": [[1, "asc"]],
                     "aoColumnDefs": [
                         { 'bSortable': false, 'aTargets': [0] }
-                    ],
-                    buttons: [
-                        'copyHtml5',
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
                     ]
                 });
 
               
                 $('#signaturelog').DataTable({
-                    dom: 'Bfrtip',
+                    dom: 'frtip',
                     "aaSorting": [[3, "asc"]],
                     "aoColumnDefs": [
                         { 'bSortable': false, 'aTargets': [1] }
-                    ],
-                    buttons: [
-                        'copyHtml5',
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
                     ]
                 });
               
@@ -3950,22 +3959,14 @@ $(document).ready(function ()
                     $("#rjmetadata").html('');
                     console.log(data.rejection);
                     $.each(data.rejection, function (index, value) {
-                        console.log(value);
+                       
                         $("#rjmetadata").append('<tr><td style="float:left" >' + value.firstName + ' ' + value.lastName + '</td> <td > ' + value.rejectedReason + '</td> <td>' + value.rejectedDateTime.substring(0, 19) + ' </td></tr>');
                     });
-
-
-                  
+                                      
                     $('#rejectionlog').DataTable({
-                        dom: 'Bfrt',
+                        dom: 'frt',
                         "aoColumnDefs": [
                             { 'bSortable': false, 'aTargets': [1] }
-                        ],
-                        buttons: [
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
                         ]
                     });
                 }
@@ -3974,9 +3975,29 @@ $(document).ready(function ()
 
             },
             error: function (ts) {
-                alert('error' + ts.errorMessage);
+                alert('error' + ts.exceptionMessage);
             }
         });
+    });
+
+
+    $("#printactivity12").click(function (e) {
+
+        e.preventDefault();
+        var claim = $("#printactivity").attr('data-ID');
+        var type = $("#printactivity").attr('data-formtype');
+        var rid = $("#printactivity").attr('data-rowid');
+
+        if (claim != "") {
+            var printWindow = window.open("/Hr/ExportActivity/?Id="+claim+"&FormType=" + type+"rid="+rid, 'Acitivity Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
+
+            printWindow.addEventListener('load', function () {
+                setTimeout(function () {
+                    printWindow.close();
+                    //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                }, 1000);
+            }, true);
+        }
     });
 
 

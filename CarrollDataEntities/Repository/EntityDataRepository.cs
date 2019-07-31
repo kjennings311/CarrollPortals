@@ -1500,7 +1500,6 @@ namespace Carroll.Data.Entities.Repository
                                 {
                                     res.La_Property3 = _property.La_Property3;
                                     res.La_Property3_Per = _property.La_Property3_Per;
-
                                 }
                             }
 
@@ -1508,7 +1507,8 @@ namespace Carroll.Data.Entities.Repository
 
                         res.Status = _property.Status;
                         res.AdditionalText = _property.AdditionalText;
-
+                        res.EmployeeSignedDateTime = null;
+                        res.RegionalManagerSignedDateTime = null;
                             res.kitordered = _property.kitordered;
                         //   res.boardingcallscheduled = Convert.ToDateTime(HttpContext.Current.Request.Params["callscheduled"]);
                         res.Allocation = _property.Allocation;
@@ -2228,7 +2228,7 @@ namespace Carroll.Data.Entities.Repository
                  
                     config.Columns.Add(new DtableConfigArray { name = "managerSigned", label = "Manager Signed", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
@@ -2255,7 +2255,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "requisitionRequestId", label = "Id", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
@@ -2279,7 +2279,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Manager Signed", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
@@ -2303,7 +2303,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "reason", label = "Reason", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "effectiveDateOfChange", label = "Effective Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "timeStamp", label = "Date Signed", type = DFieldType.IsText, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
@@ -2335,7 +2335,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "rpmSigned", label = "Regional Signed", type = DFieldType.IsText, href = "" });
                     
                     config.Columns.Add(new DtableConfigArray { name = "rejectionStatus", label = "RejectionStatus", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Notes", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -4209,7 +4209,7 @@ namespace Carroll.Data.Entities.Repository
                     return new { log = res, metadata = dldetails,rejection=res1 };
                 }
                else
-                    return new { log = res, metadata = dldetails,rejection="" };
+                    return new { log = res, metadata = dldetails,rejection= "" };
 
             }
         }

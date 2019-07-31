@@ -170,11 +170,22 @@ namespace Carroll.Data.Services.Helpers
 
         public static bool ValidateFormData(IValidationDictionary _validationDictionary,  List<FormField> FormData)
         {
+            var iscontacted = false;
+
             foreach (FormField _field in FormData)
             {
-                if ((_field.Required) && (string.IsNullOrEmpty(_field.FieldValue)))
-                //          if("a" == "a")
+                if (_field.ToString() == "AuthoritiesContacted")
                 {
+                    iscontacted = true;
+                }
+                else if (_field.ToString() == "PoliceReportNumber" && iscontacted == true && (string.IsNullOrEmpty(_field.FieldValue)))
+                {
+                    _validationDictionary.AddError(_field.FieldName, string.Concat(_field.FieldLabel, " is required."));
+                }
+                else if ((_field.Required) && (string.IsNullOrEmpty(_field.FieldValue)))
+                //          if("a" == "a")
+                {                  
+                   
                     _validationDictionary.AddError(_field.FieldName, string.Concat(_field.FieldLabel, " is required."));
                 }
                 else if (!string.IsNullOrEmpty(_field.ValidationExpressionServerSide))

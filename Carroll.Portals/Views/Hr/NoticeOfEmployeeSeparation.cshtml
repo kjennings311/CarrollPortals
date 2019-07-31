@@ -843,6 +843,15 @@
                         control = $("#polictyvoilated1");
                 }
 
+                if ($("#ssignature").val() == "") {
+                    errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
+                    $("#ssignature").addClass('has-error');
+                    if (control == "")
+                        control = $("#ssignature");
+                }
+
+
+
                 if (errormsgsummary != "") {
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -921,7 +930,7 @@
 
                                     },
                                     error: function (ts) {
-                                        //  alert('error' + ts.errorMessage);
+                                        //  alert('error' + ts.exceptionMessage);
                                     }
                                 });
 
@@ -949,7 +958,7 @@
 
                         },
                         error: function (ts) {
-                            alert('error' + ts.errorMessage);
+                            alert('error' + ts.exceptionMessage);
                         }
                     });
 

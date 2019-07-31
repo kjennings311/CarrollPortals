@@ -202,7 +202,7 @@
 
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">
-                                                New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" id="kitorderdate1" /> No
+                                                New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" checked id="kitorderdate1" /> No
                                             </span>
                                         </p>
                                         <p class="c1" style="margin-bottom: 60px;">
@@ -516,6 +516,9 @@
         {
 
             $(".addnew").click(function () {
+                $("#divproperty").hide();
+                $("#location").attr('seloption', '');
+                document.getElementById("submitform").reset();
                 $("#esignature,#edate,#rpmsignature,#rpmdate").attr('disabled', true);
                 document.getElementById("mdate").valueAsDate = new Date();
                 document.getElementById("startdate").valueAsDate = new Date();
@@ -589,7 +592,7 @@
 
                     },
                     error: function (ts) {
-                        alert('error' + ts.errorMessage);
+                        alert('error' + ts.exceptionMessage);
                     }
                 });
             });
@@ -682,7 +685,7 @@
 
                     },
                     error: function (ts) {
-                        alert('error' + ts.errorMessage);
+                        alert('error' + ts.exceptionMessage);
                     }
                 });
 
@@ -740,7 +743,7 @@
 
                     },
                     error: function (ts) {
-                        alert('error' + ts.errorMessage);
+                        alert('error' + ts.exceptionMessage);
                     }
                 });
 
@@ -798,7 +801,7 @@
 
                     },
                     error: function (ts) {
-                        alert('error' + ts.errorMessage);
+                        alert('error' + ts.exceptionMessage);
                     }
                 });
             });
@@ -813,12 +816,11 @@
 
                 insertoredit = false;
 
-                LoadHrPositions();
+              
 
                 $.get($BaseApiUrl + "api/Data/GetEmployeeNewHireNotice?riderid=" + leaseid, function (data)
                 {
-
-                    console.log(data);
+                    
 
                     if (data != "")
                     {
@@ -844,12 +846,13 @@
                             $("#divproperty").show();      
 
                             $("#location").attr('seloption', data.location);
+                            
+                           // LoadPropertiesForSelect(true,"location");
 
-                            setTimeout(function () { $("#location").val(data.location);  }, 5000);
+                         //  setTimeout(function () { $("#location").val(data.location);  }, 5000);
 
                         }
-                        $("#email").val(data.emailAddress);
-                        $("#email").val(data.emailAddress);
+                        LoadHrPositions();
                         $("#email").val(data.emailAddress);
 
                         if (data.position_Exempt == "1") {
@@ -900,9 +903,15 @@
                             $("#kitorderdate1").prop("checked", true);
                         }
                            
+                      
 
-                        
-                        $("#position").val(data.position);
+                        setTimeout(function () {
+                            console.log(data.position);
+                            $('#position option[value="' + data.position + '"]').attr("selected", "selected");
+                            $("#position").val("" + data.position);
+                        }, 3000);
+
+
                         $("#la_Prop1").val(data.la_Property1);
                         $("#la_Prop2").val(data.la_Property2);
 
@@ -934,7 +943,8 @@
 
             var iscorporate = true;
 
-            $("#chkcorporate,#chkproperty").change(function (e) {
+            $("#chkcorporate,#chkproperty").change(function (e)
+            {
 
                 e.preventDefault();
 
@@ -988,7 +998,8 @@
             });
 
 
-            $("#Submit").click(function (e) {
+            $("#Submit").click(function (e)
+            {
                 e.preventDefault();
                 $("input,select").removeClass("has-error");
                 var errormsgsummary = "";
@@ -1032,6 +1043,15 @@
                         control = $("#location");
                 }
 
+                if ($("#position").val() == "") {
+                    errormsgsummary += "<li> Please Choose Position </li>";
+                    $("#position").addClass('has-error');
+                    if (control == "")
+                        control = $("#position");
+                }
+              
+
+
                 // check either exempt or non exemppt checked
 
                 if (!$("#exempt").is(":checked") && !$("#nonexempt").is(":checked")) {
@@ -1060,12 +1080,12 @@
                         control = $("#salary");
                 }
 
-                //if ($("#kitorderdate").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Kit Ordered Date  </li>";
-                //    $("#kitorderdate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#kitorderdate");
-                //}
+                if ($("#msignature").val() == "") {
+                    errormsgsummary += "<li> Please Enter PM Signature  </li>";
+                    $("#msignature").addClass('has-error');
+                    if (control == "")
+                        control = $("#msignature");
+                }
 
 
                 //if ($("#onboardcall").val() == "") {
@@ -1098,6 +1118,7 @@
                             var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
                             if (total < 100)
                                 errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                           // return false;
                         }
 
                     }
@@ -1151,7 +1172,7 @@
 
                     }
                 }
-
+              
                 if (errormsgsummary != "")
                 {
 
@@ -1313,7 +1334,7 @@
 
                         },
                         error: function (ts) {
-                            alert('error' + ts.errorMessage);
+                            alert('error' + ts.exceptionMessage);
                         }
                     });
 

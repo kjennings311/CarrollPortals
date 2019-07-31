@@ -562,6 +562,7 @@ namespace Carroll.Data.Services.Controllers
             var retu =_service.InsertEmployeeLeaseRider(fa);
 
             WorkflowHelper.InsertHrLog("LeaseRider", fa.EmployeeLeaseRiderId.ToString(), " Employee Lease Rider has been Submitted", "Employee Lease Rider has been Submitted on" +DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+            WorkflowHelper.InsertHrLog("LeaseRider", fa.EmployeeLeaseRiderId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -776,6 +777,7 @@ namespace Carroll.Data.Services.Controllers
             }
           
              var   retu = _service.InsertEmployeeNewHireNotice(fa, type);
+            WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -834,6 +836,17 @@ namespace Carroll.Data.Services.Controllers
         {
             return _service.GetEmployeeNewHireNotice(new Guid(riderid));
         }
+
+        [ActionName("GetHRFormsActivityLogExport")]
+        [HttpGet]
+        public dynamic GetHRFormsActivityLogExport(string FormType, string Id)
+        {
+            //string FormType = HttpContext.Current.Request.Params["FormType"].ToString();
+            //string RecordId = HttpContext.Current.Request.Params["RecordId"].ToString();
+            return _service.GetHrFormLogActivity(FormType, Id);
+        }
+
+
 
         [ActionName("newhirerejection")]
         [HttpPost]
@@ -1031,6 +1044,7 @@ namespace Carroll.Data.Services.Controllers
 
             var re= _service.InsertPayRollStatusChangeNotice(fa);
             WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "New Payroll Status Change has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+            WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
 
             string VisitorsIPAddress = string.Empty;
@@ -1131,6 +1145,7 @@ namespace Carroll.Data.Services.Controllers
 
             var re= _service.InsertRequisitionRequest(fa);
             WorkflowHelper.InsertHrLog("RequisitionRequest", fa.RequisitionRequestId.ToString(), "New Requisition Request has been submitted", "New Requisition Request  has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+            WorkflowHelper.InsertHrLog("PayRoll", fa.RequisitionRequestId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -1246,6 +1261,7 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedDateTime = DateTime.Now;
             var re = _service.InsertNoticeOfEmployeeSeperation(fa);
             WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), "Notice Of Employee Separation has been submitted", "New Notice Of Employee Separation has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+            WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), " PM Signature has been Completed", "Notice Of Employee Separation has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try

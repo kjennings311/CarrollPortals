@@ -233,6 +233,52 @@ namespace Carroll.Portals.Controllers
             }
         }
 
+        public async Task<ActionResult> ExportActivity(string Id,string FormType,string rid)
+        {
+
+
+            dynamic obj = new { };
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetHRFormsActivityLogExport?Id=" + Id+"&FormType="+FormType);
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintActivity>(EmpResponse);
+
+                }
+
+                // o.Date=obj.
+                //returning the employee list to view  
+                //      return View(obj);
+
+                if (Session["user"] != null)
+                {
+                    var user = (SiteUser)Session["user"];
+                    WorkflowHelper.InsertHrLog(FormType, Id, "Activity Export has been requested", "Activity has been requested on" + DateTime.Now, user.FirstName + " " + user.LastName);
+
+                }
+
+                ViewBag.Id = rid;
+                //returning the employee list to view  
+                return new ViewAsPdf("PrintActivityExport", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "ActivtyExport-" + rid + ".pdf" };
+
+            }
+        }
 
         [AllowAnonymous]
         [ActionName("UpdateWorkflowEmployeeLeaseRiderAsync")]
