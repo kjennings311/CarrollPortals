@@ -39,5 +39,6 @@ namespace Carroll.Data.Entities
         public string ResidentsAffected { get; set; }
         public Nullable<bool> ResidentsRelocating { get; set; }
         public string ResidentContactInformation { get; set; }
+        public string ResidentName { get; set; }
     }
 }

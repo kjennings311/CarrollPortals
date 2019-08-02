@@ -1,6 +1,6 @@
 ﻿ 
-//  var $BaseApiUrl = "http://localhost:1002/"; 
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+  var $BaseApiUrl = "http://localhost:1002/"; 
+// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -161,7 +161,10 @@ function BindElements() {
 
             if ($("#homeval").length > 0) {
                 if ($("#homeval").val() == '1') {
-                    $("#reviewmodal").modal('show');
+                    $("#reviewmodal").modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    },'show');
                     return false;
                 }
             }
@@ -666,7 +669,10 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
 }
 
 function LoadHrForm(formname) {
-    $("#myModal").modal('show');
+    $("#myModal").modal({
+        backdrop: 'static',
+        keyboard: false
+    },'show');
    
 }
 
@@ -756,7 +762,10 @@ function LoadForm(formaname)
 
         $('.claimmodal').modal('hide');
 
-        $('.incidentformmodal').modal('show');
+        $('.incidentformmodal').modal({
+            backdrop: 'static',
+            keyboard: false
+        },'show');
 
         //  $(".hidewhenformopen").hide();
 
@@ -1059,7 +1068,10 @@ function openmobilepopup(body)
         $(this).text().replace("PropertyDamage", "PM");
     });
 
-    $("#mobilepopup").modal('show');
+    $("#mobilepopup").modal({
+        backdrop: 'static',
+        keyboard: false
+    },'show');
 }
 
 
@@ -3390,6 +3402,7 @@ function LoadClaim()
                                 
                                 claimbody += '<tr><td style="width:30%;"> Apartment Occupied :</td><td>' + (ClaimData.claim.tbl.apartmentOccupied == true ? "Yes ":"No")  + '</td></tr>';                               
                                  claimbody += '<tr><td style="width:30%;"> Residents Affected :</td><td>' + ClaimData.claim.tbl.residentsAffected + '</td></tr>';                               
+                                claimbody += '<tr><td style="width:30%;">   Resident Name :</td><td>' + ClaimData.claim.tbl.residentName + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Resident Contact Information :</td><td>' + ClaimData.claim.tbl.residentContactInformation + '</td></tr>';                              
                                 claimbody += '<tr><td style="width:30%;"> Resident Relocating : </td><td>' + (ClaimData.claim.tbl.residentsRelocating == true ? "Yes":"No")  + '</td></tr>';                               
 
@@ -3929,7 +3942,10 @@ $(document).ready(function () {
                 });
 
 
-                $('#activitymodal').modal('show');
+                $('#activitymodal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                },'show');
 
                 
                 $('#viewlog').DataTable({

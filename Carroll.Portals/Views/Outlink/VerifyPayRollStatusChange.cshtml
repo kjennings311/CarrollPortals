@@ -330,7 +330,7 @@
                     <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @Model.Notes1 </textarea></P>
 
                 </div>
-                <P class="p6 ft1">Employee Signature: <input type="text" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
+                <P class="p6 ft1">Employee Signature: <input type="text" class="italic" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
                 <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToShortDateString()" /> </P>
             </div>
             <div id="status"> </div>
@@ -344,6 +344,7 @@
    
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+      
 
         ol {
             margin: 0;

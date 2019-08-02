@@ -925,7 +925,7 @@ namespace Carroll.Data.Services.Controllers
         public dynamic InsertPayRollStatusChangeNotice()
         {
             PayrollStatusChangeNotice fa = new PayrollStatusChangeNotice();
-            fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
+         
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.EmployeeEmail = HttpContext.Current.Request.Params["empemail"].ToString();
             fa.Property = new Guid(HttpContext.Current.Request.Params["property"].ToString());
@@ -946,16 +946,35 @@ namespace Carroll.Data.Services.Controllers
                     TypeofChange = "Multiple";
                 else
                     TypeofChange = "Property Change";
+                fa.ChangeEffectiveDate = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["effectivedate"]));
+                fa.FromPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
+                fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
+                fa.FromManager = HttpContext.Current.Request.Params["frommanager"].ToString();
+                fa.ToPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["topropnum"].ToString());
+                fa.ToPropName = HttpContext.Current.Request.Params["topropname"].ToString();
+                fa.ToManager = HttpContext.Current.Request.Params["tomanager"].ToString();
 
             }
 
 
-            if (fa.ShowPropertyChange == true)
+            if (fa.ShowPayChange == true)
             {
                 if (TypeofChange != "")
                     TypeofChange = "Multiple";
                 else
                     TypeofChange = "Property Change";
+
+                fa.FromTitle = HttpContext.Current.Request.Params["fromtitle"].ToString();
+                fa.FromPosition = HttpContext.Current.Request.Params["fromposition"].ToString();
+                fa.FromStatus = HttpContext.Current.Request.Params["fromstatus"].ToString();
+                fa.FromWageSalary = HttpContext.Current.Request.Params["fromwage"].ToString();
+                fa.FromRate = Convert.ToDouble(HttpContext.Current.Request.Params["fromrate"].ToString());
+                fa.ToTitle = HttpContext.Current.Request.Params["totitle"].ToString();
+                fa.ToPosition = HttpContext.Current.Request.Params["toposition"].ToString();
+                fa.ToStatus = HttpContext.Current.Request.Params["tostatus"].ToString();
+                fa.ToWageSalary = HttpContext.Current.Request.Params["towage"].ToString();
+                fa.ToRate = Convert.ToDouble(HttpContext.Current.Request.Params["torate"].ToString());
+
 
             }
 
@@ -965,7 +984,6 @@ namespace Carroll.Data.Services.Controllers
                     TypeofChange = "Multiple";
                 else
                     TypeofChange = "Allowances";
-
             }
 
 
@@ -975,6 +993,18 @@ namespace Carroll.Data.Services.Controllers
                     TypeofChange = "Multiple";
                 else
                     TypeofChange = "Labor Allocation";
+
+                fa.BeginPayPeriod = HttpContext.Current.Request.Params["beginpayperiod"].ToString();
+                fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop1per"].ToString()))
+                    fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
+
+                fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop2per"].ToString()))
+                    fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
+                fa.La_Property3 = HttpContext.Current.Request.Params["prop3"].ToString();
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop3per"].ToString()))
+                    fa.La_Property3_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop3per"].ToString());
             }
 
             if (fa.ShowLeaves == true)
@@ -983,54 +1013,30 @@ namespace Carroll.Data.Services.Controllers
                     TypeofChange = "Multiple";
                 else
                     TypeofChange = "Leaves";
+                fa.FmlaYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlayes"].ToString());
+                fa.FmlaNo = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlano"].ToString());
+                fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefityes"].ToString());
+                fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefitno"].ToString());
+                fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
+                fa.Leave_Purpose_Other = HttpContext.Current.Request.Params["purposeother"].ToString();
+                fa.Leave_Begin = Convert.ToDateTime(HttpContext.Current.Request.Params["leavebegin"].ToString());
+                fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
+                fa.Pto_Balance = Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
             }
 
             fa.TypeOfChange = TypeofChange;
-            fa.FromPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["frompropnum"].ToString());
-            fa.FromPropName = HttpContext.Current.Request.Params["frompropname"].ToString();
-            fa.FromManager = HttpContext.Current.Request.Params["frommanager"].ToString();
-            fa.ToPropNum = Convert.ToDouble(HttpContext.Current.Request.Params["topropnum"].ToString());
-            fa.ToPropName = HttpContext.Current.Request.Params["topropname"].ToString();
-            fa.ToManager = HttpContext.Current.Request.Params["tomanager"].ToString();
+         
 
             fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
-            fa.FromTitle = HttpContext.Current.Request.Params["fromtitle"].ToString();
-            fa.FromPosition = HttpContext.Current.Request.Params["fromposition"].ToString();
-            fa.FromStatus = HttpContext.Current.Request.Params["fromstatus"].ToString();
-            fa.FromWageSalary = HttpContext.Current.Request.Params["fromwage"].ToString();
-            fa.FromRate = Convert.ToDouble(HttpContext.Current.Request.Params["fromrate"].ToString());
-            fa.ToTitle = HttpContext.Current.Request.Params["totitle"].ToString();
-            fa.ToPosition = HttpContext.Current.Request.Params["toposition"].ToString();
-            fa.ToStatus = HttpContext.Current.Request.Params["tostatus"].ToString();
-            fa.ToWageSalary = HttpContext.Current.Request.Params["towage"].ToString();
-            fa.ToRate = Convert.ToDouble(HttpContext.Current.Request.Params["torate"].ToString());
+          
 
-
-            fa.BeginPayPeriod = HttpContext.Current.Request.Params["beginpayperiod"].ToString();
-            fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop1per"].ToString()))
-                fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
-
-            fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop2per"].ToString()))
-                fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
-            fa.La_Property3= HttpContext.Current.Request.Params["prop3"].ToString();
-            if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop3per"].ToString()))
-                fa.La_Property3_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop3per"].ToString());
+         
             //fa.Chk_CarAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkcaramount"].ToString());
             //fa.CarAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtcaramount"].ToString());
             //fa.Chk_PhoneAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkphoneamount"].ToString());
             //fa.PhoneAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtphoneamount"].ToString());
 
-            fa.FmlaYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlayes"].ToString());
-            fa.FmlaNo = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlano"].ToString());
-            fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefityes"].ToString());
-            fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefitno"].ToString());
-            fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
-            fa.Leave_Purpose_Other = HttpContext.Current.Request.Params["purposeother"].ToString();
-            fa.Leave_Begin = Convert.ToDateTime(HttpContext.Current.Request.Params["leavebegin"].ToString());
-            fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
-            fa.Pto_Balance = Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
+          
             fa.Notes1 = HttpContext.Current.Request.Params["notes1"].ToString();
             // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
             //fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
@@ -1043,7 +1049,7 @@ namespace Carroll.Data.Services.Controllers
             fa.PmSignedDateTime = DateTime.Now;
 
             var re= _service.InsertPayRollStatusChangeNotice(fa);
-            WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "New Payroll Status Change has been submitted on" + DateTime.Now.ToString(), fa.CreatedUser.ToString());
+            WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "New Payroll Status Change has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
             WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
 
@@ -1145,7 +1151,7 @@ namespace Carroll.Data.Services.Controllers
 
             var re= _service.InsertRequisitionRequest(fa);
             WorkflowHelper.InsertHrLog("RequisitionRequest", fa.RequisitionRequestId.ToString(), "New Requisition Request has been submitted", "New Requisition Request  has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
-            WorkflowHelper.InsertHrLog("PayRoll", fa.RequisitionRequestId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+           // WorkflowHelper.InsertHrLog("PayRoll", fa.RequisitionRequestId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
             try
@@ -1192,7 +1198,7 @@ namespace Carroll.Data.Services.Controllers
             browser["JavaScriptVersion"];
 
 
-            WorkflowHelper.UpdatePmBrowserInfo(fa.RequisitionRequestId.ToString(), "RequisitionRequest", "PM Email", browserDetails, VisitorsIPAddress);
+           WorkflowHelper.UpdatePmBrowserInfo(fa.RequisitionRequestId.ToString(), "RequisitionRequest", "PM Email", browserDetails, VisitorsIPAddress);
          //   WorkflowHelper.ReSendHrWorkFlowEmail(fa.RequisitionRequestId.ToString(), "RequisitionRequest", "HR Email");
             return re;
         }
@@ -1261,8 +1267,7 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedDateTime = DateTime.Now;
             var re = _service.InsertNoticeOfEmployeeSeperation(fa);
             WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), "Notice Of Employee Separation has been submitted", "New Notice Of Employee Separation has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
-            WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), " PM Signature has been Completed", "Notice Of Employee Separation has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
-
+           
             string VisitorsIPAddress = string.Empty;
             try
             {
@@ -1308,7 +1313,10 @@ namespace Carroll.Data.Services.Controllers
             browser["JavaScriptVersion"];
 
             WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "PM Email", browserDetails, VisitorsIPAddress);
-        //    WorkflowHelper.ReSendHrWorkFlowEmail(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "HR Email");
+
+            WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), " PM Signature has been Completed", "Notice Of Employee Separation has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+
+            //   WorkflowHelper.ReSendHrWorkFlowEmail(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "HR Email");
             return re;
 
         }

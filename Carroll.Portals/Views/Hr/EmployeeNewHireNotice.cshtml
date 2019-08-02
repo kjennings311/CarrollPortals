@@ -1097,7 +1097,7 @@
                 if (iscorporate == false) {
 
                     if ($("#la_Prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
-                        errormsgsummary += "<li> Please Enter Division Of Labour Percentage  </li>";
+                        errormsgsummary += "<li> Please Enter Division Of Labor Percentage  </li>";
                         $("#la_Prop1per").addClass('has-error');
                         if (control == "")
                             control = $("#la_Prop1per");
@@ -1107,7 +1107,7 @@
 
                         if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "")
                         {
-                            errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
+                            errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
                             $("#la_Prop1").addClass('has-error');
                             $("#la_Prop2").addClass('has-error');
                             $("#la_Prop3").addClass('has-error');
@@ -1117,7 +1117,7 @@
                         else {
                             var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
                             if (total < 100)
-                                errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                                errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
                            // return false;
                         }
 

@@ -1,0 +1,161 @@
+﻿
+
+@{
+    ViewBag.Title = "Dynamic Error Log";
+
+}
+
+<input type="hidden" id="pageid" value="carrollpositions" />
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2> Error Log </h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li>
+                <a href="~/Users/Index">Admin</a>
+            </li>
+            <li class="active">
+                <strong> Error Log </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight" style="min-height:120vh">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title no-padding">
+                <h5>  Error Log <small></small></h5>
+                @*<div class="ibox-tools" style="display:none">
+                    <a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('carrollpositions');"><i class="fa fa-edit"></i> Edit</a>
+
+                    <a disabled="disabled" class="btnDelete" href="#">
+                        <i class="fa fa-trash"></i> Delete
+                    </a>
+
+                    <a style="color:#1ab394;" href="#" onclick="ToggleAdd('carrollpositions');">
+                        <i class="fa fa-plus-circle"></i> Add New
+                    </a>
+                </div>*@
+            </div>
+            <div class="ibox-content">
+                <table class="table  dtprops" width="100%">
+                    @*<thead>
+                            <tr>
+                                <th></th>
+                                <th>User Email</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone</th>
+                                <th>Photo</th>
+                                <th>Is Active </th>
+                                <th>Is Approved </th>
+                            </tr>
+                        </thead>
+
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>User Email</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone</th>
+                                <th>Photo</th>
+                                <th>Is Active </th>
+                                <th>Is Approved </th>
+                            </tr>
+                        </tfoot>*@
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="AddEditContainer row" style="display:none;">
+
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5> Add/Edit  Error Log  </h5>
+                <div class="ibox-tools">
+                    @*<a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>*@
+
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('carrollpositions');">
+                        <i class="fa fa-minus-circle"></i> Cancel
+                    </a>
+                    @*<ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#" >Cancel</a>
+                            </li>
+
+                        </ul>*@
+                    @*<a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>*@
+                </div>
+            </div>
+            <div class="ibox-content dynamicForm">
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+
+@section Styles
+{
+
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+
+    <style>
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        @@media only screen and (min-width: 768px) {
+            .RowsContatiner .ibox-title {
+                padding: 20px 15px 7px !important;
+            }
+        }
+    </style>
+}
+
+@section Scripts 
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+
+    <script>
+
+
+        $(document).ready(function () {
+
+            //  LoadUsers();
+        //    ConfigDatatable("carrollpositions");
+            GetAllHRFORMs('ErrorLog');
+        });
+    </script>
+
+}

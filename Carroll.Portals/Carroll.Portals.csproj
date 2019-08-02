@@ -957,6 +957,7 @@
     <Content Include="Views\User\UserProperties.cshtml" />
     <Content Include="Views\User\CarrollPositions.cshtml" />
     <Content Include="Views\User\PayPeriods.cshtml" />
+    <Content Include="Views\User\ErrorLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -64,7 +64,7 @@
                     <thead><tr style="width:70%;"><th> Position  </th> <th> How Many</th></tr></thead>
                     <tbody>
 
-                        @{ if (Model.PositionCombined.Contains("Property Manager"))
+                        @{ if (Model.PositionCombined.Replace("Assistant Property Manager", "").Contains("Property Manager"))
                             {
 
                                 <tr> <td>  Property Manager  </td><td> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>

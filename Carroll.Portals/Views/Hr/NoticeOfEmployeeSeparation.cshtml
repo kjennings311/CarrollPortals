@@ -74,7 +74,7 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <input type="text" disabled id="rehire" /></p>
+                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <input type="text" value="YES" disabled id="rehire" /></p>
                                             <p class="p1 ft1">Property Name <input type="text" disabled id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
                                             <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <select id="jobtitle" style="width:46%"> </select></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
@@ -628,7 +628,8 @@
 
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             var leaseid = "";
 
             GetAllHRFORMs('EmployeeSeparation');
@@ -640,7 +641,8 @@
                 document.getElementById("sdate").valueAsDate = new Date();
 
                 $("input,select,textarea").prop("disabled", false);
-                $("#sdate").prop("disabled", true);
+                $("#sdate,#rehire").prop("disabled", true);
+                $("#rehire").val('YES');
 
                 //$("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
              
@@ -657,6 +659,7 @@
                 }
             });
 
+            $("#rehire").val("Yes");
 
             if ($("#2weekscom").val() == "true") {
                 $("#rehire").val("Yes");
@@ -757,6 +760,7 @@
                 else
                     reason = "Multiple";
 
+                cnt = 0;
 
                 var quittext = "";
 
@@ -769,13 +773,16 @@
                 });
 
                 quittext = quittext.replace(/(^,)|(,$)/g, "");
+                if (cnt != 0)
+                {
+                    if (cnt == 1 && dischargetext == "")
+                        reason = quittext;
+                    else
+                        reason = "Multiple";
+                }
+              
 
-                if (cnt == 1 && dischargetext == "")
-                    reason = quittext;
-                else
-                    reason = "Multiple";
-
-
+                cnt = 0;
                 var worktext = "";
 
                 $('.wor').each(function (index, obj) {
@@ -787,10 +794,13 @@
 
                 worktext = worktext.replace(/(^,)|(,$)/g, "");
 
-                if (cnt == 1 && quittext == "")
-                    reason = worktext;
-                else
-                    reason = "Multiple";
+                if (cnt != 0)
+                {
+                    if (cnt == 1 && quittext == "" && dischargetext == "")
+                        reason = worktext;
+                    else
+                        reason = "Multiple";
+                }
 
                 if ($("#effectivedate").val() == "") {
                     errormsgsummary += "<li> Please Choose Date </li>";
@@ -909,9 +919,9 @@
                         success: function (data) {
                             // To-do code if ajax request is successful
 
-                            if (data['error'] == false) {
+                            if (data['error'] == false)
+                            {
                                 leaseid = data['insertedId'];
-
 
                                 var insertForm = new FormData();
                                 insertForm.append('refid', leaseid);
@@ -925,7 +935,8 @@
                                     processData: false,
                                     contentType: false,
                                     data: insertForm,
-                                    success: function (data) {
+                                    success: function (data)
+                                    {
                                         // To-do code if ajax request is successful
 
                                     },

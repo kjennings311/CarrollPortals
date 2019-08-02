@@ -60,6 +60,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<ResidentContactInformation_Vehicles> ResidentContactInformation_Vehicles { get; set; }
         public virtual DbSet<DynamicLink> DynamicLinks { get; set; }
         public virtual DbSet<ActivityLogHrForm> ActivityLogHrForms { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -293,6 +294,19 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("refid", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallhrformsactivity_Result>("proc_getallhrformsactivity", formtypeParameter, refidParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetAllClaimsnew_Result> SP_GetAllClaimsnew(Nullable<System.Guid> userid, Nullable<System.Guid> propertyid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            var propertyidParameter = propertyid.HasValue ?
+                new ObjectParameter("propertyid", propertyid) :
+                new ObjectParameter("propertyid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllClaimsnew_Result>("SP_GetAllClaimsnew", useridParameter, propertyidParameter);
         }
     }
 }

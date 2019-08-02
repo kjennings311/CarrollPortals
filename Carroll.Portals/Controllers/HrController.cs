@@ -434,7 +434,7 @@ namespace Carroll.Portals.Controllers
             //  mail.To.Add("pavan.nanduri@carrollorg.com");
            mail.To.Add("sekhar.babu@forcitude.com");
            mail.To.Add("Shashank.Trivedi@carrollorg.com");
-
+            mail.To.Add("sukumar.gandhi@forcitude.com");
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
             try
@@ -621,7 +621,7 @@ namespace Carroll.Portals.Controllers
             // remove this line before going production
             //  mail.To.Add("pavan.nanduri@carrollorg.com");
             mail.To.Add("sekhar.babu@forcitude.com");
-             mail.To.Add("Shashank.Trivedi@carrollorg.com");
+             mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
@@ -825,8 +825,8 @@ namespace Carroll.Portals.Controllers
                     //  mail.To.Add("pavan.nanduri@carrollorg.com");
                     mail.To.Add("sekhar.babu@forcitude.com");
                     mail.To.Add("Shashank.Trivedi@carrollorg.com");
-
-                    mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mail.To.Add("sukumar.gandhi@forcitude.com");
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                     mail.Priority = MailPriority.High;
                 try
                 {
@@ -1038,9 +1038,9 @@ namespace Carroll.Portals.Controllers
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
                 mail.To.Add("sekhar.babu@forcitude.com");
                  mail.To.Add("Shashank.Trivedi@carrollorg.com");
-                 mail.To.Add("iamhr@carrollmg.com");
+                 mail.To.Add("iamhr@carrollmg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
-                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
                 try
                 {

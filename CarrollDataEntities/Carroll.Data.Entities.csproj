@@ -98,6 +98,9 @@
     <Compile Include="EquityPartnerContact.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ErrorLog.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseReimbursementDetail.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -270,6 +273,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GetAllClaims1_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetAllClaimsnew_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_GetUserProperties_Result.cs">

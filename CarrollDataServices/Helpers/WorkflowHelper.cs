@@ -235,6 +235,7 @@ namespace Carroll.Data.Services.Helpers
 
                     _message.Body += "<tr> <td><strong> Apartment Occupied : </strong> </td><td>" + (ClaimData.tbl.ApartmentOccupied == true ? "Yes " : " No ") + "</td> </tr>";
                     _message.Body += "<tr> <td><strong> Residents Affected : </strong> </td><td>" + ClaimData.tbl.ResidentsAffected + "</td> </tr>";
+                    _message.Body += "<tr> <td><strong>  Resident Name : </strong> </td><td>" + ClaimData.tbl.ResidentName + "</td> </tr>";
                     _message.Body += "<tr> <td><strong> Resident Contact Information : </strong> </td><td>" + ClaimData.tbl.ResidentContactInformation + "</td> </tr>";
                     _message.Body += "<tr> <td><strong> Resident Relocating : </strong> </td><td>" + (ClaimData.tbl.ResidentsRelocating == true ? "Yes" : "No" ) + "</td> </tr>";
 
@@ -374,7 +375,7 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         _message.EmailTo = tos;
 
                         if(EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
@@ -447,7 +448,7 @@ namespace Carroll.Data.Services.Helpers
                         tos.Add("iamregionalmanager@carrollmg.com");
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                       //  tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         _message.EmailTo = tos;
 
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.tbl.CreatedUser.ToString()))
@@ -553,7 +554,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                       //  tos.Add("sekhar.babu@forcitude.com");
@@ -618,7 +619,7 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         if (!string.IsNullOrEmpty(NewhireDetails.EmployeeEmail))
                             tos.Add(NewhireDetails.EmployeeEmail);
                         _message.EmailTo = tos;
@@ -713,7 +714,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                        tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         //  tos.Add("sekhar.babu@forcitude.com");
@@ -774,7 +775,7 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                          tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         if (!string.IsNullOrEmpty(NewhireDetails.EmployeeEmail))
                             tos.Add(NewhireDetails.EmployeeEmail);
                         _message.EmailTo = tos;
@@ -872,7 +873,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";
 
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         //  tos.Add("sekhar.babu@forcitude.com");
@@ -924,7 +925,7 @@ namespace Carroll.Data.Services.Helpers
                 List<string> tos = new List<string>();
                  tos.Add("Shashank.Trivedi@carrollorg.com");
                 tos.Add("iamnewemployee@carrollmg.com");
-                tos.Add("sekhar.babu@forcitude.com");
+                tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                 _message.EmailTo = tos;
                
                 
@@ -997,7 +998,7 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         _message.EmailTo = tos;
 
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
@@ -1057,7 +1058,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                          tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamregionalmanager@carrollmg.com");
                        // tos.Add("sekhar.babu@forcitude.com");
@@ -1123,7 +1124,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy. Please find the Attachment of Employee New Hire Notice <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                          tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
@@ -1187,7 +1188,7 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         _message.EmailTo = tos;
 
                        
@@ -1257,7 +1258,7 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                          tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                         if (!string.IsNullOrEmpty(NewhireDetails.EmployeeEmail))
                             tos.Add(NewhireDetails.EmployeeEmail);
                         _message.EmailTo = tos;
@@ -1316,7 +1317,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Employee Lease Rider <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                        tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
@@ -1331,6 +1332,21 @@ namespace Carroll.Data.Services.Helpers
                 }
                 else if (FormType == "NoticeOfEmployeeSeparation")
                 {
+
+                    var dldetails2 = (from tbl in _entities.DynamicLinks
+                                      where tbl.FormType == "NoticeOfEmployeeSeparation" && tbl.Action == "PM Email" && tbl.ReferenceId == propid
+                                      select new { browserinfo = tbl.BrowserInformation, ip = tbl.IpAddress, datetime = tbl.Clientdatetime }).FirstOrDefault();
+                    string br3 = "";
+                    string ip3 = "";
+                    string d3 = "";
+
+                    if (dldetails2 != null)
+                    {
+                        br3 = dldetails2.browserinfo;
+                        ip3 = dldetails2.ip;
+                        d3 = dldetails2.datetime.ToString();
+                    }
+
                     var NewhireDetails = (from tbl in _entities.NoticeOfEmployeeSeperations
                                           join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.EmployeeSeperationId == propid
@@ -1342,10 +1358,12 @@ namespace Carroll.Data.Services.Helpers
                         //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Notice Of Employee Separation has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
-                        _message.Body += "Notice Of Employee Separation for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of Notice Of Employee Separation <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        _message.Body += "A new \"Notice Of Employee Separation\" for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form </p>";
+                        _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";
+
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
-                      tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
+                        tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
 
@@ -1360,6 +1378,22 @@ namespace Carroll.Data.Services.Helpers
                 else if (FormType == "RequisitionRequest")
                 {
 
+                    var dldetails2 = (from tbl in _entities.DynamicLinks
+                                      where tbl.FormType == "RequisitionRequest" && tbl.Action == "PM Email" && tbl.ReferenceId == propid
+                                      select new { browserinfo = tbl.BrowserInformation, ip = tbl.IpAddress, datetime = tbl.Clientdatetime }).FirstOrDefault();
+                    string br3 = "";
+                    string ip3 = "";
+                    string d3 = "";
+
+                    if (dldetails2 != null)
+                    {
+                        br3 = dldetails2.browserinfo;
+                        ip3 = dldetails2.ip;
+                        d3 = dldetails2.datetime.ToString();
+                    }
+
+
+
                     var NewhireDetails = (from tbl in _entities.RequisitionRequests
                                           join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.RequisitionRequestId == propid
@@ -1370,9 +1404,12 @@ namespace Carroll.Data.Services.Helpers
                         //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Requisition Request has been Submitted";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
-                        _message.Body += "Requisition Request   for " + NewhireDetails.PropertyName + " has been submitted. Please find attached copy of Requisition Request  <h5> Thank You, <br> Carroll Management Group   </div></div>";
+                        _message.Body += "A new \"requisition request\"   for " + NewhireDetails.PropertyName + " has been submitted. Please find attached copy of the form </p>";
+
+
+                        _message.Body += "<br> <h6> Property Manager Signature Metadata : </h6> <p> Browser : " + br3 + " </p><p> Ip Address : " + ip3 + " </p> <p> Date Time : " + d3 + " </p> Thank You, <br> Carroll Management Group   </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add("sekhar.babu@forcitude.com");
+                        tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                      tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamhr@carrollmg.com ");
                         _message.EmailTo = tos;
@@ -1427,7 +1464,7 @@ namespace Carroll.Data.Services.Helpers
                             _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + item.EmployeeName + " </h5> <p> ";
                             _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <h5> Thank You, <br> Carroll Management Group   </div></div>";
                             List<string> tos = new List<string>();
-                            tos.Add("sekhar.babu@forcitude.com");
+                            tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                           tos.Add("Shashank.Trivedi@carrollorg.com");
                             tos.Add("iamregionalmanager@carrollmg.com");
                             // tos.Add("sekhar.babu@forcitude.com");
@@ -1591,7 +1628,7 @@ namespace Carroll.Data.Services.Helpers
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
                 mail.To.Add("sekhar.babu@forcitude.com");
-             mail.To.Add("Shashank.Trivedi@carrollorg.com");
+             mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
@@ -1645,9 +1682,9 @@ namespace Carroll.Data.Services.Helpers
             // remove this line before going production
             //  mail.To.Add("pavan.nanduri@carrollorg.com");
             mail.To.Add("sekhar.babu@forcitude.com");
-        mail.To.Add("Shashank.Trivedi@carrollorg.com");
+        mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
-            mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
 
             smtp.Send(mail);
@@ -1695,8 +1732,8 @@ namespace Carroll.Data.Services.Helpers
                mail.To.Clear();
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com");
-           mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
+                mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+                mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;

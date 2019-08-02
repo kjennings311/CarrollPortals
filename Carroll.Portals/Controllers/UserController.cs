@@ -43,5 +43,12 @@ namespace Carroll.Portals.Controllers
         {
             return View(new BaseViewModel());
         }
+
+        // GET: User
+        public ActionResult ErrorLog()
+        {
+            return View(new BaseViewModel());
+        }
+
     }
 }

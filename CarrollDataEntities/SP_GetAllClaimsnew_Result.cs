@@ -10,11 +10,11 @@
 namespace Carroll.Data.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class view_getallclaims
+    public partial class SP_GetAllClaimsnew_Result
     {
         public System.Guid Id { get; set; }
+        public string ClaimNumber { get; set; }
         public System.Guid PropertyId { get; set; }
         public string ClaimType { get; set; }
         public string PropertyName { get; set; }
@@ -29,7 +29,6 @@ namespace Carroll.Data.Entities
         public string ReportedPhone { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
-        public string ClaimNumber { get; set; }
         public string ResidentName { get; set; }
     }
 }

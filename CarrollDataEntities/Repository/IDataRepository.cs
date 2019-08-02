@@ -61,6 +61,7 @@ namespace Carroll.Data.Entities.Repository
 
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
         void HrLogActivity(string FormType, string RecordId, string ActivitySubject, string ActivityDesc,string UserGuid);
+        void ErrorLog(ErrorLog errorLog);
         dynamic GetHrFormLogActivity(string FormType, string RecordId);
         dynamic GetAllMileageForms(string FormType, Guid userid, string optionalSeachText);
         dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted);

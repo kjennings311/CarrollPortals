@@ -812,13 +812,13 @@ namespace Carroll.Data.Entities.Repository
                 var config = new Config { };
 
                 if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
-                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).ToList();
                 else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
                 else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList();
                 else
-                    config.Rows = _entities.SP_GetAllClaims1(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
 
                 config.EtType = EntityType.AllClaims.ToString();
                 PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
@@ -834,9 +834,9 @@ namespace Carroll.Data.Entities.Repository
                 //    config.Columns.Add(new DtableConfigArray { name = "incidentLocation", label = "Incident Location", type = 0, href = "" });
                 //  config.Columns.Add(new DtableConfigArray { name = "incidentDescription", label = "Incident Description", type = 0, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "incidentDateTime", label = "Incident Date", type = DFieldType.IsDate, href = "" });
-                // config.Columns.Add(new DtableConfigArray { name = "reportedBy", label = "Reported By", type = 0, href = "" });
-                //config.Columns.Add(new DtableConfigArray { name = "dateReported", label = "Date Reported", type = DFieldType.IsDate, href = "" });
-                //config.Columns.Add(new DtableConfigArray { name = "reportedPhone", label = "Reported Phone", type = DFieldType.IsText, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "residentName", label = "Resident Name", type = 0, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Submitted Date", type = DFieldType.IsDate, href = "" });
+              //  config.Columns.Add(new DtableConfigArray { name = "reportedPhone", label = "Reported Phone", type = DFieldType.IsText, href = "" });
                 //config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type =  DFieldType.IsDate, href = "" });
 
                 return config;
@@ -1226,7 +1226,23 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
-      public  void HrLogActivity(string FormType, string RecordId, string ActivitySubject, string ActivityDesc, string UserGuid)
+        public void ErrorLog(ErrorLog errorLog)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    _entities.ErrorLogs.Add(errorLog);
+
+                }                 
+                catch (Exception ex)
+                {
+
+                }
+        }
+        }
+
+        public  void HrLogActivity(string FormType, string RecordId, string ActivitySubject, string ActivityDesc, string UserGuid)
       { 
               using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
@@ -2338,6 +2354,24 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
+
+                }
+                if (FormType == "ErrorLog")
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.ErrorLogs.ToList();
+                    else
+                        config.Rows = _entities.ErrorLogs.Where(x => x.Page.ToLower().Contains(optionalSeachText.ToLower()) || x.UserName.ToLower().Contains(optionalSeachText.ToLower()) || x.Error.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+
+                    config.EtType = EntityType.AllClaims.ToString();
+                    PropertyInfo[] userprop = typeof(ErrorLog).GetProperties();
+                    config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
+                    config.Columns = new List<DtableConfigArray>();
+
+                    config.Columns.Add(new DtableConfigArray { name = "userName", label = "User", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "page", label = "Page", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "error", label = "Error", type = 0, href = "" });
+                   config.Columns.Add(new DtableConfigArray { name = "datetime", label = "Date", type = DFieldType.IsDate, href = "" });                   
 
                 }
                 //else if (FormType == "Mileage Log")

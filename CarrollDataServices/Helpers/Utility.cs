@@ -176,6 +176,7 @@ namespace Carroll.Data.Services.Helpers
             {
                 if (_field.ToString() == "AuthoritiesContacted")
                 {
+                    if(_field.FieldValue == "1" || _field.FieldValue == "true" )
                     iscontacted = true;
                 }
                 else if (_field.ToString() == "PoliceReportNumber" && iscontacted == true && (string.IsNullOrEmpty(_field.FieldValue)))
