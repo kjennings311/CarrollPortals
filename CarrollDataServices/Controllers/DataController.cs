@@ -35,6 +35,7 @@ namespace Carroll.Data.Services.Controllers
     // [Authorize]
     // [EnableCors(origins: "http://localhost")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [ExceptionFilter]
     public class DataController : ApiController
     {
         private IDataService _service;
@@ -553,7 +554,7 @@ namespace Carroll.Data.Services.Controllers
             fa.EmployeeEmail = HttpContext.Current.Request.Params["empemail"].ToString();
             fa.PropertyManager = "";
             fa.SignatureOfPropertyManager = HttpContext.Current.Request.Params["propertymanager"].ToString();
-            fa.SignatureOfEmployee = HttpContext.Current.Request.Params["signature"].ToString();
+           // fa.SignatureOfEmployee = HttpContext.Current.Request.Params["signature"].ToString();
             fa.EmployeeLeaseRiderId = System.Guid.NewGuid();
             fa.Position = HttpContext.Current.Request.Params["position"].ToString();
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
@@ -907,6 +908,8 @@ namespace Carroll.Data.Services.Controllers
 
                 WorkflowHelper.UpdatePmBrowserInfo(refid, "NewHire", "Rejection Email", browserDetails, VisitorsIPAddress);
                 WorkflowHelper.SendNewHireRejectionEmail(refid,CreatedByName);
+                WorkflowHelper.InsertHrLog("NewHire", refid, "Rejection email has been sent to property manager", " Employee New Hire Notice has been rejected on" + DateTime.Now.ToString(), "System");
+
             }
 
             return ret;

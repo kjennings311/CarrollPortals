@@ -604,8 +604,8 @@
                 leaseid = $(this).attr('data-ref');
                 $(".reviewmodal").modal('show');
 
-              //   if ($("#UserR").val() == "hr")
-              if ($("#UserR").val() == "Administrator")
+                if ($("#UserR").val() == "hr")
+              //  if($("#UserR").val() == "Administrator")
                 {
                     console.log($("#UserR").val()+"hr")
                     $("#managerblock").show();
@@ -809,7 +809,7 @@
             // Resubmit
             var insertoredit = true;
 
-            $(document).on('click', "#resubmit", function ()
+            $(document).on('click', "#resubmit,.resubmit", function ()
             {
                 $('.reviewmodal').modal('hide');
                 $('#myModal').modal('show');

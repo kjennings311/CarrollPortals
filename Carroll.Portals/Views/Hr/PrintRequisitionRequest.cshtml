@@ -56,108 +56,108 @@
                         <TD class="tr1 td1"><P class="p0 ft4">&nbsp;</P></TD>
                     </TR>
                 </TABLE>
-              
-                @if(@Model.PositionCombined.ToString() != "")
+
+                @if (@Model.PositionCombined.ToString() != "")
                 {
 
-                <table style="width:60%;margin:20px;">
-                    <thead><tr style="width:70%;"><th> Position  </th> <th> How Many</th></tr></thead>
-                    <tbody>
+                    <table style="width:60%;margin:20px;">
+                        <thead><tr style="width:70%;"><th> Position  </th> <th> How Many</th></tr></thead>
+                        <tbody>
 
-                        @{ if (Model.PositionCombined.Replace("Assistant Property Manager", "").Contains("Property Manager"))
-                            {
+                            @{ if (Model.PositionCombined.Replace("Assistant Property Manager", "").Contains("Property Manager"))
+                                {
 
-                                <tr> <td>  Property Manager  </td><td> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
+                                    <tr> <td>  Property Manager  </td><td> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
+
+                                }
+
+                                if (Model.PositionCombined.Contains("Assistant Property Manager"))
+                                {
+                                    <tr>
+                                        <td> Assistant Property Manager  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Assistant Property Manager--")) + 28, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                if (Model.PositionCombined.Contains("Leasing Manager"))
+                                {
+                                    <tr>
+                                        <td> Leasing Manager  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Manager--")) + 17, 1)
+                                        </td>
+                                    </tr>
+                                }
+
+                                if (Model.PositionCombined.Contains("Leasing Consultant"))
+                                {
+                                    <tr>
+                                        <td>  Leasing Consultant  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Consultant")) + 20, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                if (Model.PositionCombined.Contains("Maintenance Supervisor"))
+                                {
+                                    <tr>
+                                        <td> Maintenance Supervisor  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Supervisor")) + 24, 1)
+                                        </td>
+                                    </tr>
+                                }
+
+                                if (Model.PositionCombined.Contains("Maintenance Technician"))
+                                {
+                                    <tr>
+                                        <td> Maintenance Technician  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Technician")) + 24, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                if (Model.PositionCombined.Contains("Groundskeeper"))
+                                {
+                                    <tr>
+                                        <td> Groundskeeper</td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Groundskeeper")) + 15, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                if (Model.PositionCombined.Contains("Housekeeper"))
+                                {
+                                    <tr>
+                                        <td> Housekeeper  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Housekeeper")) + 13, 1)
+
+                                        </td>
+                                    </tr>
+                                }
+
+                                if (Model.PositionCombined.Contains("Other"))
+                                {
+                                    <tr>
+                                        <td>  @Model.PositionOther  </td>
+                                        <td>
+                                            @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Other--")) + 7, 1)
+                                        </td>
+                                    </tr>
+                                }
 
                             }
 
-                            if (Model.PositionCombined.Contains("Assistant Property Manager"))
-                            {
-                                <tr>
-                                    <td> Assistant Property Manager  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Assistant Property Manager--")) + 28, 1)
-                                    </td>
-                                </tr>
-                            }
-                       if (Model.PositionCombined.Contains("Leasing Manager"))
-                            {
-                                <tr>
-                                    <td> Leasing Manager  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Manager--")) + 17, 1)
-                                    </td>
-                                </tr>
-                            }
-
-                      if (Model.PositionCombined.Contains("Leasing Consultant"))
-                            {
-                                <tr>
-                                    <td>  Leasing Consultant  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Consultant")) + 20, 1)
-                                    </td>
-                                </tr>
-                            }
-                       if (Model.PositionCombined.Contains("Maintenance Supervisor"))
-                            {
-                                <tr>
-                                    <td> Maintenance Supervisor  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Supervisor")) + 24, 1)
-                                    </td>
-                                </tr>
-                            }
-
-                            if (Model.PositionCombined.Contains("Maintenance Technician"))
-                            {
-                                <tr>
-                                    <td> Maintenance Technician  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Technician")) + 24, 1)
-                                    </td>
-                                </tr>
-                            } 
-                            if (Model.PositionCombined.Contains("Groundskeeper"))
-                            {
-                                <tr>
-                                    <td> Groundskeeper</td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Groundskeeper")) + 15, 1)
-                                    </td>
-                                </tr>
-                            } 
-                            if (Model.PositionCombined.Contains("Housekeeper"))
-                            {
-                                <tr>
-                                    <td> Housekeeper  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Housekeeper")) + 13, 1)
-
-                                    </td>
-                                </tr>
-                            }
-
-                            if (Model.PositionCombined.Contains("Other"))
-                            {
-                                <tr>
-                                    <td>  @Model.PositionOther  </td>
-                                    <td>
-                                        @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Other--")) + 7, 1)
-                                    </td>
-                                </tr>
-                            }
-
-                        }
-                        
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
 
                 }
 
-              
+
                 <P class="p1 ft0">
                     Circle One: <SPAN class="ft1">
                         @{
@@ -250,7 +250,62 @@
             </div>
         </form>
     </div>
+    <div class="page">
 
+        <div id="page_1">
+            <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
+                <img src="/img/requistionrequestheader.jpg" />
+                <h1 style="font-weight:bold;text-align:center;">  Activity - @Model.SequenceNumber </h1>
+            </DIV>
+
+
+            <table id="viewlog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Description</th>
+                        <th style="width:30%;">Date</th>
+                        <th style="width:20%"> Created By </th>
+                    </tr>
+                </thead>
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.log)
+                    {
+                        <tr> <td> @item.ActivitySubject </td> <td> @item.ActivityDate.ToString().Substring(0, 19) </td> <td> @item.ActivityByName </td> </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <h2> Signature Meta Data </h2>
+            <br />
+            <table id="signaturelog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:15%"> Type </th>
+                        <th style="width:10%">Ip Address</th>
+                        <th style="width:50%;text-align:center">Browser </th>
+                        <th style="width:25%;text-align:center"> Date Time </th>
+                    </tr>
+                </thead>
+                <tbody id="hrsignmetadata">
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.metadata)
+                    {
+                        <tr> <td> @item.Action.Replace("Email", "Signature") </td> <td> @item.ip </td> <td> @item.browserinfo </td> <td> @item.datetime.ToString().Substring(0, 19)</td> </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
     <style type="text/css">
 
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');

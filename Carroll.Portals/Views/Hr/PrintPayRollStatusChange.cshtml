@@ -20,6 +20,7 @@
 
 </head>
 <body class="document">
+
     <div class="page">
         <div id="page_1" style="width:96%;">
             <img style="margin-left: 33%;margin-top:-35px;" src="/img/payroll.png" id="p1img1">
@@ -67,16 +68,16 @@
                 @if (Model.ShowPropertyChange == true)
                 {
 
-                <div style="width:100%;" id="divpropertychange">
+                    <div style="width:100%;" id="divpropertychange">
 
-                    <P class="p4 ft5">Property Change</P>
-                    <P class="p5 ft6"> Change Effective Date : <input type="text"    value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
-                    <P class="p5 ft6"> Property Transfer:</P>
+                        <P class="p4 ft5">Property Change</P>
+                        <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
+                        <P class="p5 ft6"> Property Transfer:</P>
 
-                    <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> From Property Name: <input style=" display:inline; " value="@Model.FromPropName" type="text" id="frompropname" class="" />From Manager:  <input style=" display:inline; " value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
-                    <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " type="text" value="@Model.ToPropName" id="topropname" class="" />To Manager: <input style=" display:inline; " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
-                    <hr style="border-top: 2px solid black;" />
-                </div>
+                        <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> From Property Name: <input style=" display:inline; " value="@Model.FromPropName" type="text" id="frompropname" class="" />From Manager:  <input style=" display:inline; " value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
+                        <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " type="text" value="@Model.ToPropName" id="topropname" class="" />To Manager: <input style=" display:inline; " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
+                        <hr style="border-top: 2px solid black;" />
+                    </div>
 
 
                 }
@@ -327,10 +328,12 @@
 
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
-                    <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @if (Model.Notes1 != null)
+                    <P class="p6 ft1">
+                        <textarea type="text" style="width:95%" id="notes1"> @if (Model.Notes1 != null)
                     {
                         @Model.Notes1
-                    } </textarea></P>
+                    } </textarea>
+                    </P>
 
                 </div>
                 <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.ESignature" />  Date: <input type="text" name="name" value="@Model.EDate.Value.ToShortDateString()" /> </P>
@@ -339,6 +342,66 @@
 
         </div>
     </div>
+
+    <div class="page">
+
+        <div id="page_1">
+            <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
+                <img src="/img/requistionrequestheader.jpg" />
+                <h1 style="font-weight:bold;text-align:center">  Activity - @Model.SequenceNumber </h1>
+            </DIV>
+
+
+            <table id="viewlog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Description</th>
+                        <th style="width:30%;">Date</th>
+                        <th style="width:20%"> Created By </th>
+                    </tr>
+                </thead>
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.log)
+                    {
+                        <tr> <td> @item.ActivitySubject </td> <td> @item.ActivityDate.ToString().Substring(0, 19) </td> <td> @item.ActivityByName </td> </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <h2> Signature Meta Data </h2>
+            <br />
+            <table id="signaturelog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:15%"> Type </th>
+                        <th style="width:10%">Ip Address</th>
+                        <th style="width:50%;text-align:center">Browser </th>
+                        <th style="width:25%;text-align:center"> Date Time </th>
+                    </tr>
+                </thead>
+                <tbody id="hrsignmetadata">
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.metadata)
+                    {
+                        <tr> <td> @item.Action.Replace("Email", "Signature") </td> <td> @item.ip </td> <td> @item.browserinfo </td> <td> @item.datetime.ToString().Substring(0, 19)</td> </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+      
+
+    </div>
+
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
 
@@ -351,9 +414,9 @@
             padding: 0
         }
 
-        hr{
-            margin-top:10px !important;
-            margin-bottom:0px !important;
+        hr {
+            margin-top: 10px !important;
+            margin-bottom: 0px !important;
         }
 
         .c3 {
@@ -870,35 +933,35 @@
             padding: 0px;
             margin: 0px;
             width: 474px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td1 {
             padding: 0px;
             margin: 0px;
             width: 147px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td2 {
             padding: 0px;
             margin: 0px;
             width: 83px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td3 {
             padding: 0px;
             margin: 0px;
             width: 16px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td4 {
             padding: 0px;
             margin: 0px;
             width: 704px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td5 {
@@ -906,7 +969,7 @@
             padding: 0px;
             margin: 0px;
             width: 474px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td6 {
@@ -914,7 +977,7 @@
             padding: 0px;
             margin: 0px;
             width: 147px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td7 {
@@ -922,7 +985,7 @@
             padding: 0px;
             margin: 0px;
             width: 83px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td8 {
@@ -930,7 +993,7 @@
             padding: 0px;
             margin: 0px;
             width: 16px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td9 {
@@ -944,14 +1007,14 @@
             padding: 0px;
             margin: 0px;
             width: 241px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td11 {
             padding: 0px;
             margin: 0px;
             width: 354px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td12 {
@@ -959,7 +1022,7 @@
             padding: 0px;
             margin: 0px;
             width: 125px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td13 {
@@ -967,14 +1030,14 @@
             padding: 0px;
             margin: 0px;
             width: 595px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .td14 {
             padding: 0px;
             margin: 0px;
             width: 595px;
-           /*vertical-align: bottom;*/
+            /*vertical-align: bottom;*/
         }
 
         .tr0 {
@@ -1019,6 +1082,7 @@
             width: 720px;
             font: italic 15px 'Calibri';
         }
+
         .sign {
             font-family: 'Herr Von Muellerhoff', cursive;
         }
@@ -1028,8 +1092,6 @@
             font-weight: bold;
             font-size: 22px;
         }
-
-
     </style>
 </body>
 </html>

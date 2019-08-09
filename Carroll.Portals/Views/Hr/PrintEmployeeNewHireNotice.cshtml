@@ -425,6 +425,91 @@
         </form>
 
     </div>
+
+    <div class="page">
+
+        <div id="page_1">
+            <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
+                <img src="/img/requistionrequestheader.jpg" />
+                <h1 style="font-weight:bold;text-align:center">  Activity - @Model.SequenceNumber </h1>
+            </DIV>
+
+
+            <table id="viewlog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Description</th>
+                        <th style="width:30%;">Date</th>
+                        <th style="width:20%"> Created By </th>
+                    </tr>
+                </thead>
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.log)
+                    {
+                        <tr> <td> @item.ActivitySubject </td> <td> @item.ActivityDate.ToString().Substring(0, 19) </td> <td> @item.ActivityByName </td> </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <h2> Signature Meta Data </h2>
+            <br />
+            <table id="signaturelog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:15%"> Type </th>
+                        <th style="width:10%">Ip Address</th>
+                        <th style="width:50%;text-align:center">Browser </th>
+                        <th style="width:25%;text-align:center"> Date Time </th>
+                    </tr>
+                </thead>
+                <tbody id="hrsignmetadata">
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.metadata)
+                    {
+                        <tr> <td> @item.Action.Replace("Email", "Signature") </td> <td> @item.ip </td> <td> @item.browserinfo </td> <td> @item.datetime.ToString().Substring(0, 19)</td> </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+        @if (Model.printActivity.rejection != null && Model.printActivity.rejection.Count > 0)
+        {
+
+            <div class="col-md-12 rejectionblock" style="text-align:center;">
+                <h2> Rejection  </h2>
+                <br />
+                <table id="rejectionlog" class="table table-striped col-md-6">
+                    <thead>
+                        <tr>
+                            <th style="width:15%"> Rejected By </th>
+                            <th style="width:60%;text-align:center">Reason </th>
+                            <th style="width:25%;text-align:center"> Date Time </th>
+                        </tr>
+                    </thead>
+                    <tbody id="rjmetadata">
+
+                        @foreach (var item in Model.printActivity.rejection)
+                        {
+                            <tr> <td> @item.FirstName &nbsp;&nbsp;  @item.LastName </td> <td>  @item.RejectedReason </td>  <td> @item.RejectedDateTime.ToString().Substring(0, 19) </td>  </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        }
+
+    </div>
 </body>
 </html>
 

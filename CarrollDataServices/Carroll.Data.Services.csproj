@@ -212,7 +212,9 @@
   <ItemGroup>
     <Content Include="ModelXml\dummy.xml" />
     <Content Include="ModelXml\FormGeneralLiabilityClaim.xml" />
-    <Content Include="ModelXml\FormMoldDamageClaim.xml" />
+    <Content Include="ModelXml\FormMoldDamageClaim.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ModelXml\FormPropertyDamageClaim.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -254,6 +256,7 @@
     </Compile>
     <Compile Include="Helpers\AuthorizeRolesAttribute.cs" />
     <Compile Include="Helpers\CustomActionFilter.cs" />
+    <Compile Include="Helpers\ExceptionFilter.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\Role.cs" />

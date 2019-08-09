@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ResidentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataControllers\DataController.cs" />
+    <Compile Include="FIlters\ExceptionFilter.cs" />
     <Compile Include="GetCurrentUser.ashx.cs">
       <DependentUpon>GetCurrentUser.ashx</DependentUpon>
     </Compile>

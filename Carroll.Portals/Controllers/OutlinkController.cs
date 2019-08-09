@@ -32,6 +32,7 @@ using System.Text.RegularExpressions;
 namespace Carroll.Portals.Controllers
 {
 
+    [ExceptionFilter]
     public class OutlinkController : Controller
     {
 
@@ -63,6 +64,7 @@ namespace Carroll.Portals.Controllers
                 var newhire = (from tbl in _entities.EmployeeNewHireNotices
                                where tbl.EmployeeHireNoticeId == dlink.ReferenceId
                                select tbl).FirstOrDefault();
+
                 if (dlink == null)
                 {
                     return Content("<p style='color:red'> Invalid Link, Please Contact Administrator </p>");
@@ -328,6 +330,17 @@ namespace Carroll.Portals.Controllers
                 //Deserializing the response recieved from web api and storing into the Employee list  
                 obj = JsonConvert.DeserializeObject<PrintEmployeeLeaseRider>(EmpResponse);
             }
+            HttpResponseMessage Res1 = await client.GetAsync("api/data/GetHRFormsActivityLogExport?Id=" + retu + "&FormType=" + "LeaseRider");
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (Res1.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var EmpResponse = Res1.Content.ReadAsStringAsync().Result;
+
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                obj.printActivity = JsonConvert.DeserializeObject<PrintActivity>(EmpResponse);
+
+            }
 
             var actionPDF = new Rotativa.ViewAsPdf("../Hr/PrintEmployeeLeaseRider", obj)//some route values)
             {
@@ -514,7 +527,17 @@ namespace Carroll.Portals.Controllers
 
 
             }
+            HttpResponseMessage Res1 = await client.GetAsync("api/data/GetHRFormsActivityLogExport?Id=" + retu + "&FormType=" + "PayRoll");
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (Res1.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var EmpResponse = Res1.Content.ReadAsStringAsync().Result;
 
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                obj.printActivity = JsonConvert.DeserializeObject<PrintActivity>(EmpResponse);
+
+            }
 
 
             var actionPDF = new Rotativa.ViewAsPdf("../Hr/PrintPayRollStatusChange", obj)//some route values)
@@ -718,7 +741,17 @@ namespace Carroll.Portals.Controllers
 
                 }
 
+                HttpResponseMessage Res1 = await client.GetAsync("api/data/GetHRFormsActivityLogExport?Id=" + retu + "&FormType=" + "NewHire");
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res1.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res1.Content.ReadAsStringAsync().Result;
 
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj.printActivity = JsonConvert.DeserializeObject<PrintActivity>(EmpResponse);
+
+                }
 
                 var actionPDF = new Rotativa.ViewAsPdf("../Hr/PrintEmployeeNewHireNotice", obj)//some route values)
                 {

@@ -73,5 +73,7 @@ namespace Carroll.Data.Services.Models
         string GetPropertyNumberNameManager(string PropertyNumber);
         dynamic GetHrFormLogActivity(string FormType, string RecordId);
         dynamic GetNewHireRejectionDetails(string Refid);
+        void ErrorLog(ErrorLog errorLog);
+
     }
 }

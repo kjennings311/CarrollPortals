@@ -91,21 +91,23 @@ namespace Carroll.Portals.Models
         public decimal ApartmentMarketRentalValue { get; set; }
         public string EmployeeName { get; set; }
         public System.DateTime Date { get; set; }
-        public System.DateTime? PositionDate { get; set; }
-        public System.DateTime PmDate { get; set; }
         public string Community { get; set; }
         public decimal EmployeeMonthlyRent { get; set; }
         public string RentalPaymentResidencyAt { get; set; }
         public string PropertyManager { get; set; }
-        public string SignatureOfPropertyManager { get; set; }
         public string Position { get; set; }
-        public string SignatureOfEmployee { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }
         public Nullable<System.DateTime> ModifiedDatetime { get; set; }
+        public string SignatureOfPropertyManager { get; set; }
+        public string SignatureOfEmployee { get; set; }
+        public Nullable<System.DateTime> PositionDate { get; set; }
         public string EmployeeEmail { get; set; }
-        public DateTime? EmployeeSignedDateTime { get; set; }
+        public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
+        public string SequenceNumber { get; set; }
+        public Nullable<System.DateTime> PMDate { get; set; }
+        public PrintActivity printActivity { get; set; }
     }
 
     public class PrintRequisitionRequest
@@ -135,6 +137,8 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> ModifiedDateTime { get; set; }
         public Nullable<bool> ChkOtherPosition { get; set; }
         public Nullable<bool> ChkOtherPost { get; set; }
+        public string SequenceNumber { get; set; }
+        public PrintActivity printActivity { get; set; }
     }
 
     public class PrintViewClaim
@@ -147,7 +151,7 @@ namespace Carroll.Portals.Models
     }
 
     public class PrintProperty
-    {
+    {       
         public System.Guid PropertyId { get; set; }
         public string PropertyName { get; set; }
         public Nullable<int> PropertyNumber { get; set; }
@@ -179,11 +183,17 @@ namespace Carroll.Portals.Models
         public string Field2 { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
-        public string CreatedByName { get; set; }
+        public string CreatedByName { get; set; }        
+        public string ClaimNumber { get; set; }
+        public string IncidentTime { get; set; }
+        public string ResidentName { get; set; }
+        public string ResidentContactInformation { get; set; }
+        public string PoliceReportNumber { get; set; }
 
     }
     public class PrintGeneralLiabilityClaim
     {
+
         public System.Guid GLLId { get; set; }
         public System.Guid PropertyId { get; set; }
         public Nullable<System.DateTime> IncidentDateTime { get; set; }
@@ -211,10 +221,14 @@ namespace Carroll.Portals.Models
         public Nullable<System.Guid> CreatedBy { get; set; }
         public Nullable<bool> NotifySecurityOfficer { get; set; }
         public string ClaimNumber { get; set; }
+        public string ResidentName { get; set; }
+        public string ResidentContactInformation { get; set; }
+        public string PoliceReportNumber { get; set; }
     }
 
     public class PrintMoldDamageClaim
     {
+
         public System.Guid MDLId { get; set; }
         public System.Guid PropertyId { get; set; }
         public Nullable<System.DateTime> DiscoveryDate { get; set; }
@@ -236,6 +250,11 @@ namespace Carroll.Portals.Models
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string ClaimNumber { get; set; }
+        public Nullable<bool> ApartmentOccupied { get; set; }
+        public string ResidentsAffected { get; set; }
+        public Nullable<bool> ResidentsRelocating { get; set; }
+        public string ResidentContactInformation { get; set; }
+        public string ResidentName { get; set; }
     }
 
     public class PrintPropertyDamageClaim
@@ -263,6 +282,10 @@ namespace Carroll.Portals.Models
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string ClaimNumber { get; set; }
+        public string IncidentTime { get; set; }
+        public string ResidentName { get; set; }
+        public string ResidentContactInformation { get; set; }
+        public string PoliceReportNumber { get; set; }
     }
 
     public class PrintEmployeeNewHireNotice
@@ -312,6 +335,8 @@ namespace Carroll.Portals.Models
         public Nullable<System.Guid> RejectedBy { get; set; }
         public Nullable<System.DateTime> RejectedDateTime { get; set; }
         public string AdditionalText { get; set; }
+        public string RejectedReason { get; set; }
+        public  PrintActivity printActivity { get; set; }
 
     }
 
@@ -511,6 +536,7 @@ namespace Carroll.Portals.Models
         public Nullable<double> La_Property3_Per { get; set; }
         public Nullable<System.DateTime> PmSignedDateTime { get; set; }
         public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
+        public PrintActivity printActivity { get; set; }
     }
 
     public class PrintNoticeOfEmployeeSeparation
@@ -546,6 +572,8 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> HRMDate { get; set; }
         public string Reason { get; set; }
         public Nullable<bool> C2WeeksCompleted { get; set; }
+        public string SequenceNumber { get; set; }
+        public PrintActivity printActivity { get; set; }
     }
 
     public class PrintMileageLogHeader

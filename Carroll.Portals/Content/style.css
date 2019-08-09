@@ -8697,10 +8697,10 @@ z-index:99999999 !important;
         .ipbackground h1 {
             position: absolute !important;
             margin-top: 100px !important;
-            font-size: 26px !important;
+            font-size: 35px !important;
             color: white !important;
             text-align: center !important;
-            padding-left: 3% !important;
+            padding-left: 5% !important;
         }
 
     .homeheading
@@ -8858,7 +8858,7 @@ z-index:99999999 !important;
         }*/
         .ipbackground h1 {
             margin-top: 235px !important;
-            font-size: 98px !important;
+            font-size: 117px !important;
             color: white !important;
             text-align: center !important;
             position: inherit !important;

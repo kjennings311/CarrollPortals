@@ -1,6 +1,6 @@
 ﻿ 
 // var $BaseApiUrl = "http://localhost:1002/";
-var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -12,8 +12,6 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phon
     // Take the user to a different screen here.
     $ismobile = true;
 }
-
-
 
 var $reloadpageformobile = false;
 var $isemailconfirmed = false;
@@ -422,8 +420,8 @@ function getForm(FormName, RecordId)
 {
 
     var formUrl = "";
-    var TXT_ERROR = " <div class=\"alert alert-danger alert-dismissable failure-message\" style=\"display:none\"><div id=\"failureMessage\">there was an error!</div> </div>";
-    var TXT_SUCCESS = "<div class=\"alert alert-success alert-dismissable success-message\" style=\"display:none\"><div id=\"successMessage\"></div> </div>";
+    var TXT_ERROR = " <div class=\"alert col-md-10 alert-danger alert-dismissable failure-message\" style=\"display:none\"><div id=\"failureMessage\">there was an error!</div> </div>";
+    var TXT_SUCCESS = "<div class=\"alert col-md-10 alert-success alert-dismissable success-message\" style=\"display:none\"><div id=\"successMessage\"></div> </div>";
     var $formBegin = '<form  class="form-horizontal CustomForm">';
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
@@ -672,7 +670,23 @@ function LoadHrForm(formname) {
     $("#myModal").modal({
         backdrop: 'static',
         keyboard: false
-    },'show');
+    }, 'show');
+
+    $(document).on('keyup', 'textarea', function () {
+        var max = 1000;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#cnt' + $(this).attr('id')).html('<span style="color:red"> you have reached the limit </span>');
+            var str = $(this).val();
+            $(this).val(str.substring(1, 1000));
+
+        } else {
+            var char = max - len;
+            $('#cnt' + $(this).attr('id')).html('<span style="color:green">' + char + ' characters left</span>');
+        }
+
+    });
+
    
 }
 
@@ -2633,6 +2647,29 @@ function ConfigDatatable(Form) {
         }
     );
 }
+function FilterClaims(filter) {
+    $("#DataTables_Table_0_filter input").val(filter);
+    $('.dtprops').DataTable().search(filter).draw();
+    $(".pr,.ge,.mo").removeClass('active');
+
+    if (filter == "Mold")
+    {
+        $(".mo").addClass('active');
+    }
+    else if (filter == "General") {
+        $(".ge").addClass('active');
+    }
+    else if (filter == "Property") {
+        $(".pr").addClass('active');
+    }
+}
+
+$(document).on("change", "#DataTables_Table_0_filter input",function () {
+
+    if ($("#DataTables_Table_0_filter input").val() == "") {
+        $(".pr,.ge,.mo").removeClass('active');
+    }
+});
 
 function GetAllClaims(Type) {
 
@@ -3344,7 +3381,7 @@ function LoadClaim()
 
                             if (Type == "p")
                             {
-                                $("#heading").html("Property Damage Claim");
+                                $("#heading").html("Property Damage Claim - " + ClaimData.claim.tbl.claimNumber);
                                 $("#property").html(ClaimData.claim.propertyName);
                                 claimbody += ' <table class="table">';
                                 claimbody += '<tr><td style="width:30%;"> Weather Conditions:</td><td>' + CheckNull(ClaimData.claim.tbl.weatherConditions) + '</td></tr>'; 
@@ -3391,7 +3428,7 @@ function LoadClaim()
 
                             }
                             else if (Type == "m") {
-                                $("#heading").html("Mold Damage Claim");
+                                $("#heading").html("Mold Damage Claim  - " + ClaimData.claim.tbl.claimNumber);
                                 $("#property").html(ClaimData.claim.propertyName);
 
                             
@@ -3447,7 +3484,7 @@ function LoadClaim()
                                 $("#claimbody").html(claimbody);
                             }
                             else if (Type == "g") {
-                                $("#heading").html("General Liability Claim");
+                                $("#heading").html("General Liability Claim - " + ClaimData.claim.tbl.claimNumber);
                                 $("#property").html(ClaimData.claim.propertyName);
                                 claimbody += ' <table class="table">';
 

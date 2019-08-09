@@ -174,12 +174,12 @@ namespace Carroll.Data.Services.Helpers
 
             foreach (FormField _field in FormData)
             {
-                if (_field.ToString() == "AuthoritiesContacted")
+                if (_field.FieldName == "AuthoritiesContacted")
                 {
-                    if(_field.FieldValue == "1" || _field.FieldValue == "true" )
+                    if(_field.FieldValue == "1" || _field.FieldValue == "True" )
                     iscontacted = true;
                 }
-                else if (_field.ToString() == "PoliceReportNumber" && iscontacted == true && (string.IsNullOrEmpty(_field.FieldValue)))
+                else if (_field.FieldName == "PoliceReportNumber" && iscontacted == true && (string.IsNullOrEmpty(_field.FieldValue)))
                 {
                     _validationDictionary.AddError(_field.FieldName, string.Concat(_field.FieldLabel, " is required."));
                 }

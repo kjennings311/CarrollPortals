@@ -88,11 +88,11 @@
             <PropertyRef Name="EmployeeLeaseRiderId" />
           </Key>
           <Property Name="EmployeeLeaseRiderId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ApartmentMarketRentalValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ApartmentMarketRentalValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Community" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="EmployeeMonthlyRent" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="EmployeeMonthlyRent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="RentalPaymentResidencyAt" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PropertyManager" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -289,7 +289,7 @@
           <Property Name="GLLId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IncidentDateTime" Type="datetime" />
-          <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentLocation" Type="varchar(max)" />
           <Property Name="IncidentDescription" Type="varchar(max)" />
           <Property Name="AuthoritiesContacted" Type="bit" />
           <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
@@ -356,7 +356,7 @@
           <Property Name="PropertyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IncidentDateTime" Type="datetime" Nullable="false" />
           <Property Name="WeatherConditions" Type="varchar(max)" />
-          <Property Name="IncidentLocation" Type="varchar" MaxLength="50" />
+          <Property Name="IncidentLocation" Type="varchar(max)" />
           <Property Name="DescriptionOfProperty" Type="varchar" MaxLength="500" />
           <Property Name="IncidentDescription" Type="varchar(max)" />
           <Property Name="EstimateOfDamage" Type="nvarchar" MaxLength="350" />
@@ -1145,7 +1145,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="GLLId" Type="Guid" Nullable="false" />
           <Property Name="PropertyId" Type="Guid" Nullable="false" />
           <Property Name="IncidentDateTime" Type="DateTime" Precision="3" />
-          <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AuthoritiesContacted" Type="Boolean" />
           <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1212,7 +1212,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="PropertyId" Type="Guid" Nullable="false" />
           <Property Name="IncidentDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="WeatherConditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IncidentLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DescriptionOfProperty" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EstimateOfDamage" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
@@ -1696,11 +1696,11 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <PropertyRef Name="EmployeeLeaseRiderId" />
           </Key>
           <Property Name="EmployeeLeaseRiderId" Type="Guid" Nullable="false" />
-          <Property Name="ApartmentMarketRentalValue" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ApartmentMarketRentalValue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Community" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EmployeeMonthlyRent" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="EmployeeMonthlyRent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="RentalPaymentResidencyAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PropertyManager" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />

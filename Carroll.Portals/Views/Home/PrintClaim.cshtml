@@ -43,15 +43,15 @@
     <div class="page">
         @if (Model.Type == 'g')
         {
-            <h1> General Liability Claim </h1>
+        <h1> General Liability Claim -  <b> @Model.GLC.ClaimNumber</b> </h1>
         }
         else if (Model.Type == 'p')
         {
-            <h1> Property Damage Claim </h1>
+        <h1> Property Damage Claim -  <b> @Model.PDC.ClaimNumber</b> </h1>
         }
         else if (Model.Type == 'm')
         {
-            <h1> Mold DamageClaim </h1>
+            <h1> Mold Damage Claim -  <b> @Model.MDC.ClaimNumber</b> </h1>
         }
 
         <table class="table table-hover table-responsive table-striped">
@@ -75,7 +75,11 @@
 
 
         <table class="table table-hover table-responsive table-striped">
-            <tr> <td> <strong>Claim Details : </strong></td> </tr> <tr> <td style="width:30%;"> <b> Claim Number  </b> </td><td> <b> @Model.GLC.ClaimNumber</b> </td></tr>
+            <tr> <td> <strong>Claim Details : </strong></td> </tr>
+            <tr>
+                <td style="width:30%;"> <b> Claim Number  </b> </td>
+                <td> <b> @Model.GLC.ClaimNumber</b> </td>
+            </tr>
             <tr><td style="width:30%;"> Incident Date:</td><td> @(Model.GLC.IncidentDateTime == null ? "" : Model.GLC.IncidentDateTime.ToString().Substring(0, 10)) </td></tr>
 
             <tr><td style="width:30%;"> Incident Location:</td><td> @Model.GLC.IncidentLocation </td></tr>
@@ -89,20 +93,28 @@
             else
             {
                 <tr><td>Authorities Contacted: </td><td> Yes </td></tr>
+                <tr><td style="width:30%;"> Police Report Number:</td><td> @Model.GLC.PoliceReportNumber </td></tr>
             }
 
 
 
+
             <tr><td style="width:30%;"> Contact Person :</td><td> @Model.GLC.ContactPerson</td></tr>
+
+            <tr><td style="width:30%;"> Resident Name :</td><td> @Model.GLC.ResidentName</td></tr>
+
+            <tr><td style="width:30%;"> Resident Contact Information :</td><td> @Model.GLC.ResidentContactInformation</td></tr>
+
+
 
 
             <tr><td style="width:30%;"> Claimant Name:</td><td> @Model.GLC.ClaimantName </td></tr>
 
             <tr><td style="width:30%;"> Claimant Address:</td><td> @Model.GLC.ClaimantAddress </td></tr>
 
-            <tr><td style="width:30%;"> Claimant Phone1:</td><td> @Model.GLC.ClaimantPhone1 </td></tr>
+            <tr><td style="width:30%;"> Claimant Primary Phone:</td><td> @Model.GLC.ClaimantPhone1 </td></tr>
 
-            <tr><td style="width:30%;"> Claimant Phone2:</td><td> @Model.GLC.ClaimantPhone2 </td></tr>
+            <tr><td style="width:30%;"> Claimant Secondary Phone:</td><td> @Model.GLC.ClaimantPhone2 </td></tr>
 
             @if (Model.GLC.AnyInjuries == false)
             {
@@ -134,9 +146,7 @@
             <tr><td style="width:30%;">Witness Phone:</td><td> @Model.GLC.WitnessPhone </td></tr>
 
 
-            <tr><td style="width:30%;">Description Of Property:</td><td> @Model.GLC.DescriptionOfProperty </td></tr>
-
-            <tr><td style="width:30%;">Description Of Damage:</td><td> @Model.GLC.DescriptionOfDamage </td></tr>
+           <tr><td style="width:30%;">Description Of Damage:</td><td> @Model.GLC.DescriptionOfDamage </td></tr>
 
 
             <tr><td style="width:30%;">Reported By:</td><td> @Model.GLC.ReportedBy </td></tr>
@@ -163,14 +173,25 @@
 
         }
         else if (Model.Type == 'm')
-        {
-
-           
+        {           
 
         <table class="table table-hover table-responsive table-striped">
             <tr> <td> <strong>Claim Details : </strong></td>   </tr>
             <tr> <td style="width:30%;"> <b> Claim Number  </b> </td><td> <b> @Model.MDC.ClaimNumber</b> </td></tr>
+            <tr><td style="width:30%;"> Discovery Date : </td><td> @(Model.MDC.DiscoveryDate == null ? "" : Model.MDC.DiscoveryDate.ToString().Substring(0, 10)) </td></tr>
             <tr><td style="width:30%;"> Location :</td><td> @Model.MDC.Location</td></tr>
+
+            <tr><td style="width:30%;"> Apartment Occupied :</td><td> @(Model.MDC.ApartmentOccupied == true ? "YES" : "NO" ) </td></tr>
+
+            <tr><td style="width:30%;"> Residents Affected :</td><td> @Model.MDC.Description</td></tr>
+
+            <tr><td style="width:30%;">  Resident Name  :</td><td> @Model.MDC.Description</td></tr>
+
+            <tr><td style="width:30%;">Resident Contact Information  :</td><td> @Model.MDC.Description</td></tr>
+
+            <tr><td style="width:30%;"> Resident Relocating :</td><td> @Model.MDC.Description</td></tr>
+            <tr><td style="width:30%;"> Suspected Cause : </td><td> @Model.MDC.SuspectedCause</td></tr>
+
 
             <tr><td style="width:30%;"> Description :</td><td> @Model.MDC.Description</td></tr>
 
@@ -188,18 +209,6 @@
 
             }
 
-
-
-            <tr><td style="width:30%;"> How Much Water Present :</td><td> @Model.MDC.HowMuchWater</td></tr>
-
-            <tr><td style="width:30%;"> Estimated Time Damage Present: </td><td> @Model.MDC.EstimatedTimeDamagePresent</td></tr>
-
-            <tr><td style="width:30%;"> Planned Actions : </td><td> @Model.MDC.PlannedActions</td></tr>
-
-            <tr><td style="width:30%;"> Discovery Date : </td><td> @(Model.MDC.DiscoveryDate == null ? "" : Model.MDC.DiscoveryDate.ToString().Substring(0, 10)) </td></tr>
-
-            <tr><td style="width:30%;"> Suspected Cause : </td><td> @Model.MDC.SuspectedCause</td></tr>
-
             @if (Model.MDC.IsStandingWaterPresent == false)
             {
                 <tr><td style="width:30%;"> Is Standing Water Present : </td><td>  No </td></tr>
@@ -211,17 +220,27 @@
 
 
 
+            <tr><td style="width:30%;"> How Much Water Present :</td><td> @Model.MDC.HowMuchWater</td></tr>
+
             <tr><td style="width:30%;">Estimated Surface Area Affected : </td><td> @Model.MDC.EstimatedSurfaceAreaAffected</td></tr>
 
+
+
+            <tr><td style="width:30%;"> Estimated Time Damage Present: </td><td> @Model.MDC.EstimatedTimeDamagePresent</td></tr>
+
+
             <tr><td style="width:30%;"> Corrective Actions Taken : </td><td>  @Model.MDC.CorrectiveActionsTaken</td></tr>
+
+            <tr><td style="width:30%;"> Planned Actions : </td><td> @Model.MDC.PlannedActions</td></tr>
 
             <tr><td style="width:30%;"> Additional Comments : </td><td> @Model.MDC.AdditionalComments</td></tr>
 
             <tr><td style="width:30%;"> Reported By : </td><td> @Model.MDC.ReportedBy</td></tr>
+            <tr><td style="width:30%;"> Reported Phone : </td><td> @Model.MDC.ReportedPhone</td></tr>
 
             <tr><td style="width:30%;"> Reported Date : </td><td> @(Model.MDC.DateReported == null ? "" : Model.MDC.DateReported.ToString().Substring(0, 10)) </td></tr>
 
-            <tr><td style="width:30%;"> Reported Phone : </td><td> @Model.MDC.ReportedPhone</td></tr>
+
 
             <tr><td style="width:30%;"> Created By :</td><td> @Model.MDC.CreatedByName</td></tr>
 
@@ -238,7 +257,12 @@
             <tr> <td style="width:30%;"> <b> Claim Number </b> </td><td> <b> @Model.PDC.ClaimNumber</b> </td></tr>
             <tr><td style="width:30%;">Weather Conditions:</td><td>   @Model.PDC.WeatherConditions </td></tr>
             <tr><td style="width:30%;">Incident Date:</td><td>   @(Model.PDC.IncidentDateTime == null ? "" : Model.PDC.IncidentDateTime.ToString().Substring(0, 10)) </td></tr>
+            <tr><td style="width:30%;">Incident Time:</td><td>   @Model.PDC.IncidentTime </td></tr>
             <tr><td style="width:30%;">Incident Location:</td><td>   @Model.PDC.IncidentLocation </td></tr>
+
+            <tr><td style="width:30%;">Resident Name:</td><td>   @Model.PDC.ResidentName </td></tr>
+            <tr><td style="width:30%;">Resident Contact Information :</td><td>   @Model.PDC.ResidentContactInformation </td></tr>
+
             <tr><td style="width:30%;">Incident Description:</td><td>   @Model.PDC.IncidentDescription </td></tr>
             <tr><td style="width:30%;">Estimate of Damage:</td><td>   @Model.PDC.EstimateOfDamage </td></tr>
 
@@ -251,6 +275,7 @@
 
             {
                 <tr><td style="width:30%;">Authorities Contacted:</td><td>Yes</td></tr>
+                <tr><td style="width:30%;">Police Report Number:</td><td>@Model.PDC.PoliceReportNumber</td></tr>
 
             }
 
@@ -263,7 +288,6 @@
             else
             {
                 <tr><td style="width:30%;"> Loss Of Revenues:</td><td>Yes </td></tr>
-
             }
 
 
@@ -277,11 +301,15 @@
             }
 
             <tr><td style="width:30%;">Witness Name:</td><td>   @Model.PDC.WitnessName </td></tr>
-            <tr><td style="width:30%;">Witness Address:</td><td>   @Model.PDC.WitnessAddress </td></tr>
+
             <tr><td style="width:30%;">Witness Phone:</td><td>   @Model.PDC.WitnessPhone </td></tr>
+            <tr><td style="width:30%;">Reported Phone(Alternate): </td><td>   @Model.PDC.ReportedPhone </td></tr>
+
+            <tr><td style="width:30%;">Witness Address:</td><td>   @Model.PDC.WitnessAddress </td></tr>
+
             <tr><td style="width:30%;">Reported By:</td><td>   @Model.PDC.IncidentReportedBy </td></tr>
-            <tr><td style="width:30%;">Reported Phone:</td><td>   @Model.PDC.ReportedPhone </td></tr>
-            <tr><td style="width:30%;">Reported Date:</td><td>   @(Model.PDC.DateReported == null ? "" : Model.PDC.DateReported.ToString().Substring(0, 10)) </td></tr>
+
+            <tr><td style="width:30%;"> Date Reported :</td><td>   @(Model.PDC.DateReported == null ? "" : Model.PDC.DateReported.ToString().Substring(0, 10)) </td></tr>
             <tr><td style="width:30%;">Created By:</td><td>   @Model.PDC.CreatedByName </td></tr>
             <tr><td style="width:30%;">Created Date:</td><td>   @(@Model.PDC.CreatedDate == null ? "" : @Model.PDC.CreatedDate.ToString().Substring(0, 10)) </td></tr>
         </table>

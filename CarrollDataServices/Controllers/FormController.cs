@@ -19,6 +19,7 @@ namespace Carroll.Data.Services.Controllers
 {
     //[Authorize]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [ExceptionFilter]
     public class FormController : ApiController
     {
 
@@ -29,7 +30,6 @@ namespace Carroll.Data.Services.Controllers
         {
             _modelState = new ModelStateWrapper(this.ModelState);
             _service = new DataService(_modelState, new EntityDataRepository());
-
         }
 
         public FormController(IDataService service)
@@ -235,7 +235,10 @@ namespace Carroll.Data.Services.Controllers
 
                 RecordUpdateResult _result = _service.CreateUpdateRecord(id, obj);
                 bSucceeded = _result.Succeded;
+                if(bSucceeded)
+                {
 
+              
                 // Let's run workflow notificaiton here
                 if(id == EntityType.FormGeneralLiabilityClaim )
                     WorkflowHelper.RunNotifyWorkflow(_result.RecordId,'G');
@@ -243,7 +246,7 @@ namespace Carroll.Data.Services.Controllers
                     WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'M');
                     else if (id ==EntityType.FormPropertyDamageClaim)
                     WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'P');
-
+                }
                 return Utility.ReturnRecordResponse(_modelState, bSucceeded);
 
              

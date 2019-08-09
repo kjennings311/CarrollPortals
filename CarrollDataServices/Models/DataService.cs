@@ -297,5 +297,11 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetAllCarrollPayPerilds();
         }
+
+        public void ErrorLog(ErrorLog errorLog)
+        {
+             _repository.ErrorLog(errorLog);
+        }
+
     }
 }

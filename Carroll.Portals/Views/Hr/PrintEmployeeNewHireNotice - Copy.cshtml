@@ -271,7 +271,7 @@
             <p class="c1">
                 <span class="c0"> Employee Name:    <input type="text" style="width:40%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
-            
+
             <p class="c1">
                 <span class="c0">Personal Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:60%;" /> (do not leave blank) </span>
             </p>
@@ -283,24 +283,25 @@
                 <span class="c0">Location:<input type="text" id="location" style="width:83%;" value="@Model.Location" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">Position: @{ if (Model.Position_Exempt == "1")
-                    {
-                        <input type="radio" checked value="1" name="exempt" id="exempt" /> 
-                    }
-                    else
-                    {
-                        <input type="radio" value="1" name="exempt" id="exempt" />
-                    }
+                <span class="c0">
+                    Position: @{ if (Model.Position_Exempt == "1")
+                        {
+                            <input type="radio" checked value="1" name="exempt" id="exempt" />
+                        }
+                        else
+                        {
+                            <input type="radio" value="1" name="exempt" id="exempt" />
+                        }
 
 
 
 
-                }   Exempt @{ if (Model.Position_NonExempt == "")
-                    {  <input type="radio" checked value="1" name="exempt" id="exempt" />   }
-                    else
-                    {
-                        <input type="radio" value="1" name="exempt" id="exempt" />
-                    }
+                    }   Exempt @{ if (Model.Position_NonExempt == "")
+                        { <input type="radio" checked value="1" name="exempt" id="exempt" /> }
+                        else
+                        {
+                            <input type="radio" value="1" name="exempt" id="exempt" />
+                        }
                     }
                 </span>
             </p>
@@ -311,20 +312,22 @@
                 <span class="c4">(please make sure it is an approved Carroll Management Group title)</span>
             </p>
             <p class="c1">
-                <span class="c0">Status (full-time / part-time) :  <select id="status1"> 
-                    @{ if (Model.Status.ToString() == "Full Time ")
-                        {
-                            <option selected value="Full Time"> Full Time </option>
-                            <option value="Part Time"> Part Time </option>
-                        }
-                        else 
-                        {
-                            <option  value="Full Time"> Full Time </option>
-                            <option selected value="Part Time"> Part Time </option>
+                <span class="c0">
+                    Status (full-time / part-time) :  <select id="status1">
+                        @{ if (Model.Status.ToString() == "Full Time ")
+                            {
+                                <option selected value="Full Time"> Full Time </option>
+                                <option value="Part Time"> Part Time </option>
+                            }
+                            else
+                            {
+                                <option value="Full Time"> Full Time </option>
+                                <option selected value="Part Time"> Part Time </option>
 
                             }
                         }
-                   </select></span>
+                    </select>
+                </span>
             </p>
             <p class="c1">
                 <span class="c0">Wage/Salary <input type="text" id="salary" value="@Model.Wage_Salary" style="width:30%;" /> </span>
@@ -338,16 +341,16 @@
                     New Hire Kit Ordered : <input type="text" value="@Model.kitordered" id="kitorderdate" style="width:63%;" />
                 </span>
             </p>
-          
+
 
             <p class="c1">
-                <span class="c0">Employee Signature <input type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date <input type="text"  name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
+                <span class="c0">Employee Signature <input type="text" id="esignature" value="@Model.esignature" style="width:42%;" />    Date <input type="text" name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
             </p>
             <p class="c1">
-                <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature"  value="@Model.msignature" style="width:30%;" /> Date <input type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="@Model.rpmsignature" />Date <input type="text" name="name"  id="rpmdate" value="@Model.rpmdate.Value.ToShortDateString()" /></span>
+                <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="@Model.rpmsignature" />Date <input type="text" name="name" id="rpmdate" value="@Model.rpmdate.Value.ToShortDateString()" /></span>
             </p>
             <p class="c1" style="width:75%;">
                 <span class="c6">
@@ -358,10 +361,95 @@
 
             <br /> <br />
             <p>Rev. June 2018</p>
-          
+
         </form>
 
 
+
+    </div>
+
+    <div class="page">
+
+        <div id="page_1">
+            <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
+                <img src="/img/requistionrequestheader.jpg" />
+                <h1 style="font-weight:bold">  Activity - @Model.SequenceNumber </h1>
+            </DIV>
+
+
+            <table id="viewlog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Description</th>
+                        <th style="width:30%;">Date</th>
+                        <th style="width:20%"> Created By </th>
+                    </tr>
+                </thead>
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.log)
+                    {
+                        <tr> <td> @item.ActivitySubject </td> <td> @item.ActivityDate.ToString().Substring(0, 19) </td> <td> @item.ActivityByName </td> </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <h2> Signature Meta Data </h2>
+            <br />
+            <table id="signaturelog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:15%"> Type </th>
+                        <th style="width:10%">Ip Address</th>
+                        <th style="width:50%;text-align:center">Browser </th>
+                        <th style="width:25%;text-align:center"> Date Time </th>
+                    </tr>
+                </thead>
+                <tbody id="hrsignmetadata">
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.metadata)
+                    {
+                        <tr> <td> @item.Action.Replace("Email", "Signature") </td> <td> @item.ip </td> <td> @item.browserinfo </td> <td> @item.datetime.ToString().Substring(0, 19)</td> </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+
+        @if (Model.printActivity.rejection != null && Model.printActivity.rejection.Count > 0)
+        {
+
+            <div class="col-md-12 rejectionblock" style="text-align:center;">
+                <h2> Rejection  </h2>
+                <br />
+                <table id="rejectionlog" class="table table-striped col-md-6">
+                    <thead>
+                        <tr>
+                            <th style="width:15%"> Rejected By </th>
+                            <th style="width:60%;text-align:center">Reason </th>
+                            <th style="width:25%;text-align:center"> Date Time </th>
+                        </tr>
+                    </thead>
+                    <tbody id="rjmetadata">
+
+                        @foreach (var item in Model.printActivity.rejection)
+                        {
+                            <tr> <td> @item.FirstName &nbsp;&nbsp;  @item.LastName </td> <td>  @item.RejectedReason </td>  <td> @item.RejectedDateTime.ToString().Substring(0, 19) </td>  </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        }
 
     </div>
 </body>

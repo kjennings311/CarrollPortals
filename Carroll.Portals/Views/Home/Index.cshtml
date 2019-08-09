@@ -24,14 +24,14 @@
             <h1 class="visible-lg visible-md" style="color: white;
     position: absolute;
   bottom: 0%;
-    left: 1%;font-weight:bold;">
+    left: 1%;font-weight:bold;width:80%;">
                 INCIDENT DASHBOARD & REPORTING
             </h1>
 
             <h1 class="visible-xs visible-sm" style="color: white;
     position: absolute;
   bottom: 0%;
-    left: 1%;font-weight:bold;">
+    left: 1%;font-weight:bold; width:80%;">
                 INCIDENT DASHBOARD
             </h1>
         </div>
@@ -43,7 +43,7 @@
             <div class="modal-dialog modal-lg" style="width:68%" role="document">
                 <div class="modal-header" style="background-clip: padding-box;
     background-color: #2f4050;border-bottom:none;padding-bottom:0px;">
-                    <button type="button" class="close" data-dismiss="modal" style="color:white !important;" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" style="color:white !important;opacity:1;" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h1 class="modal-title form-heading" style="
 font-weight: bold;
     text-align: center;
@@ -202,7 +202,7 @@ font-weight: bold;
 
 
     <div class="row hidewhenformopen visible-md visible-lg" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
-        <div class="col-lg-4 db" onclick="GetAllClaims('Property')" style="border-right: 1px solid #797979;">
+        <div class="col-lg-4 db" onclick="FilterClaims('Property')" style="border-right: 1px solid #797979;">
             <div class="widget style1 navy-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -210,14 +210,14 @@ font-weight: bold;
                             Property Damage Claim
                         </h3>
                         <div class="claimcount" style="display:none; text-align:center;">
-                            <div class="font-bold hclaimcount" style=""><h1 class="propcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+                            <div class="font-bold hclaimcount pr" style=""><h1 class="propcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="col-lg-4 db" onclick="GetAllClaims('General')" style="border-right: 1px solid #797979;">
+        <div class="col-lg-4 db" onclick="FilterClaims('General')" style="border-right: 1px solid #797979;">
             <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -225,7 +225,7 @@ font-weight: bold;
                             General Liability Claim
                         </h3>
                         <div class="claimcount" style="display:none;text-align:center;">
-                            <div class="font-bold hclaimcount" style=""><h1 class="liabcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+                            <div class="font-bold hclaimcount ge" style=""><h1 class="liabcount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@ font-weight: bold;
 
         </div>
 
-        <div class="col-lg-4 db" onclick="GetAllClaims('Mold')">
+        <div class="col-lg-4 db" onclick="FilterClaims('Mold')">
             <div class="widget style1 yellow-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -241,7 +241,7 @@ font-weight: bold;
                             Mold Damage Claim
                         </h3>
                         <div class="claimcount" style="display:none;text-align:center">
-                            <div class="font-bold hclaimcount " style=""><h1 class="damagecount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
+                            <div class="font-bold hclaimcount mo" style=""><h1 class="damagecount" style="font-weight:bold;"> </h1><p style="font-size: 10px;" class="viewall"> VIEW ALL </p></div>
 
                         </div>
                     </div>
@@ -378,11 +378,13 @@ font-weight: bold;
     <style type="text/css">
 
 
-        .dtprops td, .dtprops th {
+        .dtprops td, .dtprops th 
+        {
             white-space: nowrap;
         }
 
-        .hclaimcount:hover {
+        .hclaimcount:hover, .hclaimcount.active 
+        {
             background: #2f4050 !important;
         }
 

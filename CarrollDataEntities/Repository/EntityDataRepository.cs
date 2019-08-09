@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -10,9 +12,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Carroll.Data.Entities.Helpers;
-
-
-
 
 
 namespace Carroll.Data.Entities.Repository
@@ -167,6 +166,8 @@ namespace Carroll.Data.Entities.Repository
             using (CarrollFormsEntities _entities = DBEntity)
             {
                 RecordUpdateResult _result = new RecordUpdateResult();
+                var username = "";
+
                 try
                 {
 
@@ -192,7 +193,7 @@ namespace Carroll.Data.Entities.Repository
                                 bool bSuccess = true;
                                 _result.RecordId = _property.PropertyId.ToString();
                                 _result.Succeded = bSuccess;
-
+                                username = _property.CreatedByName;
                                 return _result;
                             }
                             else
@@ -205,7 +206,7 @@ namespace Carroll.Data.Entities.Repository
                                 // return (i == 1) ? true : false;
                                 _result.RecordId = _property.PropertyId.ToString();
                                 _result.Succeded = true;
-
+                                username = _property.CreatedByName;
                                 return _result;
 
 
@@ -229,7 +230,7 @@ namespace Carroll.Data.Entities.Repository
                                 int i = _entities.SaveChanges();
                                 _result.RecordId = _contact.ContactId.ToString();
                                 _result.Succeded = true;
-
+                                username = _contact.CreatedByName;
                                 return _result;
                                 // return (i == 1) ? true : false;
                                 // return true;
@@ -240,7 +241,7 @@ namespace Carroll.Data.Entities.Repository
                                 int i = _entities.SaveChanges();
                                 _result.RecordId = _contact.ContactId.ToString();
                                 _result.Succeded = true;
-
+                                username = _contact.CreatedByName;
                                 return _result;
                                 // return true;
                             }
@@ -266,7 +267,7 @@ namespace Carroll.Data.Entities.Repository
                                 //return true;
                                 _result.RecordId = _partner.EquityPartnerId.ToString();
                                 _result.Succeded = true;
-
+                                username = _partner.CreatedByName;
                                 return _result;
                             }
                             else
@@ -277,7 +278,7 @@ namespace Carroll.Data.Entities.Repository
                                 // return true;
                                 _result.RecordId = _partner.EquityPartnerId.ToString();
                                 _result.Succeded = true;
-
+                                username = _partner.CreatedByName;
                                 return _result;
 
                             }
@@ -296,7 +297,7 @@ namespace Carroll.Data.Entities.Repository
                                 }
                                 _user.CreatedDate = DateTime.Now;
                                 // No record exists create a new property record here
-
+                                username = _user.CreatedByName;
                                 _entities.SiteUsers.Add(_user);
                                 _entities.SaveChanges();
                                 int i = _entities.SaveChanges();
@@ -314,7 +315,7 @@ namespace Carroll.Data.Entities.Repository
                                 int i = _entities.SaveChanges();
                                 _result.RecordId = _user.UserId.ToString();
                                 _result.Succeded = true;
-
+                                username = _user.CreatedByName;
                                 return _result;
                                 // return true;
                             }
@@ -496,7 +497,7 @@ namespace Carroll.Data.Entities.Repository
                                 // return true;
                                 _result.RecordId = _glc.GLLId.ToString();
                                 _result.Succeded = true;
-
+                                username = _glc.CreatedByName;
                                 return _result;
                             }
                             else
@@ -507,7 +508,7 @@ namespace Carroll.Data.Entities.Repository
                                 // return true;
                                 _result.RecordId = _glc.GLLId.ToString();
                                 _result.Succeded = true;
-
+                                username = _glc.CreatedByName;
                                 return _result;
                             }
 
@@ -536,7 +537,7 @@ namespace Carroll.Data.Entities.Repository
                                 // return true;
                                 _result.RecordId = _mdc.MDLId.ToString();
                                 _result.Succeded = true;
-
+                                username = _mdc.CreatedByName;
                                 return _result;
                             }
                             else
@@ -547,7 +548,7 @@ namespace Carroll.Data.Entities.Repository
                                 //return true;
                                 _result.RecordId = _mdc.MDLId.ToString();
                                 _result.Succeded = true;
-
+                                username = _mdc.CreatedByName;
                                 return _result;
                             }
                         #endregion
@@ -577,7 +578,7 @@ namespace Carroll.Data.Entities.Repository
                                 //return true;
                                 _result.RecordId = _pdc.PDLId.ToString();
                                 _result.Succeded = true;
-
+                                username = _pdc.CreatedByName;
                                 return _result;
                             }
                             else
@@ -588,7 +589,7 @@ namespace Carroll.Data.Entities.Repository
                                 //return true;
                                 _result.RecordId = _pdc.PDLId.ToString();
                                 _result.Succeded = true;
-
+                                username = _pdc.CreatedByName;
                                 return _result;
                             }
                         #endregion
@@ -602,8 +603,77 @@ namespace Carroll.Data.Entities.Repository
                 }
                 catch (Exception ex)
                 {
+                    StringBuilder sb = new StringBuilder();
+                    Exception e = ex;
 
-                    return false;
+                    if (e.GetType() == typeof(DbEntityValidationException))
+                    {
+                        var innerException = e as DbEntityValidationException;
+                        if (innerException != null)
+                        {
+                            sb.AppendLine();
+                            sb.AppendLine();
+                            foreach (var eve in innerException.EntityValidationErrors)
+                            {
+                                sb.AppendLine(string.Format("- Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                                    eve.Entry.Entity.GetType().FullName, eve.Entry.State));
+                                foreach (var ve in eve.ValidationErrors)
+                                {
+                                    sb.AppendLine(string.Format("-- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                        ve.PropertyName,
+                                        eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                        ve.ErrorMessage));
+                                }
+                            }
+                            sb.AppendLine();
+                        }
+                    }
+                    else
+                    {
+                        if (e.InnerException != null)
+                        {
+                            sb.AppendLine();
+                            sb.AppendLine();
+
+                            if (e.InnerException != null)
+                            {
+                                sb.Append(e.InnerException.Message);
+                            }
+
+                          
+                            sb.AppendLine();
+                        }
+                    }
+                    //    Exception e = filterContext.Exception;
+                    //Get a StackTrace object for the exception
+                    StackTrace st = new StackTrace(e, true);
+
+                    //Get the first stack frame
+                    StackFrame frame = st.GetFrame(0);
+
+                    //Get the file name
+                    string fileName = frame.GetFileName();
+
+                    //Get the method name
+                    string methodName = frame.GetMethod().Name;
+
+                    //Get the line number from the stack frame
+                    int line = frame.GetFileLineNumber();
+
+                    //Get the column number
+                    int col = frame.GetFileColumnNumber();
+
+                    ErrorLog errorLog = new ErrorLog();
+                    errorLog.datetime = DateTime.Now;
+                    errorLog.UserName = username;
+                    errorLog.Page = "Form Submission "+entityType.ToString();
+                    errorLog.Error = e.GetType().ToString() + " at" + "Form Submission " + entityType.ToString();
+                    errorLog.Description = sb.ToString() + " " + e.Message + line.ToString();
+                    errorLog.LogId = Guid.NewGuid();
+                    ErrorLog(errorLog);
+                    _result.RecordId = "";
+                    _result.Succeded = false;
+                    return _result;
                 }
 
                 return true;
@@ -1029,8 +1099,6 @@ namespace Carroll.Data.Entities.Repository
                     { cd.Claim = _formdamageclaim; }
                     formtype = 3;
 
-
-
                 }
                 else if (Type == 'p')
                 {
@@ -1233,6 +1301,7 @@ namespace Carroll.Data.Entities.Repository
                 try
                 {
                     _entities.ErrorLogs.Add(errorLog);
+                    _entities.SaveChanges();
 
                 }                 
                 catch (Exception ex)
@@ -4267,6 +4336,9 @@ namespace Carroll.Data.Entities.Repository
                         propertyres.RejectedBy = new Guid(refuser);
                         propertyres.RejectedDateTime = DateTime.Now;
                         propertyres.RejectedReason = reason;
+                        propertyres.PmSignedDateTime = null;
+                        propertyres.EmployeeSignedDateTime = null;
+                        propertyres.RegionalManagerSignedDateTime = null;
                         _entities.SaveChanges();
                     }
                     else if(status =="cancel")
@@ -4275,6 +4347,9 @@ namespace Carroll.Data.Entities.Repository
                         propertyres.RejectedBy = new Guid(refuser);
                         propertyres.RejectedDateTime = DateTime.Now;
                         propertyres.RejectedReason = "cancel";
+                        propertyres.PmSignedDateTime = null;
+                        propertyres.EmployeeSignedDateTime = null;
+                        propertyres.RegionalManagerSignedDateTime = null;
                         _entities.SaveChanges();
                     }
                 }
