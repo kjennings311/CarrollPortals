@@ -466,6 +466,7 @@ function getForm(FormName, RecordId)
             console.log(data);
 
             var $fields = $data["formFields"];
+            console.log($fields);
             for (var i = 0; i < $fields.length; i++) {
                 // alert($fields[i]["fieldLabel"]+ " " + $fields[i]["fieldType"]);
                 // Build the form elements here
@@ -573,8 +574,8 @@ function getForm(FormName, RecordId)
                         var val = 'Value="' + personId + '"';
                         $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         break;
-                    case "Hidden":
-                        $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                    //case "Hidden":
+                    //    $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         
                 }
 
@@ -1554,7 +1555,7 @@ function LoadProperties() {
                             { "data": "propertyName", "name": "propertyName", "autoWidth": false },
                             { "data": "legalName", "name": "legalName", "autoWidth": false },
                             { "data": "units", "name": "units", "autoWidth": false },
-                            { "data": "isOwned", "name": "isOwned", "autoWidth": false },
+                            { "data": "isOwned", "name": "isOwned", "autoWidth": false },                           
                             { "data": "propertyAddress", "name": "propertyAddress", "autoWidth": false },
                             { "data": "city", "name": "city", "autoWidth": false },
                             { "data": "state", "name": "state", "autoWidth": false },
@@ -1682,6 +1683,7 @@ function LoadProperties() {
                                     return month + "/" + date.getDate() + "/" + date.getFullYear();
                                 }
                             },
+                            { "data": "isActive", "name": "isActive", "autoWidth": false },
                             {
                                 "data": "createdDate", 'render': function (date) {
                                     if (date == null) return '';

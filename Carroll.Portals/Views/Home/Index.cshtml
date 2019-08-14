@@ -118,7 +118,7 @@ font-weight: bold;
                                     <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immediately in addition to completing the General Liability Claim Report </p>
                                 </div>
 
-                                <div class="col-md-12 text-center" style="position: absolute;bottom: 10px;" >
+                                <div class="col-md-12 text-center" style="position: absolute;bottom: 10px;">
                                     <button class="btn btn-primary " onclick="LoadForm('FormGeneralLiabilityClaim');">
                                         Start Claim
                                     </button>
@@ -147,7 +147,7 @@ font-weight: bold;
         </div>
 
 
-        <div class="modal fade bs-example-modal-lg reviewmodal"  id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal fade bs-example-modal-lg reviewmodal" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" style="width:60%" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -262,331 +262,322 @@ font-weight: bold;
             <tr style="border-bottom: 1px solid;" onclick="GetAllClaims('General Liability')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> GENERAL LIABILITY CLAIM </td> <td style="background:#2f4050"> <span class="liabcount" style="font-weight:bold;"> </span> </td></tr>
             <tr onclick="GetAllClaims('Mold Damage')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> MOLD DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="damagecount" style="font-weight:bold;"> </span> </td></tr>
         </table>
-        </div>
+    </div>
 
-        <div class="row">
-            <div class="col-lg-12 no-padding">
-                <input type="hidden" id="homeval" value="1" />
-                <div class="RowsContatiner animated fadeInRight" >
-                    <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5> All Claims <small></small></h5>
-                            </div>
-                            <div class="ibox-content">
-                                <table class="table  dtprops" width="100%"></table>
-                            </div>
+    <div class="row">
+        <div class="col-lg-12 no-padding">
+            <input type="hidden" id="homeval" value="1" />
+            <div class="RowsContatiner animated fadeInRight">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5> All Claims <small></small></h5>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table  dtprops" width="100%"></table>
                         </div>
                     </div>
-
                 </div>
 
-
-
-                <div class="AddEditContainer row" style="display:none;">
-                    <div class="col-lg-12">
-                        <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-                                <h5 class="form-heading">  </h5>
-                                <div class="ibox-tools">
-                                    @*<a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>*@
-
-                                    @*<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('UserInRole');">
-                                            <i class="fa fa-minus-circle"></i> Cancel
-                                        </a>*@
-                                    @*<ul class="dropdown-menu dropdown-user">
-                                            <li>
-                                                <a href="#" >Cancel</a>
-                                            </li>
-
-                                        </ul>*@
-                                    @*<a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>*@
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
-        </div>
 
+
+            <div class="AddEditContainer row" style="display:none;">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="form-heading">  </h5>
+                            <div class="ibox-tools">
+                                @*<a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>*@
+
+                                @*<a class="dropdown-toggle" data-toggle="dropdown" href="#" onclick="ToggleAdd('UserInRole');">
+                                        <i class="fa fa-minus-circle"></i> Cancel
+                                    </a>*@
+                                @*<ul class="dropdown-menu dropdown-user">
+                                        <li>
+                                            <a href="#" >Cancel</a>
+                                        </li>
+
+                                    </ul>*@
+                                @*<a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>*@
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 
 
+</div>
 
-    @if (ViewBag.ErrorMessage == "AuthorizationRequired")
-    {
-        <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
 
-    }
-    @if (ViewBag.ErrorMessage == "UnexpectedError")
-    {
-        <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
-    }
 
-    @section Styles
-    {
-        @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
-        @Styles.Render("~/content/plugins/token-inputcss")
-
-    }
-
-    @section Scripts
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
 {
-        @Scripts.Render("~/scripts/plugins/dataTablesjs")
-        @Scripts.Render("~/scripts/plugins/input-maskjs")
-        @Scripts.Render("~/scripts/plugins/token-inputjs")
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
 
-        <script>
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
 
-            function LoadClaimsFilter(val) {
+@section Styles
+    {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
 
-                $('.dtprops').DataTable().search(val)
-                    .draw();
-            }
+}
 
-// alert("Record Successfully added");
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
 
-          //  $(".modal-alert").html("Record Successfully added");
-           // $("#mobiletoastnotification").modal('show');
+    <script>
 
-            $(document).ready(function () {
-                $("#helpid").show();
+        function LoadClaimsFilter(val) {
 
-                             LoadUserClaims();
-                GetAllClaims("All");
+            $('.dtprops').DataTable().search(val)
+                .draw();
+        }
+
+        // alert("Record Successfully added");
+
+        //  $(".modal-alert").html("Record Successfully added");
+        // $("#mobiletoastnotification").modal('show');
+
+        $(document).ready(function () {
+            $("#helpid").show();
+
+            LoadUserClaims();
+            GetAllClaims("All");
 
 
 
 
-            });
+        });
 
 
 
-        </script>
+    </script>
 
+}
+
+
+<style type="text/css">
+
+
+    .dtprops td, .dtprops th {
+        white-space: nowrap;
     }
 
+    .hclaimcount:hover, .hclaimcount.active {
+        background: #2f4050 !important;
+    }
 
-    <style type="text/css">
-
-
-        .dtprops td, .dtprops th 
-        {
-            white-space: nowrap;
+    @@media only screen and (max-width : 768px) {
+        .ipbackground {
+            margin-top: 0px !important;
         }
 
-        .hclaimcount:hover, .hclaimcount.active 
-        {
-            background: #2f4050 !important;
+        #mobiletoastnotification {
+            top: 30%;
         }
 
-        @@media only screen and (max-width : 768px) {
-            .ipbackground 
-            {
-                margin-top: 0px !important;
-            }
+        .mobiletoast {
+        }
 
-           #mobiletoastnotification
-           {
-               top:30%;
-           }
+        .ipbackground button {
+            top: 54.5% !important;
+            right: -2% !important;
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-            .mobiletoast {
-            }
-
-            .ipbackground button {
-                top: 54.5% !important;
-                right: -2% !important;
-                font-size: 14px;
-                font-weight: bold;
-            }
-
-                    .ipbackground button i {
-                        font-size: 15px !important;
-                    }
-
-                .ipbackground h1 {
-                    top: 22%;
-                    left: -11% !important;
-                    font-weight: bold;
-                    font-size: 20px !important;
-                    width: 90%;
-                }
-
-            .db {
-                width: 95%;
-                margin-left: 0%;
-                cursor: pointer;
-                border-right: none !important;
-            }
-
-            .hidewhenformopen {
-                margin-top: -100px !important;
-                margin-bottom: 0px !important;
-            }
-
-            .ibox-title {
-                padding: 15px 15px 7px !important;
-            }
-
-            .db h3.font-bold {
+            .ipbackground button i {
                 font-size: 15px !important;
-                text-transform: uppercase;
-                color: #797979 !important;
-                margin-bottom: 5px !important;
             }
 
-            .widget {
-                margin-bottom: -30px !important;
-                margin-top: 10px !important;
-            }
-
-            .hclaimcount {
-                width: 70px !important;
-                text-align: center !important;
-                display: inline-block;
-                border-radius: 70px !important;
-                background: #797979;
-                padding-top: 0px !important;
-                padding-bottom: 0px;
-                height: 70px !important;
-            }
-
-                .hclaimcount h1 {
-                    font-size: 15px !important;
-                }
-
-                .hclaimcount p {
-                    font-size: 10px;
-                }
-
-
-            .RowsContatiner {
-                margin-top: 20px !important;
-            }
-
-            .dtprops td:nth-child(5), .dtprops th:nth-child(5), .dtprops td:nth-child(0), .dtprops th:nth-child(0) {
-                display: none !important;
-            }
-
-            .start-claim {
-                width: 100% !important;
-                margin-left: 0px !important;
-                clear: both;
-                margin-top: 10px;
-            }
-
-                .start-claim button {
-                    margin-left: 70%;
-                }
-
-            .claimmodal .modal-title {
-                font-size: 18px !important;
-            }
-
-            .claimmodal .modal-dialog, .incidentformmodal .modal-dialog {
-                width: 95% !important;
-            }
-
-            .claimmodal h2{
-                font-size:18px !important;
-                text-align:center;
-            }
-
-            .claimmodal, .claimmodal p {
-                font-size: 11px !important;
-            }
-
-            .claimmodal .modal-header
-            {
-                padding :5px !important;
-            }
-
-                .claimmodal .modal-body {
-                    padding: 0px 30px 30px 30px !important;
-                }
-
-            .claimmodal .start-claim
-            {
-                min-height:450px !important;
-            }
-
-            .claimmodal .damage-claim
-            {
-                min-height:300px !important;
-            }
-
-            .reviewmodal .modal-lg
-            {
-                width: 95% !important;
-            }
-
-            .reviewmodal .btn
-            {
-                margin-left:0px !important;
-            }
+        .ipbackground h1 {
+            top: 22%;
+            left: -11% !important;
+            font-weight: bold;
+            font-size: 20px !important;
+            width: 90%;
         }
 
-        @@media only screen and (min-width : 768px) 
-        {
-            .dynamicForm
-            {
-                margin-left:10% !important;
+        .db {
+            width: 95%;
+            margin-left: 0%;
+            cursor: pointer;
+            border-right: none !important;
+        }
+
+        .hidewhenformopen {
+            margin-top: -100px !important;
+            margin-bottom: 0px !important;
+        }
+
+        .ibox-title {
+            padding: 15px 15px 7px !important;
+        }
+
+        .db h3.font-bold {
+            font-size: 15px !important;
+            text-transform: uppercase;
+            color: #797979 !important;
+            margin-bottom: 5px !important;
+        }
+
+        .widget {
+            margin-bottom: -30px !important;
+            margin-top: 10px !important;
+        }
+
+        .hclaimcount {
+            width: 70px !important;
+            text-align: center !important;
+            display: inline-block;
+            border-radius: 70px !important;
+            background: #797979;
+            padding-top: 0px !important;
+            padding-bottom: 0px;
+            height: 70px !important;
+        }
+
+            .hclaimcount h1 {
+                font-size: 15px !important;
             }
-            .ipbackground h1 {
+
+            .hclaimcount p {
+                font-size: 10px;
+            }
+
+
+        .RowsContatiner {
+            margin-top: 20px !important;
+        }
+
+        .dtprops td:nth-child(5), .dtprops th:nth-child(5), .dtprops td:nth-child(0), .dtprops th:nth-child(0) {
+            display: none !important;
+        }
+
+        .start-claim {
+            width: 100% !important;
+            margin-left: 0px !important;
+            clear: both;
+            margin-top: 10px;
+        }
+
+            .start-claim button {
+                margin-left: 70%;
+            }
+
+        .claimmodal .modal-title {
+            font-size: 18px !important;
+        }
+
+        .claimmodal .modal-dialog, .incidentformmodal .modal-dialog {
+            width: 95% !important;
+        }
+
+        .claimmodal h2 {
+            font-size: 18px !important;
+            text-align: center;
+        }
+
+        .claimmodal, .claimmodal p {
+            font-size: 11px !important;
+        }
+
+            .claimmodal .modal-header {
+                padding: 5px !important;
+            }
+
+            .claimmodal .modal-body {
+                padding: 0px 30px 30px 30px !important;
+            }
+
+            .claimmodal .start-claim {
+                min-height: 450px !important;
+            }
+
+            .claimmodal .damage-claim {
+                min-height: 300px !important;
+            }
+
+        .reviewmodal .modal-lg {
+            width: 95% !important;
+        }
+
+        .reviewmodal .btn {
+            margin-left: 0px !important;
+        }
+    }
+
+    @@media only screen and (min-width : 768px) {
+        .dynamicForm {
+            margin-left: 10% !important;
+        }
+
+        .ipbackground h1 {
+            font-size: 30px !important;
+            color: white !important;
+            text-align: left !important;
+        }
+
+        .db {
+            width: 30%;
+            margin-left: 2%;
+            cursor: pointer;
+            /*border-right: 1px solid #797979*/
+        }
+
+            .db h3 {
+                font-size: 20px;
+                text-transform: uppercase;
+                color: #797979;
+                margin-bottom: 10px;
+            }
+
+        .hclaimcount {
+            width: 100px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 100px;
+            background: #797979;
+            padding-top: 1px;
+            padding-bottom: 0px;
+            height: 100px;
+        }
+
+            .hclaimcount h1 {
                 font-size: 30px !important;
-                color: white !important;
-                text-align: left !important;
             }
 
-            .db {
-                width: 30%;
-                margin-left: 2%;
-                cursor: pointer;
-                /*border-right: 1px solid #797979*/
+            .hclaimcount p {
+                font-size: 10px;
             }
-
-                .db h3 {
-                    font-size: 20px;
-                    text-transform: uppercase;
-                    color: #797979;
-                    margin-bottom: 10px;
-                }
-
-            .hclaimcount {
-                width: 100px;
-                text-align: center;
-                display: inline-block;
-                border-radius: 100px;
-                background: #797979;
-                padding-top: 1px;
-                padding-bottom: 0px;
-                height: 100px;
-            }
-
-                .hclaimcount h1 {
-                    font-size: 30px !important;
-                }
-
-                .hclaimcount p {
-                    font-size: 10px;
-                }
-            /*.dtprops td, .dtprops th
+        /*.dtprops td, .dtprops th
         {
             display:block !important;
         }*/
-
-
-            .RowsContatiner .ibox-title {
-                padding: 17px !important;
-            }
+        .RowsContatiner .ibox-title {
+            padding: 17px !important;
         }
-    </style>
+    }
+</style>

@@ -183,8 +183,8 @@ namespace Carroll.Data.Services.Controllers
                     // Validate the uploaded image(optional)
 
                     // Get the complete file path
-                    filename = httpPostedFile.FileName;
-                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring + httpPostedFile.FileName);
+                    filename = Path.GetFileName(httpPostedFile.FileName);
+                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring +filename);
 
                     // Save the uploaded file to "UploadedFiles" folder
                     httpPostedFile.SaveAs(fileSavePath);

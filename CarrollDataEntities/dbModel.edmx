@@ -292,9 +292,9 @@
           <Property Name="IncidentLocation" Type="varchar(max)" />
           <Property Name="IncidentDescription" Type="varchar(max)" />
           <Property Name="AuthoritiesContacted" Type="bit" />
-          <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
-          <Property Name="ClaimantName" Type="varchar" MaxLength="50" />
-          <Property Name="ClaimantAddress" Type="varchar" MaxLength="100" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="250" />
+          <Property Name="ClaimantName" Type="varchar" MaxLength="150" />
+          <Property Name="ClaimantAddress" Type="varchar" MaxLength="300" />
           <Property Name="ClaimantPhone1" Type="varchar" MaxLength="35" />
           <Property Name="ClaimantPhone2" Type="varchar" MaxLength="35" />
           <Property Name="AnyInjuries" Type="bit" />
@@ -313,7 +313,7 @@
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="NotifySecurityOfficer" Type="bit" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
-          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="200" />
           <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
           <Property Name="PoliceReportNumber" Type="nvarchar" MaxLength="150" />
         </EntityType>
@@ -346,7 +346,7 @@
           <Property Name="ResidentsAffected" Type="nvarchar" MaxLength="300" />
           <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
           <Property Name="ResidentsRelocating" Type="bit" />
-          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaims">
           <Key>
@@ -361,7 +361,7 @@
           <Property Name="IncidentDescription" Type="varchar(max)" />
           <Property Name="EstimateOfDamage" Type="nvarchar" MaxLength="350" />
           <Property Name="AuthoritiesContacted" Type="bit" />
-          <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="250" />
           <Property Name="ReportNumber" Type="varchar" MaxLength="30" />
           <Property Name="LossOfRevenues" Type="bit" />
           <Property Name="WitnessPresent" Type="bit" />
@@ -375,8 +375,8 @@
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
           <Property Name="ClaimNumber" Type="nvarchar" MaxLength="12" />
-          <Property Name="IncidentTime" Type="nvarchar" MaxLength="20" />
-          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IncidentTime" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="200" />
           <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
           <Property Name="PoliceReportNumber" Type="nvarchar" MaxLength="150" />
         </EntityType>
@@ -840,6 +840,12 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="f_proc_getallresidentreferals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="[proc_getallresidentreferals">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="proc_checkcontactexists" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="str" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="proc_closealllinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallcarrollpayperiods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallcarrollpositions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1104,6 +1110,12 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <Parameter Name="userid" Mode="In" Type="Guid" />
             <Parameter Name="propertyid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="proc_checkcontactexists" ReturnType="Collection(Carroll.Data.Entities.proc_checkcontactexists_Result)">
+          <Parameter Name="str" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_closealllinks">
+            <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1148,9 +1160,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="IncidentLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="AuthoritiesContacted" Type="Boolean" />
-          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ClaimantName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ClaimantAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimantName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimantAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="ClaimantPhone1" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
           <Property Name="ClaimantPhone2" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
           <Property Name="AnyInjuries" Type="Boolean" />
@@ -1169,7 +1181,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="NotifySecurityOfficer" Type="Boolean" />
           <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="PoliceReportNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -1202,7 +1214,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ResidentsAffected" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="ResidentsRelocating" Type="Boolean" />
           <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FormPropertyDamageClaim">
           <Key>
@@ -1217,7 +1229,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="IncidentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EstimateOfDamage" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="AuthoritiesContacted" Type="Boolean" />
-          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="ReportNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="LossOfRevenues" Type="Boolean" />
           <Property Name="WitnessPresent" Type="Boolean" />
@@ -1231,8 +1243,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="IncidentTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IncidentTime" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="PoliceReportNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -2615,6 +2627,20 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
           <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="proc_checkcontactexists_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="301" />
+          <Property Type="Guid" Name="ContactId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="17" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="ContactPhoto" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4102,6 +4128,25 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_checkcontactexists" FunctionName="Carroll.Data.Entities.Store.proc_checkcontactexists">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_checkcontactexists_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ContactPhoto" ColumnName="ContactPhoto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_closealllinks" FunctionName="Carroll.Data.Entities.Store.proc_closealllinks" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

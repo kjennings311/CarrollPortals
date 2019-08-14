@@ -18,7 +18,7 @@ h1 {
   font-size: 30px;
 }
 h2 {
-  font-size: 24px;
+    a .tooltipwala font-size: 24px;
 }
 h3 {
   font-size: 16px;
@@ -8572,7 +8572,8 @@ body.md-skin {
 a.tooltipwala {
     float: left;
     margin-right: 10px;
-    background: #0c81cba8;
+    background: #0c81cb;
+    background-color: #0c81cb;
     /* padding: 5px; */
     border-radius: 10px;
     height: 20px;
@@ -8892,7 +8893,8 @@ z-index:99999999 !important;
     overflow: auto;
 }
 
-.btn-danger, .btn-success, .btn-danger:active, .btn-danger:hover, .btn-success:active, .btn-success:hover {
+.btn-danger, .btn-success, .btn-danger:active, .btn-danger:hover, .btn-success:active, .btn-success:hover 
+{
     background-color: #293846 !important;
     border-color: #293846 !important;
     color: #FFFFFF;

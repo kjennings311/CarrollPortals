@@ -308,5 +308,23 @@ namespace Carroll.Data.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllClaimsnew_Result>("SP_GetAllClaimsnew", useridParameter, propertyidParameter);
         }
+    
+        public virtual ObjectResult<proc_checkcontactexists_Result> proc_checkcontactexists(string str)
+        {
+            var strParameter = str != null ?
+                new ObjectParameter("str", str) :
+                new ObjectParameter("str", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_checkcontactexists_Result>("proc_checkcontactexists", strParameter);
+        }
+    
+        public virtual int proc_closealllinks(Nullable<System.Guid> refid)
+        {
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_closealllinks", refidParameter);
+        }
     }
 }

@@ -82,6 +82,7 @@ namespace Carroll.Data.Services.Helpers
 
         public static T DeserializeObject<T>(string xmlText)
         {
+            xmlText = xmlText.Replace("null", "");
             if (String.IsNullOrWhiteSpace(xmlText)) return default(T);
 
             using (System.IO.StringReader stringReader = new System.IO.StringReader(xmlText))

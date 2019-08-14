@@ -3152,22 +3152,24 @@ namespace Carroll.Data.Entities.Repository
 
                             if (!string.IsNullOrEmpty(row[1].ToString()))
                             {
-
                                 if (othercontact.VP.ToLower().Trim() != row[1].ToString().ToLower().Trim())
                                 {
                                     // if changed, check contact exist with given name
 
                                     var searchstr = row[1].ToString().Trim().ToLower();
-
-                                    var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                      select tbl).FirstOrDefault();
-
-                                    if (chkcontact != null)
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        contact.VicePresident = chkcontact.ContactId;
-                                        chkcontact.Phone = row[2].ToString();
-                                        change = true;
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.VicePresident = chkcontact.ContactId;
+                                            chkcontact.Phone = row[2].ToString();
+                                            change = true;
+                                        }
                                     }
                                     else
                                     {
@@ -3231,15 +3233,20 @@ namespace Carroll.Data.Entities.Repository
                                 {
                                     // if changed, check contact exist with given name
                                     var searchstr = row[3].ToString().Trim().ToLower();
-                                    var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                      select tbl).FirstOrDefault();
-
-                                    if (chkcontact != null)
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        contact.RegionalVicePresident = chkcontact.ContactId;
-                                        chkcontact.Phone = row[4].ToString();
-                                        change = true;
+
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.RegionalVicePresident = chkcontact.ContactId;
+                                            chkcontact.Phone = row[4].ToString();
+                                            change = true;
+                                        }
                                     }
                                     else
                                     {
@@ -3302,16 +3309,22 @@ namespace Carroll.Data.Entities.Repository
                                 if (othercontact.RM.ToLower().Trim() != row[5].ToString().ToLower().Trim())
                                 {
                                     // if changed, check contact exist with given name
-                                    var searchstr = row[5].ToString().Trim().ToLower();
-                                    var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                      select tbl).FirstOrDefault();
+                                 
 
-                                    if (chkcontact != null)
+                                        var searchstr = row[5].ToString().Trim().ToLower();
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        contact.RegionalManager = chkcontact.ContactId;
-                                        chkcontact.Phone = row[6].ToString();
-                                        change = true;
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.RegionalManager = chkcontact.ContactId;
+                                            chkcontact.Phone = row[6].ToString();
+                                            change = true;
+                                        }
                                     }
                                     else
                                     {
@@ -3434,14 +3447,19 @@ namespace Carroll.Data.Entities.Repository
                                 {
                                     // if changed, check contact exist with given name
                                     var searchstr = row[11].ToString().Trim().ToLower();
-                                    var chkcontact = (from tbl in _entities.Contacts
-                                                      where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                      select tbl).FirstOrDefault();
-
-                                    if (chkcontact != null)
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        contact.AssetManager1 = chkcontact.ContactId;
-                                        change = true;
+
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.AssetManager1 = chkcontact.ContactId;
+                                            change = true;
+                                        }
                                     }
                                     else
                                     {
@@ -3487,44 +3505,49 @@ namespace Carroll.Data.Entities.Repository
                             {
                                 // if changed, check contact exist with given name
                                 var searchstr = row[12].ToString().Trim().ToLower();
-                                var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                  select tbl).FirstOrDefault();
-
-                                if (chkcontact != null)
-                                {
-                                    contact.ConstructionManager = chkcontact.ContactId;
-                                    change = true;
-                                }
-                                else
-                                {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
-
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[12].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[12].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        c.LastName = row[12].ToString().Replace(c.FirstName, "");
 
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.ConstructionManager = chkcontact.ContactId;
+                                            change = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[12].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[12].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[12].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Construction Manager ";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.ConstructionManager = c.ContactId;
+                                        change = true;
 
                                     }
-                                    c.Title = "Construction Manager ";
-                                    c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                    c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact.ConstructionManager = c.ContactId;
-                                    change = true;
-
-                                }
                             }
                             }
                             else
@@ -3539,44 +3562,49 @@ namespace Carroll.Data.Entities.Repository
                             {
                                 // if changed, check contact exist with given name
                                 var searchstr = row[13].ToString().Trim().ToLower();
-                                var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                  select tbl).FirstOrDefault();
-
-                                if (chkcontact != null)
-                                {
-                                    contact.MarketingSpecialist = chkcontact.ContactId;
-                                    change = true;
-                                }
-                                else
-                                {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
-
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[13].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[13].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        c.LastName = row[13].ToString().Replace(c.FirstName, "");
 
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where  tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.MarketingSpecialist = chkcontact.ContactId;
+                                            change = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[13].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[13].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[13].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Marketing Specialist ";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.MarketingSpecialist = c.ContactId;
+                                        change = true;
 
                                     }
-                                    c.Title = "Marketing Specialist ";
-                                    c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                    c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact.MarketingSpecialist = c.ContactId;
-                                    change = true;
-
-                                }
                             }
 
                             }
@@ -3593,44 +3621,49 @@ namespace Carroll.Data.Entities.Repository
                             {
                                 // if changed, check contact exist with given name
                                 var searchstr = row[14].ToString().Trim().ToLower();
-                                var chkcontact = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr
-                                                  select tbl).FirstOrDefault();
-
-                                if (chkcontact != null)
-                                {
-                                    contact.PropertyManager = chkcontact.ContactId;
-                                    change = true;
-                                }
-                                else
-                                {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
-
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[14].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[14].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
+                                    var checkexists55 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                                    if (checkexists55 != null)
                                     {
-                                        c.LastName = row[14].ToString().Replace(c.FirstName, "");
 
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
+                                        var chkcontact = (from tbl in _entities.Contacts
+                                                          where  tbl.ContactId == checkexists55.ContactId
+                                                          select tbl).FirstOrDefault();
+
+                                        if (chkcontact != null)
+                                        {
+                                            contact.PropertyManager = chkcontact.ContactId;
+                                            change = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                        Contact c = new Contact();
+                                        c.ContactId = Guid.NewGuid(); ;
+                                        var sp = row[14].ToString().Split(new char[0]);
+
+                                        c.FirstName = row[14].ToString().Split(new char[0])[0].ToString();
+                                        if (sp.Length > 1)
+                                        {
+                                            c.LastName = row[14].ToString().Replace(c.FirstName, "");
+
+                                            //if (row[7].ToString().Split(new char[0])[1] != null)
+                                            //{
+                                            //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                            //}
+
+                                        }
+                                        c.Title = "Property Manager";
+                                        c.CreatedBy = contact.CreatedBy;
+                                        c.CreatedDate = DateTime.Now;
+                                        c.CreatedByName = contact.CreatedByName;
+                                        _entities.Contacts.Add(c);
+                                        _entities.SaveChanges();
+                                        contact.PropertyManager = c.ContactId;
+                                        change = true;
 
                                     }
-                                    c.Title = "Property Manager";
-                                    c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                    c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact.PropertyManager = c.ContactId;
-                                    change = true;
-
-                                }
                             }
                             }
                             else
@@ -3699,10 +3732,10 @@ namespace Carroll.Data.Entities.Repository
                             //        var str = row[23].ToString().Trim().Replace("/", "-").Split('-');
                             //        contact.AcquisitionDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
                             //    }
-                            //    //    contact.AcquisitionDate = Convert.ToDateTime(row[23].ToString().Trim().Replace("/", "-"));
+                            //    contact.AcquisitionDate = Convert.ToDateTime(row[23].ToString().Trim().Replace("/", "-"));
                             //    change = true;
                             //}
-                            
+
                             //if (contact.RefinancedDate.ToString() != row[24].ToString().Trim())
                             //{
                             //    if (!string.IsNullOrEmpty(row[24].ToString().Trim()))
@@ -3710,7 +3743,7 @@ namespace Carroll.Data.Entities.Repository
                             //        var str = row[24].ToString().Trim().Replace("/", "-").Split('-');
                             //        contact.RefinancedDate = Convert.ToDateTime(str[1] + "-" + str[0] + "-" + str[2]);
                             //    }
-                            //       // contact.RefinancedDate = Convert.ToDateTime(row[24].ToString().Trim().Replace("/", "-"));
+                            //    contact.RefinancedDate = Convert.ToDateTime(row[24].ToString().Trim().Replace("/", "-"));
                             //    change = true;
                             //}
 
@@ -3746,46 +3779,49 @@ namespace Carroll.Data.Entities.Repository
                         {
                             var searchstr = row[1].ToString().Trim().ToLower();
 
-                          //  var chkcontact = _entities.Contacts.ToList().Where(a => searchstr.All(p=>(a.FirstName+a.LastName).ToLower().Contains(p))).FirstOrDefault();
+                            //  var chkcontact = _entities.Contacts.ToList().Where(a => searchstr.All(p=>(a.FirstName+a.LastName).ToLower().Contains(p))).FirstOrDefault();
+                            var checkexists51 = _entities.proc_checkcontactexists(searchstr).FirstOrDefault();
+                            if (checkexists51 != null)
+                            {
+                                var chkcontact = (from tbl in _entities.Contacts
+                                                  where tbl.ContactId == checkexists51.ContactId
+                                                  select tbl).FirstOrDefault();
 
-                            var chkcontact = (from tbl in _entities.Contacts
-                                              where (tbl.FirstName.ToLower()+" "+tbl.LastName.ToLower()) == searchstr
-                                              select tbl).FirstOrDefault();
-
-                            if (chkcontact != null)
+                                if (chkcontact != null)
                                 {
                                     contact1.VicePresident = chkcontact.ContactId;
                                     chkcontact.Phone = row[2].ToString();
                                     change = true;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[1].ToString().Split(new char[0]);
+
+                                c.FirstName = row[1].ToString().Split(new char[0])[0].ToString();
+                                if (sp.Length > 1)
                                 {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
+                                    c.LastName = row[1].ToString().Replace(c.FirstName, "");
 
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[1].ToString().Split(new char[0]);
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
 
-                                    c.FirstName = row[1].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
-                                    {
-                                        c.LastName = row[1].ToString().Replace(c.FirstName, "");
-
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
-
-                                    }
-                                    c.Title = "Vice President";
-                                  //  c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                  //  c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact1.VicePresident = c.ContactId;
-                                    change = true;
                                 }
+                                c.Title = "Vice President";
+                                //  c.CreatedBy = contact.CreatedBy;
+                                c.CreatedDate = DateTime.Now;
+                                //  c.CreatedByName = contact.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contact1.VicePresident = c.ContactId;
+                                change = true;
+                            }
 
                         }
                         else
@@ -3798,9 +3834,13 @@ namespace Carroll.Data.Entities.Repository
 
                             // if changed, check contact exist with given name
                             var searchstr1 = row[3].ToString().Trim().ToLower();
-                            var chkcontact1 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr1
-                                               select tbl).FirstOrDefault();
+                            var checkexists1 = _entities.proc_checkcontactexists(searchstr1).FirstOrDefault();
+                            if (checkexists1 != null)
+                            {
+
+                                var chkcontact1 = (from tbl in _entities.Contacts
+                                                   where tbl.ContactId == checkexists1.ContactId
+                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact1 != null)
                                 {
@@ -3808,35 +3848,36 @@ namespace Carroll.Data.Entities.Repository
                                     chkcontact1.Phone = row[4].ToString();
                                     change = true;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[3].ToString().Split(new char[0]);
+
+                                c.FirstName = row[3].ToString().Split(new char[0])[0].ToString();
+                                if (sp.Length > 1)
                                 {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
+                                    c.LastName = row[3].ToString().Replace(c.FirstName, "");
 
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[3].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[3].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
-                                    {
-                                        c.LastName = row[3].ToString().Replace(c.FirstName, "");
-
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
-
-                                    }
-                                    c.Title = "Regional Vice President";
-                                 //   c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                 //   c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact1.RegionalVicePresident = c.ContactId;
-                                    change = true;
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
 
                                 }
+                                c.Title = "Regional Vice President";
+                                //   c.CreatedBy = contact.CreatedBy;
+                                c.CreatedDate = DateTime.Now;
+                                //   c.CreatedByName = contact.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contact1.RegionalVicePresident = c.ContactId;
+                                change = true;
+
+                            }
 
                         }
                         else
@@ -3852,9 +3893,13 @@ namespace Carroll.Data.Entities.Repository
                             // For Regional Manager
                             // if changed, check contact exist with given name
                             var searchstr2 = row[5].ToString().Trim().ToLower();
-                            var chkcontact2 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr2
-                                               select tbl).FirstOrDefault();
+                            var checkexists2 = _entities.proc_checkcontactexists(searchstr2).FirstOrDefault();
+                            if (checkexists2 != null)
+                            {
+
+                                var chkcontact2 = (from tbl in _entities.Contacts
+                                                   where tbl.ContactId == checkexists2.ContactId
+                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact2 != null)
                                 {
@@ -3862,35 +3907,36 @@ namespace Carroll.Data.Entities.Repository
                                     chkcontact2.Phone = row[6].ToString();
                                     change = true;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[5].ToString().Split(new char[0]);
+
+                                c.FirstName = row[5].ToString().Split(new char[0])[0].ToString();
+                                if (sp.Length > 1)
                                 {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
+                                    c.LastName = row[5].ToString().Replace(c.FirstName, "");
 
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[5].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[5].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
-                                    {
-                                        c.LastName = row[5].ToString().Replace(c.FirstName, "");
-
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
-
-                                    }
-                                    c.Title = "Regional Manager ";
-                                //    c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                  //  c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact1.RegionalManager = c.ContactId;
-                                    change = true;
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
 
                                 }
+                                c.Title = "Regional Manager ";
+                                //    c.CreatedBy = contact.CreatedBy;
+                                c.CreatedDate = DateTime.Now;
+                                //  c.CreatedByName = contact.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contact1.RegionalManager = c.ContactId;
+                                change = true;
+
+                            }
 
 
                         }
@@ -3942,44 +3988,49 @@ namespace Carroll.Data.Entities.Repository
                             // if changed, check contact exist with given name
 
                             var searchstr4 = row[11].ToString().Trim().ToLower();
-                            var chkcontact3 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr4
-                                               select tbl).FirstOrDefault();
+                            var checkexists4 = _entities.proc_checkcontactexists(searchstr4).FirstOrDefault();
+                            if (checkexists4 != null)
+                            {
+
+                                var chkcontact3 = (from tbl in _entities.Contacts
+                                                   where tbl.ContactId == checkexists4.ContactId
+                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact3 != null)
                                 {
                                     contact1.AssetManager1 = chkcontact3.ContactId;
                                     change = true;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[11].ToString().Split(new char[0]);
+
+                                c.FirstName = row[11].ToString().Split(new char[0])[0].ToString();
+                                if (sp.Length > 1)
                                 {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
+                                    c.LastName = row[11].ToString().Replace(c.FirstName, "");
 
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[11].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[11].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
-                                    {
-                                        c.LastName = row[11].ToString().Replace(c.FirstName, "");
-
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
-
-                                    }
-                                    c.Title = "Asset Manager ";
-                                  //  c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                  //  c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact1.AssetManager1 = c.ContactId;
-                                    change = true;
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
 
                                 }
+                                c.Title = "Asset Manager ";
+                                //  c.CreatedBy = contact.CreatedBy;
+                                c.CreatedDate = DateTime.Now;
+                                //  c.CreatedByName = contact.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contact1.AssetManager1 = c.ContactId;
+                                change = true;
+
+                            }
                         }
                         else
                         {
@@ -3991,44 +4042,49 @@ namespace Carroll.Data.Entities.Repository
                         if (!string.IsNullOrEmpty(row[12].ToString()))
                         {
                             var searchstr5 = row[12].ToString().Trim().ToLower();
-                            var chkcontact4 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr5
-                                               select tbl).FirstOrDefault();
+                            var checkexists5 = _entities.proc_checkcontactexists(searchstr5).FirstOrDefault();
+                            if (checkexists5 != null)
+                            {
+
+                                var chkcontact4 = (from tbl in _entities.Contacts
+                                                   where tbl.ContactId == checkexists5.ContactId
+                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact4 != null)
                                 {
                                     contact1.ConstructionManager = chkcontact4.ContactId;
                                     change = true;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[12].ToString().Split(new char[0]);
+
+                                c.FirstName = row[12].ToString().Split(new char[0])[0].ToString();
+                                if (sp.Length > 1)
                                 {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
+                                    c.LastName = row[12].ToString().Replace(c.FirstName, "");
 
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[12].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[12].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
-                                    {
-                                        c.LastName = row[12].ToString().Replace(c.FirstName, "");
-
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
-
-                                    }
-                                    c.Title = "Construction Manager ";
-                            c.CreatedBy = new Guid("F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E"); 
-                                    c.CreatedDate = DateTime.Now;
-                                  //  c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact1.ConstructionManager = c.ContactId;
-                                    change = true;
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
 
                                 }
+                                c.Title = "Construction Manager ";
+                                c.CreatedBy = new Guid("F0C3A30B-50A8-4E20-A0B5-5B6AA0BC9B4E");
+                                c.CreatedDate = DateTime.Now;
+                                //  c.CreatedByName = contact.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contact1.ConstructionManager = c.ContactId;
+                                change = true;
+
+                            }
 
                         }
                         else
@@ -4040,44 +4096,49 @@ namespace Carroll.Data.Entities.Repository
                         {
                             // Marketing Specialist= -- 13 thc column
                             var searchstr6 = row[13].ToString().Trim().ToLower();
-                            var chkcontact5 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr6
-                                               select tbl).FirstOrDefault();
+                            var checkexists6 = _entities.proc_checkcontactexists(searchstr6).FirstOrDefault();
+                            if (checkexists6 != null)
+                            {
+
+                                var chkcontact5 = (from tbl in _entities.Contacts
+                                                   where tbl.ContactId == checkexists6.ContactId
+                                                   select tbl).FirstOrDefault();
 
                                 if (chkcontact5 != null)
                                 {
                                     contact1.MarketingSpecialist = chkcontact5.ContactId;
                                     change = true;
                                 }
-                                else
+                            }
+                            else
+                            {
+                                // create new contact with this Name and phone number and update contact id as vp for property table
+
+                                Contact c = new Contact();
+                                c.ContactId = Guid.NewGuid(); ;
+                                var sp = row[13].ToString().Split(new char[0]);
+
+                                c.FirstName = row[13].ToString().Split(new char[0])[0].ToString();
+                                if (sp.Length > 1)
                                 {
-                                    // create new contact with this Name and phone number and update contact id as vp for property table
+                                    c.LastName = row[13].ToString().Replace(c.FirstName, "");
 
-                                    Contact c = new Contact();
-                                    c.ContactId = Guid.NewGuid();;
-                                    var sp = row[13].ToString().Split(new char[0]);
-
-                                    c.FirstName = row[13].ToString().Split(new char[0])[0].ToString();
-                                    if (sp.Length > 1)
-                                    {
-                                        c.LastName = row[13].ToString().Replace(c.FirstName, "");
-
-                                        //if (row[7].ToString().Split(new char[0])[1] != null)
-                                        //{
-                                        //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
-                                        //}
-
-                                    }
-                                    c.Title = "Marketing Specialist ";
-                                  ///  c.CreatedBy = contact.CreatedBy;
-                                    c.CreatedDate = DateTime.Now;
-                                  //  c.CreatedByName = contact.CreatedByName;
-                                    _entities.Contacts.Add(c);
-                                    _entities.SaveChanges();
-                                    contact1.MarketingSpecialist = c.ContactId;
-                                    change = true;
+                                    //if (row[7].ToString().Split(new char[0])[1] != null)
+                                    //{
+                                    //    c.LastName = row[7].ToString().Split(new char[0])[1].ToString();
+                                    //}
 
                                 }
+                                c.Title = "Marketing Specialist ";
+                                ///  c.CreatedBy = contact.CreatedBy;
+                                c.CreatedDate = DateTime.Now;
+                                //  c.CreatedByName = contact.CreatedByName;
+                                _entities.Contacts.Add(c);
+                                _entities.SaveChanges();
+                                contact1.MarketingSpecialist = c.ContactId;
+                                change = true;
+
+                            }
 
                         }
                         else
@@ -4093,8 +4154,13 @@ namespace Carroll.Data.Entities.Repository
 
 
                             var searchstr7 = row[14].ToString().Trim().ToLower();
+                            var checkexists = _entities.proc_checkcontactexists(searchstr7).FirstOrDefault();
+                            if(checkexists!= null)
+                            {
+
+                            
                             var chkcontact6 = (from tbl in _entities.Contacts
-                                                  where (tbl.FirstName.ToLower() + " " + tbl.LastName.ToLower()) == searchstr7
+                                                  where tbl.ContactId == checkexists.ContactId
                                                select tbl).FirstOrDefault();
 
                                 if (chkcontact6 != null)
@@ -4102,7 +4168,8 @@ namespace Carroll.Data.Entities.Repository
                                     contact1.PropertyManager = chkcontact6.ContactId;
                                     change = true;
                                 }
-                                else
+                            }
+                            else
                                 {
                                     // create new contact with this Name and phone number and update contact id as vp for property table
 
@@ -4352,6 +4419,7 @@ namespace Carroll.Data.Entities.Repository
                         propertyres.RegionalManagerSignedDateTime = null;
                         _entities.SaveChanges();
                     }
+                    _entities.proc_closealllinks(id);
                 }
 
                 return true;

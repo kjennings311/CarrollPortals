@@ -36,6 +36,20 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
+                        <div class="col-md-12 regionalblock" id="preregionalblock" style="text-align:center;display:none;">
+                            <div class="col-md-12">  <h2> Are you sure you want to reject  </h2></div>
+                            
+                            <div class="col-md-12" style="text-align:center; margin-top:30px; ">
+                                <button class="btn btn-danger" id="preregionalreject">
+                                    YES
+                                </button>
+                                <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"> NO </button>
+
+                            </div>
+
+                        </div>
+
+
                         <div class="col-md-12 regionalblock" id="regionalblock" style="text-align:center;display:none;">
                             <div class="col-md-5"> Write Rejection Reason :</div>
                             <textarea cols="40" rows="5" class="col-md-6" id="reason">
@@ -515,7 +529,8 @@
         $(document).ready(function ()
         {
 
-            $(".addnew").click(function () {
+            $(".addnew").click(function ()
+            {
                 $("#divproperty").hide();
                 $("#location").attr('seloption', '');
                 document.getElementById("submitform").reset();
@@ -603,6 +618,7 @@
             {               
                 leaseid = $(this).attr('data-ref');
                 $(".reviewmodal").modal('show');
+               
 
                 if ($("#UserR").val() == "hr")
               //  if($("#UserR").val() == "Administrator")
@@ -610,18 +626,23 @@
                     console.log($("#UserR").val()+"hr")
                     $("#managerblock").show();
                     $("#regionalblock").hide();
-
-
                 }
                 else
                 {
                     console.log($("#UserR").val() + "other")
                     $("#managerblock").hide();
-                    $("#regionalblock").show();
+                    $("#preregionalblock").show();
+                    $("#regionalblock").hide();
                     $("#reason").val('');
                 }
             });
 
+            $("#preregionalreject").click(function () {
+
+                $("#preregionalblock").hide();
+                $("#regionalblock").show();
+                $("#reason").val('');
+            });
 
             // regional rejected 
             $(document).on('click', ".rejectednotes", function ()

@@ -137,6 +137,9 @@
     <Compile Include="PayrollStatusChangeNotice.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_checkcontactexists_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_getallcarrollpayperiods_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
