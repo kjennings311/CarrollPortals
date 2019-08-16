@@ -181,10 +181,12 @@ namespace Carroll.Data.Services.Controllers
             IValidationDictionary _modelState = new ModelStateWrapper(this.ModelState);
             Form _formdata = JsonData.ToObject<Form>();
             bool bSucceeded = false;
+            string userid = "";
             // Validate the data that is sent.. 
 
             if (Utility.ValidateFormData(_modelState, _formdata.FormFields))
             {
+
                 // Now data is valid let's pass to DAL for update/Insert
                 object obj = _service.GetRuntimeClassInstance(_formdata.FormName);
 
@@ -225,6 +227,9 @@ namespace Carroll.Data.Services.Controllers
                         //}
                     }
 
+                    if (_field.FieldName == "CreatedBy")
+                        userid = _field.FieldValue;
+
                     //if (obj.GetPropertyValue(_field.FieldName) == null)
                     //    obj.SetPropertyValue(_field.FieldName, _field.FieldValue);
 
@@ -241,11 +246,11 @@ namespace Carroll.Data.Services.Controllers
               
                 // Let's run workflow notificaiton here
                 if(id == EntityType.FormGeneralLiabilityClaim )
-                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId,'G');
+                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId,'G',userid);
                 else if (id == EntityType.FormMoldDamageClaim)
-                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'M');
+                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'M',userid);
                     else if (id ==EntityType.FormPropertyDamageClaim)
-                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'P');
+                    WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'P',userid);
                 }
                 return Utility.ReturnRecordResponse(_modelState, bSucceeded);
 

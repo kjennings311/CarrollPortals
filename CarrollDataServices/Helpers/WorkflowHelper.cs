@@ -16,7 +16,7 @@ namespace Carroll.Data.Services.Helpers
 {
     public sealed class WorkflowHelper
     {
-        public static bool RunNotifyWorkflow(string RecordId, Char Type)
+        public static bool RunNotifyWorkflow(string RecordId, Char Type,string UserId)
         {
 
             if (ConfigurationManager.AppSettings["NotifyWorkFlow"] == "true")
@@ -95,8 +95,19 @@ namespace Carroll.Data.Services.Helpers
 
 
                     // Popute Target To Email's
-                    var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                 //   var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                    var uid =new Guid(UserId);
 
+                    var userdetails = (from tbl in _entities.SiteUsers
+                                       where tbl.UserId == uid
+                                       select tbl.UserEmail).FirstOrDefault();
+
+                    if (userdetails != null)
+                    {
+                        _message.EmailTo.Add(userdetails);
+                       
+                    }
+                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
                     //{
                     //    _message.EmailTo.Add(workflowemails.InsuranceEmail);
@@ -106,25 +117,24 @@ namespace Carroll.Data.Services.Helpers
                     //    _message.EmailTo.Add(workflowemails.EquityPartnerEmail);
                     //}
 
-                    if (!string.IsNullOrEmpty(workflowemails.RMEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.RMEmail);
-                    }
+                    //if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.RMEmail);
+                    //}
 
-                    if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
-                    }
-                    if (!string.IsNullOrEmpty(workflowemails.VPEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.VPEmail);
-                    }
-                    if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.RVPEmail);
-                    }
-                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
-                    
+                    //if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
+                    //}
+                    //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.VPEmail);
+                    //}
+                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
+                    //}
+                  
                     //if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
                     //{
                     //    _message.EmailTo.Add(workflowemails.AssetManager1Email);
@@ -183,7 +193,7 @@ namespace Carroll.Data.Services.Helpers
                     // Popute Target To Email's
 
 
-                    var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                    //  var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
                     //{
@@ -215,25 +225,37 @@ namespace Carroll.Data.Services.Helpers
                     //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
                     //}
 
-                    if (!string.IsNullOrEmpty(workflowemails.RMEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.RMEmail);
-                    }
+                    //if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.RMEmail);
+                    //}
 
-                    if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
-                    }
-                    if (!string.IsNullOrEmpty(workflowemails.VPEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.VPEmail);
-                    }
-                    if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.RVPEmail);
-                    }
+                    //if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
+                    //}
+                    //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.VPEmail);
+                    //}
+                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
+                    //}
 
+                    var uid = new Guid(UserId);
+
+                    var userdetails = (from tbl in _entities.SiteUsers
+                                       where tbl.UserId == uid
+                                       select tbl.UserEmail).FirstOrDefault();
+
+                    if (userdetails != null)
+                    {
+                        _message.EmailTo.Add(userdetails);
+                    }
                     _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+
+                   // _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
                     EmailHelper.SendEmail(_message, RecordId, ClaimData.tbl.CreatedByName, ClaimData.tbl.CreatedBy.ToString());
                 }
                 else if (Type == 'M')
@@ -281,7 +303,7 @@ namespace Carroll.Data.Services.Helpers
                     _message.Body += "</div></div>";
                     // Popute Target To Email's
 
-                    var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                    //   var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
                     //{
@@ -312,22 +334,35 @@ namespace Carroll.Data.Services.Helpers
                     //{
                     //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
                     //}
-                    if (!string.IsNullOrEmpty(workflowemails.RMEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.RMEmail);
-                    }
+                    //if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.RMEmail);
+                    //}
 
-                    if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                    //if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
+                    //}
+                    //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.VPEmail);
+                    //}
+                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
+                    //}
+                    //_message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+
+                    var uid = new Guid(UserId);
+
+                    var userdetails = (from tbl in _entities.SiteUsers
+                                       where tbl.UserId == uid
+                                       select tbl.UserEmail).FirstOrDefault();
+
+                    if (userdetails != null)
                     {
-                        _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
-                    }
-                    if (!string.IsNullOrEmpty(workflowemails.VPEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.VPEmail);
-                    }
-                    if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    {
-                        _message.EmailTo.Add(workflowemails.RVPEmail);
+                        _message.EmailTo.Add(userdetails);
+
                     }
                     _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
 
@@ -1769,8 +1804,9 @@ namespace Carroll.Data.Services.Helpers
                 mail.Body = Message.Body;
             //   mail.To.Clear();
                 // remove this line before going production
-                //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+                 mail.To.Add("pavan.nanduri@carrollorg.com");
+                mail.To.Add("sekhar.babu@forcitude.com");
+              //  mail.To.Add("sukumar.gandhi@forcitude.com");
                 mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
