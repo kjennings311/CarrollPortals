@@ -1057,7 +1057,9 @@ function HandleRowClickr(obj) {
 }
 function LoadFormView(data)
 {
-    location.href = "http://"+location.hostname+"/Home/viewclaim/?Claim=" + data;
+   // location.href = "http://"+location.hostname+"/Home/viewclaim/?Claim=" + data;
+    // changed by Pavan 08/19/2019 @12:21pm est
+    location.href = "/Home/viewclaim/?Claim=" + data;
 }
 
 function CheckNull(variable)

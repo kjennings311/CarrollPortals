@@ -450,7 +450,6 @@
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\app\admin.js" />
-    <Content Include="Scripts\app\custom - Copy.js" />
     <Content Include="Scripts\app\custom.js" />
     <Content Include="Scripts\app\Global.js" />
     <Content Include="Scripts\app\inspinia.js" />
