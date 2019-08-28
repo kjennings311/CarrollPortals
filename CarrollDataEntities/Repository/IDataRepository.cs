@@ -85,5 +85,7 @@ namespace Carroll.Data.Entities.Repository
         string GetPropertyName(int PropertyNumber);
         string GetPropertyNameManager(int PropertyNumber);
         string GetPropertyNumberNameManager(string PropertyNumber);
+        dynamic GetDynamicLinkStatus(Guid refid);
+        dynamic GetAllContactsHighRolesInclude(string search);
     }
 }

@@ -74,6 +74,7 @@ namespace Carroll.Data.Services.Models
         dynamic GetHrFormLogActivity(string FormType, string RecordId);
         dynamic GetNewHireRejectionDetails(string Refid);
         void ErrorLog(ErrorLog errorLog);
-
+        dynamic GetDynamicLinkStatus(Guid refid);
+        dynamic GetAllContactsHighRolesInclude(string search);
     }
 }

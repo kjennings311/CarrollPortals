@@ -326,5 +326,32 @@ namespace Carroll.Data.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_closealllinks", refidParameter);
         }
+    
+        public virtual ObjectResult<proc_getactivitylog_Result> proc_getactivitylog(string formtype, Nullable<System.Guid> refid)
+        {
+            var formtypeParameter = formtype != null ?
+                new ObjectParameter("formtype", formtype) :
+                new ObjectParameter("formtype", typeof(string));
+    
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getactivitylog_Result>("proc_getactivitylog", formtypeParameter, refidParameter);
+        }
+    
+        public virtual ObjectResult<proc_getnewhirerejectiondetails_Result> proc_getnewhirerejectiondetails(Nullable<System.Guid> refid)
+        {
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getnewhirerejectiondetails_Result>("proc_getnewhirerejectiondetails", refidParameter);
+        }
+    
+        public virtual ObjectResult<proc_getallcontactsincludinghighroles_Result> proc_getallcontactsincludinghighroles()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallcontactsincludinghighroles_Result>("proc_getallcontactsincludinghighroles");
+        }
     }
 }

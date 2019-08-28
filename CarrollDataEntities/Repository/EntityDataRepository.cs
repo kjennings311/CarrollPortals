@@ -681,6 +681,17 @@ namespace Carroll.Data.Entities.Repository
 
         }
 
+       public dynamic GetAllContactsHighRolesInclude(string search)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+                dynamic _temp = _entities.proc_getallcontactsincludinghighroles().ToList().Where(s => s.FirstName.ToLower().Contains(search) || s.LastName.ToLower().Contains(search)).ToList();
+                return _temp;
+            }
+        }
+
+
         public dynamic GetRecords(EntityType entityType, string optionalSeachText = "")
         {
             using (CarrollFormsEntities _entities = DBEntity)
@@ -799,10 +810,10 @@ namespace Carroll.Data.Entities.Repository
 
                 var res = (from tbl in _entities.Roles
                            join tbluserrole in _entities.UserInRoles on tbl.RoleId equals tbluserrole.RoleId
-                           where tbluserrole.UserId == userid && tbl.RoleName.Contains("admin")
-                           select tbl).Count();
+                           where tbluserrole.UserId == userid
+                           select tbl).FirstOrDefault();
 
-                if (res == 1)
+                if (res.RoleName.ToLower() == "administrator")
                 {
 
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
@@ -817,8 +828,9 @@ namespace Carroll.Data.Entities.Repository
 
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
                 }
-                else
-                {
+                else if (res.RoleName.ToLower() == "property")
+                 {
+
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
                                       join tblpropertyusers in _entities.UserInProperties on tbl.PropertyId equals tblpropertyusers.PropertyId
                                       where tblpropertyusers.UserId == userid
@@ -833,6 +845,79 @@ namespace Carroll.Data.Entities.Repository
                                            select tbl).Count();
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
                 }
+                else if (res.RoleName.ToLower() == "vp")
+                {
+
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                      where tblpropertyusers.VicePresident == userid
+                                      select tbl).Count();
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                        where tblpropertyusers.VicePresident == userid
+                                        select tbl).Count();
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                           where tblpropertyusers.VicePresident == userid
+                                           select tbl).Count();
+                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                }
+                else if (res.RoleName.ToLower() == "rvp")
+                {
+
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                      where tblpropertyusers.RegionalVicePresident == userid
+                                      select tbl).Count();
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                        where tblpropertyusers.RegionalVicePresident == userid
+                                        select tbl).Count();
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                           where tblpropertyusers.RegionalVicePresident == userid
+                                           select tbl).Count();
+                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                }
+                else if (res.RoleName.ToLower() == "regional")
+                {
+
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                      where tblpropertyusers.RegionalManager == userid
+                                      select tbl).Count();
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                        where tblpropertyusers.RegionalManager == userid
+                                        select tbl).Count();
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                           where tblpropertyusers.RegionalManager == userid
+                                           select tbl).Count();
+                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                }
+                else if (res.RoleName.ToLower() == "asset manager")
+                {
+
+                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                      where tblpropertyusers.AssetManager1 == userid
+                                      select tbl).Count();
+                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                        where tblpropertyusers.AssetManager1 == userid
+                                        select tbl).Count();
+                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                           where tblpropertyusers.AssetManager1 == userid
+                                           select tbl).Count();
+                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                }
+                else
+                {
+                    return new { PropertyCount = 0, DamageCount = 0, LiabilityCount = 0 };
+                }
+            
             }
         }
 
@@ -862,8 +947,7 @@ namespace Carroll.Data.Entities.Repository
             using (CarrollFormsEntities _entities = DBEntity)
             {
 
-                var res = (from tbl in _entities.EquityPartners
-                           join tblcontact in _entities.Contacts on tbl.ContactId equals tblcontact.ContactId
+                var res = (from tbl in _entities.EquityPartners                          
                            where tbl.IsActive == true
                            select tbl).ToList();
 
@@ -1083,7 +1167,10 @@ namespace Carroll.Data.Entities.Repository
                                          where tbl.GLLId == _recId
                                          select new { tbl, tblprop.PropertyName }).FirstOrDefault();
                     if (_generalclaim != null)
-                    { cd.Claim = _generalclaim; }
+                    {
+
+
+                        cd.Claim = _generalclaim; }
                     formtype = 2;
 
                 }
@@ -1108,7 +1195,11 @@ namespace Carroll.Data.Entities.Repository
                                         select new { tbl, tblprop.PropertyName }).FirstOrDefault();
 
                     //_entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
-                    if (_damageclaim != null) { cd.Claim = _damageclaim; }
+                    if (_damageclaim != null) {
+
+                        
+
+                        cd.Claim = _damageclaim; }
                     formtype = 1;
 
                 }
@@ -1605,6 +1696,7 @@ namespace Carroll.Data.Entities.Repository
 
                         res.rpmsignature = null;
                             res.rpmdate = null;
+                        res.PmSignedDateTime = _property.PmSignedDateTime;
                         int i1 = _entities.SaveChanges();
                     }
                        
@@ -4366,16 +4458,20 @@ namespace Carroll.Data.Entities.Repository
                 
                 var rid = new Guid(RecordId);
                 var res = _entities.proc_getallhrformsactivity(FormType, rid).ToList();
-                var dldetails = (from tbl in _entities.DynamicLinks
-                                 where tbl.FormType == FormType && tbl.ReferenceId == rid && tbl.IpAddress != null && tbl.BrowserInformation!= null
-                                 orderby tbl.CreatedDate descending
-                                 select new { browserinfo = tbl.BrowserInformation, ip = tbl.IpAddress, datetime = tbl.Clientdatetime, tbl.Action }).ToList();
-                if(FormType =="NewHire")
+                var dldetails = _entities.proc_getactivitylog(FormType, rid).ToList();
+                //var dldetails = (from tbl in _entities.DynamicLinks
+                //                 where tbl.FormType == FormType && tbl.ReferenceId == rid && tbl.IpAddress != null && tbl.BrowserInformation!= null
+                //                 orderby tbl.CreatedDate descending
+                //                 select new { browserinfo = tbl.BrowserInformation, ip = tbl.IpAddress, datetime = tbl.Clientdatetime, tbl.Action }).ToList();
+
+                if (FormType =="NewHire")
                 {
-                    var res1 = (from tbl in _entities.EmployeeNewHireNotices
-                               join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
-                               where tbl.EmployeeHireNoticeId == rid
-                               select new { tbl.RejectedReason, tbluser.FirstName, tbluser.LastName, tbl.RejectedDateTime }).ToList();
+                    var res1 = _entities.proc_getnewhirerejectiondetails(rid).ToList();
+
+                    //var res1 = (from tbl in _entities.EmployeeNewHireNotices
+                    //           join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
+                    //           where tbl.EmployeeHireNoticeId == rid
+                    //           select new { tbl.RejectedReason, tbluser.FirstName, tbluser.LastName, RejectedDateTime= tbl.RejectedDateTime.Value.ToString("MM/dd/yyyy") + " " + tbl.RejectedDateTime.Value.ToShortTimeString() }).ToList();
                     return new { log = res, metadata = dldetails,rejection=res1 };
                 }
                else
@@ -4384,6 +4480,18 @@ namespace Carroll.Data.Entities.Repository
             }
         }
 
+       public dynamic GetDynamicLinkStatus(Guid refid)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+
+
+
+                return (from tbl in _entities.DynamicLinks
+                        where tbl.DynamicLinkId == refid
+                        select tbl.OpenStatus).FirstOrDefault();
+            }
+        }
         public dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser)
         {
             using (CarrollFormsEntities _entities = DBEntity)

@@ -321,7 +321,7 @@
             </p>
 
             <p class="c1">
-                <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" value="@Model.Wage_Salary" style="width:15%;margin-left:2%;" />  / @Model.Status  </span>
+                <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" value="@Model.Wage_Salary" style="width:15%;margin-left:2%;" />  / @Model.Sal_Time  </span>
             </p>
 
             <p class="c1">
@@ -342,15 +342,15 @@
 
                 @if (!string.IsNullOrEmpty(Model.La_Property1))
                 {
-                    <tr> <td> <input type="text" id="la_Prop1" value="@Model.La_Property1" />  </td> <td> <input type="text" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
+                    <tr> <td> <input type="text" id="la_Prop1" style="width:95%" value="@Model.La_Property1" />  </td> <td> <input type="text" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
                     if (!string.IsNullOrEmpty(Model.La_Property2))
                     {
-                        <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
+                        <tr> <td> <input type="text" id="la_Prop2" style="width:95%" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
                     }
 
                     if (!string.IsNullOrEmpty(Model.La_Property3))
                     {
-                        <tr> <td> <input type="text" id="la_Prop2" value="@Model.La_Property3" /> </td> <td> <input type="text" value="@Model.La_Property3_Per" id="la_Prop2per" /> </td> </tr>
+                        <tr> <td> <input type="text" id="la_Prop2" style="width:95%" value="@Model.La_Property3" /> </td> <td> <input type="text" value="@Model.La_Property3_Per" id="la_Prop2per" /> </td> </tr>
                     }
 
 
@@ -510,6 +510,15 @@
         }
 
     </div>
+    <script >
+
+        var inputs = document.getElementsByTagName('input');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }  
+
+
+    </script>
 </body>
 </html>
 

@@ -122,7 +122,8 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
 
             $("input").change(function (e) {
                 e.preventDefault();
@@ -208,7 +209,7 @@
                             alert("Successfully Submitted");
 
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-
+                            window.opener.UpdateChildStatus(1);
                             setTimeout(function ()
                             {
 

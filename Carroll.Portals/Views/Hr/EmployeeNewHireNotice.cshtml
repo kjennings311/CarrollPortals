@@ -37,7 +37,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 regionalblock" id="preregionalblock" style="text-align:center;display:none;">
-                            <div class="col-md-12">  <h2> Are you sure you want to reject  </h2></div>
+                            <div class="col-md-12">  <h2 class="text-center"> Are you sure you want to reject ?  </h2></div>
                             
                             <div class="col-md-12" style="text-align:center; margin-top:30px; ">
                                 <button class="btn btn-danger" id="preregionalreject">
@@ -832,12 +832,15 @@
 
             $(document).on('click', "#resubmit,.resubmit", function ()
             {
-                $('.reviewmodal').modal('hide');
-                $('#myModal').modal('show');
-
+              
+                var eid = $(this).attr('data-ref');
                 insertoredit = false;
 
-              
+                if (eid != "")
+                    leaseid = eid;
+
+                $(".alert").html('Processing');
+                $('#toastnotification').modal('show');
 
                 $.get($BaseApiUrl + "api/Data/GetEmployeeNewHireNotice?riderid=" + leaseid, function (data)
                 {
@@ -930,7 +933,7 @@
                             console.log(data.position);
                             $('#position option[value="' + data.position + '"]').attr("selected", "selected");
                             $("#position").val("" + data.position);
-                        }, 3000);
+                        }, 1000);
 
 
                         $("#la_Prop1").val(data.la_Property1);
@@ -957,6 +960,15 @@
 
                         //   $("#dateposted").val(data.datePosted);
                         $("#notes1").val(data.notes);
+
+                        $('.reviewmodal').modal('hide');
+                        $('#myModal').modal('show');
+                        if ($("#divprocessingbtn").length > 0) {
+                            $("#divprocessingbtn").hide();
+                        }
+                        $('#toastnotification').modal('hide');
+                        $("#esignature,#edate,#rpmsignature,#rpmdate").attr('disabled', true);
+
                     }
                 });
 

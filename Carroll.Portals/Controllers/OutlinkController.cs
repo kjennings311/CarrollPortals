@@ -394,6 +394,39 @@ namespace Carroll.Portals.Controllers
 
 
         [AllowAnonymous]
+        [ActionName("GetDynamicLinkStatus")]
+        [HttpGet]
+        public async Task<dynamic>  GetDynamicLinkStatus(string refid)
+        {
+
+            var client = new HttpClient();
+
+            //Passing service base url  
+            client.BaseAddress = new Uri(Baseurl);
+
+            client.DefaultRequestHeaders.Clear();
+            //Define request data format  
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+            //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+            HttpResponseMessage Res = await client.GetAsync("api/data/GetDynamicLinkStatus?refid=" + refid);
+             bool fi = false;
+
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (Res.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                fi = JsonConvert.DeserializeObject<bool>(EmpResponse);
+            }
+
+            return fi;
+        }
+
+        [AllowAnonymous]
         [ActionName("UpdateWorkflowPayRollStatusChangeNoticeAsync")]
         [HttpPost]
         [MyIgnore]
@@ -594,7 +627,7 @@ namespace Carroll.Portals.Controllers
         [ActionName("UpdateWorkflowEmployeeNewHireNotice")]
         [HttpPost]
         [MyIgnore]
-        public async Task<dynamic> UpdateWorkflowEmployeeNewHireNoticeAsync(string action, string refid, string signature, string iscorporate)
+        public async Task<dynamic> UpdateWorkflowEmployeeNewHireNoticeAsync(string action, string refid, string signature, string iscorporate,string empname)
         {
 
             //var Action = Request.Params["action"].ToString();
@@ -664,9 +697,9 @@ namespace Carroll.Portals.Controllers
 
             if (action == "Employee Email" && iscorporate.ToLower() == "false")
             {
-                var empemail = Request.Params["empemail"].ToString();
+              //  var empemail = Request.Params["empemail"].ToString();
 
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, empemail);
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, empname);
 
                 WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Regional Email", "System");
 
@@ -674,7 +707,7 @@ namespace Carroll.Portals.Controllers
             }
             else
             {
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, "System");
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, "System");
 
                 // WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
 

@@ -23,7 +23,7 @@
 
     <div class="page">
         <div id="page_1" style="width:96%;">
-            <img style="margin-left: 33%;margin-top:-35px; margin-bottom:20px" src="/img/payroll.png" id="p1img1">
+            <img style="margin-left: 33%; margin-bottom:20px" src="/img/payroll.png" id="p1img1">
             <P class="p0 ft0" style="    margin-top: 10PX;
     margin-bottom: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
             <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" value="@Model.EmployeeName" /> Current Property: <input style=" display:inline;" value="@Model.FromPropName" type="text" id="effdate" class="" /></P>
@@ -398,7 +398,7 @@
         </div>
 
 
-      
+
 
     </div>
 
@@ -1093,6 +1093,17 @@
             font-size: 22px;
         }
     </style>
+
+
+    <script>
+
+        var inputs = document.getElementsByTagName('input');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+
+    </script>
 </body>
 </html>
 

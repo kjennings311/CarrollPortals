@@ -156,7 +156,7 @@
           <Property Name="IsRejected" Type="bit" />
           <Property Name="RejectedBy" Type="uniqueidentifier" />
           <Property Name="RejectedDateTime" Type="datetime" />
-          <Property Name="AdditionalText" Type="nvarchar" MaxLength="150" />
+          <Property Name="AdditionalText" Type="nvarchar" MaxLength="550" />
           <Property Name="RejectedReason" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="EquityPartnerContacts">
@@ -846,8 +846,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_closealllinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="proc_getactivitylog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="formtype" Type="varchar(max)" Mode="In" />
+          <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallcarrollpayperiods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallcarrollpositions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallcontactsincludinghighroles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeenewhirenotice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallemployeenewhirenoticenew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -878,6 +883,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getnewhirerejectiondetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getpayperiodsforcurrentyear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcelupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -1114,8 +1122,16 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="str" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="proc_closealllinks">
+          <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getactivitylog" ReturnType="Collection(Carroll.Data.Entities.proc_getactivitylog_Result)">
+            <Parameter Name="formtype" Mode="In" Type="String" />
             <Parameter Name="refid" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="proc_getnewhirerejectiondetails" ReturnType="Collection(Carroll.Data.Entities.proc_getnewhirerejectiondetails_Result)">
+          <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getallcontactsincludinghighroles" ReturnType="Collection(Carroll.Data.Entities.proc_getallcontactsincludinghighroles_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -2017,7 +2033,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="IsRejected" Type="Boolean" />
           <Property Name="RejectedBy" Type="Guid" />
           <Property Name="RejectedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="AdditionalText" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AdditionalText" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Name="RejectedReason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NoticeOfEmployeeSeperation">
@@ -2595,7 +2611,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         </ComplexType>
         <ComplexType Name="proc_getallhrformsactivity_Result">
           <Property Type="String" Name="ActivitySubject" Nullable="true" MaxLength="300" />
-          <Property Type="DateTime" Name="ActivityDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ActivityDate" Nullable="false" MaxLength="61" />
           <Property Type="String" Name="ActivityByName" Nullable="true" MaxLength="150" />
         </ComplexType>
         <EntityType Name="ErrorLog">
@@ -2641,6 +2657,24 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="CreatedByName" Nullable="true" MaxLength="25" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="String" Name="ContactPhoto" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="proc_getactivitylog_Result">
+          <Property Type="String" Name="browserinfo" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ip" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Action" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="datetime" Nullable="false" MaxLength="61" />
+        </ComplexType>
+        <ComplexType Name="proc_getnewhirerejectiondetails_Result">
+          <Property Type="String" Name="RejectedReason" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RejectedDateTime" Nullable="false" MaxLength="61" />
+        </ComplexType>
+        <ComplexType Name="proc_getallcontactsincludinghighroles_Result">
+          <Property Type="Guid" Name="ContactId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4147,6 +4181,36 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_closealllinks" FunctionName="Carroll.Data.Entities.Store.proc_closealllinks" />
+          <FunctionImportMapping FunctionImportName="proc_getactivitylog" FunctionName="Carroll.Data.Entities.Store.proc_getactivitylog">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getactivitylog_Result">
+                <ScalarProperty Name="browserinfo" ColumnName="browserinfo" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getnewhirerejectiondetails" FunctionName="Carroll.Data.Entities.Store.proc_getnewhirerejectiondetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getnewhirerejectiondetails_Result">
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RejectedDateTime" ColumnName="RejectedDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getallcontactsincludinghighroles" FunctionName="Carroll.Data.Entities.Store.proc_getallcontactsincludinghighroles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getallcontactsincludinghighroles_Result">
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

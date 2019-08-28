@@ -38,7 +38,7 @@
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#"  class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -990,6 +990,15 @@
         $(document).ready(function () {
             var leaseid = "";
 
+            $(".addnew").click(function () {
+             
+                $("#location").attr('seloption', '');
+                document.getElementById("submitform").reset();
+                $("#esignature,#edate,#mdate").attr('disabled', true);
+                document.getElementById("mdate").valueAsDate = new Date();
+                
+            });
+
             GetAllHRFORMs('PayRollChange');
 
             $("input").change(function (e) {
@@ -1167,7 +1176,8 @@
 
             });
 
-            $("#Submit").click(function (e) {
+            $("#Submit").click(function (e)
+            {
 
                 e.preventDefault();
 
@@ -1176,119 +1186,294 @@
 
                 $("#status").html('');
 
-                //if ($("#empname").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Employee Name </li>";
-                //    $("#empname").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#empname");
-                //}
+                if ($("#empname").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $("#empname").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
 
-                //if ($("#effectivedate").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Effective Date </li>";
-                //    $("#effectivedate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#effectivedate");
-                //}
+                if ($("#location").val() == "")
+                {
+                    errormsgsummary += "<li> Please Choose Property </li>";
+                    $("#location").addClass('has-error');
+                    if (control == "")
+                        control = $("#location");
+                }
 
-                //if ($("#manager").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Manager </li>";
-                //    $("#manager").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#manager");
-                //}
+                if ($("#empemail").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Email </li>";
+                    $("#empemail").addClass('has-error');
+                    if (control == "")
+                        control = $("#empemail");
+                }
 
-                //if ($("#todaydate").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Today's Date </li>";
-                //    $("#todaydate").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#todaydate");
-                //}
+              
 
-                //if ($("#location").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Location </li>";
-                //    $("#location").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#location");
-                //}
+                if ($("#chkpropertychange").is(":checked"))
+                {
+                    if ($("#effectivedate").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter Effective Date </li>";
+                        $("#effectivedate").addClass('has-error');
+                        if (control == "")
+                            control = $("#effectivedate");
+                    }
 
-
-                //if ($("#position").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Position Of Employee </li>";
-                //    $("#position").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#position");
-                //}
-
-                //if ($("#dob").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Date Of Birth </li>";
-                //    $("#dob").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#dob");
-                //}
+                    if ($("#frompropnum").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter From Property Number </li>";
+                        $("#frompropnum").addClass('has-error');
+                        if (control == "")
+                            control = $("#frompropnum");
+                    }
 
 
-                //if ($("#status1").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Choose Status  </li>";
-                //    $("#status1").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#status1");
-                //}
+                    if ($("#topropnum").val() == "") {
+                        errormsgsummary += "<li> Please Enter To Property Number </li>";
+                        $("#topropnum").addClass('has-error');
+                        if (control == "")
+                            control = $("#topropnum");
+                    }
+                                      
+                }
+
+                if ($("#chkpaychange").is(":checked"))
+                {
+                    if ($("#fromtitle").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter From Title </li>";
+                        $("#fromtitle").addClass('has-error');
+                        if (control == "")
+                            control = $("#fromtitle");
+                    }
+
+                    if (!$("#fromexempt").is(":checked") && !$("#fromnonexempt").is(":checked"))
+                    {
+                        errormsgsummary += "<li> Please Select From Position Options </li>";
+                        $("#fromexempt").addClass('has-error');
+                        if (control == "")
+                            control = $("#fromexempt");
+                    }
+
+                    if (!$("#fromfullstatus").is(":checked") && !$("#frompartstatus").is(":checked"))
+                    {
+                        errormsgsummary += "<li> Please Select From Status Options </li>";
+                        $("#fromfullstatus").addClass('has-error');
+                        if (control == "")
+                            control = $("#fromfullstatus");
+                    }
 
 
-                //if ($("#salary").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                //    $("#salary").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#salary");
-                //}
-
-                //if ($("#allocation").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Allocation  </li>";
-                //    $("#allocation").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#allocation");
-                //}
+                    if (!$("#fromannualsalary").is(":checked") && !$("#fromsalhourly").is(":checked"))
+                    {
+                        errormsgsummary += "<li> Please Select From Wage/Salary Options </li>";
+                        $("#fromannualsalary").addClass('has-error');
+                        if (control == "")
+                            control = $("#fromannualsalary");
+                    }
 
 
-                //if ($("#streetaddress").val() == "")
-                //{
-                //    errormsgsummary += "<li> Please Enter Street Address  </li>";
-                //    $("#streetaddress").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#streetaddress");
-                //}
+                    if ($("#fromrate").val() == "") {
+                        errormsgsummary += "<li> Please Enter From Rate </li>";
+                        $("#fromrate").addClass('has-error');
+                        if (control == "")
+                            control = $("#fromrate");
+                    }
+
+                    if ($("#totitle").val() == "") {
+                        errormsgsummary += "<li> Please Enter To Title </li>";
+                        $("#totitle").addClass('has-error');
+                        if (control == "")
+                            control = $("#totitle");
+                    }
+
+                    if (!$("#toexempt").is(":checked") && !$("#tononexempt").is(":checked")) {
+                        errormsgsummary += "<li> Please Select To Position Options </li>";
+                        $("#toexempt").addClass('has-error');
+                        if (control == "")
+                            control = $("#toexempt");
+                    }
+
+                    if (!$("#tofullstatus").is(":checked") && !$("#topartstatus").is(":checked")) {
+                        errormsgsummary += "<li> Please Select To Status Options </li>";
+                        $("#tofullstatus").addClass('has-error');
+                        if (control == "")
+                            control = $("#tofullstatus");
+                    }
 
 
-                //if ($("#city_state_zip").val() == "") {
-                //    errormsgsummary += "<li> Please Enter City/State/Zip  </li>";
-                //    $("#city_state_zip").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#city_state_zip");
-                //}
+                    if (!$("#toannualsalary").is(":checked") && !$("#tosalhourly").is(":checked")) {
+                        errormsgsummary += "<li> Please Select To Wage/Salary Options </li>";
+                        $("#toannualsalary").addClass('has-error');
+                        if (control == "")
+                            control = $("#toannualsalary");
+                    }
 
 
-                //if ($("#prop1per").val() == "" || $("#prop2per").val() == "") {
-                //    errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
-                //    $("#prop1per").addClass('has-error');
-                //    $("#prop2per").addClass('has-error');
-                //    if (control == "")
-                //        control = $("#prop2per");
-                //}
-                //else {
-                //    var total = parseFloat($("#prop1per").val()) + parseFloat($("#prop2per").val());
-                //    if (total < 100)
-                //        errormsgsummary += "<li> Division Of Labour Percentage should be 100% </li>";
-                //}
+                    if ($("#torate").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter To Rate </li>";
+                        $("#torate").addClass('has-error');
+                        if (control == "")
+                            control = $("#torate");
+                    }
 
+                }
+
+                if ($("#chklaborallocation").is(":checked"))
+                {
+                    if ($("#la_Prop1per").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter Division Of Labor Percentage  </li>";
+                        $("#la_Prop1per").addClass('has-error');
+                        if (control == "")
+                            control = $("#la_Prop1per");
+                    }
+
+                    if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100)
+                    {
+
+                        if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "")
+                        {
+                            errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
+                            $("#la_Prop1").addClass('has-error');
+                            $("#la_Prop2").addClass('has-error');
+                            $("#la_Prop3").addClass('has-error');
+                            if (control == "")
+                                control = $("#la_Prop2");
+                        }
+                        else {
+                            var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
+                            if (total < 100)
+                                errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
+                            // return false;
+                        }
+
+                    }
+
+                    var p1 = 0, p2 = 0, p3 = 0;
+
+                    if ($("#la_Prop1per").val() != "")
+                        p1 = parseFloat($("#la_Prop1per").val());
+                    if ($("#la_Prop2per").val() != "")
+                        p2 = parseFloat($("#la_Prop2per").val());
+                    if ($("#la_Prop3per").val() != "")
+                        p3 = parseFloat($("#la_Prop3per").val());
+                    var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+
+                    console.log(sum);
+
+
+                    if (sum != 100)
+                    {
+
+                        if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
+                        {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                            $("#la_Prop1").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop1");
+                        }
+
+
+                        if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "")
+                        {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                            $("#la_Prop2").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop2");
+                        }
+
+
+                        if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "")
+                        {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                            $("#la_Prop3").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop3");
+                        }
+
+                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                        control = $("#la_Prop3");
+
+                    }
+
+
+                }
+
+
+
+
+                if ($("#chkleave").is(":checked"))
+                {
+                    if (!$("#chkfmlayes").is(":checked") && !$("#chkfmlano").is(":checked"))
+                    {
+                        errormsgsummary += "<li> Please Select FMLA Eligible </li>";
+                        $("#chkfmlayes").addClass('has-error');
+                        if (control == "")
+                            control = $("#chkfmlayes");
+                    }
+                    
+                    if (!$("#chkbenefityes").is(":checked") && !$("#chkbenefitno").is(":checked"))
+                    {
+                        errormsgsummary += "<li> Please Select enrolled benefits? </li>";
+                        $("#chkbenefityes").addClass('has-error');
+                        if (control == "")
+                            control = $("#chkbenefityes");
+                    }
+
+                    if ($("#purpose").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Choose Leave Purpose </li>";
+                        $("#purpose").addClass('has-error');
+                        if (control == "")
+                            control = $("#purpose");
+                    }
+
+                    if ($("#purpose").val() == "Other")
+                    {
+                        errormsgsummary += "<li> Please enter Other Reason </li>";
+                        $("#purposeother").addClass('has-error');
+                        if (control == "")
+                            control = $("#purposeother");
+                    }
+
+                    if ($("#leavebegin").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter Leave Begin </li>";
+                        $("#leavebegin").addClass('has-error');
+                        if (control == "")
+                            control = $("#leavebegin");
+                    }
+
+
+
+                    if ($("#leaveend").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter Leave End </li>";
+                        $("#leaveend").addClass('has-error');
+                        if (control == "")
+                            control = $("#leaveend");
+                    }
+
+                    if ($("#ptobalance").val() == "")
+                    {
+                        errormsgsummary += "<li> Please Enter PTO Balance </li>";
+                        $("#ptobalance").addClass('has-error');
+                        if (control == "")
+                            control = $("#ptobalance");
+                    }
+                                       
+                }
+                
                 if ($("#msignature").val() == "") {
                     errormsgsummary += "<li> Please Enter Manager's Signature  </li>";
                     $("#msignature").addClass('has-error');
@@ -1297,71 +1482,10 @@
                 }
 
 
-                if ($("#la_Prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
-                    errormsgsummary += "<li> Please Enter Division Of Labour Percentage  </li>";
-                    $("#la_Prop1per").addClass('has-error');
-                    if (control == "")
-                        control = $("#la_Prop1per");
-                }
+                
 
-                if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
-
-                    if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "") {
-                        errormsgsummary += "<li> Please Enter Division Of Labour Percentage </li>";
-                        $("#la_Prop1").addClass('has-error');
-                        $("#la_Prop2").addClass('has-error');
-                        $("#la_Prop3").addClass('has-error');
-                        if (control == "")
-                            control = $("#la_Prop2");
-                    }
-                    else {
-                        var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
-                        if (total < 100)
-                            errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                    }
-
-                }
-
-                if ((parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val()) == 100)) {
-
-                    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
-
-                        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                        $("#la_Prop1").addClass('has-error');
-
-                        if (control == "")
-                            control = $("#la_Prop1");
-                    }
-
-
-                    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
-
-                        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                        $("#la_Prop2").addClass('has-error');
-
-                        if (control == "")
-                            control = $("#la_Prop2");
-                    }
-
-
-                    if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
-
-                        errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                        $("#la_Prop3").addClass('has-error');
-
-                        if (control == "")
-                            control = $("#la_Prop3");
-                    }
-                }
-
-                if ($("#purpose").val() == "Other" && $("#purposeother").val() == "") {
-                    errormsgsummary += "<li> Please Enter Other Purpose  </li>";
-                    $("#purposeother").addClass('has-error');
-                    if (control == "")
-                        control = $("#purposeother");
-                }
-
-                if (errormsgsummary != "") {
+                if (errormsgsummary != "")
+                {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -1369,7 +1493,8 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else {
+                else
+                {
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
@@ -1379,7 +1504,8 @@
                     //   insertForm.append('typeofchange', $("#typeofchange").val());
 
 
-                    if ($("#chkpropertychange").is(":checked")) {
+                    if ($("#chkpropertychange").is(":checked"))
+                    {
                         insertForm.append('showproperty', 'true');
                     }
                     else {
@@ -1542,9 +1668,6 @@
 
                                 setTimeout(function () {
 
-                                    $("#print").attr('disabled', false);
-                                    $("#pdf").attr('disabled', false);
-                                    $("#Submit").attr('disabled', true);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
                             }

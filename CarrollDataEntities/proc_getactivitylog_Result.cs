@@ -11,10 +11,11 @@ namespace Carroll.Data.Entities
 {
     using System;
     
-    public partial class proc_getallhrformsactivity_Result
+    public partial class proc_getactivitylog_Result
     {
-        public string ActivitySubject { get; set; }
-        public string ActivityDate { get; set; }
-        public string ActivityByName { get; set; }
+        public string browserinfo { get; set; }
+        public string ip { get; set; }
+        public string Action { get; set; }
+        public string datetime { get; set; }
     }
 }

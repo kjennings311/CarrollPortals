@@ -140,8 +140,11 @@ namespace Carroll.Data.Services.Models
         {
             return _repository.GetEmployeeNewHireNotice(obj);
         }
-
-      public  dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate)
+      public  dynamic GetAllContactsHighRolesInclude(string search)
+        {
+            return _repository.GetAllContactsHighRolesInclude(search);
+        }
+        public  dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate)
         {
             return _repository.UpdateWorkflowEmployeeNewHireNotice(Action,RefId,Sign,edate,"","");
         }
@@ -296,6 +299,11 @@ namespace Carroll.Data.Services.Models
         public List<CarrollPayPeriod> GetAllCarrollPayPerilds( )
         {
             return _repository.GetAllCarrollPayPerilds();
+        }
+
+     public   dynamic GetDynamicLinkStatus(Guid refid)
+        {
+            return _repository.GetDynamicLinkStatus(refid);
         }
 
         public void ErrorLog(ErrorLog errorLog)

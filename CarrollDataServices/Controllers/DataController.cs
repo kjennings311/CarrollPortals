@@ -230,9 +230,9 @@ namespace Carroll.Data.Services.Controllers
         public IEnumerable<TokenInput> GetTokenInputUser(string q)
         {
 
-            var _users = _service.GetRecords(EntityType.Contact, q.ToLower());
+            var _users = _service.GetAllContactsHighRolesInclude(q.ToLower());
             List<TokenInput> _coll = new List<TokenInput>();
-            foreach (Contact _user in _users)
+            foreach (proc_getallcontactsincludinghighroles_Result _user in _users)
             {
                 TokenInput _input = new TokenInput();
                 _input.id = _user.ContactId.ToString();
@@ -702,6 +702,7 @@ namespace Carroll.Data.Services.Controllers
                 fa.ResubmittedDateTime = DateTime.Now;
                 fa.EmployeeSignedDateTime = null;
                 fa.RegionalManagerSignedDateTime = null;
+                fa.PmSignedDateTime = DateTime.Now;
                 WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), "New Hire Notice has been Resubmitted", "New Hire Notice has been Resubmitted  on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             }
@@ -776,8 +777,8 @@ namespace Carroll.Data.Services.Controllers
             {
               type= "Update";
             }
-          
-             var   retu = _service.InsertEmployeeNewHireNotice(fa, type);
+            fa.PmSignedDateTime = DateTime.Now;
+            var   retu = _service.InsertEmployeeNewHireNotice(fa, type);
             WorkflowHelper.InsertHrLog("NewHire", fa.EmployeeHireNoticeId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
             string VisitorsIPAddress = string.Empty;
@@ -1684,7 +1685,13 @@ namespace Carroll.Data.Services.Controllers
             return _service.GetAllMileageForms(FormType, userid, "");
         }
 
-
+        [AllowAnonymous]
+        [ActionName("GetDynamicLinkStatus")]
+        [HttpGet]
+        public dynamic GetDynamicLinkStatus(string refid)
+        {
+            return _service.GetDynamicLinkStatus(new Guid(refid));
+        }
 
         [ActionName("GetHrFormCount")]
         [HttpGet]

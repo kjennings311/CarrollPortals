@@ -1130,20 +1130,18 @@
                             alert("Successfully Submitted");
 
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-
+                            window.opener.UpdateChildStatus(1);
                             setTimeout(function ()
                             {
-
                                 closeMe();
                             }, 2000);
-
 
                         },
                         error: function (ts)
                         {
                             alert("Successfully Submitted");
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-
+                            window.opener.UpdateChildStatus(1);
                             setTimeout(function () { closeMe(); }, 2000);
 
 

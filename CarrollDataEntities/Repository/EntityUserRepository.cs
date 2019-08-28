@@ -48,20 +48,20 @@ namespace Carroll.Data.Entities.Repository
                 string role = "";
                 // _entities.Configuration.ProxyCreationEnabled = false;
                 var _userRoles = _entities.UserInRoles.Where(x => x.UserId == userid).ToList();
-                var propid = _entities.UserInProperties.Where(x => x.UserId == userid).Select(x=>x.PropertyId).ToList();
+              //  var propid = _entities.UserInProperties.Where(x => x.UserId == userid).Select(x=>x.PropertyId).ToList();
                 string prop = "";
 
-                if(propid != null)
-                {
-                    foreach (var item in propid)
-                    {
-                        if (prop == "")
-                            prop = item.ToString();
-                        else
-                            prop += "se" + item.ToString() ;
-                    }
+                //if(propid != null)
+                //{
+                //    foreach (var item in propid)
+                //    {
+                //        if (prop == "")
+                //            prop = item.ToString();
+                //        else
+                //            prop += "se" + item.ToString() ;
+                //    }
                   
-                }
+                //}
 
                 foreach (var item in _userRoles)
                 {
@@ -72,6 +72,88 @@ namespace Carroll.Data.Entities.Repository
                         role = res;
                     else
                         role += "," + res;
+
+                    if(role== "VP")
+                    {
+                        var propid = _entities.Properties.Where(x => x.VicePresident == userid).Select(x => x.PropertyId).ToList();
+
+                        if (propid != null)
+                        {
+                            foreach (var item1 in propid)
+                            {
+                                if (prop == "")
+                                    prop = item1.ToString();
+                                else
+                                    prop += "se" + item1.ToString();
+                            }
+
+                        }
+                    }
+                    else if (role == "RVP")
+                    {
+                        var propid = _entities.Properties.Where(x => x.RegionalVicePresident == userid).Select(x => x.PropertyId).ToList();
+
+                        if (propid != null)
+                        {
+                            foreach (var item1 in propid)
+                            {
+                                if (prop == "")
+                                    prop = item1.ToString();
+                                else
+                                    prop += "se" + item1.ToString();
+                            }
+
+                        }
+                    }
+                    else if (role == "Regional")
+                    {
+                        var propid = _entities.Properties.Where(x => x.RegionalManager == userid).Select(x => x.PropertyId).ToList();
+
+                        if (propid != null)
+                        {
+                            foreach (var item1 in propid)
+                            {
+                                if (prop == "")
+                                    prop = item1.ToString();
+                                else
+                                    prop += "se" + item1.ToString();
+                            }
+                        }
+                    }
+                    else if (role == "Asset Manager")
+                    {
+                        var propid = _entities.Properties.Where(x => x.AssetManager1 == userid).Select(x => x.PropertyId).ToList();
+                        
+                        if (propid != null)
+                        {
+                            foreach (var item1 in propid)
+                            {
+                                if (prop == "")
+                                    prop = item1.ToString();
+                                else
+                                    prop += "se" + item1.ToString();
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        var propid = _entities.UserInProperties.Where(x => x.UserId == userid).Select(x => x.PropertyId).ToList();
+
+
+                        if (propid != null)
+                        {
+                            foreach (var item1 in propid)
+                            {
+                                if (prop == "")
+                                    prop = item1.ToString();
+                                else
+                                    prop += "se" + item1.ToString();
+                            }
+
+                        }
+                    }
+                   
                 }
 
                 if(prop!="")

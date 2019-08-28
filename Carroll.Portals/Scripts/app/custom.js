@@ -1,6 +1,7 @@
-﻿ 
+﻿
 // var $BaseApiUrl = "http://localhost:1002/";
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+
+var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -20,7 +21,6 @@ function ShowToastNotification(message,locationreload)
 {
     $(".modal-alert").html(message);
   
-
     if ($ismobile)
     {
         $('#mobiletoastnotification').modal('show');
@@ -574,8 +574,8 @@ function getForm(FormName, RecordId)
                         var val = 'Value="' + personId + '"';
                         $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
                         break;
-                    //case "Hidden":
-                    //    $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
+                    case "Hidden":
+                        $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
                         
                 }
 
@@ -3216,7 +3216,7 @@ function LoadHrPositions()
             selected = "";
         }
         // now let's load options into select box
-        $('#position').append(options);
+        $('#position').html(options);
 
         if ($("#totitle").length > 0)
         {
@@ -3244,7 +3244,7 @@ function LoadHrPositions()
         // now let's load options into select box
         $('#location').append(options1);
         if ($("#property1").length > 0) {
-            $('#property1').append(options);
+            $('#property1').html(options);
         }
     });
 
@@ -3349,6 +3349,10 @@ function LoadPayRoles() {
     });
 }
 
+function ReturnUSDate(datestring) {
+
+    return (datestring.substring(5, 7) + '/' + datestring.substring(8, 10) + '/' + datestring.substring(0, 4));
+}
 
 function LoadClaim()
 {
@@ -3389,7 +3393,7 @@ function LoadClaim()
                                 $("#property").html(ClaimData.claim.propertyName);
                                 claimbody += ' <table class="table">';
                                 claimbody += '<tr><td style="width:30%;"> Weather Conditions:</td><td>' + CheckNull(ClaimData.claim.tbl.weatherConditions) + '</td></tr>'; 
-                                claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDateTime) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.incidentDateTime)) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Incident Time:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentTime) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Incident Location:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentLocation) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;">  Resident Name :</td><td>' + ClaimData.claim.tbl.residentName + '</td></tr>';
@@ -3423,9 +3427,9 @@ function LoadClaim()
                                 claimbody += '<tr><td style="width:30%;">Witness Phone (Alternate): </td><td>' + CheckNull(ClaimData.claim.tbl.reportedPhone) + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Reported By:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentReportedBy) + '</td></tr>';
                              
-                                claimbody += '<tr><td style="width:30%;">Reported Date:</td><td>' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';
+                                claimbody += '<tr><td style="width:30%;">Reported Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10)) + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;">Created By:</td><td>' + CheckNull(ClaimData.claim.tbl.createdByName) + '</td></tr>';
-                                claimbody += '<tr><td  style="width:30%;">Created Date:</td><td>' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10) + '</td></tr>';
+                                claimbody += '<tr><td  style="width:30%;">Created Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)) + ' ' + CheckNull(ClaimData.claim.tbl.createdDate).substring(11, 19) + '</td></tr>';
                                 claimbody += '</table>'
 
                                 $("#claimbody").html(claimbody);
@@ -3438,7 +3442,7 @@ function LoadClaim()
                             
                                // $('.claimDesc').html(ClaimData.claim.tbl.description);
                                 claimbody += ' <table class="table ">';
-                                claimbody += '<tr><td  style="width:30%;"> Discovery Date : </td><td>' + CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10) + '</td></tr>'; 
+                                claimbody += '<tr><td  style="width:30%;"> Discovery Date : </td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.discoveryDate).substring(0, 10)) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Location :</td><td>' + ClaimData.claim.tbl.location + '</td></tr>';        
                                 
                                 claimbody += '<tr><td style="width:30%;"> Apartment Occupied :</td><td>' + (ClaimData.claim.tbl.apartmentOccupied == true ? "Yes ":"No")  + '</td></tr>';                               
@@ -3479,10 +3483,10 @@ function LoadClaim()
                             
                                 claimbody += '<tr><td  style="width:30%;"> Additional Comments : </td><td>' + ClaimData.claim.tbl.additionalComments + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Reported By : </td><td>' + ClaimData.claim.tbl.reportedBy + '</td></tr>';
-                                claimbody += '<tr><td  style="width:30%;"> Reported Date : </td><td>' + CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';
+                                claimbody += '<tr><td  style="width:30%;"> Reported Date : </td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.dateReported).substring(0, 10)) + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Reported Phone : </td><td>' + ClaimData.claim.tbl.reportedPhone + '</td></tr>';
                                 claimbody += '<tr><td  style="width:30%;"> Created By :</td><td>' + ClaimData.claim.tbl.createdByName + '</td></tr>';
-                                claimbody += '<tr><td  style="width:30%;"> Created Date:</td><td>' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10) + '</td></tr>';
+                                claimbody += '<tr><td  style="width:30%;"> Created Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)) + ' ' + CheckNull(ClaimData.claim.tbl.createdDate).substring(11, 19) + '</td></tr>';
                                 claimbody += '</table>'
 
                                 $("#claimbody").html(claimbody);
@@ -3492,7 +3496,7 @@ function LoadClaim()
                                 $("#property").html(ClaimData.claim.propertyName);
                                 claimbody += ' <table class="table">';
 
-                                claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10)) + '</td></tr>'; 
                                 claimbody += '<tr><td style="width:30%;"> Incident Location:</td><td>' + ClaimData.claim.tbl.incidentLocation + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;"> Incident Description:</td><td>' + ClaimData.claim.tbl.incidentDescription + '</td></tr>';  
                                
@@ -3540,10 +3544,10 @@ function LoadClaim()
                                 else
                                     claimbody += '<tr><td style="width:30%;">Notify Security Officer :</td><td> No </td></tr>'; 
 
-                                claimbody += '<tr><td style="width:30%;">Date Reported:</td><td>' + (ClaimData.claim.tbl.dateReported).substring(0, 10) + '</td></tr>';  
+                                claimbody += '<tr><td style="width:30%;">Date Reported:</td><td>' + ReturnUSDate((ClaimData.claim.tbl.dateReported).substring(0, 10)) + '</td></tr>';  
 
                                 claimbody += '<tr><td style="width:30%;">Created By:</td><td>' + ClaimData.claim.tbl.createdByName + '</td></tr>'; 
-                                claimbody += '<tr><td style="width:30%;">Created Date:</td><td>' + CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;">Created Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.createdDate).substring(0, 10)) + ' ' + CheckNull(ClaimData.claim.tbl.createdDate).substring(11, 19)+'</td></tr>'; 
                                 claimbody += '</table>'
                              
                                 $("#claimbody").html(claimbody);

@@ -306,7 +306,7 @@
             </p>
 
             <p class="c1">
-                <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" value="@Model.Wage_Salary" style="width:15%;margin-left:2%;" />  / @Model.Status  </span>
+                <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" value="@Model.Wage_Salary" style="width:15%;margin-left:2%;" />  / @Model.Sal_Time  </span>
             </p>
 
             <p class="c1">
@@ -383,7 +383,7 @@
                     </p>
 
                     <p class="c1">
-                        <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" value="" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
+                        <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" class="italic" value="" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
                     </p>
                 }
                 <input type="hidden" id="Action" value="@ViewBag.Action" />
@@ -432,6 +432,7 @@
                 }
 
             });
+
             $("input").prop("disabled", true);
           
 
@@ -546,7 +547,7 @@
                             alert("Successfully Submitted");
                             
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-
+                            window.opener.UpdateChildStatus(1);
                             setTimeout(function () { closeMe(); }, 2000);
 
                             setTimeout(function () { closeMe(); }, 5000);
@@ -559,7 +560,7 @@
                         error: function (ts) {
                             alert("Successfully Submitted");
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-
+                            window.opener.UpdateChildStatus(1);
                             setTimeout(function () { closeMe(); }, 2000);
 
                             setTimeout(function () { closeMe(); }, 5000);

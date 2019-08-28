@@ -11,10 +11,11 @@ namespace Carroll.Data.Entities
 {
     using System;
     
-    public partial class proc_getallhrformsactivity_Result
+    public partial class proc_getnewhirerejectiondetails_Result
     {
-        public string ActivitySubject { get; set; }
-        public string ActivityDate { get; set; }
-        public string ActivityByName { get; set; }
+        public string RejectedReason { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string RejectedDateTime { get; set; }
     }
 }
