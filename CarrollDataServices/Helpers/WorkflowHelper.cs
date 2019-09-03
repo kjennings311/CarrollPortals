@@ -505,10 +505,10 @@ namespace Carroll.Data.Services.Helpers
 
                     // get Employee Details i.e name and email
 
-                    var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices
-                                       
+                    var NewhireDetails = (from tbl in _entities.EmployeeNewHireNotices                                       
                                           where tbl.EmployeeHireNoticeId == propid
                                           select new { tbl }  ).FirstOrDefault();
+
 
                     if (NewhireDetails != null)
                     {
@@ -965,6 +965,39 @@ namespace Carroll.Data.Services.Helpers
                 return false;
             }
 
+        }
+
+        public static string GetMgrNamefromnewhire(string RecordId)
+        {
+            var propid = new Guid(RecordId);
+            var _entities = new CarrollFormsEntities();
+           
+            var regionalmgr = (from tbl in  _entities.EmployeeNewHireNotices 
+                               where tbl.EmployeeHireNoticeId == propid
+                               select tbl.Location).FirstOrDefault();
+            if(regionalmgr!= null)
+            {
+
+            }
+            var pid = new Guid(regionalmgr);
+
+
+            var rid = (from tbl in _entities.Properties
+                       where tbl.PropertyId == pid
+                       select tbl.RegionalManager).FirstOrDefault();
+
+           
+            string mgr = "";
+            var res = (from tbl in _entities.proc_getallcontactsincludinghighroles()
+                   where tbl.ContactId == rid
+                   select tbl).FirstOrDefault();
+
+            if (res != null)
+            {
+                mgr = res.FirstName+" "+res.LastName;
+
+            }
+            return mgr;
         }
 
         public static dynamic SendNewHireRejectionEmail(string RecordId,string User)

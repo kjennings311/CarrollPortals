@@ -358,10 +358,15 @@ namespace Carroll.Portals.Models
 
     public class ListRejectReason
     {
-        public string RejectedReason { get; set; }
-        public string FirstName { get; set; }
-        public DateTime? RejectedDateTime { get; set; }
-        public string LastName { get; set; }
+        //public string RejectedReason { get; set; }
+        //public string FirstName { get; set; }
+        //public DateTime? RejectedDateTime { get; set; }
+        //public string LastName { get; set; }
+
+        public string name { get; set; }
+        public string rejectionDesc { get; set; }
+        public string datetime { get; set; }
+
 
     }
     public class PrintActivity

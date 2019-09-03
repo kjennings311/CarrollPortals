@@ -1,7 +1,7 @@
 ﻿
-// var $BaseApiUrl = "http://localhost:1002/";
+ var $BaseApiUrl = "http://localhost:1002/";
 
-var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 //49786/";
 //   and UserOject are global variables can be used here.
@@ -3216,15 +3216,15 @@ function LoadHrPositions()
             selected = "";
         }
         // now let's load options into select box
-        $('#position').html(options);
+        $('#position').append(options);
 
         if ($("#totitle").length > 0)
         {
-            $('#totitle').append(options);
+            $('#totitle').html(options);
         }
         if ($("#fromtitle").length > 0)
         {
-            $('#fromtitle').append(options);
+            $('#fromtitle').html(options);
         }
     });
 
@@ -3242,7 +3242,7 @@ function LoadHrPositions()
 
         }
         // now let's load options into select box
-        $('#location').append(options1);
+        $('#location').html(options1);
         if ($("#property1").length > 0) {
             $('#property1').html(options);
         }
@@ -3286,7 +3286,7 @@ function LoadPropertiesForSelect(iskey,control)
         // now let's load options into select box
         if ($("#" + control).length > 0)
         {
-            $("#" + control).append(options1);
+            $("#" + control).html(options1);
         }
     //    if ($("#location").length > 0) {
 
@@ -3318,14 +3318,14 @@ function LoadPositions() {
         $('#position').append(options);
 
         if ($("#totitle").length > 0) {
-            $('#totitle').append(options);
+            $('#totitle').html(options);
         }
         if ($("#fromtitle").length > 0) {
-            $('#fromtitle').append(options);
+            $('#fromtitle').html(options);
         }
 
         if ($("#jobtitle").length > 0) {
-            $('#jobtitle').append(options);
+            $('#jobtitle').html(options);
         }
     });
     
@@ -4021,7 +4021,7 @@ $(document).ready(function () {
                     console.log(data.rejection);
                     $.each(data.rejection, function (index, value) {
                        
-                        $("#rjmetadata").append('<tr><td style="float:left" >' + value.firstName + ' ' + value.lastName + '</td> <td > ' + value.rejectedReason + '</td> <td>' + value.rejectedDateTime.substring(0, 19) + ' </td></tr>');
+                        $("#rjmetadata").append('<tr><td style="float:left" >' + value.name + '</td> <td > ' + value.rejectionDesc + '</td> <td>' + value.datetime + ' </td></tr>');
                     });
                                       
                     $('#rejectionlog').DataTable({

@@ -61,6 +61,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<DynamicLink> DynamicLinks { get; set; }
         public virtual DbSet<ActivityLogHrForm> ActivityLogHrForms { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
+        public virtual DbSet<NewHireRejectionHistory> NewHireRejectionHistories { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -352,6 +353,15 @@ namespace Carroll.Data.Entities
         public virtual ObjectResult<proc_getallcontactsincludinghighroles_Result> proc_getallcontactsincludinghighroles()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallcontactsincludinghighroles_Result>("proc_getallcontactsincludinghighroles");
+        }
+    
+        public virtual ObjectResult<proc_getnewhirerejectionhistory_Result> proc_getnewhirerejectionhistory(Nullable<System.Guid> newhireid)
+        {
+            var newhireidParameter = newhireid.HasValue ?
+                new ObjectParameter("newhireid", newhireid) :
+                new ObjectParameter("newhireid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getnewhirerejectionhistory_Result>("proc_getnewhirerejectionhistory", newhireidParameter);
         }
     }
 }

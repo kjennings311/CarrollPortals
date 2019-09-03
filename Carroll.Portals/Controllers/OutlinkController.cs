@@ -497,6 +497,9 @@ namespace Carroll.Portals.Controllers
                 WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, empname);
 
             }
+            else
+                WorkflowHelper.InsertHrLog("PayRoll", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Payroll Status Change on" + DateTime.Now, empname);
+
 
             var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Manager Email", "System");
 
@@ -707,7 +710,8 @@ namespace Carroll.Portals.Controllers
             }
             else
             {
-                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, "System");
+                var mgr = WorkflowHelper.GetMgrNamefromnewhire(retu);
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, mgr);
 
                 // WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
 

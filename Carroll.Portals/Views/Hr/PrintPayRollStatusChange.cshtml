@@ -26,7 +26,7 @@
             <img style="margin-left: 33%; margin-bottom:20px" src="/img/payroll.png" id="p1img1">
             <P class="p0 ft0" style="    margin-top: 10PX;
     margin-bottom: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
-            <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" value="@Model.EmployeeName" /> Current Property: <input style=" display:inline;" value="@Model.FromPropName" type="text" id="effdate" class="" /></P>
+            <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" value="@Model.EmployeeName" /> Current Property: <input style=" display:inline;" value="@Model.Notes2" type="text" id="effdate" class="" /></P>
 
             <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input value="@Model.EmployeeEmail" style=" display:inline; width:40%;" type="text" step="" id="empemail" class="" /> </P>
             <P class="p3 ft3"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
@@ -273,6 +273,7 @@
                                                 if (Model.FmlaYes == true)
                                                 {
                                                     <input type="checkbox" checked id="chkfmlayes" />
+
                                                 }
                                                 else
                                                 {
@@ -297,26 +298,30 @@
                                 <TD class="tr1 td11">
                                     <P class="p8 ft6">
                                         Enrolled in Benefits? <SPAN class="ft9">
-                                            @{ if (Model.EnrolledBenefitsYes == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkbenefityes" />
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkbenefityes" />
-                                                }
-                                            }
-                                        </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
-                                            @{ if (Model.EnrolledBenefitNo == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkbenefitno" />
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkbenefitno" />
-                                                }
-                                            }
-                                        </SPAN><SPAN class="ft1">No</SPAN>
+    @{ if (Model.EnrolledBenefitsYes == true)
+        {
+            <input type="checkbox" checked id="chkbenefityes" />
+           
+        }
+        else
+        {
+            <input type="checkbox"  id="chkbenefityes" />
+           
+        }
+    }
+</SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
+    @{ if (Model.EnrolledBenefitNo == true)
+        {
+            <input type="checkbox" checked id="chkbenefitno" />
+            
+        }
+        else
+        {
+           
+            <input type="checkbox" checked id="chkbenefitno" />
+        }
+    }
+</SPAN><SPAN class="ft1">No</SPAN>
                                     </P>
                                 </TD>
                             </TR>
@@ -329,10 +334,9 @@
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
                     <P class="p6 ft1">
-                        <textarea type="text" style="width:95%" id="notes1"> @if (Model.Notes1 != null)
-                    {
+                        <textarea type="text" style="width:95%" id="notes1"> 
                         @Model.Notes1
-                    } </textarea>
+                     </textarea>
                     </P>
 
                 </div>

@@ -101,11 +101,10 @@
 
                         @foreach (var item in Model.rejection)
                         {
-                        <tr> <td> @item.FirstName &nbsp;&nbsp;  @item.LastName </td> <td>  @item.RejectedReason </td>  <td> @item.RejectedDateTime.ToString().Substring(0, 19) </td>  </tr>
+                            <tr> <td> @item.name  </td> <td>  @item.rejectionDesc </td>  <td> @item.datetime</td>  </tr>
                         }
 
-
-                    </tbody>
+                      </tbody>
                 </table>
             </div>
 

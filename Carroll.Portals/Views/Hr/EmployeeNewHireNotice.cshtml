@@ -933,7 +933,7 @@
                             console.log(data.position);
                             $('#position option[value="' + data.position + '"]').attr("selected", "selected");
                             $("#position").val("" + data.position);
-                        }, 1000);
+                        }, 4000);
 
 
                         $("#la_Prop1").val(data.la_Property1);
@@ -1237,7 +1237,7 @@
                     }
                     else {
                         insertForm.append('location', $("#location option:selected").val());
-                        insertForm.append('manager', manager);
+                        insertForm.append('manager', $("#manager").val());
                     }
 
                     insertForm.append('propertyid', $("#location").val());

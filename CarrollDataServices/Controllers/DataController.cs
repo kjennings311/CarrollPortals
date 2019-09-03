@@ -733,7 +733,6 @@ namespace Carroll.Data.Services.Controllers
                     { 
                         fa.La_Property2 = HttpContext.Current.Request.Params["prop2"].ToString();
                         fa.La_Property2_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop2per"].ToString());
-
                     }
 
                     if (!String.IsNullOrEmpty(HttpContext.Current.Request.Params["prop3per"].ToString()))

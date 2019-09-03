@@ -131,6 +131,9 @@
     <Compile Include="MileageLogHeader.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NewHireRejectionHistory.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="NoticeOfEmployeeSeperation.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -216,6 +219,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getnewhirerejectiondetails_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getnewhirerejectionhistory_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getpropertiesforexcelupdate_Result.cs">

@@ -1845,10 +1845,11 @@ namespace Carroll.Data.Entities.Repository
                 try
                 {
                     var res = (from tbl in _entities.PayrollStatusChangeNotices
+                               join tblproperty in _entities.Properties on tbl.Property equals tblproperty.PropertyId
                                where tbl.PayrollStatusChangeNoticeId == riderid
-                               select tbl).FirstOrDefault();
-
-                    return res;
+                               select new { tbl,tblproperty.PropertyName } ).FirstOrDefault();
+                    res.tbl.Notes2 = res.PropertyName;
+                    return res.tbl;
                 }
                 catch (Exception ex)
                 {
@@ -4466,7 +4467,9 @@ namespace Carroll.Data.Entities.Repository
 
                 if (FormType =="NewHire")
                 {
-                    var res1 = _entities.proc_getnewhirerejectiondetails(rid).ToList();
+                  //  var res1 = _entities.proc_getnewhirerejectiondetails(rid).ToList();
+
+                    var res1 = _entities.proc_getnewhirerejectionhistory(rid).ToList();
 
                     //var res1 = (from tbl in _entities.EmployeeNewHireNotices
                     //           join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
@@ -4484,9 +4487,6 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-
-
-
                 return (from tbl in _entities.DynamicLinks
                         where tbl.DynamicLinkId == refid
                         select tbl.OpenStatus).FirstOrDefault();
@@ -4503,6 +4503,9 @@ namespace Carroll.Data.Entities.Repository
                                    where tbl.EmployeeHireNoticeId == id
                                    select tbl).FirstOrDefault();
 
+                NewHireRejectionHistory rh = new NewHireRejectionHistory();
+
+
                 if(propertyres != null)
                 {
                     if(status == "reject")
@@ -4514,6 +4517,12 @@ namespace Carroll.Data.Entities.Repository
                         propertyres.PmSignedDateTime = null;
                         propertyres.EmployeeSignedDateTime = null;
                         propertyres.RegionalManagerSignedDateTime = null;
+                        rh.ClientDateTime = DateTime.Now;
+                        rh.HistoryID = Guid.NewGuid();
+                        rh.NewHireId = new Guid(refid);
+                        rh.RejectedUser= new Guid(refuser);
+                        rh.RejectionDesc = reason;
+                        _entities.NewHireRejectionHistories.Add(rh);
                         _entities.SaveChanges();
                     }
                     else if(status =="cancel")
@@ -4525,6 +4534,12 @@ namespace Carroll.Data.Entities.Repository
                         propertyres.PmSignedDateTime = null;
                         propertyres.EmployeeSignedDateTime = null;
                         propertyres.RegionalManagerSignedDateTime = null;
+                        rh.ClientDateTime = DateTime.Now;
+                        rh.HistoryID = Guid.NewGuid();
+                        rh.NewHireId = new Guid(refid);
+                        rh.RejectedUser = new Guid(refuser);
+                        rh.RejectionDesc = "cancel";
+                        _entities.NewHireRejectionHistories.Add(rh);
                         _entities.SaveChanges();
                     }
                     _entities.proc_closealllinks(id);

@@ -411,6 +411,17 @@
           <Property Name="ModifiedUser" Type="uniqueidentifier" />
           <Property Name="ModifiedDatetime" Type="datetime" />
         </EntityType>
+        <EntityType Name="NewHireRejectionHistory">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NewHireId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="RejectionDesc" Type="text" />
+          <Property Name="ClientDateTime" Type="datetime" />
+          <Property Name="RejectedUser" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="NoticeOfEmployeeSeperation">
           <Key>
             <PropertyRef Name="EmployeeSeperationId" />
@@ -886,6 +897,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getnewhirerejectiondetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="proc_getnewhirerejectionhistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="newhireid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getpayperiodsforcurrentyear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcelupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -931,6 +945,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="FormPropertyDamageClaims" EntityType="Self.FormPropertyDamageClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MileageLogDetails" EntityType="Self.MileageLogDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MileageLogHeader" EntityType="Self.MileageLogHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewHireRejectionHistory" EntityType="Self.NewHireRejectionHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NoticeOfEmployeeSeperation" EntityType="Self.NoticeOfEmployeeSeperation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayrollStatusChangeNotice" EntityType="Self.PayrollStatusChangeNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
@@ -1132,6 +1147,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="refid" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="proc_getallcontactsincludinghighroles" ReturnType="Collection(Carroll.Data.Entities.proc_getallcontactsincludinghighroles_Result)" />
+          <FunctionImport Name="proc_getnewhirerejectionhistory" ReturnType="Collection(Carroll.Data.Entities.proc_getnewhirerejectionhistory_Result)">
+          <Parameter Name="newhireid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="NewHireRejectionHistories" EntityType="Carroll.Data.Entities.NewHireRejectionHistory" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -2676,6 +2695,22 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="LastName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="proc_getnewhirerejectionhistory_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="RejectionDesc" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="datetime" Nullable="false" MaxLength="61" />
+        </ComplexType>
+        <EntityType Name="NewHireRejectionHistory">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="Guid" Nullable="false" />
+          <Property Name="NewHireId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RejectionDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClientDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RejectedUser" Type="Guid" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4211,6 +4246,27 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getnewhirerejectionhistory" FunctionName="Carroll.Data.Entities.Store.proc_getnewhirerejectionhistory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getnewhirerejectionhistory_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RejectionDesc" ColumnName="RejectionDesc" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="NewHireRejectionHistories">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.NewHireRejectionHistory">
+              <MappingFragment StoreEntitySet="NewHireRejectionHistory">
+                <ScalarProperty Name="RejectedUser" ColumnName="RejectedUser" />
+                <ScalarProperty Name="ClientDateTime" ColumnName="ClientDateTime" />
+                <ScalarProperty Name="RejectionDesc" ColumnName="RejectionDesc" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NewHireId" ColumnName="NewHireId" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
