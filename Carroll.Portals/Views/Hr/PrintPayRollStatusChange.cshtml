@@ -56,7 +56,7 @@
 
                 }
 
-                @if (Model.ShowAllowances == true)
+                @if (Model.ShowLeaves == true)
                 {
                     <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leaves Of Absence </span>
 
@@ -335,7 +335,11 @@
                     <P class="p21 ft5">Notes:</P>
                     <P class="p6 ft1">
                         <textarea type="text" style="width:95%" id="notes1"> 
-                        @Model.Notes1
+@if(!string.IsNullOrEmpty(Model.Notes1))
+{
+ @Model.Notes1.ToString()
+}
+           
                      </textarea>
                     </P>
 

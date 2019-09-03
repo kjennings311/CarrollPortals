@@ -1671,12 +1671,29 @@ namespace Carroll.Data.Entities.Repository
                                     res.La_Property2_Per = _property.La_Property2_Per;
 
                                 }
+                                else
+                                {
+                                    res.La_Property2 = "";
+                                    res.La_Property2_Per = null;
+                                }
 
                                 if (!String.IsNullOrEmpty(_property.La_Property3))
                                 {
                                     res.La_Property3 = _property.La_Property3;
                                     res.La_Property3_Per = _property.La_Property3_Per;
                                 }
+                                else
+                                {
+                                    res.La_Property3 = "";
+                                    res.La_Property3_Per = null;
+                                }
+                            }
+                            else
+                            {
+                                res.La_Property2 = "";
+                                res.La_Property2_Per = null;
+                                res.La_Property3 = "";
+                                res.La_Property3_Per = null;
                             }
 
                         }
