@@ -16,7 +16,6 @@ namespace Carroll.Data.Entities
         public string PropertyName { get; set; }
         public string RequestorName { get; set; }
         public string RequestorPosition { get; set; }
-        public string Type { get; set; }
         public string Post { get; set; }
         public Nullable<System.DateTime> DatePosted { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }

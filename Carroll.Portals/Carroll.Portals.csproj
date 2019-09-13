@@ -923,7 +923,6 @@
     <Content Include="Views\Mileage\PrintMonthlyLog.cshtml" />
     <Content Include="Views\Mileage\PrintExpenseReimbursement.cshtml" />
     <Content Include="Views\Hr\PrintPayRollStatusChange - Copy.cshtml" />
-    <Content Include="Views\Hr\PrintEmployeeNewHireNotice - Copy.cshtml" />
     <Content Include="Views\Resident\ReferalRequest.cshtml" />
     <Content Include="Views\Resident\Printresidentreferal.cshtml" />
     <Content Include="Views\Resident\ReferalContact.cshtml" />

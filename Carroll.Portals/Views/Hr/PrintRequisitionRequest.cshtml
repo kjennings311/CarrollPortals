@@ -32,6 +32,15 @@
             border-bottom: 1px solid #0c0606;
             padding: 5px;
         }
+
+        button[disabled], html input[disabled] {
+            cursor: default;
+            background: white;
+            color: black;
+            font-weight: bold;
+        }
+
+
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
@@ -43,7 +52,7 @@
             <div id="page_1">
                 <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
                     <img src="/img/requistionrequestheader.jpg" />
-                    <h1 style="font-weight:bold">  Requisition Request </h1>
+                    <h1 style="font-weight:bold; margin-bottom:15px;">  Requisition Request </h1>
                 </DIV>
 
                 <TABLE cellpadding=0 cellspacing=0 class="t0">
@@ -61,31 +70,55 @@
                 {
 
                     <table style="width:60%;margin:20px;">
-                        <thead><tr style="width:70%;"><th> Position  </th> <th> How Many</th></tr></thead>
+                        <thead><tr ><th style="width:50%;"> Position  </th> <th style="text-align:left"> How Many</th></tr></thead>
                         <tbody>
 
                             @{ if (Model.PositionCombined.Replace("Assistant Property Manager", "").Contains("Property Manager"))
                                 {
 
-                                    <tr> <td>  Property Manager  </td><td> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
+                                    <tr> <td> <input type="checkbox" checked />    Property Manager  </td><td style="text-align:left"> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
+
+                                }
+                                else
+                                {
+
+                                    <tr> <td> <input type="checkbox"  />    Property Manager  </td><td>  </td></tr>
 
                                 }
 
                                 if (Model.PositionCombined.Contains("Assistant Property Manager"))
                                 {
                                     <tr>
-                                        <td> Assistant Property Manager  </td>
-                                        <td>
+                                        <td> <input type="checkbox" checked />   Assistant Property Manager  </td>
+                                        <td style="text-align:left" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Assistant Property Manager--")) + 28, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />   Assistant Property Manager  </td>
+                                        <td>
+                                           
                                         </td>
                                     </tr>
                                 }
                                 if (Model.PositionCombined.Contains("Leasing Manager"))
                                 {
                                     <tr>
-                                        <td> Leasing Manager  </td>
-                                        <td>
+                                        <td> <input type="checkbox" checked />   Leasing Manager  </td>
+                                        <td style="text-align:left" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Manager--")) + 17, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />   Leasing Manager  </td>
+                                        <td>
+                                           
                                         </td>
                                     </tr>
                                 }
@@ -93,18 +126,36 @@
                                 if (Model.PositionCombined.Contains("Leasing Consultant"))
                                 {
                                     <tr>
-                                        <td>  Leasing Consultant  </td>
-                                        <td>
+                                        <td> <input type="checkbox" checked />    Leasing Consultant  </td>
+                                        <td style="text-align:left" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Consultant")) + 20, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />    Leasing Consultant  </td>
+                                        <td>
+                                          
                                         </td>
                                     </tr>
                                 }
                                 if (Model.PositionCombined.Contains("Maintenance Supervisor"))
                                 {
                                     <tr>
-                                        <td> Maintenance Supervisor  </td>
-                                        <td>
+                                        <td>  <input type="checkbox" checked />   Maintenance Supervisor  </td>
+                                        <td style="text-align:left" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Supervisor")) + 24, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>  <input type="checkbox" />   Maintenance Supervisor  </td>
+                                        <td>
+                                           
                                         </td>
                                     </tr>
                                 }
@@ -112,27 +163,58 @@
                                 if (Model.PositionCombined.Contains("Maintenance Technician"))
                                 {
                                     <tr>
-                                        <td> Maintenance Technician  </td>
-                                        <td>
+                                        <td> <input type="checkbox" checked />   Maintenance Technician  </td>
+                                        <td style="text-align:left">
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Technician")) + 24, 1)
                                         </td>
                                     </tr>
                                 }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />   Maintenance Technician  </td>
+                                        <td>
+                                          
+                                        </td>
+                                    </tr>
+                                }
+
                                 if (Model.PositionCombined.Contains("Groundskeeper"))
                                 {
                                     <tr>
-                                        <td> Groundskeeper</td>
-                                        <td>
+                                        <td> <input type="checkbox" checked />   Groundskeeper</td>
+                                        <td style="text-align:left">
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Groundskeeper")) + 15, 1)
                                         </td>
                                     </tr>
                                 }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />   Groundskeeper</td>
+                                        <td>
+                                           
+                                        </td>
+                                    </tr>
+                                }
+
+
                                 if (Model.PositionCombined.Contains("Housekeeper"))
                                 {
                                     <tr>
-                                        <td> Housekeeper  </td>
-                                        <td>
+                                        <td> <input type="checkbox" checked />  Housekeeper  </td>
+                                        <td style="text-align:left">
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Housekeeper")) + 13, 1)
+
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />  Housekeeper  </td>
+                                        <td>
+                                           
 
                                         </td>
                                     </tr>
@@ -141,9 +223,18 @@
                                 if (Model.PositionCombined.Contains("Other"))
                                 {
                                     <tr>
-                                        <td>  @Model.PositionOther  </td>
-                                        <td>
+                                        <td> <input type="checkbox" checked /> Other &nbsp;&nbsp;&nbsp;&nbsp;   @Model.PositionOther  </td>
+                                        <td style="text-align:left" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Other--")) + 7, 1)
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td> <input type="checkbox" />  Other  </td>
+                                        <td>
+                                          
                                         </td>
                                     </tr>
                                 }
@@ -158,38 +249,6 @@
                 }
 
 
-                <P class="p1 ft0">
-                    Circle One: <SPAN class="ft1">
-                        @{
-                            if (@Model.ChkNewPosition == true)
-                            {
-                                <input type="radio" name="position" class="" id="chknewposition" checked />
-                            }
-                            else
-                            {
-                                <input type="radio" name="position" class="" id="chknewposition" />
-                            }
-
-                        }
-                        New Position
-                    </SPAN>
-                </P>
-                <P class="p4 ft1">
-                    @{
-                        if (@Model.ChkReplacementPosition == true)
-                        {
-                            <input type="radio" class="" name="position" id="chkreplacementposition" checked />
-
-                        }
-                        else
-                        {
-
-                            <input type="radio" class="" name="position" id="chkreplacementposition" />
-                        }
-                    } Replacement Position
-                </P>
-
-                <P class="p5 ft1">Name of Person(s) Replacing: <input type="text" id="replaceperson" value="@Model.ReplacingPerson" /> </P>
                 <P class="p1 ft1">
                     <SPAN class="ft0">Post to: </SPAN>   @{
                         if (@Model.ChkCarrollCareersIndeed == true)
@@ -231,21 +290,29 @@
                     }  Other:   <input type="text" id="otherpost" value="@Model.PostOther" />
                 </P>
                 <P class="p7 ft1">Special Instructions(i.e.confidential posting, etc.)</P>
-                <P class="p2 ft1"><p> @Model.SpecailInstructions </p> </P>
+                <P class="p2 ft1"><p style="border: 1px solid;
+
+padding: 10px;
+
+margin: 10px;"> @Model.SpecailInstructions </p> </P>
                 <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
                 <P class="p7 ft1">Requisition Number(s): <input type="text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
                 <P class="p7 ft1">
                     Date Posted: @if (Model.DatePosted != null)
                     {
-                        <input type="text" id="dateposted" value="@Model.DatePosted.Value.ToShortDateString()" />
+                        <input type="text" id="dateposted" style="margin-left:8.6%" value="@Model.DatePosted.Value.ToShortDateString()" />
                     }
                     else
                     {
-                        <input type="text" id="dateposted" value="" />
+                        <input type="text" style="margin-left:8.6%" id="dateposted" value="" />
                     }
                 </P>
-                <P class="p7 ft1">Notes:</P>
-                <P class="p3 ft1">@Model.Notes</P>
+                <P class="p7 ft1" >Notes:</P>
+                <P class="p3 ft1" style="border: 1px solid;
+
+padding: 10px;
+
+margin: 10px;">@Model.Notes</P>
 
             </div>
         </form>
@@ -353,12 +420,12 @@
         }
 
         .ft0 {
-            font: bold 16px 'Calibri';
+            font: bold 13px 'Calibri';
             line-height: 19px;
         }
 
         .ft1 {
-            font: 16px 'Calibri';
+            font: 13px 'Calibri';
             line-height: 19px;
         }
 
@@ -368,7 +435,7 @@
         }
 
         .ft3 {
-            font: 15px 'Calibri';
+            font: 13px 'Calibri';
             line-height: 18px;
         }
 
@@ -466,7 +533,7 @@
             width: 655px;
             margin-left: 2px;
             /*margin-top: 119px;*/
-            font: bold 16px 'Calibri';
+            font: bold 13px 'Calibri';
         }
 
         .dtprops td, .dtprops th {

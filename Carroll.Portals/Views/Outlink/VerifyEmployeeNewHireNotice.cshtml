@@ -275,34 +275,71 @@
                 <span class="c7"> NEW HIRE NOTICE </span>
             </p>
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:40%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:46%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
 
             <p class="c1">
-                <span class="c0">Personal Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:60%;" /> (do not leave blank) </span>
+                <span class="c0">Personal Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:58%;" /> (do not leave blank) </span>
             </p>
 
             <p class="c1">
-                <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" value="@Model.Manager" /> </span>
+                <span class="c0">Manager:<input type="text" id="manager" style="width:89%;" value="@Model.Manager" /> </span>
             </p>
             <p class="c1">
-                <span class="c0">Location:<input type="text" id="location" style="width:83%;" value="@Model.Location" /> </span>
+
+
+                Location: @if (Model.iscorporate.ToString() == "True")
+                {
+                    <span class="c0">
+                        <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate & nbsp; &nbsp; &nbsp; &nbsp;
+
+                        <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                    </span>
+
+                }
+                else
+                {
+                    <span class="c0">
+                        <span>  <input type="radio" id="chkcorporate" Checked name="loc" /> Property </span>
+                        <input type="text" id="location" style="width:35%;" value="@Model.Location" />
+                    </span>
+
+                }
+
             </p>
             <p class="c1">
                 <span class="c0">
                     Position:  @if (Model.Position_Exempt == "1")
                     {
-                        <span> <input type="text" value=" Exempt" />  </span>
+
+                        <span> <input type="radio" checked style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
 
                     }  @if (Model.Position_NonExempt == "1")
                     {
-                        <span> <input type="text" value="Non Exempt" /> </span>
+                        <span> <input type="radio" style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" checked style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
 
                     }
                 </span>
             </p>
             <p class="c1">
-                <span class="c0">Status :  <input type="text" value=" @Model.Status" />  </span>
+
+                Status : @if (Model.Status == "FULL TIME")
+                {
+
+                    <span class="c0">
+                        <input type="radio" checked style="margin-left:1.5%;" value="1" name="time" id="fullstatus" /> Full Time <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" /> Part Time
+                    </span>
+
+                }
+                else
+                {
+                    <span class="c0">
+                        <input type="radio" style="margin-left:1.5%;" value="1" name="time" id="fullstatus" /> Full Time
+                        <input type="radio" checked style="margin-left:5%;" name="time" id="partstatus" value="1" /> Part Time
+                    </span>
+                }
+
+
             </p>
 
             <p class="c1">
@@ -356,7 +393,7 @@
 
             <p class="c1" style="margin-top: 10px;">
                 <span class="c0">
-                    Additional Instructions : 
+                    Additional Instructions :
                 </span>
                 @Model.AdditionalText
             </p>
@@ -365,25 +402,25 @@
                 if (ViewBag.Action == "Employee Email")
                 {
                     <p class="c1" style="margin-top:50px;">
-                        <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:42%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
+                        <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:48.5%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
                     </p>
 
                     <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text"  class="italic" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
                     </p>
                 }
                 else if (ViewBag.Action == "Regional Email")
                 {
                     <p class="c1" style="margin-top:50px;">
-                        <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:42%;" />    Date <input type="text" disabled name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
+                        <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:48.5%;" />    Date <input type="text" disabled name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
                     </p>
 
                     <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:30%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
                     </p>
 
                     <p class="c1">
-                        <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:48%;" class="italic" value="" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
+                        <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:49%;margin-left: 4%;" class="italic" value="" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
                     </p>
                 }
                 <input type="hidden" id="Action" value="@ViewBag.Action" />
@@ -547,7 +584,7 @@
                             alert("Successfully Submitted");
                             
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-                            window.opener.UpdateChildStatus(1);
+                           
                             setTimeout(function () { closeMe(); }, 2000);
 
                             setTimeout(function () { closeMe(); }, 5000);
@@ -560,7 +597,7 @@
                         error: function (ts) {
                             alert("Successfully Submitted");
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-                            window.opener.UpdateChildStatus(1);
+                          
                             setTimeout(function () { closeMe(); }, 2000);
 
                             setTimeout(function () { closeMe(); }, 5000);

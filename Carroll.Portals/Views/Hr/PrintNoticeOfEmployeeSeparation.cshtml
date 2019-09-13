@@ -28,6 +28,15 @@
             font-size: 22px;
         }
 
+        input[type="checkbox"], input[type="radio"] {
+            margin: 4px 0 0;
+            margin-right: 0px;
+            margin-top: 1px\9;
+            line-height: normal;
+            margin-right: 5px !important;
+        }
+
+
         p {
             margin: 0;
             color: #000000;
@@ -428,19 +437,37 @@
 </head>
 <body class="document">
     <div class="page">
-        <p class="c1 c8" style="margin-left:30%;">
+        <p class="c1 c8" style="margin-left:25%;">
             <span class="c7">
                 <img src="~/img/newhirenotice.png" style="margin-bottom:20px;">
             </span>
         </p>
         <DIV id="page_1">
             <DIV class="dclr"></DIV>
-            <p class="p0 ft0" style="font-weight: bolder;margin-left:-5%;margin-top:10px;"> Notice of Employee Separation </p>
+            <p class="p0 ft0" style="font-weight: bolder;margin-left:-8%;margin-top:0px;"> Notice of Employee Separation </p>
             <p class="p1 ft1">
                 Effective Date of Change <input type="text" value="@Model.EffectiveDateOfChange.Value.ToShortDateString()" id="effectivedate" /> Eligible for Rehire  <input type="text" value="@Model.EligibleForReHire" readonly />
 
             </p>
-            <p class="p1 ft1">Property Name <input type="text" id="propertyname" value="@Model.PropertyName" style="width:30%" /> Property Number<input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:40%" /></p>
+           
+            <p class="p1 ft1">
+                @if (Model.IsCoporate.ToString() == "True")
+                {
+
+                <span class="c0">
+                    Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input style="" type="radio" id="chkproperty" name="loc" /> Property 
+                </span>
+                }
+                else
+                {
+                <span class="c0">
+                    Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input style="" type="radio" id="chkproperty" name="loc" /> Property  <input type="text" style="width:33%" id="location" value="@Model.PropertyName" /> Number <input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:23%" />
+                </span>
+                }
+
+            <p class="p1 ft1" style="display:none">Property Name <input type="text" id="propertyname" value="@Model.PropertyName" style="width:30%" /> Property Number<input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:40%" /></p>
             <p class="p2 ft1">Employee Name <input type="text" id="empname" value="@Model.EmployeeName" style="width:30%" /> Job Title <input type="text" id="jobtitle" value="@Model.JobTitle" style="width:46%" /></p>
             <P class="p3 ft2">Reason Code from below (Circle all that apply)</P>
             <TABLE cellpadding=0 cellspacing=0 class="t0">
@@ -866,17 +893,40 @@
                 </TR>
             </TABLE>
             <P class="p11 ft1" style="margin-top: 17px;">**What Policy specifically was violated?  </P>
-            <P class="p12 ft1"> @Model.Policty_Voilated </P>
-            <P class="p13 ft1" style="margin-top: 17px;">Additional Remarks  </P>
-            <P class="p14 ft1"> @Model.AdditionalRemarks </P>
+            <P class="p12 ft1" style="border: 1px solid;
 
-            <P class="p18 ft1">
-                Equipment/Keys Returned? <select id="keysreturned">
+padding: 10px;
+
+margin: 10px;">@Model.Policty_Voilated</P>
+        <P class="p13 ft1" style="margin-top: 17px;">Additional Remarks  </P>
+        <P class="p14 ft1" style="border: 1px solid;
+
+padding: 10px;
+
+margin: 10px;">@Model.AdditionalRemarks</P>
+
+        <P class="p18 ft1">
+            Equipment/Keys Returned? <select id="keysreturned">
+                @{
+
+                    if (Model.EquipmentKeysReturned == true)
+                    {
+
+                        <option selected value="true"> Yes </option>
+                        <option value="false"> No </option>
+                    }
+                    else
+                    {
+                        <option value="true"> Yes </option>
+                        <option selected value="false"> No </option>
+                    }
+                }
+            </select><SPAN style="padding-left:10px;">
+                2 weeks’ notice given? <select id="noticegiven">
                     @{
 
-                        if (Model.EquipmentKeysReturned == true)
+                        if (Model.C2WeeeksNoticeGiven == true)
                         {
-
                             <option selected value="true"> Yes </option>
                             <option value="false"> No </option>
                         }
@@ -886,65 +936,50 @@
                             <option selected value="false"> No </option>
                         }
                     }
-                </select><SPAN style="padding-left:10px;">
-                    2 weeks’ notice given? <select id="noticegiven">
-                        @{
+                </select>
+            </SPAN> <SPAN style="padding-left:15px;">
+                2 weeks’ Completed? <select id="2weekscom">
 
-                            if (Model.C2WeeeksNoticeGiven == true)
-                            {
-                                <option selected value="true"> Yes </option>
-                                <option value="false"> No </option>
-                            }
-                            else
-                            {
-                                <option value="true"> Yes </option>
-                                <option selected value="false"> No </option>
-                            }
+                    @{
+
+                        if (Model.C2WeeksCompleted == true)
+                        {
+                            <option selected value="true"> Yes </option>
+                            <option value="false"> No </option>
                         }
-                    </select>
-                </SPAN> <SPAN style="padding-left:15px;">
-                    2 weeks’ Completed? <select id="2weekscom">
-
-                        @{
-
-                            if (Model.C2WeeksCompleted == true)
-                            {
-                                <option selected value="true"> Yes </option>
-                                <option value="false"> No </option>
-                            }
-                            else
-                            {
-                                <option value="true"> Yes </option>
-                                <option selected value="false"> No </option>
-                            }
+                        else
+                        {
+                            <option value="true"> Yes </option>
+                            <option selected value="false"> No </option>
                         }
+                    }
 
-                    </select>
-                </SPAN>
-            </P>
-            <P class="p13 ft9">
-                <SPAN class="ft1">
-                    Should vacation be paid out? <select id="vacationpaid">
-                        @{
+                </select>
+            </SPAN>
+        </P>
+        <P class="p13 ft9">
+            <SPAN class="ft1">
+                Should vacation be paid out? <select id="vacationpaid">
+                    @{
 
-                            if (Model.VacationPaidOut == true)
-                            {
-                                <option selected value="true"> Yes </option>
-                                <option value="false"> No </option>
-                            }
-                            else
-                            {
-                                <option value="true"> Yes </option>
-                                <option selected value="false"> No </option>
-                            }
+                        if (Model.VacationPaidOut == true)
+                        {
+                            <option selected value="true"> Yes </option>
+                            <option value="false"> No </option>
                         }
-                    </select>
-                </SPAN>(If yes, please indicate vacation balance:<input type="text" value="@Model.VacationBalance" id="vacationbalance" style="width:10%" />)
-            </P>
-            <P class="p17 ft1">Supervisor’s Signature: <input type="text" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
+                        else
+                        {
+                            <option value="true"> Yes </option>
+                            <option selected value="false"> No </option>
+                        }
+                    }
+                </select>
+            </SPAN>(If yes, please indicate vacation balance:<input type="text" value="@Model.VacationBalance" id="vacationbalance" style="width:10%" />)
+        </P>
+        <P class="p17 ft1">Supervisor’s Signature: <input type="text" style="width:42%" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
 
 
-            <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
+        <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
         </DIV>
     </div>
 
@@ -1001,35 +1036,6 @@
                 </tbody>
             </table>
         </div>
-
-
-        @if (Model.printActivity.rejection != null && Model.printActivity.rejection.Count > 0)
-        {
-
-            <div class="col-md-12 rejectionblock" style="text-align:center;">
-                <h2> Rejection  </h2>
-                <br />
-                <table id="rejectionlog" class="table table-striped col-md-6">
-                    <thead>
-                        <tr>
-                            <th style="width:15%"> Rejected By </th>
-                            <th style="width:60%;text-align:center">Reason </th>
-                            <th style="width:25%;text-align:center"> Date Time </th>
-                        </tr>
-                    </thead>
-                    <tbody id="rjmetadata">
-
-                        @foreach (var item in Model.printActivity.rejection)
-                        {
-                            <tr> <td> @item.FirstName &nbsp;&nbsp;  @item.LastName </td> <td>  @item.RejectedReason </td>  <td> @item.RejectedDateTime.ToString().Substring(0, 19) </td>  </tr>
-                        }
-
-
-                    </tbody>
-                </table>
-            </div>
-
-        }
 
     </div>
     <script>

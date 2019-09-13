@@ -38,7 +38,7 @@
                         <i class="fa fa-trash"></i> Delete
                     </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" class="addnew" href="#" onclick="LoadHrForm('EmployeeSeparation'); LoadPositions();">
+                        <a style="color:white;font-size: 30px;font-weight:bold" class="addnew" href="#" onclick="LoadHrForm('EmployeeSeparation');LoadHrPositions(); LoadPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -66,16 +66,25 @@
                                 <div class="row" style="padding: 20px;
     border: 2px solid black;">
                                     <form id="submitform" onsubmit="return false;">
-                                        <p class="c1 c8" style="margin-left:30%;">
+                                        <p class="c1 c8" style="margin-left:27%;">
                                             <span class="c7">
                                                 <img src="~/img/newhirenotice.png">
                                             </span>
                                         </p>
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
-                                            <p class="p0 ft0" style="font-weight: bolder;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1">Effective Date of Change <input type="date" id="effectivedate" /> Eligible for Rehire <input type="text" value="YES" disabled id="rehire" /></p>
-                                            <p class="p1 ft1">Property Name <input type="text" disabled id="propertyname" style="width:30%" /> Property Number<input type="text" id="propertynumber" style="width:40%" /></p>
+                                            <p class="p0 ft0" style="font-weight: bolder;margin-left:2%;">Notice of Employee Separation</p>
+                                            <p class="p1 ft1">Effective Date of Change <input style="width:37%;" type="date" id="effectivedate" /> Eligible for Rehire <input type="text"  value="YES" disabled id="rehire" /></p>
+                                            <p class="p1 ft1">
+                                                <span class="c0">
+                                                    Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input style="" type="radio" id="chkproperty" name="loc" /> Property
+                                                </span>
+                                                <span class="c0" id="divproperty" style="display:none;">
+                                                    <select type="text" style="width:33%" id="location"></select> Number <input type="text" id="propertynumber" style="width:23%" />
+                                                </span>
+                                              
+                                            </p>
                                             <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <select id="jobtitle" style="width:46%"> </select></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
@@ -90,17 +99,17 @@
                                                     <TD class="tr1 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="No Light Duty Available" /> No Light Duty Available</P></TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Falsified Applications" /> Falsified Applications</P></TD>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Falsified Applications" />Falsified Applications</P></TD>
                                                     <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="For Other Work" />For Other Work</P></TD>
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="Location Closed" /> Location Closed</P></TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Neglect of Duty" /> Neglect of Duty</P></TD>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="checkbox" class="dis" value="Neglect of Duty" />Neglect of Duty</P></TD>
                                                     <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Without Notice" />Without Notice</P></TD>
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="Job Eliminated" /> Job Eliminated</P></TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Misconduct" /> Misconduct</P></TD>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="checkbox" class="dis" value="Misconduct" />Misconduct</P></TD>
                                                     <TD class="tr2 td4"><P class="p8 ft4"><input type="checkbox" class="qui" value="Job Dissatisfaction" />Job Dissatisfaction</P></TD>
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="checkbox" class="wor" value="End of Temporary Assignment" /> End of Temporary Assignment</P></TD>
                                                 </TR>
@@ -168,7 +177,7 @@
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
 
                                             <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" />  Date: <input type="date" id="sdate" disabled /></P>
+                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="date" id="sdate" disabled /></P>
 
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
@@ -178,7 +187,7 @@
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
-                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            <input type="button" style="margin-left:-30%;" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                                         </div>
                                     </form>
@@ -223,7 +232,13 @@
             color: #555555;
             font-size: 13px;
         }*/
-
+        input[type="checkbox"], input[type="radio"] {
+            margin: 4px 0 0;
+            margin-right: 0px;
+            margin-top: 1px\9;
+            line-height: normal;
+            margin-right: 5px !important;
+        }
         p {
             margin: 0;
             color: #000000;
@@ -640,7 +655,7 @@
                 document.getElementById("effectivedate").valueAsDate = new Date();
                 document.getElementById("sdate").valueAsDate = new Date();
 
-                $("input,select,textarea").prop("disabled", false);
+                $("input,select,textarea,#propertyname,#propertynumber").prop("disabled", false);
                 $("#sdate,#rehire").prop("disabled", true);
                 $("#rehire").val('YES');
 
@@ -658,6 +673,53 @@
                     $(this).removeClass("has-error");
                 }
             });
+
+
+            $("#chkcorporate,#chkproperty").change(function (e) {
+
+                e.preventDefault();
+
+                if ($("#chkcorporate").is(":checked")) {
+                    iscorporate = true;
+                    $("#divproperty").hide();
+                    $("#manager").val($("#CreatedByName").val());
+                }
+                if ($("#chkproperty").is(":checked")) {
+                    iscorporate = false;
+                    $("#divproperty").show();
+                }
+
+              
+            });
+
+            $("#location").change(function () {
+
+                if ($("#location").val() == "") {
+
+                    alert("Please Select Property");
+
+                }
+                else {
+
+                    $.get($BaseApiUrl + "api/Data/GetPropertyNumberNameMananger?PropertyNumber=" + $("#location").val(), function (data) {
+                        if (data == "") {
+
+                            alert("Invalid Property Code");
+                            $("#propertyname ").val('');
+                            $("#propertynumber").val('');
+                        }
+                        else {
+                            var values = data.split(",");
+                            $("#propertyname ").val(values[0]);
+                          
+                            $("#propertynumber").val(values[2]);
+                        }
+                    });
+                }
+
+            });
+
+
 
             $("#rehire").val("Yes");
 
@@ -687,52 +749,52 @@
             // on focus out get the PropertyName for Property Number
 
 
-            $("#propertynumber").focusout(function () {
+            //$("#propertynumber").focusout(function () {
 
-                if ($("#propertynumber").val() == "") {
+            //    if ($("#propertynumber").val() == "") {
 
-                    //$('#toastnotification').modal('show');
+            //        //$('#toastnotification').modal('show');
 
-                    //$(".alert").html('<h6 style="color:red;"> Please Enter Property Number </h6> ');
+            //        //$(".alert").html('<h6 style="color:red;"> Please Enter Property Number </h6> ');
 
-                    //setTimeout(function () {
-                    //    $('#toastnotification').modal('hide');
+            //        //setTimeout(function () {
+            //        //    $('#toastnotification').modal('hide');
 
-                    //    $(".alert").html(' ');
-                    //}, 3000);
+            //        //    $(".alert").html(' ');
+            //        //}, 3000);
 
-                    alert("Please Enter Property Number");
+            //        alert("Please Enter Property Number");
 
-                    //   $("#propertynumber").focus();
-                }
-                else {
+            //        //   $("#propertynumber").focus();
+            //    }
+            //    else {
 
-                    $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber=" + $("#propertynumber").val(), function (data) {
-                        if (data == "") {
+            //        $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber=" + $("#propertynumber").val(), function (data) {
+            //            if (data == "") {
 
-                            alert("Invalid Property Code");
+            //                alert("Invalid Property Code");
 
-                            //   $("#propertynumber").focus();
-                            $("#propertyname").val('');
-                            //$('#toastnotification').modal('show');
+            //                //   $("#propertynumber").focus();
+            //                $("#propertyname").val('');
+            //                //$('#toastnotification').modal('show');
 
-                            //$(".alert").html('<h6 style="color:red;"> Invalid Property Code </h6> ');
+            //                //$(".alert").html('<h6 style="color:red;"> Invalid Property Code </h6> ');
 
-                            //setTimeout(function ()
-                            //{
-                            //    $('#toastnotification').modal('hide');
+            //                //setTimeout(function ()
+            //                //{
+            //                //    $('#toastnotification').modal('hide');
 
-                            //    $(".alert").html(' ');
-                            //}, 3000);
-                        }
-                        else {
+            //                //    $(".alert").html(' ');
+            //                //}, 3000);
+            //            }
+            //            else {
 
-                            $("#propertyname").val(data);
-                        }
-                    });
-                }
+            //                $("#propertyname").val(data);
+            //            }
+            //        });
+            //    }
 
-            });
+            //});
 
             $("#Submit").click(function (e) {   
                 e.preventDefault();
@@ -740,7 +802,7 @@
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
-
+                $("input,select,textarea").removeClass('has-error');
                 var cnt = 0;
                 var reason = "";
 
@@ -859,8 +921,13 @@
                     if (control == "")
                         control = $("#ssignature");
                 }
-
-
+                
+                if ($("#vacationpaid").val() == "true" && ($("#vacationbalance").val() == "" || $("#vacationbalance").val() == "0" )) {
+                    errormsgsummary += "<li> Vacation Balance Should not be Empty Or Zero  </li>";
+                    $("#vacationpaid").addClass('has-error');
+                    if (control == "")
+                        control = $("#vacationpaid");
+                } 
 
                 if (errormsgsummary != "") {
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');

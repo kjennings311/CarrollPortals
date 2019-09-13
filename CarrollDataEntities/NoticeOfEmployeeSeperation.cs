@@ -46,5 +46,7 @@ namespace Carroll.Data.Entities
         public string Reason { get; set; }
         public Nullable<bool> C2WeeksCompleted { get; set; }
         public string SequenceNumber { get; set; }
+        public Nullable<bool> IsCoporate { get; set; }
+        public string location { get; set; }
     }
 }

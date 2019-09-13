@@ -38,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-12 regionalblock" id="preregionalblock" style="text-align:center;display:none;">
                             <div class="col-md-12">  <h2 class="text-center"> Are you sure you want to reject ?  </h2></div>
-                            
+
                             <div class="col-md-12" style="text-align:center; margin-top:30px; ">
                                 <button class="btn btn-danger" id="preregionalreject">
                                     YES
@@ -104,7 +104,7 @@
             </div>
         </div>
     </div>
-    
+
 
     @{ Html.RenderPartial("HrFormLogActivity"); }
 
@@ -155,29 +155,29 @@
                                                 <img src="~/img/newhirenotice.png">
                                             </span>
                                         </p>
-                                        <p class="c1 c8" style="margin-left: 20%;
+                                        <p class="c1 c8" style="margin-left: 25%;
     margin-top: 15px;
     margin-bottom: 15px;">
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Employee Name:    <input type="text" style="width:40%" id="empname" />        Start Date:<input type="date" id="startdate" value="" />  </span>
+                                            <span class="c0"> Employee Name:    <input type="text" style="width:47%" id="empname" />        Start Date:<input type="date" id="startdate" value="" />  </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Personal Email Address: <input type="email" id="email" style="width:60%;" /> (do not leave blank) </span>
+                                            <span class="c0">Personal Email Address: <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager:<input type="text" id="manager" style="width:83%;" /> </span>
+                                            <span class="c0">Manager: <input type="text" id="manager" style="width:78%;" /> </span>
                                         </p>
                                         <p class="c1">
                                             <span class="c0">
                                                 Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <input type="radio" id="chkproperty" name="loc" /> Property
+                                                <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
                                             </span>
 
-                                            <span class="c0" id="divproperty" style="display:none; padding:40px;">
+                                            <span class="c0" id="divproperty" style="display:none; padding:20px;">
                                                 Property : <select type="text" id="location"></select>
                                             </span>
                                         </p>
@@ -191,7 +191,7 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
+                                            <span class="c0">Wage (Hourly) / Salary (Annual) <input type="number" id="salary"  style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
                                         </p>
 
                                         <p class="c1">
@@ -214,26 +214,26 @@
                                             <tr> <td> <input type="text" id="la_Prop3" /> </td> <td> <input type="number" id="la_Prop3per" /> </td> </tr>
                                         </table>
 
-                                        <p class="c1" style="margin-bottom: 60px;">
+                                        <p class="c1" style="margin-bottom: 30px;margin-top:30px;">
                                             <span class="c0">
                                                 New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" checked id="kitorderdate1" /> No
                                             </span>
                                         </p>
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">
-                                                Additional Instructions : <textarea id="additional" cols="50" rows="5" style="width:auto">  </textarea>
+                                                Additional Instructions : <textarea id="additional" cols="55" rows="5" style="width:60%">  </textarea>
                                             </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42%;" />    Date <input disabled type="date" name="name" id="edate" value="" /></span>
+                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="date" name="name" id="edate" value="" /></span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
+                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:16%;" disabled name="name" id="mdate" value="" /> </span>
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
-                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:47.5%;" />Date <input disabled type="date" name="name" id="rpmdate" value="" /></span>
+                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:42.5%;margin-left:5%;" />Date <input disabled type="date" name="name" id="rpmdate" value="" /></span>
                                         </p>
 
 
@@ -243,7 +243,7 @@
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
-                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            <input type="button" id="Submit" style="margin-left:-25%;" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                                         </div>
                                     </form>
@@ -280,20 +280,21 @@
             padding: 0
         }
 
-        a.rejectednotes 
-        {
+        a.rejectednotes {
             color: #293846 !important;
         }
+
         .btn-danger, .btn-success, .btn-danger:active, .btn-danger:hover, .btn-success:active, .btn-success:hover {
             background-color: #293846 !important;
             border-color: #293846 !important;
             color: #FFFFFF;
             border-radius: 20px !important;
         }
-        .btn
-        {
-            border-radius:20px !important;
+
+        .btn {
+            border-radius: 20px !important;
         }
+
         table
         .c0 {
             color: #000000;
@@ -523,39 +524,102 @@
     @Scripts.Render("~/scripts/plugins/dataTablesjs")
     @Scripts.Render("~/scripts/plugins/input-maskjs")
     @Scripts.Render("~/scripts/plugins/token-inputjs")
-
+   
     <script>
 
-        $(document).ready(function ()
-        {
+        $(document).ready(function () {
+
+            $("#salary").keypress(function (e) {
+                //if the letter is not digit then display error and don't type anything
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    //display error message
+                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
+                    return false;
+                }
+            });
+
+
+            $('#salary').keyup(function (e) {
+                if (/\D/g.test(this.value)) {
+                    // Filter non-digits from input value.
+                    this.value = this.value.replace(/\D/g, '');
+                }
+            });
+
 
             $(".addnew").click(function ()
             {
                 $("#divproperty").hide();
                 $("#location").attr('seloption', '');
                 document.getElementById("submitform").reset();
-                $("#esignature,#edate,#rpmsignature,#rpmdate").attr('disabled', true);
+                $("#esignature,#edate,#rpmsignature,#rpmdate,#manager").attr('disabled', true);
                 document.getElementById("mdate").valueAsDate = new Date();
                 document.getElementById("startdate").valueAsDate = new Date();
-              
+
             });
 
             var leaseid = "";
 
             GetAllHRFORMs('New Hire Notice');
 
+function AssignManager()
+{
+
+                if ($("#chkcorporate").is(":checked"))
+                {                  
+                    $("#manager").val($("#CreatedByName").val());
+                }
+
+                if ($("#chkproperty").is(":checked"))
+                {
+                    if ($("#position").val() == "Property Manager") {
+                        $("#manager").val('');
+                    }
+                    else
+                    {
+                        var pattern = /run/;
+
+                        $.get($BaseApiUrl + "api/Data/GetPropertyManager?PropertyId=" + $("#location").val(), function (data) {
+
+                            if (data == "No Manager") {
+                                manager = "";
+                                alert("Invalid Property Code");
+                                $("#manager").val('');
+                            }
+                            else if (data.indexOf("Error") == true) {
+                                manager = "";
+                                //  alert(data);
+                                $("#manager").val('');
+                            }
+                            else {
+                                //    var values = data.split(",");
+                                $("#la_Prop1").val($("#location option:selected").text());
+                                manager = data;
+                                $("#manager").val(data);
+                            }
+                        });
+                    }
+                }
+            }
+
+            $("#position,#location").change(function () {
+
+                AssignManager();
+
+            });
+
             $("input").change(function (e) {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
-                    $(this).addClass("has-error");
+                   // $(this).addClass("has-error");
                 }
                 else {
                     $(this).removeClass("has-error");
                 }
             });
 
-             document.getElementById("mdate").valueAsDate = new Date();
+            document.getElementById("mdate").valueAsDate = new Date();
 
 
 
@@ -570,8 +634,7 @@
                 insertForm.append('refid', refid);
                 insertForm.append('CreatedBy', $("#CreatedBy").val());
                 insertForm.append('CreatedByName', $("#CreatedByName").val());
-                if ($("#divprocessingbtn").length > 0)
-                {
+                if ($("#divprocessingbtn").length > 0) {
                     $("#divprocessingbtn").show();
                 }
 
@@ -586,8 +649,7 @@
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true)
-                        {
+                        if (data == true) {
                             GetAllHRFORMs('New Hire Notice');
                             $(".alert").html('Email Resent Success');
                             if ($("#divprocessingbtn").length > 0) {
@@ -600,7 +662,8 @@
                                 $('#toastnotification').modal('hide');
                             }, 3000);
                         }
-                        else {
+                        else
+                        {
                             $("#status").html(data);
                         }
 
@@ -614,21 +677,19 @@
 
 
             //  reject clicked
-            $(document).on('click', ".reject", function ()
-            {               
+            $(document).on('click', ".reject", function () {
                 leaseid = $(this).attr('data-ref');
                 $(".reviewmodal").modal('show');
-               
+
 
                 if ($("#UserR").val() == "hr")
-              //  if($("#UserR").val() == "Administrator")
+                //  if($("#UserR").val() == "Administrator")
                 {
-                    console.log($("#UserR").val()+"hr")
+                    console.log($("#UserR").val() + "hr")
                     $("#managerblock").show();
                     $("#regionalblock").hide();
                 }
-                else
-                {
+                else {
                     console.log($("#UserR").val() + "other")
                     $("#managerblock").hide();
                     $("#preregionalblock").show();
@@ -644,21 +705,19 @@
                 $("#reason").val('');
             });
 
-            // regional rejected 
-            $(document).on('click', ".rejectednotes", function ()
-            {
+            // regional rejected
+            $(document).on('click', ".rejectednotes", function () {
                 leaseid = $(this).attr('data-ref');
                 var insertForm = new FormData();
-             
+
                 insertForm.append('refid', leaseid);
                 insertForm.append('CreatedByName', $("#CreatedByName").val());
-                if ($("#divprocessingbtn").length > 0)
-                {
+                if ($("#divprocessingbtn").length > 0) {
                     $("#divprocessingbtn").show();
                 }
 
                 $('.reviewmodal').modal('hide');
-               
+
                 $(".alert").html('Processing');
 
                 $('#toastnotification').modal('show');
@@ -670,8 +729,7 @@
                     processData: false,
                     contentType: false,
                     data: insertForm,
-                    success: function (data)
-                    {
+                    success: function (data) {
                         // To-do code if ajax request is successful
 
                         if ($("#divprocessingbtn").length > 0) {
@@ -690,13 +748,13 @@
 
                         // for emp
                         if (data.emp != null) {
-                            signm += "<h3> Employee </h3><p> Browser : " + data.emp.browserInformation + "   </p><p> Ip Address : " + data.emp.ipAddress + "   </p><p> Date Time : " + data.emp.clientdatetime +"   </p>";
+                            signm += "<h3> Employee </h3><p> Browser : " + data.emp.browserInformation + "   </p><p> Ip Address : " + data.emp.ipAddress + "   </p><p> Date Time : " + data.emp.clientdatetime + "   </p>";
                         }
                         // for pm
                         if (data.pm != null) {
                             signm += "<h3> Property Manager </h3><p> Browser : " + data.pm.browserInformation + "   </p><p> Ip Address : " + data.pm.ipAddress + "   </p><p> Date Time : " + data.pm.clientdatetime + "   </p>";
                         }
-                        // regional 
+                        // regional
                         if (data.regional != null) {
                             signm += "<h3> Regional Manager </h3><p> Browser : " + data.regional.browserInformation + "   </p><p> Ip Address : " + data.regional.ipAddress + "   </p><p> Date Time : " + data.regional.clientdatetime + "   </p>";
                         }
@@ -714,17 +772,15 @@
 
 
 
-            // regional rejected 
-            $(document).on('click', "#regionalreject ", function ()
-            {
+            // regional rejected
+            $(document).on('click', "#regionalreject ", function () {
                 var insertForm = new FormData();
                 insertForm.append('status', 'reject');
                 insertForm.append('reason', $("#reason").val());
                 insertForm.append('refid', leaseid);
                 insertForm.append('CreatedBy', $("#CreatedBy").val());
                 insertForm.append('CreatedByName', $("#CreatedByName").val());
-                if ($("#divprocessingbtn").length > 0)
-                {
+                if ($("#divprocessingbtn").length > 0) {
                     $("#divprocessingbtn").show();
                 }
 
@@ -743,8 +799,7 @@
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true)
-                        {
+                        if (data == true) {
                             GetAllHRFORMs('New Hire Notice');
                             $(".alert").html('New Hire Rejected Successfully');
                             if ($("#divprocessingbtn").length > 0) {
@@ -770,9 +825,9 @@
 
             });
 
-            // Cancelled by HR 
+            // Cancelled by HR
 
-            // regional rejected 
+            // regional rejected
             $(document).on('click', "#hrcancel ", function () {
                 var insertForm = new FormData();
                 insertForm.append('status', 'cancell');
@@ -781,8 +836,7 @@
                 insertForm.append('CreatedBy', $("#CreatedBy").val());
                 insertForm.append('CreatedByName', $("#CreatedByName").val());
 
-                if ($("#divprocessingbtn").length > 0)
-                {
+                if ($("#divprocessingbtn").length > 0) {
                     $("#divprocessingbtn").show();
                 }
 
@@ -801,8 +855,7 @@
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true)
-                        {
+                        if (data == true) {
                             GetAllHRFORMs('New Hire Notice');
                             $(".alert").html('New Hire Cancelled Successfully');
                             if ($("#divprocessingbtn").length > 0) {
@@ -830,9 +883,8 @@
             // Resubmit
             var insertoredit = true;
 
-            $(document).on('click', "#resubmit,.resubmit", function ()
-            {
-              
+            $(document).on('click', "#resubmit,.resubmit", function () {
+
                 var eid = $(this).attr('data-ref');
                 insertoredit = false;
 
@@ -842,12 +894,10 @@
                 $(".alert").html('Processing');
                 $('#toastnotification').modal('show');
 
-                $.get($BaseApiUrl + "api/Data/GetEmployeeNewHireNotice?riderid=" + leaseid, function (data)
-                {
-                    
+                $.get($BaseApiUrl + "api/Data/GetEmployeeNewHireNotice?riderid=" + leaseid, function (data) {
 
-                    if (data != "")
-                    {
+
+                    if (data != "") {
 
                         $("#empname").val(data.employeeName);
                         var d = data.startDate.substring(5, 7) + "-" + data.startDate.substring(8, 10) + "-" + data.startDate.substring(0, 4);
@@ -856,24 +906,22 @@
                         $("#email").val(data.emailAddress);
                         $("#manager").val(data.manager);
 
-                        if (data.location == "Corporate")
-                        {
+                        if (data.location == "Corporate") {
                             $("#chkcorporate").prop("checked", true);
                             iscorporate = true;
                             $("#divproperty").hide();
                         }
-                        else
-                        {
+                        else {
                             $("#chkproperty").prop("checked", true);
-                           
-                                iscorporate = false;
-                            $("#divproperty").show();      
+
+                            iscorporate = false;
+                            $("#divproperty").show();
 
                             $("#location").attr('seloption', data.location);
-                            
-                           // LoadPropertiesForSelect(true,"location");
 
-                         //  setTimeout(function () { $("#location").val(data.location);  }, 5000);
+                            // LoadPropertiesForSelect(true,"location");
+
+                            //  setTimeout(function () { $("#location").val(data.location);  }, 5000);
 
                         }
                         LoadHrPositions();
@@ -898,16 +946,14 @@
                             $("#partstatus").prop("checked", false);
 
                         }
-                        else
-                        {
+                        else {
                             $("#fullstatus").prop("checked", false);
                             $("#partstatus").prop("checked", true);
                         }
 
 
 
-                        if (data.sal_Time == "Annually")
-                        {
+                        if (data.sal_Time == "Annually") {
                             $("#annualsalary").prop("checked", true);
                             $("#salhourly").prop("checked", false);
 
@@ -926,8 +972,8 @@
                             $("#kitorderdate").prop("checked", false);
                             $("#kitorderdate1").prop("checked", true);
                         }
-                           
-                      
+
+
 
                         setTimeout(function () {
                             console.log(data.position);
@@ -946,7 +992,7 @@
                         $("#salary").val(data.wage_Salary);
                         $("#additional").val(data.additionalText);
                         $("#msignature").val(data.msignature);
-                      //  $("#salary").val(data.wage_Salary);
+                        //  $("#salary").val(data.wage_Salary);
 
                         document.getElementById("mdate").valueAsDate = new Date();
                         document.getElementById("startdate").valueAsDate = new Date();
@@ -976,13 +1022,11 @@
 
             var iscorporate = true;
 
-            $("#chkcorporate,#chkproperty").change(function (e)
-            {
+            $("#chkcorporate,#chkproperty").change(function (e) {
 
                 e.preventDefault();
 
-                if ($("#chkcorporate").is(":checked"))
-                {
+                if ($("#chkcorporate").is(":checked")) {
                     iscorporate = true;
                     $("#divproperty").hide();
                     $("#manager").val($("#CreatedByName").val());
@@ -992,8 +1036,30 @@
                     $("#divproperty").show();
                 }
 
+                AssignManager();
+            });
+
+
+            $("#exempt").change(function () {
+
+                if ($("#exempt").is(":checked"))
+                {
+                    $("#salhourly").prop('checked', true);
+                }
+                
+            });
+            
+            $("#nonexempt").change(function ()
+            {
+                if ($("#nonexempt").is(":checked"))
+                {
+                    $("#annualsalary").prop('checked', true);
+                }               
 
             });
+
+
+
 
             var manager = "";
 
@@ -1006,35 +1072,15 @@
                 }
                 else {
 
-                    var pattern = /run/;
-
-                    $.get($BaseApiUrl + "api/Data/GetPropertyManager?PropertyId=" + $("#location").val(), function (data) {
-
-                        if (data == "No Manager") {
-                            manager = "";
-                            alert("Invalid Property Code");
-                            $("#manager").val('');
-                        }
-                        else if (data.indexOf("Error") == true) {
-                            manager = "";
-                          //  alert(data);
-                            $("#manager").val('');
-                        }
-                        else {
-                            //    var values = data.split(",");
-                            $("#la_Prop1").val($("#location option:selected").text());
-                            manager = data;
-                            $("#manager").val(data);
-                        }
-                    });
+                    AssignManager();
                 }
             });
 
 
-            $("#Submit").click(function (e)
-            {
+            $("#Submit").click(function (e) {
                 e.preventDefault();
-                $("input,select").removeClass("has-error");
+
+                $("input,select,textarea").removeClass('has-error');
                 var errormsgsummary = "";
                 var control = "";
                 $("#status").html('');
@@ -1062,12 +1108,12 @@
 
 
 
-                if ($("#manager").val() == "") {
-                    errormsgsummary += "<li> Please Enter Manager Name </li>";
-                    $("#manager").addClass('has-error');
-                    if (control == "")
-                        control = $("#manager");
-                }
+                //if ($("#manager").val() == "") {
+                //    errormsgsummary += "<li> Please Enter Manager Name </li>";
+                //    $("#manager").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#manager");
+                //}
 
                 if ($("#location").val() == "" && iscorporate == false) {
                     errormsgsummary += "<li> Please Enter Location </li>";
@@ -1082,7 +1128,7 @@
                     if (control == "")
                         control = $("#position");
                 }
-              
+
 
 
                 // check either exempt or non exemppt checked
@@ -1138,8 +1184,7 @@
 
                     if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
 
-                        if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "")
-                        {
+                        if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "") {
                             errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
                             $("#la_Prop1").addClass('has-error');
                             $("#la_Prop2").addClass('has-error');
@@ -1151,15 +1196,15 @@
                             var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
                             if (total < 100)
                                 errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
-                           // return false;
+                            // return false;
                         }
 
                     }
 
-                    var p1=0, p2=0, p3 = 0;
+                    var p1 = 0, p2 = 0, p3 = 0;
 
                     if ($("#la_Prop1per").val() != "")
-                        p1 =parseFloat($("#la_Prop1per").val());
+                        p1 = parseFloat($("#la_Prop1per").val());
                     if ($("#la_Prop2per").val() != "")
                         p2 = parseFloat($("#la_Prop2per").val());
                     if ($("#la_Prop3per").val() != "")
@@ -1205,9 +1250,8 @@
 
                     }
                 }
-              
-                if (errormsgsummary != "")
-                {
+
+                if (errormsgsummary != "") {
 
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -1215,8 +1259,7 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');
@@ -1256,10 +1299,9 @@
                         insertForm.append('nonexempt', '0');
                     }
 
-                    if (insertoredit == false)
-                    {
+                    if (insertoredit == false) {
                         insertForm.append('isedit', '1');
-                        insertForm.append('refid',leaseid);
+                        insertForm.append('refid', leaseid);
                     }
                     else
                         insertForm.append('isedit', '0');
@@ -1350,16 +1392,14 @@
                                 ShowToastNotification('Record Successfully Updated', 3);
 
 
-                                setTimeout(function ()
-                                {
+                                setTimeout(function () {
                                     $("#print").attr('disabled', false);
                                     $("#pdf").attr('disabled', false);
                                     $("#Submit").attr('disabled', false);
                                     $('#toastnotification').modal('hide');
                                 }, 3000);
                             }
-                            else
-                            {
+                            else {
                                 $("#status").html(data['errorMsg']);
 
                             }

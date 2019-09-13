@@ -61,7 +61,7 @@
     padding: 20px;
     margin-top: 20px;margin-left:-2px;">
 
-            <img src="~/img/carroll-print.png" />
+            <img src="~/img/carroll-print.png" style="margin-bottom:20px;" />
 
             <h1 style="text-align: center;
     margin-top: -20px;">
@@ -71,7 +71,7 @@
 
                 <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;"> Date :   </span>  <input type="text" \ class="" value="@Model.Date.ToShortDateString()" /> </p>
 
-                <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;">Name of Apartment Community :  </span> <input type="text" class="" value="@Model.Community" />  </p>
+                <p style="text-align: justify;"><span style="font-size: 9pt; line-height: 115%;">Name of Apartment Community :  </span> <input style="width:50%;" type="text" class="" value="@Model.Community" />  </p>
 
                 <p style="text-align: justify;    margin-bottom: 30px !important;
 "><span style="font-size: 9pt; line-height: 115%;">I, <input type="text" class="" value="@Model.EmployeeName" />  , understand and agree to the following :  </span></p>
@@ -88,16 +88,16 @@
                 </ol>
 
                 <p style="text-align: justify;">
-                    <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" class="italic" id="esignature" style="width:25%;" disabled /> </span>
+                    <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" class="italic" id="esignature" style="width:25%;margin-left:6%;" disabled /> </span>
 
-                    <input style="float:right; margin-right:15%;" type="date" id="leasedate" />
-                    <span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;">Date : </span>
+                    <input style="float:right; margin-right:15%;width:19%;" type="date" id="leasedate" />
+                    <span style="font-size: 14px; line-height: 115%; float:right; margin-right:20px; margin-top:10px;">Date : </span>
                 </p>
                 <p style="text-align: justify;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" style="width:25%;" class="italic" disabled name="name" value="@Model.SignatureOfPropertyManager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.PMDate.Value.ToShortDateString()" disabled id="pmdate" /> <span style="margin-right:20px;float:right;margin-top:10px;font-size:14px;" id="pmdatespan"> Date : </span> </p>
                 <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Printed Name of Employee <input type="text" disabled value="@Model.EmployeeName" style="margin-left:25px;width:25%;" id="printempname" /> </span></p>
-                <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:45%; margin-left:8%;" value="@Model.EmployeeEmail" id="employeeemail" />  </span></p>
+                <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:45%; margin-left:10.5%;" value="@Model.EmployeeEmail" id="employeeemail" />  </span></p>
 
-                <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;">Position : <input type="text" style="width:45%;" value="@Model.Position" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
+                <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
 
                 <input type="hidden" id="Action" value="@ViewBag.Action" />
                 <div id="status"> </div>

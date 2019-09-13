@@ -95,7 +95,6 @@
           <Property Name="EmployeeMonthlyRent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="RentalPaymentResidencyAt" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PropertyManager" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedUser" Type="uniqueidentifier" />
           <Property Name="CreatedDatetime" Type="datetime" />
           <Property Name="ModifiedUser" Type="uniqueidentifier" />
@@ -458,6 +457,8 @@
           <Property Name="Reason" Type="nvarchar" MaxLength="50" />
           <Property Name="2WeeksCompleted" Type="bit" />
           <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
+          <Property Name="IsCoporate" Type="bit" />
+          <Property Name="location" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="PayrollStatusChangeNotice">
           <Key>
@@ -530,6 +531,7 @@
           <Property Name="EmployeeEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="PmSignedDateTime" Type="datetime" />
           <Property Name="EmployeeSignedDateTime" Type="datetime" />
+          <Property Name="IsCorporate" Type="bit" />
         </EntityType>
         <EntityType Name="Properties">
           <Key>
@@ -583,11 +585,7 @@
           <Property Name="PositionCombined" Type="nvarchar" MaxLength="500" />
           <Property Name="PositionOther" Type="nvarchar" MaxLength="500" />
           <Property Name="ChkOtherPosition" Type="bit" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Post" Type="nvarchar" MaxLength="100" />
-          <Property Name="ChkNewPosition" Type="bit" />
-          <Property Name="ChkReplacementPosition" Type="bit" />
-          <Property Name="ReplacingPerson" Type="nvarchar" MaxLength="500" />
           <Property Name="ChkCarrollCareersIndeed" Type="bit" />
           <Property Name="ChkApartmentAssociation" Type="bit" />
           <Property Name="ChkOtherPost" Type="bit" />
@@ -1704,11 +1702,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="RequestorPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PositionCombined" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="PositionOther" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Post" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ChkNewPosition" Type="Boolean" />
-          <Property Name="ChkReplacementPosition" Type="Boolean" />
-          <Property Name="ReplacingPerson" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ChkCarrollCareersIndeed" Type="Boolean" />
           <Property Name="ChkApartmentAssociation" Type="Boolean" />
           <Property Name="PostOther" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1728,7 +1722,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="PropertyName" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="RequestorName" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="RequestorPosition" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Post" Nullable="true" MaxLength="8" />
           <Property Type="DateTime" Name="DatePosted" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDateTime" Nullable="true" Precision="23" />
@@ -1750,7 +1743,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="EmployeeMonthlyRent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="RentalPaymentResidencyAt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PropertyManager" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedUser" Type="Guid" />
           <Property Name="CreatedDatetime" Type="DateTime" Precision="3" />
           <Property Name="ModifiedUser" Type="Guid" />
@@ -2003,6 +1995,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="La_Property3_Per" Type="Double" />
           <Property Name="PmSignedDateTime" Type="DateTime" Precision="3" />
           <Property Name="EmployeeSignedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsCorporate" Type="Boolean" />
         </EntityType>
         <EntityType Name="EmployeeNewHireNotice">
           <Key>
@@ -2091,6 +2084,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="C2WeeksCompleted" Type="Boolean" />
           <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="IsCoporate" Type="Boolean" />
+          <Property Name="location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="proc_getallresidentreferalsheets_Result">
           <Property Type="Guid" Name="ResidentReferalId" Nullable="true" />
@@ -2344,14 +2339,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         </ComplexType>
         <ComplexType Name="proc_getallemployeeleaseriders_Result">
           <Property Type="Guid" Name="EmployeeLeaseRiderId" Nullable="false" />
-          <Property Type="Decimal" Name="ApartmentMarketRentalValue" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="ApartmentMarketRentalValue" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="Date" Nullable="false" />
           <Property Type="String" Name="Community" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="EmployeeMonthlyRent" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="EmployeeMonthlyRent" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="RentalPaymentResidencyAt" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="PropertyManager" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Position" Nullable="false" MaxLength="50" />
           <Property Type="Guid" Name="CreatedUser" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDatetime" Nullable="true" Precision="23" />
           <Property Type="Guid" Name="ModifiedUser" Nullable="true" />
@@ -2369,7 +2363,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="PMDate" Nullable="true" />
           <Property Type="String" Name="EmpSigned" Nullable="true" MaxLength="193" />
           <Property Type="String" Name="ManagerSigned" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="Notes" Nullable="false" MaxLength="205" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="232" />
         </ComplexType>
         <ComplexType Name="proc_getallnoticeofemployeeseparation_Result">
           <Property Type="Guid" Name="EmployeeSeperationId" Nullable="false" />
@@ -3278,11 +3272,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="PostOther" ColumnName="PostOther" />
                 <ScalarProperty Name="ChkApartmentAssociation" ColumnName="ChkApartmentAssociation" />
                 <ScalarProperty Name="ChkCarrollCareersIndeed" ColumnName="ChkCarrollCareersIndeed" />
-                <ScalarProperty Name="ReplacingPerson" ColumnName="ReplacingPerson" />
-                <ScalarProperty Name="ChkReplacementPosition" ColumnName="ChkReplacementPosition" />
-                <ScalarProperty Name="ChkNewPosition" ColumnName="ChkNewPosition" />
                 <ScalarProperty Name="Post" ColumnName="Post" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PositionOther" ColumnName="PositionOther" />
                 <ScalarProperty Name="PositionCombined" ColumnName="PositionCombined" />
                 <ScalarProperty Name="RequestorPosition" ColumnName="RequestorPosition" />
@@ -3299,7 +3289,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
                 <ScalarProperty Name="RequestorName" ColumnName="RequestorName" />
                 <ScalarProperty Name="RequestorPosition" ColumnName="RequestorPosition" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Post" ColumnName="Post" />
                 <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
                 <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
@@ -3325,7 +3314,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />
                 <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
                 <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
                 <ScalarProperty Name="RentalPaymentResidencyAt" ColumnName="RentalPaymentResidencyAt" />
                 <ScalarProperty Name="EmployeeMonthlyRent" ColumnName="EmployeeMonthlyRent" />
@@ -3532,6 +3520,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="PayrollStatusChangeNotices">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.PayrollStatusChangeNotice">
               <MappingFragment StoreEntitySet="PayrollStatusChangeNotice">
+                <ScalarProperty Name="IsCorporate" ColumnName="IsCorporate" />
                 <ScalarProperty Name="EmployeeSignedDateTime" ColumnName="EmployeeSignedDateTime" />
                 <ScalarProperty Name="PmSignedDateTime" ColumnName="PmSignedDateTime" />
                 <ScalarProperty Name="La_Property3_Per" ColumnName="La_Property3_Per" />
@@ -3657,6 +3646,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="NoticeOfEmployeeSeperations">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.NoticeOfEmployeeSeperation">
               <MappingFragment StoreEntitySet="NoticeOfEmployeeSeperation">
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="IsCoporate" ColumnName="IsCoporate" />
                 <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
                 <ScalarProperty Name="C2WeeksCompleted" ColumnName="2WeeksCompleted" />
                 <ScalarProperty Name="Reason" ColumnName="Reason" />
@@ -3926,7 +3917,6 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="EmployeeMonthlyRent" ColumnName="EmployeeMonthlyRent" />
                 <ScalarProperty Name="RentalPaymentResidencyAt" ColumnName="RentalPaymentResidencyAt" />
                 <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
                 <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
                 <ScalarProperty Name="ModifiedUser" ColumnName="ModifiedUser" />

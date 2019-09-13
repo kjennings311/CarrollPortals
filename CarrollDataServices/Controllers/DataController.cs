@@ -556,7 +556,7 @@ namespace Carroll.Data.Services.Controllers
             fa.SignatureOfPropertyManager = HttpContext.Current.Request.Params["propertymanager"].ToString();
            // fa.SignatureOfEmployee = HttpContext.Current.Request.Params["signature"].ToString();
             fa.EmployeeLeaseRiderId = System.Guid.NewGuid();
-            fa.Position = HttpContext.Current.Request.Params["position"].ToString();
+           // fa.Position = HttpContext.Current.Request.Params["position"].ToString();
             fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
             fa.CreatedDatetime = DateTime.Now;
 
@@ -1023,7 +1023,8 @@ namespace Carroll.Data.Services.Controllers
                 fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
                 fa.Leave_Purpose_Other = HttpContext.Current.Request.Params["purposeother"].ToString();
                 fa.Leave_Begin = Convert.ToDateTime(HttpContext.Current.Request.Params["leavebegin"].ToString());
-                fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["leaveend"].ToString()))
+                    fa.Leave_End = Convert.ToDateTime(HttpContext.Current.Request.Params["leaveend"].ToString());
                 fa.Pto_Balance = Convert.ToDouble(HttpContext.Current.Request.Params["ptobalance"].ToString());
             }
 
@@ -1130,12 +1131,12 @@ namespace Carroll.Data.Services.Controllers
             fa.PositionCombined = HttpContext.Current.Request.Params["positioncombined"].ToString();
             fa.PositionOther = HttpContext.Current.Request.Params["txtother"].ToString();
             fa.ChkOtherPosition = Convert.ToBoolean(HttpContext.Current.Request.Params["chkposition"].ToString());
-            fa.Type = HttpContext.Current.Request.Params["type"].ToString().Trim(',');
+          //  fa.Type = HttpContext.Current.Request.Params["type"].ToString().Trim(',');
             fa.Post = HttpContext.Current.Request.Params["post"].ToString().Trim(',');
-            fa.ChkNewPosition = Convert.ToBoolean(HttpContext.Current.Request.Params["chknewposition"].ToString());
+            //fa.ChkNewPosition = Convert.ToBoolean(HttpContext.Current.Request.Params["chknewposition"].ToString());
 
-            fa.ChkReplacementPosition = Convert.ToBoolean(HttpContext.Current.Request.Params["chkreplacementposition"].ToString());
-            fa.ReplacingPerson = HttpContext.Current.Request.Params["replaceperson"].ToString();
+            //fa.ChkReplacementPosition = Convert.ToBoolean(HttpContext.Current.Request.Params["chkreplacementposition"].ToString());
+            //fa.ReplacingPerson = HttpContext.Current.Request.Params["replaceperson"].ToString();
             fa.ChkCarrollCareersIndeed = Convert.ToBoolean(HttpContext.Current.Request.Params["postindeed"].ToString());
             fa.ChkApartmentAssociation = Convert.ToBoolean(HttpContext.Current.Request.Params["postassociation"].ToString());
             fa.PostOther = HttpContext.Current.Request.Params["otherpost"].ToString();

@@ -1,9 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Payroll Status Change Notice";
 }
 
 <input type="hidden" id="pageid" value="payroll" />
+
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <ol class="breadcrumb" style="padding: 8px 15px;">
@@ -19,8 +19,6 @@
 
 @{ Html.RenderPartial("HrFormLogActivity"); }
 
-
-
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -32,6 +30,7 @@
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">
+
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
                             <a disabled="disabled" class="btnDelete" href="#">
@@ -52,6 +51,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
                                 @*<h1 class="modal-title" style="font-weight:bold;text-align: center;
                                     color: black;" id="gridSystemModalLabel">
                                                                     Payroll Status Change
@@ -62,25 +62,40 @@
                                     <form id="submitform" onsubmit="return false;">
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
-                                            <img style="margin-left: 33%;
+                                            <img style="margin-left: 35%;
     MARGIN-TOP: 22PX;" src="/img/payroll.png" id="p1img1">
-                                            <P class="p0 ft0" style="margin-top:0PX;">PAYROLL STATUS CHANGE NOTICE</P>
-                                            <P class="p1 ft1">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" />    Current Property : <select style=" display:inline; " id="location" class=""> </select></P>
+                                            <P class="p0 ft0" style="margin-top: 15PX;
+margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
+                                            <P class="p1 ft1" style="margin-top:5px !important">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" /> </P>
+                                            <p class="p1 ft1" style="margin-top:10px;">
+                                                <span class="">
+                                                    Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                                                </span>
+                                                <span class="c0" id="divproperty" style="display:none; padding:20px;">
+                                                    Property : <select type="text" id="location"></select>
+                                                </span>
+                                            </p>
+
                                             <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:40%;" type="text" step="" id="empemail" class="" /> </P>
                                             <P class="p3 ft3"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
                                             <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence   </P>
                                             <P class="p6 ft1">  </P>
 
                                             <div class="" style="border: 2px solid black; width:100%">
+
                                                 <div style="width:100%;display:none;" id="divpropertychange">
                                                     <P class="p4 ft5">Property Change</P>
                                                     <P class="p5 ft6"> Change Effective Date : <input type="date" id="effectivedate" /> </P>
                                                     <P class="p5 ft6"> Property Transfer:</P>
-                                                    <P class="p6 ft1">From property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> From Property Name: <input disabled style=" display:inline; " type="text" id="frompropname" class="" />From Manager:  <input disabled style=" display:inline; " type="text" id="frommanager" class="" /></P>
-                                                    <P class="p6 ft1">To property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> To Property Name: <input style=" display:inline; " disabled type="text" id="topropname" class="" />To Manager: <input style=" display:inline; " disabled type="text" id="tomanager" class="" /></P>
+                                                    <P class="p5 ft6"> <strong>From : </strong></P>
+                                                    <P class="p6 ft1"> property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:30%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:30%; " type="text" id="frommanager" class="" /></P>
+                                                    <P class="p5 ft6"><strong> To : </strong> </P>
+                                                    <P class="p6 ft1"> property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input style=" display:inline;width:30%; " disabled type="text" id="topropname" class="" /> Manager: <input style=" display:inline;width:30%; " disabled type="text" id="tomanager" class="" /></P>
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
-                                                <div style="width:102%;display:none;" id="divpaychange">
+
+                                                <div style="width:102%;display:none;margin-top:-15px;" id="divpaychange">
                                                     <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                         <TR>
                                                             <TD class="tr0 td0"><P class="p7 ft7">Pay / Position Change</P></TD>
@@ -113,7 +128,7 @@
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Rate  <input type="text" id="fromrate" style="width:30%;margin-left:26%;" />    </span>
+                                                            <span class="c0">Rate  <input type="text" id="fromrate" style="width:30%;margin-left:26%;" />   <span id="fromtext"> </span>  </span>
                                                         </p>
                                                     </div>
 
@@ -138,7 +153,7 @@
                                                             <span class="c0">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
                                                         </p>
                                                         <p class="c1">
-                                                            <span class="c0">Rate  <input type="text" id="torate" style="width:30%;margin-left:26%;" />    </span>
+                                                            <span class="c0">Rate  <input type="text" id="torate" style="width:30%;margin-left:26%;" />     <span id="totext"> </span>   </span>
                                                         </p>
                                                     </div>
 
@@ -152,6 +167,7 @@
 
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
+
                                                 <div style="width:100%;display:none" id="divlaborallocation">
                                                     <TABLE id="divlaborallocation" cellpadding=0 cellspacing=0 class="t0">
                                                         <TR>
@@ -243,7 +259,7 @@
                                                             <option value="Other">
                                                                 Other
                                                             </option>
-                                                        </select>   Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" />
+                                                        </select>  <span style="display:none;" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
                                                     </P>
                                                     <P class="p20 ft1">  Begin: <input type="date" style="width:20%;" id="leavebegin" /> Expected End:<input type="date" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" id="ptobalance" /> </P>
 
@@ -255,13 +271,13 @@
                                                     <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> </textarea></P>
                                                     <P class="p6 ft1">  </P>
                                                 </div>
-                                                <P class="p6 ft1">Employee Signature: <input type="text" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
-                                                <P class="p6 ft1">Manager Signature: <input type="text" id="msignature" /> Date: <input disabled type="date" id="mdate" /></P>
+                                                <P class="p6 ft1">Employee Signature: <input type="text" style="width:55%;" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
+                                                <P class="p6 ft1">Supervisor Signature: <input type="text" style="width:55%;" id="msignature" /> Date: <input disabled type="date" id="mdate" /></P>
                                             </div>
                                         </DIV>
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
-                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            <input type="button" id="Submit" style="margin-left:-15px;" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
                                         </div>
                                     </form>
 
@@ -382,7 +398,7 @@
         .title {
             padding-top: 24pt;
             color: #000000;
-            font-weight: 700;
+            font-weight: 700;.
             font-size: 36pt;
             padding-bottom: 6pt;
             font-family: "Arial";
@@ -678,7 +694,7 @@
         .p4 {
             text-align: left;
             padding-left: 309px;
-            margin-top: 15px;
+            margin-top: 0px;
             margin-bottom: 0px;
         }
 
@@ -692,7 +708,7 @@
         .p6 {
             text-align: left;
             padding-left: 8px;
-            margin-top: 18px;
+            margin-top: 0px;
             margin-bottom: 10px;
         }
 
@@ -1013,6 +1029,32 @@
 
             });
 
+            $("#toannualsalary,#tosalhourly,#fromannualsalary,#fromsalhourly").change(function () {
+
+                if ($("#toannualsalary").is(':checked')) {
+
+                    $("#totext").html(" / annually");
+                }
+
+                if ($("#tosalhourly").is(':checked')) {
+
+                    $("#totext").html(" / per hour");
+                }
+
+                if ($("#fromsalhourly").is(':checked')) {
+
+                    $("#fromtext").html(" / per hour");
+                }
+
+                if ($("#fromannualsalary").is(':checked')) {
+
+                    $("#fromtext").html(" / annually");
+                }
+
+
+            });
+
+
             document.getElementById("mdate").valueAsDate = new Date();
 
 
@@ -1087,9 +1129,11 @@
 
                 if ($("#purpose").val() == "Other") {
                     $("#purposeother").show();
+                    $("#spanpurposeother").show();
                 }
                 else {
                     $("#purposeother").hide();
+                    $("#spanpurposeother").hide();
                 }
             });
 
@@ -1123,6 +1167,7 @@
                 }
 
             });
+
             $("#location").focusout(function () {
 
                 if ($("#location").val() == "") {
@@ -1175,6 +1220,23 @@
                 }
 
             });
+            var iscorporate = false;
+            $("#chkcorporate,#chkproperty").change(function (e) {
+
+                e.preventDefault();
+
+                if ($("#chkcorporate").is(":checked")) {
+                    iscorporate = true;
+                    $("#divproperty").hide();
+                    $("#manager").val($("#CreatedByName").val());
+                }
+                if ($("#chkproperty").is(":checked")) {
+                    iscorporate = false;
+                    $("#divproperty").show();
+                }
+
+               
+            });
 
             $("#Submit").click(function (e)
             {
@@ -1184,6 +1246,7 @@
                 var errormsgsummary = "";
                 var control = "";
 
+                $("input,select,textarea").removeClass('has-error');
                 $("#status").html('');
 
                 if ($("#empname").val() == "")
@@ -1332,86 +1395,90 @@
                             control = $("#prop1per");
                     }
 
-                    if ($("#prop1per").val() != "" && parseFloat($("#prop1per").val()) < 100) {
+                    if ($("#prop1per").val() != "" && parseFloat($("#prop1per").val()) < 100)
+                    {
 
                         if ($("#prop2per").val() == "" && $("#prop3per").val() == "") {
                             errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
-                            $("#prop1").addClass('has-error');
+
                             $("#prop2").addClass('has-error');
                             $("#prop3").addClass('has-error');
                             if (control == "")
                                 control = $("#prop2");
                         }
+                    }
                         else {
                             var total = parseFloat($("#prop1per").val()) + parseFloat($("#prop2per").val()) + parseFloat($("#prop3per").val());
-                            if (total < 100)
+
+                            var p1 = 0, p2 = 0, p3 = 0;
+
+                            if ($("#prop1per").val() != "")
+                                if (isNaN(parseFloat($("#prop1per").val())) == false) {
+                                    p1 = parseFloat($("#prop1per").val());
+                                }
+                            if ($("#prop2per").val() != "")
+                                if (isNaN(parseFloat($("#prop2per").val())) == false) {
+                                    p2 = parseFloat($("#prop2per").val());
+                                }
+
+
+                            if ($("#prop3per").val() != "")
+                                if (isNaN(parseFloat($("#la_prop3per").val())) == false) {
+                                    p3 = parseFloat($("#la_prop3per").val());
+                                }
+
+
+                            var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+
+                            console.log(sum);
+
+
+                            if (sum != 100)
                                 errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
                             // return false;
                         }
 
-                    }
+                    
 
-                    var p1 = 0, p2 = 0, p3 = 0;
+                 
 
-                    if ($("#prop1per").val() != "")
-                        if (isNaN(parseFloat($("#prop1per").val())) == false)
-                        {
-                            p1 = parseFloat($("#prop1per").val());
-                        }
-                    if ($("#prop2per").val() != "")
-                        if (isNaN(parseFloat($("#prop2per").val())) == false)
-                        {
-                            p2 = parseFloat($("#prop2per").val());
-                        }
+                    //if (sum != 100)
+                    //{
 
-                       
-                    if ($("#prop3per").val() != "")
-                        if (isNaN(parseFloat($("#la_prop3per").val())) == false)
-                        {
-                            p3 = parseFloat($("#la_prop3per").val());
-                        }
+                    //    if ($("#prop1per").val() != "" && $("#prop1").val() == "")
+                    //    {
 
-                     
-                    var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                    //        $("#prop1").addClass('has-error');
 
-                    console.log(sum);
+                    //        if (control == "")
+                    //            control = $("#prop1");
+                    //    }
 
 
-                    if (sum != 100) {
+                    //    if ($("#prop2per").val() != "" && $("#prop2").val() == "") {
 
-                        if ($("#prop1per").val() != "" && $("#prop1").val() == "") {
+                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                    //        $("#prop2").addClass('has-error');
 
-                            errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                            $("#prop1").addClass('has-error');
-
-                            if (control == "")
-                                control = $("#prop1");
-                        }
+                    //        if (control == "")
+                    //            control = $("#prop2");
+                    //    }
 
 
-                        if ($("#prop2per").val() != "" && $("#prop2").val() == "") {
+                    //    if ($("#prop3per").val() != "" && $("#prop3").val() == "") {
 
-                            errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                            $("#prop2").addClass('has-error');
+                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                    //        $("#prop3").addClass('has-error');
 
-                            if (control == "")
-                                control = $("#prop2");
-                        }
+                    //        if (control == "")
+                    //            control = $("#prop3");
+                    //    }
 
+                    //    errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                    //    control = $("#prop3");
 
-                        if ($("#prop3per").val() != "" && $("#prop3").val() == "") {
-
-                            errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                            $("#prop3").addClass('has-error');
-
-                            if (control == "")
-                                control = $("#prop3");
-                        }
-
-                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                        control = $("#prop3");
-
-                    }
+                    //}
 
                     //if ($("#la_Prop1per").val() == "")
                     //{
@@ -1545,13 +1612,13 @@
 
 
 
-                    if ($("#leaveend").val() == "")
-                    {
-                        errormsgsummary += "<li> Please Enter Leave End </li>";
-                        $("#leaveend").addClass('has-error');
-                        if (control == "")
-                            control = $("#leaveend");
-                    }
+                    //if ($("#leaveend").val() == "")
+                    //{
+                    //    errormsgsummary += "<li> Please Enter Leave End </li>";
+                    //    $("#leaveend").addClass('has-error');
+                    //    if (control == "")
+                    //        control = $("#leaveend");
+                    //}
 
                     if ($("#ptobalance").val() == "")
                     {
@@ -1570,16 +1637,15 @@
                         control = $("#notes1");
                 }
                 
-                if ($("#msignature").val() == "") {
-                    errormsgsummary += "<li> Please Enter Manager's Signature  </li>";
+                if ($("#msignature").val() == "")
+                {
+                    errormsgsummary += "<li> Please Enter Supervisor's Signature  </li>";
+
                     $("#msignature").addClass('has-error');
                     if (control == "")
                         control = $("#msignature");
                 }
-
-
                 
-
                 if (errormsgsummary != "")
                 {
 
@@ -1598,8 +1664,8 @@
                     insertForm.append('empemail', $("#empemail").val());
                     insertForm.append('effectivedate', $("#effectivedate").val());
                     //   insertForm.append('typeofchange', $("#typeofchange").val());
-
-
+                    insertForm.append('iscorporate', iscorporate);
+                 
                     if ($("#chkpropertychange").is(":checked"))
                     {
                         insertForm.append('showproperty', 'true');

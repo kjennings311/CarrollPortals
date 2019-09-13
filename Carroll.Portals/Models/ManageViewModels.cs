@@ -343,7 +343,7 @@ namespace Carroll.Portals.Models
     public class ListActivity
     {
         public string ActivitySubject { get; set; }
-        public System.DateTime ActivityDate { get; set; }
+        public string ActivityDate { get; set; }
         public string ActivityByName { get; set; }
     }
 
@@ -351,7 +351,7 @@ namespace Carroll.Portals.Models
     {
         public string browserinfo { get; set; }
         public string ip { get; set; }
-        public DateTime? datetime { get; set; }
+        public string datetime { get; set; }
         public string Action { get; set; }
 
     }
@@ -542,6 +542,7 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> PmSignedDateTime { get; set; }
         public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
         public PrintActivity printActivity { get; set; }
+        public Nullable<bool> IsCorporate { get; set; }
     }
 
     public class PrintNoticeOfEmployeeSeparation
@@ -579,6 +580,8 @@ namespace Carroll.Portals.Models
         public Nullable<bool> C2WeeksCompleted { get; set; }
         public string SequenceNumber { get; set; }
         public PrintActivity printActivity { get; set; }
+        public Nullable<bool> IsCoporate { get; set; }
+        public string location { get; set; }
     }
 
     public class PrintMileageLogHeader

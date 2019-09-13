@@ -21,11 +21,7 @@ namespace Carroll.Data.Entities
         public string RequestorPosition { get; set; }
         public string PositionCombined { get; set; }
         public string PositionOther { get; set; }
-        public string Type { get; set; }
         public string Post { get; set; }
-        public Nullable<bool> ChkNewPosition { get; set; }
-        public Nullable<bool> ChkReplacementPosition { get; set; }
-        public string ReplacingPerson { get; set; }
         public Nullable<bool> ChkCarrollCareersIndeed { get; set; }
         public Nullable<bool> ChkApartmentAssociation { get; set; }
         public string PostOther { get; set; }

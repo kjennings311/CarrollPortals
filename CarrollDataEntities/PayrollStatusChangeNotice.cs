@@ -81,5 +81,6 @@ namespace Carroll.Data.Entities
         public Nullable<double> La_Property3_Per { get; set; }
         public Nullable<System.DateTime> PmSignedDateTime { get; set; }
         public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
+        public Nullable<bool> IsCorporate { get; set; }
     }
 }

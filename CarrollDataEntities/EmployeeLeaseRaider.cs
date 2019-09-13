@@ -22,7 +22,6 @@ namespace Carroll.Data.Entities
         public decimal EmployeeMonthlyRent { get; set; }
         public string RentalPaymentResidencyAt { get; set; }
         public string PropertyManager { get; set; }
-        public string Position { get; set; }
         public Nullable<System.Guid> CreatedUser { get; set; }
         public Nullable<System.DateTime> CreatedDatetime { get; set; }
         public Nullable<System.Guid> ModifiedUser { get; set; }

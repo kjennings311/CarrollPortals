@@ -41,7 +41,12 @@
         ol li span {
             margin-top: 10px !important;
         }
-
+        button[disabled], html input[disabled] {
+            cursor: default;
+            background: white;
+            color: black;
+            font-weight: bold;
+        }
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
@@ -52,12 +57,12 @@
         <div class="col-md-12" style="width: 95%;
     border: 1px solid black;
     padding: 20px;
-    margin-top: 20px;margin-left:-2px;">
+    margin-top: 10px;margin-left:-2px;text-align:center;">
 
-            <img src="~/img/carroll-print.png" style="margin-bottom:20px;" />
+            <img src="~/img/carroll-print.png" style="margin-bottom:10px;" />
 
             <h1 style="text-align: center;
-    margin-top: -20px;">
+    margin-top: 5px;">
                 <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
             </h1>
             <form id="submitform" onsubmit="return false;">
@@ -81,20 +86,34 @@
                 </ol>
 
 
-                <p style="text-align: justify;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" class="italic" style="width:25%;" disabled value="@Model.SignatureOfPropertyManager" id="signatureproperymanager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.PMDate.Value.ToShortDateString()" disabled id="pmdate" /> <span style="margin-right:20px;float:right;margin-top:10px;" id="pmdatespan"> Date : </span> </p>
+                <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" class="italic" style="width:25%;" disabled value="@Model.SignatureOfPropertyManager" id="signatureproperymanager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.PMDate.Value.ToShortDateString()" disabled id="pmdate" /> 
+                <span style="margin-top:10px;font-size: 10.0pt;
+line-height: 115%;" id="pmdatespan"> Date : </span> </p>
+
                 <p style="text-align: justify;">
-                    <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" class="italic" style="margin-left:45px;width:25%;" value="@Model.SignatureOfEmployee" id="signature" disabled /> </span>  @if (Model.PositionDate != null)
+                    <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : </span>  <span style="font-size: 10.0pt; line-height: 115%;">
+                    <input type="text" class="italic" style="margin-left:45px;width:25%;" value="@Model.SignatureOfEmployee" id="signature" disabled /> </span>  @if (Model.PositionDate != null)
                     {
-                        <input type="text" id="leasedate" style="float:right; margin-right:15%;" value="@Model.PositionDate.Value.ToShortDateString()" />
+                        <span>  <input type="text" id="leasedate" style="float:right; margin-right:15%;" value="@Model.PositionDate.Value.ToShortDateString()" /></span>
                     }
                     else
-                    { <input disabled style="float:right; margin-right:15%;" type="text" id="positiondate" />
-                    }<span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;"> Date : </span>
-                </p>
-                <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Printed Name of Employee <input type="text" disabled style="margin-left:25px;width:55%;" value="@Model.EmployeeName" id="printempname" /> </span></p>
-                <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:35%; margin-left:8%;" value="@Model.EmployeeEmail" id="employeeemail" />  </span></p>
+                    {    <span> <input disabled style="float:right; margin-right:15%;" type="text" id="positiondate" /> </span>
+                    }   <span style="font-size: 10.0pt;
 
-                <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;"> Position : <input type="text" style="margin-left:135px;width:25%;" value="@Model.Position" id="position" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
+line-height: 115%;
+
+margin-right: 10px;
+
+margin-top: 10px;
+
+text-align: right;
+
+float: right;"> Date : </span>
+                </p>
+                <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;text-align:left;"> Printed Name of Employee </span> <input type="text" disabled style="margin-left:25px;width:56%;" value="@Model.EmployeeName" id="printempname" /> </p>
+                <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:56%; margin-left:11%;" value="@Model.EmployeeEmail" id="employeeemail" />  </span></p>
+
+                <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
 
 
             </form>

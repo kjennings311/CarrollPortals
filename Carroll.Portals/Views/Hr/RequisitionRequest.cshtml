@@ -73,7 +73,7 @@
                                                 <h1 style="font-weight:bold">  Requisition Request </h1>
                                             </DIV>
 
-                                            <TABLE cellpadding=0 cellspacing=0 class="t0">
+                                            <TABLE cellpadding=0 cellspacing=0 class="t0" style="margin-top:20px;">
                                                 <TR>
                                                     <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><select style="width:60%;" id="propertyname" required > </select></P></TD>
 
@@ -105,10 +105,8 @@
                                             <P class="p3 ft1"><input type="checkbox" class="chkposition s6" data-tr="s6" id="chkmt" value="Maintenance Technician" />  Maintenance Technician  <select style="margin-left:10%;" class="chkposition drdchk" id="s6"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select></P>
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition s7" data-tr="s7" id="chkgs" value=" Groundskeeper" />  Groundskeeper<select style="margin-left:18%;" class="chkposition drdchk" id="s7"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p3 ft1"><input type="checkbox" class="chkposition s8" data-tr="s8" id="chkhk" value="Housekeeper" />  Housekeeper <select style="margin-left:19.4%;" class="chkposition drdchk" id="s8"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p2 ft1"><input type="checkbox" class="chkposition s9" data-tr="s9" id="chkother" value="Other" /> Other: <input type="text" id="txtother" /> <select style="margin-left:2%;" class="chkposition drdchk" id="s9"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                            <P class="p1 ft0">Select One: <SPAN class="ft1"><input type="radio" name="position" class="" id="chknewposition" />  New Position</SPAN></P>
-                                            <P class="p4 ft1"><input type="radio" class="" name="position" style="margin-left:0.5%;" id="chkreplacementposition" /> Replacement Position</P>
-                                            <P class="p5 ft1">Name of Person(s) Replacing: <input type="text" id="replaceperson1" /> </P>
+                                            <P class="p2 ft1"><input type="checkbox" class="chkposition s9" data-tr="s9" id="chkother" value="Other" /> Other: <input type="text" style="width: 22.6%;" id="txtother" /> <select style="margin-left:2%;" class="chkposition drdchk" id="s9"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
+                                           
                                             <P class="p1 ft1"><SPAN class="ft0">Post to: </SPAN>  <input type="checkbox" id="postindeed" />  Carroll Careers/Indeed</P>
                                             <P class="p6 ft1"> <input type="checkbox" id="postassociation" />  Apartment Association</P>
                                             <P class="p4 ft1"> <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost" /> </P>
@@ -117,7 +115,8 @@
 
                                             <P class="p8 ft0">For Recruiting Use <SPAN class="ft1">:</SPAN> </P>
                                             <P class="p7 ft1">Requisition Number(s): <input type="text" disabled id="requisitionnumber" /> </P>
-                                            <P class="p7 ft1">Date Posted:<input type="date" disabled id="dateposted" /></P>
+                                            <P class="p7 ft1">Date Posted:<input type="date" style="margin-left: 9.4%;
+width: 25%;" disabled id="dateposted" /></P>
                                             <P class="p7 ft1">Notes:</P>
                                             <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1"> </textarea></P>
                                             <br /> <br />
@@ -423,19 +422,19 @@
                         else
                             $("#postassociation").prop("checked", false);
 
-                        if (data.chkNewPosition == true) {
-                            $("#chknewposition").prop("checked", true);
-                        }
-                        else
-                            $("#chknewposition").prop("checked", false);
+                        //if (data.chkNewPosition == true) {
+                        //    $("#chknewposition").prop("checked", true);
+                        //}
+                        //else
+                        //    $("#chknewposition").prop("checked", false);
 
 
-                        if (data.chkReplacementPosition == true) {
-                            $("#chkreplacementposition").prop("checked", true);
-                            $("#replaceperson1").val(data.replacingPerson);
-                        }
-                        else
-                            $("#chkreplacementposition").prop("checked", false);
+                        //if (data.chkReplacementPosition == true) {
+                        //    $("#chkreplacementposition").prop("checked", true);
+                        //    $("#replaceperson1").val(data.replacingPerson);
+                        //}
+                        //else
+                        //    $("#chkreplacementposition").prop("checked", false);
 
                         if (data.chkCarrollCareersIndeed == true)
                         {
@@ -585,7 +584,7 @@
 
                 var errormsgsummary = "";
                 var control = "";
-
+                $("input,select,textarea").removeClass('has-error');
                 $("#status").html('');
 
                 if (insertoredit)
@@ -614,12 +613,12 @@
                     }
 
 
-                    if (!$("#chknewposition").is(":checked") && !$("#chkreplacementposition").is(":checked")) {
-                        errormsgsummary += "<li> Please Select New Position Or Replacement Position </li>";
-                        $("#chknewposition").addClass('has-error');
-                        if (control == "")
-                            control = $("#chknewposition");
-                    }
+                    //if (!$("#chknewposition").is(":checked") && !$("#chkreplacementposition").is(":checked")) {
+                    //    errormsgsummary += "<li> Please Select New Position Or Replacement Position </li>";
+                    //    $("#chknewposition").addClass('has-error');
+                    //    if (control == "")
+                    //        control = $("#chknewposition");
+                    //}
 
                     if (!$("#postindeed").is(":checked") && !$("#postassociation").is(":checked")) {
                         errormsgsummary += "<li> Please Select Post Option </li>";
@@ -718,24 +717,24 @@
                             insertForm.append('txtother', '');
                         }
 
-                        if ($("#chknewposition").is(":checked")) {
-                            insertForm.append('chknewposition', true);
-                            insertForm.append('type', 'new position');
-                        }
-                        else {
-                            insertForm.append('chknewposition', false);
-                        }
+                        //if ($("#chknewposition").is(":checked")) {
+                        //    insertForm.append('chknewposition', true);
+                        //    insertForm.append('type', 'new position');
+                        //}
+                        //else {
+                        //    insertForm.append('chknewposition', false);
+                        //}
 
-                        if ($("#chkreplacementposition").is(":checked")) {
-                            insertForm.append('chkreplacementposition', true);
+                        //if ($("#chkreplacementposition").is(":checked")) {
+                        //    insertForm.append('chkreplacementposition', true);
 
-                            insertForm.append('replaceperson', $("#replaceperson1").val());
-                            insertForm.append('type', 'replacement position');
-                        }
-                        else {
-                            insertForm.append('chkreplacementposition', false);
-                            insertForm.append('replaceperson', "");
-                        }
+                        //    insertForm.append('replaceperson', $("#replaceperson1").val());
+                        //    insertForm.append('type', 'replacement position');
+                        //}
+                        //else {
+                        //    insertForm.append('chkreplacementposition', false);
+                        //    insertForm.append('replaceperson', "");
+                        //}
                         insertForm.append('post', "");
                         if ($("#postindeed").is(":checked")) {
                             insertForm.append('postindeed', true);

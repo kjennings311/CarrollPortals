@@ -2404,7 +2404,7 @@ namespace Carroll.Data.Entities.Repository
                     if (string.IsNullOrEmpty(optionalSeachText))
                         config.Rows = _entities.proc_getallemployeeleaseriders().ToList();
                     else
-                        config.Rows = _entities.proc_getallemployeeleaseriders().Where(x => x.Community.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.Position.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallemployeeleaseriders().Where(x => x.Community.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(proc_getallemployeeleaseriders_Result).GetProperties();
@@ -2446,7 +2446,7 @@ namespace Carroll.Data.Entities.Repository
                     config.Columns.Add(new DtableConfigArray { name = "requestorName", label = "Requestor Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "requestorPosition", label = "Position", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "post", label = "How Many", type = DFieldType.IsText, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "type", label = "Type", type = DFieldType.IsText, href = "" });
+                   // config.Columns.Add(new DtableConfigArray { name = "type", label = "Type", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                     //config.Columns.Add(new DtableConfigArray { name = "requisitionRequestId", label = "Id", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });

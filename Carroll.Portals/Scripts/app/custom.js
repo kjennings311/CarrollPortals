@@ -3203,7 +3203,31 @@ function getParameterByName(name, url) {
 var claimbody = "";
 var $details = "";
 
+function LoadAllProperties() {
+      
 
+    var options1 = "<option value='' > Select Property </option>";
+
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+        var defaultsel = $("#location").attr('seloption');
+
+        for (var i = 0; i < data.length; i++) {
+            if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            else
+                options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+
+        }
+        // now let's load options into select box
+        $('#location').html(options1);
+        if ($("#property1").length > 0) {
+            $('#property1').html(options);
+        }
+    });
+
+
+}
 function LoadHrPositions()
 {
     var options = "";
