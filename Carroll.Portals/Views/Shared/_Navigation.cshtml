@@ -38,190 +38,195 @@
             <li id="equitypartners">
                 <a href="/Data/partners"><i class="fa fa-users"></i> <span class="nav-label">Equity Partners</span></a>
             </li>
-            <li id="incidentdashboard">
-                <a href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
-            </li>
-
 
             @{
-                if (@Model.RoleType.ToLower() == "administrator")
+                if (@Model.RoleType.ToLower() != "office staff")
                 {
+                    <li id="incidentdashboard">
+                        <a href="~/Home/IncidentDashboard"><i class="fa fa-exclamation-triangle"></i> <span class="nav-label">Incident Dashboard</span></a>
+                    </li>
+                    }
+                }
 
-                    @*<li>
-                    <a href="javascript:void(0)"><i class="fa fa-edit"></i> <span class="nav-label">Forms</span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="#">Property Forms<span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level collapse">
-                                <li><a href="/FORMS/PropertyDamageClaims">  <i class="fa fa-angle-double-right"></i> Property Damage Claim </a></li>
-                                <li><a href="/FORMS/GeneralLiabilityClaims">  <i class="fa fa-angle-double-right"></i>  General Liability Claim</a></li>
-                                <li><a href="/FORMS/MoldDamageClaims">  <i class="fa fa-angle-double-right"></i>  Mold Damage Claim</a></li>
+                    @{
+                        if (@Model.RoleType.ToLower() == "administrator")
+                        {
+
+                            @*<li>
+                            <a href="javascript:void(0)"><i class="fa fa-edit"></i> <span class="nav-label">Forms</span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">Property Forms<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li><a href="/FORMS/PropertyDamageClaims">  <i class="fa fa-angle-double-right"></i> Property Damage Claim </a></li>
+                                        <li><a href="/FORMS/GeneralLiabilityClaims">  <i class="fa fa-angle-double-right"></i>  General Liability Claim</a></li>
+                                        <li><a href="/FORMS/MoldDamageClaims">  <i class="fa fa-angle-double-right"></i>  Mold Damage Claim</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
-                </li>*@
+                        </li>*@
 
 
 
-                    <li id="hrforms">
-                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
+                            <li id="hrforms">
+                                <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
 
-                        <ul class="nav nav-second-level collapse">
-                            <li id="empleaserider">
-                                <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li id="empleaserider">
+                                        <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
 
-                            </li>
-                            <li id="newhire">
-                                <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
-                            </li>
-                            <li id="payroll">
-                                <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
-                            </li>
-                            <li id="empseparation">
-                                <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
-                            </li>
-                            <li id="requisitionrequest">
-                                <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
-                            </li>
+                                    </li>
+                                    <li id="newhire">
+                                        <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
+                                    </li>
+                                    <li id="payroll">
+                                        <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
+                                    </li>
+                                    <li id="empseparation">
+                                        <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
+                                    </li>
+                                    <li id="requisitionrequest">
+                                        <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
+                                    </li>
 
-                        </ul>
-                    </li>
-
-                    <li id="expensereports">
-                        <a href="javascript:void(0)"><i class="fa fa-dollar"></i> <span class="nav-label"> Expense Reports </span></a>
-
-                        <ul class="nav nav-second-level collapse">
-                            <li id="instructions">
-                                <a href="~/Mileage/CarrollMileageLogInstructions/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Instructions  </span></a>
-                            </li>
-                            <li id="expense">
-                                <a href="~/Mileage/CarrollExpenseForm/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Expense Form  </span></a>
-                            </li>
-                            <li id="mileagelog">
-                                <a href="~/Mileage/CarrollMileageLog/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Mileage Log </span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="residentrelations">
-                        <a href="javascript:void(0)"><i class="fa fa-comments-o"></i> <span class="nav-label"> Resident Relations  </span></a>
-
-                        <ul class="nav nav-second-level collapse">
-                            <li id="referalrequest">
-                                <a href="~/Resident/ReferalRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referral Request  </span></a>
-                            </li>
-                            <li id="referalcontact">
-                                <a href="~/Resident/ReferalContact/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referral Contact </span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li style="display:none;" id="residentrelations">
-                        <a href="javascript:void(0)"><i class="fa fa-comments-o"></i> <span class="nav-label"> Accounting  </span></a>
-
-                        <ul class="nav nav-second-level collapse">
-                            <li id="referalrequest">
-                                <a href="~/Accounting/AccrualReclass/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Accrual and Reclass  </span></a>
-                            </li>
-                            <li id="referalcontact">
-                                <a href="~/Accounting/EomChecklist/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> EOM Checklist </span></a>
-                            </li>
-                            <li id="referalrequest">
-                                <a href="~/Accounting/MoveOutCoverSheet/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Move Out Cover Sheet  </span></a>
-                            </li>
-                            <li id="referalcontact">
-                                <a href="~/Accounting/PettyCashPolicy/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Petty Cash Policy  </span></a>
-                            </li>
-                            <li id="referalcontact">
-                                <a href="~/Accounting/ResidentReferalPolicy/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Resident Referal Policy </span></a>
+                                </ul>
                             </li>
 
-                        </ul>
-                    </li>
-                    <li id="admin">
-                        <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> Admin </span></a>
+                            <li id="expensereports">
+                                <a href="javascript:void(0)"><i class="fa fa-dollar"></i> <span class="nav-label"> Expense Reports </span></a>
 
-                        <ul class="nav nav-second-level collapse">
-                            <li id="users">
-                                <a href="~/User/Index">  <i class="fa fa-angle-double-right"></i>  Manage Users </a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li id="instructions">
+                                        <a href="~/Mileage/CarrollMileageLogInstructions/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Instructions  </span></a>
+                                    </li>
+                                    <li id="expense">
+                                        <a href="~/Mileage/CarrollExpenseForm/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Expense Form  </span></a>
+                                    </li>
+                                    <li id="mileagelog">
+                                        <a href="~/Mileage/CarrollMileageLog/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Mileage Log </span></a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li id="usertorole">
-                                <a href="~/User/UserRoles">   <i class="fa fa-angle-double-right"></i>  Add User To Role  </a>
+                            <li id="residentrelations">
+                                <a href="javascript:void(0)"><i class="fa fa-comments-o"></i> <span class="nav-label"> Resident Relations  </span></a>
+
+                                <ul class="nav nav-second-level collapse">
+                                    <li id="referalrequest">
+                                        <a href="~/Resident/ReferalRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referral Request  </span></a>
+                                    </li>
+                                    <li id="referalcontact">
+                                        <a href="~/Resident/ReferalContact/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Referral Contact </span></a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li id="usertoproperty">
-                                <a href="~/User/UserProperties">  <i class="fa fa-angle-double-right"></i>  Add User To Property </a>
+                            <li style="display:none;" id="residentrelations">
+                                <a href="javascript:void(0)"><i class="fa fa-comments-o"></i> <span class="nav-label"> Accounting  </span></a>
+
+                                <ul class="nav nav-second-level collapse">
+                                    <li id="referalrequest">
+                                        <a href="~/Accounting/AccrualReclass/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Accrual and Reclass  </span></a>
+                                    </li>
+                                    <li id="referalcontact">
+                                        <a href="~/Accounting/EomChecklist/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> EOM Checklist </span></a>
+                                    </li>
+                                    <li id="referalrequest">
+                                        <a href="~/Accounting/MoveOutCoverSheet/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Move Out Cover Sheet  </span></a>
+                                    </li>
+                                    <li id="referalcontact">
+                                        <a href="~/Accounting/PettyCashPolicy/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Petty Cash Policy  </span></a>
+                                    </li>
+                                    <li id="referalcontact">
+                                        <a href="~/Accounting/ResidentReferalPolicy/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Resident Referal Policy </span></a>
+                                    </li>
+
+                                </ul>
                             </li>
-                            <li id="carrollpositions">
-                                <a href="~/User/CarrollPositions">  <i class="fa fa-angle-double-right"></i>   Carroll Positions </a>
+                            <li id="admin">
+                                <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> Admin </span></a>
+
+                                <ul class="nav nav-second-level collapse">
+                                    <li id="users">
+                                        <a href="~/User/Index">  <i class="fa fa-angle-double-right"></i>  Manage Users </a>
+                                    </li>
+                                    <li id="usertorole">
+                                        <a href="~/User/UserRoles">   <i class="fa fa-angle-double-right"></i>  Add User To Role  </a>
+                                    </li>
+                                    <li id="usertoproperty">
+                                        <a href="~/User/UserProperties">  <i class="fa fa-angle-double-right"></i>  Add User To Property </a>
+                                    </li>
+                                    <li id="carrollpositions">
+                                        <a href="~/User/CarrollPositions">  <i class="fa fa-angle-double-right"></i>   Carroll Positions </a>
+                                    </li>
+                                    <li id="payperiod">
+                                        <a href="~/User/PayPeriods">  <i class="fa fa-angle-double-right"></i>   Pay Periods </a>
+                                    </li>
+                                    <li id="errorlog">
+                                        <a href="~/User/ErrorLog">  <i class="fa fa-angle-double-right"></i>   Error Log </a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li id="payperiod">
-                                <a href="~/User/PayPeriods">  <i class="fa fa-angle-double-right"></i>   Pay Periods </a>
+
+                            @*<li>
+                            <a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="nav-label"> Administration </span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="~/Admin/SiteColumns"> <i class="fa fa-angle-double-right"></i>  Site Columns </a>
+                                    <a href="~/Admin/ContentTypes">  <i class="fa fa-angle-double-right"></i>  Content Types  </a>
+                                    <a href="~/Admin/Forms">   <i class="fa fa-angle-double-right"></i>  Forms </a>
+                                </li>
+                            </ul>
+                        </li>*@
+                        }
+                        else if (@Model.RoleType.ToLower() == "hr")
+                        {
+
+                            <li id="hrforms">
+                                <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li id="empleaserider">
+                                        <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
+
+                                    </li>
+                                    <li id="newhire">
+                                        <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
+                                    </li>
+                                    <li id="payroll">
+                                        <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
+                                    </li>
+                                    <li id="empseparation">
+                                        <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
+                                    </li>
+                                    <li id="requisitionrequest">
+                                        <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li id="errorlog">
-                                <a href="~/User/ErrorLog">  <i class="fa fa-angle-double-right"></i>   Error Log </a>
-                            </li>
-                        </ul>
-                    </li>
+
+                        }
+                    }
+
 
                     @*<li>
-                    <a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="nav-label"> Administration </span></a>
+                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Property Forms</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li>
-                            <a href="~/Admin/SiteColumns"> <i class="fa fa-angle-double-right"></i>  Site Columns </a>
-                            <a href="~/Admin/ContentTypes">  <i class="fa fa-angle-double-right"></i>  Content Types  </a>
-                            <a href="~/Admin/Forms">   <i class="fa fa-angle-double-right"></i>  Forms </a>
-                        </li>
+                        <li><a href="form_basic.html">Property Damage Claim </a></li>
+                        <li><a href="form_advanced.html">General Liability Claim</a></li>
+                        <li><a href="form_wizard.htmm">Mold Damage Claim</a></li>
+
                     </ul>
                 </li>*@
-                }
-                else if (@Model.RoleType.ToLower() == "hr")
-                {
-
-                    <li id="hrforms">
-                        <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li id="empleaserider">
-                                <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
-
-                            </li>
-                            <li id="newhire">
-                                <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
-                            </li>
-                            <li id="payroll">
-                                <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
-                            </li>
-                            <li id="empseparation">
-                                <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
-                            </li>
-                            <li id="requisitionrequest">
-                                <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
-                            </li>
-                        </ul>
-                    </li>
-
-                }
-            }
 
 
-            @*<li>
-            <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Property Forms</span><span class="fa arrow"></span></a>
-            <ul class="nav nav-second-level collapse">
-                <li><a href="form_basic.html">Property Damage Claim </a></li>
-                <li><a href="form_advanced.html">General Liability Claim</a></li>
-                <li><a href="form_wizard.htmm">Mold Damage Claim</a></li>
+                    @*@{
+                if (@Model.RoleType == "Resources")
+                {*@
 
-            </ul>
-        </li>*@
-
-
-            @*@{
-        if (@Model.RoleType == "Resources")
-        {*@
-
-            @*}
-        }*@
+                    @*}
+                }*@
 
 
 
-        </ul>
+                </ul>
 
     </div>
 </nav>

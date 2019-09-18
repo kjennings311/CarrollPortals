@@ -718,6 +718,8 @@
           <Property Name="UserPhoto" Type="varchar(max)" />
           <Property Name="CreatedByName" Type="varchar" MaxLength="25" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="ismanagement" Type="bit" />
+          <Property Name="managementcontact" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="UserInProperty">
           <Key>
@@ -1349,6 +1351,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedByName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Guid" />
           <NavigationProperty Name="UserInRoles" Relationship="Carroll.Data.Entities.FK_UserInRole_SiteUsers" FromRole="SiteUser" ToRole="UserInRole" />
+          <Property Name="ismanagement" Type="Boolean" />
+          <Property Name="managementcontact" Type="Guid" />
         </EntityType>
         <Association Name="FK_UserInRole_SiteUsers">
           <End Type="Carroll.Data.Entities.SiteUser" Role="SiteUser" Multiplicity="1">
@@ -2886,6 +2890,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="SiteUsers">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.SiteUser">
               <MappingFragment StoreEntitySet="SiteUsers">
+                <ScalarProperty Name="managementcontact" ColumnName="managementcontact" />
+                <ScalarProperty Name="ismanagement" ColumnName="ismanagement" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
                 <ScalarProperty Name="UserPhoto" ColumnName="UserPhoto" />

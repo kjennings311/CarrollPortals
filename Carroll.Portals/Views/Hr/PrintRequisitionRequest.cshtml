@@ -52,7 +52,7 @@
             <div id="page_1">
                 <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
                     <img src="/img/requistionrequestheader.jpg" />
-                    <h1 style="font-weight:bold; margin-bottom:15px;">  Requisition Request </h1>
+                    <h1 style="font-weight:bold; margin-bottom:25px;margin-top:15px;font-size:19px;">  Requisition Request </h1>
                 </DIV>
 
                 <TABLE cellpadding=0 cellspacing=0 class="t0">
@@ -76,7 +76,8 @@
                             @{ if (Model.PositionCombined.Replace("Assistant Property Manager", "").Contains("Property Manager"))
                                 {
 
-                                    <tr> <td> <input type="checkbox" checked />    Property Manager  </td><td style="text-align:left"> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
+                                    <tr> <td> <input type="checkbox" checked />    Property Manager  </td><td style="text-align: left;
+padding-left: 6%;"> @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Property Manager--")) + 18, 1) </td></tr>
 
                                 }
                                 else
@@ -90,7 +91,8 @@
                                 {
                                     <tr>
                                         <td> <input type="checkbox" checked />   Assistant Property Manager  </td>
-                                        <td style="text-align:left" >
+                                        <td style="text-align: left;
+padding-left: 6%;" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Assistant Property Manager--")) + 28, 1)
                                         </td>
                                     </tr>
@@ -108,7 +110,8 @@
                                 {
                                     <tr>
                                         <td> <input type="checkbox" checked />   Leasing Manager  </td>
-                                        <td style="text-align:left" >
+                                        <td style="text-align: left;
+padding-left: 6%;" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Manager--")) + 17, 1)
                                         </td>
                                     </tr>
@@ -127,7 +130,8 @@
                                 {
                                     <tr>
                                         <td> <input type="checkbox" checked />    Leasing Consultant  </td>
-                                        <td style="text-align:left" >
+                                        <td style="text-align: left;
+padding-left: 6%;" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Leasing Consultant")) + 20, 1)
                                         </td>
                                     </tr>
@@ -145,7 +149,8 @@
                                 {
                                     <tr>
                                         <td>  <input type="checkbox" checked />   Maintenance Supervisor  </td>
-                                        <td style="text-align:left" >
+                                        <td style="text-align: left;
+padding-left: 6%;" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Supervisor")) + 24, 1)
                                         </td>
                                     </tr>
@@ -164,7 +169,8 @@
                                 {
                                     <tr>
                                         <td> <input type="checkbox" checked />   Maintenance Technician  </td>
-                                        <td style="text-align:left">
+                                        <td style="text-align: left;
+padding-left: 6%;">
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Maintenance Technician")) + 24, 1)
                                         </td>
                                     </tr>
@@ -183,7 +189,8 @@
                                 {
                                     <tr>
                                         <td> <input type="checkbox" checked />   Groundskeeper</td>
-                                        <td style="text-align:left">
+                                        <td style="text-align: left;
+padding-left: 6%;">
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Groundskeeper")) + 15, 1)
                                         </td>
                                     </tr>
@@ -203,7 +210,8 @@
                                 {
                                     <tr>
                                         <td> <input type="checkbox" checked />  Housekeeper  </td>
-                                        <td style="text-align:left">
+                                        <td style="text-align: left;
+padding-left: 6%;">
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Housekeeper")) + 13, 1)
 
                                         </td>
@@ -223,8 +231,9 @@
                                 if (Model.PositionCombined.Contains("Other"))
                                 {
                                     <tr>
-                                        <td> <input type="checkbox" checked /> Other &nbsp;&nbsp;&nbsp;&nbsp;   @Model.PositionOther  </td>
-                                        <td style="text-align:left" >
+                                        <td> <input type="checkbox" checked /> Other &nbsp;&nbsp;&nbsp;&nbsp;  <input type="text" value="@Model.PositionOther" />   </td>
+                                        <td style="text-align: left;
+padding-left: 6%;" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Other--")) + 7, 1)
                                         </td>
                                     </tr>
@@ -287,14 +296,14 @@
                         {
                             <input type="checkbox" id="chkotherpost" />
                         }
-                    }  Other:   <input type="text" id="otherpost" value="@Model.PostOther" />
+                    }  Other:   <input type="text" id="otherpost" style="width:68%;" value="@Model.PostOther" />
                 </P>
                 <P class="p7 ft1">Special Instructions(i.e.confidential posting, etc.)</P>
                 <P class="p2 ft1"><p style="border: 1px solid;
 
 padding: 10px;
 
-margin: 10px;"> @Model.SpecailInstructions </p> </P>
+margin: 10px;min-height:50px;"> @Model.SpecailInstructions </p> </P>
                 <P class="p8 ft0">For Recruiting Use<SPAN class="ft1">:</SPAN></P>
                 <P class="p7 ft1">Requisition Number(s): <input type="text" id="requisitionnumber" value="@Model.RequistionNumber" /> </P>
                 <P class="p7 ft1">

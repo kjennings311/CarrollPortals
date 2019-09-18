@@ -66,20 +66,22 @@
     MARGIN-TOP: 22PX;" src="/img/payroll.png" id="p1img1">
                                             <P class="p0 ft0" style="margin-top: 15PX;
 margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
-                                            <P class="p1 ft1" style="margin-top:5px !important">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" /> </P>
+                                            <P class="p1 ft1" style="margin-top:5px !important">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" /> </P>
                                             <p class="p1 ft1" style="margin-top:10px;">
                                                 <span class="">
                                                     Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
                                                 </span>
                                                 <span class="c0" id="divproperty" style="display:none; padding:20px;">
+
                                                     Property : <select type="text" id="location"></select>
                                                 </span>
                                             </p>
 
-                                            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:40%;" type="text" step="" id="empemail" class="" /> </P>
+                                            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
                                             <P class="p3 ft3"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
-                                            <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence   </P>
+                                            <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change 
+                                            <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence   </P>
                                             <P class="p6 ft1">  </P>
 
                                             <div class="" style="border: 2px solid black; width:100%">
@@ -89,9 +91,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                     <P class="p5 ft6"> Change Effective Date : <input type="date" id="effectivedate" /> </P>
                                                     <P class="p5 ft6"> Property Transfer:</P>
                                                     <P class="p5 ft6"> <strong>From : </strong></P>
-                                                    <P class="p6 ft1"> property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:30%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:30%; " type="text" id="frommanager" class="" /></P>
+                                                    <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
                                                     <P class="p5 ft6"><strong> To : </strong> </P>
-                                                    <P class="p6 ft1"> property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input style=" display:inline;width:30%; " disabled type="text" id="topropname" class="" /> Manager: <input style=" display:inline;width:30%; " disabled type="text" id="tomanager" class="" /></P>
+                                                    <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input style=" display:inline;width:35%; " disabled type="text" id="topropname" class="" /> Manager: <input style=" display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
 
@@ -1029,8 +1031,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
             });
 
-            $("#toannualsalary,#tosalhourly,#fromannualsalary,#fromsalhourly").change(function () {
-
+            function UpdateRate()
+            {
                 if ($("#toannualsalary").is(':checked')) {
 
                     $("#totext").html(" / annually");
@@ -1051,6 +1053,11 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     $("#fromtext").html(" / annually");
                 }
 
+            }
+
+            $("#toannualsalary,#tosalhourly,#fromannualsalary,#fromsalhourly").change(function () {
+
+                UpdateRate();
 
             });
 
@@ -1143,6 +1150,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     $("#fromannualsalary").prop("checked", true);
                     $("#fromsalhourly").prop("checked", false);
                 }
+
+                UpdateRate();
             });
 
             $("#fromnonexempt").change(function () {
@@ -1151,21 +1160,31 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     $("#fromannualsalary").prop("checked", false);
                     $("#fromsalhourly").prop("checked", true);
                 }
+
+                UpdateRate();
             });
-            $("#toexempt").change(function () {
-                if ($("#toexempt").is(":checked")) {
+
+            $("#toexempt").change(function ()
+            {
+                if ($("#toexempt").is(":checked"))
+                {
                     $("#toannualsalary").prop("checked", true);
                     $("#tosalhourly").prop("checked", false);
                 }
 
+                UpdateRate();
+
             });
 
-            $("#tononexempt").change(function () {
-                if ($("#tononexempt").is(":checked")) {
+            $("#tononexempt").change(function ()
+            {
+                if ($("#tononexempt").is(":checked"))
+                {
                     $("#toannualsalary").prop("checked", false);
                     $("#tosalhourly").prop("checked", true);
                 }
 
+                UpdateRate();
             });
 
             $("#location").focusout(function () {
@@ -1221,20 +1240,30 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
             });
             var iscorporate = false;
+
             $("#chkcorporate,#chkproperty").change(function (e) {
 
                 e.preventDefault();
 
-                if ($("#chkcorporate").is(":checked")) {
+                if ($("#chkcorporate").is(":checked"))
+                {
                     iscorporate = true;
                     $("#divproperty").hide();
                     $("#manager").val($("#CreatedByName").val());
-                }
-                if ($("#chkproperty").is(":checked")) {
-                    iscorporate = false;
-                    $("#divproperty").show();
+
+                    $("#chkpropertychange,#chklaborallocation").prop("disabled", true);
+
                 }
 
+                if ($("#chkproperty").is(":checked"))
+                {
+                    iscorporate = false;
+                    $("#divproperty").show();
+                    $("#chkpropertychange,#chklaborallocation").prop("disabled", false);
+
+                }
+
+                console.log('corpoerate change ' + iscorporate);
                
             });
 
@@ -1257,12 +1286,12 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         control = $("#empname");
                 }
 
-                if ($("#location").val() == "")
+                if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false )
                 {
-                    errormsgsummary += "<li> Please Choose Property </li>";
-                    $("#location").addClass('has-error');
+                    errormsgsummary += "<li> Please  Select Corporate or Property Option </li>";
+                    $("#chkcorporate").addClass('has-error');
                     if (control == "")
-                        control = $("#location");
+                        control = $("#chkcorporate");
                 }
 
                 if ($("#empemail").val() == "") {
@@ -1630,12 +1659,12 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                        
                 }
 
-                if ($("#notes1").val().trim()== "") {
-                    errormsgsummary += "<li> Please Enter Notes </li>";
-                    $("#notes1").addClass('has-error');
-                    if (control == "")
-                        control = $("#notes1");
-                }
+                //if ($("#notes1").val().trim()== "") {
+                //    errormsgsummary += "<li> Please Enter Notes </li>";
+                //    $("#notes1").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#notes1");
+                //}
                 
                 if ($("#msignature").val() == "")
                 {
@@ -1664,6 +1693,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     insertForm.append('empemail', $("#empemail").val());
                     insertForm.append('effectivedate', $("#effectivedate").val());
                     //   insertForm.append('typeofchange', $("#typeofchange").val());
+
+                    console.log('corpoerate change insert ' + iscorporate);
                     insertForm.append('iscorporate', iscorporate);
                  
                     if ($("#chkpropertychange").is(":checked"))

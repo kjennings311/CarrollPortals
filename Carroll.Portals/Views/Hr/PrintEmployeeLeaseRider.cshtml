@@ -57,12 +57,12 @@
         <div class="col-md-12" style="width: 95%;
     border: 1px solid black;
     padding: 20px;
-    margin-top: 10px;margin-left:-2px;text-align:center;">
+    margin-top: 10px;margin-left:0px;text-align:center;">
 
-            <img src="~/img/carroll-print.png" style="margin-bottom:10px;" />
+            <img src="~/img/carroll-print.png" style="margin-bottom:0px;" />
 
             <h1 style="text-align: center;
-    margin-top: 5px;">
+    margin-top: 0px;">
                 <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
             </h1>
             <form id="submitform" onsubmit="return false;">
@@ -77,7 +77,7 @@
                 <ol>
                     <li style="text-align: justify;"><span style="font-size: 9pt; line-height: 150%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input type="text" id="leasedate" class="" value="@Model.ApartmentMarketRentalValue" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input type="text" id="leasedate" class="" value="@Model.EmployeeMonthlyRent" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
-                    <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">If at any time during residency at <input type="text" id="leasedate" class="" value="@Model.RentalPaymentResidencyAt" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
+                    <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">If at any time during residency at <input type="text" id="leasedate" class="" style="width:45%;" value="@Model.Community" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">Upon termination of my employment with Carroll Organization whether voluntary or involuntary, my lease will be terminated regardless of the lease term stated on the lease. I will not be considered a tenant of the apartment community nor will I have rights and privileges of a tenant without the written consent of the Carroll Organization.&nbsp; I further agree that upon such termination from employment, I will vacate the apartment occupied by me within <strong><u>seven days</u></strong> from the date of my termination of employment.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">If the Carroll Organization should agree to allow me to continue to lease the apartment as a resident, a new lease will be signed that shall be at the current market rate and subject to all normal lease provisions.</span></li>
@@ -88,7 +88,7 @@
 
                 <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" class="italic" style="width:25%;" disabled value="@Model.SignatureOfPropertyManager" id="signatureproperymanager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.PMDate.Value.ToShortDateString()" disabled id="pmdate" /> 
                 <span style="margin-top:10px;font-size: 10.0pt;
-line-height: 115%;" id="pmdatespan"> Date : </span> </p>
+line-height: 115%;margin-left:7px;" id="pmdatespan"> Date : </span> </p>
 
                 <p style="text-align: justify;">
                     <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : </span>  <span style="font-size: 10.0pt; line-height: 115%;">

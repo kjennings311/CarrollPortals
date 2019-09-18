@@ -156,8 +156,8 @@
                                             </span>
                                         </p>
                                         <p class="c1 c8" style="margin-left: 25%;
-    margin-top: 15px;
-    margin-bottom: 15px;">
+    margin-top: 0px;
+    margin-bottom: 0px;">
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
@@ -568,6 +568,7 @@ function AssignManager()
                 if ($("#chkcorporate").is(":checked"))
                 {                  
                     $("#manager").val($("#CreatedByName").val());
+                    $("#manager").attr("disabled", false);
                 }
 
                 if ($("#chkproperty").is(":checked"))
@@ -598,6 +599,8 @@ function AssignManager()
                                 $("#manager").val(data);
                             }
                         });
+
+                        $("#manager").attr("disabled", true);
                     }
                 }
             }
@@ -1092,6 +1095,13 @@ function AssignManager()
                         control = $("#empname");
                 }
 
+                if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false) {
+                    errormsgsummary += "<li> Please  Select Corporate or Property Option </li>";
+                    $("#chkcorporate").addClass('has-error');
+                    if (control == "")
+                        control = $("#chkcorporate");
+                }
+
                 if ($("#startdate").val() == "") {
                     errormsgsummary += "<li> Please Enter Date </li>";
                     $("#startdate").addClass('has-error');
@@ -1201,54 +1211,54 @@ function AssignManager()
 
                     }
 
-                    var p1 = 0, p2 = 0, p3 = 0;
+                    //var p1 = 0, p2 = 0, p3 = 0;
 
-                    if ($("#la_Prop1per").val() != "")
-                        p1 = parseFloat($("#la_Prop1per").val());
-                    if ($("#la_Prop2per").val() != "")
-                        p2 = parseFloat($("#la_Prop2per").val());
-                    if ($("#la_Prop3per").val() != "")
-                        p3 = parseFloat($("#la_Prop3per").val());
-                    var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+                    //if ($("#la_Prop1per").val() != "")
+                    //    p1 = parseFloat($("#la_Prop1per").val());
+                    //if ($("#la_Prop2per").val() != "")
+                    //    p2 = parseFloat($("#la_Prop2per").val());
+                    //if ($("#la_Prop3per").val() != "")
+                    //    p3 = parseFloat($("#la_Prop3per").val());
+                    //var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
 
-                    console.log(sum);
-
-
-                    if (sum != 100) {
-
-                        if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
-
-                            errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                            $("#la_Prop1").addClass('has-error');
-
-                            if (control == "")
-                                control = $("#la_Prop1");
-                        }
+                    //console.log(sum);
 
 
-                        if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+                    //if (sum != 100) {
 
-                            errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                            $("#la_Prop2").addClass('has-error');
+                    //    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
 
-                            if (control == "")
-                                control = $("#la_Prop2");
-                        }
+                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                    //        $("#la_Prop1").addClass('has-error');
+
+                    //        if (control == "")
+                    //            control = $("#la_Prop1");
+                    //    }
 
 
-                        if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
+                    //    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
 
-                            errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                            $("#la_Prop3").addClass('has-error');
+                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                    //        $("#la_Prop2").addClass('has-error');
 
-                            if (control == "")
-                                control = $("#la_Prop3");
-                        }
+                    //        if (control == "")
+                    //            control = $("#la_Prop2");
+                    //    }
 
-                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                        control = $("#la_Prop3");
 
-                    }
+                    //    if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
+
+                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                    //        $("#la_Prop3").addClass('has-error');
+
+                    //        if (control == "")
+                    //            control = $("#la_Prop3");
+                    //    }
+
+                    //    errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                    //    control = $("#la_Prop3");
+
+                    //}
                 }
 
                 if (errormsgsummary != "") {

@@ -73,67 +73,88 @@ namespace Carroll.Data.Entities.Repository
                     else
                         role += "," + res;
 
-                    if(role== "VP")
+                    if (role == "VP")
                     {
-                        var propid = _entities.Properties.Where(x => x.VicePresident == userid).Select(x => x.PropertyId).ToList();
+                        var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                        if (propid != null)
+                        if (managementid != null)
                         {
-                            foreach (var item1 in propid)
-                            {
-                                if (prop == "")
-                                    prop = item1.ToString();
-                                else
-                                    prop += "se" + item1.ToString();
-                            }
+                            var propid = _entities.Properties.Where(x => x.VicePresident == managementid).Select(x => x.PropertyId).ToList();
 
+                            if (propid != null)
+                            {
+                                foreach (var item1 in propid)
+                                {
+                                    if (prop == "")
+                                        prop = item1.ToString();
+                                    else
+                                        prop += "se" + item1.ToString();
+                                }
+
+                            }
                         }
                     }
                     else if (role == "RVP")
                     {
-                        var propid = _entities.Properties.Where(x => x.RegionalVicePresident == userid).Select(x => x.PropertyId).ToList();
+                        var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                        if (propid != null)
+                        if (managementid != null)
                         {
-                            foreach (var item1 in propid)
-                            {
-                                if (prop == "")
-                                    prop = item1.ToString();
-                                else
-                                    prop += "se" + item1.ToString();
-                            }
+                            var propid = _entities.Properties.Where(x => x.RegionalVicePresident == managementid).Select(x => x.PropertyId).ToList();
 
+                            if (propid != null)
+                            {
+                                foreach (var item1 in propid)
+                                {
+                                    if (prop == "")
+                                        prop = item1.ToString();
+                                    else
+                                        prop += "se" + item1.ToString();
+                                }
+
+                            }
                         }
+                    
                     }
                     else if (role == "Regional")
                     {
-                        var propid = _entities.Properties.Where(x => x.RegionalManager == userid).Select(x => x.PropertyId).ToList();
+                        var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                        if (propid != null)
+                        if (managementid != null)
                         {
-                            foreach (var item1 in propid)
+                            var propid = _entities.Properties.Where(x => x.RegionalManager == managementid).Select(x => x.PropertyId).ToList();
+
+                            if (propid != null)
                             {
-                                if (prop == "")
-                                    prop = item1.ToString();
-                                else
-                                    prop += "se" + item1.ToString();
+                                foreach (var item1 in propid)
+                                {
+                                    if (prop == "")
+                                        prop = item1.ToString();
+                                    else
+                                        prop += "se" + item1.ToString();
+                                }
                             }
                         }
                     }
                     else if (role == "Asset Manager")
                     {
-                        var propid = _entities.Properties.Where(x => x.AssetManager1 == userid).Select(x => x.PropertyId).ToList();
-                        
-                        if (propid != null)
-                        {
-                            foreach (var item1 in propid)
-                            {
-                                if (prop == "")
-                                    prop = item1.ToString();
-                                else
-                                    prop += "se" + item1.ToString();
-                            }
+                        var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
+                        if (managementid != null)
+                        {
+                            var propid = _entities.Properties.Where(x => x.AssetManager1 == managementid).Select(x => x.PropertyId).ToList();
+
+                            if (propid != null)
+                            {
+                                foreach (var item1 in propid)
+                                {
+                                    if (prop == "")
+                                        prop = item1.ToString();
+                                    else
+                                        prop += "se" + item1.ToString();
+                                }
+
+                            }
                         }
                     }
                     else

@@ -451,7 +451,7 @@
             </p>
            
             <p class="p1 ft1">
-                @if (Model.IsCoporate.ToString() == "True")
+                @if (Model.IsCoporate.ToString() == "true")
                 {
 
                 <span class="c0">
@@ -462,8 +462,7 @@
                 else
                 {
                 <span class="c0">
-                    Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input style="" type="radio" id="chkproperty" name="loc" /> Property  <input type="text" style="width:33%" id="location" value="@Model.PropertyName" /> Number <input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:23%" />
+                    Location: <input type="radio"  id="chkcorporate" name="loc" /> Corporate &nbsp;  <input style="" type="radio" checked id="chkproperty" name="loc" /> Property  <input type="text" style="width:48%" id="location" value="@Model.PropertyName" /> Number <input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:10%" />
                 </span>
                 }
 
@@ -903,7 +902,7 @@ margin: 10px;">@Model.Policty_Voilated</P>
 
 padding: 10px;
 
-margin: 10px;">@Model.AdditionalRemarks</P>
+margin: 10px;min-height:50px;">@Model.AdditionalRemarks</P>
 
         <P class="p18 ft1">
             Equipment/Keys Returned? <select id="keysreturned">
@@ -976,7 +975,7 @@ margin: 10px;">@Model.AdditionalRemarks</P>
                 </select>
             </SPAN>(If yes, please indicate vacation balance:<input type="text" value="@Model.VacationBalance" id="vacationbalance" style="width:10%" />)
         </P>
-        <P class="p17 ft1">Supervisor’s Signature: <input type="text" style="width:42%" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
+        <P class="p17 ft1">Supervisor’s Signature: <input type="text" style="width:51%" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
 
 
         <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>

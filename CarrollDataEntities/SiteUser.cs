@@ -32,6 +32,8 @@ namespace Carroll.Data.Entities
         public string UserPhoto { get; set; }
         public string CreatedByName { get; set; }
         public Nullable<System.Guid> CreatedBy { get; set; }
+        public Nullable<bool> ismanagement { get; set; }
+        public Nullable<System.Guid> managementcontact { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInRole> UserInRoles { get; set; }

@@ -14,8 +14,6 @@
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
-
-
     <link href="/Content/a4css.css" rel="stylesheet" />
 
 </head>
@@ -27,9 +25,10 @@
             <P class="p0 ft0" style="    margin-top: 10PX;
     margin-bottom: 10px;margin-top: 10PX;
 margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
-            <P class="p1 ft1" style="margin-top:-10px">Employee Name: <input style=" display:inline; " type="text" id="empname" class="" value="@Model.EmployeeName" /> </P>
+            <P class="p1 ft1" style="margin-top:-10px">Employee Name: <input style=" display:inline;width:29%; "  type="text" id="empname" class="" value="@Model.EmployeeName" /> </P>
             <p class="p1 ft1" style="margin-top:10px;">
-                @if (Model.IsCorporate.ToString() == "True")
+
+                @if (Model.IsCorporate.ToString() == "true")
                 {
 
                     <span class="c0">
@@ -47,7 +46,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
 
 
             </p>
-            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input value="@Model.EmployeeEmail" style=" display:inline; width:40%;" type="text" step="" id="empemail" class="" /> </P>
+            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input value="@Model.EmployeeEmail" style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
             <P class="p3 ft3" style="padding-top:0px"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
             <P class="p6 ft1" style="margin:15px !important;padding:0px !important; margin-top:0px !important">
 
@@ -93,9 +92,9 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                     <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
                     <P class="p5 ft6"> Property Transfer:</P>
                     <P class="p5 ft6"> <strong>From : </strong></P>
-                    <P class="p6 ft1"> property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:30% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:30%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
+                    <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:35% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:25%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
                     <P class="p5 ft6"> <strong>To : </strong></P>
-                    <P class="p6 ft1"> property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" />  Name: <input style=" display:inline; width:30%" type="text" value="@Model.ToPropName" id="topropname" class="" />Manager: <input style=" display:inline;width:30% " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
+                    <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" />  Name: <input style=" display:inline; width:35%" type="text" value="@Model.ToPropName" id="topropname" class="" />Manager: <input style=" display:inline;width:25% " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
                     <hr style="border-top: 2px solid black;" />
                 </div>
 
@@ -230,16 +229,28 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property1_Per" id="prop1per" /></P></TD>
 
                             </TR>
-                            <TR>
-                                <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
-                                <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+                            @if (!string.IsNullOrEmpty(Model.La_Property2))
 
-                            </TR>
+                            {
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                </TR>
+                            }
                             <TR>
                                 <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property3" id="prop2" /></P></TD>
                                 <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property3_Per" id="prop2per" /></P></TD>
-
                             </TR>
+                            @if (string.IsNullOrEmpty(Model.La_Property2))
+
+                            {
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                </TR>
+                            }
 
                         </TABLE>
                         <hr style="border-top: 2px solid black;" />
@@ -339,51 +350,76 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 <TD class="tr1 td11">
                                     <P class="p8 ft6">
                                         Enrolled in Benefits? <SPAN class="ft9">
-                                            @{ if (Model.EnrolledBenefitsYes == true)
+                                            @{ 
+                                                if (Model.EnrolledBenefitsYes != null)
                                                 {
-                                                    <input type="checkbox" checked id="chkbenefityes" />
 
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkbenefityes" />
 
-                                                }
-                                            }
-                                        </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
-                                            @{ if (Model.EnrolledBenefitNo == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkbenefitno" />
+                                                    if (Model.EnrolledBenefitsYes == true)
+                                                    {
+                                                                  <span>  <input type="checkbox" checked id="chkbenefityes" /> </span>
 
+                                                    }
+                                                    else
+                                                    {
+                                                            <span>
+                                                                <input type="checkbox" id="chkbenefityes" />
+                                                            </span>
+
+                                                        }
+                                                    }
                                                 }
-                                                else
+
+
+                                                                  </span><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
+                                            @{  
+
+                                                if (Model.EnrolledBenefitNo != null)
                                                 {
+                                                    if (Model.EnrolledBenefitNo == true)
+                                                    {
+                                                      <input type="checkbox" checked id="chkbenefitno" />
+
+                                                    }
+                                                    else
+                                                    {
 
                                                     <input type="checkbox" id="chkbenefitno" />
+                                                        }
+                                                    }
                                                 }
-                                            }
                                         </SPAN><SPAN class="ft1">No</SPAN>
                                     </P>
                                 </TD>
                             </TR>
                         </TABLE>
-                        <P class="p20 ft1">Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" /> @if (Model.Leave_Purpose == "Other")
-                        {<span style="display:none;" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother"  value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span> } </P>
-                        <P class="p20 ft1"> Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToShortDateString()" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@Model.Leave_End.Value.ToShortDateString()" style="width:23%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" /> </P>
-                        <hr style="border-top: 2px solid black;" />
-                    </div>
+                        <P class="p20 ft1">Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" /> 
+                        @if (Model.Leave_Purpose == "Other")
+                        { <span  id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother"  value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span> } </P>
+                        <P class="p20 ft1">
+                            Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToShortDateString()" id="leavebegin" /> Expected End:
+                            @if (Model.Leave_End != null)
+                            {
+                                <input type="text" style="width:20%;" value="@Model.Leave_End.Value.ToShortDateString()" id="leavebegin" />
+                            }
+                            else
+                            {
+                                <input type="text" style="width:20%;"  id="leavebegin" />
+                            }
+                            <hr style="border-top: 2px solid black;" />
+</div>
                 }
 
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
                     <P class="p6 ft1">
-                        <textarea type="text" style="width:95%" id="notes1"> 
-@if(!string.IsNullOrEmpty(Model.Notes1))
+                        @*<textarea type="text" style="width:95%" id="notes1"> 
+@if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
 {
- @Model.Notes1.ToString()
+ @Model.Notes1
 }
            
-                     </textarea>
+                     </textarea>*@
                     </P>
 
                 </div>

@@ -82,22 +82,24 @@
                 <h1 style="padding-top:5px;color:white;text-transform:uppercase;margin-top:-10px;"> <b>  Equity Partners </b></h1>
                 <div class="ibox-tools" style="margin-top:-40px;color:white; font-size:20px;min-height:50px;">
 
-                    @if (@Model.RoleType.ToLower() == "administrator")
+                    @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "office staff")
+                    {
+                        if (@Model.RoleType.ToLower() != "office staff")
                     {
 
-                        <a class="export" style="color:white;" href="/Hr/ExportEquityPartners"> <i class="fa fa-download"></i> Export As Excel </a>
-                        <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
-
-                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
-
-                        <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
-                            <i class="fa fa-trash"></i> Delete
-                        </a>
-
-                        <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
-                            <i class="fa fa-plus-circle"></i> New
-                        </a>
+                            <a class="export" style="color:white;" href="/Hr/ExportEquityPartners"> <i class="fa fa-download"></i> Export As Excel </a>
+                            <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
                     }
+                            <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
+
+                            <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>
+
+                            <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
+                                <i class="fa fa-plus-circle"></i> New
+                            </a>
+                        }
                 </div>
             </div>
 

@@ -227,16 +227,28 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property1_Per" id="prop1per" /></P></TD>
 
                             </TR>
-                            <TR>
-                                <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
-                                <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+                            @if (!string.IsNullOrEmpty(Model.La_Property2))
 
-                            </TR>
+                            {
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                </TR>
+                            }
                             <TR>
                                 <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property3" id="prop2" /></P></TD>
                                 <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property3_Per" id="prop2per" /></P></TD>
-
                             </TR>
+                            @if (string.IsNullOrEmpty(Model.La_Property2))
+
+                            {
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                </TR>
+                            }
 
                         </TABLE>
                         <hr style="border-top: 2px solid black;" />

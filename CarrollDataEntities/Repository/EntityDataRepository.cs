@@ -813,7 +813,7 @@ namespace Carroll.Data.Entities.Repository
                            where tbluserrole.UserId == userid
                            select tbl).FirstOrDefault();
 
-                if (res.RoleName.ToLower() == "administrator")
+                if (res.RoleName.ToLower() == "administrator" || res.RoleName.ToLower() == "management")
                 {
 
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
@@ -847,71 +847,98 @@ namespace Carroll.Data.Entities.Repository
                 }
                 else if (res.RoleName.ToLower() == "vp")
                 {
+                    var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                      where tblpropertyusers.VicePresident == userid
-                                      select tbl).Count();
-                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
-                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                        where tblpropertyusers.VicePresident == userid
-                                        select tbl).Count();
-                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
-                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                           where tblpropertyusers.VicePresident == userid
-                                           select tbl).Count();
-                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    if (managementid != null)
+                    {
+
+                        var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                          join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                          where tblpropertyusers.VicePresident == managementid
+                                          select tbl).Count();
+                        var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                            where tblpropertyusers.VicePresident == managementid
+                                            select tbl).Count();
+                        var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                               join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                               where tblpropertyusers.VicePresident == managementid
+                                               select tbl).Count();
+                        return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    }
+                    else
+                        return new { PropertyCount = 0, DamageCount = 0, LiabilityCount = 0 };
                 }
                 else if (res.RoleName.ToLower() == "rvp")
                 {
+                    var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                      where tblpropertyusers.RegionalVicePresident == userid
-                                      select tbl).Count();
-                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
-                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                        where tblpropertyusers.RegionalVicePresident == userid
-                                        select tbl).Count();
-                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
-                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                           where tblpropertyusers.RegionalVicePresident == userid
-                                           select tbl).Count();
-                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    if (managementid != null)
+                    {
+
+                        var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                          join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                          where tblpropertyusers.RegionalVicePresident == managementid
+                                          select tbl).Count();
+                        var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                            where tblpropertyusers.RegionalVicePresident == managementid
+                                            select tbl).Count();
+                        var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                               join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                               where tblpropertyusers.RegionalVicePresident == managementid
+                                               select tbl).Count();
+                        return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    }
+                    else
+                        return new { PropertyCount = 0, DamageCount = 0, LiabilityCount = 0 };
                 }
                 else if (res.RoleName.ToLower() == "regional")
                 {
+                    var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                      where tblpropertyusers.RegionalManager == userid
-                                      select tbl).Count();
-                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
-                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                        where tblpropertyusers.RegionalManager == userid
-                                        select tbl).Count();
-                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
-                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                           where tblpropertyusers.RegionalManager == userid
-                                           select tbl).Count();
-                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    if (managementid != null)
+                    {
+                        var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                          join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                          where tblpropertyusers.RegionalManager == managementid
+                                          select tbl).Count();
+                        var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                            where tblpropertyusers.RegionalManager == managementid
+                                            select tbl).Count();
+                        var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                               join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                               where tblpropertyusers.RegionalManager == managementid
+                                               select tbl).Count();
+                        return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    }
+                    else
+                        return new { PropertyCount = 0, DamageCount = 0, LiabilityCount = 0 };
                 }
                 else if (res.RoleName.ToLower() == "asset manager")
                 {
+                    var managementid = _entities.SiteUsers.Where(x => x.UserId == userid).Select(x => x.managementcontact).FirstOrDefault();
 
-                    var _propcount = (from tbl in _entities.FormPropertyDamageClaims
-                                      join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                      where tblpropertyusers.AssetManager1 == userid
-                                      select tbl).Count();
-                    var _damagecount = (from tbl in _entities.FormMoldDamageClaims
-                                        join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                        where tblpropertyusers.AssetManager1 == userid
-                                        select tbl).Count();
-                    var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
-                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                           where tblpropertyusers.AssetManager1 == userid
-                                           select tbl).Count();
-                    return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    if (managementid != null)
+                    {
+
+                        var _propcount = (from tbl in _entities.FormPropertyDamageClaims
+                                          join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                          where tblpropertyusers.AssetManager1 == managementid
+                                          select tbl).Count();
+                        var _damagecount = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                            where tblpropertyusers.AssetManager1 == managementid
+                                            select tbl).Count();
+                        var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
+                                               join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
+                                               where tblpropertyusers.AssetManager1 == managementid
+                                               select tbl).Count();
+                        return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
+                    }
+                    else
+                        return new { PropertyCount = 0, DamageCount = 0, LiabilityCount = 0 };
                 }
                 else
                 {
@@ -1862,10 +1889,25 @@ namespace Carroll.Data.Entities.Repository
                 try
                 {
                     var res = (from tbl in _entities.PayrollStatusChangeNotices
-                               join tblproperty in _entities.Properties on tbl.Property equals tblproperty.PropertyId
                                where tbl.PayrollStatusChangeNoticeId == riderid
-                               select new { tbl,tblproperty.PropertyName } ).FirstOrDefault();
-                    res.tbl.Notes2 = res.PropertyName;
+                               select new { tbl} ).FirstOrDefault();
+                    if(res!= null)
+                    {
+                        if(res.tbl.IsCorporate == false)
+                        {
+                            if(res.tbl.Property.ToString() != "")
+                            {
+                                var propname = (from tbl in _entities.Properties
+                                                where tbl.PropertyId == res.tbl.Property
+                                                select tbl.PropertyName).FirstOrDefault();
+                                res.tbl.Notes2 = propname;
+                            }
+                           
+                        }
+                    }
+                    // res.tbl.Notes2 = res.PropertyName;
+                    if (res.tbl.Notes1 == null)
+                        res.tbl.Notes1 = "";
                     return res.tbl;
                 }
                 catch (Exception ex)

@@ -931,7 +931,16 @@ namespace Carroll.Data.Services.Controllers
          
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.EmployeeEmail = HttpContext.Current.Request.Params["empemail"].ToString();
-            fa.Property = new Guid(HttpContext.Current.Request.Params["property"].ToString());
+            fa.IsCorporate = Convert.ToBoolean(HttpContext.Current.Request.Params["iscorporate"].ToString());
+
+            if(fa.IsCorporate == false)
+            {
+                if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["property"].ToString()))
+                    fa.Property = new Guid(HttpContext.Current.Request.Params["property"].ToString());
+                
+            }
+
+
             string TypeofChange = "";
 
             fa.ShowPayChange = Convert.ToBoolean(HttpContext.Current.Request.Params["showpay"].ToString());
@@ -1040,8 +1049,9 @@ namespace Carroll.Data.Services.Controllers
             //fa.Chk_PhoneAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkphoneamount"].ToString());
             //fa.PhoneAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtphoneamount"].ToString());
 
-          
-            fa.Notes1 = HttpContext.Current.Request.Params["notes1"].ToString();
+          if(string.IsNullOrEmpty(HttpContext.Current.Request.Params["notes1"].ToString()))
+          fa.Notes1 = HttpContext.Current.Request.Params["notes1"].ToString();
+
             // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
             //fa.ESignature = HttpContext.Current.Request.Params["esignature"].ToString();
             //fa.EDate = Convert.ToDateTime(HttpContext.Current.Request.Params["edate"]);
@@ -1247,6 +1257,9 @@ namespace Carroll.Data.Services.Controllers
             fa.EffectiveDateOfChange = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["datechange"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.EligibleForReHire = HttpContext.Current.Request.Params["rehire"].ToString();
+            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["location"].ToString()))
+            fa.location = HttpContext.Current.Request.Params["location"].ToString();
+            fa.IsCoporate =Convert.ToBoolean(HttpContext.Current.Request.Params["iscorporate"].ToString());
             fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
             fa.PropertyNumber = HttpContext.Current.Request.Params["propertynumber"].ToString();
             fa.JobTitle = HttpContext.Current.Request.Params["jobtitile"].ToString();
