@@ -275,11 +275,11 @@
                 <span class="c7"> NEW HIRE NOTICE </span>
             </p>
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:46%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:50%" value="@Model.EmployeeName" id="empname" />        Start Date:<input style="width:20%;" value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
 
             <p class="c1">
-                <span class="c0">Personal Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:58%;" /> (do not leave blank) </span>
+                <span class="c0">Personal Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:56%;" /> (do not leave blank) </span>
             </p>
 
             <p class="c1">
@@ -291,7 +291,7 @@
                 Location: @if (Model.iscorporate.ToString() == "True")
                 {
                     <span class="c0">
-                        <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate & nbsp; &nbsp; &nbsp; &nbsp;
+                        <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate &nbsp; &nbsp; &nbsp; 
 
                         <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
                     </span>
@@ -300,7 +300,7 @@
                 else
                 {
                     <span class="c0">
-                        <span>  <input type="radio" id="chkcorporate" Checked name="loc" /> Property </span>
+                        <span>  <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate &nbsp; &nbsp; &nbsp; <input type="radio" id="chkcorporate" Checked name="loc" /> Property </span>
                         <input type="text" id="location" style="width:35%;" value="@Model.Location" />
                     </span>
 
@@ -408,45 +408,51 @@
                 <span class="c0">
                     Additional Instructions :
                 </span>
-                @Model.AdditionalText
+                
+            <p style="border: 1px solid;
+
+padding: 10px;
+
+margin: 10px; min-height:50px;">@Model.AdditionalText</p>  
+        
             </p>
 
-            @{
-                if (ViewBag.Action == "Employee Email")
-                {
-                    <p class="c1" style="margin-top:50px;">
-                        <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:48.5%;" />    Date <input type="date" name="name" id="edate" value="" /></span>
-                    </p>
+        @{
+            if (ViewBag.Action == "Employee Email")
+            {
+                <p class="c1" style="margin-top:50px;">
+                    <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:49%;" />    Date <input type="date" name="name" style="width:21%;" id="edate" value="" /></span>
+                </p>
 
-                    <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
-                    </p>
-                }
-                else if (ViewBag.Action == "Regional Email")
-                {
-                    <p class="c1" style="margin-top:50px;">
-                        <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:48.5%;" />    Date <input type="text" disabled name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
-                    </p>
-
-                    <p class="c1">
-                        <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:24%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
-                    </p>
-
-                    <p class="c1">
-                        <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:49%;margin-left: 4%;" class="italic" value="" />Date <input type="date" name="name" id="rpmdate" value="" /></span>
-                    </p>
-                }
-                <input type="hidden" id="Action" value="@ViewBag.Action" />
+                <p class="c1">
+                    <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                </p>
             }
+            else if (ViewBag.Action == "Regional Email")
+            {
+                <p class="c1" style="margin-top:50px;">
+                    <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:49%;" />    Date <input type="text" disabled style="width:21%;" name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
+                </p>
 
-            <br /> <br />
-            <p>Rev. June 2018</p>
-            <div id="status"> </div>
-            <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+                <p class="c1">
+                    <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                </p>
 
-                <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                <p class="c1">
+                    <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:49%;margin-left: 6%;" class="italic" value="" />Date <input type="date" name="name" style="width:21%;" id="rpmdate" value="" /></span>
+                </p>
+            }
+            <input type="hidden" id="Action" value="@ViewBag.Action" />
+        }
 
-            </div>
+        <br /> <br />
+        <p>Rev. June 2018</p>
+        <div id="status"> </div>
+        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+        </div>
         </form>
     </div>\
     <style type="text/css">

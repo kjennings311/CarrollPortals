@@ -161,7 +161,7 @@
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Employee Name:    <input type="text" style="width:47%" id="empname" />        Start Date:<input type="date" id="startdate" value="" />  </span>
+                                            <span class="c0"> Employee Name:    <input type="text" style="width:42%" id="empname" />        Start Date:<input type="date" style="width:20%;" id="startdate" value="" />  </span>
                                         </p>
 
                                         <p class="c1">
@@ -225,15 +225,15 @@
                                             </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="date" name="name" id="edate" value="" /></span>
+                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="date" style="width:21%" name="name" id="edate" value="" /></span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:16%;" disabled name="name" id="mdate" value="" /> </span>
+                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
-                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:42.5%;margin-left:5%;" />Date <input disabled type="date" name="name" id="rpmdate" value="" /></span>
+                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:42.5%;margin-left:5%;" />Date <input disabled type="date" style="width:21%" name="name" id="rpmdate" value="" /></span>
                                         </p>
 
 
@@ -1096,7 +1096,7 @@ function AssignManager()
                 }
 
                 if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false) {
-                    errormsgsummary += "<li> Please  Select Corporate or Property Option </li>";
+                    errormsgsummary += "<li> Please  Select Corporate or Property for location </li>";
                     $("#chkcorporate").addClass('has-error');
                     if (control == "")
                         control = $("#chkcorporate");
@@ -1125,12 +1125,12 @@ function AssignManager()
                 //        control = $("#manager");
                 //}
 
-                if ($("#location").val() == "" && iscorporate == false) {
-                    errormsgsummary += "<li> Please Enter Location </li>";
-                    $("#location").addClass('has-error');
-                    if (control == "")
-                        control = $("#location");
-                }
+                //if ($("#location").val() == "" && iscorporate == false) {
+                //    errormsgsummary += "<li> Please Enter Location </li>";
+                //    $("#location").addClass('has-error');
+                //    if (control == "")
+                //        control = $("#location");
+                //}
 
                 if ($("#position").val() == "") {
                     errormsgsummary += "<li> Please Choose Position </li>";

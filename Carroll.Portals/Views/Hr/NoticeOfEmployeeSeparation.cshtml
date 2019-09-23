@@ -74,7 +74,7 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;margin-left:2%;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="date" id="effectivedate" /> Eligible for Rehire <input type="text"  value="YES" disabled id="rehire" /></p>
+                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="date" id="effectivedate" /> Eligible for Rehire <input type="text" style="width:23%;"  value="YES" disabled id="rehire" /></p>
                                             <p class="p1 ft1">
                                                 <span class="c0">
                                                     Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
@@ -177,7 +177,7 @@
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
 
                                             <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="date" id="sdate" disabled /></P>
+                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="date"  style="width:20%;" id="sdate" disabled /></P>
 
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
@@ -877,20 +877,22 @@
                         control = $("#rehire");
                 }
 
+                if ($("#chkproperty").is(":checked"))
+                {                  
+                    if ($("#location").val() == "") {
+                        errormsgsummary += "<li> Please Choose Property  </li>";
+                        $("#location").addClass('has-error');
+                        if (control == "")
+                            control = $("#location");
+                    }
 
-                if ($("#propertyname").val() == "") {
-                    errormsgsummary += "<li> Please Enter Property Name </li>";
-                    $("#propertyname").addClass('has-error');
-                    if (control == "")
-                        control = $("#propertyname");
-                }
 
-
-                if ($("#propertynumber").val() == "") {
-                    errormsgsummary += "<li> Please Enter Property Number </li>";
-                    $("#propertynumber").addClass('has-error');
-                    if (control == "")
-                        control = $("#propertynumber");
+                    if ($("#propertynumber").val() == "") {
+                        errormsgsummary += "<li> Please Enter Property Number </li>";
+                        $("#propertynumber").addClass('has-error');
+                        if (control == "")
+                            control = $("#propertynumber");
+                    }
                 }
 
                 if ($("#empname").val() == "") {

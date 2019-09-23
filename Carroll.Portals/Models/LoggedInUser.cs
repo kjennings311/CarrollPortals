@@ -43,10 +43,12 @@ namespace Carroll.Portals.Models
 
         public static string AssignedUserProperty()
         {
-            HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-            FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-            string[] roles = authTicket.UserData.Split(new Char[] { '|' });
-            if (roles != null && roles.Length ==2) return roles[1];
+            HttpCookie authCookie = HttpContext.Current.Request.Cookies[DateTime.Now.ToShortDateString() + "tlsporp"];
+          //  FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            string[] roles = authCookie.Value.Split(new Char[] { '|' });
+            if (roles != null ) return roles[0].ToString();
+
+           // if (roles != null && roles.Length == 2) return roles[1];
             return string.Empty;
         }
         public static void AssignRolesToUser()
@@ -75,7 +77,7 @@ namespace Carroll.Portals.Models
                         ident.Ticket.IssueDate,
                         ident.Ticket.Expiration,
                         ident.Ticket.IsPersistent,
-                        String.Join("|", roles),
+                        String.Join("|", roles[0]),
                         ident.Ticket.CookiePath);
 
                         // Create the cookie.    
@@ -83,12 +85,36 @@ namespace Carroll.Portals.Models
                         FormsAuthentication.FormsCookieName,
                         FormsAuthentication.Encrypt(newticket));
                         authCookie.Path = FormsAuthentication.FormsCookiePath + "; HttpOnly; noScriptAccess";
+
                         authCookie.Secure = FormsAuthentication.RequireSSL;
 
                         if (newticket.IsPersistent)
                             authCookie.Expires = newticket.Expiration;
 
                         HttpContext.Current.Response.Cookies.Add(authCookie);
+
+
+                        // Cookie for storing user associated properties list
+
+                   //     FormsAuthenticationTicket propticket = new FormsAuthenticationTicket(
+                   //ident.Ticket.Version,
+                   //ident.Ticket.Name,
+                   //ident.Ticket.IssueDate,
+                   //ident.Ticket.Expiration,
+                   //ident.Ticket.IsPersistent,
+                   //String.Join("|", roles[1]),
+                   //ident.Ticket.CookiePath);
+
+                        HttpCookie propcookie = new HttpCookie(DateTime.Now.ToShortDateString()+"tlsporp",
+                                    roles[1]);
+                        propcookie.Path = FormsAuthentication.FormsCookiePath + "; HttpOnly; noScriptAccess";
+                        propcookie.Secure = FormsAuthentication.RequireSSL;
+
+                        //if (propticket.IsPersistent)
+                        //    propcookie.Expires = propticket.Expiration;
+
+                        HttpContext.Current.Response.Cookies.Add(propcookie);
+
                     }
 
                     // Create principal and attach to user

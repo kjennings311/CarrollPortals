@@ -306,7 +306,7 @@
                 <span class="c7"> NEW HIRE NOTICE </span>
             </p>
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:46%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:50%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" style="width:20%;" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
 
             <p class="c1">
@@ -321,18 +321,18 @@
 
                 Location: @if (Model.iscorporate.ToString() == "True")
                 {
-                    <span class="c0">
-                        <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate &nbsp; &nbsp; &nbsp; &nbsp;
+                <span class="c0">
+                    <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate &nbsp; &nbsp;&nbsp; &nbsp;
 
-                        <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
-                    </span>
+                    <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                </span>
 
                 }
                 else
                 {
                     <span class="c0">
-                        <span>    <input type="radio" id="chkcorporate"  name="loc" /> Corporate &nbsp; &nbsp; &nbsp; &nbsp;  <input type="radio" id="chkcorporate" Checked name="loc" /> Property </span>
-                        <input type="text" id="location" style="width:35%;" value="@Model.Location" />
+                        <span>    <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   <input type="radio" id="chkcorporate" Checked name="loc" /> Property </span>
+                        <input type="text" id="location" style="width:50%;" value="@Model.Location" />
                     </span>
 
                 }
