@@ -1,5 +1,5 @@
 ﻿
- // var $BaseApiUrl = "http://localhost:1002/";
+// var $BaseApiUrl = "http://localhost:1002/";
 
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
@@ -925,11 +925,11 @@ function HandleRowClick(obj)
        
     //    $this.removeClass('selected');
 
-        $('.btnDelete').css("color", "white");
+        $('.btnDelete').css("color", "#1ab394");
         $('.btnDelete').removeAttr("disabled");
         $('.btnDelete').attr("itemId", $this.attr("id"));
         $('.btnDelete').attr("itemType", $this.attr("itemType"));
-        $('.btnEdit').css("color", "white");
+        $('.btnEdit').css("color", "#1ab394");
         $('.btnEdit').removeAttr("disabled");
   
         $('.btnEdit').attr("itemId", $this.attr("id"));
@@ -3393,7 +3393,15 @@ function LoadClaim()
     else if (Type == "g")
         $("#type").val("2");
 
-   
+    var hrv = $("#exportclaim").attr('href');
+    console.log(hrv +"Type is "+Type);
+    hrv = hrv.replace("num", claim);
+    console.log(hrv);
+    hrv = hrv.replace("t", Type);
+    console.log(hrv);
+    $("#exportclaim").attr('href', hrv+Type);
+
+    console.log($("#exportclaim").attr('href'));
               $.ajax({
                 type: "get",
                 dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
@@ -3515,12 +3523,14 @@ function LoadClaim()
 
                                 $("#claimbody").html(claimbody);
                             }
-                            else if (Type == "g") {
+                            else if (Type == "g")
+                            {
                                 $("#heading").html("General Liability Claim - " + ClaimData.claim.tbl.claimNumber);
                                 $("#property").html(ClaimData.claim.propertyName);
                                 claimbody += ' <table class="table">';
 
                                 claimbody += '<tr><td style="width:30%;"> Incident Date:</td><td>' + ReturnUSDate(CheckNull(ClaimData.claim.tbl.incidentDateTime).substring(0, 10)) + '</td></tr>'; 
+                                claimbody += '<tr><td style="width:30%;"> Incident Time:</td><td>' + ClaimData.claim.tbl.incidentTime + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;"> Incident Location:</td><td>' + ClaimData.claim.tbl.incidentLocation + '</td></tr>';
                                 claimbody += '<tr><td style="width:30%;"> Incident Description:</td><td>' + ClaimData.claim.tbl.incidentDescription + '</td></tr>';  
                                
@@ -3592,7 +3602,7 @@ function LoadClaim()
                             $("#attachmentbody").html('');
 
                             $.each(ClaimData.attchments, function (index, value) {
-                                $("#attachmentbody").append('<tr><td style="float:left" ><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
+                                $("#attachmentbody").append('<tr><td style="float:left" ><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </td><td style="width:20%;" >' + value.uploadedByName + ' </td> </tr>');
                             });
                             
                             $("#activitybody").html('');
@@ -3810,25 +3820,43 @@ $(document).ready(function () {
 
     });
 
-    $("#printclaim").click(function (e) {
+    //$("#printclaim").click(function (e) {
 
+    //    e.preventDefault();
+    //    var claim = getParameterByName("Claim");
+    //    var Type = claim[claim.length - 1];
+    //    claim = claim.substr(0, claim.length - 1);
+
+    //    if (claim != "") {
+    //        var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
+
+    //        printWindow.addEventListener('load', function () {
+    //            setTimeout(function () {
+    //                printWindow.print();
+    //                printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+    //            }, 1000);
+    //        }, true);
+    //    }
+    //});
+
+    $("#exportclaim").click(function (e) {
+        console.log('iam epxort ');
         e.preventDefault();
         var claim = getParameterByName("Claim");
         var Type = claim[claim.length - 1];
         claim = claim.substr(0, claim.length - 1);
 
         if (claim != "") {
-            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
+            var printWindow = window.open("/Home/ExportClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
 
             printWindow.addEventListener('load', function () {
                 setTimeout(function () {
-                    printWindow.print();
+                  //  printWindow.print();
                     //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
                 }, 1000);
             }, true);
         }
     });
-
 
 
     $("#btnUpload").click(function () {

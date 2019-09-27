@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+              <img src="~/carroll.portals/img/logo.png" />
             <h1>You have successfully logged out. Please close the browser.</h1>
             <p><a href="/sso.aspx">Login again</a></p>
         </div>

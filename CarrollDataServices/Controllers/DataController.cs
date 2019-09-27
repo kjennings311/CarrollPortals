@@ -155,6 +155,13 @@ namespace Carroll.Data.Services.Controllers
 
             return _service.GetClaimDetailsForPrint(Claim, Type);
         }
+        [ActionName("GetExportClaim")]
+        [HttpGet]
+        public dynamic GetExportClaim(string Claim, char Type)
+        {
+            return _service.GetExportClaim(Claim, Type);
+        }
+
 
         [ActionName("InsertComment")]
         [HttpPost]

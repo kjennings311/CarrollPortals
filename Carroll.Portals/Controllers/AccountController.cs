@@ -36,6 +36,11 @@ namespace Carroll.Portals.Controllers
         // GET: Account
         public ActionResult Login()
         {
+            if (HttpContext.Request.Browser.Browser.ToLower() != "chrome")
+            {
+                return RedirectToAction("gotochrome");
+            }
+
             if (Session["Vm_UserId"] == null)
             {
              
@@ -45,6 +50,13 @@ namespace Carroll.Portals.Controllers
             }
             else
                 return RedirectToAction("Index", "Home");
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult gotochrome()
+        {
+
+            return View();
         }
         [AllowAnonymous]
         [HttpGet]

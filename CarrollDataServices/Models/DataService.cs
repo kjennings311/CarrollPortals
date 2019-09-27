@@ -116,6 +116,11 @@ namespace Carroll.Data.Services.Models
             return _repository.GetPrintClaim(Claim, Type);
         }
 
+        public dynamic GetExportClaim(string Claim, char Type)
+        {
+            return _repository.GetExportClaim(Claim, Type);
+        }
+
         public dynamic InsertComment(FormComment obj)
         {
             return _repository.InsertComment(obj);

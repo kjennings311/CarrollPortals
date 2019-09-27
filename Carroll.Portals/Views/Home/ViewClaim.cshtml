@@ -36,14 +36,14 @@
                         <div class="col-lg-12">
                             <div class="m-b-md">
                                 @*<a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>
-        <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>*@
+            <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>*@
                                 <h2 class="propertyName"></h2>
 
                                 <b> Claim Number : <span id="claimnumber"></span> </b>
                                 <ul class="list-unstyled PropDetails pd-top" style="padding-left:15px;"></ul>
                             </div>
                             <h5>Report Details:</h5>
-                           
+
                             @*<dl class="dl-horizontal">
             <dt>Details:</dt>
             <dd><span class="claimDesc"></span></dd>
@@ -54,7 +54,9 @@
             <dt>Created Date:</dt>
             <dd><span class="createdDate"></span></dd>
         </dl>*@
-                            <button class="btn btn-success pull-right " style="margin-top:-75px;" id="printclaim"> Print Claim </button>
+                            <button class="btn btn-success pull-right " style="margin-top:-115px;margin-right:5px;" id="printclaim"> Print Claim </button>
+
+                            <a class="btn btn-success pull-right " href="/Home/ExportClaim/?claim=num&Type=" style="margin-top:-75px;" id="exportclaim"> Export Claim </a>
                         </div>
                     </div>
                     @*<div class="row">
@@ -134,6 +136,7 @@
                                                         <tr>
                                                             <th style="float:left;">File</th>
                                                             <th>Date</th>
+                                                            <th>Created By</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="attachmentbody"></tbody>

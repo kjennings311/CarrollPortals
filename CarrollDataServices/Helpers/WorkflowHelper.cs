@@ -52,7 +52,7 @@ namespace Carroll.Data.Services.Helpers
 
                     _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Property Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"));
 
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1><strong> THIS IS A TEST CLAIM – NO ACTION REQUIRED AT THIS TIME </strong></h1> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br> <table border='1' cellpadding='5' cellspacing='0' >";
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br> <table border='1' cellpadding='5' cellspacing='0' >";
 
                     _message.Body += "<tr><td><strong> Weather Conditions : </strong> </td> <td>" + (ClaimData.tbl.WeatherConditions == null ? "" : ClaimData.tbl.WeatherConditions) + " </td></tr>";
 
@@ -83,7 +83,7 @@ namespace Carroll.Data.Services.Helpers
                     else
                         _message.Body += "<tr><td><strong> Witness Present : </strong> </td><td> Yes  </td> </tr><tr> <td><strong> Witness Name : </strong> </td><td>" + ClaimData.tbl.WitnessName + "</td></tr> ";
 
-                    _message.Body += "<tr> <td><strong> Witness Phone : </strong> </td><td> " + (ClaimData.tbl.WitnessPhone == null ? "" : ClaimData.tbl.WitnessPhone) + "</td></tr><tr> <td><strong> Witness Phone (Altnernate) : </strong> </td><td> " + (ClaimData.tbl.ReportedPhone == null ? "" : ClaimData.tbl.ReportedPhone) + "</td></tr><tr> <td><strong> Witness Address : </strong> </td><td>" + ClaimData.tbl.WitnessAddress + "</td> </tr>";
+                    _message.Body += "<tr> <td><strong> Witness Phone : </strong> </td><td> " + (ClaimData.tbl.WitnessPhone == null ? "" : ClaimData.tbl.WitnessPhone) + "</td></tr><tr> <td><strong> Witness Phone (Alternate) : </strong> </td><td> " + (ClaimData.tbl.ReportedPhone == null ? "" : ClaimData.tbl.ReportedPhone) + "</td></tr><tr> <td><strong> Witness Address : </strong> </td><td>" + ClaimData.tbl.WitnessAddress + "</td> </tr>";
 
                     _message.Body += "<tr><td><strong> Reported By : </strong> </td><td> " + ClaimData.tbl.IncidentReportedBy + " </td> </tr>";
                     _message.Body += "<tr><td><strong> Date Reported : </strong> </td><td> " + (ClaimData.tbl.DateReported == null ? "" : ClaimData.tbl.DateReported.Value.ToString("MM/dd/yyyy")) + "</td></tr><tr><td><strong> Created By : </strong> </td><td>" + ClaimData.tbl.CreatedByName + "</td></tr>";
@@ -95,7 +95,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                     // Popute Target To Email's
-                 //   var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                   var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
                     var uid =new Guid(UserId);
 
                     var userdetails = (from tbl in _entities.SiteUsers
@@ -108,6 +108,15 @@ namespace Carroll.Data.Services.Helpers
                        
                     }
                     _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    _message.EmailTo.Add("brian.mckay@rhodesra.com");
+                    _message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
+                    _message.EmailTo.Add("David.Perez@carrollorg.com");
+                    _message.EmailTo.Add("james.flanagan@rhodesra.com");
+                    _message.EmailTo.Add("Mike.Davis@rhodesra.com");
+                    _message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
+                    _message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
+
+
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
                     //{
                     //    _message.EmailTo.Add(workflowemails.InsuranceEmail);
@@ -117,15 +126,15 @@ namespace Carroll.Data.Services.Helpers
                     //    _message.EmailTo.Add(workflowemails.EquityPartnerEmail);
                     //}
 
-                    //if (!string.IsNullOrEmpty(workflowemails.RMEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RMEmail);
-                    //}
+                    if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.RMEmail);
+                    }
 
-                    //if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
-                    //}
+                    if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
+                    }
                     //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
                     //{
                     //    _message.EmailTo.Add(workflowemails.VPEmail);
@@ -134,11 +143,11 @@ namespace Carroll.Data.Services.Helpers
                     //{
                     //    _message.EmailTo.Add(workflowemails.RVPEmail);
                     //}
-                  
-                    //if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.AssetManager1Email);
-                    //}
+
+                    if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                    {
+                        _message.EmailTo.Add(workflowemails.AssetManager1Email);
+                    }
                     //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
                     //{
                     //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
@@ -163,9 +172,9 @@ namespace Carroll.Data.Services.Helpers
                                          select tbl.PartnerName).FirstOrDefault();
 
                     _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "General Liability Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"));
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"><h1><strong> THIS IS A TEST CLAIM – NO ACTION REQUIRED AT THIS TIME </strong></h1> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br>  <table border='1' cellpadding='5' cellspacing='0' >";
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br>  <table border='1' cellpadding='5' cellspacing='0' >";
 
-                    _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Incident Date : </strong> </td><td>" + ClaimData.tbl.IncidentDateTime.Value.ToString("MM/dd/yyyy") + "</td> </tr><tr> <td><strong> Incident Location : </strong> </td><td>" + ClaimData.tbl.IncidentLocation + "</td> </tr>";
+                    _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Incident Date : </strong> </td><td>" + ClaimData.tbl.IncidentDateTime.Value.ToString("MM/dd/yyyy") + "</td> </tr><tr><td><strong> Incident Time : </strong> </td><td>" + ClaimData.tbl.IncidentTime + "</td></tr><tr> <td><strong> Incident Location : </strong> </td><td>" + ClaimData.tbl.IncidentLocation + "</td> </tr>";
 
                     _message.Body += "<tr><td><strong> Incident Description : </strong> </td><td>" + ClaimData.tbl.IncidentDescription + "</td></tr><tr><td><strong> Authorities Contacted : </strong> </td> <td>" + (ClaimData.tbl.AuthoritiesContacted == true ? "Yes" : "No") + " </td></tr>";
                     _message.Body += "<tr> <td><strong> Police Report Number : </strong> </td><td>" + ClaimData.tbl.PoliceReportNumber + "</td></tr>";
@@ -193,7 +202,17 @@ namespace Carroll.Data.Services.Helpers
                     // Popute Target To Email's
 
 
-                    //  var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                     var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+
+                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    _message.EmailTo.Add("brian.mckay@rhodesra.com");
+                    _message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
+                    _message.EmailTo.Add("David.Perez@carrollorg.com");
+                    _message.EmailTo.Add("james.flanagan@rhodesra.com");
+                    _message.EmailTo.Add("Mike.Davis@rhodesra.com");
+                    _message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
+                    _message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
+
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
                     //{
@@ -215,35 +234,35 @@ namespace Carroll.Data.Services.Helpers
                     //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
                     //{
                     //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.AssetManager1Email);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
-                    //}
+                //}
+                if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                {
+                    _message.EmailTo.Add(workflowemails.AssetManager1Email);
+                }
+                //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
+                //{
+                //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
+                //}
 
-                    //if (!string.IsNullOrEmpty(workflowemails.RMEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RMEmail);
-                    //}
+                if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.RMEmail);
+                    }
 
-                    //if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.VPEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                    //}
+                    if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
+                    }
+                        //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
+                        //{
+                        //    _message.EmailTo.Add(workflowemails.VPEmail);
+                        //}
+                        //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                        //{
+                        //    _message.EmailTo.Add(workflowemails.RVPEmail);
+                        //}
 
-                    var uid = new Guid(UserId);
+                        var uid = new Guid(UserId);
 
                     var userdetails = (from tbl in _entities.SiteUsers
                                        where tbl.UserId == uid
@@ -275,7 +294,7 @@ namespace Carroll.Data.Services.Helpers
                                          select tbl.PartnerName).FirstOrDefault();
 
                     _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Mold Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"));
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1><strong> THIS IS A TEST CLAIM – NO ACTION REQUIRED AT THIS TIME </strong></h1> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table>  <br> <br> <table border='1' cellpadding='5' cellspacing='0'>";
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table>  <br> <br> <table border='1' cellpadding='5' cellspacing='0'>";
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Discovery Date : </strong> </td><td>" + ClaimData.tbl.DiscoveryDate.Value.ToString("MM/dd/yyyy") + "</td> </tr>";
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Location : </strong> </td><td>" + ClaimData.tbl.Location + "</td> </tr>";
 
@@ -303,7 +322,17 @@ namespace Carroll.Data.Services.Helpers
                     _message.Body += "</div></div>";
                     // Popute Target To Email's
 
-                    //   var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+                      var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
+
+                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    _message.EmailTo.Add("brian.mckay@rhodesra.com");
+                    _message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
+                    _message.EmailTo.Add("David.Perez@carrollorg.com");
+                    _message.EmailTo.Add("james.flanagan@rhodesra.com");
+                    _message.EmailTo.Add("Mike.Davis@rhodesra.com");
+                    _message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
+                    _message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
+
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
                     //{
@@ -325,35 +354,36 @@ namespace Carroll.Data.Services.Helpers
                     //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
                     //{
                     //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.AssetManager1Email);
-                    //}
+             //   }
+                if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                {
+                    _message.EmailTo.Add(workflowemails.AssetManager1Email);
+                    }
                     //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
                     //{
                     //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
                     //}
-                    //if (!string.IsNullOrEmpty(workflowemails.RMEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RMEmail);
-                    //}
 
-                    //if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.VPEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                    //}
-                    //_message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.RMEmail);
+                    }
 
-                    var uid = new Guid(UserId);
+                    if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
+                {
+                    _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
+                }
+                //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
+                //{
+                //    _message.EmailTo.Add(workflowemails.VPEmail);
+                //}
+                //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                //{
+                //    _message.EmailTo.Add(workflowemails.RVPEmail);
+                //}
+                //_message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+
+                var uid = new Guid(UserId);
 
                     var userdetails = (from tbl in _entities.SiteUsers
                                        where tbl.UserId == uid
@@ -1835,11 +1865,11 @@ namespace Carroll.Data.Services.Helpers
                 mail.IsBodyHtml = true;
                 mail.Subject = Message.Subject;
                 mail.Body = Message.Body;
-            //   mail.To.Clear();
+               // mail.To.Clear();
                 // remove this line before going production
-                 mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com");
-              //  mail.To.Add("sukumar.gandhi@forcitude.com");
+               //  mail.To.Add("pavan.nanduri@carrollorg.com");
+               // mail.To.Add("sekhar.babu@forcitude.com");
+               //mail.To.Add("sukumar.gandhi@forcitude.com");
                 mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;

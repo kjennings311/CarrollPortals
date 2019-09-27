@@ -1308,9 +1308,126 @@ namespace Carroll.Data.Entities.Repository
 
                 }
 
+                var AllComments = (from tbl in _entities.FormComments
+                                   where tbl.RefFormID == _recId && tbl.RefFormType == formtype
+                                   orderby
+tbl.CommentDate descending
+                                   select tbl).ToList();
+
+                // Get All Attachment for this RowId and Type
+                var AllAttachments = (from tbl in _entities.FormAttachments
+                                      where tbl.RefFormType == formtype && tbl.RefId == _recId
+                                      orderby
+tbl.UploadedDate descending
+                                      select tbl).ToList();
+
+                var AllActivity = (from tbl in _entities.Activities
+                                   where tbl.RecordId == _recId
+                                   orderby tbl.ActivityDate descending
+                                   select new { tbl.ActivityDescription, ActivityDate = tbl.ActivityDate, tbl.ActivityStatus, tbl.ActivityByName }).ToList();
+
+
+                cd.Comments = AllComments;
+                cd.Attchments = AllAttachments;
+                cd.Activity = AllActivity;
+
                 return cd;
             }
         }
+
+
+
+        public dynamic GetExportClaim(string Claim, char Type)
+        {
+            ExportClaim cd = new ExportClaim();
+
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                _entities.Configuration.ProxyCreationEnabled = false;
+                Guid _recId = new Guid(Claim);
+                Int16 formtype = 1;
+                Guid propid = Guid.NewGuid();
+
+                if (Type == 'g')
+                {
+                    //  var _generalclaim = _entities.FormGeneralLiabilityClaims.Where(x => x.GLLId == _recId).FirstOrDefault();
+
+                    var _generalclaim = (from tbl in _entities.FormGeneralLiabilityClaims
+                                         join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                         where tbl.GLLId == _recId
+                                         select new { tbl }).FirstOrDefault();
+                    if (_generalclaim != null)
+                    {
+                        cd.GLC= _generalclaim.tbl;
+                        propid = _generalclaim.tbl.PropertyId;
+                    }
+
+                    formtype = 2;
+                }
+                else if (Type == 'm')
+                {
+                    var _formdamageclaim = (from tbl in _entities.FormMoldDamageClaims
+                                            join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                            where tbl.MDLId == _recId
+                                            select new { tbl }).FirstOrDefault();
+
+                    //_entities.FormMoldDamageClaims.Where(x => x.MDLId == _recId).FirstOrDefault();
+                    if (_formdamageclaim != null)
+                    { cd.MDC= _formdamageclaim.tbl;
+                        propid = _formdamageclaim.tbl.PropertyId;
+                    }
+
+                    formtype = 3;
+
+                }
+                else if (Type == 'p')
+                {
+                    var _damageclaim = (from tbl in _entities.FormPropertyDamageClaims
+                                        join tblprop in _entities.Properties on tbl.PropertyId equals tblprop.PropertyId
+                                        where tbl.PDLId == _recId
+                                        select new { tbl }).FirstOrDefault();
+
+                    //_entities.FormPropertyDamageClaims.Where(x => x.PDLId == _recId).FirstOrDefault();
+                    if (_damageclaim != null)
+                    {
+                        cd.PDC= _damageclaim.tbl;
+                        propid = _damageclaim.tbl.PropertyId;
+                    }
+
+                }
+
+             
+
+                var propertyres = _entities.proc_getpropertydetails(propid).FirstOrDefault();
+                cd.Prop = propertyres;
+
+                var AllComments = (from tbl in _entities.FormComments
+                                   where tbl.RefFormID == _recId
+                                   orderby
+tbl.CommentDate descending
+                                   select tbl).ToList();
+
+                // Get All Attachment for this RowId and Type
+                var AllAttachments = (from tbl in _entities.FormAttachments
+                                      where  tbl.RefId == _recId
+                                      orderby
+tbl.UploadedDate descending
+                                      select tbl).ToList();
+
+                var AllActivity = (from tbl in _entities.Activities
+                                   where tbl.RecordId == _recId
+                                   orderby tbl.ActivityDate descending
+                                   select tbl).ToList();
+
+
+                cd.PrintComments = AllComments;
+                cd.PrintAttachments =AllAttachments;
+                cd.PrintClaimActivity =AllActivity;
+
+                return cd;
+            }
+        }
+
 
         public dynamic GetAllActivity(Guid _recId)
         {

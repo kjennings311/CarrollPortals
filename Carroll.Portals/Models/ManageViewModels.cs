@@ -141,14 +141,65 @@ namespace Carroll.Portals.Models
         public PrintActivity printActivity { get; set; }
     }
 
+    public  class PrintClaimComments
+    {
+        public System.Guid CommentId { get; set; }
+        public string Comment { get; set; }
+        public short RefFormType { get; set; }
+        public System.Guid RefFormID { get; set; }
+        public System.DateTime CommentDate { get; set; }
+        public string CommentByName { get; set; }
+        public System.Guid CommentBy { get; set; }
+    }
+
+
+
+  public class PrintClaimAttachments
+    {
+        public System.Guid AttachmentId { get; set; }
+        public System.Guid RefId { get; set; }
+        public short RefFormType { get; set; }
+        public string At_Name { get; set; }
+        public string At_FileName { get; set; }
+        public string UploadedByName { get; set; }
+        public System.Guid UploadedBy { get; set; }
+        public System.DateTime UploadedDate { get; set; }
+    }
+
+
+    public class PrintClaimActivity
+    {
+        public System.Guid ActivityId { get; set; }
+        public System.Guid RecordId { get; set; }
+        public string ActivityDescription { get; set; }
+        public Nullable<System.DateTime> ActivityDate { get; set; }
+        public string ActivityStatus { get; set; }
+        public string ActivityByName { get; set; }
+        public Nullable<System.Guid> ActivityBy { get; set; }
+    }
+
+   
     public class PrintViewClaim
     {
         public char Type { get; set; }
         public PrintGeneralLiabilityClaim GLC { get; set; }
         public PrintPropertyDamageClaim PDC { get; set; }
         public PrintMoldDamageClaim MDC { get; set; }
-        public PrintProperty Prop { get; set; }
+        public PrintProperty Prop { get; set; }        
     }
+
+    public class ExportClaim
+    {
+        public char Type { get; set; }
+        public PrintGeneralLiabilityClaim GLC { get; set; }
+        public PrintPropertyDamageClaim PDC { get; set; }
+        public PrintMoldDamageClaim MDC { get; set; }
+        public PrintProperty Prop { get; set; }
+        public List<PrintClaimComments> PrintComments { get; set; }
+        public List<PrintClaimAttachments> PrintAttachments { get; set; }
+        public List<PrintClaimActivity> PrintClaimActivity { get; set; }
+    }
+
 
     public class PrintProperty
     {       
@@ -198,6 +249,8 @@ namespace Carroll.Portals.Models
         public System.Guid PropertyId { get; set; }
         public Nullable<System.DateTime> IncidentDateTime { get; set; }
         public string IncidentLocation { get; set; }
+
+        public string IncidentTime { get; set; }
         public string IncidentDescription { get; set; }
         public Nullable<bool> AuthoritiesContacted { get; set; }
         public string ContactPerson { get; set; }

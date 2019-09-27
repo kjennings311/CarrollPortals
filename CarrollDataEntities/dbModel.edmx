@@ -315,6 +315,7 @@
           <Property Name="ResidentName" Type="nvarchar" MaxLength="200" />
           <Property Name="ResidentContactInformation" Type="nvarchar" MaxLength="300" />
           <Property Name="PoliceReportNumber" Type="nvarchar" MaxLength="150" />
+          <Property Name="IncidentTime" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaims">
           <Key>
@@ -1219,6 +1220,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ResidentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ResidentContactInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="PoliceReportNumber" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IncidentTime" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FormMoldDamageClaim">
           <Key>
@@ -2753,6 +2755,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="FormGeneralLiabilityClaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.FormGeneralLiabilityClaim">
               <MappingFragment StoreEntitySet="FormGeneralLiabilityClaims">
+                <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
                 <ScalarProperty Name="PoliceReportNumber" ColumnName="PoliceReportNumber" />
                 <ScalarProperty Name="ResidentContactInformation" ColumnName="ResidentContactInformation" />
                 <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />

@@ -26,6 +26,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetUserClaimCount(Guid userid);
         dynamic GetClaimDetails(string Claim, char Type);
         dynamic GetPrintClaim(string Claim, char Type);
+        dynamic GetExportClaim(string Claim, char Type);
         dynamic GetUserPropertyForClaimPrint(string userid);
         dynamic InsertComment(FormComment obj);
         dynamic InsertAttachment(FormAttachment formAttachment);

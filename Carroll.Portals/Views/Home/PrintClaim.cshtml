@@ -81,7 +81,7 @@
                 <td> <b> @Model.GLC.ClaimNumber</b> </td>
             </tr>
             <tr><td style="width:30%;"> Incident Date:</td><td> @(Model.GLC.IncidentDateTime == null ? "" : Model.GLC.IncidentDateTime.ToString().Substring(0, 10)) </td></tr>
-
+            <tr><td style="width:30%;"> Incident Time:</td><td> @Model.GLC.IncidentTime </td></tr>
             <tr><td style="width:30%;"> Incident Location:</td><td> @Model.GLC.IncidentLocation </td></tr>
 
             <tr><td style="width:30%;"> Incident Description:</td><td> @Model.GLC.IncidentDescription </td></tr>
@@ -146,7 +146,7 @@
             <tr><td style="width:30%;">Witness Phone:</td><td> @Model.GLC.WitnessPhone </td></tr>
 
 
-           <tr><td style="width:30%;">Description Of Damage:</td><td> @Model.GLC.DescriptionOfDamage </td></tr>
+            <tr><td style="width:30%;">Description Of Damage:</td><td> @Model.GLC.DescriptionOfDamage </td></tr>
 
 
             <tr><td style="width:30%;">Reported By:</td><td> @Model.GLC.ReportedBy </td></tr>

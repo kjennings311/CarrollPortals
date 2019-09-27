@@ -44,5 +44,6 @@ namespace Carroll.Data.Entities
         public string ResidentName { get; set; }
         public string ResidentContactInformation { get; set; }
         public string PoliceReportNumber { get; set; }
+        public string IncidentTime { get; set; }
     }
 }

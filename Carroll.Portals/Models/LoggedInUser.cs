@@ -44,9 +44,14 @@ namespace Carroll.Portals.Models
         public static string AssignedUserProperty()
         {
             HttpCookie authCookie = HttpContext.Current.Request.Cookies[DateTime.Now.ToShortDateString() + "tlsporp"];
-          //  FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-            string[] roles = authCookie.Value.Split(new Char[] { '|' });
-            if (roles != null ) return roles[0].ToString();
+
+            //  FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+            if (authCookie != null)
+            {
+                string[] roles = authCookie.Value.Split(new Char[] { '|' });
+                if (roles != null) return roles[0].ToString();
+            }
+               
 
            // if (roles != null && roles.Length == 2) return roles[1];
             return string.Empty;
@@ -110,8 +115,8 @@ namespace Carroll.Portals.Models
                         propcookie.Path = FormsAuthentication.FormsCookiePath + "; HttpOnly; noScriptAccess";
                         propcookie.Secure = FormsAuthentication.RequireSSL;
 
-                        //if (propticket.IsPersistent)
-                        //    propcookie.Expires = propticket.Expiration;
+                        if (newticket.IsPersistent)
+                            propcookie.Expires = newticket.Expiration;
 
                         HttpContext.Current.Response.Cookies.Add(propcookie);
 
