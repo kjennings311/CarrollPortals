@@ -1876,12 +1876,13 @@ namespace Carroll.Data.Services.Helpers
                 mail.IsBodyHtml = true;
                 mail.Subject = Message.Subject;
                 mail.Body = Message.Body;
-               // mail.To.Clear();
+              //  mail.To.Clear();
                 // remove this line before going production
-               //  mail.To.Add("pavan.nanduri@carrollorg.com");
-               // mail.To.Add("sekhar.babu@forcitude.com");
-               //mail.To.Add("sukumar.gandhi@forcitude.com");
-               // mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
+                //  mail.To.Add("pavan.nanduri@carrollorg.com");
+
+              //  mail.To.Add("sekhar.babu@forcitude.com");
+              //  mail.To.Add("sukumar.gandhi@forcitude.com");
+                mail.To.Add("Shashank.Trivedi@carrollorg.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;

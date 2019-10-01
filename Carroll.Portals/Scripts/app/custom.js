@@ -1,5 +1,5 @@
 ﻿
-// var $BaseApiUrl = "http://localhost:1002/";
+ // var $BaseApiUrl = "http://localhost:1002/";
 
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
@@ -1213,6 +1213,12 @@ function LoadContacts() {
                         ]
                     }).columns.adjust();
 
+                    setTimeout(function () {
+
+                        CheckToLoadContact();
+
+                    }, 1000);
+
 
                 }
             });
@@ -1325,7 +1331,6 @@ function LoadPartners() {
 
                             //    }
                             //},
-
                             { "data": "partnerName", "name": "partnerName", "autoWidth": false },
                             { "data": "addressLine1", "name": "addressLine1", "autoWidth": false },
                             { "data": "addressLine2", "name": "addressLine2", "autoWidth": false },
@@ -1362,7 +1367,11 @@ function LoadPartners() {
                         ]
                     }).columns.adjust();
 
+                    setTimeout(function () {
 
+                        CheckToLoadContact();
+
+                    }, 1000);
                 }
             });
         }
@@ -1572,7 +1581,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/equitypartner?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/partners?name=' + result["name"] + '">' + result["name"] + '</a>';
                                      
                                     } else return '';
                                 }
@@ -1595,7 +1604,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1605,7 +1614,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1615,7 +1624,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1625,7 +1634,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1635,7 +1644,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1645,7 +1654,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1655,7 +1664,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -1666,7 +1675,7 @@ function LoadProperties() {
                                 render: function (data, type, row) {
                                     if (data != null) {
                                         var result = JSON.parse(data);
-                                        return '<a href="/contact?id=' + result["id"] + '">' + result["name"] + '</a>';
+                                        return '<a target="_blank" href="/data/contacts?name=' + result["name"] + '">' + result["name"] + '</a>';
                                     } else return '';
                                 }
                             },
@@ -2652,6 +2661,14 @@ function ConfigDatatable(Form) {
         }
     );
 }
+
+function CheckToLoadContact()
+{
+    var filter = getParameterByName("name");
+    $("#DataTables_Table_0_filter input").val(filter);
+    $('.dtprops').DataTable().search(filter).draw();
+}
+
 function FilterClaims(filter) {
     $("#DataTables_Table_0_filter input").val(filter);
     $('.dtprops').DataTable().search(filter).draw();
