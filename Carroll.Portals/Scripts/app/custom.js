@@ -3395,14 +3395,19 @@ function LoadClaim()
         $("#type").val("2");
 
     var hrv = $("#exportclaim").attr('href');
-    console.log(hrv +"Type is "+Type);
+   
     hrv = hrv.replace("num", claim);
-    console.log(hrv);
-    hrv = hrv.replace("t", Type);
-    console.log(hrv);
-    $("#exportclaim").attr('href', hrv+Type);
+  
+    $("#exportclaim").attr('href', hrv + Type);
 
-    console.log($("#exportclaim").attr('href'));
+
+    var hrv = $("#printclaim").attr('href');
+
+    hrv = hrv.replace("num", claim);
+
+    $("#printclaim").attr('href', hrv + Type);
+
+       
               $.ajax({
                 type: "get",
                 dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
@@ -3821,44 +3826,44 @@ $(document).ready(function () {
 
     });
 
-    $("#printclaim").click(function (e) {
+    //$("#printclaim").click(function (e) {
        
-        console.log('i am print');
-        e.preventDefault();
-        var claim = getParameterByName("Claim");
-        var Type = claim[claim.length - 1];
-        claim = claim.substr(0, claim.length - 1);
+       
+    //    e.preventDefault();
+    //    var claim = getParameterByName("Claim");
+    //    var Type = claim[claim.length - 1];
+    //    claim = claim.substr(0, claim.length - 1);
 
-        if (claim != "") {
-            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
+    //    if (claim != "") {
+    //        var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
 
-            printWindow.addEventListener('load', function () {
-                setTimeout(function () {
-                    printWindow.print();
-                    printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-                }, 1000);
-            }, true);
-        }
-    });
+    //        printWindow.addEventListener('load', function () {
+    //            setTimeout(function () {
+    //             //   printWindow.print();
+    //              // printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+    //            }, 1000);
+    //        }, true);
+    //    }
+    //});
 
-    $("#exportclaim").click(function (e) {
-        console.log('iam epxort ');
-        e.preventDefault();
-        var claim = getParameterByName("Claim");
-        var Type = claim[claim.length - 1];
-        claim = claim.substr(0, claim.length - 1);
+    //$("#exportclaim").click(function (e) {
+    //    console.log('iam epxort ');
+    //    e.preventDefault();
+    //    var claim = getParameterByName("Claim");
+    //    var Type = claim[claim.length - 1];
+    //    claim = claim.substr(0, claim.length - 1);
 
-        if (claim != "") {
-            var printWindow = window.open("/Home/ExportClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
+    //    if (claim != "") {
+    //        var printWindow = window.open("/Home/ExportClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
 
-            printWindow.addEventListener('load', function () {
-                setTimeout(function () {
-                  //  printWindow.print();
-                    //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-                }, 1000);
-            }, true);
-        }
-    });
+    //        printWindow.addEventListener('load', function () {
+    //            setTimeout(function () {
+    //              //  printWindow.print();
+    //                //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+    //            }, 1000);
+    //        }, true);
+    //    }
+    //});
 
 
     $("#btnUpload").click(function () {

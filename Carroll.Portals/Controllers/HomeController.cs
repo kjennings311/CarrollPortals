@@ -155,21 +155,18 @@ namespace Carroll.Portals.Controllers
 
                     n.Type = Type;
 
-                    //if (Type == 'g')
-                    //{
-                    //    n.GLC = JsonConvert.DeserializeObject<PrintGeneralLiabilityClaim>(EmpResponse);
-                    //    Propid = n.GLC.PropertyId.ToString();
-                    //}
-                    //else if (Type == 'm')
-                    //{
-                    //    n.MDC = JsonConvert.DeserializeObject<PrintMoldDamageClaim>(EmpResponse);
-                    //    Propid = n.MDC.PropertyId.ToString();
-                    //}
-                    //else if (Type == 'p')
-                    //{
-                    //    n.PDC = JsonConvert.DeserializeObject<PrintPropertyDamageClaim>(EmpResponse);
-                    //    Propid = n.PDC.PropertyId.ToString();
-                    //}
+                    if (Type == 'g')
+                    {
+                        Propid = n.GLC.ClaimNumber;
+                    }
+                    else if (Type == 'm')
+                    {
+                        Propid = n.MDC.ClaimNumber;
+                    }
+                    else if (Type == 'p')
+                    {
+                        Propid = n.PDC.ClaimNumber;
+                    }
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
 
@@ -178,7 +175,7 @@ namespace Carroll.Portals.Controllers
                 // o.Date=obj.
                 //returning the employee list to view  
              //  return View(n);
-               return new ViewAsPdf("ExportClaim", n) { PageSize = Rotativa.Options.Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "ClaimDetails - " + DateTime.Now.ToShortDateString() + ".pdf" };
+               return new ViewAsPdf("ExportClaim", n) { PageSize = Rotativa.Options.Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "ClaimDetails - " + Propid + ".pdf" };
 
             }
 
