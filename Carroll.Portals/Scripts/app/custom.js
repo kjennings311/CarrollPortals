@@ -2665,8 +2665,11 @@ function ConfigDatatable(Form) {
 function CheckToLoadContact()
 {
     var filter = getParameterByName("name");
-    $("#DataTables_Table_0_filter input").val(filter);
-    $('.dtprops').DataTable().search(filter).draw();
+    //alert(filter);
+    if (filter != null) {
+        $("#DataTables_Table_0_filter input").val(filter);
+        $('.dtprops').DataTable().search(filter).draw();
+    }
 }
 
 function FilterClaims(filter) {
