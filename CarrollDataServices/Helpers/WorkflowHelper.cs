@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Net.Configuration;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text.RegularExpressions;
@@ -26,7 +27,8 @@ namespace Carroll.Data.Services.Helpers
                 EmailMessage _message = new EmailMessage();
 
                 _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["AdditionalEmails"]).Split(',');
+                _message.EmailBcc = Convert.ToString(ConfigurationManager.AppSettings["BCCEmails"]).Split(',');
 
                 var _entities = new CarrollFormsEntities();
                 var propid = new Guid(RecordId);
@@ -107,14 +109,14 @@ namespace Carroll.Data.Services.Helpers
                         _message.EmailTo.Add(userdetails);
                        
                     }
-                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
-                    _message.EmailTo.Add("brian.mckay@rhodesra.com");
-                    _message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
-                    _message.EmailTo.Add("David.Perez@carrollorg.com");
-                    _message.EmailTo.Add("james.flanagan@rhodesra.com");
-                    _message.EmailTo.Add("Mike.Davis@rhodesra.com");
-                    _message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
-                    _message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
+                    //_message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    //_message.EmailTo.Add("brian.mckay@rhodesra.com");
+                    //_message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
+                    //_message.EmailTo.Add("David.Perez@carrollorg.com");
+                    //_message.EmailTo.Add("james.flanagan@rhodesra.com");
+                    //_message.EmailTo.Add("Mike.Davis@rhodesra.com");
+                    //_message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
+                    //_message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
 
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
@@ -204,14 +206,14 @@ namespace Carroll.Data.Services.Helpers
 
                      var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
 
-                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
-                    _message.EmailTo.Add("brian.mckay@rhodesra.com");
-                    _message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
-                    _message.EmailTo.Add("David.Perez@carrollorg.com");
-                    _message.EmailTo.Add("james.flanagan@rhodesra.com");
-                    _message.EmailTo.Add("Mike.Davis@rhodesra.com");
-                    _message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
-                    _message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
+                    //_message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    //_message.EmailTo.Add("brian.mckay@rhodesra.com");
+                    //_message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
+                    //_message.EmailTo.Add("David.Perez@carrollorg.com");
+                    //_message.EmailTo.Add("james.flanagan@rhodesra.com");
+                    //_message.EmailTo.Add("Mike.Davis@rhodesra.com");
+                    //_message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
+                    //_message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
 
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
@@ -272,7 +274,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         _message.EmailTo.Add(userdetails);
                     }
-                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                   // _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
 
                    // _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
                     EmailHelper.SendEmail(_message, RecordId, ClaimData.tbl.CreatedByName, ClaimData.tbl.CreatedBy.ToString());
@@ -324,14 +326,14 @@ namespace Carroll.Data.Services.Helpers
 
                       var workflowemails = _entities.proc_getworkflowemails(propertyid).FirstOrDefault();
 
-                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
-                    _message.EmailTo.Add("brian.mckay@rhodesra.com");
-                    _message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
-                    _message.EmailTo.Add("David.Perez@carrollorg.com");
-                    _message.EmailTo.Add("james.flanagan@rhodesra.com");
-                    _message.EmailTo.Add("Mike.Davis@rhodesra.com");
-                    _message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
-                    _message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
+                    //_message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                    //_message.EmailTo.Add("brian.mckay@rhodesra.com");
+                    //_message.EmailTo.Add("Bruce.Federspiel@rhodesra.com");
+                    //_message.EmailTo.Add("David.Perez@carrollorg.com");
+                    //_message.EmailTo.Add("james.flanagan@rhodesra.com");
+                    //_message.EmailTo.Add("Mike.Davis@rhodesra.com");
+                    //_message.EmailTo.Add("Ryan.Cranford@rhodesra.com");
+                    //_message.EmailTo.Add("Scott.Gilpatrick@carrollmg.com");
 
 
                     //if (!string.IsNullOrEmpty(workflowemails.InsuranceEmail))
@@ -394,7 +396,8 @@ namespace Carroll.Data.Services.Helpers
                         _message.EmailTo.Add(userdetails);
 
                     }
-                    _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
+                  
+                 //   _message.EmailTo.Add("Laura.Patterson@carrollorg.com");
 
 
                     EmailHelper.SendEmail(_message, RecordId, ClaimData.tbl.CreatedByName, ClaimData.tbl.CreatedBy.ToString());
@@ -1674,20 +1677,24 @@ namespace Carroll.Data.Services.Helpers
 
         public static SmtpClient SetMailServerSettings()
         {
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
-           // smtp.Host = "smtp.office365.com"; // smtp.Host = "smtp.gmail.com";
-            smtp.EnableSsl = true;
+            SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+           SmtpClient smtp = new SmtpClient();
+            smtp.Host = section.Network.Host; //"smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
+                                              // smtp.Host = "smtp.office365.com"; // smtp.Host = "smtp.gmail.com";
+            smtp.Port = section.Network.Port;
+            smtp.EnableSsl = section.Network.EnableSsl;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.UseDefaultCredentials = false;
         //    smtp.TargetName = "STARTTLS/smtp.office365.com";
          //  NetworkCredential networkCredential = new NetworkCredential("iamnewemployee@carrollmg.com", "Carroll123!");
-
-            NetworkCredential networkCredential = new NetworkCredential("sekhar.babu@forcitude.com", "R21221.Skr");
-
-            smtp.Credentials = networkCredential;
+         if((!string.IsNullOrEmpty(section.Network.UserName)) && (!string.IsNullOrEmpty(section.Network.Password))){
+                NetworkCredential networkCredential = new NetworkCredential(section.Network.UserName, section.Network.Password);
+            }
             
-            smtp.Port = 587; //587
+
+           // smtp.Credentials = networkCredential;
+            
+           // smtp.Port = 587; //587
             return smtp;
 
         }
@@ -1763,8 +1770,8 @@ namespace Carroll.Data.Services.Helpers
               //  mail.To.Clear();
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com");
-             mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+            //    mail.To.Add("sekhar.babu@forcitude.com");
+            // mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
@@ -1817,8 +1824,8 @@ namespace Carroll.Data.Services.Helpers
             mail.To.Clear();
             // remove this line before going production
             //  mail.To.Add("pavan.nanduri@carrollorg.com");
-            mail.To.Add("sekhar.babu@forcitude.com");
-        mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+           // mail.To.Add("sekhar.babu@forcitude.com");
+        //mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
@@ -1859,6 +1866,10 @@ namespace Carroll.Data.Services.Helpers
                 {
                     mail.CC.Add(new MailAddress(item));
                 }
+                foreach (var item in Message.EmailBcc)
+                {
+                    mail.Bcc.Add(new MailAddress(item));
+                }
 
                 mail.AlternateViews.Add(av1);
 
@@ -1870,7 +1881,7 @@ namespace Carroll.Data.Services.Helpers
                //  mail.To.Add("pavan.nanduri@carrollorg.com");
                // mail.To.Add("sekhar.babu@forcitude.com");
                //mail.To.Add("sukumar.gandhi@forcitude.com");
-                mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
+               // mail.To.Add("Shashank.Trivedi@carrollorg.com"); 
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
@@ -1899,6 +1910,7 @@ namespace Carroll.Data.Services.Helpers
         }
         public List<string> EmailTo { get; set; }
         public string[] EmailCc { get; set; }
+        public string[] EmailBcc { get; set; }
         public string EmailFrom { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }

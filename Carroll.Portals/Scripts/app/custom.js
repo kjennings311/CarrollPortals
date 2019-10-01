@@ -3821,24 +3821,25 @@ $(document).ready(function () {
 
     });
 
-    //$("#printclaim").click(function (e) {
+    $("#printclaim").click(function (e) {
+       
+        console.log('i am print');
+        e.preventDefault();
+        var claim = getParameterByName("Claim");
+        var Type = claim[claim.length - 1];
+        claim = claim.substr(0, claim.length - 1);
 
-    //    e.preventDefault();
-    //    var claim = getParameterByName("Claim");
-    //    var Type = claim[claim.length - 1];
-    //    claim = claim.substr(0, claim.length - 1);
+        if (claim != "") {
+            var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
 
-    //    if (claim != "") {
-    //        var printWindow = window.open("/Home/PrintClaim/?claim=" + claim + "&Type=" + Type, 'Claim Details', 'left=20, top=20, width=1200, height=auto, toolbar=0, resizable=1,scrollbars=no');
-
-    //        printWindow.addEventListener('load', function () {
-    //            setTimeout(function () {
-    //                printWindow.print();
-    //                printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-    //            }, 1000);
-    //        }, true);
-    //    }
-    //});
+            printWindow.addEventListener('load', function () {
+                setTimeout(function () {
+                    printWindow.print();
+                    printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
+                }, 1000);
+            }, true);
+        }
+    });
 
     $("#exportclaim").click(function (e) {
         console.log('iam epxort ');

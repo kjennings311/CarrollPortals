@@ -572,7 +572,7 @@ namespace Carroll.Data.Entities.Repository
                                 int i = _entities.SaveChanges();
 
 
-                                string Comment = "Property Damage Claim Record was added on " + _pdc.CreatedDate.ToString();
+                                string Comment = "Property Damage Claim Record was added on " + Convert.ToDateTime(_pdc.CreatedDate).ToString("MM/dd/yyyy");
                                 LogActivity(Comment, _pdc.CreatedByName, _pdc.CreatedBy.ToString(), _pdc.PDLId.ToString(), "New PD Claim");
                                 // return (i == 1) ? true : false;
                                 //return true;
@@ -1494,7 +1494,7 @@ tbl.UploadedDate descending
                                       where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
                                       orderby tbl.UploadedDate descending
                                       select tbl).ToList();
-                string Comment = "A new attachement was added by " + _property.UploadedByName;
+                string Comment = "A new attachment was added by " + _property.UploadedByName;
                 LogActivity(Comment, _property.UploadedByName, _property.UploadedBy.ToString(), _property.RefId.ToString(), "New Attachment");
                 return new { attachments = AllAttachments, activity = GetAllActivity(formAttachment.RefId) }; ;
             }
