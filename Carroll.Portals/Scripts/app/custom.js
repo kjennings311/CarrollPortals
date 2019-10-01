@@ -3401,7 +3401,7 @@ function LoadClaim()
 
     var claim = getParameterByName("Claim");
     var Type = claim[claim.length - 1];
-    claim = claim.substr(0, claim.length - 1)
+    claim = claim.substr(0, claim.length - 1);
 
     $("#claim").val(claim);
     if(Type=="m")
