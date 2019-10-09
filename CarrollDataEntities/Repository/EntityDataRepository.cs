@@ -491,7 +491,7 @@ namespace Carroll.Data.Entities.Repository
                                 _entities.SaveChanges();
                                 int i = _entities.SaveChanges();
 
-                                string Comment = "FormGeneralLiabilityClaim Record was added on " + _glc.CreatedDate.ToString();
+                                string Comment = "FormGeneralLiabilityClaim Record was added on " + Convert.ToDateTime(_glc.CreatedDate).ToString("MM/dd/yyyy");
                                 LogActivity(Comment, _glc.CreatedByName, _glc.CreatedBy.ToString(), _glc.GLLId.ToString(), "New GL Claim");
                                 // return (i == 1) ? true : false;
                                 // return true;
@@ -531,7 +531,7 @@ namespace Carroll.Data.Entities.Repository
                                 _entities.FormMoldDamageClaims.Add(_mdc);
                                 _entities.SaveChanges();
                                 int i = _entities.SaveChanges();
-                                string Comment = "Mold Damage Claim Record was added on " + _mdc.CreatedDate.ToString();
+                                string Comment = "Mold Damage Claim Record was added on " + Convert.ToDateTime(_mdc.CreatedDate).ToString("MM/dd/yyyy");
                                 LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New MD Claim");
                                 // return (i == 1) ? true : false;
                                 // return true;
