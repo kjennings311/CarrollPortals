@@ -1059,7 +1059,7 @@ namespace Carroll.Data.Services.Helpers
                 var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Hr/EmployeeNewHireNotice?resubmit=" + propid;
                 _message.Subject = "Employee New Hire Notice has been rejected";
                 _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name of the person : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime + "  <br>  Click here to Resubmit : <a href='" + link + "'> " + link + " </a> </p>  <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name of the person : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy") + "  <br>  Click here to Resubmit : <a href='" + link + "'> " + link + " </a> </p>  <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
                 List<string> tos = new List<string>();
                  tos.Add("Shashank.Trivedi@carrollorg.com");
                 tos.Add("iamnewemployee@carrollmg.com");
@@ -1677,24 +1677,41 @@ namespace Carroll.Data.Services.Helpers
 
         public static SmtpClient SetMailServerSettings()
         {
-            SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
-           SmtpClient smtp = new SmtpClient();
-            smtp.Host = section.Network.Host; //"smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
-                                              // smtp.Host = "smtp.office365.com"; // smtp.Host = "smtp.gmail.com";
-            smtp.Port = section.Network.Port;
-            smtp.EnableSsl = section.Network.EnableSsl;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.UseDefaultCredentials = false;
-        //    smtp.TargetName = "STARTTLS/smtp.office365.com";
-         //  NetworkCredential networkCredential = new NetworkCredential("iamnewemployee@carrollmg.com", "Carroll123!");
-         if((!string.IsNullOrEmpty(section.Network.UserName)) && (!string.IsNullOrEmpty(section.Network.Password))){
-                NetworkCredential networkCredential = new NetworkCredential(section.Network.UserName, section.Network.Password);
-            }
-            
+            SmtpClient smtp = new SmtpClient();
 
-           // smtp.Credentials = networkCredential;
-            
-           // smtp.Port = 587; //587
+            if (ConfigurationManager.AppSettings["islive"] == "true")
+            {
+
+                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+
+                smtp.Host = section.Network.Host; //"smtp.gmail.com"; // smtp.Host = "smtp.gmail.com";
+                                                  // smtp.Host = "smtp.office365.com"; // smtp.Host = "smtp.gmail.com";
+                smtp.Port = section.Network.Port;
+                smtp.EnableSsl = section.Network.EnableSsl;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
+                //    smtp.TargetName = "STARTTLS/smtp.office365.com";
+                //  NetworkCredential networkCredential = new NetworkCredential("iamnewemployee@carrollmg.com", "Carroll123!");
+                if ((!string.IsNullOrEmpty(section.Network.UserName)) && (!string.IsNullOrEmpty(section.Network.Password)))
+                {
+                    NetworkCredential networkCredential = new NetworkCredential(section.Network.UserName, section.Network.Password);
+                }
+
+
+                // smtp.Credentials = networkCredential;
+
+                // smtp.Port = 587; //587
+            }
+            else
+            {
+                smtp.Host = "smtp.gmail.com";                                              
+                smtp.EnableSsl = true;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;   
+                NetworkCredential networkCredential = new NetworkCredential("sekhar.babu@forcitude.com", "R21221.Skr");
+                smtp.Credentials = networkCredential;
+                smtp.Port = 587; 
+            }
             return smtp;
 
         }
@@ -1770,8 +1787,8 @@ namespace Carroll.Data.Services.Helpers
               //  mail.To.Clear();
                 // remove this line before going production
                 //  mail.To.Add("pavan.nanduri@carrollorg.com");
-            //    mail.To.Add("sekhar.babu@forcitude.com");
-            // mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+               mail.To.Add("sekhar.babu@forcitude.com");
+             mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
@@ -1783,7 +1800,7 @@ namespace Carroll.Data.Services.Helpers
             return true;
         }
 
-        public static bool SendHrFormNotificationEmail(EmailMessage Message, string RecordId, string RecordCreatedBy)
+    public static bool SendHrFormNotificationEmail(EmailMessage Message, string RecordId, string RecordCreatedBy)
     {
         // write your email function here..
         using (MailMessage mail = new MailMessage())
@@ -1824,8 +1841,8 @@ namespace Carroll.Data.Services.Helpers
             mail.To.Clear();
             // remove this line before going production
             //  mail.To.Add("pavan.nanduri@carrollorg.com");
-           // mail.To.Add("sekhar.babu@forcitude.com");
-        //mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+            mail.To.Add("sekhar.babu@forcitude.com");
+        mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;

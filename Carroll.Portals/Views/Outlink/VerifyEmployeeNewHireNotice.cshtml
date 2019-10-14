@@ -421,7 +421,7 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
             if (ViewBag.Action == "Employee Email")
             {
                 <p class="c1" style="margin-top:50px;">
-                    <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:49%;" />    Date <input type="date" name="name" style="width:21%;" id="edate" value="" /></span>
+                    <span class="c0">Employee Signature <input type="text" id="esignature" class="italic" value="" style="width:49%;" />    Date <input type="text" name="name" style="width:21%;" id="edate" value="@DateTime.Now.ToString("MM/dd/yyyy")" /></span>
                 </p>
 
                 <p class="c1">
@@ -439,7 +439,7 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
                 </p>
 
                 <p class="c1">
-                    <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:49%;margin-left: 6%;" class="italic" value="" />Date <input type="date" name="name" style="width:21%;" id="rpmdate" value="" /></span>
+                    <span class="c0">RPM Signature<input type="text" id="rpmsignature" style="width:49%;margin-left: 6%;" class="italic" value="" />Date <input type="text" name="name" disabled style="width:21%;" id="rpmdate" value="@DateTime.Now.ToString("MM/dd/yyyy")" /></span>
                 </p>
             }
             <input type="hidden" id="Action" value="@ViewBag.Action" />
@@ -448,13 +448,13 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
         <br /> <br />
         <p>Rev. June 2018</p>
         <div id="status"> </div>
-        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+        <div class="col-md-12" style="text-align:center;margin-bottom:40px;">
 
             <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
         </div>
         </form>
-    </div>\
+    </div>
     <style type="text/css">
 
    
@@ -494,14 +494,14 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
 
             if ($("#Action").val() == "Employee Email") {
 
-                document.getElementById("edate").valueAsDate = new Date();
+          //      document.getElementById("edate").valueAsDate = new Date();
                 $("#esignature,#Submit").prop("disabled", false);
                 $("#esignature").focus();
 
             }
             else {
 
-                document.getElementById("rpmdate").valueAsDate = new Date();
+              //  document.getElementById("rpmdate").valueAsDate = new Date();
                 $("#rpmsignature,#Submit").prop("disabled", false);
                 $("#rpmsignature").focus();
             }

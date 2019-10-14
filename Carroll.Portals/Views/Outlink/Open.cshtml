@@ -21,7 +21,7 @@
         var issuccess = false;
 
         var link = "/outlink/Verify?link=@ViewBag.link";
-        var child = window.open(link, "_blank", 'toolbar =1, status = 0, width = 1200, height = 750');
+        var child = window.open(link, "_blank", 'toolbar =1, status = 0, width = 1200px, height =900px,scrollbars=yes');
         child.focus();
         document.getElementById("msg").innerHTML = "Please fill out the form in the new window";
         var timer = setInterval(checkChild, 1000);

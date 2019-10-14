@@ -15,6 +15,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
     <style type="text/css">
+        html, body {
+            overflow: scroll;
+        }
+
 
         body {
             font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -90,7 +94,7 @@
                 <p style="text-align: justify;">
                     <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" class="italic" id="esignature" style="width:25%;margin-left:6%;" disabled /> </span>
 
-                    <input style="float:right; margin-right:15%;width:21%;" type="date" id="leasedate" />
+                    <input style="float:right; margin-right:15%;width:21%;" value="@DateTime.Now.ToString("MM/dd/yyyy")"  type="text" id="leasedate" />
                     <span style="font-size: 14px; line-height: 115%; float:right; margin-right:22px; margin-top:10px;">Date : </span>
                 </p>
 
@@ -107,7 +111,7 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
 
                 <input type="hidden" id="Action" value="@ViewBag.Action" />
                 <div id="status"> </div>
-                <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+                <div class="col-md-12" style="text-align:center;margin-bottom:40px;">
                     <button class="btn btn-danger" id="closer" onclick="closeMe();">close</button>
                     <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
@@ -151,7 +155,7 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
             $("#esignature,#Submit").prop("disabled", false);
             $("#esignature").focus();
 
-            document.getElementById("leasedate").valueAsDate = new Date();
+          //  document.getElementById("leasedate").valueAsDate = (new Date()).toLocaleString();
 
 
             function closeMe()

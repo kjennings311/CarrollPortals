@@ -28,7 +28,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
             <P class="p1 ft1" style="margin-top:-10px">Employee Name: <input style=" display:inline;width:29%; "  type="text" id="empname" class="" value="@Model.EmployeeName" /> </P>
             <p class="p1 ft1" style="margin-top:10px;">
 
-                @if (Model.IsCorporate.ToString() == "true")
+                @if (Model.IsCorporate.ToString().ToLower() == "true")
                 {
 
                     <span class="c0">
@@ -39,8 +39,8 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 else
                 {
                     <span class="c0">
-                        Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property  <input type="text" id="location" style="width:35%;" value="@Model.Notes2" />
+                        Location: <input type="radio"  id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input style="margin-left:12px" checked type="radio" id="chkproperty" name="loc" /> Property  <input type="text" id="location" style="width:35%;" value="@Model.Notes2" />
                     </span>
                 }
 
