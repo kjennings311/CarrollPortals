@@ -191,7 +191,7 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Wage (Hourly) / Salary (Annual) <input type="number" id="salary"  style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
+                                            <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" class="allow_decimal" id="salary"  style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
                                         </p>
 
                                         <p class="c1">
@@ -203,15 +203,13 @@
                                             <tr>
                                                 <td colspan="1">
                                                     <h3 style="text-align: center;
-    margin-left: 40%;">
-                                                        Labor Allocation
-                                                    </h3>
+    margin-left: 40%;"> Labor Allocation   </h3>
                                                 </td>
                                             </tr>
                                             <tr> <td> Property </td> <td> Percentage </td> </tr>
-                                            <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="number" id="la_Prop1per" /> </td> </tr>
-                                            <tr> <td> <input type="text" id="la_Prop2" /> </td> <td> <input type="number" id="la_Prop2per" /> </td> </tr>
-                                            <tr> <td> <input type="text" id="la_Prop3" /> </td> <td> <input type="number" id="la_Prop3per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="text" class="allow_decimal" id="la_Prop1per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop2" /> </td> <td> <input type="text" class="allow_decimal" id="la_Prop2per" /> </td> </tr>
+                                            <tr> <td> <input type="text" id="la_Prop3" /> </td> <td> <input type="text" class="allow_decimal" id="la_Prop3per" /> </td> </tr>
                                         </table>
 
                                         <p class="c1" style="margin-bottom: 30px;margin-top:30px;">
@@ -529,22 +527,22 @@
 
         $(document).ready(function () {
 
-            $("#salary").keypress(function (e) {
-                //if the letter is not digit then display error and don't type anything
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                    //display error message
-                    $("#errmsg").html("Digits Only").show().fadeOut("slow");
-                    return false;
-                }
-            });
+            //$("#salary").keypress(function (e) {
+            //    //if the letter is not digit then display error and don't type anything
+            //    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            //        //display error message
+            //        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+            //        return false;
+            //    }
+            //});
 
 
-            $('#salary').keyup(function (e) {
-                if (/\D/g.test(this.value)) {
-                    // Filter non-digits from input value.
-                    this.value = this.value.replace(/\D/g, '');
-                }
-            });
+            //$('#salary').keyup(function (e) {
+            //    if (/\D/g.test(this.value)) {
+            //        // Filter non-digits from input value.
+            //        this.value = this.value.replace(/\D/g, '');
+            //    }
+            //});
 
 
             $(".addnew").click(function ()
@@ -1192,73 +1190,73 @@ function AssignManager()
                             control = $("#la_Prop1per");
                     }
 
-                    if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
+                    //if ($("#la_Prop1per").val() != "" && parseFloat($("#la_Prop1per").val()) < 100) {
 
-                        if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "") {
-                            errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
-                            $("#la_Prop1").addClass('has-error');
-                            $("#la_Prop2").addClass('has-error');
-                            $("#la_Prop3").addClass('has-error');
-                            if (control == "")
-                                control = $("#la_Prop2");
-                        }
-                        else {
-                            var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
-                            if (total < 100)
-                                errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
-                            // return false;
-                        }
-
-                    }
-
-                    //var p1 = 0, p2 = 0, p3 = 0;
-
-                    //if ($("#la_Prop1per").val() != "")
-                    //    p1 = parseFloat($("#la_Prop1per").val());
-                    //if ($("#la_Prop2per").val() != "")
-                    //    p2 = parseFloat($("#la_Prop2per").val());
-                    //if ($("#la_Prop3per").val() != "")
-                    //    p3 = parseFloat($("#la_Prop3per").val());
-                    //var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
-
-                    //console.log(sum);
-
-
-                    //if (sum != 100) {
-
-                    //    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
-
-                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                    //    if ($("#la_Prop2per").val() == "" && $("#la_Prop3per").val() == "") {
+                    //        errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
                     //        $("#la_Prop1").addClass('has-error');
-
-                    //        if (control == "")
-                    //            control = $("#la_Prop1");
-                    //    }
-
-
-                    //    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
-
-                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
                     //        $("#la_Prop2").addClass('has-error');
-
+                    //        $("#la_Prop3").addClass('has-error');
                     //        if (control == "")
                     //            control = $("#la_Prop2");
                     //    }
-
-
-                    //    if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
-
-                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                    //        $("#la_Prop3").addClass('has-error');
-
-                    //        if (control == "")
-                    //            control = $("#la_Prop3");
+                    //    else {
+                    //        var total = parseFloat($("#la_Prop1per").val()) + parseFloat($("#la_Prop2per").val()) + parseFloat($("#la_Prop3per").val());
+                    //        if (total < 100)
+                    //            errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
+                    //        // return false;
                     //    }
 
-                    //    errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                    //    control = $("#la_Prop3");
-
                     //}
+
+                    var p1 = 0, p2 = 0, p3 = 0;
+
+                    if ($("#la_Prop1per").val() != "")
+                        p1 = parseFloat($("#la_Prop1per").val());
+                    if ($("#la_Prop2per").val() != "")
+                        p2 = parseFloat($("#la_Prop2per").val());
+                    if ($("#la_Prop3per").val() != "")
+                        p3 = parseFloat($("#la_Prop3per").val());
+                    var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+
+                    console.log(sum);
+
+
+                    if (sum != 100) {
+
+                        if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                            $("#la_Prop1").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop1");
+                        }
+
+
+                        if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                            $("#la_Prop2").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop2");
+                        }
+
+
+                        if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                            $("#la_Prop3").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop3");
+                        }
+
+                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                        control = $("#la_Prop3");
+
+                    }
                 }
 
                 if (errormsgsummary != "") {
@@ -1269,7 +1267,8 @@ function AssignManager()
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else {
+                else
+                {
                     $('#myModal').modal('hide');
 
                     $(".alert").html('Processing');

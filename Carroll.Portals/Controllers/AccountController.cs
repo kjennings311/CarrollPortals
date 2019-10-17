@@ -36,14 +36,14 @@ namespace Carroll.Portals.Controllers
         // GET: Account
         public ActionResult Login()
         {
-            if ((HttpContext.Request.Browser.Browser.ToLower() == "chrome")|| (HttpContext.Request.Browser.Browser.ToLower() == "safari"))
-            {
-                // do nothing
-            }
-            else
-            {
-                return RedirectToAction("gotochrome");
-            }
+            //if ((HttpContext.Request.Browser.Browser.ToLower() == "chrome") || (HttpContext.Request.Browser.Browser.ToLower() == "safari"))
+            //{
+            //    // do nothing
+            //}
+            //else
+            //{
+            //    return RedirectToAction("gotochrome");
+            //}
 
             if (Session["Vm_UserId"] == null)
             {

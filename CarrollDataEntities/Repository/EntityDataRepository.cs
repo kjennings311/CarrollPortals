@@ -1788,7 +1788,6 @@ tbl.UploadedDate descending
                         res.Location = _property.Location;
                         res.iscorporate = _property.iscorporate;
                         res.IsRejected = _property.IsRejected ;
-
                       
                             res.IsResumitted = true;
                         res.ResubmittedBy = _property.ResubmittedBy;
@@ -1840,6 +1839,15 @@ tbl.UploadedDate descending
                                 res.La_Property3_Per = null;
                             }
 
+                        }
+                        else
+                        {
+                            res.La_Property1 = "";
+                            res.La_Property1_Per = null;
+                            res.La_Property2 = "";
+                            res.La_Property2_Per = null;
+                            res.La_Property3 = "";
+                            res.La_Property3_Per = null;
                         }
 
                         res.Status = _property.Status;

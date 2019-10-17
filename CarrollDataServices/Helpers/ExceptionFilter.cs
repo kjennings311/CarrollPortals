@@ -113,8 +113,8 @@ namespace Carroll.Data.Services.Helpers
             else
             {
                 user = new SiteUser();
-                if (!string.IsNullOrEmpty(filterContext.HttpContext.Request.Params["CreatedByName"].ToString()))
-                    user.FirstName = filterContext.HttpContext.Request.Params["CreatedByName"].ToString();
+                //if (!string.IsNullOrEmpty(filterContext.HttpContext.Request.Params["CreatedByName"].ToString()))
+                //    user.FirstName = filterContext.HttpContext.Request.Params["CreatedByName"].ToString();
 
             }
 

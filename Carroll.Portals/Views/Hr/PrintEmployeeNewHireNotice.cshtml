@@ -319,10 +319,10 @@
             <p class="c1">
 
 
-                Location: @if (Model.iscorporate.ToString() == "True")
+                Location: @if (Model.iscorporate.ToString().ToLower() == "true")
                 {
                 <span class="c0">
-                    <input type="radio" id="chkcorporate" Checked name="loc" /> Corporate &nbsp; &nbsp;&nbsp; &nbsp;
+                    <input type="radio" id="chkcorporate" checked name="loc" /> Corporate &nbsp; &nbsp;&nbsp; &nbsp;
 
                     <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
                 </span>
@@ -392,32 +392,41 @@
                     </td>
                 </tr>
                 <tr> <td> Property </td> <td> Percentage </td> </tr>
-
-                @if (!string.IsNullOrEmpty(Model.La_Property1))
+                @if (Model.iscorporate.ToString().ToLower() == "true")
                 {
-                    <tr> <td> <input type="text" id="la_Prop1" style="width:95%" value="@Model.La_Property1" />  </td> <td> <input type="text" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
-                    if (!string.IsNullOrEmpty(Model.La_Property2))
+
+                    if (!string.IsNullOrEmpty(Model.La_Property1))
                     {
-                        <tr> <td> <input type="text" id="la_Prop2" style="width:95%" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
+                        <tr> <td> <input type="text" id="la_Prop1" style="width:95%" value="@Model.La_Property1" />  </td> <td> <input type="text" value="@Model.La_Property1_Per" id="la_Prop1per" /> </td> </tr>
+                        if (!string.IsNullOrEmpty(Model.La_Property2))
+                        {
+                            <tr> <td> <input type="text" id="la_Prop2" style="width:95%" value="@Model.La_Property2" /> </td> <td> <input type="text" value="@Model.La_Property2_Per" id="la_Prop2per" /> </td> </tr>
 
-                    }
+                        }
 
 
-                    if (!string.IsNullOrEmpty(Model.La_Property3))
-                    {
-                        <tr> <td> <input type="text" id="la_Prop2" style="width:95%" value="@Model.La_Property3" /> </td> <td> <input type="text" value="@Model.La_Property3_Per" id="la_Prop2per" /> </td> </tr>
+                        if (!string.IsNullOrEmpty(Model.La_Property3))
+                        {
+                            <tr> <td> <input type="text" id="la_Prop2" style="width:95%" value="@Model.La_Property3" /> </td> <td> <input type="text" value="@Model.La_Property3_Per" id="la_Prop2per" /> </td> </tr>
+                        }
+                        else
+                        {
+                            <tr> <td> <input type="text" style="width:95%" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                        }
+
+                        if (string.IsNullOrEmpty(Model.La_Property2))
+                        {
+
+                            <tr> <td> <input type="text" style="width:95%" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+
+
+                        }
                     }
                     else
                     {
-                        <tr> <td> <input type="text" style="width:95%" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
-                    }
-
-                    if (string.IsNullOrEmpty(Model.La_Property2))
-                    {
-
-                        <tr> <td> <input type="text" style="width:95%" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
-
-
+                        <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                        <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
+                        <tr> <td> <input type="text" id="la_Prop2" value="" /> </td> <td> <input type="text" value="" id="la_Prop2per" /> </td> </tr>
                     }
 
 

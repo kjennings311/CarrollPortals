@@ -130,7 +130,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Rate  <input type="text" id="fromrate" style="width:30%;margin-left:26%;" />   <span id="fromtext"> </span>  </span>
+                                                            <span class="c0">Rate  <input type="text" id="fromrate" class="allow_decimal" style="width:30%;margin-left:26%;" />   <span id="fromtext"> </span>  </span>
                                                         </p>
                                                     </div>
 
@@ -155,7 +155,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             <span class="c0">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
                                                         </p>
                                                         <p class="c1">
-                                                            <span class="c0">Rate  <input type="text" id="torate" style="width:30%;margin-left:26%;" />     <span id="totext"> </span>   </span>
+                                                            <span class="c0">Rate  <input type="text" id="torate" class="allow_decimal" style="width:30%;margin-left:26%;" />     <span id="totext"> </span>   </span>
                                                         </p>
                                                     </div>
 
@@ -192,18 +192,18 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </TR>
                                                         <TR>
                                                             <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop1" /></P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" id="prop1per" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%" id="prop1per" /></P></TD>
 
                                                         </TR>
                                                         <TR>
                                                             <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop2" /></P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" id="prop2per" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%" id="prop2per" /></P></TD>
 
                                                         </TR>
 
                                                         <TR>
                                                             <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop3" /></P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" id="prop3per" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%" id="prop3per" /></P></TD>
 
                                                         </TR>
                                                     </TABLE>
@@ -279,7 +279,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                         </DIV>
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
-                                            <input type="button" id="Submit" style="margin-left:-15px;" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            <input type="button" id="Submit" style="margin-left:-10%;" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
                                         </div>
                                     </form>
 
@@ -290,9 +290,6 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 </div>
                 <br />
                 <table class="table  dtprops" width="100%"></table>
-
-
-
 
             </div>
         </div>
@@ -1424,48 +1421,48 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             control = $("#prop1per");
                     }
 
-                    if ($("#prop1per").val() != "" && parseFloat($("#prop1per").val()) < 100)
-                    {
+                    //if ($("#prop1per").val() != "" && parseFloat($("#prop1per").val()) < 100)
+                    //{
 
-                        if ($("#prop2per").val() == "" && $("#prop3per").val() == "") {
-                            errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
+                    //    if ($("#prop2per").val() == "" && $("#prop3per").val() == "") {
+                    //        errormsgsummary += "<li> Please Enter Division Of Labor Percentage </li>";
 
-                            $("#prop2").addClass('has-error');
-                            $("#prop3").addClass('has-error');
-                            if (control == "")
-                                control = $("#prop2");
-                        }
-                    }
-                        else {
-                            var total = parseFloat($("#prop1per").val()) + parseFloat($("#prop2per").val()) + parseFloat($("#prop3per").val());
+                    //        $("#prop2").addClass('has-error');
+                    //        $("#prop3").addClass('has-error');
+                    //        if (control == "")
+                    //            control = $("#prop2");
+                    //    }
+                    //}
+                    //    else {
+                    //        var total = parseFloat($("#prop1per").val()) + parseFloat($("#prop2per").val()) + parseFloat($("#prop3per").val());
 
-                            var p1 = 0, p2 = 0, p3 = 0;
+                    //        var p1 = 0, p2 = 0, p3 = 0;
 
-                            if ($("#prop1per").val() != "")
-                                if (isNaN(parseFloat($("#prop1per").val())) == false) {
-                                    p1 = parseFloat($("#prop1per").val());
-                                }
-                            if ($("#prop2per").val() != "")
-                                if (isNaN(parseFloat($("#prop2per").val())) == false) {
-                                    p2 = parseFloat($("#prop2per").val());
-                                }
-
-
-                            if ($("#prop3per").val() != "")
-                                if (isNaN(parseFloat($("#la_prop3per").val())) == false) {
-                                    p3 = parseFloat($("#la_prop3per").val());
-                                }
+                    //        if ($("#prop1per").val() != "")
+                    //            if (isNaN(parseFloat($("#prop1per").val())) == false) {
+                    //                p1 = parseFloat($("#prop1per").val());
+                    //            }
+                    //        if ($("#prop2per").val() != "")
+                    //            if (isNaN(parseFloat($("#prop2per").val())) == false) {
+                    //                p2 = parseFloat($("#prop2per").val());
+                    //            }
 
 
-                            var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+                    //        if ($("#prop3per").val() != "")
+                    //            if (isNaN(parseFloat($("#la_prop3per").val())) == false) {
+                    //                p3 = parseFloat($("#la_prop3per").val());
+                    //            }
 
-                            console.log(sum);
+
+                    //        var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+
+                    //        console.log(sum);
 
 
-                            if (sum != 100)
-                                errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
-                            // return false;
-                        }
+                    //        if (sum != 100)
+                    //            errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
+                    //        // return false;
+                    //    }
 
                     
 
@@ -1538,58 +1535,58 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     //}
 
-                    //var p1 = 0, p2 = 0, p3 = 0;
+                    var p1 = 0, p2 = 0, p3 = 0;
 
-                    //if ($("#la_Prop1per").val() != "")
-                    //    p1 = parseFloat($("#la_Prop1per").val());
-                    //if ($("#la_Prop2per").val() != "")
-                    //    p2 = parseFloat($("#la_Prop2per").val());
-                    //if ($("#la_Prop3per").val() != "")
-                    //    p3 = parseFloat($("#la_Prop3per").val());
-                    //var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
+                    if ($("#la_Prop1per").val() != "")
+                        p1 = parseFloat($("#la_Prop1per").val());
+                    if ($("#la_Prop2per").val() != "")
+                        p2 = parseFloat($("#la_Prop2per").val());
+                    if ($("#la_Prop3per").val() != "")
+                        p3 = parseFloat($("#la_Prop3per").val());
+                    var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
 
-                    //console.log(sum);
-
-
-                    //if (sum != 100)
-                    //{
-
-                    //    if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
-                    //    {
-
-                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                    //        $("#la_Prop1").addClass('has-error');
-
-                    //        if (control == "")
-                    //            control = $("#la_Prop1");
-                    //    }
+                    console.log(sum);
 
 
-                    //    if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "")
-                    //    {
+                    if (sum != 100)
+                    {
 
-                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                    //        $("#la_Prop2").addClass('has-error');
+                        if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
+                        {
 
-                    //        if (control == "")
-                    //            control = $("#la_Prop2");
-                    //    }
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
+                            $("#la_Prop1").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop1");
+                        }
 
 
-                    //    if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "")
-                    //    {
+                        if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "")
+                        {
 
-                    //        errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                    //        $("#la_Prop3").addClass('has-error');
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
+                            $("#la_Prop2").addClass('has-error');
 
-                    //        if (control == "")
-                    //            control = $("#la_Prop3");
-                    //    }
+                            if (control == "")
+                                control = $("#la_Prop2");
+                        }
 
-                    //    errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                    //    control = $("#la_Prop3");
 
-                    //}
+                        if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "")
+                        {
+
+                            errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
+                            $("#la_Prop3").addClass('has-error');
+
+                            if (control == "")
+                                control = $("#la_Prop3");
+                        }
+
+                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                        control = $("#la_Prop3");
+
+                    }
 
 
                 }

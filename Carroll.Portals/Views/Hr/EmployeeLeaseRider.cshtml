@@ -112,7 +112,7 @@
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">I, <input style=" display:inline; width:35%; " onchange="document.getElementById('printempname').value = this.value;" type="text" id="empname" class="" />  , understand and agree to the following :  </span></p>
 
                                         <ol>
-                                            <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input style=" display:inline; " type="number" id="marketvalue" class="" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input style=" display:inline; " type="number" id="monthlyrent" class="" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
+                                            <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is &nbsp; $ <input style=" display:inline; " type="text" id="marketvalue" class="allow_decimal" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be &nbsp; $ <input style=" display:inline; " type="text" id="monthlyrent" class="allow_decimal" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline;width:33%; " type="text"  id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
@@ -528,36 +528,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
 
             });
 
-            $("#print").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-
-                    var printWindow = window.open("/Hr/PrintEmployeeLeaseRider/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.print();
-                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-                        }, 1000);
-                    }, true);
-                }
-            });
-
-
-            $("#pdf").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-                    var printWindow = window.open("/Hr/PdfEmployeeLeaseRider/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            //printWindow.close();
-                        }, 1000);
-                    }, true);
-
-                }
-
-            });
-
-
+          
         });
 
     </script>

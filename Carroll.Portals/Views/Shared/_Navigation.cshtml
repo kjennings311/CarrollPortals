@@ -49,7 +49,7 @@
                 }
 
                     @{
-                        if (@Model.RoleType.ToLower() == "administrator")
+                        if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "pm" || @Model.RoleType.ToLower() == "hr")
                         {
 
                             @*<li>

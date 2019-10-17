@@ -751,6 +751,17 @@ namespace Carroll.Data.Services.Controllers
                 }
               
             }
+            else
+            {
+                fa.La_Property1 ="";
+                fa.La_Property1_Per = null;
+              
+                        fa.La_Property2 = "";
+                        fa.La_Property2_Per = null;
+                   
+                        fa.La_Property3 = "";
+                        fa.La_Property3_Per = null;                   
+            }
          
             fa.Status = HttpContext.Current.Request.Params["status"].ToString();
             fa.AdditionalText = HttpContext.Current.Request.Params["additional"].ToString();

@@ -218,7 +218,7 @@ namespace Carroll.Portals.Controllers
             var action = Request.Params["action"].ToString();
             var refid = Request.Params["refid"].ToString();
             var signature = Request.Params["signature"].ToString();
-            var date = Convert.ToDateTime(Request.Params["date"].ToString());
+            var date = DateTime.Now;
             var empname = Request.Params["empname"].ToString();
             // ip address .
 
@@ -436,7 +436,8 @@ namespace Carroll.Portals.Controllers
             var action = Request.Params["action"].ToString();
             var refid = Request.Params["refid"].ToString();
             var signature = Request.Params["signature"].ToString();
-            var date = Convert.ToDateTime(Request.Params["date"].ToString());
+        //    var date = Convert.ToDateTime(Request.Params["date"].ToString());
+            var date =DateTime.Now;
             var empname = Request.Params["empname"].ToString();
             // ip address 
 
@@ -638,11 +639,11 @@ namespace Carroll.Portals.Controllers
             //var Sign = Request.Params["signature"].ToString();
             //var iscorporate = Request.Params["iscorporate"].ToString();
 
-            DateTime? edate = null;
-            if (!string.IsNullOrEmpty(Request.Params["date"]))
-            {
-                edate = Convert.ToDateTime(Request.Params["date"].ToString());
-            }
+            DateTime? edate = DateTime.Now;
+            //if (!string.IsNullOrEmpty(Request.Params["date"]))
+            //{
+            //    edate = Convert.ToDateTime(Request.Params["date"].ToString());
+            //}
 
 
             // ip address 

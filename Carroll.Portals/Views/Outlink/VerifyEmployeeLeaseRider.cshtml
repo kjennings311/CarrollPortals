@@ -82,7 +82,7 @@
 "><span style="font-size: 9pt; line-height: 115%;">I, <input type="text"  class="" style="width:35%; " value="@Model.EmployeeName" />  , understand and agree to the following :  </span></p>
 
                 <ol>
-                    <li style="text-align: justify;"><span style="font-size: 9pt; line-height: 150%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input type="text" class="" value="@Model.ApartmentMarketRentalValue" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input type="text"  class="" value="@Model.EmployeeMonthlyRent" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
+                    <li style="text-align: justify;"><span style="font-size: 9pt; line-height: 150%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is $ <input type="text" class="allow_decimal" value="@Model.ApartmentMarketRentalValue" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be $ <input type="text"  class="allow_decimal" value="@Model.EmployeeMonthlyRent" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">If at any time during residency at <input type="text"  class="" style="width:45%;" value="@Model.Community" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
@@ -94,8 +94,8 @@
                 <p style="text-align: justify;">
                     <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" class="italic" id="esignature" style="width:25%;margin-left:6%;" disabled /> </span>
 
-                    <input style="float:right; margin-right:15%;width:21%;" value="@DateTime.Now.ToString("MM/dd/yyyy")"  type="text" id="leasedate" />
-                    <span style="font-size: 14px; line-height: 115%; float:right; margin-right:22px; margin-top:10px;">Date : </span>
+                    <input style="float:right; margin-right:15%;width:23%;" value="@DateTime.Now.ToString("MM/dd/yyyy")"  type="text" id="leasedate" />
+                    <span style="font-size: 14px; line-height: 115%; float:right; margin-right:10px; margin-top:10px;">Date : </span>
                 </p>
 
                 <p style="text-align: justify;margin-top:0px;">
@@ -111,7 +111,7 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
 
                 <input type="hidden" id="Action" value="@ViewBag.Action" />
                 <div id="status"> </div>
-                <div class="col-md-12" style="text-align:center;margin-bottom:40px;">
+                <div class="col-md-12" style="text-align:center;margin-bottom:90px;">
                     <button class="btn btn-danger" id="closer" onclick="closeMe();">close</button>
                     <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 

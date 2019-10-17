@@ -3885,6 +3885,13 @@ $(document).ready(function () {
     //    }
     //});
 
+    $(".allow_decimal").on("input", function (evt) {
+        var self = $(this);
+        self.val(self.val().replace(/[^0-9\.]/g, ''));
+        if ((evt.which != 46 || self.val().indexOf('.') != -1) && (evt.which < 48 || evt.which > 57)) {
+            evt.preventDefault();
+        }
+    });
 
     $("#btnUpload").click(function () {
 
@@ -4074,7 +4081,7 @@ $(document).ready(function () {
                 
                 $('#viewlog').DataTable({
                     dom: 'frtip',
-                    "aaSorting": [[1, "asc"]],
+                    "aaSorting": [[1, "desc"]],
                     "aoColumnDefs": [
                         { 'bSortable': false, 'aTargets': [0] }
                     ]
@@ -4083,7 +4090,7 @@ $(document).ready(function () {
               
                 $('#signaturelog').DataTable({
                     dom: 'frtip',
-                    "aaSorting": [[3, "asc"]],
+                    "aaSorting": [[3, "desc"]],
                     "aoColumnDefs": [
                         { 'bSortable': false, 'aTargets': [1] }
                     ]
