@@ -56,6 +56,14 @@ namespace Carroll.Portals.Models
            // if (roles != null && roles.Length == 2) return roles[1];
             return string.Empty;
         }
+
+        public static string ReturnAllowedProperties()
+        {
+            var str = "EF14E853-8958-413C-9B65-319EDE91A1A1seECF41C2B-AE15-46AF-9A66-E7D40FFCCE1EseAFD85A1D-5BA1-4783-9BA4-6DD8FD3436EEse2C86BF5B-9B9A-423D-93CB-B5AC5449A7D3se79789672-54D7-4DD7-9917-408193183FFC";
+            return str.ToLower();
+        }
+
+
         public static void AssignRolesToUser()
         {
             try

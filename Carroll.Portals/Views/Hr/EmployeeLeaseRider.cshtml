@@ -28,7 +28,7 @@
 
                 <h1 style="color:black; text-transform:uppercase"> <b> Employee Lease Rider  </b></h1>
 
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr")
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">
@@ -105,7 +105,7 @@
                                                                 </h1>*@
                                     <form id="submitform" onsubmit="return false;">
 
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="date" id="leasedate" class="" /> </p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="text" id="leasedate" class="date-mask" /> </p>
 
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">Name of Apartment Property :  </span> <select style=" display:inline; " id="location" class=""> </select> <input style=" display:inline;width:40%;display:none " type="text" id="apartmentname" class="" />  </p>
 
@@ -122,11 +122,11 @@
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
                                         </ol>
 
-                                        <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" style="width:35%;" id="signatureproperymanager" /> </span>  <input type="date" style="float:right;margin-right: 15%;
+                                        <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" style="width:35%;" id="signatureproperymanager" /> </span>  <input type="text" class="date-mask" style="float:right;margin-right: 15%;
 
 width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;margin-top:10px;" id="pmdatespan"> Date : </span> </p>
                                         <p style="text-align: justify;">
-                                            <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" style="margin-left:45px;width:35%;" id="signature" disabled /> </span>  <input disabled style="float:right; margin-right:15%;width:15%;" type="date" id="positiondate" />  <span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;"> Date : </span>
+                                            <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" style="margin-left:45px;width:35%;" id="signature" disabled /> </span>  <input disabled style="float:right; margin-right:15%;width:15%;" type="date"value="" id="positiondate" />  <span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;"> Date : </span>
                                         </p>
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Printed Name of Employee <input type="text" disabled style="margin-left:25px;width:35%;" id="printempname" /> </span></p>
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:35%; margin-left:8%;" id="employeeemail" />  </span></p>
@@ -229,8 +229,8 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
         
         $(".addnew").click(function () {
             $("#signature,#positiondate,#printempname").attr('disabled', true);
-            document.getElementById("pmdate").valueAsDate = new Date();
-            document.getElementById("leasedate").valueAsDate = new Date();
+          //  document.getElementById("pmdate").valueAsDate = new Date();
+           // document.getElementById("leasedate").valueAsDate = new Date();
             $("#apartmentname").val('');
             $("#location").val('');
             $("#empname").val('');
@@ -263,7 +263,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
 
           
 
-            document.getElementById("pmdate").valueAsDate = new Date();
+       //     document.getElementById("pmdate").valueAsDate = new Date();
 
 
 

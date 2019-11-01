@@ -117,7 +117,7 @@
 
                 <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Employee New Hire Notice </b></h1>
 
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property")
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">
@@ -161,7 +161,7 @@
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Employee Name:    <input type="text" style="width:42%" id="empname" />        Start Date:<input type="date" style="width:20%;" id="startdate" value="" />  </span>
+                                            <span class="c0"> Employee Name:    <input type="text" style="width:42%" id="empname" />        Start Date:<input type="text" class="date-mask" style="width:20%;" id="startdate" value="" />  </span>
                                         </p>
 
                                         <p class="c1">
@@ -227,21 +227,18 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="date" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
+                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="text" class="date-mask" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
                                             <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:42.5%;margin-left:5%;" />Date <input disabled type="date" style="width:21%" name="name" id="rpmdate" value="" /></span>
                                         </p>
-
-
-
                                         <br /> <br />
                                         <p>Rev. June 2018</p>
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
-                                            <input type="button" id="Submit" style="margin-left:-25%;" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            <input type="button" id="Submit" style="margin-left:-10%;" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                                         </div>
                                     </form>
@@ -551,8 +548,8 @@
                 $("#location").attr('seloption', '');
                 document.getElementById("submitform").reset();
                 $("#esignature,#edate,#rpmsignature,#rpmdate,#manager").attr('disabled', true);
-                document.getElementById("mdate").valueAsDate = new Date();
-                document.getElementById("startdate").valueAsDate = new Date();
+         //       document.getElementById("mdate").valueAsDate = new Date();
+           //     document.getElementById("startdate").valueAsDate = new Date();
 
             });
 
@@ -620,7 +617,7 @@ function AssignManager()
                 }
             });
 
-            document.getElementById("mdate").valueAsDate = new Date();
+  //          document.getElementById("mdate").valueAsDate = new Date();
 
 
 
@@ -995,9 +992,14 @@ function AssignManager()
                         $("#msignature").val(data.msignature);
                         //  $("#salary").val(data.wage_Salary);
 
-                        document.getElementById("mdate").valueAsDate = new Date();
-                        document.getElementById("startdate").valueAsDate = new Date();
+                        //document.getElementById("mdate").valueAsDate = new Date();
+                        //document.getElementById("startdate").valueAsDate = new Date();
+                        $("#mdate,#startdate").datepicker({
+                            format: "mm/dd/yyyy"
+                        }).datepicker("setDate", 'now');
+                      
 
+                       // $("#datechoosen").datepicker("setDate", new Date(data.date));
                         //if (data.mdate != null) {
 
                         //    var d1 = data.mdate.substring(0, 4) + "-" + data.mdate.substring(5, 7) + "-" + data.mdate.substring(8, 10);

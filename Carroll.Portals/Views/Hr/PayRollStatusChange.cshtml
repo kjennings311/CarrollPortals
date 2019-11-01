@@ -26,7 +26,7 @@
 
                 <h1 style="color:black;text-transform:uppercase"> <b> Payroll Status Change  </b></h1>
 
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr")
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">
@@ -88,7 +88,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                                                 <div style="width:100%;display:none;" id="divpropertychange">
                                                     <P class="p4 ft5">Property Change</P>
-                                                    <P class="p5 ft6"> Change Effective Date : <input type="date" id="effectivedate" /> </P>
+                                                    <P class="p5 ft6"> Change Effective Date : <input type="text" class="date-mask" id="effectivedate" /> </P>
                                                     <P class="p5 ft6"> Property Transfer:</P>
                                                     <P class="p5 ft6"> <strong>From : </strong></P>
                                                     <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
@@ -231,8 +231,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </TR>
                                                         <TR>
                                                             <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
-                                                            <TD class="tr1 td10"><P class="p19 ft6">FMLA Eligible? <SPAN class="ft9"><input type="checkbox" id="chkfmlayes" />  </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkfmlano" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
-                                                            <TD class="tr1 td11"><P class="p8 ft6">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
+                                                            <TD class="tr1 td10"><P class="p19 ft6">FMLA Eligible? <SPAN class="ft9"><input type="checkbox" id="chkfmlayes" name="chkfml" />  </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input name="chkfml" type="checkbox" id="chkfmlano" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
+                                                            <TD class="tr1 td11"><P class="p8 ft6">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" name="chkbenefit" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" name="chkbenefit" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
                                                         </TR>
                                                     </TABLE>
                                                     <P class="p20 ft1">
@@ -263,7 +263,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             </option>
                                                         </select>  <span style="display:none;" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
                                                     </P>
-                                                    <P class="p20 ft1">  Begin: <input type="date" style="width:20%;" id="leavebegin" /> Expected End:<input type="date" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" style="width:25%" id="ptobalance" /> </P>
+                                                    <P class="p20 ft1">  Begin: <input type="text" class="date-mask" style="width:20%;" id="leavebegin" /> Expected End:<input type="text" class="date-mask" class="date-mask" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
 
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
@@ -274,7 +274,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                     <P class="p6 ft1">  </P>
                                                 </div>
                                                 <P class="p6 ft1">Employee Signature: <input type="text" style="width:55%;" disabled id="esignature" />  Date: <input type="date" disabled id="edate" /> </P>
-                                                <P class="p6 ft1">Supervisor Signature: <input type="text" style="width:55%;" id="msignature" /> Date: <input disabled type="date" id="mdate" /></P>
+                                                <P class="p6 ft1">Supervisor Signature: <input type="text" style="width:55.4%;" id="msignature" /> Date: <input disabled type="text" style="width:16%" class="date-mask" id="mdate" /></P>
                                             </div>
                                         </DIV>
                                         <div id="status"> </div>
@@ -1002,15 +1002,21 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             var leaseid = "";
+
+            $('input[type="checkbox"]').on('change', function () {
+                $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+            });
+
 
             $(".addnew").click(function () {
              
                 $("#location").attr('seloption', '');
                 document.getElementById("submitform").reset();
                 $("#esignature,#edate,#mdate").attr('disabled', true);
-                document.getElementById("mdate").valueAsDate = new Date();
+              //  document.getElementById("mdate").valueAsDate = new Date();
                 
             });
 
@@ -1059,7 +1065,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             });
 
 
-            document.getElementById("mdate").valueAsDate = new Date();
+          //  document.getElementById("mdate").valueAsDate = new Date();
 
 
             $(".showchange").change(function (e) {
@@ -1537,54 +1543,54 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     var p1 = 0, p2 = 0, p3 = 0;
 
-                    if ($("#la_Prop1per").val() != "")
-                        p1 = parseFloat($("#la_Prop1per").val());
-                    if ($("#la_Prop2per").val() != "")
-                        p2 = parseFloat($("#la_Prop2per").val());
-                    if ($("#la_Prop3per").val() != "")
-                        p3 = parseFloat($("#la_Prop3per").val());
+                    if ($("#prop1").val() != "")
+                        p1 = parseFloat($("#prop1per").val());
+                    if ($("#prop2").val() != "")
+                        p2 = parseFloat($("#prop2per").val());
+                    if ($("#prop3").val() != "")
+                        p3 = parseFloat($("#prop3per").val());
                     var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
 
-                    console.log(sum);
+                    console.log('sum value is '+sum);
 
 
                     if (sum != 100)
                     {
 
-                        if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "")
+                        if ($("#prop1per").val() != "" && $("#prop1").val() == "")
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
                             $("#la_Prop1").addClass('has-error');
 
                             if (control == "")
-                                control = $("#la_Prop1");
+                                control = $("#prop1");
                         }
 
 
-                        if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "")
+                        if ($("#prop2per").val() != "" && $("#prop2").val() == "")
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                            $("#la_Prop2").addClass('has-error');
+                            $("#prop2").addClass('has-error');
 
                             if (control == "")
-                                control = $("#la_Prop2");
+                                control = $("#prop2");
                         }
 
 
-                        if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "")
+                        if ($("#prop3per").val() != "" && $("#prop3").val() == "")
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                            $("#la_Prop3").addClass('has-error');
+                            $("#prop3").addClass('has-error');
 
                             if (control == "")
-                                control = $("#la_Prop3");
+                                control = $("#prop3");
                         }
 
                         errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
-                        control = $("#la_Prop3");
+                        control = $("#prop3");
 
                     }
 

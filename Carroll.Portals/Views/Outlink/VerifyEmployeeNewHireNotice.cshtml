@@ -269,13 +269,13 @@
                     <img src="~/img/newhirenotice.png">
                 </span>
             </p>
-            <p class="c1 c8" style="margin-left: 20%;
+            <p class="c1 c8" style="margin-left: 25%;
     margin-top: 15px;
     margin-bottom: 15px;">
                 <span class="c7"> NEW HIRE NOTICE </span>
             </p>
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:50%" value="@Model.EmployeeName" id="empname" />        Start Date:<input style="width:20%;" value="@Model.StartDate.Value.ToShortDateString()" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:50%" value="@Model.EmployeeName" id="empname" />  Start Date:<input style="width:20%;" value="@Model.StartDate.Value.ToString("MM/dd/yyyy")" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
 
             <p class="c1">
@@ -434,17 +434,17 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
                 </p>
 
                 <p class="c1">
-                    <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                    <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToString("MM/dd/yyyy")" /> </span>
                 </p>
             }
             else if (ViewBag.Action == "Regional Email")
             {
                 <p class="c1" style="margin-top:50px;">
-                    <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:49%;" />    Date <input type="text" disabled style="width:21%;" name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" /></span>
+                    <span class="c0">Employee Signature <input disabled type="text" id="esignature" class="italic" value="@Model.esignature" style="width:49%;" />    Date <input type="text" disabled style="width:21%;" name="name" id="edate" value="@Model.edate.Value.ToString("MM/dd/yyyy")" /></span>
                 </p>
 
                 <p class="c1">
-                    <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToShortDateString()" /> </span>
+                    <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToString("MM/dd/yyyy")" /> </span>
                 </p>
 
                 <p class="c1">

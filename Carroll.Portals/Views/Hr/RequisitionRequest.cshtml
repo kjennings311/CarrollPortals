@@ -31,19 +31,17 @@
 
                 <h1 style="padding-top:5px;color:black;text-transform:uppercase"> <b>  Requistion Request </b></h1>
 
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr" )
                 {
-
                     <div class="ibox-tools" style="margin-top:-55px;">
 
-                        @*@if (@Model.RoleType.ToLower() == "hr")
-                        {*@
+                        @if (@Model.RoleType.ToLower() == "hr")
+                        {
                             <a disabled="disabled" class="btnEdit" href="#" style="font-size:30px; color:white; font-weight:bold"><i class="fa fa-edit"></i> Edit</a> } @*
                             <a disabled="disabled" class="btnDelete" href="#">
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
-                       @* }*@
-
+                        }
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('Requistion Request');">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
@@ -86,7 +84,7 @@
                                                             }
                                                             else
                                                             {
-                                                                <input type="date" id="datechoosen" />
+                                                                <input type="text" class="date-mask" id="datechoosen" />
                                                             }
                                                         </P>
                                                     </TD>
@@ -115,7 +113,7 @@
 
                                             <P class="p8 ft0">For Recruiting Use <SPAN class="ft1">:</SPAN> </P>
                                             <P class="p7 ft1">Requisition Number(s): <input type="text" disabled id="requisitionnumber" /> </P>
-                                            <P class="p7 ft1">Date Posted:<input type="date" style="margin-left: 9.4%;
+                                            <P class="p7 ft1">Date Posted:<input type="text"  data-date-format="mm/dd/yyyy" class="date-mask" style="margin-left: 9.4%;
 width: 25%;" disabled id="dateposted" /></P>
                                             <P class="p7 ft1">Notes:</P>
                                             <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1"> </textarea></P>
@@ -353,7 +351,8 @@ width: 25%;" disabled id="dateposted" /></P>
             $(".addnew").click(function ()
             {
                 document.getElementById("submitform").reset();
-                document.getElementById("datechoosen").valueAsDate = new Date();
+             //   document.getElementById("datechoosen").valueAsDate = new Date();
+                ApplyDateMask();
                 $("input,select,textarea").prop("disabled", false);
                 //$("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
                 $("#notes1,#requisitionnumber,#dateposted,#datechoosen").prop("disabled", true);
@@ -409,9 +408,16 @@ width: 25%;" disabled id="dateposted" /></P>
                         $("#propertyname").html(options);
                        
 
-                        var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
-                        document.getElementById("datechoosen").valueAsDate = new Date(d);
-                        //$("#datechoosen").val(d);
+                   //   var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
+                      //  document.getElementById("datechoosen").valueAsDate = new Date(d);
+                      //  $("#datechoosen").val(d);
+                        $("#datechoosen").datepicker({
+                            format: "mm/dd/yyyy"
+                        });
+                        console.log(data.date);
+
+                        $("#datechoosen").datepicker("setDate", new Date(data.date));
+
                         //alert(d);
 
                         $("#requestorname").val(data.requestorName);
@@ -536,8 +542,14 @@ width: 25%;" disabled id="dateposted" /></P>
 
                         if (data.datePosted != null)
                         {
-                            var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
-                            $("#dateposted").val(d1);
+                           // var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
+                        //    $("#dateposted").val(d1);
+
+                            $("#dateposted").datepicker({
+                                format: "mm/dd/yyyy"
+                            });
+
+                            $("#dateposted").datepicker("setDate", new Date(data.datePosted));
                         }
 
                         //   $("#dateposted").val(data.datePosted);

@@ -1004,7 +1004,7 @@ namespace Carroll.Data.Services.Controllers
                 fa.ToStatus = HttpContext.Current.Request.Params["tostatus"].ToString();
                 fa.ToWageSalary = HttpContext.Current.Request.Params["towage"].ToString();
                 fa.ToRate = Convert.ToDouble(HttpContext.Current.Request.Params["torate"].ToString());
-
+                fa.BeginPayPeriod = HttpContext.Current.Request.Params["beginpayperiod"].ToString();
 
             }
 
@@ -1024,7 +1024,7 @@ namespace Carroll.Data.Services.Controllers
                 else
                     TypeofChange = "Labor Allocation";
 
-                fa.BeginPayPeriod = HttpContext.Current.Request.Params["beginpayperiod"].ToString();
+             
                 fa.La_Property1 = HttpContext.Current.Request.Params["prop1"].ToString();
                 if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["prop1per"].ToString()))
                     fa.La_Property1_Per = Convert.ToDouble(HttpContext.Current.Request.Params["prop1per"].ToString());
@@ -1046,7 +1046,7 @@ namespace Carroll.Data.Services.Controllers
                 fa.FmlaYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlayes"].ToString());
                 fa.FmlaNo = Convert.ToBoolean(HttpContext.Current.Request.Params["chkfmlano"].ToString());
                 fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefityes"].ToString());
-                fa.EnrolledBenefitsYes = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefitno"].ToString());
+                fa.EnrolledBenefitNo = Convert.ToBoolean(HttpContext.Current.Request.Params["chkbenefitno"].ToString());
                 fa.Leave_Purpose = HttpContext.Current.Request.Params["purpose"].ToString();
                 fa.Leave_Purpose_Other = HttpContext.Current.Request.Params["purposeother"].ToString();
                 fa.Leave_Begin = Convert.ToDateTime(HttpContext.Current.Request.Params["leavebegin"].ToString());
@@ -1067,7 +1067,7 @@ namespace Carroll.Data.Services.Controllers
             //fa.Chk_PhoneAmount = Convert.ToBoolean(HttpContext.Current.Request.Params["chkphoneamount"].ToString());
             //fa.PhoneAmountPerMonth = Convert.ToDouble(HttpContext.Current.Request.Params["txtphoneamount"].ToString());
 
-          if(string.IsNullOrEmpty(HttpContext.Current.Request.Params["notes1"].ToString()))
+          if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["notes1"].ToString()))
           fa.Notes1 = HttpContext.Current.Request.Params["notes1"].ToString();
 
             // fa.Notes2 = HttpContext.Current.Request.Params["notes2"].ToString();
@@ -1275,9 +1275,14 @@ namespace Carroll.Data.Services.Controllers
             fa.EffectiveDateOfChange = Convert.ToDateTime(Convert.ToDateTime(HttpContext.Current.Request.Params["datechange"]));
             fa.EmployeeName = HttpContext.Current.Request.Params["empname"].ToString();
             fa.EligibleForReHire = HttpContext.Current.Request.Params["rehire"].ToString();
-            if(!string.IsNullOrEmpty(HttpContext.Current.Request.Params["location"].ToString()))
-            fa.location = HttpContext.Current.Request.Params["location"].ToString();
+          
             fa.IsCoporate =Convert.ToBoolean(HttpContext.Current.Request.Params["iscorporate"].ToString());
+
+            if(fa.IsCoporate == false )
+            {
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["location"].ToString()))
+                    fa.location = HttpContext.Current.Request.Params["location"].ToString();
+            }
             fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
             fa.PropertyNumber = HttpContext.Current.Request.Params["propertynumber"].ToString();
             fa.JobTitle = HttpContext.Current.Request.Params["jobtitile"].ToString();
@@ -1704,9 +1709,9 @@ namespace Carroll.Data.Services.Controllers
 
         [ActionName("GetAllHrForms")]
         [HttpGet]
-        public dynamic GetAllHrForms(string FormType, string OptionalSeachText = "")
+        public dynamic GetAllHrForms(Guid? userid, string FormType, string OptionalSeachText = "")
         {
-            return _service.GetAllHrForms(FormType, OptionalSeachText);
+            return _service.GetAllHrForms(userid,FormType, OptionalSeachText);
         }
 
         [ActionName("GetAllMileageForms")]

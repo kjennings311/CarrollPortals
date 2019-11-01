@@ -21,7 +21,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
         dynamic GetAllClaims(Guid? userid,Guid? propertyid,string Type, string OptionalSeachText);
-        dynamic GetAllHrForms(string FormType, string OptionalSeachText);
+        dynamic GetAllHrForms(Guid? userid, string FormType, string OptionalSeachText);
         dynamic GetHrFormCount();
         dynamic GetUserClaimCount(Guid userid);
         dynamic GetClaimDetails(string Claim, char Type);

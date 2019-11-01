@@ -1,7 +1,7 @@
 ﻿
-  var $BaseApiUrl = "http://localhost:1002/";
+//  var $BaseApiUrl = "http://localhost:1002/";
 
-// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -668,6 +668,20 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
     });
 }
 
+
+function ApplyDateMask()
+{
+    $('input[type="date"]').datepicker({
+        format: "mm/dd/yyyy",
+        "setDate": new Date()
+    });
+
+    $('.date-mask').datepicker({
+        format: "mm/dd/yyyy"
+    }).datepicker("setDate", 'now');
+}
+
+
 function LoadHrForm(formname) {
     $("#myModal").modal({
         backdrop: 'static',
@@ -688,7 +702,8 @@ function LoadHrForm(formname) {
         }
 
     });
-
+    setTimeout(function () { ApplyDateMask();  }, 2000);
+    
    
 }
 
@@ -2346,7 +2361,6 @@ function LoadMoldDamageClaims() {
 }
 
 
-
 function ApplyInputMask(container) {
     //https://github.com/RobinHerbots/jquery.inputmask
 
@@ -3020,7 +3034,7 @@ function GetAllHRFORMs(formtype) {
             $.ajax({
                 type: "get",
                 dataType: "json",headers: { 'Access-Control-Allow-Origin': true },
-                url: $BaseApiUrl + "api/data/GetAllHrForms?FormType=" + formtype,
+                url: $BaseApiUrl + "api/data/GetAllHrForms?FormType=" + formtype + "&userid="+ $("#CreatedBy").val(),
                 async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -3225,25 +3239,62 @@ var claimbody = "";
 var $details = "";
 
 function LoadAllProperties() {
-      
+
+
+    // now let's load options into select box
+   // $('#' + fieldId).append(options);
+    var st = $("#UserPropertyAccess").val();
+    var propertyarray = Array();
+
+    if (st.includes("se")) {
+        propertyarray = $("#UserPropertyAccess").val().split('se');
+    }
+    else
+        propertyarray.push(st);
+
 
     var options1 = "<option value='' > Select Property </option>";
 
-    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data)
+    {
         var defaultsel = $("#location").attr('seloption');
 
-        for (var i = 0; i < data.length; i++) {
-            if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
-                options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+        for (var i = 0; i < data.length; i++)
+        {
+            if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR" ) {
+
+                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                else
+                    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                selected = "";
+
+            }
             else
-                options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
-            selected = "";
+            {
+                if (propertyarray.includes(data[i]["key"]))
+                {                   
+                    options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                }
+            }
+
+            //if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
+
+            //    if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+            //        options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            //    else
+            //        options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            //    selected = "";
+            //}
+            //else {
+
+            //}
 
         }
         // now let's load options into select box
         $('#location').html(options1);
         if ($("#property1").length > 0) {
-            $('#property1').html(options);
+            $('#property1').html(options1);
         }
     });
 
@@ -3273,17 +3324,50 @@ function LoadHrPositions()
         }
     });
 
+    var st = $("#UserPropertyAccess").val();
+    var propertyarray = Array();
+
+    if (st.includes("se")) {
+        propertyarray = $("#UserPropertyAccess").val().split('se');
+    }
+    else
+        propertyarray.push(st);
+
+
     var options1 = "<option value='' > Select Property </option>";
 
-    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data)
+    {
         var defaultsel = $("#location").attr('seloption');
 
-        for (var i = 0; i < data.length; i++) {
-            if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
-                options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
-            else
-                options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
-            selected = "";
+        console.log(defaultsel);
+
+        for (var i = 0; i < data.length; i++)
+        {
+            if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
+
+                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                else
+                    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                selected = "";
+
+            }
+            else {
+                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"]  ) {
+                    options1 += "<option selected value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                }
+                else
+                    if (propertyarray.includes(data[i]["key"])) {
+                        options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                    }
+            }
+
+            //if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+            //    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            //else
+            //    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+           selected = "";
 
         }
         // now let's load options into select box
@@ -3298,6 +3382,16 @@ function LoadHrPositions()
 
 function LoadPropertiesForSelect(iskey,control)
 {
+
+    var st = $("#UserPropertyAccess").val();
+    var propertyarray = Array();
+
+    if (st.includes("se")) {
+        propertyarray = $("#UserPropertyAccess").val().split('se');
+    }
+    else
+        propertyarray.push(st);
+
     var options1 = "<option value='' > Select Property </option>";
 
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
@@ -3307,10 +3401,27 @@ function LoadPropertiesForSelect(iskey,control)
         {
             for (var i = 0; i < data.length; i++)
             {
-                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
-                    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
-                else
-                    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+
+                if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
+
+                    if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                        options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                    else
+                        options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                    selected = "";
+
+                }
+                else {
+                    if (propertyarray.includes(data[i]["key"])) {
+                        options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                    }
+                }
+
+
+                //if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                //    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                //else
+                //    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
                 selected = "";
             }
         }
@@ -3318,10 +3429,25 @@ function LoadPropertiesForSelect(iskey,control)
         {
             for (var i = 0; i < data.length; i++)
             {
-                if (defaultsel == data[i]["value"])
-                    options1 += "<option selected value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
-                else
-                    options1 += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+                if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
+
+                    if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                        options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                    else
+                        options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                    selected = "";
+
+                }
+                else {
+                    if (propertyarray.includes(data[i]["key"])) {
+                        options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                    }
+                }
+
+                //if (defaultsel == data[i]["value"])
+                //    options1 += "<option selected value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+                //else
+                //    options1 += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
                 selected = "";
 
             }

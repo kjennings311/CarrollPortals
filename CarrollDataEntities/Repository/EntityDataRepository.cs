@@ -291,6 +291,17 @@ namespace Carroll.Data.Entities.Repository
                             var _dbuser = _entities.SiteUsers.Where(x => x.UserId == _user.UserId).FirstOrDefault();
                             if (_dbuser == null)
                             {
+
+                                var _dbuser1 = _entities.SiteUsers.Where(x => x.UserEmail == _user.UserEmail).FirstOrDefault();
+
+                                if(_dbuser1 != null)
+                                {
+                                    _result.RecordId = "user already exists";
+                                    _result.Succeded = false;
+
+                                    return _result;
+                                }
+
                                 if ((_user.UserId.ToString() == "00000000-0000-0000-0000-000000000000") || (_user.UserId == null))
                                 {
                                     _user.UserId = Guid.NewGuid();
@@ -405,6 +416,22 @@ namespace Carroll.Data.Entities.Repository
                             var _dbuserinrole = _entities.UserInRoles.Where(x => x.UserRoleId == _userrole.UserRoleId).FirstOrDefault();
                             if (_dbuserinrole == null)
                             {
+
+                                var res = (from tbl in _entities.UserInRoles
+                                           join tb in _entities.SiteUsers  on tbl.UserId equals tb.UserId
+                                           join tblrole in _entities.Roles on tbl.RoleId equals tblrole.RoleId
+                                           where tbl.UserId == _userrole.UserId
+                                           select new { tblrole.RoleName,tb.UserEmail }).FirstOrDefault();
+
+                                if (res != null)
+                                {
+                                    _result.RecordId = res.UserEmail+" is already assigned to "+res.RoleName;
+                                    _result.Succeded = false;
+
+                                    return _result;
+                                }
+
+
                                 if ((_userrole.UserRoleId.ToString() == "00000000-0000-0000-0000-000000000000") || (_userrole.UserRoleId == null))
                                 {
                                     _userrole.UserRoleId = Guid.NewGuid();
@@ -2558,7 +2585,7 @@ tbl.UploadedDate descending
         }
 
 
-        public dynamic GetAllHrForms(string FormType, string optionalSeachText)
+        public dynamic GetAllHrForms(Guid? userid, string FormType, string optionalSeachText)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -2569,9 +2596,9 @@ tbl.UploadedDate descending
                 if (FormType == "LeaseRider")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallemployeeleaseriders().ToList();
+                        config.Rows = _entities.proc_getallemployeeleaseriders(userid).ToList();
                     else
-                        config.Rows = _entities.proc_getallemployeeleaseriders().Where(x => x.Community.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallemployeeleaseriders(userid).Where(x => x.Community.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(proc_getallemployeeleaseriders_Result).GetProperties();
@@ -2600,9 +2627,9 @@ tbl.UploadedDate descending
                 else if (FormType == "Requisition Request")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallrequisitionrequests().ToList();
+                        config.Rows = _entities.proc_getallrequisitionrequests(userid).ToList();
                     else
-                        config.Rows = _entities.proc_getallrequisitionrequests().Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.RequestorName.ToLower().Contains(optionalSeachText.ToLower()) || x.RequestorPosition.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallrequisitionrequests(userid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.RequestorName.ToLower().Contains(optionalSeachText.ToLower()) || x.RequestorPosition.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(RequisitionRequest).GetProperties();
@@ -2626,9 +2653,9 @@ tbl.UploadedDate descending
                 else if (FormType == "PayRollChange")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallpayrollstatuschange().ToList();
+                        config.Rows = _entities.proc_getallpayrollstatuschange(userid).ToList();
                     else
-                        config.Rows = _entities.proc_getallpayrollstatuschange().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.ChangeEffectiveDate.Value.ToShortDateString().ToLower().Contains(optionalSeachText.ToLower()) || x.TypeOfChange.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallpayrollstatuschange(userid).Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.ChangeEffectiveDate.Value.ToShortDateString().ToLower().Contains(optionalSeachText.ToLower()) || x.TypeOfChange.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(PayrollStatusChangeNotice).GetProperties();
@@ -2650,9 +2677,9 @@ tbl.UploadedDate descending
                 else if (FormType == "EmployeeSeparation")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallnoticeofemployeeseparation().ToList();
+                        config.Rows = _entities.proc_getallnoticeofemployeeseparation(userid).ToList();
                     else
-                        config.Rows = _entities.proc_getallnoticeofemployeeseparation().Where(x => x.EffectiveDateOfChange.Value.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.EligibleForReHire.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.PropertyNumber.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.JobTitle.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallnoticeofemployeeseparation(userid).Where(x => x.EffectiveDateOfChange.Value.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.EligibleForReHire.ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.PropertyNumber.ToLower().Contains(optionalSeachText.ToLower()) || x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.JobTitle.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(proc_getallnoticeofemployeeseparation_Result).GetProperties();
@@ -2674,9 +2701,9 @@ tbl.UploadedDate descending
                 else if (FormType == "New Hire Notice")
                 {
                     if (string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.proc_getallemployeenewhirenoticenew().ToList();
+                        config.Rows = _entities.proc_getallemployeenewhirenoticenew(userid).ToList();
                     else
-                        config.Rows = _entities.proc_getallemployeenewhirenoticenew().Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                        config.Rows = _entities.proc_getallemployeenewhirenoticenew(userid).Where(x => x.EmployeeName.ToLower().Contains(optionalSeachText.ToLower()) || x.StartDate.Value.ToShortDateString().ToString().ToLower().Contains(optionalSeachText.ToLower()) || x.Location.ToLower().Contains(optionalSeachText.ToLower())).ToList();
 
                     config.EtType = EntityType.AllClaims.ToString();
                     PropertyInfo[] userprop = typeof(proc_getallemployeenewhirenoticenew_Result).GetProperties();
@@ -4577,6 +4604,8 @@ tbl.UploadedDate descending
                                    where tbl.PropertyNumber == PropertyNumber
                                    select new { tbl.PropertyName,tbl.PropertyManager }).FirstOrDefault();
                 var manager = "";
+
+                if(propertyres != null)
                 if(propertyres.PropertyManager != null)
                 {
 

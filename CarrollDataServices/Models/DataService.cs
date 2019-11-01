@@ -253,9 +253,9 @@ namespace Carroll.Data.Services.Models
             return _repository.InsertAttachment(formAttachment);
         }
 
-      public  dynamic GetAllHrForms(string FormType, string OptionalSeachText)
+      public  dynamic GetAllHrForms(Guid? userid, string FormType, string OptionalSeachText)
         {
-            return _repository.GetAllHrForms(FormType, OptionalSeachText);
+            return _repository.GetAllHrForms(userid,FormType, OptionalSeachText);
         }
 
         public dynamic GetAllMileageForms(string FormType,string userid, string OptionalSeachText)

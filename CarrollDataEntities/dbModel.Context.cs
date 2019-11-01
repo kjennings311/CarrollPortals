@@ -137,14 +137,22 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpropertydetails_Result>("proc_getpropertydetails", propidParameter);
         }
     
-        public virtual ObjectResult<proc_getallpayrollstatuschange_Result> proc_getallpayrollstatuschange()
+        public virtual ObjectResult<proc_getallpayrollstatuschange_Result> proc_getallpayrollstatuschange(Nullable<System.Guid> userid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallpayrollstatuschange_Result>("proc_getallpayrollstatuschange");
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallpayrollstatuschange_Result>("proc_getallpayrollstatuschange", useridParameter);
         }
     
-        public virtual ObjectResult<proc_getallrequisitionrequests_Result> proc_getallrequisitionrequests()
+        public virtual ObjectResult<proc_getallrequisitionrequests_Result> proc_getallrequisitionrequests(Nullable<System.Guid> userid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallrequisitionrequests_Result>("proc_getallrequisitionrequests");
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallrequisitionrequests_Result>("proc_getallrequisitionrequests", useridParameter);
         }
     
         public virtual ObjectResult<proc_getallmonthlyexpensedetails_Result> proc_getallmonthlyexpensedetails(Nullable<System.Guid> userid)
@@ -209,19 +217,31 @@ namespace Carroll.Data.Entities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenotice1_Result1>("proc_getallemployeenewhirenotice1");
         }
     
-        public virtual ObjectResult<proc_getallemployeenewhirenoticenew_Result> proc_getallemployeenewhirenoticenew()
+        public virtual ObjectResult<proc_getallemployeenewhirenoticenew_Result> proc_getallemployeenewhirenoticenew(Nullable<System.Guid> userid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenoticenew_Result>("proc_getallemployeenewhirenoticenew");
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeenewhirenoticenew_Result>("proc_getallemployeenewhirenoticenew", useridParameter);
         }
     
-        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders()
+        public virtual ObjectResult<proc_getallemployeeleaseriders_Result> proc_getallemployeeleaseriders(Nullable<System.Guid> userid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders");
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallemployeeleaseriders_Result>("proc_getallemployeeleaseriders", useridParameter);
         }
     
-        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation()
+        public virtual ObjectResult<proc_getallnoticeofemployeeseparation_Result> proc_getallnoticeofemployeeseparation(Nullable<System.Guid> userid)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation");
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getallnoticeofemployeeseparation_Result>("proc_getallnoticeofemployeeseparation", useridParameter);
         }
     
         public virtual ObjectResult<proc_getcontactsforexcel_Result1> proc_getcontactsforexcel()

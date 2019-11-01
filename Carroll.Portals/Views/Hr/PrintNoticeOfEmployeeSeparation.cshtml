@@ -446,11 +446,11 @@
             <DIV class="dclr"></DIV>
             <p class="p0 ft0" style="font-weight: bolder;margin-left:-2%;margin-top:0px;"> Notice of Employee Separation </p>
             <p class="p1 ft1">
-                Effective Date of Change <input style="width:39%;" type="text" value="@Model.EffectiveDateOfChange.Value.ToShortDateString()" id="effectivedate" /> Eligible for Rehire  <input type="text" value="@Model.EligibleForReHire" readonly />
+                Effective Date of Change <input style="width:39%;" type="text" value="@Model.EffectiveDateOfChange.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> Eligible for Rehire  <input type="text" value="@Model.EligibleForReHire" readonly />
             </p>
            
             <p class="p1 ft1">
-                @if (Model.IsCoporate.ToString() == "true")
+                @if (Model.IsCoporate.ToString().ToLower() == "true")
                 {
 
                 <span class="c0">
@@ -974,7 +974,7 @@ margin: 10px;min-height:50px;">@Model.AdditionalRemarks</P>
                 </select>
             </SPAN>(If yes, please indicate vacation balance:<input type="text" value="@Model.VacationBalance" id="vacationbalance" style="width:10%" />)
         </P>
-        <P class="p17 ft1">Supervisor’s Signature: <input type="text" style="width:51%" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToShortDateString()" /></P>
+        <P class="p17 ft1">Supervisor’s Signature: <input type="text" style="width:51%" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToString("MM/dd/yyyy")" /></P>
 
 
         <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>

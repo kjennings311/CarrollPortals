@@ -306,7 +306,7 @@
                 <span class="c7"> NEW HIRE NOTICE </span>
             </p>
             <p class="c1">
-                <span class="c0"> Employee Name:    <input type="text" style="width:50%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToShortDateString()" style="width:20%;" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
+                <span class="c0"> Employee Name:    <input type="text" style="width:50%" value="@Model.EmployeeName" id="empname" />        Start Date:<input value="@Model.StartDate.Value.ToString("MM/dd/yyyy")" style="width:20%;" data-date-format="MM-DD-YYYY" type="text" id="startdate" />  </span>
             </p>
 
             <p class="c1">
@@ -392,7 +392,8 @@
                     </td>
                 </tr>
                 <tr> <td> Property </td> <td> Percentage </td> </tr>
-                @if (Model.iscorporate.ToString().ToLower() == "true")
+
+                @if (Model.iscorporate.ToString().ToLower() != "true")
                 {
 
                     if (!string.IsNullOrEmpty(Model.La_Property1))
@@ -462,7 +463,7 @@ margin: 10px;"> @Model.AdditionalText </p>
                     Employee Signature <input type="text" id="esignature" class="italic" value="@Model.esignature" style="width:48%;" />    Date
                     @if (Model.edate != null)
                     {
-                        <input type="text" name="name" id="edate" value="@Model.edate.Value.ToShortDateString()" />
+                        <input type="text" name="name" id="edate" value="@Model.edate.Value.ToString("MM/dd/yyyy")" />
                     }
                     else
                     {
@@ -476,7 +477,7 @@ margin: 10px;"> @Model.AdditionalText </p>
                     Manager&rsquo;s Authorizing Signature <input type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date
                     @if (Model.mdate != null)
                     {
-                        <input type="text" name="name" id="edate" value="@Model.mdate.Value.ToShortDateString()" />
+                        <input type="text" name="name" id="edate" value="@Model.mdate.Value.ToString("MM/dd/yyyy")" />
                     }
                     else
                     {
@@ -485,12 +486,12 @@ margin: 10px;"> @Model.AdditionalText </p>
 
                 </span>
             </p>
-            <p class="c1">
+            <p class="c1" style="margin-bottom:20px;">
                 <span class="c0">
                     RPM Signature  <input type="text" id="rpmsignature" class="italic" style="width:49%;margin-left:4%;" value="@Model.rpmsignature" />Date
                     @if (Model.rpmdate != null)
                     {
-                        <input type="text" name="name" id="edate" value="@Model.rpmdate.Value.ToShortDateString()" />
+                        <input type="text" name="name" id="edate" value="@Model.rpmdate.Value.ToString("MM/dd/yyyy")" />
                     }
                     else
                     {

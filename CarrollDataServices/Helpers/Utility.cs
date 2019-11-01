@@ -138,8 +138,23 @@ namespace Carroll.Data.Services.Helpers
             }
             else if (!bSucceded)
             {
+                if (OptionalData != "")
+                {
+                    return new HttpResponseMessage()
+                    {
+
+                        Content = new StringContent(
+                       OptionalData,
+                       Encoding.UTF8,
+                       "application/json"
+                   ),
+                        StatusCode = HttpStatusCode.InternalServerError
+                    };
+                }
+                else
                 return new HttpResponseMessage()
                 {
+                   
                     Content = new StringContent(
                         "There were Errors processing your request. Please try back later.",
                         Encoding.UTF8,

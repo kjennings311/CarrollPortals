@@ -709,7 +709,138 @@ namespace Carroll.Portals.Controllers
 
 
             }
-            else
+            else if (action == "Employee Email" && iscorporate.ToLower() == "true")
+            {
+                //var mgr = WorkflowHelper.GetMgrNamefromnewhire(retu);
+                //WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, mgr);
+
+                // WorkflowHelper.UpdatePmBrowserInfo(retu, "NewHire", "Regional Email", browserDetails, VisitorsIPAddress);
+                WorkflowHelper.InsertHrLog("NewHire", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for New Hire Notice on" + DateTime.Now, empname);
+
+                var Message = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Manager Email", "System");
+
+                // write your email function here..
+                MailMessage mail = new MailMessage();
+
+
+                AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                        null, MediaTypeNames.Text.Html);
+
+                SmtpClient smtp = EmailHelper.SetMailServerSettings();
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                foreach (var item in Message.EmailTo)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        Match match = regex.Match(item);
+                        if (match.Success)
+                        {
+                            mail.To.Add(item);
+                        }
+                    }
+                }
+
+                mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+
+
+                //foreach (var item in Message.EmailCc)
+                //{
+                //    mail.CC.Add(new MailAddress(item));
+                //}
+
+                mail.AlternateViews.Add(av1);
+
+                mail.IsBodyHtml = true;
+
+                dynamic obj = new { };
+
+                var client = new HttpClient();
+
+                //Passing service base url  
+                client.BaseAddress = new Uri(Baseurl);
+
+                client.DefaultRequestHeaders.Clear();
+                //Define request data format  
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient  
+                //   HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeLeaseRider?riderid="+id);
+                HttpResponseMessage Res = await client.GetAsync("api/data/GetEmployeeNewHireNotice?riderid=" + retu);
+
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj = JsonConvert.DeserializeObject<PrintEmployeeNewHireNotice>(EmpResponse);
+
+
+                }
+
+                HttpResponseMessage Res1 = await client.GetAsync("api/data/GetHRFormsActivityLogExport?Id=" + retu + "&FormType=" + "NewHire");
+                //Checking the response is successful or not which is sent using HttpClient  
+                if (Res1.IsSuccessStatusCode)
+                {
+                    //Storing the response details recieved from web api   
+                    var EmpResponse = Res1.Content.ReadAsStringAsync().Result;
+
+                    //Deserializing the response recieved from web api and storing into the Employee list  
+                    obj.printActivity = JsonConvert.DeserializeObject<PrintActivity>(EmpResponse);
+
+                }
+
+                var actionPDF = new Rotativa.ViewAsPdf("../Hr/PrintEmployeeNewHireNotice", obj)//some route values)
+                {
+                    //FileName = "TestView.pdf",
+                    PageSize = Size.A4,
+                    PageOrientation = Rotativa.Options.Orientation.Portrait,
+                    CustomSwitches = "--disable-smart-shrinking",
+                    PageMargins = { Left = 1, Right = 1 }
+                };
+
+
+                byte[] applicationPDFData = actionPDF.BuildFile(ControllerContext);
+
+                MemoryStream file = new MemoryStream(applicationPDFData);
+                file.Seek(0, SeekOrigin.Begin);
+
+                Attachment data = new Attachment(file, (string)obj.EmployeeName + "_EmployeeNewHireNotice" + ".pdf", "application/pdf");
+
+                System.Net.Mime.ContentDisposition disposition = data.ContentDisposition;
+                disposition.CreationDate = System.DateTime.Now;
+                disposition.ModificationDate = System.DateTime.Now;
+                disposition.DispositionType = DispositionTypeNames.Attachment;
+
+                mail.Attachments.Add(data);
+
+                mail.Subject = Message.Subject;
+                mail.Body = Message.Body;
+                //   mail.To.Clear();
+                // remove this line before going production
+                //  mail.To.Add("pavan.nanduri@carrollorg.com");
+                mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+                mail.To.Add("Shashank.Trivedi@carrollorg.com");
+
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mail.Priority = MailPriority.High;
+                try
+                {
+                    smtp.Send(mail);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+
+            }
+
+
+             else
             {
                 var mgr = WorkflowHelper.GetMgrNamefromnewhire(retu);
                 WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, mgr);

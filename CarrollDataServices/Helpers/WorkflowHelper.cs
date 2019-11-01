@@ -482,7 +482,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+ "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your Review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += "Please review this form for accuracy. If any questions, contact hiring manager. You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "Please review this form for accuracy. If any questions, contact hiring manager. You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
@@ -551,9 +551,9 @@ namespace Carroll.Data.Services.Helpers
                         var link =  "http://aspnet.carrollaccess.net/Outlink/Open?link=" + dl.DynamicLinkId;
 
 
-                        _message.Subject = "Employee New Hire Notice needs your Review";
+                        _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                        
                         tos.Add("iamregionalmanager@carrollmg.com");
@@ -657,7 +657,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <p> ";
                         _message.Body += " Employee New Hire Notice  for "+NewhireDetails.tbl.EmployeeName+ " has been successfully reviewed and completed. Please find attached copy of form.<br> <br> <br><br>  ";
-                        _message.Body += "<br>  Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "<br>  Thank you, <br> CARROLL   </div></div>";
 
 
                         List<string> tos = new List<string>();
@@ -720,9 +720,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Employee Lease Rider needs your Review";
+                        _message.Subject = "Employee Lease Rider needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br><br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br><br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
@@ -816,7 +816,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Subject = "Employee Lease Rider has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <p> ";
                         _message.Body += " Employee Lease Rider  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the attach copy of form <br> <br> <br>  <h5> ";
-                        _message.Body += "<br> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "<br> Thank you, <br> CARROLL   </div></div>";
 
 
                         List<string> tos = new List<string>();
@@ -875,9 +875,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Payroll Status Change Notice needs your Review";
+                        _message.Subject = "Payroll Status Change Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br>  <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br>  <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                          tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
@@ -964,9 +964,9 @@ namespace Carroll.Data.Services.Helpers
                     // get Employee Details i.e name and email
 
                     var NewhireDetails = (from tbl in _entities.PayrollStatusChangeNotices
-                                          join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.CreatedBy
+                                      
                                           where tbl.PayrollStatusChangeNoticeId == propid
-                                          select new {siteu.FirstName,siteu.LastName,tbl.EmployeeName }).FirstOrDefault();
+                                          select new {tbl.EmployeeName }).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -975,7 +975,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"><p> ";
                         _message.Body += "Payroll Status Change Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find the attached Copy of form <br> <br> <br>  <h5> ";
                        
-                        _message.Body += "<br> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "<br> Thank you, <br> CARROLL   </div></div>";
 
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
@@ -1015,10 +1015,37 @@ namespace Carroll.Data.Services.Helpers
             var pid = new Guid(regionalmgr);
 
 
+            // regional manager
+            var stid = "";
+
             var rid = (from tbl in _entities.Properties
                        where tbl.PropertyId == pid
                        select tbl.RegionalManager).FirstOrDefault();
+            if (rid != null)
+                stid = rid.ToString();
+            else
+            {
+                // get rvp 
 
+                var rid1 = (from tbl in _entities.Properties
+                           where tbl.PropertyId == pid
+                           select tbl.RegionalVicePresident).FirstOrDefault();
+                if (rid1 != null)
+                    stid = rid1.ToString();
+                else
+                {
+                    // get rvp 
+
+                    var rid11 = (from tbl in _entities.Properties
+                                where tbl.PropertyId == pid
+                                select tbl.VicePresident).FirstOrDefault();
+                    if (rid11 != null)
+                        stid = rid11.ToString();
+
+
+                }
+
+            }
            
             string mgr = "";
             var res = (from tbl in _entities.proc_getallcontactsincludinghighroles()
@@ -1059,7 +1086,7 @@ namespace Carroll.Data.Services.Helpers
                 var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Hr/EmployeeNewHireNotice?resubmit=" + propid;
                 _message.Subject = "Employee New Hire Notice has been rejected";
                 _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5> <p> ";
-                _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name of the person : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy")+ " "+ NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name of the person : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy")+ " "+ NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                 List<string> tos = new List<string>();
                  tos.Add("Shashank.Trivedi@carrollorg.com");
                 tos.Add("iamnewemployee@carrollmg.com");
@@ -1130,9 +1157,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Employee New Hire Notice needs your Review";
+                        _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br>  <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br>  <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
@@ -1192,9 +1219,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Employee New Hire Notice needs your Review";
+                        _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br> <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                          tos.Add("Shashank.Trivedi@carrollorg.com");
@@ -1260,7 +1287,7 @@ namespace Carroll.Data.Services.Helpers
                         //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
-                        _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form.  <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form.  <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                          tos.Add("Shashank.Trivedi@carrollorg.com");
@@ -1320,9 +1347,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Payroll Status Change Notice needs your Review";
+                        _message.Subject = "Payroll Status Change Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br> <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
@@ -1390,9 +1417,9 @@ namespace Carroll.Data.Services.Helpers
                         // subject and body
 
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Employee Lease Rider needs your Review";
+                        _message.Subject = "Employee Lease Rider needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br>  <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access </p> <br>  <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                          tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add("iamnewemployee@carrollmg.com");
@@ -1453,7 +1480,7 @@ namespace Carroll.Data.Services.Helpers
                         //   var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
-                        _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                        tos.Add("Shashank.Trivedi@carrollorg.com");
@@ -1497,7 +1524,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Subject = "Notice Of Employee Separation has been successfully completed";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5><p> ";
                         _message.Body += "A new \"Notice Of Employee Separation\" for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form </p>";
-                        _message.Body += "<br> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "<br> Thank you, <br> CARROLL   </div></div>";
 
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
@@ -1545,7 +1572,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "A new \"requisition request\"   for " + NewhireDetails.PropertyName + " has been submitted. Please find attached copy of the form </p>";
 
 
-                        _message.Body += "<br> Thank You, <br> CARROLL   </div></div>";
+                        _message.Body += "<br> Thank you, <br> CARROLL   </div></div>";
                         List<string> tos = new List<string>();
                         tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");
                      tos.Add("Shashank.Trivedi@carrollorg.com");
@@ -1598,9 +1625,9 @@ namespace Carroll.Data.Services.Helpers
                       //subject and body
 
                             var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
-                            _message.Subject = "Remainder : Employee New Hire Notice needs your Review";
+                            _message.Subject = "Remainder : Employee New Hire Notice needs your review";
                             _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + item.EmployeeName + " </h5> <p> ";
-                            _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click on the link to access : <a href='" + link + "'> " + link + " </a> </p> <br> <br> <h5> Thank You, <br> CARROLL   </div></div>";
+                            _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access  </p> <br> <br> <h5> Thank you, <br> CARROLL   </div></div>";
 
                            List<string> tos = new List<string>();
                             tos.Add("sekhar.babu@forcitude.com"); tos.Add("sukumar.gandhi@forcitude.com");

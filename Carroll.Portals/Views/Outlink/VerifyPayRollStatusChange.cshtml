@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Print PayRoll Status Change </title>
+    <title> Verify PayRoll Status Change </title>
 
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
@@ -74,7 +74,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 }
 
-                @if (Model.ShowPayChange == true)
+                @if (Model.ShowLeaves == true)
                 {
                     <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leaves Of Absence </span>
 
@@ -89,7 +89,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                     <div style="width:100%;" id="divpropertychange">
 
                         <P class="p4 ft5" style="margin-top:0px !important">Property Change</P>
-                        <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
+                        <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> </P>
                         <P class="p5 ft6"> Property Transfer:</P>
                         <P class="p5 ft6"> <strong>From : </strong></P>
                         <P class="p6 ft1"> property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:30% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:30%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
@@ -359,11 +359,11 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                         </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
                                             @{ if (Model.EnrolledBenefitNo == true)
                                                 {
-                                                    <input type="checkbox" checked id="chkbenefitno" />
+                                                    <input type="checkbox" checked  id="chkbenefitno" />
                                                 }
                                                 else
                                                 {
-                                                    <input type="checkbox" id="chkbenefitno" />
+                                                    <input type="checkbox"  id="chkbenefitno" />
                                                 }
                                             }
                                         </SPAN><SPAN class="ft1">No</SPAN>
@@ -372,21 +372,30 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                             </TR>
                         </TABLE>
                         <P class="p20 ft1">
-                            Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" /> @if (Model.Leave_Purpose == "Other")
-                            {  <span style="display:none;" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span>}
+                            Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" /> 
+
+                            @if (Model.Leave_Purpose == "Other" && Model.Leave_Purpose_Other != null && Model.Leave_Purpose_Other !="" )
+                            { 
+                                
+                                <span  id="spanpurposeother">  Other Reason: 
+                            <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span>
+                            }
                         </P>
-                        <P class="p20 ft1"> Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToShortDateString()" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@Model.Leave_End.Value.ToShortDateString()" style="width:23%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" /> </P>
+                        <P class="p20 ft1"> Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@if( Model.Leave_End != null)
+                        {
+                            @Model.Leave_End.Value.ToString("MM/dd/yyyy");
+                        }" style="width:23%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" /> </P>
                         <hr style="border-top: 2px solid black;" />
                     </div>
                 }
 
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
-                    <P class="p6 ft1"> <textarea type="text" style="width:95%" id="notes1"> @Model.Notes1 </textarea></P>
+                    <P class="p6 ft1"> <textarea type="text" disabled style="width:95%;padding:10px;" id="notes1"> @Model.Notes1 </textarea></P>
 
                 </div>
                 <P class="p6 ft1">Employee Signature: <input type="text" class="italic" style="width:52%;height:30px; margin-right:0.3%;"  disabled id="esignature" />  Date: <input type="text" value="@DateTime.Now.ToString("MM/dd/yyyy")" disabled id="edate" /> </P>
-                <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToShortDateString()" /> </P>
+                <P class="p6 ft1"  style="margin-bottom:20px;" >Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
             </div>
             <div id="status"> </div>
             <div class="col-md-12" style="text-align:center;margin-bottom:100px;">
@@ -1117,7 +1126,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 }
             });
 
-            $("input").prop("disabled", true);
+            $("input,textarea").prop("disabled", true);
             $("#esignature,#Submit").prop("disabled", false);
 
             $("#esignature").focus();

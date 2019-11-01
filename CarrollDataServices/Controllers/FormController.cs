@@ -240,10 +240,10 @@ namespace Carroll.Data.Services.Controllers
 
                 RecordUpdateResult _result = _service.CreateUpdateRecord(id, obj);
                 bSucceeded = _result.Succeded;
+
                 if(bSucceeded)
                 {
-
-              
+                                  
                 // Let's run workflow notificaiton here
                 if(id == EntityType.FormGeneralLiabilityClaim )
                     WorkflowHelper.RunNotifyWorkflow(_result.RecordId,'G',userid);
@@ -251,10 +251,15 @@ namespace Carroll.Data.Services.Controllers
                     WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'M',userid);
                     else if (id ==EntityType.FormPropertyDamageClaim)
                     WorkflowHelper.RunNotifyWorkflow(_result.RecordId, 'P',userid);
-                }
-                return Utility.ReturnRecordResponse(_modelState, bSucceeded);
+                    return Utility.ReturnRecordResponse(_modelState, bSucceeded);
 
-             
+                }
+                else
+                    return Utility.ReturnRecordResponse(_modelState, bSucceeded, _result.RecordId);
+
+
+
+
             }
             else
             {

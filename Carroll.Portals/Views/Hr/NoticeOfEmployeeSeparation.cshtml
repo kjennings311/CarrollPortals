@@ -28,7 +28,7 @@
 
                 <h1 style="color:black;text-transform:uppercase"> <b> Notice of Employee Separation </b></h1>
 
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr")
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">
@@ -65,7 +65,7 @@
                             <div class="modal-body">
                                 <div class="row" style="padding: 20px;
     border: 2px solid black;">
-                                    <form id="submitform" onsubmit="return false;">
+                                    <form id="submitform" style="margin-left:10%;" onsubmit="return false;">
                                         <p class="c1 c8" style="margin-left:27%;">
                                             <span class="c7">
                                                 <img src="~/img/newhirenotice.png">
@@ -73,8 +73,8 @@
                                         </p>
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
-                                            <p class="p0 ft0" style="font-weight: bolder;margin-left:2%;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="date" id="effectivedate" /> Eligible for Rehire <input type="text" style="width:23%;"  value="YES" disabled id="rehire" /></p>
+                                            <p class="p0 ft0" style="font-weight: bolder;margin-left:-1%;">Notice of Employee Separation</p>
+                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="text" class="date-mask" id="effectivedate" /> Eligible for Rehire <input type="text" style="width:23%;"  value="YES" disabled id="rehire" /></p>
                                             <p class="p1 ft1">
                                                 <span class="c0">
                                                     Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
@@ -176,8 +176,8 @@
 
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
 
-                                            <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="date"  style="width:20%;" id="sdate" disabled /></P>
+                                            <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" class="allow_decimal" id="vacationbalance" value="0" style="width:10%" />)</P>
+                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="text" class="date-mask"   style="width:20%;" id="sdate" disabled /></P>
 
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
@@ -187,7 +187,7 @@
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
-                                            <input type="button" style="margin-left:-30%;" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+                                            <input type="button" style="margin-left:-20%;" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
                                         </div>
                                     </form>
@@ -652,15 +652,17 @@
             $(".addnew").click(function ()
             {
                 document.getElementById("submitform").reset();
-                document.getElementById("effectivedate").valueAsDate = new Date();
-                document.getElementById("sdate").valueAsDate = new Date();
+                //document.getElementById("effectivedate").valueAsDate = new Date();
+                //document.getElementById("sdate").valueAsDate = new Date();
 
                 $("input,select,textarea,#propertyname,#propertynumber").prop("disabled", false);
                 $("#sdate,#rehire").prop("disabled", true);
                 $("#rehire").val('YES');
 
                 //$("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
-             
+                $('.date-mask').datepicker({
+                    format: "mm/dd/yyyy"
+                }).datepicker("setDate", 'now');
             });
 
             $("input").change(function (e) {
@@ -796,7 +798,21 @@
 
             //});
 
-            $("#Submit").click(function (e) {   
+            $("#vacationpaid").change(function ()
+            {
+                if ($("#vacationpaid").val() != "true")
+                {
+                    $("#vacationbalance").prop('disabled', true);
+                }
+                else
+                {
+                    $("#vacationbalance").prop('disabled', false);
+                }
+            });
+
+
+            $("#Submit").click(function (e)
+            {   
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -917,12 +933,7 @@
                         control = $("#polictyvoilated1");
                 }
 
-                if ($("#ssignature").val() == "") {
-                    errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
-                    $("#ssignature").addClass('has-error');
-                    if (control == "")
-                        control = $("#ssignature");
-                }
+              
                 
                 if ($("#vacationpaid").val() == "true" && ($("#vacationbalance").val() == "" || $("#vacationbalance").val() == "0" )) {
                     errormsgsummary += "<li> Vacation Balance Should not be Empty Or Zero  </li>";
@@ -930,7 +941,12 @@
                     if (control == "")
                         control = $("#vacationpaid");
                 } 
-
+                if ($("#ssignature").val() == "") {
+                    errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
+                    $("#ssignature").addClass('has-error');
+                    if (control == "")
+                        control = $("#ssignature");
+                }
                 if (errormsgsummary != "") {
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -938,7 +954,8 @@
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else {
+                else
+                {
                     $('#myModal').modal('hide');
 
                     //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
@@ -952,15 +969,17 @@
                     if ($("#chkcorporate").is(":checked"))
                     {
                         insertForm.append('iscorporate', 'true');
+                        insertForm.append('propertyname', "");
                     }
                     else if ($("#chkproperty").is(":checked"))
                     {
                         insertForm.append('iscorporate', 'false');
                         insertForm.append('location', $("#location").val());
+                        insertForm.append('propertyname', $("#location option:selected").text());
                     }
 
                     insertForm.append('datechange', $("#effectivedate").val());
-                    insertForm.append('propertyname', $("#location option:selected").text());
+                   
                     insertForm.append('rehire', $("#rehire").val());
                     insertForm.append('propertynumber', $("#propertynumber").val());
                     insertForm.append('jobtitile', $("#jobtitle").val());

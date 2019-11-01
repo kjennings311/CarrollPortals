@@ -15,10 +15,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
     <link href="/Content/a4css.css" rel="stylesheet" />
-
 </head>
 <body class="document">
-
     <div class="page">
         <div id="page_1" style="width:96%;">
             <img style="margin-left: 33%;" src="/img/payroll.png" id="p1img1">
@@ -81,7 +79,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 }
             </P>
 
-            <div class="" style="border: 2px solid black; width:100%">
+            <div class="" style="border: 2px solid black; width:100%;padding-bottom:20px;">
 
                 @if (Model.ShowPropertyChange == true)
                 {
@@ -89,7 +87,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 <div style="width:100%;" id="divpropertychange">
 
                     <P class="p4 ft5" style="margin-top:0px !important">Property Change</P>
-                    <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToShortDateString()" id="effectivedate" /> </P>
+                    <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> </P>
                     <P class="p5 ft6"> Property Transfer:</P>
                     <P class="p5 ft6"> <strong>From : </strong></P>
                     <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:35% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:25%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
@@ -372,23 +370,31 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
 
 
                                                                   </span><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
-                                            @{  
+    @{
 
-                                                if (Model.EnrolledBenefitNo != null)
-                                                {
-                                                    if (Model.EnrolledBenefitNo == true)
-                                                    {
-                                                      <input type="checkbox" checked id="chkbenefitno" />
+        if (Model.EnrolledBenefitNo != null)
+        {
+            if (Model.EnrolledBenefitNo == true)
+            {
+                <input type="checkbox" checked id="chkbenefitno" />
 
-                                                    }
-                                                    else
-                                                    {
+            }
+            else
+            {
 
-                                                    <input type="checkbox" id="chkbenefitno" />
-                                                        }
-                                                    }
-                                                }
-                                        </SPAN><SPAN class="ft1">No</SPAN>
+                <input type="checkbox" id="chkbenefitno" />
+            }
+        }
+        else
+        {
+
+            <input type="checkbox" id="chkbenefitno" />
+        }
+    }
+
+
+
+</SPAN><SPAN class="ft1">No</SPAN>
                                     </P>
                                 </TD>
                             </TR>
@@ -397,10 +403,10 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                         @if (Model.Leave_Purpose == "Other")
                         { <span  id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother"  value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span> } </P>
                         <P class="p20 ft1">
-                            Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToShortDateString()" id="leavebegin" /> Expected End:
+                            Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:
                             @if (Model.Leave_End != null)
                             {
-                                <input type="text" style="width:20%;" value="@Model.Leave_End.Value.ToShortDateString()" id="leavebegin" />
+                                <input type="text" style="width:20%;" value="@Model.Leave_End.Value.ToString("MM/dd/yyyy")" id="leavebegin" />
                             }
                             else
                             {
@@ -413,18 +419,18 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
                     <P class="p6 ft1">
-                        @*<textarea type="text" style="width:95%" id="notes1"> 
+                        <textarea type="text" style="width:95%;padding:10px;" rows="5"  id="notes1"> 
 @if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
 {
  @Model.Notes1
 }
            
-                     </textarea>*@
+                     </textarea>
                     </P>
 
                 </div>
-                <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.ESignature" />  Date: <input type="text" name="name" value="@Model.EDate.Value.ToShortDateString()" /> </P>
-                <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToShortDateString()" /> </P>
+                <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@if (Model.ESignature != null) {  @Model.ESignature; } " />  Date: <input type="text" name="name" value="@if (Model.EDate != null) { @Model.EDate.Value.ToString("MM/dd/yyyy"); } " /> </P>
+                <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name"name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
             </div>
 
         </div>
@@ -491,6 +497,11 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
 
     <style type="text/css">
         @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        /*.page {
+
+            margin-left:1% !important;
+        }*/
 
         ol {
             margin: 0;

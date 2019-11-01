@@ -39,6 +39,42 @@ namespace Carroll.Portals.Helpers
                         bm.Name = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(LoggedInUser.Current.FirstName.ToLower()) + " " + System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(LoggedInUser.Current.LastName.ToLower());
                         bm.RoleType = LoggedInUser.AssignedRole();
                         bm.PropertyId = LoggedInUser.AssignedUserProperty();
+                        bm.AllowedProp = LoggedInUser.ReturnAllowedProperties();
+                        bm.Isallowed = false;
+                        if (Carroll.Portals.Models.LoggedInUser.AssignedRole().ToLower() != "administrator" && Carroll.Portals.Models.LoggedInUser.AssignedRole().ToLower() != "hr")
+                        {
+                            bool isallowed = false;
+
+                            var prop = Carroll.Portals.Models.LoggedInUser.AssignedUserProperty();
+                            var AllowedProp = Carroll.Portals.Models.LoggedInUser.ReturnAllowedProperties();
+                            string[] proplist = { };
+
+                            if (prop.Contains("se"))
+                            {
+                                proplist = prop.Split(new string[] { "se" },StringSplitOptions.RemoveEmptyEntries );
+
+                                foreach (string item in proplist)
+                                {
+                                    if(item !="")
+                                    {
+                                        if (AllowedProp.Contains(item))
+                                        {
+                                            isallowed = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (AllowedProp.Contains(prop))
+                                {
+                                    isallowed = true;
+
+                                }
+                            }
+                            bm.Isallowed = isallowed;
+                        }
                     }
                 }
                 base.OnActionExecuted(filterContext);

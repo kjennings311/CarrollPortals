@@ -433,7 +433,7 @@
           <Property Name="PropertyNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
-          <Property Name="Policty_Voilated" Type="nvarchar" MaxLength="300" />
+          <Property Name="Policty_Voilated" Type="nvarchar" MaxLength="500" />
           <Property Name="AdditionalRemarks" Type="nvarchar" MaxLength="500" />
           <Property Name="DocumentationAvailable" Type="nvarchar" MaxLength="500" />
           <Property Name="WarningGiven_Dates" Type="nvarchar" MaxLength="50" />
@@ -865,9 +865,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getallcarrollpayperiods" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallcarrollpositions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallcontactsincludinghighroles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallemployeeleaseriders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallemployeenewhirenotice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="proc_getallemployeenewhirenoticenew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallemployeenewhirenoticenew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getallexpensemileagelogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -878,9 +882,15 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         <Function Name="proc_getallmonthlyexpensedetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
         </Function>
-        <Function Name="proc_getallnoticeofemployeeseparation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="proc_getallpayrollstatuschange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="proc_getallrequisitionrequests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getallnoticeofemployeeseparation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="proc_getallpayrollstatuschange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="proc_getallrequisitionrequests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="Proc_getallresidentcontacts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getallresidentreferals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
@@ -1057,9 +1067,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="proc_getpropertydetails" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertydetails_Result)">
           <Parameter Name="propid" Mode="In" Type="Guid" />
           </FunctionImport>
-          <FunctionImport Name="proc_getallpayrollstatuschange" ReturnType="Collection(Carroll.Data.Entities.proc_getallpayrollstatuschange_Result)" />
+          <FunctionImport Name="proc_getallpayrollstatuschange" ReturnType="Collection(Carroll.Data.Entities.proc_getallpayrollstatuschange_Result)" >
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
           <EntitySet Name="RequisitionRequests" EntityType="Carroll.Data.Entities.RequisitionRequest" />
-          <FunctionImport Name="proc_getallrequisitionrequests" ReturnType="Collection(Carroll.Data.Entities.proc_getallrequisitionrequests_Result)" />
+          <FunctionImport Name="proc_getallrequisitionrequests" ReturnType="Collection(Carroll.Data.Entities.proc_getallrequisitionrequests_Result)" >
+          <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
           <EntitySet Name="EmployeeLeaseRaiders" EntityType="Carroll.Data.Entities.EmployeeLeaseRaider" />
           <EntitySet Name="EquityPartnerContacts" EntityType="Carroll.Data.Entities.EquityPartnerContact" />
           <EntitySet Name="ExpenseReimbursementDetails" EntityType="Carroll.Data.Entities.ExpenseReimbursementDetail" />
@@ -1105,9 +1119,15 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImport Name="Proc_getallresidentcontacts" ReturnType="Collection(Carroll.Data.Entities.Proc_getallresidentcontacts_Result)" />
           <EntitySet Name="DynamicLinks" EntityType="Carroll.Data.Entities.DynamicLink" />
           <FunctionImport Name="proc_getallemployeenewhirenotice1" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenotice1_Result1)" />
-          <FunctionImport Name="proc_getallemployeenewhirenoticenew" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenoticenew_Result)" />
-          <FunctionImport Name="proc_getallemployeeleaseriders" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeeleaseriders_Result)" />
-          <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" />
+          <FunctionImport Name="proc_getallemployeenewhirenoticenew" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeenewhirenoticenew_Result)" >
+          <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getallemployeeleaseriders" ReturnType="Collection(Carroll.Data.Entities.proc_getallemployeeleaseriders_Result)" >
+          <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getallnoticeofemployeeseparation" ReturnType="Collection(Carroll.Data.Entities.proc_getallnoticeofemployeeseparation_Result)" >
+          <Parameter Name="userid" Mode="In" Type="Guid" />
+          </FunctionImport>
           <FunctionImport Name="proc_getcontactsforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getcontactsforexcel_Result1)" />
           <FunctionImport Name="proc_getequitypartnersforexcel" ReturnType="Collection(Carroll.Data.Entities.proc_getequitypartnersforexcel_Result1)" />
           <FunctionImport Name="proc_getpropertydetailsforupdate" ReturnType="Collection(Carroll.Data.Entities.proc_getpropertydetailsforupdate_Result)">
@@ -2065,7 +2085,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="PropertyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Policty_Voilated" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Policty_Voilated" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AdditionalRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DocumentationAvailable" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="WarningGiven_Dates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
