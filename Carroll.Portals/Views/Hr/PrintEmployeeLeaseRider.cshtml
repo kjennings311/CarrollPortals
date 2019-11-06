@@ -179,11 +179,21 @@ float: right;"> Date : </span>
 
     </div>
     <script>
-
         var inputs = document.getElementsByTagName('input');
         for (i = 0; i < inputs.length; i++) {
             inputs[i].disabled = true;
         }
+
+        var inputs = document.getElementsByTagName('select');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+        var inputs = document.getElementsByTagName('textarea');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
 
 
     </script>

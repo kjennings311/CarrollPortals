@@ -1043,6 +1043,16 @@ margin: 10px;min-height:50px;">@Model.AdditionalRemarks</P>
             inputs[i].disabled = true;
         }
 
+        var inputs = document.getElementsByTagName('select');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+        var inputs = document.getElementsByTagName('textarea');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
 
     </script>
 </body>

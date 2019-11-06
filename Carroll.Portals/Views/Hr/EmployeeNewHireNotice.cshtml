@@ -223,7 +223,7 @@
                                             </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="date" style="width:21%" name="name" id="edate" value="" /></span>
+                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="text" style="width:21%" name="name" id="edate" value="" /></span>
                                         </p>
 
                                         <p class="c1">
@@ -231,7 +231,7 @@
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
-                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:42.5%;margin-left:5%;" />Date <input disabled type="date" style="width:21%" name="name" id="rpmdate" value="" /></span>
+                                            <span class="c0">RPM Signature<input type="text" disabled id="rpmsignature" style="width:42.5%;margin-left:5%;" />Date <input disabled type="text" style="width:21%" name="name" id="rpmdate" value="" /></span>
                                         </p>
                                         <br /> <br />
                                         <p>Rev. June 2018</p>
@@ -1033,6 +1033,7 @@ function AssignManager()
                     iscorporate = true;
                     $("#divproperty").hide();
                     $("#manager").val($("#CreatedByName").val());
+                    $("#la_Prop1,#la_Prop1per,#la_Prop2,#la_Prop2per,#la_Prop3,#la_Prop3per").val('');
                 }
                 if ($("#chkproperty").is(":checked")) {
                     iscorporate = false;
@@ -1047,7 +1048,7 @@ function AssignManager()
 
                 if ($("#exempt").is(":checked"))
                 {
-                    $("#salhourly").prop('checked', true);
+                    $("#annualsalary").prop('checked', true);
                 }
                 
             });
@@ -1056,7 +1057,8 @@ function AssignManager()
             {
                 if ($("#nonexempt").is(":checked"))
                 {
-                    $("#annualsalary").prop('checked', true);
+                    
+                    $("#salhourly").prop('checked', true);
                 }               
 
             });
