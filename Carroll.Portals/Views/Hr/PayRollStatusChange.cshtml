@@ -1017,6 +1017,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 document.getElementById("submitform").reset();
                 $("#esignature,#edate,#mdate").attr('disabled', true);
               //  document.getElementById("mdate").valueAsDate = new Date();
+
+                $("#divpropertychange,#divpaychange,#divlaborallocation,#divleaveabsence").hide();
                 
             });
 
@@ -1077,7 +1079,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 else {
                     $("#" + $(this).attr('data-div')).hide();
                 }
-
+               
             });
 
 

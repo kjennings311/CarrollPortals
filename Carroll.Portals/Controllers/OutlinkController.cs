@@ -425,11 +425,11 @@ namespace Carroll.Portals.Controllers
 
             return fi;
         }
-
+                       
         [AllowAnonymous]
         [ActionName("UpdateWorkflowPayRollStatusChangeNoticeAsync")]
         [HttpPost]
-        [MyIgnore]
+        [MyIgnore]       
         public async Task<dynamic> UpdateWorkflowPayRollStatusChangeNoticeAsync()
         {
 

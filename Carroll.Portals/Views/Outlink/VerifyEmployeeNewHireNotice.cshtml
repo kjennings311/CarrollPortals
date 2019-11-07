@@ -622,13 +622,13 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
                             //    $("#status").html(data['errorMsg']);
                             //}
                         },
-                        error: function (ts) {
-                            alert("Successfully Submitted");
-                            $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-                          
-                            setTimeout(function () { closeMe(); }, 2000);
+                        error: function (ts)
+                        {
+                            alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
+                            $("#status").html("<p style='color:green'> Something Wrong, Contact Adminstrator Ref: ID " + ts.responseJSON.ErrorId + "  " + ts.responseJSON.exceptionMessage + "</p> ");
 
-                            setTimeout(function () { closeMe(); }, 5000);
+                            setTimeout(function () { closeMe(); }, 4000);
+
                         }
                     });
 

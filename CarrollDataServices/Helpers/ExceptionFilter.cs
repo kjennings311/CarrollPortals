@@ -120,6 +120,7 @@ namespace Carroll.Data.Services.Helpers
 
 
             ErrorLog errorLog = new ErrorLog();
+            errorLog.LogId = Guid.NewGuid();
             errorLog.datetime = DateTime.Now;
             errorLog.UserName = user.FirstName + " " + user.LastName;
             errorLog.Page = (string)filterContext.RouteData.Values["controller"] + "/" + (string)filterContext.RouteData.Values["action"];
@@ -141,7 +142,7 @@ namespace Carroll.Data.Services.Helpers
                     // For the sake of simplicity let's suppose that we want to
                     // send only the exception message to the client
                     ErrorId = errorLog.LogId,
-                    exceptionMessage = errorLog.Error
+                    exceptionMessage = errorLog.Description
                 },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };

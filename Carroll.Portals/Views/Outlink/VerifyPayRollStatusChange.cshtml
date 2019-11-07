@@ -1205,10 +1205,11 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                         },
                         error: function (ts)
                         {
-                            alert("Successfully Submitted");
-                            $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
+
+                            alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
+                            $("#status").html("<p style='color:green'> Something Wrong, Contact Adminstrator Ref: ID " + ts.responseJSON.ErrorId+"  "+ts.responseJSON.exceptionMessage +"</p> ");
                           
-                            setTimeout(function () { closeMe(); }, 2000);
+                            setTimeout(function () { closeMe(); }, 4000);
 
 
                         }
