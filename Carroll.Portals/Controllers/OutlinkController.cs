@@ -212,7 +212,7 @@ namespace Carroll.Portals.Controllers
         [ActionName("UpdateWorkflowEmployeeLeaseRiderAsync")]
         [HttpPost]
         [MyIgnore]
-        public async Task<dynamic> UpdateWorkflowEmployeeLeaseRiderAsync()
+        public async Task<JsonResult> UpdateWorkflowEmployeeLeaseRiderAsync()
         {
 
             var action = Request.Params["action"].ToString();
@@ -294,7 +294,7 @@ namespace Carroll.Portals.Controllers
                 }
             }
 
-            mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
             //foreach (var item in Message.EmailCc)
@@ -370,9 +370,7 @@ namespace Carroll.Portals.Controllers
             mail.Body = Message.Body;
             //   mail.To.Clear();
             // remove this line before going production
-            //  mail.To.Add("pavan.nanduri@carrollorg.com");
-            mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
-            mail.To.Add("Shashank.Trivedi@carrollorg.com");
+          
 
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
@@ -389,7 +387,7 @@ namespace Carroll.Portals.Controllers
 
 
 
-            return retu;
+            return  Json(retu);
         }
 
 
@@ -430,7 +428,7 @@ namespace Carroll.Portals.Controllers
         [ActionName("UpdateWorkflowPayRollStatusChangeNoticeAsync")]
         [HttpPost]
         [MyIgnore]       
-        public async Task<dynamic> UpdateWorkflowPayRollStatusChangeNoticeAsync()
+        public async Task<JsonResult> UpdateWorkflowPayRollStatusChangeNoticeAsync()
         {
 
             var action = Request.Params["action"].ToString();
@@ -525,7 +523,7 @@ namespace Carroll.Portals.Controllers
                 }
             }
 
-            mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
             //foreach (var item in Message.EmailCc)
@@ -605,9 +603,7 @@ namespace Carroll.Portals.Controllers
             mail.Body = Message.Body;
             //   mail.To.Clear();
             // remove this line before going production
-            //  mail.To.Add("pavan.nanduri@carrollorg.com");
-            mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
-            mail.To.Add("Shashank.Trivedi@carrollorg.com");
+        
 
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
@@ -624,14 +620,14 @@ namespace Carroll.Portals.Controllers
 
 
 
-            return retu;
+            return Json(retu);
         }
 
         [AllowAnonymous]
         [ActionName("UpdateWorkflowEmployeeNewHireNotice")]
         [HttpPost]
         [MyIgnore]
-        public async Task<dynamic> UpdateWorkflowEmployeeNewHireNoticeAsync(string action, string refid, string signature, string iscorporate,string empname)
+        public async Task<JsonResult> UpdateWorkflowEmployeeNewHireNoticeAsync(string action, string refid, string signature, string iscorporate,string empname)
         {
 
             //var Action = Request.Params["action"].ToString();
@@ -740,7 +736,7 @@ namespace Carroll.Portals.Controllers
                     }
                 }
 
-                mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
                 //foreach (var item in Message.EmailCc)
@@ -820,9 +816,7 @@ namespace Carroll.Portals.Controllers
                 mail.Body = Message.Body;
                 //   mail.To.Clear();
                 // remove this line before going production
-                //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
-                mail.To.Add("Shashank.Trivedi@carrollorg.com");
+                     
 
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
@@ -834,11 +828,8 @@ namespace Carroll.Portals.Controllers
                 {
 
                 }
-
-
-
+                
             }
-
 
              else
             {
@@ -870,7 +861,7 @@ namespace Carroll.Portals.Controllers
                     }
                 }
 
-                mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
                 //foreach (var item in Message.EmailCc)
@@ -949,11 +940,7 @@ namespace Carroll.Portals.Controllers
                 mail.Subject = Message.Subject;
                 mail.Body = Message.Body;
                 //   mail.To.Clear();
-                // remove this line before going production
-                //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
-                mail.To.Add("Shashank.Trivedi@carrollorg.com");
-
+            
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
                 try
@@ -969,7 +956,7 @@ namespace Carroll.Portals.Controllers
 
             }
 
-            return retu;
+            return Json(retu);
         }
         
     }

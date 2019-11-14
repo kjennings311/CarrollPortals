@@ -171,7 +171,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                 </div>
 
                                                 <div style="width:100%;display:none" id="divlaborallocation">
-                                                    <TABLE id="divlaborallocation" cellpadding=0 cellspacing=0 class="t0">
+                                                    <TABLE id="" cellpadding=0 cellspacing=0 class="t0">
                                                         <TR>
                                                             <TD class="tr5 td0"><P class="p7 ft7"> Labor Allocation </P></TD>
                                                             <TD class="tr5 td1"><P class="p8 ft13">&nbsp;</P></TD>
@@ -1125,9 +1125,18 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             }, 3000);
                         }
                         else {
-                            $("#status").html(data);
-                        }
+                            $(".alert").html("<span style='color:red'> " + data + "</span>");
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
 
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 7000);
+                        }
+                        GetAllHRFORMs('PayRollChange');
 
                     },
                     error: function (ts) {
@@ -1509,7 +1518,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     //            control = $("#prop3");
                     //    }
 
-                    //    errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                    //    errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
                     //    control = $("#prop3");
 
                     //}
@@ -1591,7 +1600,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 control = $("#prop3");
                         }
 
-                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                        errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
                         control = $("#prop3");
 
                     }

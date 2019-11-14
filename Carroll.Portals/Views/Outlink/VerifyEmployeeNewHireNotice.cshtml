@@ -480,10 +480,13 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
 
         $(document).ready(function () {
 
+
             function closeMe() {
+                window.close();
                 var win = window.open("", "_self"); /* url = "" or "about:blank"; target="_self" */
                 win.close();
             }
+
 
 
             $("input").change(function (e) {
@@ -613,9 +616,12 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
                             
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
                            
-                            setTimeout(function () { closeMe(); }, 2000);
+                            setTimeout(function () {
+                                closeMe();
+                                window.close();
+                            }, 2000);
 
-                            setTimeout(function () { closeMe(); }, 5000);
+                           // setTimeout(function () { closeMe(); }, 5000);
                             //}
                             //else
                             //{
@@ -624,10 +630,13 @@ margin: 10px; min-height:50px;">@Model.AdditionalText</p>
                         },
                         error: function (ts)
                         {
-                            alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
+                          //  alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
                             $("#status").html("<p style='color:green'> Something Wrong, Contact Adminstrator Ref: ID " + ts.responseJSON.ErrorId + "  " + ts.responseJSON.exceptionMessage + "</p> ");
 
-                            setTimeout(function () { closeMe(); }, 4000);
+                            setTimeout(function () {
+                                closeMe();
+                                window.close();
+                            }, 4000);
 
                         }
                     });

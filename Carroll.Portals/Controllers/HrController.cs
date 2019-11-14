@@ -413,7 +413,7 @@ namespace Carroll.Portals.Controllers
                 }
             }
 
-            mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
             //foreach (var item in Message.EmailCc)
@@ -489,10 +489,7 @@ namespace Carroll.Portals.Controllers
             mail.Body = Message.Body;
             //   mail.To.Clear();
             // remove this line before going production
-            //  mail.To.Add("pavan.nanduri@carrollorg.com");
-           mail.To.Add("sekhar.babu@forcitude.com");
-           mail.To.Add("Shashank.Trivedi@carrollorg.com");
-            mail.To.Add("sukumar.gandhi@forcitude.com");
+          
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
             try
@@ -607,7 +604,7 @@ namespace Carroll.Portals.Controllers
                 }
             }
 
-            mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+            mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
             //foreach (var item in Message.EmailCc)
@@ -686,10 +683,7 @@ namespace Carroll.Portals.Controllers
             mail.Subject = Message.Subject;
             mail.Body = Message.Body;
             //   mail.To.Clear();
-            // remove this line before going production
-            //  mail.To.Add("pavan.nanduri@carrollorg.com");
-            mail.To.Add("sekhar.babu@forcitude.com");
-             mail.To.Add("Shashank.Trivedi@carrollorg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
+         
 
             mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
             mail.Priority = MailPriority.High;
@@ -820,7 +814,7 @@ namespace Carroll.Portals.Controllers
                         }
                     }
 
-                    mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+                    mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
                 
                     //foreach (var item in Message.EmailCc)
@@ -900,10 +894,7 @@ namespace Carroll.Portals.Controllers
                     mail.Body = Message.Body;
                  //   mail.To.Clear();
                     // remove this line before going production
-                    //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                    mail.To.Add("sekhar.babu@forcitude.com");
-                    mail.To.Add("Shashank.Trivedi@carrollorg.com");
-                mail.To.Add("sukumar.gandhi@forcitude.com");
+                
                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                     mail.Priority = MailPriority.High;
                 try
@@ -957,7 +948,7 @@ namespace Carroll.Portals.Controllers
                     }
                 }
 
-                mail.From = new MailAddress("Shashank.Trivedi@carrollorg.com", "Carroll Organization");
+                mail.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
 
 
                 //foreach (var item in Message.EmailCc)
@@ -1146,11 +1137,8 @@ namespace Carroll.Portals.Controllers
                 mail.Body = Message.Body;
                // mail.To.Clear();
                 // remove this line before going production
-                //  mail.To.Add("pavan.nanduri@carrollorg.com");
-                mail.To.Add("sekhar.babu@forcitude.com");
-                 mail.To.Add("Shashank.Trivedi@carrollorg.com");
-                 mail.To.Add("iamhr@carrollmg.com"); mail.To.Add("sukumar.gandhi@forcitude.com");
-
+            
+             
               mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                 mail.Priority = MailPriority.High;
                 try

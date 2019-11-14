@@ -294,7 +294,8 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true) {
+                        if (data == true)
+                        {
                             GetAllHRFORMs('LeaseRider');
                             $(".alert").html('Email Resent Success');
                             if ($("#divprocessingbtn").length > 0) {
@@ -307,8 +308,20 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                                 $('#toastnotification').modal('hide');
                             }, 3000);
                         }
-                        else {
-                            $("#status").html(data);
+                        else
+                        {
+                            $(".alert").html("<span style='color:red'> "+data+"</span>");
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 7000);
+                            GetAllHRFORMs('LeaseRider');
+                        //    $("#status").html(data);
                         }
 
 

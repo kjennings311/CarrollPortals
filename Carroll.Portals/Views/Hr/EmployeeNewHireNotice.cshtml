@@ -647,7 +647,8 @@ function AssignManager()
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true) {
+                        if (data == true)
+                        {
                             GetAllHRFORMs('New Hire Notice');
                             $(".alert").html('Email Resent Success');
                             if ($("#divprocessingbtn").length > 0) {
@@ -662,9 +663,18 @@ function AssignManager()
                         }
                         else
                         {
-                            $("#status").html(data);
-                        }
+                            $(".alert").html("<span style='color:red'>" + data + "</span>");
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
 
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 7000);
+                        }
+                        GetAllHRFORMs('New Hire Notice');
 
                     },
                     error: function (ts) {
@@ -1257,7 +1267,7 @@ function AssignManager()
                                 control = $("#la_Prop3");
                         }
 
-                        errormsgsummary += "<li> Division Of Labout Percentage should be 100% </li>";
+                        errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
                         control = $("#la_Prop3");
 
                     }

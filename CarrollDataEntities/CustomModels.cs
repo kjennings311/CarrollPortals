@@ -286,7 +286,7 @@ namespace Carroll.Data.Entities
         {
             logo = "carroll.jpg";
             signature = "<p> Pavan Nanduri <br>  Vice President, Information Systems <br> Carroll Organization <br> pavan.nanduri@carrollorg.com <br> 3340 Peachtree Rd NE - Suite 2250 <br> Atlanta, GA  30326 <br> Office: 404 - 812 - 8298<br> Cell: 770 - 508 - 5050 <br> Fax: 404 - 806 - 4312 <br> www.CarrollOrganization.com <br> <br>";
-            fromemail = "sekhar.babu@forcitude.com";
+            fromemail = "";
             Company = "Carroll Organisation";
             mailfooterhtml = "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
             mailstart = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <table >  ";

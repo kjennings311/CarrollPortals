@@ -660,9 +660,7 @@ namespace Carroll.Data.Services.Controllers
             return retu;
         }
 
-
-
-
+        
         [ActionName("ResentHrWorkflow")]
         [HttpPost]
         public dynamic ResentHrWorkflow()
@@ -673,8 +671,8 @@ namespace Carroll.Data.Services.Controllers
             var UserId = HttpContext.Current.Request.Params["CreatedBy"].ToString();
             var CreatedByName = HttpContext.Current.Request.Params["CreatedByName"].ToString();
 
-            WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action, CreatedByName);
-            return true;
+           return  WorkflowHelper.ReSendHrWorkFlowEmail(Refid, FormType, Action, CreatedByName);
+           // return true;
 
         }
 

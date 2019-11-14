@@ -160,6 +160,7 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
 
             function closeMe()
             {
+                window.close();
                 var win = window.open("", "_self"); /* url = "" or "about:blank"; target="_self" */
                 win.close();
             }
@@ -196,6 +197,8 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
                 else
                 {
 
+                 //   closeMe();
+
                     var insertForm = new FormData();
 
                     insertForm.append('action', $("#Action").val());
@@ -224,24 +227,23 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
                             alert("Successfully Submitted");
 
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-                            window.opener.UpdateChildStatus(1);
+                         //   window.opener.UpdateChildStatus(1);
                             setTimeout(function ()
                             {
-
-                                closeMe();
-                            }, 2000);
-
-
+                                 closeMe();
+                                window.close();
+                            },2000);
                         },
                         error: function (ts)
                         {
-
                             alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
                             $("#status").html("<p style='color:green'> Something Wrong, Contact Adminstrator Ref: ID " + ts.responseJSON.ErrorId + "  " + ts.responseJSON.exceptionMessage + "</p> ");
 
-                            setTimeout(function () { closeMe(); }, 4000);
+                            setTimeout(function () {
+                                window.close();
+                                closeMe();
 
-
+                            }, 4000);
 
                         }
                     });

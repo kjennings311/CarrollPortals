@@ -1133,11 +1133,13 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
           /// document.getElementById("edate").valueAsDate = new Date();
 
 
-            function closeMe()
-            {
+
+            function closeMe() {
+                window.close();
                 var win = window.open("", "_self"); /* url = "" or "about:blank"; target="_self" */
-               win.close();
+                win.close();
             }
+
 
 
             $("#Submit").click(function (e)
@@ -1199,6 +1201,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                          
                             setTimeout(function ()
                             {
+                                window.close();
                                 closeMe();
                             }, 2000);
 
@@ -1206,10 +1209,13 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                         error: function (ts)
                         {
 
-                            alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
+                          //  alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
                             $("#status").html("<p style='color:green'> Something Wrong, Contact Adminstrator Ref: ID " + ts.responseJSON.ErrorId+"  "+ts.responseJSON.exceptionMessage +"</p> ");
                           
-                            setTimeout(function () { closeMe(); }, 4000);
+                            setTimeout(function () {
+                                window.close();
+                                closeMe();
+                            }, 4000);
 
 
                         }
