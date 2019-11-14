@@ -1109,6 +1109,14 @@ namespace Carroll.Data.Services.Helpers
                 _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy")+ " "+ NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
                 List<string> tos = new List<string>();
                  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+
+                // get created user email
+
+                var email = (from tbl in _entities.SiteUsers
+                             where tbl.UserId == NewhireDetails.CreatedUser
+                             select tbl.UserEmail).FirstOrDefault();
+                if (!string.IsNullOrEmpty(email))
+                    tos.Add(email);
                 
                 _message.EmailTo = tos;
                
