@@ -694,6 +694,11 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                         tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        var email = (from tbl in _entities.SiteUsers
+                                     where tbl.UserId == NewhireDetails.tbl.CreatedUser
+                                     select tbl.UserEmail).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(email))
+                            tos.Add(email);
                         _message.EmailTo = tos;
                         InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For Employee New Hire Notice on" + DateTime.Now,"System" );
 
@@ -848,6 +853,12 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                         tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        var email = (from tbl in _entities.SiteUsers
+                                     where tbl.UserId == NewhireDetails.CreatedUser
+                                     select tbl.UserEmail).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(email))
+                            tos.Add(email);
+
                         _message.EmailTo = tos;
 
                         InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Employee Lease Rider on" + DateTime.Now, "System");
@@ -988,7 +999,7 @@ namespace Carroll.Data.Services.Helpers
                     var NewhireDetails = (from tbl in _entities.PayrollStatusChangeNotices
                                       
                                           where tbl.PayrollStatusChangeNoticeId == propid
-                                          select new {tbl.EmployeeName }).FirstOrDefault();
+                                          select new {tbl.EmployeeName,tbl.CreatedUser }).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -1002,6 +1013,12 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                     
                          tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        var email = (from tbl in _entities.SiteUsers
+                                     where tbl.UserId == NewhireDetails.CreatedUser
+                                     select tbl.UserEmail).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(email))
+                            tos.Add(email);
+
                         _message.EmailTo = tos;
 
                         InsertHrLog(FormType, propid.ToString(), "HR Email sent ", "HR Email is sent For Payroll Status Change on" + DateTime.Now, "System");
@@ -1375,7 +1392,12 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form.  <br> <br> <h5> Thank you, <br> CARROLL </h5>    </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]); 
+                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        var email = (from tbl in _entities.SiteUsers
+                                     where tbl.UserId == NewhireDetails.CreatedUser
+                                     select tbl.UserEmail).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(email))
+                            tos.Add(email);
                         _message.EmailTo = tos;
                       
                        InsertHrLog(FormType, propid.ToString(), "HR Email sent", "Hr Email is sent For New Hire Notice on" + DateTime.Now, "System");
@@ -1572,7 +1594,8 @@ namespace Carroll.Data.Services.Helpers
                     var NewhireDetails = (from tbl in _entities.EmployeeLeaseRaiders
                                           join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.EmployeeLeaseRiderId == propid
-                                          select new { tbl.EmployeeName,siteu.FirstName,siteu.LastName } ).FirstOrDefault();
+                                          select new { tbl.EmployeeName,siteu.FirstName,siteu.LastName,tbl.CreatedUser } ).FirstOrDefault();
+
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -1584,6 +1607,11 @@ namespace Carroll.Data.Services.Helpers
                         List<string> tos = new List<string>();
                     
                         tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        var email = (from tbl in _entities.SiteUsers
+                                     where tbl.UserId == NewhireDetails.CreatedUser
+                                     select tbl.UserEmail).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(email))
+                            tos.Add(email);
                         _message.EmailTo = tos;
                       
                         InsertHrLog("LeaseRider", propid.ToString(), "HR Email sent", " Hr Email is sent for Employee Lease Rider" + DateTime.Now, "System" );
@@ -1614,7 +1642,7 @@ namespace Carroll.Data.Services.Helpers
                     var NewhireDetails = (from tbl in _entities.NoticeOfEmployeeSeperations
                                           join siteu in _entities.SiteUsers on tbl.CreatedUser equals siteu.UserId
                                           where tbl.EmployeeSeperationId == propid
-                                          select new { tbl.EmployeeName, siteu.FirstName, siteu.LastName }) .FirstOrDefault();
+                                          select new { tbl.EmployeeName, siteu.FirstName, siteu.LastName,tbl.CreatedUser }) .FirstOrDefault();
                     if (NewhireDetails != null)
                     {
                         // subject and body
@@ -1629,8 +1657,13 @@ namespace Carroll.Data.Services.Helpers
                     
                         tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         _message.EmailTo = tos;
+                        var email = (from tbl in _entities.SiteUsers
+                                     where tbl.UserId == NewhireDetails.CreatedUser
+                                     select tbl.UserEmail).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(email))
+                            tos.Add(email);
 
-                       InsertHrLog("NoticeOfEmployeeSeparation", propid.ToString(), "HR Email sent", " Hr Email is sent for Notice of Employee Separation" + DateTime.Now, "System");
+                        InsertHrLog("NoticeOfEmployeeSeparation", propid.ToString(), "HR Email sent", " Hr Email is sent for Notice of Employee Separation" + DateTime.Now, "System");
 
                         return _message;
                     }
