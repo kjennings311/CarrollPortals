@@ -90,18 +90,18 @@
                             <a class="export" style="color:white;" href="/Hr/ExportsContacts"> <i class="fa fa-download"></i> Export As Excel </a>
                             <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
                         }
-                            <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('contact');"><i class="fa fa-edit"></i> Edit</a>
+                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('contact');"><i class="fa fa-edit"></i> Edit</a>
 
-                            <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
+                        <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>
 
-                            <a style="color:white;" href="#" onclick="ToggleAdd('contact');">
-                                <i class="fa fa-plus-circle"></i> New
-                            </a>
-                        }
+                        <a style="color:white;" href="#" onclick="ToggleAdd('contact');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
+                    }
 
-                    </div>
+                </div>
 
             </div>
             @*<div class="ibox-title">
@@ -206,6 +206,9 @@
             white-space: nowrap;
         }
     </style>
+
+  
+
 }
 
 @section Scripts
@@ -220,7 +223,7 @@
         $(document).ready(function () {
 
             LoadContacts();
-            
+
             $(".btnupload").click(function () {
                 $(".claimmodal").modal("show");
 

@@ -85,21 +85,21 @@
                     @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "office staff")
                     {
                         if (@Model.RoleType.ToLower() != "office staff")
-                    {
+                        {
 
                             <a class="export" style="color:white;" href="/Hr/ExportEquityPartners"> <i class="fa fa-download"></i> Export As Excel </a>
                             <a class="btnupload" style="color:white;" href="#"><i class="fa fa-upload"></i> Upload Excel </a>
-                    }
-                            <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
-
-                            <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>
-
-                            <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
-                                <i class="fa fa-plus-circle"></i> New
-                            </a>
                         }
+                        <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('partner');"><i class="fa fa-edit"></i> Edit</a>
+
+                        <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>
+
+                        <a style="color:white;" href="#" onclick="ToggleAdd('partner');">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
+                    }
                 </div>
             </div>
 
@@ -196,6 +196,51 @@
             }
         }
     </style>
+}
+
+
+@section ipadstyles
+{
+    <style type="text/css">
+
+
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) 
+        {
+            .RowsContatiner .ibox-title {
+                padding-top: 200px !important;
+            }
+
+            .ibox-title h1
+            {
+                font-size:20px !important;
+                
+            }
+            .ibox-tools
+            {
+                margin-top:-36px !important;
+
+            }
+        }
+
+
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation :landscape ) 
+        {
+            .RowsContatiner .ibox-title 
+            {
+                padding-top: 200px !important;
+            }
+
+            .ibox-title h1 {
+                font-size: 20px !important;
+            }
+
+            .ibox-tools {
+                margin-top: -36px !important;
+            }
+        }
+    </style>
+
+
 }
 
 @section Scripts

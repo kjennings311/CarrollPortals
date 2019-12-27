@@ -59,6 +59,8 @@ namespace Carroll.Portals
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
                       "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
 
+            bundles.Add(new StyleBundle("~/bundles/ipad-media").Include(
+                      "~/content/ipad-media.css"));
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/scripts/jquery-3.1.1.min.js",

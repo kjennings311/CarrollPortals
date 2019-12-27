@@ -61,7 +61,7 @@
                                         <div style="width:100%; text-align:center;">
 
 
-                                            <img style="width:200px;" src="~/carroll.portals/img/residentreferaltop.png" />
+                                            <img style="width:200px;" src="~/img/residentreferaltop.png" />
 
 
                                         </div>
@@ -449,11 +449,15 @@
                 }
 
 
-                if ($("#v1make").val() == "") {
+
+
+
+                if ($("#v1make").val() == "")
+                {
                     errormsgsummary += "<li> Please Enter Vehicle 1 Make </li>";
-                    $("#v1make").addClass('has-error');
+                    $("#v1make").addClass('has-error');
                     if (control == "")
-                        control = $("#v1make");
+                        control = $("#v1make");
                 }
 
 
@@ -623,7 +627,7 @@
 
 
 
-                    if ($("#o4name").val() != "" && $("#o4date").val() == "") {
+                    if ($("#o4name").val() != "" && $("#o4date").val() != "") {
 
                         if (othercontacts != "")
                             othercontacts += "|";

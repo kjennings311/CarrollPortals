@@ -6,16 +6,18 @@
 <div class="wrapper wrapper-content" style="padding-top:0px !important">
     <div class="row hidewhenformopen">
         <div class="col-md-12 ipbackground" style="background-image: url(/img/bg1.jpg);">
-            <h1 class="homeheading visible-lg visible-md" style="font-size: 105px !important;"> <span style="font-weight:bolder;"> CARROLL </span> <span style="font-size:150px;"> | </span>  <span> FORMS </span>  </h1>
+            <h1 class="homeheading visible-lg visible-md visible-sm" style="font-size: 105px !important;"> <span style="font-weight:bolder;"> CARROLL </span> <span style="font-size:150px;"> | </span>  <span> FORMS </span>  </h1>
             <h1 class="homeheading visible-xs" style="position: absolute !important;
     margin-top: 105px !important;
     font-size: 25px !important;
     color: white !important;
     text-align: center !important;
-    padding-left: 5% !important;"> <span style="font-weight:bolder;"> CARROLL </span> <span style="font-size:30px;"> | </span>  <span> FORMS </span>  </h1>
+    padding-left: 5% !important;">
+                <span style="font-weight:bolder;"> CARROLL </span> <span style="font-size:30px;"> | </span>  <span> FORMS </span>
+            </h1>
 
         </div>
-        <div class="col-xs-12 visible-xs mobile-menu-dashboard" style="margin-top:-40px;">
+        <div class="col-xs-12 visible-xs mobile-menu-dashboard visible-xs" style="margin-top:-40px;">
             <div class="col-xs-6 ">
                 <a href="~/Home/Index" style="color:white;"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
             </div>   <div class="col-xs-6">
@@ -56,16 +58,14 @@
         }
 
 
-        @@media only screen and (max-width : 480px) 
-        {
+        @@media only screen and (max-width : 480px) {
 
             .navbar-header {
                 display: none !important;
             }
         }
 
-        @@media only screen and (min-width: 320px) 
-        {
+        @@media only screen and (min-width: 320px) {
 
             .ipbackground h1 {
                 position: absolute !important;
@@ -78,7 +78,61 @@
         }
 
 
+
     </style>
+}
+
+@section ipadstyles
+{
+
+    <style type="text/css">
+
+
+        /* iPads (landscape) ----------- */
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) 
+        {
+            .ipbackground {
+               min-height:465px !important;
+                height: 465px !important;
+            }
+
+            .homeheading, .homeheading span {
+                font-size: 50px !important;
+            }
+
+            .ipbackground h1 
+            {
+                margin-top:150px !important;
+            }
+        }
+
+
+        /* iPads (portrait) ----------- */
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) 
+        {
+            .ipbackground {
+                min-height: 500px !important;
+                padding-top: 150px !important;
+            }
+
+            .homeheading, .homeheading span {
+                font-size: 50px !important;
+            }
+
+            .ipbackground h1 
+            {
+                margin-top:0px !important;
+            }
+
+            .navbar-right 
+            {
+                margin-right:0px !important;            
+            }
+
+            /* Styles */
+        }
+    </style>
+
 }
 
 @section Scripts

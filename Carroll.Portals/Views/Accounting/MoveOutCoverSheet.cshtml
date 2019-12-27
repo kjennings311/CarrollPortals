@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Referral Request";
+    ViewBag.Title = " Move Out Cover Sheet";
 }
 
 <input type="hidden" id="pageid" value="referalrequest" />
@@ -11,7 +11,7 @@
                 <a href="~/Home/Index">Home</a>
             </li>
             <li class="active">
-                <strong> Referral Request </strong>
+                <strong> Move Out Cover Sheet </strong>
             </li>
         </ol>
     </div>
@@ -26,7 +26,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title" style="background:url('/img/resrel.jpg');background-size: cover;padding: 240px 15px 7px;">
 
-                <h1 style="padding-top:5px;color:white;text-transform:uppercase;"> <b>  Referral Request </b></h1>
+                <h1 style="padding-top:5px;color:white;text-transform:uppercase;"> <b>   Move Out Cover Sheet </b></h1>
 
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
@@ -35,7 +35,7 @@
                             <a disabled="disabled" class="btnDelete" href="#">
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('ReferralRequest'); ">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm(' MoveOutCoverSheet'); ">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -51,106 +51,104 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h1 class="modal-title" style="font-weight:bold;text-align: center;
     color: black;display:none;" id="gridSystemModalLabel">
-                                    Referral Request Sheet
+                                    Move Out Cover Sheet
                                 </h1>
                             </div>
                             <div class="modal-body">
                                 <div class="row" style="padding: 20px;  border: 2px solid black;">
                                     <form id="submitform" onsubmit="return false;">
-                                        <p style="line-height: 99%;  margin: 0cm 0cm .0001pt 3.0pt;"><strong><span style="font-size: 18.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL SHEET</span></strong> <img style="float:right;" src="~/img/residentreferaltop.png" /> </p>
+                                        <p style="line-height: 99%;  margin: 0cm 0cm .0001pt 3.0pt;"><strong><span style="font-size: 18.0pt; line-height: 99%; font-family: 'Century Gothic',sans-serif;">Move Out Cover Sheet</span></strong> <img style="float:right;" src="~/img/residentreferaltop.png" /> </p>
                                         <p style=" line-height: 19.1pt; "><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></p>
+
+
                                         <table style="margin-left: .5pt; border-collapse: collapse;width:100%">
                                             <tbody>
-                                                <tr style="height: 17.65pt;">
+                                                <tr style="height: 30pt;">
                                                     <td style="width: 209.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="279">
                                                         <p style="line-height: normal;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Code: <input type="text" id="propertynumber" />  </span></strong></p>
                                                     </td>
                                                     <td style="width: 325.0pt; border: solid windowtext 1.0pt; border-left: none; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="433">
-                                                        <p style="line-height: normal;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Name: <input disabled type="text" id="propertyname" style="width:44%;" /> </span></strong></p>
+                                                        <p style="line-height: normal;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Name: <input disabled type="text" id="propertyname" style="width:65%;" /> </span></strong></p>
                                                     </td>
                                                 </tr>
                                                 <tr style="height: 16.65pt;">
                                                     <td style="width: 209.0pt; border: solid windowtext 1.0pt; border-top: none; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="279">
-                                                        <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Code: <input type="text" style="width:39%;" id="refresidentcode" /> </span></strong></p>
+                                                        <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Tenant Code: <input type="text" style="width:56%;" id="refresidentcode" /> </span></strong></p>
                                                     </td>
                                                     <td style="width: 325.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="433">
-                                                        <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Name: <input type="text" id="refresidentname"  onchange="document.getElementById('residentname1').value = this.value;"/> </span></strong></p>
+                                                        <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Tenant Name: <input type="text" id="refresidentname" style="width:65%" /> </span></strong></p>
                                                     </td>
                                                 </tr>
                                                 <tr style="height: 70.4pt;">
                                                     <td colspan="2" style="width: 209.0pt; border-top: none; border-left: solid windowtext 1.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 70.4pt;" width="279">
-
-                                                        <p style=" line-height: 16.6pt; width:10%; display:inline-block "><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">&nbsp; Notes: </span></strong> </p> <textarea id="notes" style="width:80%; display:inline-block;">  </textarea>
+                                                        <p style=" line-height: 16.6pt; width:20%; display:inline-block "><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">&nbsp; Forwarding Address: </span></strong> </p> <textarea id="notes" style="width:70%; display:inline-block;">  </textarea>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <p><strong><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></strong></p>
-                                        <table style="width:100%;border:1px solid black;margin-bottom:30px;">
+                                        <table style="width:40%;border:1px solid black;margin-bottom:30px; float:left;margin-left:50px;">
                                             <tbody>
                                                 <tr>
-                                                    <td style="padding:10px">
-                                                        <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) <input type="text" style="width:35%;" disabled id="propertyname1" /> and (Resident&rsquo;s Name)<input type="text" id="residentname1" /> , concerning the referral of (Referred Resident) <input type="text" style="width:19%;" id="refferedresident" /> in unit number<input style="width:8%" type="text" id="unitnumber" />. </strong></p>
-                                                        <p style="text-indent: 36.0pt;"><strong>In consideration of the referral, the Property now agrees to credit rent of the referring resident for $ <input type="text" style="width:10%;" id="referalbonus" /> as a referral bonus. This amount will be credited after the referred resident has lived on-site for a full 30 days and has paid a full month&rsquo;s rent with no concessions. &nbsp;&nbsp;</strong></p>
-                                                        <p style="text-indent: 36.0pt;"><strong>&nbsp;</strong></p>
-                                                        <p><strong>&nbsp;Submit for Rent Credit: </strong></p>
-                                                        <ul style="list-style-type:decimal">
-                                                            <li> Copy of application or KNOCK listing the referring resident&rsquo;s name. &nbsp; </li>
-                                                            <li> Copy of executed lease of referred resident. </li>
-                                                            <li> Completed Resident Referral Sheet (this form).  </li>
-                                                        </ul>
+                                                    <td style="padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid;">
+                                                        <strong> REFUND DUE </strong>
                                                     </td>
                                                 </tr>
+                                                <tr style="padding-top:10px;"> <td style="padding: 15px 11px 15px 10px;text-align:center"> Email your AP Specialist this form and the proper backup (Move - out statement) </td></tr>
+                                                <tr><td> Refund Due : <input type="text" />  </td>   </tr>
+
+                                                <tr><td> Move Out Date : <input type="text" />  </td>   </tr>
+
+                                                <tr> <td> <input type="checkbox" /> Move - Out Statement Attached  </td> </tr>
+                                                <tr> <td style="padding-bottom:20px;"> <input type="checkbox" /> Resident Ledger Attached  </td> </tr>
                                             </tbody>
                                         </table>
-                                        <p style=" line-height: 99%; ">
+                                        <table style="width:40%;border:1px solid black;margin-bottom:30px; float:right; margin-right:50px;min-height:220px">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid;">
+                                                        <strong> BALANCE DUE </strong>
+                                                    </td>
+                                                </tr>
+                                                <tr style="padding-top:10px;"> <td style="padding: 15px 11px 15px 10px;text-align:center">Keep this form with your move out file and do not submit ap </td></tr>
+                                                <tr><td> Amount Due : <input type="text" />  </td>   </tr>
+
+                                                <tr><td> Move Out Date : <input type="text" />  </td>   </tr>
+                                                <tr><td> Sent Collections On : <input type="date" />  </td>   </tr>
+                                                
+                                            </tbody>
+                                        </table>
+
+                                        <p style=" line-height: 99%; clear:both ">
                                             <span style=" line-height: 99%; ">
-                                                Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" style="    width: 46.5%;
+                                                Submitting Associate: <input type="text" style="    width: 46.5%;
     margin-right: 3%;
-    margin-left: 3.5%;" id="refresidentsign" /> Dated <input type="date" id="refresdate" />
+    margin-left: 0.5%;" id="refresidentsign" /> Dated <input type="date" id="refresdate" />
                                             </span>
                                         </p>
 
                                         <p style=" line-height: normal;">
-                                            <span style="">Property Manager&rsquo;s Approval:</span>
+                                            <span style="">Manager Approval:</span>
                                             <span style="">
                                                 <input style="width: 46.5%;
-    margin-right: 3%;" type="text" id="properymanagersign" /> Dated<input type="date" id="properymanagerdate" />
+    margin-left: 2%;margin-right:3%;" type="text" id="properymanagersign" /> Dated<input type="date" id="properymanagerdate" />
                                             </span>
                                         </p>
-                                        <p style=" line-height: 99%;margin: 41px 0px 0px 0px; "><strong><span style="font-size: 14.0pt; line-height: 99%;">ACCOUNTING USE ONLY:</span></strong></p>
 
-                                        <p style=" line-height: 99%;margin-top:10px; margin-bottom:20px;"><span style=" ">Received: <input type="text" style="margin-right:18%;" id="receivedamount" value="0" /> Credit Applied:<input type="text" value="0" id="creditapplied" /></span></p>
+                                        <div style="border: 1px solid black;
+    margin-top: 100px" class="col-md-12">
+                                            <h2 style="margin: 10px;
+    padding: 10px;
+    font-weight: bold;"> ACCOUNTING USE ONLY: </h2>
 
-                                        <p style="margin-top:20px;"><strong><span style="font-size: 14.0pt; line-height: 107%; font-family: 'Century Gothic',sans-serif;">RESIDENT REFERRAL PROGRAM</span></strong></p>
-                                        <p style="text-indent: 36.0pt;">The Resident Referral Program is designed to reward our current residents for referring others to a Carroll Community. Each resident will receive a credit to their ledger for the referral bonus amount, which is set on a property-by-property basis.</p>
-                                        <p><strong>Residents are eligible to receive a referral fee after the described requirements are met:</strong></p>
-                                        <ul>
-                                            <li>Referred Applicant(s) must add referring residents&rsquo; name on application or KNOCK during their visit.</li>
-                                            <li>Referred Applicant(s) must be approved per the community requirements and execute a valid minimum six-month lease with a Carroll Property.</li>
-                                            <li>Referred Resident(s) must establish a minimum 30-day residency and pay one full month&rsquo;s rent (full-month concessions are not considered payments).</li>
-                                            <li>Referred or Referring Resident(s) cannot at any time withhold payments. If the referring residents&rsquo; rent is due and credit has not been posted to the ledger, the resident must pay rent in full and the credit will be applied to the following month.</li>
-                                            <li>All appropriate documents must be submitted to the Accounts Payable Team before a credit can be applied to the referring tenant(s) ledger.</li>
-                                        </ul>
-                                        <p>&nbsp;</p>
-                                        <p><strong>Submitting Documents: </strong></p>
-                                        <p>Please submit the following documents to have the credit applied:</p>
-                                        <ol style="margin-left:5%">
-                                            <li>Copy of the referred applicants&rsquo; application or KNOCK referring tenant(s) name.</li>
-                                            <li>Copy of referred residents Terms and Signature Lease pages.</li>
-                                            <li>Completed Referral Request Form.</li>
-                                        </ol>
-                                        <p>&nbsp;</p>
-                                        <p><strong>Applying Credits: </strong></p>
-                                        <p>All applied credits will be added to the referring resident(s) ledger by the Accounts Payable Department.&nbsp; Once all supporting documentations have been uploaded to the resident(s) profile as an attachment, please notify your properties Accounts Payable personnel via email as follows:</p>
-                                        <p style="margin-left: 36.0pt;"><strong>Subject</strong>: Resident Referral &ndash; (Last Name)</p>
-                                        <p style="margin-left: 36.0pt;"><strong>Body</strong>: Please process the credit (amount) for (Last Name).</p>
-                                        <p style="margin-left: 36.0pt;">All required documents have been uploaded.</p>
-                                        <p style="margin-left: 36.0pt;">Thank You.</p>
-                                        <p>Once the team receives the appropriate documents, a credit charge for the approved amount will be added to the resident&rsquo;s ledger and a confirmation email will be sent to the property within 48 hours of receipt.</p>
-                                        <p>&nbsp;</p>
-                                        <p>&nbsp;</p>
-                                        <br /> <br />
+                                            <p> Recieved: <input type="text" />  Check #: <input type="text" /> Check Amount: <input type="text" />  </p>
+                                            <p style="margin-bottom:20px !important;"> Cut By: <input type="text" name="name" value="" /></p>
+                                        </div>
+
                                         <div id="status"> </div>
                                         <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
 
@@ -421,6 +419,10 @@
 
         .has-error {
             border-color: red;
+        }
+
+        td,th {
+            padding-left:10px !important;
         }
     </style>
 }

@@ -28,20 +28,28 @@
             padding: 5px;
         }
 
-        p {
+        p, p strong {
             margin-bottom: 10px !important;
+            font-size: 9pt !important;
         }
 
         ol li span {
             margin-top: 10px !important;
         }
+
+        li
+        {
+            line-height:2;
+        }
+
+
     </style>
 
     <link href="/Content/a4css.css" rel="stylesheet" />
 
 </head>
 <body class="document">
-    <div class="page" style="padding: 30px;">
+    <div class="page" style="padding: 5px;">
         <div class="col-md-12" style="    width: 100%;
     border: 1px solid black;
     padding: 40px;    margin-top: 20px;">
@@ -52,35 +60,39 @@
                     <tbody>
                         <tr style="height: 17.65pt;">
                             <td style="width: 209.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="279">
-                                <p style="line-height: normal;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Code: <input type="text" value="@Model.PropertyCode" style="width:50%;" id="propertynumber" />  </span></strong></p>
+                                <p style="line-height: normal;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color:#555555">Property Code: <input type="text" value="@Model.PropertyCode" style="width:50%;" id="propertynumber" />  </span></strong></p>
                             </td>
                             <td style="width: 325.0pt; border: solid windowtext 1.0pt; border-left: none; padding: 0cm 0cm 0cm 0cm; height: 17.65pt;" width="433">
-                                <p style="line-height: normal;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Property Name: <input type="text" value="@Model.PropertyName" id="propertyname" /> </span></strong></p>
+                                <p style="line-height: normal;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color:#555555">Property Name: <input type="text" value="@Model.PropertyName" style="width:75%;" id="propertyname" /> </span></strong></p>
                             </td>
                         </tr>
                         <tr style="height: 16.65pt;">
                             <td style="width: 209.0pt; border: solid windowtext 1.0pt; border-top: none; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="279">
-                                <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Code: <input type="text" style="width:35%;" value="@Model.ResidentCode" id="refresidentcode" /> </span></strong></p>
+                                <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 6.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color:#555555">Referring Resident Code: <input type="text" style="width:35%;" value="@Model.ResidentCode" id="refresidentcode" /> </span></strong></p>
                             </td>
                             <td style="width: 325.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 16.65pt;" width="433">
-                                <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">Referring Resident Name: <input type="text" value="@Model.ResidentName" id="refresidentname" /> </span></strong></p>
+                                <p style="line-height: 16.6pt;  margin: 0cm 0cm .0001pt 5.0pt;"><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color:#555555">Referring Resident Name: <input type="text" value="@Model.ResidentName" id="refresidentname" /> </span></strong></p>
                             </td>
                         </tr>
                         <tr style="height: 70.4pt;">
                             <td colspan="2" style="width: 209.0pt; border-top: none; border-left: solid windowtext 1.0pt; border: solid windowtext 1.0pt; padding: 0cm 0cm 0cm 0cm; height: 70.4pt;" width="279">
 
-                                <p style=" line-height: 16.6pt; width:10%; display:inline-block "><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color: windowtext;">&nbsp; Notes: </span></strong> </p> <textarea id="notes" style="width:80%; display:inline-block;"> @Model.Notes  </textarea>
+                                <p style=" line-height: 16.6pt; width:10%; display:inline-block "><strong><span style="font-size: 9.0pt; font-family: 'Century Gothic',sans-serif; color:#555555">&nbsp; Notes: </span></strong> </p> <p id="notes" style="width:80%; display:inline-block;">
+                                    @if (@Model.Notes != null)
+                                    {
+                                        @Model.Notes}
+                                </p>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <p><strong><span style="font-size: 12.0pt; font-family: 'Times New Roman',serif;">&nbsp;</span></strong></p>
-                <table style="width:100%;border:1px solid black;margin-bottom:30px;">
+                <table style="width:100%;border:1px solid black;margin-bottom:15px;">
                     <tbody>
                         <tr>
                             <td style="padding:10px">
-                                <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) <input type="text" value="@Model.AgriPropertyName" id="propertyname1" /> and (Resident&rsquo;s Name)<input type="text" value="@Model.AgriResidentName" id="residentname1" /> , concerning the referral of (Referred Resident) <input type="text" value="@Model.ReferredResident" style="width:19%" id="refferedresident" /> in unit number<input type="text" style="width:8%;" value="@Model.UnitNumber" id="unitnumber" />.&nbsp; </strong></p>
-                                <p style="text-indent: 36.0pt;"><strong>In consideration of the referral, the Property now agrees to credit rent of the referring resident for $ <input type="text" style="width:10%" value="@Model.ReferalBonus" id="referalbonus" /> as a referral bonus. This amount will be credited after the referred resident has lived on-site for a full 30 days and has paid a full month&rsquo;s rent with no concessions. &nbsp;&nbsp;</strong></p>
+                                <p style="text-indent: 36.0pt;"><strong>This agreement is made between (Property Name) <input type="text" value="@Model.AgriPropertyName" style="width:45%;" id="propertyname1" /> and (Resident&rsquo;s Name)<input type="text" style="width:50%" value="@Model.AgriResidentName" id="residentname1" /> , concerning the referral of (Referred Resident) <input type="text" value="@Model.ReferredResident" style="width:50%" id="refferedresident" /> in unit number<input type="text" style="width:8%;" value="@Model.UnitNumber" id="unitnumber" />.&nbsp; </strong></p>
+                                <p style="text-indent: 36.0pt;"><strong>In consideration of the referral, the Property now agrees to credit rent of the referring resident for <br /> $ <input type="text" style="width:10%" value="@Model.ReferalBonus" id="referalbonus" /> as a referral bonus. This amount will be credited after the referred resident has lived on-site for a full 30 days and has paid a full month&rsquo;s rent with no concessions. &nbsp;&nbsp;</strong></p>
                                 <p style="text-indent: 36.0pt;"><strong>&nbsp;</strong></p>
                                 <p><strong>&nbsp;Submit for Rent Credit: </strong></p>
                                 <ul style="list-style-type:decimal">
@@ -94,17 +106,15 @@
                 </table>
                 <p style=" line-height: 99%; ">
                     <span style=" line-height: 99%; ">
-                        Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" style="    width: 46.5%;
-    margin-right: 3%;
-    margin-left: 3.5%;" id="refresidentsign"  value="@Model.ReferingResident" /> Dated <input type="text" value="@Model.ResidentDate.Value.ToShortDateString()" id="refresdate" />
+                        Referring Resident:&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="text" style="width: 50%;" id="refresidentsign" value="@Model.ReferingResident" /> Dated <input type="text" value="@if (Model.ResidentDate != null) { @Model.ResidentDate.Value.ToString("MM/dd/yyyy"); }" id="refresdate" />
                     </span>
                 </p>
 
                 <p style=" line-height: normal;">
                     <span style="">Property Manager&rsquo;s Approval:</span>
                     <span style="">
-                        <input style="width: 46.5%;
-    margin-right: 3%;" type="text" id="properymanagersign" value="@Model.PropertyManager" /> Dated<input value="@Model.PropertyManagerDate.Value.ToShortDateString()" type="text" id="properymanagerdate" />
+                        <input style="width: 45.8%;
+" type="text" id="properymanagersign" value="@Model.PropertyManager" /> Dated<input style="margin-left:5px;" value="@if (Model.ResidentDate != null) { @Model.PropertyManagerDate.Value.ToString("MM/dd/yyyy"); }" type="text" id="properymanagerdate" />
                     </span>
                 </p>
                 <p style=" line-height: 99%;margin: 41px 0px 0px 0px; "><strong><span style="font-size: 14.0pt; line-height: 99%;">ACCOUNTING USE ONLY:</span></strong></p>
@@ -137,11 +147,32 @@
                 <p style="margin-left: 36.0pt;">All required documents have been uploaded.</p>
                 <p style="margin-left: 36.0pt;">Thank You.</p>
                 <p>Once the team receives the appropriate documents, a credit charge for the approved amount will be added to the resident&rsquo;s ledger and a confirmation email will be sent to the property within 48 hours of receipt.</p>
-                
+
             </form>
 
         </div>
     </div>
+
+
+    <script>
+
+        var inputs = document.getElementsByTagName('input');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+        var inputs = document.getElementsByTagName('select');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+        var inputs = document.getElementsByTagName('textarea');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+
+    </script>
 </body>
 </html>
 

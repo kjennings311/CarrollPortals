@@ -1466,17 +1466,21 @@ namespace Carroll.Data.Services.Controllers
 
             foreach (var item in allcontacts)
             {
-                var values = item.ToString().Split(',');
-                var m = new ResidentContactInformation_OtherOccupants();
-                DateTime dob;
-                if(DateTime.TryParse(values[1],out dob))
+                if (!string.IsNullOrEmpty(item))
                 {
-                    m.OccupantId = System.Guid.NewGuid();
-                    m.ResidentContactInformationId = RS.Contactid;
-                    m.Name = values[0];
-                    if (!string.IsNullOrEmpty(values[1]))
-                        m.DOB = dob;
-                    contactlist.Add(m);
+
+                    var values = item.ToString().Split(',');
+                    var m = new ResidentContactInformation_OtherOccupants();
+                    DateTime dob;
+                    if (DateTime.TryParse(values[1], out dob))
+                    {
+                        m.OccupantId = System.Guid.NewGuid();
+                        m.ResidentContactInformationId = RS.Contactid;
+                        m.Name = values[0];
+                        if (!string.IsNullOrEmpty(values[1]))
+                            m.DOB = dob;
+                        contactlist.Add(m);
+                    }
                 }
             }
 

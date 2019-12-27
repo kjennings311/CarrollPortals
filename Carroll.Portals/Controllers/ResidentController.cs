@@ -174,7 +174,7 @@ namespace Carroll.Portals.Controllers
                     var EmpResponse = Res.Content.ReadAsStringAsync().Result;
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
-                    obj = JsonConvert.DeserializeObject<PrintResidentContact>(EmpResponse);
+                    obj = JsonConvert.DeserializeObject<Carroll.Data.Entities.Repository.PrintResidentContact>(EmpResponse);
 
                 }
 

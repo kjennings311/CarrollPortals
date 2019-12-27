@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title> @ViewBag.Title</title>
-  
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <!-- Add local styles, mostly for plugins css file -->
     @if (IsSectionDefined("Styles"))
@@ -14,11 +14,14 @@
 
     <!-- Add jQuery Style direct - used for jQGrid plugin -->
     <link href="@Url.Content("~/scripts/plugins/jquery-ui/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
-   
+
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/bundles/jqueryui")
+    @Styles.Render("~/bundles/ipad-media")
+    @if (IsSectionDefined("ipadstyles"))
+    {@RenderSection("ipadstyles", required: false)}
     <script type="application/javascript" src="~/Scripts/app/Global.js"></script>
 </head>
 <body>

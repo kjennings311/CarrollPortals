@@ -1,0 +1,36 @@
+﻿/* iPads (landscape) ----------- */
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) 
+{
+    .modal-lg {
+        width: 45% !important;
+    }
+
+    .ibox-tools a 
+    {
+        font-size:17px !important;
+    }
+
+    #prphead 
+    {
+        margin-top:-30px !important;
+    }
+
+}
+
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+{
+    .navbar-right {
+        margin-right:0px !important;
+    }
+
+    .modal-lg {
+        width: 45% !important;
+    }
+
+    .ibox-tools a {
+        font-size: 17px !important;
+    }
+
+
+
+}

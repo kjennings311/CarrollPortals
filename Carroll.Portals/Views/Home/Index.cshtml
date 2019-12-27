@@ -56,7 +56,7 @@ font-weight: bold;
     border-radius: 4px;
     box-shadow: none">
                     <div class="modal-body" style="padding-top:0px !important;">
-                        <div class="row" style="padding: 0px;padding-left:20px;">
+                        <div class="row" style="padding: 0px;">
                             <div class="ibox-content dynamicForm" style="border-style:none !important;">
 
                             </div>
@@ -79,7 +79,7 @@ font-weight: bold;
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 start-claim" style="border:1px solid;margin-left: 25px; min-height:590px; width: 29%;">
-                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ipadd11" style="margin-bottom:50px;">
 
                                     <h2> <strong>  Property Damage Claim </strong> </h2>
                                     <p> A Property Damage claim Report Should be filed when there is damage to the building or common areas. Examples include but are not limited to the following : </p>
@@ -94,7 +94,7 @@ font-weight: bold;
                                     <p> If there is injury to an individual due to property damage, both a Property Liability Claim Report and a General Liability Claim Report must be completed. </p>
                                     <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immediately in addition to completing the Property Damage Claim Report. </p>
                                 </div>
-                                <div class="col-md-12 text-center" style="position: absolute;
+                                <div class="col-md-12 text-center ipadd" style="position: absolute;
     bottom: 10px;">
                                     <button class="btn btn-primary " onclick="LoadForm('FormPropertyDamageClaim');">
                                         Start Claim
@@ -103,7 +103,7 @@ font-weight: bold;
 
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 start-claim" style="border:1px solid; margin-left: 25px;min-height: 590px;width: 29%;">
-                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ipadd11" style="margin-bottom:50px;">
 
                                     <h2> <strong>  General Liability Claim</strong> </h2>
                                     <p> A General Liability Claim Report should be filed when there is an injury to an individual at the property examples include but are not limited to :</p>
@@ -118,14 +118,14 @@ font-weight: bold;
                                     <p> ** In the event of a fire, death or any other event that may receive press coverage, contact your Regional Manager immediately in addition to completing the General Liability Claim Report </p>
                                 </div>
 
-                                <div class="col-md-12 text-center" style="position: absolute;bottom: 10px;">
+                                <div class="col-md-12 text-center ipadd" style="position: absolute;bottom: 10px;">
                                     <button class="btn btn-primary " onclick="LoadForm('FormGeneralLiabilityClaim');">
                                         Start Claim
                                     </button>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 start-claim damage-claim" style="border:1px solid;margin-left: 25px;min-height: 590px;width: 29%;">
-                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-bottom:50px;">
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 ipadd11" style="margin-bottom:50px;">
                                     <h2> <strong> Mold Damage Claim </strong> </h2>
                                     <p>
                                         If there is either evidence of mold (sight or scent) or suspicion of mold due to a health concern being expressed by the resident, an incident report should be completed.
@@ -134,7 +134,7 @@ font-weight: bold;
                                     <p> Please followup immediately with your Regional Manager and Regional Maintenance Supervisor for guidance on remediation as some properties may have partner specific guidelines/requirements    </p>
                                     <p>Carroll Protocol for remediating any incidents involving Mold, are found in Carroll U > Maintenance > Mold Operations Plan</p>
                                 </div>
-                                <div class="col-md-12 text-center" style="position:absolute; bottom:10px;">
+                                <div class="col-md-12 text-center ipadd" style="position:absolute; bottom:10px;">
                                     <button class="btn btn-primary vertical-align" onclick="LoadForm('FormMoldDamageClaim');">
                                         Start Claim
                                     </button>
@@ -389,7 +389,7 @@ font-weight: bold;
         background: #2f4050 !important;
     }
 
-    @@media only screen and (max-width : 768px) {
+    @@media only screen and (max-width : 767px) {
         .ipbackground {
             margin-top: 0px !important;
         }
@@ -425,6 +425,7 @@ font-weight: bold;
             margin-left: 0%;
             cursor: pointer;
             border-right: none !important;
+            display:inline-block !important;
         }
 
         .hidewhenformopen {
@@ -529,7 +530,7 @@ font-weight: bold;
         }
     }
 
-    @@media only screen and (min-width : 768px) {
+    @@media only screen and (min-width : 767px) {
         .dynamicForm {
             margin-left: 10% !important;
         }
@@ -545,6 +546,7 @@ font-weight: bold;
             margin-left: 2%;
             cursor: pointer;
             /*border-right: 1px solid #797979*/
+            display:inline-block;
         }
 
             .db h3 {
@@ -580,4 +582,94 @@ font-weight: bold;
             padding: 17px !important;
         }
     }
+
+
+
+    /* iPads (landscape) ----------- */
+    @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+        .ipbackground {
+            min-height: auto !important;
+        }
+
+        .start-claim {
+            width: 90% !important;
+            min-height: 400px !important;
+        }
+
+        .ipadd {
+            position: relative !important;
+        }
+
+        .ipadd11 {
+            margin-bottom: 10px !important;
+        }
+
+        .modal-lg {
+            width: 55% !important;
+        }
+
+        .db h3
+        {
+            font-size:12px !important;
+        }
+
+        .ipadd11 h2 {
+            font-size: 23px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .dynamicForm {
+            margin-bottom: 150px !important;
+        }
+       
+    }
+
+
+    /* iPads (portrait) ----------- */
+    @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+
+        /* Styles */
+        .ipbackground h1 {
+            top: 240px !important
+        }
+        .ipbackground {
+            margin-top: -250px !important;
+        }
+        .start-claim {
+            width: 90% !important;
+            min-height:400px !important;
+        }
+
+        .ipadd
+        {
+            position:relative !important;
+        }
+
+        .ipadd11
+        {
+           margin-bottom:10px !important;
+        }
+
+        .modal-lg 
+        {
+            width: 55% !important;
+        }
+
+        .damage-claim
+        {
+            margin-bottom:300px !important;
+
+        }
+
+        .ipadd11 h2 {
+            font-size: 23px !important;
+            margin-bottom: 20px !important;
+        }
+
+        .dynamicForm
+        {
+            margin-bottom:150px !important;
+        }
+    }
 </style>
+

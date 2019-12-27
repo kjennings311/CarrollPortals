@@ -1,5 +1,4 @@
-﻿
-// var $BaseApiUrl = "http://localhost:1002/";
+﻿// var $BaseApiUrl = "http://localhost:1002/";
   var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -431,13 +430,13 @@ function getForm(FormName, RecordId)
     var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
-    var $checkbox = ' <div class="form-group"><label class="col-sm-3 col-xs-9 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-6 col-xs-3"> <div class="col-md-1 col-xs-12" > <input class="form-control" type="checkbox" style="width:18px;"  id="{1}" value="1"   {2}></div> </div></div>';
+    var $checkbox = ' <div class="form-group"><label class="col-sm-6 col-xs-9 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-6 col-xs-3"> <div class="col-md-1 col-xs-12" > <input class="form-control" type="checkbox" style="width:18px;"  id="{1}" value="1"   {2}></div> </div></div>';
     var $person = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
     var $savebuttons = '<div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
-        + '<div class="col-sm-4 col-sm-offset-4">'       
-        + '<a id="savechanges" class="btn btn-primary col-xs-offset-3 btn-add" style="background:#2f4050 !important; margin-bottom:10px; border:none !important" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
+        + '<div class="col-sm-3 col-md-4 col-md-offset-3 col-lg-4 col-lg-offset-3 col-sm-offset-3">'       
+        + '<a id="savechanges" class="btn btn-primary col-sm-offset-3  col-xs-offset-3 btn-add" style="background:#2f4050 !important; margin-bottom:10px; border:none !important" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
         + '<a class="btn btn-white col-xs-offset-4"  href="javascript:location.reload();">Cancel</a>&nbsp;'
         + '</div></div >';
     var $select = '<div class="form-group">'

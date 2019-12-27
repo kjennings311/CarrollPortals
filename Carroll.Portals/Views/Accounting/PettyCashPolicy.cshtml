@@ -1,0 +1,427 @@
+﻿@{
+    ViewBag.Title = "Petty Cash Policy";
+}
+
+<input type="hidden" id="pageid" value="referalrequest" />
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <ol class="breadcrumb" style="padding: 8px 15px;">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li class="active">
+                <strong> Petty Cash Policy </strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="RowsContatiner animated fadeInRight">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="background:url('/img/resrel.jpg');background-size: cover;padding: 240px 15px 7px;">
+
+                <h1 style="padding-top:5px;color:white;text-transform:uppercase;"> <b>  Petty Cash Policy </b></h1>
+
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
+                {
+                    <div class="ibox-tools" style="margin-top:-55px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" onclick="LoadHrForm('PettyCashPolicy'); ">
+                            <i class="fa fa-plus-circle"></i> New
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="ibox-content" style="padding:80px; padding-top:40px;">
+
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:60%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="padding: 0px;
+    border: none;">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;  border: 2px solid black;">
+                                    <form id="submitform" onsubmit="return false;">
+                                        <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;padding-top:0px;" id="gridSystemModalLabel">
+                                            Petty Cash Policy
+                                        </h1>
+                                        <p> To aid the Property Manager in their position, management will issue a petty cash card to the manager for their use for property related expenses. The petty cash card issued does not belong to the Property Manager. All petty cash funds belong to the property where the property manager acts as the custodian of the funds. All petty cash funds are to be returned to Carroll Management Group should the Property Managers no longer work on the property. </p>
+                                        <p> Petty cash is issued at $3,000 per Manager/Property, with some exceptions approved by the Sr. Vice President of Property Management. </p>
+
+                                        <ul style="list-style-type:upper-roman">
+
+                                            <li>
+                                                Petty Cash Policies
+
+                                                <ul>
+
+                                                    <li> All Property Managers are responsible for their petty cash assigned to them at all times. </li>
+                                                    <li> The petty cash card should only be used for company business and using it for personal items will require the employee to repay funds to the property. Failure to do so will include a payroll deduction.</li>
+                                                    <li> Property Managers are not permitted to purchase personal items for themselves or others utilizing the petty cash assigned. In addition, managers are not permitted to purchase items for the property on the same receipt with items for their personal use.</li>
+                                                    <li> Credit card expenditures will be documented by the Manager by using “Bank of America Works,” an internet reporting tool. Detailed instructions will accompany all new card accounts. Failure to submit appropriate receipts within 30 days of the transaction date will be considered unsubstantiated and will be deducted from personal paychecks. </li>
+                                                    <li> 	No vendor/contractor is to be paid using petty cash unless approved by the Regional Vice President. </li>
+                                                    <li>
+                                                        Petty cash can be used for:
+
+                                                        <ul>
+
+
+                                                            <li> Postage, office supplies, small maintenance supplies, resident functions, eviction filings, marketing materials & items deemed vital to the ongoing support of the property. </li>
+                                                           </ul> </li>
+                                                    </ul>
+
+                                                            <li> Petty Cash Reimbursements <ul><li>Property related purchases using personal funds are reimbursed to the manager as a Petty Cash Reimbursement when the card is unavailable for use or if there is an emergency. After the Regional Manager approves the transactions, the manager will enter the reimbursement into Yardi using the unique Petty Cash ID assigned during Petty Cash Acknowledgement, code, and upload all receipts related.</li></ul> </li>
+                                                            <li> Large Purchases <ul> <li>Large items in excess of petty cash be paid by submitting a check request </li></ul> </li>
+                                                            <li>
+                                                                Use of Funds by team members <ul>
+                                                                    <li>
+                                                                        In the event a team member needs to use petty cash, the manager must ensure the money is accounted for by having the team member sign a
+                                                                        Reimbursement Form. The manager will then submit this as a Petty Cash Reimbursement. This will ensure the employee is held accountable in the event the petty cash fund and/or receipts have any
+                                                                        dissiliences.
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+
+                                                        
+
+                                                   
+
+
+
+                                                </ul>
+
+                                        <p>********************************************************************************************************************</p>
+                                        <h2 style="
+    text-align: center;
+    padding-top: 0px;
+    font-weight: bold;
+">
+                                            ACKNOWLEDGEMENT
+                                        </h2>
+                                        <p>
+                                            I <input type="text" style="width:30%; " /> , as the undersigned employee, hereby have read, acknowledged, and understand the Carroll Management Group Petty Cash Policy. I furthermore acknowledge any misuse of violation of this policy may result in a writing counseling and our termination.
+                                        </p>
+
+                                        <p style="margin-top:40px; margin-bottom:20px;"> <span style="float:left">  Signature of Employee </span> <span style="float:right;margin-right:15%;"> Position/Title</span>  </p>
+
+                                        <p style="margin-top:90px;"> Date :  <input type="date" style="width:20%" />  </p>
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+                                            <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table  dtprops" width="100%"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+    <style type="text/css">
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+      
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+
+      #submitform  ul li 
+        {
+            margin-bottom:10px;
+            margin-top:5px;
+        }
+
+        ul {
+            list-style: lower-alpha;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function () {
+            var leaseid = "";
+
+            GetAllMileageForms('ResidentReferal');
+
+            $("input").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "") {
+                    $(this).addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+                }
+
+            });
+
+
+
+            $("#propertynumber").focusout(function () {
+
+                if ($("#propertynumber").val() == "") {
+
+                    //$('#toastnotification').modal('show');
+
+                    //$(".alert").html('<h6 style="color:red;"> Please Enter Property Number </h6> ');
+
+                    //setTimeout(function () {
+                    //    $('#toastnotification').modal('hide');
+
+                    //    $(".alert").html(' ');
+                    //}, 3000);
+
+                    alert("Please Enter Property Number");
+
+                    //   $("#propertynumber").focus();
+                }
+                else {
+
+                    $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber=" + $("#propertynumber").val(), function (data) {
+                        if (data == "") {
+
+                            alert("Invalid Property Code");
+
+                            //   $("#propertynumber").focus();
+                            $("#propertyname").val('');
+                            $("#propertyname1").val('');
+                            //$('#toastnotification').modal('show');
+
+                            //$(".alert").html('<h6 style="color:red;"> Invalid Property Code </h6> ');
+
+                            //setTimeout(function ()
+                            //{
+                            //    $('#toastnotification').modal('hide');
+
+                            //    $(".alert").html(' ');
+                            //}, 3000);
+                        }
+                        else {
+
+                            $("#propertyname").val(data);
+                            $("#propertyname1").val(data);
+                        }
+                    });
+                }
+
+            });
+
+            $("#Submit").click(function (e) {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+
+                if ($("#propertynumber").val() == "" || $("#propertyname").val() == "") {
+                    errormsgsummary += "<li> Please Choose Property Properly </li>";
+                    $("#propertynumber").addClass('has-error');
+                    if (control == "")
+                        control = $("#propertynumber");
+                }
+
+                if ($("#refresidentcode").val() == "") {
+                    errormsgsummary += "<li> Please Enter Reference Resident Code </li>";
+                    $("#refresidentcode").addClass('has-error');
+                    if (control == "")
+                        control = $("#refresidentcode");
+                }
+
+
+                if ($("#refresidentname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Reference Resident Name </li>";
+                    $("#refresidentname").addClass('has-error');
+                    if (control == "")
+                        control = $("#refresidentname");
+                }
+
+                if ($("#propertyname1").val() == "") {
+                    errormsgsummary += "<li> Please Enter Property Name </li>";
+                    $("#propertyname1").addClass('has-error');
+                    if (control == "")
+                        control = $("#propertyname1");
+                }
+
+
+                if ($("#residentname1").val() == "") {
+                    errormsgsummary += "<li> Please Enter Resident Name </li>";
+                    $("#residentname1").addClass('has-error');
+                    if (control == "")
+                        control = $("#residentname1");
+                }
+
+                if ($("#refferedresident").val() == "") {
+                    errormsgsummary += "<li> Please Enter Referred Resident Name </li>";
+                    $("#refferedresident").addClass('has-error');
+                    if (control == "")
+                        control = $("#refferedresident");
+                }
+
+
+                if ($("#unitnumber").val() == "") {
+                    errormsgsummary += "<li> Please Enter Unit Number </li>";
+                    $("#unitnumber").addClass('has-error');
+                    if (control == "")
+                        control = $("#unitnumber");
+                }
+
+
+                if ($("#referalbonus").val() == "") {
+                    errormsgsummary += "<li> Please Enter Referal Bonus </li>";
+                    $("#referalbonus").addClass('has-error');
+                    if (control == "")
+                        control = $("#referalbonus");
+                }
+
+                if (errormsgsummary != "") {
+
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else {
+                    $('#myModal').modal('hide');
+
+                    $(".alert").html('Processing');
+                    $('#toastnotification').modal('show');
+                    $("#Submit").prop('disabled', false);
+
+                    var insertForm = new FormData();
+                    insertForm.append('propertynumber', $("#propertynumber").val());
+                    insertForm.append('propertyname', $("#propertyname").val());
+                    insertForm.append('refresidentcode', $("#refresidentcode").val());
+                    insertForm.append('refresidentname', $("#refresidentname").val());
+                    insertForm.append('notes', $("#notes").val());
+                    insertForm.append('propertyname1', $("#propertyname1").val());
+                    insertForm.append('residentname1', $("#residentname1").val());
+                    insertForm.append('refferedresident', $("#refferedresident").val());
+                    insertForm.append('unitnumber', $("#unitnumber").val());
+                    insertForm.append('referalbonus', $("#referalbonus").val());
+
+                    insertForm.append('refresidentsign', $("#refresidentsign").val());
+                    insertForm.append('refresdate', $("#refresdate").val());
+                    insertForm.append('properymanagersign', $("#properymanagersign").val());
+                    insertForm.append('properymanagerdate', $("#properymanagerdate").val());
+
+
+                    insertForm.append('receivedamount', $("#receivedamount").val());
+                    insertForm.append('creditapplied', $("#creditapplied").val());
+
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                    $("#status").html("<p style='color:green'> Processing ........ </p>");
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertResidentReferralRequest",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
+
+                            if (data['error'] == false) {
+                                leaseid = data['insertedId'];
+
+                                $("#status").html('');
+
+                                document.getElementById("submitform").reset();
+
+                                GetAllMileageForms('ResidentReferal');
+                                ShowToastNotification('Record Successfully Updated', 3);
+
+
+                                setTimeout(function () {
+
+                                    $("#Submit").attr('disabled', false);
+                                    $('#toastnotification').modal('hide');
+                                }, 3000);
+                            }
+                            else {
+                                $("#status").html(data['errorMsg']);
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.exceptionMessage);
+                        }
+                    });
+
+                }
+
+
+            });
+
+
+
+        });
+
+    </script>
+
+}
