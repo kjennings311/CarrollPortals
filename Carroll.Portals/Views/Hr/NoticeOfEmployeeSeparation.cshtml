@@ -34,9 +34,9 @@
                     <div class="ibox-tools" style="margin-top:-55px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a disabled="disabled" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>*@
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" class="addnew" href="#" onclick="LoadHrForm('EmployeeSeparation');LoadHrPositions(); LoadPositions();">
                             <i class="fa fa-plus-circle"></i> New
@@ -58,9 +58,9 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 @*<h1 class="modal-title" style="font-weight:bold;text-align: center;
-                            color: black;" id="gridSystemModalLabel">
-                                                            Payroll Status Change
-                                                        </h1>*@
+                                    color: black;" id="gridSystemModalLabel">
+                                                                    Payroll Status Change
+                                                                </h1>*@
                             </div>
                             <div class="modal-body">
                                 <div class="row" style="padding: 20px;
@@ -74,7 +74,7 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;margin-left:-1%;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="text" class="date-mask" id="effectivedate" /> Eligible for Rehire <input type="text" style="width:23%;"  value="YES" disabled id="rehire" /></p>
+                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="text" class="date-mask" id="effectivedate" /> Eligible for Rehire <input type="text" style="width:23%;" value="YES" disabled id="rehire" /></p>
                                             <p class="p1 ft1">
                                                 <span class="c0">
                                                     Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,7 +83,7 @@
                                                 <span class="c0" id="divproperty" style="display:none;">
                                                     <select type="text" style="width:33%" id="location"></select> Number <input type="text" id="propertynumber" style="width:23%" />
                                                 </span>
-                                              
+
                                             </p>
                                             <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <select id="jobtitle" style="width:46%"> </select></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
@@ -177,7 +177,7 @@
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
 
                                             <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" class="allow_decimal" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="text" class="date-mask"   style="width:20%;" id="sdate" disabled /></P>
+                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="text" class="date-mask" style="width:20%;" id="sdate" disabled /></P>
 
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
@@ -239,6 +239,7 @@
             line-height: normal;
             margin-right: 5px !important;
         }
+
         p {
             margin: 0;
             color: #000000;
@@ -634,6 +635,55 @@
         }
     </style>
 }
+@section ipadstyles
+{
+
+    <style type="text/css">
+          @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+            {
+
+                p.c8 {
+                    margin-left: 30% !important;
+                }
+                p.ft0 {
+                    margin-left: -7% !important;
+                }
+
+                .ft1 
+                {
+                    font: 13px 'Arial' !important;
+                    font-size:13px !important;
+                }
+
+                #jobtitle
+                {
+                    width:45% !important;
+                }
+
+                .t0
+                {
+                    width:100% !important;
+                }
+
+                #ssignature
+                {
+                    width:43% !important;
+                }
+
+                #Submit
+                {
+                    margin-left: -10% !important;
+                }
+
+                #submitform
+                {
+                    margin-left:0px !important;
+                }
+            }
+        </style>
+    }
+
+
 
 @section Scripts
 {
@@ -691,7 +741,7 @@
                     $("#divproperty").show();
                 }
 
-              
+
             });
 
             $("#location").change(function () {
@@ -713,7 +763,7 @@
                         else {
                             var values = data.split(",");
                             $("#propertyname ").val(values[0]);
-                          
+
                             $("#propertynumber").val(values[2]);
                         }
                     });
@@ -737,7 +787,7 @@
                 e.preventDefault();
                 console.log($("#2weekscom").val());
                 if ($("#2weekscom").val() == "true") {
-                    $("#rehire").val("Yes");        
+                    $("#rehire").val("Yes");
                 }
                 else {
                     $("#rehire").val("No");
@@ -745,8 +795,8 @@
 
             });
 
-           
-            
+
+
 
             // on focus out get the PropertyName for Property Number
 
@@ -812,7 +862,7 @@
 
 
             $("#Submit").click(function (e)
-            {   
+            {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -858,7 +908,7 @@
                     else
                         reason = "Multiple";
                 }
-              
+
 
                 cnt = 0;
                 var worktext = "";
@@ -894,7 +944,7 @@
                 }
 
                 if ($("#chkproperty").is(":checked"))
-                {                  
+                {
                     if ($("#location").val() == "") {
                         errormsgsummary += "<li> Please Choose Property  </li>";
                         $("#location").addClass('has-error');
@@ -933,14 +983,14 @@
                         control = $("#polictyvoilated1");
                 }
 
-              
-                
+
+
                 if ($("#vacationpaid").val() == "true" && ($("#vacationbalance").val() == "" || $("#vacationbalance").val() == "0" )) {
                     errormsgsummary += "<li> Vacation Balance Should not be Empty Or Zero  </li>";
                     $("#vacationpaid").addClass('has-error');
                     if (control == "")
                         control = $("#vacationpaid");
-                } 
+                }
                 if ($("#ssignature").val() == "") {
                     errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
                     $("#ssignature").addClass('has-error');
@@ -979,7 +1029,7 @@
                     }
 
                     insertForm.append('datechange', $("#effectivedate").val());
-                   
+
                     insertForm.append('rehire', $("#rehire").val());
                     insertForm.append('propertynumber', $("#propertynumber").val());
                     insertForm.append('jobtitile', $("#jobtitle").val());

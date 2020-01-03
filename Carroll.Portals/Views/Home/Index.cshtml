@@ -250,7 +250,7 @@ font-weight: bold;
         </div>
     </div>
 
-    <div class="row hidewhenformopen visible-xs visible-xs" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
+    <div class="row hidewhenformopen visible-xs visible-sm" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
 
         <table style="WIDTH: 90%;
     margin-top: 15PX;
@@ -258,9 +258,9 @@ font-weight: bold;
     color: white;
     font-weight: bold; font-size:12px;
     margin-left: 5%; clear:both;">
-            <tr style="border-bottom: 1px solid;" onclick="GetAllClaims('PropertyDamage')"> <td style="width:80%;border-right: 3px solid white !important;    background: #797979;padding:10PX;"> PROPERTY DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="propcount" style="font-weight:bold;"> </span> </td></tr>
-            <tr style="border-bottom: 1px solid;" onclick="GetAllClaims('General Liability')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> GENERAL LIABILITY CLAIM </td> <td style="background:#2f4050"> <span class="liabcount" style="font-weight:bold;"> </span> </td></tr>
-            <tr onclick="GetAllClaims('Mold Damage')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> MOLD DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="damagecount" style="font-weight:bold;"> </span> </td></tr>
+            <tr style="border-bottom: 1px solid;" onclick="FilterClaims('Property')"> <td style="width:80%;border-right: 3px solid white !important;    background: #797979;padding:10PX;"> PROPERTY DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="propcount" style="font-weight:bold;"> </span> </td></tr>
+            <tr style="border-bottom: 1px solid;" onclick="FilterClaims('General')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> GENERAL LIABILITY CLAIM </td> <td style="background:#2f4050"> <span class="liabcount" style="font-weight:bold;"> </span> </td></tr>
+            <tr onclick="FilterClaims('Mold')"> <td style="width:80%;border-right: 3px solid white !important; background: #797979;padding:10PX;"> MOLD DAMAGE CLAIM </td> <td style="background:#2f4050"> <span class="damagecount" style="font-weight:bold;"> </span> </td></tr>
         </table>
     </div>
 

@@ -1,5 +1,5 @@
 ﻿// var $BaseApiUrl = "http://localhost:1002/";
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -2788,7 +2788,7 @@ function GetAllClaims(Type) {
 
                     var doms = '<"html5buttons"B>lTfgitp';
                     if ($ismobile)
-                        doms = '<"top"i>rt<"bottom"flp><"clear">';
+                        doms = '<"top"if>rt<"bottom"lp><"clear">';
 
                     var datatableVariable = $('.dtprops').DataTable({
                         data: configdata.rows,

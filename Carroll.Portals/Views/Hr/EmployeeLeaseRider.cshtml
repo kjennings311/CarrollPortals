@@ -34,9 +34,9 @@
                     <div class="ibox-tools" style="margin-top:-55px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                    <a disabled="disabled" class="btnDelete" href="#">
-                        <i class="fa fa-trash"></i> Delete
-                    </a>*@
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" class="addnew" href="#" onclick="LoadHrForm('EmployeeLeaseRider'); LoadAllProperties();">
                             <i class="fa fa-plus-circle"></i> New
@@ -68,7 +68,8 @@
                                     </a>
 
                                     <a class="btn btn-danger yescorrect" id="yescorrect" href="#" onclick="showleaserider();" style="margin-left: 75px;
-    margin-top: 10px;">  Yes,I want to submit
+    margin-top: 10px;">
+                                        Yes,I want to submit
                                     </a>
                                 </div>
                             </div>
@@ -78,9 +79,9 @@
             </div>
 
 
-           @{ Html.RenderPartial("HrFormLogActivity"); }
-            
-            
+            @{ Html.RenderPartial("HrFormLogActivity"); }
+
+
             <div class="ibox-content" style="margin-left:0%; padding-top:20px;">
                 <div id="status1"> </div>
                 <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -100,9 +101,9 @@
                                         <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
                                     </h1>
                                     @*<h1 style="text-align: center;
-                                margin-top: -30px;">
-                                                                    <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
-                                                                </h1>*@
+                                        margin-top: -30px;">
+                                                                            <strong><span style="font-size: 18.0pt; line-height: 115%;">EMPLOYEE LEASE RIDER</span></strong>
+                                                                        </h1>*@
                                     <form id="submitform" onsubmit="return false;">
 
                                         <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Date :   </span>  <input type="text" id="leasedate" class="date-mask" /> </p>
@@ -114,7 +115,7 @@
                                         <ol>
                                             <li style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">All Carroll Organization employees have the option to reside at any participating Carroll Organization community. The current market rental value of the apartment is &nbsp; $ <input style=" display:inline; " type="text" id="marketvalue" class="allow_decimal" /> .&nbsp; The employee rental discount will be 20% off the market rental rate or the current net effective rent special.&nbsp; The monthly rent shall be &nbsp; $ <input style=" display:inline; " type="text" id="monthlyrent" class="allow_decimal" /> &nbsp; The employee rental rate shall be updated at renewal based on the market rent.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that as an employee of the Carroll Organization, rent must be paid on the 1<sup>st</sup> of the month in full. I understand that any late rental payments or NSF&rsquo;s may result in termination of employment with the Carroll Organization. Continual late payments, NSF&rsquo;s or having a writ of possession filed are grounds for immediate termination.</span></li>
-                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline;width:33%; " type="text"  id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
+                                            <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If at any time during residency at <input style=" display:inline;width:33%; " type="text" id="residency" class="" /> , the rental payment is received late or payment is returned NSF, all employee concessions (paragraph 1) will be void for that month and full market value and late fees will be due.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I understand that my residency at any Carroll Organization property is strictly voluntary and in no way a requirement of my employment with Carroll Organization.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">Upon termination of my employment with Carroll Organization whether voluntary or involuntary, my lease will be terminated regardless of the lease term stated on the lease. I will not be considered a tenant of the apartment community nor will I have rights and privileges of a tenant without the written consent of the Carroll Organization.&nbsp; I further agree that upon such termination from employment, I will vacate the apartment occupied by me within <strong><u>seven days</u></strong> from the date of my termination of employment.</span></li>
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">If the Carroll Organization should agree to allow me to continue to lease the apartment as a resident, a new lease will be signed that shall be at the current market rate and subject to all normal lease provisions.</span></li>
@@ -122,14 +123,16 @@
                                             <li style="text-align: justify; "><span style="font-size: 10.0pt; line-height: 115%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
                                         </ol>
 
-                                        <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" style="width:35%;" id="signatureproperymanager" /> </span>  <input type="text" class="date-mask" style="float:right;margin-right: 15%;
+                                        <p style="text-align: justify;margin-top:30px;">
+                                            <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" style="width:35%;" id="signatureproperymanager" /> </span>  <input type="text" class="date-mask" style="float:right;margin-right: 15%;
 
-width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;margin-top:10px;" id="pmdatespan"> Date : </span> </p>
-                                        <p style="text-align: justify;">
-                                            <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : <input type="text" style="margin-left:45px;width:35%;" id="signature" disabled /> </span>  <input disabled style="float:right; margin-right:15%;width:15%;" type="text" value="" id="positiondate" />  <span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;"> Date : </span>
+width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;margin-top:10px;" id="pmdatespan"> Date : </span>
                                         </p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;"> Printed Name of Employee <input type="text" disabled style="margin-left:25px;width:35%;" id="printempname" /> </span></p>
-                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:35%; margin-left:8%;" id="employeeemail" />  </span></p>
+                                        <p style="text-align: justify;">
+                                            <span style="font-size: 10.0pt; line-height: 115%;display:inline-block; "> Signature of Employee  : </span> <input type="text" style="margin-left:45px;width:35%;" id="signature" disabled />   <input disabled style="float:right; margin-right:15%;width:15%;" type="text" value="" id="positiondate" />  <span style="font-size: 10.0pt; line-height: 115%; float:right; margin-right:20px; margin-top:10px;"> Date : </span>
+                                        </p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt; display:inline-block; line-height: 115%;"> Printed Name of Employee </span> <input type="text" disabled style="margin-left:25px;width:35%;" id="printempname" /> </p>
+                                        <p style="text-align: justify;"><span style="font-size: 10.0pt;  line-height: 115%;">   Employee Email &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" style="width:35%; margin-left:8%;" id="employeeemail" />  </span></p>
 
                                         <p style="text-align: justify; border: none; padding: 0cm;"><span style="font-size: 10.0pt; line-height: 115%;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The Carroll Organization Employee File</span></p>
                                         <br /> <br />
@@ -196,10 +199,66 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
         .modal-open {
             overflow: auto !important;
         }
+    </style>
+}
+
+@section ipadstyles
+{
+    <style type="text/css">
+
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+        {
+            #signatureproperymanager
+            {
+                width:40% !important;
+            }
+
+            #pmdate {
+                float: right;
+                margin-right: 0px !important;
+                width: 20% !important;
+            }
+
+            #signature
+            {
+                margin-left: 45px !important;
+                width: 40% !important;
+            }
+
+            #positiondate
+            {
+                margin-right:0px !important;
+                width:20% !important;
+            }
+
+            #printempname
+            {
+                width:40% !important;
+            }
+
+            #employeeemail
+            {
+                width: 40% !important;
+                margin-left: 12% !important;
+            }
+        }
+
+       @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)
+        {
+            #employeeemail
+            {
+                margin-left:8% !important;
+            }
+            #msi
+            width: 33.2%;
+        }
+
 
 
     </style>
-}
+    
+    
+    }
 
 @section Scripts
 {
@@ -216,21 +275,20 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
             // $('#myModal').modal('show');
             LoadHrForm('EmployeeLeaseRider');
         }
-       
-        function showleaserider()
-        {          
+
+        function showleaserider() {
             $("#Submit").trigger('click');
             $isemailconfirmed = true;
         }
 
 
-      
 
-        
+
+
         $(".addnew").click(function () {
             $("#signature,#positiondate,#printempname").attr('disabled', true);
-          //  document.getElementById("pmdate").valueAsDate = new Date();
-           // document.getElementById("leasedate").valueAsDate = new Date();
+            //  document.getElementById("pmdate").valueAsDate = new Date();
+            // document.getElementById("leasedate").valueAsDate = new Date();
             $("#apartmentname").val('');
             $("#location").val('');
             $("#empname").val('');
@@ -261,9 +319,9 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
 
             });
 
-          
 
-       //     document.getElementById("pmdate").valueAsDate = new Date();
+
+            //     document.getElementById("pmdate").valueAsDate = new Date();
 
 
 
@@ -294,8 +352,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                     success: function (data) {
                         // To-do code if ajax request is successful
 
-                        if (data == true)
-                        {
+                        if (data == true) {
                             GetAllHRFORMs('LeaseRider');
                             $(".alert").html('Email Resent Success');
                             if ($("#divprocessingbtn").length > 0) {
@@ -308,9 +365,8 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                                 $('#toastnotification').modal('hide');
                             }, 3000);
                         }
-                        else
-                        {
-                            $(".alert").html("<span style='color:red'> "+data+"</span>");
+                        else {
+                            $(".alert").html("<span style='color:red'> " + data + "</span>");
                             if ($("#divprocessingbtn").length > 0) {
                                 $("#divprocessingbtn").hide();
                             }
@@ -321,7 +377,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                                 $('#toastnotification').modal('hide');
                             }, 7000);
                             GetAllHRFORMs('LeaseRider');
-                        //    $("#status").html(data);
+                            //    $("#status").html(data);
                         }
 
 
@@ -347,8 +403,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
             //    $("#Submit").click();
             //});
 
-            $("#Submit").click(function (e)
-            {
+            $("#Submit").click(function (e) {
                 e.preventDefault();
 
                 var errormsgsummary = "";
@@ -394,16 +449,14 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                 }
 
 
-                if ($("#residency").val() == "")
-                {
+                if ($("#residency").val() == "") {
                     errormsgsummary += "<li> Please Enter Residency Place  </li>";
                     $("#residency").addClass('has-error');
                     if (control == "")
                         control = $("#residency");
                 }
 
-                if ($("#employeeemail").val() == "")
-                {
+                if ($("#employeeemail").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Email  </li>";
                     $("#employeeemail").addClass('has-error');
                     if (control == "")
@@ -425,11 +478,9 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
 
-                    if ($isemailconfirmed)
-                    {
+                    if ($isemailconfirmed) {
 
                         $('#myModal').modal('hide');
                         $('.reviewmodal').modal('hide');
@@ -448,7 +499,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                         insertForm.append('marketvalue', $("#marketvalue").val());
                         insertForm.append('emprent', $("#monthlyrent").val());
                         insertForm.append('residence', $("#residency").val());
-                      //  insertForm.append('position', $("#position").val());
+                        //  insertForm.append('position', $("#position").val());
                         insertForm.append('empemail', $("#employeeemail").val());
                         insertForm.append('signature', $("#signature").val());
                         insertForm.append('pmdate', $("#pmdate").val());
@@ -464,8 +515,7 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                             processData: false,
                             contentType: false,
                             data: insertForm,
-                            success: function (data)
-                            {
+                            success: function (data) {
                                 // To-do code if ajax request is successful
 
                                 if (data['error'] == false) {
@@ -526,22 +576,21 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
                             }
                         });
                     }
-                    else
-                    {                       
+                    else {
                         $('#myModal').modal('hide');
                         $('.reviewmodal').modal('show');
                         $("#eemail").show();
                         $("#eemail").val($("#employeeemail").val());
                     }
 
-                    
+
 
                 }
 
 
             });
 
-          
+
         });
 
     </script>

@@ -251,9 +251,9 @@
             margin-left: 5%;
         }
 
-        @@media only screen and (max-width : 768px) 
+        @@media only screen and (max-width : 768px)
         {
-            #printclaim, .pd-bottom 
+            #printclaim, .pd-bottom
             {
                 display: none !important;
             }
@@ -269,7 +269,7 @@
 
         }
 
-        @@media only screen and (min-width : 768px) 
+        @@media only screen and (min-width : 768px)
         {
             #printclaim,.pd-bottom {
                 display: block !important;
@@ -278,6 +278,21 @@
             {
                 display:none !important;
             }
+        }
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)
+        {
+            #exportclaim, #printclaim {
+                display: none !important;
+            }
+
+        }
+
+
+@@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+{
+           #exportclaim, #printclaim {
+        display: none !important;
+    }
         }
     </style>
 }

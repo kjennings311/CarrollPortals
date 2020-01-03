@@ -31,7 +31,7 @@
 
                 <h1 style="padding-top:5px;color:black;text-transform:uppercase"> <b>  Requistion Request </b></h1>
 
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr" )
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr")
                 {
                     <div class="ibox-tools" style="margin-top:-55px;">
 
@@ -41,7 +41,7 @@
                             <a disabled="disabled" class="btnDelete" href="#">
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
-                        
+
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('Requistion Request');">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
@@ -73,7 +73,7 @@
 
                                             <TABLE cellpadding=0 cellspacing=0 class="t0" style="margin-top:20px;">
                                                 <TR>
-                                                    <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><select style="width:60%;" id="propertyname" required > </select></P></TD>
+                                                    <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><select style="width:60%;" id="propertyname" required> </select></P></TD>
 
                                                     <TD class="tr0 td1">
                                                         <P class="p0 ft3">
@@ -104,7 +104,7 @@
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition s7" data-tr="s7" id="chkgs" value=" Groundskeeper" />  Groundskeeper<select style="margin-left:18%;" class="chkposition drdchk" id="s7"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p3 ft1"><input type="checkbox" class="chkposition s8" data-tr="s8" id="chkhk" value="Housekeeper" />  Housekeeper <select style="margin-left:19.4%;" class="chkposition drdchk" id="s8"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition s9" data-tr="s9" id="chkother" value="Other" /> Other: <input type="text" style="width: 22.6%;" id="txtother" /> <select style="margin-left:2%;" class="chkposition drdchk" id="s9"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
-                                           
+
                                             <P class="p1 ft1"><SPAN class="ft0">Post to: </SPAN>  <input type="checkbox" id="postindeed" />  Carroll Careers/Indeed</P>
                                             <P class="p6 ft1"> <input type="checkbox" id="postassociation" />  Apartment Association</P>
                                             <P class="p4 ft1"> <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost" /> </P>
@@ -113,8 +113,10 @@
 
                                             <P class="p8 ft0">For Recruiting Use <SPAN class="ft1">:</SPAN> </P>
                                             <P class="p7 ft1">Requisition Number(s): <input type="text" disabled id="requisitionnumber" /> </P>
-                                            <P class="p7 ft1">Date Posted:<input type="text"  data-date-format="mm/dd/yyyy" class="date-mask" style="margin-left: 9.4%;
-width: 25%;" disabled id="dateposted" /></P>
+                                            <P class="p7 ft1">
+                                                Date Posted:<input type="text" data-date-format="mm/dd/yyyy" class="date-mask" style="margin-left: 9.4%;
+width: 25%;" disabled id="dateposted" />
+                                            </P>
                                             <P class="p7 ft1">Notes:</P>
                                             <P class="p3 ft1"><textarea type="text" disabled style="width:100%" id="notes1"> </textarea></P>
                                             <br /> <br />
@@ -150,191 +152,281 @@ width: 25%;" disabled id="dateposted" /></P>
 {
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
-@section Styles 
+@section ipadstyles
 {
-    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
-    @Styles.Render("~/content/plugins/token-inputcss")
+
     <style type="text/css">
 
-        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
 
 
-
-        body {
-            margin-top: 0px;
-            margin-left: 0px;
-        }
-
-        #page_1 {
-            position: relative;
-            overflow: hidden;
-            margin: 0px 0px 0px 100px;
-            padding: 0px;
-            border: none;
-            width: 770px;
-        }
-
-            #page_1 #p1dimg1 {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                z-index: -1;
-                width: 706px;
-                height: 709px;
+            #s2 {
+                margin-left: 8.1% !important;
             }
 
-                #page_1 #p1dimg1 #p1img1 {
+            #s3 {
+                margin-left: 16% !important;
+            }
+            #s4 {
+                margin-left: 14.8% !important;
+            }
+
+            #s5 {
+                margin-left: 10.8% !important;
+            }
+
+            #s6 {
+                margin-left: 10.9% !important;
+            }
+
+            #s7 {
+                margin-left: 17.8% !important;
+            }
+
+            #s8 {
+                margin-left: 19% !important;
+            }
+
+            #s9 {
+                margin-left: 0.9% !important;
+            }
+
+            #dateposted {
+                margin-left: 8% !important;
+                width: 27% !important;
+            }
+        }
+
+
+  @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+    {
+            #s2
+            {
+                margin-left:5.5% !important;
+
+            }
+        #s3 {
+            margin-left: 16.3% !important;
+        }
+        #s5{
+            margin-left:9% !important;
+        }
+        #s6
+        {
+            margin-left:9.2% !important;
+        }
+
+        #s7 
+        {
+            margin-left: 18.6% !important;
+        }
+
+        #s8 {
+            margin-left: 20.2% !important;
+        }
+
+        #s9 {
+            margin-left: 3.7% !important;
+        }
+
+        #dateposted 
+        {
+            margin-left: 10.9% !important;
+            width: 27% !important;
+        }
+
+    }
+        </style>
+
+    }
+
+
+    @section Styles
+{
+        @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+        @Styles.Render("~/content/plugins/token-inputcss")
+
+        <style type="text/css">
+
+            @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+
+
+            body {
+                margin-top: 0px;
+                margin-left: 0px;
+            }
+
+            #page_1 {
+                position: relative;
+                overflow: hidden;
+                margin: 0px 0px 0px 100px;
+                padding: 0px;
+                border: none;
+                width: 770px;
+            }
+
+                #page_1 #p1dimg1 {
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    z-index: -1;
                     width: 706px;
                     height: 709px;
                 }
 
+                    #page_1 #p1dimg1 #p1img1 {
+                        width: 706px;
+                        height: 709px;
+                    }
 
 
 
-        .dclr {
-            clear: both;
-            float: none;
-            height: 1px;
-            margin: 0px;
-            padding: 0px;
-            overflow: hidden;
-        }
 
-        .ft0 {
-            font: bold 16px 'Calibri';
-            line-height: 19px;
-        }
+            .dclr {
+                clear: both;
+                float: none;
+                height: 1px;
+                margin: 0px;
+                padding: 0px;
+                overflow: hidden;
+            }
 
-        .ft1 {
-            font: 16px 'Calibri';
-            line-height: 19px;
-            margin-bottom: 8px !IMPORTANT;
-        }
+            .ft0 {
+                font: bold 16px 'Calibri';
+                line-height: 19px;
+            }
 
-        .ft2 {
-            font: bold 15px 'Calibri';
-            line-height: 18px;
-        }
+            .ft1 {
+                font: 16px 'Calibri';
+                line-height: 19px;
+                margin-bottom: 8px !IMPORTANT;
+            }
 
-        .ft3 {
-            font: 15px 'Calibri';
-            line-height: 18px;
-        }
+            .ft2 {
+                font: bold 15px 'Calibri';
+                line-height: 18px;
+            }
 
-        .ft4 {
-            font: 1px 'Calibri';
-            line-height: 1px;
-        }
+            .ft3 {
+                font: 15px 'Calibri';
+                line-height: 18px;
+            }
 
-        .p0 {
-            text-align: left;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            white-space: nowrap;
-        }
+            .ft4 {
+                font: 1px 'Calibri';
+                line-height: 1px;
+            }
 
-        .p1 {
-            text-align: left;
-            padding-left: 2px;
-            margin-top: 40px;
-            margin-bottom: 0px;
-        }
+            .p0 {
+                text-align: left;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                white-space: nowrap;
+            }
 
-        .p2 {
-            text-align: left;
-            padding-left: 2px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
+            .p1 {
+                text-align: left;
+                padding-left: 2px;
+                margin-top: 40px;
+                margin-bottom: 0px;
+            }
 
-        .p3 {
-            text-align: left;
-            padding-left: 2px;
-            margin-top: 1px;
-            margin-bottom: 0px;
-        }
+            .p2 {
+                text-align: left;
+                padding-left: 2px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
 
-        .p4 {
-            text-align: left;
-            padding-left: 78px;
-            margin-top: 1px;
-            margin-bottom: 0px;
-        }
+            .p3 {
+                text-align: left;
+                padding-left: 2px;
+                margin-top: 1px;
+                margin-bottom: 0px;
+            }
 
-        .p5 {
-            text-align: left;
-            padding-left: 146px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
+            .p4 {
+                text-align: left;
+                padding-left: 78px;
+                margin-top: 1px;
+                margin-bottom: 0px;
+            }
 
-        .p6 {
-            text-align: left;
-            padding-left: 56px;
-            margin-top: 0px;
-            margin-bottom: 0px;
-        }
+            .p5 {
+                text-align: left;
+                padding-left: 146px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
 
-        .p7 {
-            text-align: left;
-            padding-left: 2px;
-            margin-top: 20px;
-            margin-bottom: 0px;
-        }
+            .p6 {
+                text-align: left;
+                padding-left: 56px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
 
-        .p8 {
-            text-align: left;
-            padding-left: 2px;
-            margin-top: 43px;
-            margin-bottom: 0px;
-        }
+            .p7 {
+                text-align: left;
+                padding-left: 2px;
+                margin-top: 20px;
+                margin-bottom: 0px;
+            }
 
-        .td0 {
-            padding: 0px;
-            margin: 0px;
-            width: 480px;
-            vertical-align: bottom;
-        }
+            .p8 {
+                text-align: left;
+                padding-left: 2px;
+                margin-top: 43px;
+                margin-bottom: 0px;
+            }
 
-        .td1 {
-            padding: 0px;
-            margin: 0px;
-            width: 175px;
-            vertical-align: bottom;
-        }
+            .td0 {
+                padding: 0px;
+                margin: 0px;
+                width: 480px;
+                vertical-align: bottom;
+            }
 
-        .tr0 {
-            height: 20px;
-        }
+            .td1 {
+                padding: 0px;
+                margin: 0px;
+                width: 175px;
+                vertical-align: bottom;
+            }
 
-        .tr1 {
-            height: 42px;
-        }
+            .tr0 {
+                height: 20px;
+            }
 
-        .t0 {
-            width: 655px;
-            margin-left: 2px;
-            /*margin-top: 119px;*/
-            font: bold 16px 'Calibri';
-        }
+            .tr1 {
+                height: 42px;
+            }
 
-        .dtprops td, .dtprops th {
-            white-space: nowrap;
-        }
+            .t0 {
+                width: 655px;
+                margin-left: 2px;
+                /*margin-top: 119px;*/
+                font: bold 16px 'Calibri';
+            }
 
-        input {
-            border: none;
-            border-bottom: 1px solid #0c0606;
-            padding: 5px;
-        }
+            .dtprops td, .dtprops th {
+                white-space: nowrap;
+            }
 
-        button {
-            margin-left: 4%;
-        }
+            input {
+                border: none;
+                border-bottom: 1px solid #0c0606;
+                padding: 5px;
+            }
 
-        .has-error {
-            border-color: red;
-        }
+            button {
+                margin-left: 4%;
+            }
+
+            .has-error {
+                border-color: red;
+            }
     </style>
 }
 
@@ -348,10 +440,9 @@ width: 25%;" disabled id="dateposted" /></P>
 
         $(document).ready(function () {
 
-            $(".addnew").click(function ()
-            {
+            $(".addnew").click(function () {
                 document.getElementById("submitform").reset();
-             //   document.getElementById("datechoosen").valueAsDate = new Date();
+                //   document.getElementById("datechoosen").valueAsDate = new Date();
                 ApplyDateMask();
                 $("input,select,textarea").prop("disabled", false);
                 //$("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
@@ -362,17 +453,13 @@ width: 25%;" disabled id="dateposted" /></P>
             });
 
 
-              
-            $(".drdchk").change(function ()
-            {
-                if(insertoredit)
-                {
-                    if ($(this).val() != "")
-                    {
+
+            $(".drdchk").change(function () {
+                if (insertoredit) {
+                    if ($(this).val() != "") {
                         $("." + $(this).attr('id')).prop("checked", true);
                     }
-                    else
-                    {
+                    else {
                         $("." + $(this).attr('id')).prop("checked", false);
                     }
                 }
@@ -392,7 +479,7 @@ width: 25%;" disabled id="dateposted" /></P>
                 //$("input,select,textarea").clear();
                 document.getElementById("submitform").reset();
                 var ht = $("tr.selected").find('td:eq(10)').html();
-            
+
                 editid = ht.substring(ht.indexOf("?id=") + 4, ht.indexOf(" target=") - 1);
 
 
@@ -400,17 +487,15 @@ width: 25%;" disabled id="dateposted" /></P>
 
                 insertoredit = false;
 
-                $.get($BaseApiUrl + "api/Data/GetRequisitionRequest?riderid=" + editid, function (data)
-                {
-                    if (data != "")
-                    {
-                        var options = "<option value='" + data.propertyName+"'>" + data.propertyName+" </option>";
+                $.get($BaseApiUrl + "api/Data/GetRequisitionRequest?riderid=" + editid, function (data) {
+                    if (data != "") {
+                        var options = "<option value='" + data.propertyName + "'>" + data.propertyName + " </option>";
                         $("#propertyname").html(options);
-                       
 
-                   //   var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
-                      //  document.getElementById("datechoosen").valueAsDate = new Date(d);
-                      //  $("#datechoosen").val(d);
+
+                        //   var d = data.date.substring(5, 7) + "-" + data.date.substring(8, 10) + "-" + data.date.substring(0, 4);
+                        //  document.getElementById("datechoosen").valueAsDate = new Date(d);
+                        //  $("#datechoosen").val(d);
                         $("#datechoosen").datepicker({
                             format: "mm/dd/yyyy"
                         });
@@ -442,8 +527,7 @@ width: 25%;" disabled id="dateposted" /></P>
                         //else
                         //    $("#chkreplacementposition").prop("checked", false);
 
-                        if (data.chkCarrollCareersIndeed == true)
-                        {
+                        if (data.chkCarrollCareersIndeed == true) {
                             $("#postindeed").prop("checked", true);
                         }
                         else
@@ -477,7 +561,7 @@ width: 25%;" disabled id="dateposted" /></P>
                         }
 
 
-                        if (data.positionCombined.replace("Assistant Property Manager","").includes("Property Manager")) {
+                        if (data.positionCombined.replace("Assistant Property Manager", "").includes("Property Manager")) {
                             $("#chkposition").prop("checked", true);
                             var i = parseInt(data.positionCombined.indexOf("Property Manager--")) + 18;
                             $("#s1").val(data.positionCombined.substring(i, i + 1));
@@ -540,10 +624,9 @@ width: 25%;" disabled id="dateposted" /></P>
 
                         $("#requisitionnumber").val(data.requistionNumber);
 
-                        if (data.datePosted != null)
-                        {
-                           // var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
-                        //    $("#dateposted").val(d1);
+                        if (data.datePosted != null) {
+                            // var d1 = data.datePosted.substring(0, 4) + "-" + data.datePosted.substring(5, 7) + "-" + data.datePosted.substring(8, 10);
+                            //    $("#dateposted").val(d1);
 
                             $("#dateposted").datepicker({
                                 format: "mm/dd/yyyy"
@@ -566,8 +649,7 @@ width: 25%;" disabled id="dateposted" /></P>
 
             GetAllHRFORMs('Requisition Request');
 
-            if ($("#UserR").val() == "hr")
-            {
+            if ($("#UserR").val() == "hr") {
                 $("#notes1,#requisitionnumber,#dateposted").prop("disabled", false);
 
             }
@@ -575,16 +657,13 @@ width: 25%;" disabled id="dateposted" /></P>
                 $("#notes1,#requisitionnumber,#dateposted").prop("disabled", true);
             }
 
-            $("input,select").change(function (e)
-            {
+            $("input,select").change(function (e) {
                 e.preventDefault();
 
-                if ($(this).val() == "" && $(this).hasAttr('required'))
-                {
+                if ($(this).val() == "" && $(this).hasAttr('required')) {
                     $(this).addClass("has-error");
                 }
-                else
-                {
+                else {
                     $(this).removeClass("has-error");
                 }
 
@@ -599,11 +678,9 @@ width: 25%;" disabled id="dateposted" /></P>
                 $("input,select,textarea").removeClass('has-error');
                 $("#status").html('');
 
-                if (insertoredit)
-                {
+                if (insertoredit) {
 
-                    if ($("#propertyname").val() == "")
-                    {
+                    if ($("#propertyname").val() == "") {
                         errormsgsummary += "<li> Please Select Property  </li>";
                         $("#propertyname").addClass('has-error');
                         if (control == "")
@@ -672,12 +749,10 @@ width: 25%;" disabled id="dateposted" /></P>
                         }
                     });
 
-                    if (pscount == true)
-                    {
+                    if (pscount == true) {
                         errormsgsummary += "<li> Please Select How Many Option for the Selected Positions </li>";
                     }
-                    if (errormsgsummary != "")
-                    {
+                    if (errormsgsummary != "") {
 
                         $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
 
@@ -685,8 +760,7 @@ width: 25%;" disabled id="dateposted" /></P>
                         $("#Submit").prop('disabled', false);
                         return false;
                     }
-                    else
-                    {
+                    else {
                         $('#myModal').modal('hide');
 
                         var quittext = "";

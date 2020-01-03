@@ -15,6 +15,31 @@
         margin-top:-30px !important;
     }
 
+    .RowsContatiner .ibox-title {
+        padding: 210px 15px 7px !important;
+    }
+
+    .RowsContatiner .ibox-tools {
+        margin-top: -35px !important;
+    }
+
+    .html5buttons {
+        display: none !important;
+    }
+
+
+    #myModal  .modal-lg
+    {
+        width:95% !important;
+    }
+
+    #page_1 
+    {
+        width: 100% !important;
+        position: relative;
+        /* overflow: hidden; */
+        margin: 0px 0px 0px 0px;
+    }
 }
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
@@ -31,6 +56,53 @@
         font-size: 17px !important;
     }
 
+    body.mini-navbar .logo-element {
+        padding: 5px;
+        padding-top: 18px;
+    }
 
+    body.mini-navbar .logo-element img {
+        width:100% !important;
+    }
 
+    #side-menu li ul li a span.nav-label
+    {
+        display:inline-block !important;
+    }
+
+    body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level, .mini-navbar .nav li:focus > .nav-second-level
+    {
+        min-width:190px !important;
+    }
+
+    .RowsContatiner .ibox-title 
+    {
+        padding: 210px 15px 7px !important;
+    }
+
+    .RowsContatiner .ibox-tools
+    {
+        margin-top:-35px !important;
+    }
+
+    .html5buttons
+    {
+        display:none !important;
+    }
+
+    #myModal .modal-lg {
+        width: 95% !important;
+        margin-bottom:400px !important;
+    }
+
+    #exportclaim, #printclaim {
+        display: none !important;
+    }
+
+    #page_1 {
+        width: 100% !important;
+        position: relative;
+        /* overflow: hidden; */
+        margin: 0px 0px 0px 0px;
+    }
 }

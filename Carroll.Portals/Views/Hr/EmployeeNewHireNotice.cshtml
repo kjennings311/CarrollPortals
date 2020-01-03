@@ -147,7 +147,7 @@
                                 </h1>
                             </div>
                             <div class="modal-body">
-                                <div class="row" style="padding: 20px;padding-left:110px;
+                                <div class="row" id="modaldiv" style="padding: 20px;padding-left:110px;
     border: 2px solid black;">
                                     <form id="submitform" onsubmit="return false;">
                                         <p class="c1 c8" style="margin-left:19%;">
@@ -264,6 +264,47 @@
 {
     <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
 }
+@section ipadstyles
+{
+    
+    <style type="text/css">
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
+
+
+            #msignature {
+                width: 33.2% !important;
+            }
+            
+        }
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) 
+        {
+
+            #modaldiv 
+            {
+                padding-left: 45px !important;
+            }
+
+            #esignature
+            {
+                width:44% !important;
+            }
+
+            #rpmsignature 
+            {
+                width: 45%!important;
+                margin-left: 5% !important;
+            }
+            #location
+            {
+                width:40% !important;
+            }
+         }
+
+    </style>
+    
+    
+    
+    }
 @section Styles {
     @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
     @Styles.Render("~/content/plugins/token-inputcss")

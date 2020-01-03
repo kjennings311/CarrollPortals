@@ -17,7 +17,7 @@
             </h1>
 
         </div>
-        <div class="col-xs-12 visible-xs mobile-menu-dashboard visible-xs" style="margin-top:-40px;">
+        <div class="col-xs-12 visible-xs mobile-menu-dashboard visible-sm" style="margin-top:-40px;">
             <div class="col-xs-6 ">
                 <a href="~/Home/Index" style="color:white;"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
             </div>   <div class="col-xs-6">
@@ -111,8 +111,8 @@
         @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) 
         {
             .ipbackground {
-                min-height: 500px !important;
-                padding-top: 150px !important;
+                min-height: 350px !important;
+                padding-top: 100px !important;
             }
 
             .homeheading, .homeheading span {
@@ -128,6 +128,29 @@
             {
                 margin-right:0px !important;            
             }
+
+            .mobile-menu-dashboard {
+                margin-top: 0px !important;
+                margin-bottom: 400px !important;
+            }
+
+                .mobile-menu-dashboard div {
+                    padding: 5px;
+                    background-color: #293846;
+                    color: white !important;
+                    text-align: center;
+                    font-size: 25px;
+                    font-weight: normal;
+                    margin: 10px;
+                    width: 80%;
+                    padding: 15px;
+                    margin-left:10% !important;
+                   
+                }
+
+                .footer{
+                    margin-bottom:400px !important;
+                }
 
             /* Styles */
         }

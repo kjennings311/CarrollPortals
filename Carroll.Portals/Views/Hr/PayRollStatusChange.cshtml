@@ -37,7 +37,7 @@
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#"  class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
+                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New
                         </a>
                     </div>
@@ -58,7 +58,7 @@
                                                                 </h1>*@
                             </div>
                             <div class="modal-body">
-                                <div class="row" style="padding: 20px;">
+                                <div class="row"   style="padding: 20px;">
                                     <form id="submitform" onsubmit="return false;">
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
@@ -80,8 +80,10 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                                             <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
                                             <P class="p3 ft3"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
-                                            <P class="p6 ft1">  <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change 
-                                            <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence   </P>
+                                            <P class="p6 ft1">
+                                                <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change
+                                                <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence
+                                            </P>
                                             <P class="p6 ft1">  </P>
 
                                             <div class="" style="border: 2px solid black; width:100%">
@@ -397,8 +399,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
         .title {
             padding-top: 24pt;
             color: #000000;
-            font-weight: 700;.
-            font-size: 36pt;
+            font-weight: 700;
+            . font-size: 36pt;
             padding-bottom: 6pt;
             font-family: "Arial";
             line-height: 1.15;
@@ -994,6 +996,45 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
     </style>
 }
 
+@section ipadstyles
+{
+
+
+    <style type="text/css">
+          @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+            {
+              #p1img1
+              {
+                  margin-left:28% !important;
+                  margin-top:0px !important;
+              }
+                .ft1
+                {
+                    font-size:13px !important;
+                }
+
+                #msignature
+                {
+                    width:54% !important;
+                }
+
+                #esignature
+                {
+                    width: 55% !important;
+                }
+
+                #mdate {
+                    margin-left: 3px !important;
+                }                
+                .ft0
+                {
+                    margin-left:-45px !important;
+
+                }
+}
+        </style>
+        }
+
 @section Scripts
 {
     @Scripts.Render("~/scripts/plugins/dataTablesjs")
@@ -1012,14 +1053,14 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
 
             $(".addnew").click(function () {
-             
+
                 $("#location").attr('seloption', '');
                 document.getElementById("submitform").reset();
                 $("#esignature,#edate,#mdate").attr('disabled', true);
               //  document.getElementById("mdate").valueAsDate = new Date();
 
                 $("#divpropertychange,#divpaychange,#divlaborallocation,#divleaveabsence").hide();
-                
+
             });
 
             GetAllHRFORMs('PayRollChange');
@@ -1079,7 +1120,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 else {
                     $("#" + $(this).attr('data-div')).hide();
                 }
-               
+
             });
 
 
@@ -1278,7 +1319,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 }
 
                 console.log('corpoerate change ' + iscorporate);
-               
+
             });
 
             $("#Submit").click(function (e)
@@ -1315,7 +1356,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         control = $("#empemail");
                 }
 
-              
+
 
                 if ($("#chkpropertychange").is(":checked"))
                 {
@@ -1342,7 +1383,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         if (control == "")
                             control = $("#topropnum");
                     }
-                                      
+
                 }
 
                 if ($("#chkpaychange").is(":checked"))
@@ -1481,9 +1522,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     //        // return false;
                     //    }
 
-                    
 
-                 
+
+
 
                     //if (sum != 100)
                     //{
@@ -1620,7 +1661,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         if (control == "")
                             control = $("#chkfmlayes");
                     }
-                    
+
                     if (!$("#chkbenefityes").is(":checked") && !$("#chkbenefitno").is(":checked"))
                     {
                         errormsgsummary += "<li> Please Select enrolled benefits? </li>";
@@ -1670,7 +1711,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         if (control == "")
                             control = $("#ptobalance");
                     }
-                                       
+
                 }
 
                 //if ($("#notes1").val().trim()== "") {
@@ -1679,7 +1720,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 //    if (control == "")
                 //        control = $("#notes1");
                 //}
-                
+
                 if ($("#msignature").val() == "")
                 {
                     errormsgsummary += "<li> Please Enter Supervisor's Signature  </li>";
@@ -1688,7 +1729,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (control == "")
                         control = $("#msignature");
                 }
-                
+
                 if (errormsgsummary != "")
                 {
 
@@ -1710,7 +1751,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     console.log('corpoerate change insert ' + iscorporate);
                     insertForm.append('iscorporate', iscorporate);
-                 
+
                     if ($("#chkpropertychange").is(":checked"))
                     {
                         insertForm.append('showproperty', 'true');
