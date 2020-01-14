@@ -260,45 +260,30 @@
      
         @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
             #msignature
+
         {
-            width: 38% !important;
+            width: 33.2% !important;
         }
-            .page {
-                padding: 5% !important;
-                margin-left: 10% !important;
-            }
 
         }
 
         @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
-
-            .page
-            {
-                padding:5% !important;
-                margin-bottom:300px !important; 
-            }
-
 
             #modaldiv {
                 padding-left: 45px !important;
             }
 
             #esignature {
-                width: 47% !important;
+                width: 44% !important;
             }
 
             #rpmsignature {
-                width: 48% !important;
+                width: 45% !important;
                 margin-left: 5% !important;
             }
 
             #location {
                 width: 40% !important;
-            }
-
-            #padd
-            {
-                width:90% !important;
             }
         }
     </style>
@@ -338,7 +323,7 @@
                 Location: @if (Model.iscorporate.ToString().ToLower() == "true")
                 {
                     <span class="c0">
-                        <input type="radio" id="chkcorporate" checked name="loc" /> Corporate &nbsp; &nbsp; &nbsp;
+                        <input type="radio" id="chkcorporate" checked name="loc" /> Corporate &nbsp; &nbsp; &nbsp; 
 
                         <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
                     </span>
@@ -464,13 +449,14 @@
                 <span class="c0">
                     Additional Instructions :
                 </span>
-
+                
             <p style="border: 1px solid;
 
 padding: 10px;
 
-margin: 10px; min-height:50px;" id="padd">@Model.AdditionalText</p>
-
+margin: 10px; min-height:50px;">@Model.AdditionalText</p>  
+        
+            </p>
 
         @{
             if (ViewBag.Action == "Employee Email")
@@ -482,7 +468,6 @@ margin: 10px; min-height:50px;" id="padd">@Model.AdditionalText</p>
                 <p class="c1">
                     <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToString("MM/dd/yyyy")" /> </span>
                 </p>
-               
             }
             else if (ViewBag.Action == "Regional Email")
             {

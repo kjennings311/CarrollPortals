@@ -57,6 +57,11 @@
                             <a class="btn btn-success pull-right clss" href="/Home/PrintClaim/?claim=num&Type=" target="_blank" style="margin-top:-115px;margin-right:5px;" id="printclaim"> Print Claim </a>
 
                             <a class="btn btn-success pull-right clss" href="/Home/ExportClaim/?claim=num&Type=" style="margin-top:-75px;" id="exportclaim"> Export Claim </a>
+                           
+                            <a class="btn btn-success pull-right clss"  data-toggle="modal" data-target="#exampleModalCenter" id="viewpropertydetails" href="#" style="margin-top: -35px;
+    margin-right: -22px;
+    margin-bottom: 10px;display:none ">View Property Details</a>
+
                         </div>
                     </div>
                     @*<div class="row">
@@ -172,8 +177,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2 class="modal-title" id="property"></h2>
+                    <ul class="list-unstyled PropDetails pd-bottom col-md-6" id="details11" style="display:inline-block !important"></ul>
+                    <ul class="list-unstyled PropDetails1 pd-bottom col-md-6" style="display:inline-block !important"></ul>
+
+                </div>
+                <div class="modal-footer" style="border:none !important">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-3">
         <div class="wrapper wrapper-content ">
+
             <h2 id="property"></h2>
             @*<b> Claim Number : <span id="claimnumber"></span> </b>*@
 
@@ -188,6 +212,16 @@
 
 
             <ul class="list-unstyled PropDetails pd-bottom"></ul>
+            @*<b> Claim Number : <span id="claimnumber"></span> </b>*@
+
+            @*<img src="img/zender_logo.png" class="img-responsive">*@
+
+            @*<p class="small font-bold">
+            <span><i class="fa fa-circle text-warning"></i> High priority</span>
+        </p>*@
+
+
+
             @*<div class="text-center m-t-md">
             <a href="#" class="btn btn-xs btn-primary">Add files</a>
             <a href="#" class="btn btn-xs btn-primary">Report contact</a>
@@ -281,18 +315,63 @@
         }
         @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)
         {
+            #property
+            {
+                margin-top:20px !important;
+            }
             #exportclaim, #printclaim {
                 display: none !important;
             }
 
+            #viewpropertydetails {
+                display: block !important;
+            }
+
+
+            #exampleModalCenter .modal-title {
+                border-bottom: 1px solid #ddd;
+                width: 110%;
+                text-align: left;
+                margin-left: -5%;
+                padding-left: 10%;
+            }
+
+            #details11 {
+                width: 45% !important;
+                float: left;
+                margin-top: 18px !important;
+            }
+            
         }
 
 
 @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
 {
-           #exportclaim, #printclaim {
-        display: none !important;
-    }
+           #exportclaim, #printclaim 
+           {
+                display: none !important;
+            }
+
+        #viewpropertydetails
+        {
+            display:block !important;
+        }
+
+
+        #exampleModalCenter .modal-title {
+            border-bottom: 1px solid #ddd;
+            width: 114%;
+            text-align: left;
+            margin-left: -7%;
+            padding-left: 10%;
+        }
+
+
+        #details11 {
+            width: 45% !important;
+            float: left;
+            margin-top: 18px !important;
+        }
         }
     </style>
 }

@@ -942,6 +942,9 @@
     <Content Include="Views\Accounting\PettyCashPolicy.cshtml" />
     <Content Include="Views\Accounting\ReclassandAccrual.cshtml" />
     <Content Include="Views\Accounting\EomChecklist.cshtml" />
+    <Content Include="Views\Outlink\VerifyEmployeeLeaseRider - Copy.cshtml" />
+    <Content Include="Views\Outlink\VerifyEmployeeNewHireNotice - Copy.cshtml" />
+    <Content Include="Views\Outlink\VerifyPayRollStatusChange - Copy.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

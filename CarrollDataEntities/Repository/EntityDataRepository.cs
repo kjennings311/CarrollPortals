@@ -1020,16 +1020,16 @@ namespace Carroll.Data.Entities.Repository
                 var config = new Config { };
 
                 if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
-                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).ToList();
                 else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
                 else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList();
                 else
-                    config.Rows = _entities.SP_GetAllClaimsnew(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
 
                 config.EtType = EntityType.AllClaims.ToString();
-                PropertyInfo[] userprop = typeof(SP_GetAllClaims1_Result).GetProperties();
+                PropertyInfo[] userprop = typeof(SP_GetAllClaimsUpdatedDate_Result).GetProperties();
                 config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                 config.Columns = new List<DtableConfigArray>();
                 config.Columns.Add(new DtableConfigArray { name = "claimNumber", label = "ID", type = 0, href = "" });
@@ -1044,7 +1044,8 @@ namespace Carroll.Data.Entities.Repository
                 config.Columns.Add(new DtableConfigArray { name = "incidentDateTime", label = "Incident Date", type = DFieldType.IsDate, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "residentName", label = "Resident Name", type = 0, href = "" });
                 config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Submitted Date", type = DFieldType.IsDate, href = "" });
-              //  config.Columns.Add(new DtableConfigArray { name = "reportedPhone", label = "Reported Phone", type = DFieldType.IsText, href = "" });
+                config.Columns.Add(new DtableConfigArray { name = "updateddate", label = "Updated Date", type = DFieldType.IsDate, href = "" });
+                //  config.Columns.Add(new DtableConfigArray { name = "reportedPhone", label = "Reported Phone", type = DFieldType.IsText, href = "" });
                 //config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type =  DFieldType.IsDate, href = "" });
 
                 return config;
@@ -1211,6 +1212,9 @@ namespace Carroll.Data.Entities.Repository
                 _entities.Configuration.ProxyCreationEnabled = false;
                 Guid _recId = new Guid(Claim);
                 Int16 formtype = 1;
+
+                var update = _entities.updateactivityupdate(_recId);
+
 
                 if (Type == 'g')
                 {
@@ -1543,7 +1547,9 @@ tbl.UploadedDate descending
                     _activity.ActivityByName = UserName;
                     _activity.RecordId = new Guid(RecordId);
                     _activity.ActivityStatus = ActivityStatus;
+                    _activity.IsViewed = false;
                     _entities.Activities.Add(_activity);
+                   
                     _entities.SaveChanges();
                 }
                 catch (Exception ex)

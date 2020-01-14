@@ -408,7 +408,45 @@ namespace Carroll.Data.Services.Helpers
 
         }
 
+        public static   bool SendClaimUpdatesLastweek()
+        {
+            EmailMessage _message = new EmailMessage();
 
+            _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+            //_message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["AdditionalEmails"]).Split(',');
+            //_message.EmailBcc = Convert.ToString(ConfigurationManager.AppSettings["BCCEmails"]).Split(',');
+
+            var _entities = new CarrollFormsEntities();
+         
+
+            _message.Subject = "Weekly Claim Updates " ;
+
+            _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> " +
+                "<table  border='1' cellpadding='5' cellspacing='0'>  ";
+            _message.Body += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th>  <tr> </thead>";
+
+            var _res = _entities.proc_GetLastWeekClaimUpdates().ToList();
+            _message.Body += "<tbody> ";
+            foreach (var item in _res)
+            {
+
+                _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td>  <tr> </thead>";
+
+            }
+
+            _message.Body += " </tbody> </table>";
+            _message.Body += "</div></div>";
+            //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+            // populate from db
+
+                _message.EmailTo.Add("sekhar.babu@forcitude.com");
+            _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+            _message.EmailTo.Add("sukumar.gandhi@forcitude.com");
+
+            EmailHelper.SendEmailUpdate(_message);
+
+            return true;
+        }
         public static dynamic UpdatePmBrowserInfo(string RecordId, string FormType, string Action, string browser, string ipaddress)
         {
 
@@ -2064,7 +2102,66 @@ namespace Carroll.Data.Services.Helpers
             return true;
         }
 
-       
+
+        public static bool SendEmailUpdate(EmailMessage Message)
+        {
+            // write your email function here..
+            using (MailMessage mail = new MailMessage())
+            {
+
+                AlternateView av1 = AlternateView.CreateAlternateViewFromString(Message.Body,
+                        null, MediaTypeNames.Text.Html);
+
+                SmtpClient smtp = SetMailServerSettings();
+                Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                foreach (var item in Message.EmailTo)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        Match match = regex.Match(item);
+                        if (match.Success)
+                        {
+                            mail.To.Add(item);
+                        }
+                    }
+                }
+
+                mail.From = new MailAddress(Message.EmailFrom, "Carroll Organization");
+                if (Message.EmailCc != null)
+                    foreach (var item in Message.EmailCc)
+                    {
+                        mail.CC.Add(new MailAddress(item));
+                    }
+
+                if (Message.EmailBcc != null)
+                    foreach (var item in Message.EmailBcc)
+                    {
+                        mail.Bcc.Add(new MailAddress(item));
+                    }
+
+                mail.AlternateViews.Add(av1);
+
+                mail.IsBodyHtml = true;
+                mail.Subject = Message.Subject;
+                mail.Body = Message.Body;
+                //  mail.To.Clear();
+                // remove this line before going production
+
+
+                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mail.Priority = MailPriority.High;
+
+                smtp.Send(mail);
+
+                // Create an activity record
+                //IDataRepository _repo = new EntityDataRepository();
+                //_repo.LogActivity("Notification Email Sent", RecordCreatedBy, RecordCreatedByGuid, RecordId, "Workflow Notification Sent");
+                //_repo = null;
+
+            }
+            return true;
+        }
+
     }
 
 

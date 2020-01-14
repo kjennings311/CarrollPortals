@@ -250,7 +250,7 @@ font-weight: bold;
         </div>
     </div>
 
-    <div class="row hidewhenformopen visible-xs visible-sm" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
+    <div class="row hidewhenformopen visible-xs visible-sm" style="margin-top:0px;margin-bottom:20px;" id="homecontainer">
 
         <table style="WIDTH: 90%;
     margin-top: 15PX;
@@ -268,10 +268,11 @@ font-weight: bold;
         <div class="col-lg-12 no-padding">
             <input type="hidden" id="homeval" value="1" />
             <div class="RowsContatiner animated fadeInRight">
-                <div class="col-lg-12">
+                <div class="col-lg-12 ptr" >
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5> All Claims <small></small></h5>
+                            <div id="filtercheck"> <input type="checkbox" value="1" id="filterval" /> <span> Show Updated Claims </span>  </div>
                         </div>
                         <div class="ibox-content">
                             <table class="table  dtprops" width="100%"></table>
@@ -365,9 +366,11 @@ font-weight: bold;
 
             LoadUserClaims();
             GetAllClaims("All");
+            
+        });
 
-
-
+        $("#filterval").change(function () {
+            GetAllClaims("All");
 
         });
 
@@ -380,10 +383,29 @@ font-weight: bold;
 
 <style type="text/css">
 
-
-    .dtprops td, .dtprops th {
-        white-space: nowrap;
+    #filtercheck {
+        width: 200px !important;
+        position: absolute;
+        top: 68px;
+        margin-left: 47%;
     }
+
+    #filtercheck input
+    {
+        height:30px;
+        width:30px; 
+    }
+    
+    #filtercheck span 
+    {
+        margin-top: -30px;
+        display: block;
+        margin-left: 32px;
+    }
+
+        .dtprops td, .dtprops th {
+            white-space: nowrap;
+        }
 
     .hclaimcount:hover, .hclaimcount.active {
         background: #2f4050 !important;
@@ -586,14 +608,18 @@ font-weight: bold;
 
 
     /* iPads (landscape) ----------- */
-    @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-        .ipbackground {
+    @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) 
+    {
+        
+        .ipbackground 
+        {
             min-height: auto !important;
         }
 
-        .start-claim {
+        .start-claim 
+        {
             width: 90% !important;
-            min-height: 400px !important;
+            min-height: 250px !important;
         }
 
         .ipadd {
@@ -605,7 +631,7 @@ font-weight: bold;
         }
 
         .modal-lg {
-            width: 55% !important;
+            width: 85% !important;
         }
 
         .db h3
@@ -616,12 +642,15 @@ font-weight: bold;
         .ipadd11 h2 {
             font-size: 23px !important;
             margin-bottom: 20px !important;
+            text-align:center !important;
         }
 
         .dynamicForm {
-            margin-bottom: 150px !important;
+            margin-bottom: 70px !important;
         }
-       
+        .ptr {
+            padding: 0px !important;
+        }
     }
 
 
@@ -637,7 +666,7 @@ font-weight: bold;
         }
         .start-claim {
             width: 90% !important;
-            min-height:400px !important;
+            min-height:280px !important;
         }
 
         .ipadd
@@ -652,23 +681,33 @@ font-weight: bold;
 
         .modal-lg 
         {
-            width: 55% !important;
+            width: 85% !important;
         }
 
         .damage-claim
         {
-            margin-bottom:300px !important;
+            margin-bottom:100px !important;
 
         }
 
         .ipadd11 h2 {
             font-size: 23px !important;
             margin-bottom: 20px !important;
+            text-align: center !important;
         }
 
         .dynamicForm
         {
-            margin-bottom:150px !important;
+            margin-bottom:70px !important;
+        }
+
+        #homecontainer
+        {
+            margin-bottom:15px !important;
+        }
+        .ptr
+        {
+            padding:0px !important;
         }
     }
 </style>

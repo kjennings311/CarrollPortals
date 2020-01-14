@@ -215,6 +215,9 @@
     <Compile Include="proc_gethrformsactivity1_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetLastWeekClaimUpdates_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetMoldDamageClaims_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -294,6 +297,9 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GetAllClaimsnew_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetAllClaimsUpdatedDate_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_GetUserProperties_Result.cs">

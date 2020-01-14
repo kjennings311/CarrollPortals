@@ -22,7 +22,7 @@ namespace Carroll.Data.Services.Models
         dynamic CreateUpdateRecord(EntityType entityType,dynamic obj);
 
         bool DeleteRecord(EntityType entityType,string recordId);
-
+       
         dynamic GetRuntimeClassInstance(string className);
         dynamic GetClaimDetails(string Claim, char Type);
         dynamic GetClaimDetailsForPrint(string Claim, char Type);
@@ -77,5 +77,7 @@ namespace Carroll.Data.Services.Models
         void ErrorLog(ErrorLog errorLog);
         dynamic GetDynamicLinkStatus(Guid refid);
         dynamic GetAllContactsHighRolesInclude(string search);
+
+       // dynamic SendClaimUpdatesLastWeek();
     }
 }

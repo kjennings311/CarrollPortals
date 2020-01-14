@@ -1,5 +1,5 @@
-﻿// var $BaseApiUrl = "http://localhost:1002/";
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿ var $BaseApiUrl = "http://localhost:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -669,6 +669,7 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
 
 function ApplyDateMask()
 {
+   
     $('input[type="date"]').datepicker({
         format: "mm/dd/yyyy",
         "setDate": new Date()
@@ -2789,6 +2790,14 @@ function GetAllClaims(Type) {
                     var doms = '<"html5buttons"B>lTfgitp';
                     if ($ismobile)
                         doms = '<"top"if>rt<"bottom"lp><"clear">';
+                    
+                    var sort = [[6, 'asc']];
+
+                    if ($("#filterval").is(":checked"))
+                    {
+                        sort = [[7, 'desc']];
+                    }
+                  
 
                     var datatableVariable = $('.dtprops').DataTable({
                         data: configdata.rows,
@@ -2813,7 +2822,7 @@ function GetAllClaims(Type) {
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");                          
                            
                         },
-                        "order": [[2, 'asc']],
+                        "order": sort,
                         dom: doms, //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
@@ -3790,7 +3799,7 @@ function LoadClaim()
                                     
                                     var $prop = data[0];
                                     
-                                     $details = "<li>Address:</li><li>" + $prop.propertyAddress + "</li>";
+                                    $details = "<li class='font-bold'>Address:</li><li>" + $prop.propertyAddress + "</li>";
                                     $details += "<li>" + $prop.city + ", " + $prop.state + " " + $prop.zipCode + "</li>";
                                     $details += "<li>" + $prop.phoneNumber + "</li>";
                                     $details += "<li>Units: " + $prop.units + "</li>";
@@ -3812,52 +3821,69 @@ function LoadClaim()
                                         var $val = JSON.parse($prop.equityPartnerContact);
                                         $details += "<li>&nbsp;</li><li class='font-bold'>Equity Partner Contact:</li><li>" + $val.name + "</li>";
                                     } 
-                                    
+
+                                    var details = "";
                                     if ($prop.assetManager1 != null) {
                                         var $assetManager = JSON.parse($prop.assetManager1);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Asset Managers:</li><li>" + $assetManager.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Asset Managers:</li><li>" + $assetManager.name + "</li>";
                                     } else {
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Asset Managers:</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Asset Managers:</li>";
                                     }
 
 
                                     if ($prop.assetManager2 != null) {
                                         var $assetManager2 = JSON.parse($prop.assetManager2);
-                                        $details += "<li>" + $assetManager2.name + "</li>";
+                                        details += "<li>" + $assetManager2.name + "</li>";
                                     } 
 
                                     if ($prop.vicePresident != null) {
                                         var $val = JSON.parse($prop.vicePresident);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Vice President:</li><li>" + $val.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Vice President:</li><li>" + $val.name + "</li>";
                                     } 
 
                                     if ($prop.regionalVicePresident != null) {
                                         var $val = JSON.parse($prop.regionalVicePresident);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Regional Vice President:</li><li>" + $val.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Regional Vice President:</li><li>" + $val.name + "</li>";
                                     } 
 
                                     if ($prop.constructionManager != null) {
                                         var $val = JSON.parse($prop.constructionManager);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Construction Manager:</li><li>" + $val.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Construction Manager:</li><li>" + $val.name + "</li>";
                                     } 
 
                                     if ($prop.regionalManager != null) {
                                         var $val = JSON.parse($prop.regionalManager);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Regional Manager:</li><li>" + $val.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Regional Manager:</li><li>" + $val.name + "</li>";
                                     } 
 
-                                    if ($prop.propertyManager != null) {
+                                    if ($prop.propertyManager != null)
+                                    {
                                         var $val = JSON.parse($prop.propertyManager);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Property Manager:</li><li>" + $val.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Property Manager:</li><li>" + $val.name + "</li>";
                                     } 
 
-                                    if ($prop.insuranceContact != null) {
+                                    if ($prop.insuranceContact != null)
+                                    {
                                         var $val = JSON.parse($prop.insuranceContact);
-                                        $details += "<li>&nbsp;</li><li class='font-bold'>Insurance Contact:</li><li>" + $val.name + "</li>";
+                                        details += "<li>&nbsp;</li><li class='font-bold'>Insurance Contact:</li><li>" + $val.name + "</li>";
                                     } 
-                                    $('.PropDetails').html($details);
-                                    $('.propertyName').html($prop.propertyName);
-                                }
+
+                                    if ($ismobile)
+                                    {
+                                        $('.PropDetails').html($details);
+                                        $('.PropDetails1').html(details);
+
+                                        $('.propertyName').html($prop.propertyName);
+
+                                    }
+                                    else
+                                    {
+
+                                        $('.PropDetails').html($details+details);
+                                        $('.propertyName').html($prop.propertyName);
+                                    }
+
+                                                                   }
                             });
 
                             //****************************************************************

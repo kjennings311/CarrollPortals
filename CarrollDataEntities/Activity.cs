@@ -21,5 +21,6 @@ namespace Carroll.Data.Entities
         public string ActivityStatus { get; set; }
         public string ActivityByName { get; set; }
         public Nullable<System.Guid> ActivityBy { get; set; }
+        public Nullable<bool> IsViewed { get; set; }
     }
 }

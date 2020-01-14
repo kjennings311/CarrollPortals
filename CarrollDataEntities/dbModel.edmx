@@ -16,6 +16,7 @@
           <Property Name="ActivityStatus" Type="varchar" MaxLength="50" />
           <Property Name="ActivityByName" Type="varchar" MaxLength="50" />
           <Property Name="ActivityBy" Type="uniqueidentifier" />
+          <Property Name="IsViewed" Type="bit" />
         </EntityType>
         <EntityType Name="ActivityLogHrForms">
           <Key>
@@ -769,7 +770,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ReportedPhone" Type="varchar" MaxLength="35" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="uniqueidentifier" />
-          <Property Name="ResidentName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResidentName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Updateddate" Type="datetime" />
         </EntityType>
         <Association Name="FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation">
           <End Role="ResidentContactInformation" Type="Self.ResidentContactInformation" Multiplicity="0..1" />
@@ -904,6 +906,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="formtype" Type="varchar(max)" Mode="In" />
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="proc_GetLastWeekClaimUpdates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getnewhirerejectiondetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
@@ -932,9 +935,16 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="propertyid" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="SP_GetAllClaimsUpdatedDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="propertyid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="sp_GetUserProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spProperties" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="updateactivityupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rec" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="CarrollDataEntitiesStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActivityLogHrForms" EntityType="Self.ActivityLogHrForms" Schema="dbo" store:Type="Tables" />
@@ -988,7 +998,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
     [view_getallclaims].[ReportedPhone] AS [ReportedPhone], 
     [view_getallclaims].[CreatedDate] AS [CreatedDate], 
     [view_getallclaims].[CreatedBy] AS [CreatedBy], 
-    [view_getallclaims].[ResidentName] AS [ResidentName]
+    [view_getallclaims].[ResidentName] AS [ResidentName], 
+    [view_getallclaims].[Updateddate] AS [Updateddate]
     FROM [dbo].[view_getallclaims] AS [view_getallclaims]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation" Association="Self.FK_ResidentContactInformation_OtherOccupants_ResidentContactInformation">
@@ -1068,7 +1079,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="propid" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="proc_getallpayrollstatuschange" ReturnType="Collection(Carroll.Data.Entities.proc_getallpayrollstatuschange_Result)" >
-            <Parameter Name="userid" Mode="In" Type="Guid" />
+          <Parameter Name="userid" Mode="In" Type="Guid" />
           </FunctionImport>
           <EntitySet Name="RequisitionRequests" EntityType="Carroll.Data.Entities.RequisitionRequest" />
           <FunctionImport Name="proc_getallrequisitionrequests" ReturnType="Collection(Carroll.Data.Entities.proc_getallrequisitionrequests_Result)" >
@@ -1172,6 +1183,14 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="newhireid" Mode="In" Type="Guid" />
           </FunctionImport>
           <EntitySet Name="NewHireRejectionHistories" EntityType="Carroll.Data.Entities.NewHireRejectionHistory" />
+          <FunctionImport Name="SP_GetAllClaimsUpdatedDate" ReturnType="Collection(Carroll.Data.Entities.SP_GetAllClaimsUpdatedDate_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+            <Parameter Name="propertyid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="updateactivityupdate">
+          <Parameter Name="rec" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetLastWeekClaimUpdates" ReturnType="Collection(Carroll.Data.Entities.proc_GetLastWeekClaimUpdates_Result)" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1514,7 +1533,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" />
           <Property Name="ClaimNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="ResidentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResidentName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Updateddate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="FormAttachment">
           <Key>
@@ -1552,6 +1572,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ActivityStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActivityByName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActivityBy" Type="Guid" />
+          <Property Name="IsViewed" Type="Boolean" />
         </EntityType>
         <EntityType Name="Property">
           <Key>
@@ -2731,6 +2752,46 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="ClientDateTime" Type="DateTime" Precision="3" />
           <Property Name="RejectedUser" Type="Guid" />
         </EntityType>
+        <ComplexType Name="SP_GetAllClaimsUpdatedDate_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="12" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="35" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Updateddate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="proc_GetLastWeekClaimUpdates_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="12" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="35" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Updateddate" Nullable="true" Precision="23" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3054,6 +3115,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="view_getallclaims">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.view_getallclaims">
               <MappingFragment StoreEntitySet="view_getallclaims">
+                <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
                 <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
                 <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -3104,6 +3166,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="Activities">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.Activity">
               <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="IsViewed" ColumnName="IsViewed" />
                 <ScalarProperty Name="ActivityBy" ColumnName="ActivityBy" />
                 <ScalarProperty Name="ActivityByName" ColumnName="ActivityByName" />
                 <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
@@ -4286,6 +4349,55 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetAllClaimsUpdatedDate" FunctionName="Carroll.Data.Entities.Store.SP_GetAllClaimsUpdatedDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.SP_GetAllClaimsUpdatedDate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="updateactivityupdate" FunctionName="Carroll.Data.Entities.Store.updateactivityupdate" />
+          <FunctionImportMapping FunctionImportName="proc_GetLastWeekClaimUpdates" FunctionName="Carroll.Data.Entities.Store.proc_GetLastWeekClaimUpdates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_GetLastWeekClaimUpdates_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

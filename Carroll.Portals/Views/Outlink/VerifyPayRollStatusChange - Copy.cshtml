@@ -39,7 +39,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 else
                 {
                     <span class="c0">
-                        Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                        Location: <input type="radio"  id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                         <input style="margin-left:12px" checked type="radio" id="chkproperty" name="loc" /> Property  <input type="text" id="location" style="width:35%;" value="@Model.Notes2" />
                     </span>
                 }
@@ -359,11 +359,11 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                         </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
                                             @{ if (Model.EnrolledBenefitNo == true)
                                                 {
-                                                    <input type="checkbox" checked id="chkbenefitno" />
+                                                    <input type="checkbox" checked  id="chkbenefitno" />
                                                 }
                                                 else
                                                 {
-                                                    <input type="checkbox" id="chkbenefitno" />
+                                                    <input type="checkbox"  id="chkbenefitno" />
                                                 }
                                             }
                                         </SPAN><SPAN class="ft1">No</SPAN>
@@ -372,23 +372,19 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                             </TR>
                         </TABLE>
                         <P class="p20 ft1">
-                            Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" />
+                            Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" /> 
 
-                            @if (Model.Leave_Purpose == "Other" && Model.Leave_Purpose_Other != null && Model.Leave_Purpose_Other != "")
-                            {
-
-                                <span id="spanpurposeother">
-                                    Other Reason:
-                                    <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" />
-                                </span>
+                            @if (Model.Leave_Purpose == "Other" && Model.Leave_Purpose_Other != null && Model.Leave_Purpose_Other !="" )
+                            { 
+                                
+                                <span  id="spanpurposeother">  Other Reason: 
+                            <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span>
                             }
                         </P>
-                        <P class="p20 ft1">
-                            Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@if( Model.Leave_End != null)
+                        <P class="p20 ft1"> Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:<input type="text" id="leaveend" value="@if( Model.Leave_End != null)
                         {
                             @Model.Leave_End.Value.ToString("MM/dd/yyyy");
-                        }" style="width:23%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" />
-                        </P>
+                        }" style="width:23%;" /> PTO balance:<input type="text" style="width:25%" value="@Model.Pto_Balance" id="ptobalance" /> </P>
                         <hr style="border-top: 2px solid black;" />
                     </div>
                 }
@@ -398,22 +394,22 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                     <P class="p6 ft1"> <textarea type="text" disabled style="width:95%;padding:10px;" id="notes1"> @Model.Notes1 </textarea></P>
 
                 </div>
-                <P class="p6 ft1">Employee Signature: <input type="text" class="italic" style="width:52%;height:30px; margin-right:0.3%;" disabled id="esignature" />  Date: <input type="text" value="@DateTime.Now.ToString("MM/dd/yyyy")" disabled id="edate" /> </P>
-                <P class="p6 ft1" style="margin-bottom:20px;">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
+                <P class="p6 ft1">Employee Signature: <input type="text" class="italic" style="width:52%;height:30px; margin-right:0.3%;"  disabled id="esignature" />  Date: <input type="text" value="@DateTime.Now.ToString("MM/dd/yyyy")" disabled id="edate" /> </P>
+                <P class="p6 ft1"  style="margin-bottom:20px;" >Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name="name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
             </div>
             <div id="status"> </div>
-            <div class="col-md-12" style="text-align:center;margin-bottom:100px;margin-top:20px !important;">
+            <div class="col-md-12" style="text-align:center;margin-bottom:100px;">
 
                 <input type="button" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
 
             </div>
         </div> <input type="hidden" id="Action" value="@ViewBag.Action" />
     </div>
-    @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
-
+   
     <style type="text/css">
 
-
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+      
 
         ol {
             margin: 0;
@@ -1102,19 +1098,6 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
             font-weight: bold;
             font-size: 22px;
         }
-
-
-        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
-        }
-
-        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) 
-        {
-            .page 
-            {
-                margin-left: 11%;
-                margin-top: 5%;
-            }
-        }
     </style>
 
     <style type="text/css">
@@ -1215,7 +1198,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                             alert("Successfully Submitted");
 
                             $("#status").html("<p style='color:green'> Successfully Submitted </p> ");
-
+                         
                             setTimeout(function ()
                             {
                                 window.close();
@@ -1228,7 +1211,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                           //  alert("Something Wrong, Contact Adminstrator Ref: " + ts.responseJSON.ErrorId);
                             $("#status").html("<p style='color:green'> Something Wrong, Contact Adminstrator Ref: ID " + ts.responseJSON.ErrorId+"  "+ts.responseJSON.exceptionMessage +"</p> ");
-
+                          
                             setTimeout(function () {
                                 window.close();
                                 closeMe();

@@ -1,8 +1,27 @@
 ﻿/* iPads (landscape) ----------- */
+
+body.mini-navbar .nav-header {
+    background-image: none !important;
+    background-color: #2f4050;
+}
+body.mini-navbar .nav-header {
+    background-color: #2f4050 !important;
+}
+
+body.mini-navbar .nav > li.active {
+    border-left: 4px solid #2f4050;
+    background: #293846;
+}
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) 
 {
-    .modal-lg {
-        width: 45% !important;
+    #viewpropertydetails {
+        margin-top: -105px !important;
+        margin-right: 5px !important;
+    }
+    .modal-lg 
+    {
+        width: 65% !important;
+        margin-top:15% !important;
     }
 
     .ibox-tools a 
@@ -44,12 +63,18 @@
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
 {
+    #viewpropertydetails {
+        margin-top: -105px !important;
+        margin-right: 5px !important;
+    }
+
     .navbar-right {
         margin-right:0px !important;
     }
 
     .modal-lg {
-        width: 45% !important;
+        width: 65% !important;
+        margin-top: 15% !important;
     }
 
     .ibox-tools a {

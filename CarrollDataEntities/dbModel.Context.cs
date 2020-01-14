@@ -383,5 +383,32 @@ namespace Carroll.Data.Entities
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getnewhirerejectionhistory_Result>("proc_getnewhirerejectionhistory", newhireidParameter);
         }
+    
+        public virtual ObjectResult<SP_GetAllClaimsUpdatedDate_Result> SP_GetAllClaimsUpdatedDate(Nullable<System.Guid> userid, Nullable<System.Guid> propertyid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            var propertyidParameter = propertyid.HasValue ?
+                new ObjectParameter("propertyid", propertyid) :
+                new ObjectParameter("propertyid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetAllClaimsUpdatedDate_Result>("SP_GetAllClaimsUpdatedDate", useridParameter, propertyidParameter);
+        }
+    
+        public virtual int updateactivityupdate(Nullable<System.Guid> rec)
+        {
+            var recParameter = rec.HasValue ?
+                new ObjectParameter("rec", rec) :
+                new ObjectParameter("rec", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateactivityupdate", recParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetLastWeekClaimUpdates_Result> proc_GetLastWeekClaimUpdates()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetLastWeekClaimUpdates_Result>("proc_GetLastWeekClaimUpdates");
+        }
     }
 }
