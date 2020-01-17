@@ -419,9 +419,9 @@ namespace Carroll.Data.Services.Helpers
             var _entities = new CarrollFormsEntities();
          
 
-            _message.Subject = "Weekly Claim Updates " ;
+            _message.Subject = "Weekly Claim Update Summary " ;
 
-            _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> " +
+            _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h2> The following claims have been updated between "+DateTime.Today.AddDays(-7).ToShortDateString()+" to "+DateTime.Now.ToShortDateString()+" </h2>" +
                 "<table  border='1' cellpadding='5' cellspacing='0'>  ";
             _message.Body += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th>  <tr> </thead>";
 
@@ -442,6 +442,7 @@ namespace Carroll.Data.Services.Helpers
                 _message.EmailTo.Add("sekhar.babu@forcitude.com");
             _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
             _message.EmailTo.Add("sukumar.gandhi@forcitude.com");
+            _message.EmailTo.Add("iampropertymanager@carrollmg.com");
 
             EmailHelper.SendEmailUpdate(_message);
 
