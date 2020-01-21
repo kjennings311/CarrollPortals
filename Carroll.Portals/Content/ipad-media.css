@@ -12,6 +12,19 @@ body.mini-navbar .nav > li.active {
     border-left: 4px solid #2f4050;
     background: #293846;
 }
+
+@media only screen and (min-width:320px)
+{
+    body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level
+    {
+        min-width:200px !important;
+    }
+
+        body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level .nav-label
+        {
+            display:inline !important;
+        }
+}
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) 
 {
     #viewpropertydetails {

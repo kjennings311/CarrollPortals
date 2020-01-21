@@ -108,9 +108,9 @@ namespace Carroll.Data.Services.Controllers
 
         [ActionName("GetAllClaims")]
         [HttpGet]
-        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string Type, string optionalSeachText = "")
+        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string Type, int orderby,string optionalSeachText = "")
         {
-            return _service.GetAllClaims(userid, propertyid, Type, optionalSeachText);
+            return _service.GetAllClaims(userid, propertyid, Type, orderby,optionalSeachText);
         }
 
 

@@ -430,7 +430,7 @@ namespace Carroll.Data.Services.Helpers
             foreach (var item in _res)
             {
 
-                _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td>  <tr> </thead>";
+                _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString()+ "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td>  <tr> </thead>";
 
             }
 
@@ -445,6 +445,12 @@ namespace Carroll.Data.Services.Helpers
             _message.EmailTo.Add("iampropertymanager@carrollmg.com");
 
             EmailHelper.SendEmailUpdate(_message);
+
+            // sending for each property manager
+            //loop through each call sp send mail 
+            // subject and dates same
+            // add body with property details and send
+            // instead of calling them 
 
             return true;
         }

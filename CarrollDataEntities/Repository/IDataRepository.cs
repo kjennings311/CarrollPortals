@@ -20,7 +20,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetEquityPartners();
         dynamic GetRecords(EntityType entityType, string optionalSeachText = "");
         dynamic GetRecordsWithConfig(EntityType entityType, string optionalSeachText = "");
-        dynamic GetAllClaims(Guid? userid,Guid? propertyid,string Type, string OptionalSeachText);
+        dynamic GetAllClaims(Guid? userid,Guid? propertyid,string Type, string OptionalSeachText,int orderby);
         dynamic GetAllHrForms(Guid? userid, string FormType, string OptionalSeachText);
         dynamic GetHrFormCount();
         dynamic GetUserClaimCount(Guid userid);

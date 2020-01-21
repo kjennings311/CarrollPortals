@@ -1011,23 +1011,39 @@ namespace Carroll.Data.Entities.Repository
 
 
 
-        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string Type, string optionalSeachText)
+        public dynamic GetAllClaims(Guid? userid, Guid? propertyid, string Type, string optionalSeachText,int orderby)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
                 _entities.Configuration.ProxyCreationEnabled = false;
 
                 var config = new Config { };
-
-                if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
-                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).ToList();
+                if (orderby == 1)
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).ToList().OrderByDescending(o=>o.Updateddate);
                 else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList().OrderByDescending(o => o.Updateddate);
                 else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
-                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList().OrderByDescending(o => o.Updateddate);
                 else
-                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList();
+                    config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList().OrderByDescending(o => o.Updateddate);
+              
+                   
+                }
+                else if(orderby == 0)
+                {
+                    if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
+                        config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).ToList().OrderByDescending(o => o.CreatedDate);
+                    else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList().OrderByDescending(o => o.CreatedDate);
+                    else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
+                        config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList().OrderByDescending(o => o.CreatedDate);
+                    else
+                        config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower() == Type.ToLower() && (x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())))).ToList().OrderByDescending(o => o.CreatedDate);
 
+
+                }
                 config.EtType = EntityType.AllClaims.ToString();
                 PropertyInfo[] userprop = typeof(SP_GetAllClaimsUpdatedDate_Result).GetProperties();
                 config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);

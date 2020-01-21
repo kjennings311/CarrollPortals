@@ -1,5 +1,5 @@
-﻿ // var $BaseApiUrl = "http://localhost:1002/";
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿//  var $BaseApiUrl = "http://localhost:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -2721,7 +2721,15 @@ function GetAllClaims(Type) {
             $('.dtprops tbody').empty();
         }
     }
-       
+    var orderby = 0;
+
+    if ($("#filterval").is(":checked"))
+    {
+        orderby = 1;
+    }
+
+
+
 
     $.when(GetToken()).then(
         function () {
@@ -2729,7 +2737,7 @@ function GetAllClaims(Type) {
                 type: "get",
                 dataType: "json",
                 headers: { 'Access-Control-Allow-Origin': true },
-                url: $BaseApiUrl + "api/data/getallclaims?Type="+Type+"&userid="+ $("#CreatedBy").val()+"&propertyid=null",
+                url: $BaseApiUrl + "api/data/getallclaims?Type="+Type+"&orderby="+orderby+"&userid="+ $("#CreatedBy").val()+"&propertyid=null",
                 async: false,
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader('Authorization', 'Bearer ' + Token);
@@ -2795,7 +2803,7 @@ function GetAllClaims(Type) {
 
                     if ($("#filterval").is(":checked"))
                     {
-                        sort = [[7, 'desc']];
+                        sort = [[7, 'asc']];
                     }
                   
 
@@ -2821,8 +2829,7 @@ function GetAllClaims(Type) {
                             else if (rowdata.claimType.toLowerCase().trim() == "property")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");                          
                            
-                        },
-                        "order": sort,
+                        },                       
                         dom: doms, //dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
                         select: 'single',     // enable single row selection
                         responsive: false,     // enable responsiveness
