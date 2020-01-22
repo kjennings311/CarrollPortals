@@ -64,6 +64,11 @@ body.mini-navbar .nav > li.active {
     {
         width:95% !important;
     }
+    .activitymodal .modal-lg {
+        width: 95% !important;
+    }
+
+
 
     #page_1 
     {
@@ -128,14 +133,19 @@ body.mini-navbar .nav > li.active {
         display:none !important;
     }
 
-    #myModal .modal-lg {
+    #myModal .modal-lg, .activitymodal .modal-lg {
         width: 95% !important;
-        margin-bottom:400px !important;
+        margin-bottom: 400px !important;
     }
 
-    #exportclaim, #printclaim {
-        display: none !important;
-    }
+        .activitymodal .modal-lg
+        {
+            width:95% !important;
+        }
+
+        #exportclaim, #printclaim {
+            display: none !important;
+        }
 
     #page_1 {
         width: 100% !important;
