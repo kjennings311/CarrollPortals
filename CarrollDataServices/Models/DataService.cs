@@ -248,7 +248,7 @@ namespace Carroll.Data.Services.Models
             return _repository.GetUserClaimCount(userid);
         }
 
-        public dynamic InsertAttachment(FormAttachment formAttachment)
+        public dynamic InsertAttachment(List<FormAttachment> formAttachment)
         {
             return _repository.InsertAttachment(formAttachment);
         }

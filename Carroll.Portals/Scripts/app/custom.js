@@ -1,5 +1,5 @@
-﻿//  var $BaseApiUrl = "http://localhost:1002/";
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿  var $BaseApiUrl = "http://localhost:1002/";
+// var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -377,6 +377,9 @@ function BindElements() {
                                         $("#divprocessingbtn").hide();
                                     }
 
+
+                                    $("#homeval").val('1');
+
                                 } catch (err) { alert(err.message); }
 
                             }
@@ -437,7 +440,7 @@ function getForm(FormName, RecordId)
         + '<div class="form-group" >'
         + '<div class="col-sm-3 col-md-4 col-md-offset-3 col-lg-4 col-lg-offset-3 col-sm-offset-3">'       
         + '<a id="savechanges" class="btn btn-primary col-sm-offset-3  col-xs-offset-3 btn-add" style="background:#2f4050 !important; margin-bottom:10px; border:none !important" href="javascript:void(0);" formname="' + FormName + '">Save changes</button>'
-        + '<a class="btn btn-white col-xs-offset-4"  href="javascript:location.reload();">Cancel</a>&nbsp;'
+        + '<a class="btn btn-white col-xs-offset-3 ppcancel"  href="javascript:location.reload();">Cancel</a>&nbsp;'
         + '</div></div >';
     var $select = '<div class="form-group">'
         + '<label class="col-sm-12 control-label"> <a class="tooltipwala" data-container="body" href="#" data-toggle="popover" data-trigger="hover" data-content="{3}"  > i </a> {0} </label>'
@@ -2685,7 +2688,8 @@ function CheckToLoadContact()
     }
 }
 
-function FilterClaims(filter) {
+function FilterClaims(filter)
+{
     $("#DataTables_Table_0_filter input").val(filter);
     $('.dtprops').DataTable().search(filter).draw();
     $(".pr,.ge,.mo").removeClass('active');
@@ -2694,10 +2698,12 @@ function FilterClaims(filter) {
     {
         $(".mo").addClass('active');
     }
-    else if (filter == "General") {
+    else if (filter == "General")
+    {
         $(".ge").addClass('active');
     }
-    else if (filter == "Property") {
+    else if (filter == "Property")
+    {
         $(".pr").addClass('active');
     }
 }
@@ -2797,7 +2803,7 @@ function GetAllClaims(Type) {
 
                     var doms = '<"html5buttons"B>lTfgitp';
                     if ($ismobile)
-                        doms = '<"top"if>rt<"bottom"lp><"clear">';
+                        doms = '<"top"lfi>rt<"bottom"p><"clear">';
                     
                     var sort = [[6, 'asc']];
 
@@ -4056,13 +4062,31 @@ $(document).ready(function () {
             alert("Please Upload an Attachment to Proceed");
             $("#logo").focus();
         }
-        else {
-            var ext = $('#logo').val().split('.').pop().toLowerCase();
+        else
+        {
+         //   var ext = $('#logo').val().split('.').pop().toLowerCase();
+
+            var fi = document.getElementById('logo');
+
+            // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+            if (fi.files.length > 0) {
+
+               // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                for (var i = 0; i <= fi.files.length - 1; i++)
+                {
+                    var ext = fi.files.item(i).name.split('.').pop().toLowerCase();      // THE NAME OF THE FILE.
 
             if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp']) == -1) {
-                alert('invalid File Upload!');
+                alert('invalid File Upload! ' + fi.files.item(i).name);
+                $('#uploadsummary').modal('hide');
+                $("#filebodysummary").html("");
+                $("#logo").val('');
                 return;
+                    }
+
+                }
             }
+          
 
             $("#btnUpload").attr('disabled', true);
             $("#btnUpload").html('<p style="color:white"> Uploading .... </p>');
@@ -4075,7 +4099,10 @@ $(document).ready(function () {
             insertForm.append('RefFormType', $("#type").val());
             insertForm.append('UploadedByName', $("#CreatedByName").val());
             insertForm.append('UploadedBy', $("#CreatedBy").val());
-            insertForm.append('file', document.getElementById('logo').files[0]);
+            var fi = document.getElementById('logo');
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                insertForm.append(fi.files[i].name, fi.files[i]);
+            }
 
             $.ajax({
                 url: $BaseApiUrl + "api/data/InsertAttachment",
@@ -4090,7 +4117,7 @@ $(document).ready(function () {
                     $("#attachmentbody").html('');
 
                     $.each(data.attachments, function (index, value) {
-                        $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td> </tr>');
+                        $("#attachmentbody").append('<tr><td><a href="' + $BaseApiUrl + '/UploadedFiles/' + value.at_FileName + '" target="_blank" >' + value.at_Name + ' </a></td><td style="width:20%;" >' + value.uploadedDate.substring(0, 10) + ' </td><td>' + value.uploadedByName + ' </td> </tr>');
                     });
 
                     $("#activitybody").html('');
@@ -4099,7 +4126,8 @@ $(document).ready(function () {
                         $("#activitybody").append('<tr><td style="float:left" >' + value.activityDescription + ' </td><td style="width:20%;" >' + value.activityDate + ' </td> <td> ' + value.activityStatus + '</td> <td>' + value.activityByName + ' </td></tr>');
                     });
 
-                    setTimeout(function () {
+                    setTimeout(function ()
+                    {
                         $("#btnUpload").html('Upload');
                         $("#btnUpload").attr('disabled', false);
                         $("#btnUpload").fadeIn();

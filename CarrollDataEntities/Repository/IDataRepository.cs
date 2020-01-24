@@ -29,7 +29,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetExportClaim(string Claim, char Type);
         dynamic GetUserPropertyForClaimPrint(string userid);
         dynamic InsertComment(FormComment obj);
-        dynamic InsertAttachment(FormAttachment formAttachment);
+        dynamic InsertAttachment(List<FormAttachment> formAttachment);
         dynamic InsertEmployeeLeaseRider(EmployeeLeaseRaider formAttachment);
         dynamic GetEmployeeLeaseRider(Guid riderid);
         dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment,string Type);

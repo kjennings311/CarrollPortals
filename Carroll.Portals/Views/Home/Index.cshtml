@@ -383,25 +383,33 @@ font-weight: bold;
 
 <style type="text/css">
 
+    .ppcancel {
+        width: 110px;
+        height: 30px;
+        vertical-align: middle;
+        padding-top: 3px !important;
+    }
+
     #filtercheck {
         width: 200px !important;
-        position: absolute;
-        top: 68px;
-        margin-left: 47%;
+        position: relative;
+        top: 80px;
+        margin-right: 15%;
+        float: right;
     }
 
     #filtercheck input
     {
-        height:30px;
-        width:30px; 
+        height:15px;
+        width:15px; 
     }
-    
-    #filtercheck span 
-    {
-        margin-top: -30px;
-        display: block;
-        margin-left: 32px;
-    }
+
+        #filtercheck span 
+        {
+            margin-top: -22px;
+            display: block;
+            margin-left: 20px;
+        }
 
         .dtprops td, .dtprops th {
             white-space: nowrap;
@@ -610,7 +618,20 @@ font-weight: bold;
 
 
         /* iPads (landscape) ----------- */
-        @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+        @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape)
+        {
+
+            div.dataTables_wrapper div.dataTables_filter label {
+                font-size: 12px;
+                margin-top: 13px;
+            }
+
+            div.dataTables_wrapper div.dataTables_filter input {
+                height: 23px !important;
+            }
+
+
+
 
             .dtprops th:nth-child(6), .dtprops td:nth-child(6) {
                 display: none !important;
@@ -658,21 +679,58 @@ font-weight: bold;
 
             #filtercheck {
                 width: 200px !important;
-                position: absolute;
-                top: 88px !important;
-                margin-left: 40% !important;
+                position: relative;
+                top: 80px !important;
+                /* margin-left: 40% !important; */
+                float: right;
+                margin-right: -33px;
             }
         }
 
 
         /* iPads (portrait) ----------- */
         @@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-            #filtercheck {
-                width: 200px !important;
-                position: absolute;
-                top: 88px !important;
-                margin-left: 40% !important;
+
+            div.dataTables_wrapper div.dataTables_length select {
+                width: 60px;
+                display: inline-block;
+                height: 25px;
+                vertical-align: text-top;
+                padding: 2px;
             }
+
+
+            .ibox-tools, .html5buttons, .dataTables_length {
+                display: inline-block !important;
+                width: 200px !important;
+            }
+
+            div.dataTables_wrapper div.dataTables_filter {
+                text-align: right;
+                margin-top: -40px;
+            }
+        
+        div.dataTables_wrapper div.dataTables_filter label 
+        {
+            font-size: 12px;
+            margin-top: 10px;
+        }
+                div.dataTables_wrapper div.dataTables_filter input
+                {
+                    height:23px !important;
+                }
+
+
+
+
+                #filtercheck {
+                    width: 200px !important;
+                    position: relative;
+                    top:75px !important;
+                    /* margin-left: 40% !important; */
+                    float: right;
+                    margin-right: -33px;
+                }
 
             .dtprops th:nth-child(6), .dtprops td:nth-child(6) {
                 display: none !important;
@@ -726,7 +784,34 @@ font-weight: bold;
             }
         }
 
+
+    #filtercheck input {
+        height: 15px !important;
+        width: 15px !important;
+    }
+
+
     @@media only screen and (max-width : 468px) {
+
+        div.dataTables_wrapper div.dataTables_filter label {
+            font-size: 12px;
+            margin-top: 13px;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter input {
+            height: 23px !important;
+        }
+
+
+
+        div.dataTables_info
+        {
+            padding-left:45px !important;
+        }
+        .ibox-content {
+            padding-left: 0px !important;
+            padding-top: 0px !important;
+        }
         .hidewhenformopen {
             margin-top: -100px !important;
             margin-bottom: -16px !important;
@@ -744,19 +829,19 @@ font-weight: bold;
         #filtercheck {
             width: 200px !important;
             position: absolute;
-            top: 55px !important;
-            margin-left: 20% !important;
+            top: 95px !important;
+            margin-left: 27% !important;
         }
 
             #filtercheck input {
-                height: 20px !important;
-                width: 20px !important;
+                height: 15px !important;
+                width: 15px !important;
             }
 
             #filtercheck span {
-                margin-top: -24px !important;
+                margin-top: -20px;
                 display: block;
-                margin-left: 25px !important;
+                margin-left: 20px;
             }
     }
 </style>

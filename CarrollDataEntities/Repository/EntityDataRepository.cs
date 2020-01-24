@@ -1525,24 +1525,29 @@ tbl.UploadedDate descending
         }
 
 
-        public dynamic InsertAttachment(FormAttachment formAttachment)
+        public dynamic InsertAttachment(List<FormAttachment> formAttachments)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
+                foreach (var item in formAttachments)
+                {
 
-                FormAttachment _property = formAttachment;
+                FormAttachment _property = item;
                 _property.AttachmentId = Guid.NewGuid();
                 _property.UploadedDate = DateTime.Now;
                 // No record exists create a new property record here
                 _entities.FormAttachments.Add(_property);
                 // _entities.SaveChanges();
                 int i = _entities.SaveChanges();
+                }
+
+                var formAttachment = formAttachments[0];
                 var AllAttachments = (from tbl in _entities.FormAttachments
-                                      where tbl.RefId == formAttachment.RefId && tbl.RefFormType == _property.RefFormType
+                                      where tbl.RefId == formAttachment.RefId && tbl.RefFormType == formAttachment.RefFormType
                                       orderby tbl.UploadedDate descending
                                       select tbl).ToList();
-                string Comment = "A new attachment was added by " + _property.UploadedByName;
-                LogActivity(Comment, _property.UploadedByName, _property.UploadedBy.ToString(), _property.RefId.ToString(), "New Attachment");
+                string Comment = "A new attachment was added by " + formAttachment.UploadedByName;
+                LogActivity(Comment, formAttachment.UploadedByName, formAttachment.UploadedBy.ToString(), formAttachment.RefId.ToString(), "New Attachment");
                 return new { attachments = AllAttachments, activity = GetAllActivity(formAttachment.RefId) }; ;
             }
 

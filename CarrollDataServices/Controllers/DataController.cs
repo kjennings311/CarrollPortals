@@ -175,35 +175,43 @@ namespace Carroll.Data.Services.Controllers
         public dynamic InsertAttachment()
         {
 
-            FormAttachment fa = new FormAttachment();
+           List<FormAttachment> fal = new List<FormAttachment>();
+          
+
 
             var randomstring = DateTime.Now.ToString("yyMMddHHmmssff");
             var filename = "";
-
-            if (HttpContext.Current.Request.Files.AllKeys.Any())
+            bool isfailed = false;
+            var httpContext = HttpContext.Current;
+            // Check for any uploaded file  
+            if (httpContext.Request.Files.Count > 0)
             {
-                // Get the uploaded image from the Files collection
-                var httpPostedFile = HttpContext.Current.Request.Files["file"];
-
-                if (httpPostedFile != null)
+                //Loop through uploaded files  
+                for (int i = 0; i < httpContext.Request.Files.Count; i++)
                 {
-                    // Validate the uploaded image(optional)
+                    HttpPostedFile httpPostedFile = httpContext.Request.Files[i];
+                    if (httpPostedFile != null)
+                    {
+                        filename = Path.GetFileName(httpPostedFile.FileName);
+                        var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring + filename);
 
-                    // Get the complete file path
-                    filename = Path.GetFileName(httpPostedFile.FileName);
-                    var fileSavePath = Path.Combine(HttpContext.Current.Server.MapPath("~/UploadedFiles"), randomstring +filename);
-
-                    // Save the uploaded file to "UploadedFiles" folder
-                    httpPostedFile.SaveAs(fileSavePath);
+                        // Save the uploaded file to "UploadedFiles" folder
+                        httpPostedFile.SaveAs(fileSavePath);
+                        FormAttachment fa = new FormAttachment();
+                        fa.RefFormType = Convert.ToInt16(HttpContext.Current.Request.Params["RefFormType"]);
+                        fa.RefId = new Guid(HttpContext.Current.Request.Params["RefId"]);
+                        fa.UploadedBy = new Guid(HttpContext.Current.Request.Params["UploadedBy"]);
+                        fa.UploadedByName = HttpContext.Current.Request.Params["UploadedByName"];
+                        fa.At_Name = filename;
+                        fa.At_FileName = randomstring + filename;
+                        fal.Add(fa);                   
+                    }
                 }
             }
-            fa.RefFormType = Convert.ToInt16(HttpContext.Current.Request.Params["RefFormType"]);
-            fa.RefId = new Guid(HttpContext.Current.Request.Params["RefId"]);
-            fa.UploadedBy = new Guid(HttpContext.Current.Request.Params["UploadedBy"]);
-            fa.UploadedByName = HttpContext.Current.Request.Params["UploadedByName"];
-            fa.At_Name = filename;
-            fa.At_FileName = randomstring + filename;
-            return _service.InsertAttachment(fa);
+
+
+
+            return _service.InsertAttachment(fal);
         }
 
 

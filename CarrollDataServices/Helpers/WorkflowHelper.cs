@@ -140,20 +140,21 @@ namespace Carroll.Data.Services.Helpers
                     //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
                     //{
                     //    _message.EmailTo.Add(workflowemails.VPEmail);
-                    //}
-                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                    //}
+               // }
+                if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                {
+                    _message.EmailTo.Add(workflowemails.RVPEmail);
+                }
 
-                    if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                 if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                {
+                    _message.EmailTo.Add(workflowemails.AssetManager1Email);
+                }
+
+                    if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
                     {
-                        _message.EmailTo.Add(workflowemails.AssetManager1Email);
+                        _message.EmailTo.Add(workflowemails.AssetManager2Email);
                     }
-                    //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
-                    //}
 
                     EmailHelper.SendEmail(_message, RecordId, ClaimData.tbl.CreatedByName, ClaimData.tbl.CreatedBy.ToString());
                 }
@@ -241,12 +242,12 @@ namespace Carroll.Data.Services.Helpers
                 {
                     _message.EmailTo.Add(workflowemails.AssetManager1Email);
                 }
-                //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
-                //{
-                //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
-                //}
+                    if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
+                    {
+                        _message.EmailTo.Add(workflowemails.AssetManager2Email);
+                    }
 
-                if (!string.IsNullOrEmpty(workflowemails.RMEmail))
+                    if (!string.IsNullOrEmpty(workflowemails.RMEmail))
                     {
                         _message.EmailTo.Add(workflowemails.RMEmail);
                     }
@@ -255,16 +256,16 @@ namespace Carroll.Data.Services.Helpers
                     {
                         _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
                     }
-                        //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
-                        //{
-                        //    _message.EmailTo.Add(workflowemails.VPEmail);
-                        //}
-                        //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                        //{
-                        //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                        //}
+                    //if (!string.IsNullOrEmpty(workflowemails.VPEmail))
+                    //{
+                    //    _message.EmailTo.Add(workflowemails.VPEmail);
+                    //}
+                    if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.RVPEmail);
+                    }
 
-                        var uid = new Guid(UserId);
+                    var uid = new Guid(UserId);
 
                     var userdetails = (from tbl in _entities.SiteUsers
                                        where tbl.UserId == uid
@@ -353,18 +354,18 @@ namespace Carroll.Data.Services.Helpers
                     //{
                     //    _message.EmailTo.Add(workflowemails.VPEmail);
                     //}
-                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
-             //   }
-                if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                    if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.RVPEmail);
+                    }
+                    if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
                 {
                     _message.EmailTo.Add(workflowemails.AssetManager1Email);
                     }
-                    //if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.AssetManager2Email);
-                    //}
+                    if (!string.IsNullOrEmpty(workflowemails.AssetManager2Email))
+                    {
+                        _message.EmailTo.Add(workflowemails.AssetManager2Email);
+                    }
 
                     if (!string.IsNullOrEmpty(workflowemails.RMEmail))
                     {
@@ -2102,7 +2103,7 @@ namespace Carroll.Data.Services.Helpers
 
                 // Create an activity record
                 IDataRepository _repo = new EntityDataRepository();
-                _repo.LogActivity("Notification Email Sent", RecordCreatedBy, RecordCreatedByGuid, RecordId, "Workflow Notification Sent");
+                _repo.LogActivity("Notification Email Sent", "System", RecordCreatedByGuid, RecordId, "Workflow Notification Sent");
                 _repo = null;
 
             }

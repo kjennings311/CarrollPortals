@@ -36,7 +36,7 @@
                         <div class="col-lg-12">
                             <div class="m-b-md">
                                 @*<a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>
-            <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>*@
+                                    <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Reply</a>*@
                                 <h2 class="propertyName"></h2>
 
                                 <b> Claim Number : <span id="claimnumber"></span> </b>
@@ -45,20 +45,20 @@
                             <h5>Report Details:</h5>
 
                             @*<dl class="dl-horizontal">
-            <dt>Details:</dt>
-            <dd><span class="claimDesc"></span></dd>
-            <dt>Location:</dt>
-            <dd><span class="location"></span></dd>
-            <dt>Created By:</dt>
-            <dd><span class="createdBy"></span></dd>
-            <dt>Created Date:</dt>
-            <dd><span class="createdDate"></span></dd>
-        </dl>*@
+                                    <dt>Details:</dt>
+                                    <dd><span class="claimDesc"></span></dd>
+                                    <dt>Location:</dt>
+                                    <dd><span class="location"></span></dd>
+                                    <dt>Created By:</dt>
+                                    <dd><span class="createdBy"></span></dd>
+                                    <dt>Created Date:</dt>
+                                    <dd><span class="createdDate"></span></dd>
+                                </dl>*@
                             <a class="btn btn-success pull-right clss" href="/Home/PrintClaim/?claim=num&Type=" target="_blank" style="margin-top:-115px;margin-right:5px;" id="printclaim"> Print Claim </a>
 
                             <a class="btn btn-success pull-right clss" href="/Home/ExportClaim/?claim=num&Type=" style="margin-top:-75px;" id="exportclaim"> Export Claim </a>
-                           
-                            <a class="btn btn-success pull-right clss"  data-toggle="modal" data-target="#exampleModalCenter" id="viewpropertydetails" href="#" style="margin-top: -35px;
+
+                            <a class="btn btn-success pull-right clss" data-toggle="modal" data-target="#exampleModalCenter" id="viewpropertydetails" href="#" style="margin-top: -35px;
     margin-right: -22px;
     margin-bottom: 10px;display:none ">View Property Details</a>
 
@@ -130,7 +130,7 @@
                                                 <div class="form-group">
                                                     <label> Upload Attachments </label> <br />
                                                     <div class="custom-file">
-                                                        <input id="logo" type="file" class="custom-file-input">
+                                                        <input id="logo" type="file" multiple class="custom-file-input">
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-primary btn-sm pull-left " id="btnUpload" style="max-width:150px;">Upload</button>
@@ -178,6 +178,45 @@
         </div>
     </div>
 
+    <div class="modal fade bs-example-modal-lg uploadsummary" id="uploadsummary" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" style="width:60%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                        Summary: Uploaded Files
+                    </h1>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align:center">
+
+                            <table class="table table-bordered table-condensed">
+                                <thead> <tr><th> Sno </th><th>  FileName </th><th> Size(MB) </th></tr> </thead>
+                                <tbody  id="filebodysummary"> </tbody>
+                            </table>
+
+
+                            <h3> Are you sure, do you want to Upload files? </h3>
+
+                            <button class="btn btn-success " style="margin-left: 75px;
+    margin-top: 10px;" id="btnuploadyesfromsummary" >
+                               Yes
+                            </button>
+
+                            <button class="btn btn-danger " style="margin-left: 75px;
+    margin-top: 10px;" id="btnuploadnofromsummary" >
+                              No
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -190,12 +229,12 @@
                 </div>
                 <div class="modal-footer" style="border:none !important">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    
+
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 visible-lg">
         <div class="wrapper wrapper-content ">
 
             <h2 id="property"></h2>
@@ -204,11 +243,11 @@
             @*<img src="img/zender_logo.png" class="img-responsive">*@
             <p class="small description">
                 @*There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look
-            even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing*@
+                    even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing*@
             </p>
             @*<p class="small font-bold">
-            <span><i class="fa fa-circle text-warning"></i> High priority</span>
-        </p>*@
+                    <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                </p>*@
 
 
             <ul class="list-unstyled PropDetails pd-bottom"></ul>
@@ -217,16 +256,16 @@
             @*<img src="img/zender_logo.png" class="img-responsive">*@
 
             @*<p class="small font-bold">
-            <span><i class="fa fa-circle text-warning"></i> High priority</span>
-        </p>*@
+                    <span><i class="fa fa-circle text-warning"></i> High priority</span>
+                </p>*@
 
 
 
             @*<div class="text-center m-t-md">
-            <a href="#" class="btn btn-xs btn-primary">Add files</a>
-            <a href="#" class="btn btn-xs btn-primary">Report contact</a>
+                    <a href="#" class="btn btn-xs btn-primary">Add files</a>
+                    <a href="#" class="btn btn-xs btn-primary">Report contact</a>
 
-        </div>*@
+                </div>*@
         </div>
     </div>
 
@@ -255,10 +294,58 @@
         $(document).ready(function () {
             LoadClaim();
             $('.custom-file-input').on('change', function () {
-                let fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+                //let fileName = $(this).val().split('\\').pop();
+                //$(this).next('.custom-file-label').addClass("selected").html(fileName);
+                //form html and open popup
+
+                var htmlbody = "";
+
+                // GET THE FILE INPUT.
+                var fi = document.getElementById('logo');
+
+                // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+                if (fi.files.length > 0) {
+
+                    // THE TOTAL FILE COUNT.
+                 $(this).next('.custom-file-label').addClass("selected").html('Total Files: <b>' + fi.files.length + '</b></br >');
+
+                    // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                    for (var i = 0; i <= fi.files.length - 1; i++) {
+
+                        var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+                        var fsize = fi.files.item(i).size/1000000;      // THE SIZE OF THE FILE.
+                        htmlbody += "<tr><td>" + (i + 1) + " </td><td> " + fname + " </td><td> " + fsize.toFixed(2)+" </td> </tr>";
+                    }
+                }
+                else
+                {
+                    alert('Please select a file.');
+                }
+
+                $('#uploadsummary').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                }, 'show');
+
+                $("#filebodysummary").html(htmlbody)
             });
 
+
+            $("#btnuploadyesfromsummary").click(function ()
+            {           
+                $("#btnUpload").click();
+                $('#uploadsummary').modal('hide');
+                $("#filebodysummary").html("");
+
+            });
+
+
+            $("#btnuploadnofromsummary").click(function ()
+            {
+                $('#uploadsummary').modal('hide');
+                $("#filebodysummary").html("");
+                $("#logo").val('');
+            });
 
 
         });
