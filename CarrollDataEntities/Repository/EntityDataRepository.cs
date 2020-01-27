@@ -1036,7 +1036,7 @@ namespace Carroll.Data.Entities.Repository
                     if (string.IsNullOrEmpty(optionalSeachText) && string.IsNullOrEmpty(Type))
                         config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).ToList().OrderByDescending(o => o.CreatedDate);
                     else if (Type == "All" && string.IsNullOrEmpty(optionalSeachText))
-                        config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList().OrderByDescending(o => o.CreatedDate);
+                        config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x =>x.PropertyName.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentLocation.ToLower().Contains(optionalSeachText.ToLower()) || x.IncidentDescription.ToLower().Contains(optionalSeachText.ToLower()) || x.ReportedBy.ToLower().Contains(optionalSeachText.ToLower())).ToList().OrderByDescending(o => o.CreatedDate);
                     else if (Type != "All" && string.IsNullOrEmpty(optionalSeachText))
                         config.Rows = _entities.SP_GetAllClaimsUpdatedDate(userid, propertyid).Where(x => (x.ClaimType.ToLower().Trim().Contains(Type.ToLower().Trim()))).ToList().OrderByDescending(o => o.CreatedDate);
                     else
@@ -1225,6 +1225,7 @@ namespace Carroll.Data.Entities.Repository
 
             using (CarrollFormsEntities _entities = DBEntity)
             {
+
                 _entities.Configuration.ProxyCreationEnabled = false;
                 Guid _recId = new Guid(Claim);
                 Int16 formtype = 1;

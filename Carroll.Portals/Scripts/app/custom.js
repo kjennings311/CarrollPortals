@@ -1,4 +1,4 @@
-﻿//  var $BaseApiUrl = "http://localhost:1002/";
+﻿  var $BaseApiUrl = "http://localhost:1002/";
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -2877,7 +2877,11 @@ function GetAllClaims(Type) {
                                         .css('font-size', 'inherit');
                                 }
                             }],
-                        columns: columnlist1
+                        columns: columnlist1,
+                        columnDefs: [{
+                            "targets": [4,7,6],
+                            "type": 'date',
+                        }]
 
                     });
 

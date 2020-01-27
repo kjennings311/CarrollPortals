@@ -424,14 +424,14 @@ namespace Carroll.Data.Services.Helpers
 
             _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h2> The following claims have been updated between "+DateTime.Today.AddDays(-7).ToShortDateString()+" to "+DateTime.Now.ToShortDateString()+" </h2>" +
                 "<table  border='1' cellpadding='5' cellspacing='0'>  ";
-            _message.Body += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th>  <tr> </thead>";
+            _message.Body += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th> <th> Type of Update </th>  <tr> </thead>";
 
             var _res = _entities.proc_GetLastWeekClaimUpdates().ToList();
             _message.Body += "<tbody> ";
             foreach (var item in _res)
             {
 
-                _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString()+ "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td>  <tr> </thead>";
+                _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString()+ "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>"+item.UpdateType+" </td>  <tr> </thead>";
 
             }
 

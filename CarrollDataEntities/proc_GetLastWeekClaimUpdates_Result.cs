@@ -31,5 +31,6 @@ namespace Carroll.Data.Entities
         public Nullable<System.Guid> CreatedBy { get; set; }
         public string ResidentName { get; set; }
         public Nullable<System.DateTime> Updateddate { get; set; }
+        public string UpdateType { get; set; }
     }
 }

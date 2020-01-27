@@ -2774,7 +2774,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
         </ComplexType>
         <ComplexType Name="proc_GetLastWeekClaimUpdates_Result">
           <Property Type="Guid" Name="Id" Nullable="false" />
-          <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="50" />
           <Property Type="Guid" Name="PropertyId" Nullable="false" />
           <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="8" />
           <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
@@ -2789,8 +2789,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="35" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="Guid" Name="CreatedBy" Nullable="true" />
-          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="15" />
           <Property Type="DateTime" Name="Updateddate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UpdateType" Nullable="true" MaxLength="22" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4395,6 +4396,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
                 <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+                <ScalarProperty Name="UpdateType" ColumnName="UpdateType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
