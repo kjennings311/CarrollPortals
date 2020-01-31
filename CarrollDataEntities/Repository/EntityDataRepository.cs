@@ -1015,8 +1015,7 @@ namespace Carroll.Data.Entities.Repository
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-                _entities.Configuration.ProxyCreationEnabled = false;
-
+                _entities.Configuration.ProxyCreationEnabled = false;             
                 var config = new Config { };
                 if (orderby == 1)
                 {
@@ -2771,6 +2770,7 @@ tbl.UploadedDate descending
 
                     config.Columns.Add(new DtableConfigArray { name = "userName", label = "User", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "page", label = "Page", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "description", label = "Description", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "error", label = "Error", type = 0, href = "" });
                    config.Columns.Add(new DtableConfigArray { name = "datetime", label = "Date", type = DFieldType.IsDate, href = "" });                   
 

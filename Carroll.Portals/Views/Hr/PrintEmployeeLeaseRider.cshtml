@@ -88,10 +88,11 @@
 
                 <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" class="italic" style="width:25%;" disabled value="@Model.SignatureOfPropertyManager" id="signatureproperymanager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.PMDate.Value.ToString("MM/dd/yyyy")" disabled id="pmdate" /> 
                 <span style="margin-top:10px;font-size: 10.0pt;
-line-height: 115%;margin-left:7px;" id="pmdatespan"> Date : </span> </p>
+line-height: 115%;margin-left:4%;" id="pmdatespan"> Date : </span> </p>
 
                 <p style="text-align: justify;">
-                    <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : </span>  <span style="font-size: 10.0pt; line-height: 115%;">
+                    <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : </span>  
+                    <span style="font-size: 10.0pt; line-height: 115%;">
                     <input type="text" class="italic" style="margin-left:45px;width:25%;" value="@Model.SignatureOfEmployee" id="signature" disabled /> </span>  @if (Model.PositionDate != null)
                     {
                         <span>  <input type="text" id="leasedate" style="float:right; margin-right:15%;" value="@Model.PositionDate.Value.ToString("MM/dd/yyyy")" /></span>

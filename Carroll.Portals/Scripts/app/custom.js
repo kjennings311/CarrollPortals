@@ -1,4 +1,4 @@
-﻿  var $BaseApiUrl = "http://localhost:1002/";
+﻿ // var $BaseApiUrl = "http://localhost:1002/";
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -4080,12 +4080,17 @@ $(document).ready(function () {
                 {
                     var ext = fi.files.item(i).name.split('.').pop().toLowerCase();      // THE NAME OF THE FILE.
 
-            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp']) == -1) {
-                alert('invalid File Upload! ' + fi.files.item(i).name);
-                $('#uploadsummary').modal('hide');
-                $("#filebodysummary").html("");
-                $("#logo").val('');
-                return;
+                    if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp']) == -1)
+                    {
+                        alert('Invalid File Type! ' + fi.files.item(i).name + " is not supported                          (Allowed File Types are 'gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp' )");
+               
+                    }
+
+                    if (fi.files.item(i).size / 1000000 > 25)
+                    {
+
+                        alert( fi.files.item(i).name + " Exceeds the allowed size (25MB)");
+
                     }
 
                 }
@@ -4103,9 +4108,22 @@ $(document).ready(function () {
             insertForm.append('RefFormType', $("#type").val());
             insertForm.append('UploadedByName', $("#CreatedByName").val());
             insertForm.append('UploadedBy', $("#CreatedBy").val());
+
             var fi = document.getElementById('logo');
-            for (var i = 0; i <= fi.files.length - 1; i++) {
-                insertForm.append(fi.files[i].name, fi.files[i]);
+            for (var i = 0; i <= fi.files.length - 1; i++)
+            {
+                var ext = fi.files.item(i).name.split('.').pop().toLowerCase();      // THE NAME OF THE FILE.
+
+                if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp']) != -1)
+                {
+                    
+                        if (fi.files.item(i).size / 1000000 <= 25)
+                        {
+                            insertForm.append(fi.files[i].name, fi.files[i]);
+                        }
+                    }
+                   
+               
             }
 
             $.ajax({

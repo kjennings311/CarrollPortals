@@ -52,9 +52,9 @@ namespace Carroll.Data.Services.Helpers
                                          where tbl.EquityPartnerId == propresult.EquityPartner
                                          select tbl.PartnerName).FirstOrDefault();
 
-                    _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Property Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"));
+                    _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Property Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"),ClaimData.tbl.ClaimNumber);
 
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br> <table border='1' cellpadding='5' cellspacing='0' >";
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h1> " + propresult.PropertyName + " - "+ ClaimData.tbl.ClaimNumber + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br> <table border='1' cellpadding='5' cellspacing='0' >";
 
                     _message.Body += "<tr><td><strong> Weather Conditions : </strong> </td> <td>" + (ClaimData.tbl.WeatherConditions == null ? "" : ClaimData.tbl.WeatherConditions) + " </td></tr>";
 
@@ -174,8 +174,8 @@ namespace Carroll.Data.Services.Helpers
                                          where tbl.EquityPartnerId == propresult.EquityPartner
                                          select tbl.PartnerName).FirstOrDefault();
 
-                    _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "General Liability Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"));
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br>  <table border='1' cellpadding='5' cellspacing='0' >";
+                    _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "General Liability Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"),ClaimData.tbl.ClaimNumber);
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " "+ ClaimData.tbl.ClaimNumber + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table> <br> <br>  <table border='1' cellpadding='5' cellspacing='0' >";
 
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Incident Date : </strong> </td><td>" + ClaimData.tbl.IncidentDateTime.Value.ToString("MM/dd/yyyy") + "</td> </tr><tr><td><strong> Incident Time : </strong> </td><td>" + ClaimData.tbl.IncidentTime + "</td></tr><tr> <td><strong> Incident Location : </strong> </td><td>" + ClaimData.tbl.IncidentLocation + "</td> </tr>";
 
@@ -296,8 +296,8 @@ namespace Carroll.Data.Services.Helpers
                                          where tbl.EquityPartnerId == propresult.EquityPartner
                                          select tbl.PartnerName).FirstOrDefault();
 
-                    _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Mold Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"));
-                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table>  <br> <br> <table border='1' cellpadding='5' cellspacing='0'>";
+                    _message.Subject = string.Format(Convert.ToString(ConfigurationManager.AppSettings["NotifyEmailSubject"]), "Mold Damage Claim", ClaimData.PropertyName, ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy"), ClaimData.tbl.ClaimNumber);
+                    _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1> " + propresult.PropertyName + " "+ ClaimData.tbl.ClaimNumber + " </h1> <table  border='1' cellpadding='5' cellspacing='0'> <tr> <td style='width:20%;'> <strong> Address :  </strong> </td> <td> " + propresult.PropertyAddress + ", " + propresult.City + ", " + propresult.State + " " + propresult.ZipCode + " </td> </tr><tr><td><strong>  Phone :</strong> </td> <td>" + propresult.PhoneNumber + " </td> </tr> <tr><td><strong>  Units :</strong> </td> <td>" + propresult.Units + " </td> </tr><tr><td><strong>  Yardi Code :</strong> </td> <td>" + propresult.PropertyNumber + " </td> </tr><tr><td><strong>  Legal :</strong> </td> <td>" + propresult.LegalName + " </td> </tr> <tr><td><strong>  Tax ID :</strong> </td> <td>" + propresult.TaxId + " </td> </tr> <tr><td><strong>  Partner :</strong> </td> <td>" + equitypartner + " </td> </tr>    </table>  <br> <br> <table border='1' cellpadding='5' cellspacing='0'>";
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Discovery Date : </strong> </td><td>" + ClaimData.tbl.DiscoveryDate.Value.ToString("MM/dd/yyyy") + "</td> </tr>";
                     _message.Body += "<tr><td style='width:20%;padding-bottom:20px;' > <strong> Location : </strong> </td><td>" + ClaimData.tbl.Location + "</td> </tr>";
 
@@ -739,7 +739,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         List<string> tos = new List<string>();
-                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                      //  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.tbl.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -898,7 +898,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         List<string> tos = new List<string>();
-                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                      //  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1058,7 +1058,7 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                     
-                         tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                      //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1171,7 +1171,7 @@ namespace Carroll.Data.Services.Helpers
                 _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5> <p> ";
                 _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy")+ " "+ NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
                 List<string> tos = new List<string>();
-                 tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+              //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
 
                 // get created user email
 
@@ -1438,7 +1438,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form.  <br> <br> <h5> Thank you, <br> CARROLL </h5>    </div></div>";
                         List<string> tos = new List<string>();
-                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                     //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1652,7 +1652,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form <br> <br> <h5> Thank you, <br> CARROLL  </h5>  </div></div>";
                         List<string> tos = new List<string>();
                     
-                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                     //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1701,7 +1701,7 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                     
-                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                      //  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         _message.EmailTo = tos;
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
@@ -1752,7 +1752,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "<br> <h5>  Thank you, <br> CARROLL </h5>   </div></div>";
                         List<string> tos = new List<string>();
                      
-                        tos.Add(ConfigurationManager.AppSettings["RecuritingEmail"]);
+                        //tos.Add(ConfigurationManager.AppSettings["RecuritingEmail"]);
                         _message.EmailTo = tos;
 
                         InsertHrLog("RequisitionRequest", propid.ToString(), "HR Email sent ", " Hr Email is sent for Requisition Request on" + DateTime.Now, "System");

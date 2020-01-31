@@ -193,7 +193,7 @@
                         <div class="col-md-12" style="text-align:center">
 
                             <table class="table table-bordered table-condensed">
-                                <thead> <tr><th> Sno </th><th>  FileName </th><th> Size(MB) </th></tr> </thead>
+                                <thead> <tr><th> File  </th><th>  Name</th><th> Size(Max 25MB)  </th></tr> </thead>
                                 <tbody  id="filebodysummary"> </tbody>
                             </table>
 
@@ -308,9 +308,19 @@
                     for (var i = 0; i <= fi.files.length - 1; i++) {
 
                         var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
-                        var fsize = fi.files.item(i).size/1000000;      // THE SIZE OF THE FILE.
-                        htmlbody += "<tr><td>" + (i + 1) + " </td><td> " + fname + " </td><td> " + fsize.toFixed(2)+" </td> </tr>";
-                    }
+                        var fsize = fi.files.item(i).size / 1000000;
+
+                        if (fsize > 25)
+                        {
+                            htmlbody += "<tr><td>" + (i + 1) + " </td><td> " + fname + " </td><td>  <a title='size is exeeding limit' class='has-error'> " + fsize.toFixed(2) + " </a>  </td> </tr>";
+
+                        }
+                        else {
+                            htmlbody += "<tr><td>" + (i + 1) + " </td><td> " + fname + " </td><td> " + fsize.toFixed(2) + " </td> </tr>";
+
+                        }
+                            
+                         }
                 }
                 else
                 {

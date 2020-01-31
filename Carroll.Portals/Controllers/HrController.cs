@@ -150,7 +150,7 @@ namespace Carroll.Portals.Controllers
                
                 // o.Date=obj.
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { PageSize= Size.A4, CustomSwitches= "--disable-smart-shrinking", FileName = "EmployeeLeaseRider - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintEmployeeLeaseRider", obj) { PageSize= Size.A4, CustomSwitches= "--disable-smart-shrinking", FileName = "EmployeeLeaseRider-" +obj.SequenceNumber +"-"+obj.EmployeeName+ ".pdf" };
 
             }
 
@@ -275,7 +275,7 @@ namespace Carroll.Portals.Controllers
                
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintEmployeeNewHireNotice", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "EmployeeNewHireNotice - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintEmployeeNewHireNotice", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "EmployeeNewHireNotice-" +obj.SequenceNumber + "-" + obj.EmployeeName  + ".pdf" };
 
             }
         }
@@ -306,7 +306,7 @@ namespace Carroll.Portals.Controllers
 
                     //Deserializing the response recieved from web api and storing into the Employee list  
                     obj = JsonConvert.DeserializeObject<PrintActivity>(EmpResponse);
-
+                    
                 }
 
                 // o.Date=obj.
@@ -1266,7 +1266,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintPayRollStatusChange", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayROll Status Change - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintPayRollStatusChange", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayrollStatusChange-" + obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
 
             }
 
@@ -1392,7 +1392,7 @@ namespace Carroll.Portals.Controllers
            
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "NoticeOfEmployeeSeparation - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintNoticeOfEmployeeSeparation", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "NoticeOfEmployeeSeparation-" + obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
 
             }
 
@@ -1698,7 +1698,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintRequisitionRequest", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "RequisitionRequest - " + DateTime.Now.ToShortDateString() + ".pdf" };
+                return new ViewAsPdf("PrintRequisitionRequest", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "RequisitionRequest-"+ obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
 
             }
 
