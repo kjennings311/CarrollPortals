@@ -30,27 +30,53 @@ body.mini-navbar .nav > li.active {
         width:95% !important;
     }
 
+    #spanfilter1 
+    {
+        display: block !important;
+        float: right !important;
+        padding: 0px 0px 0px 5px !important;
+    }
+
+    #filterval1 
+    {
+        margin-top: 0px !important;
+    }
+
+
 }
-@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) 
+
+@media only screen and (min-width : 768px) 
 {
+
+    #filterval1 {
+        margin-top: 5px !important;
+    }
+
+}
+
+@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape) {
     #viewpropertydetails {
         margin-top: -105px !important;
         margin-right: 5px !important;
     }
-    .modal-lg 
+
+    .ibox-content 
     {
+        padding:0px !important;
+        padding-top:40px !important;
+    }
+
+    .modal-lg {
         width: 65% !important;
-        margin-top:15% !important;
+        margin-top: 15% !important;
     }
 
-    .ibox-tools a 
-    {
-        font-size:17px !important;
+    .ibox-tools a {
+        font-size: 17px !important;
     }
 
-    #prphead 
-    {
-        margin-top:-30px !important;
+    #prphead {
+        margin-top: -30px !important;
     }
 
     .RowsContatiner .ibox-title {
@@ -66,27 +92,47 @@ body.mini-navbar .nav > li.active {
     }
 
 
-    #myModal  .modal-lg
-    {
-        width:95% !important;
+    #myModal .modal-lg {
+        width: 95% !important;
     }
+
     .activitymodal .modal-lg {
         width: 95% !important;
     }
 
 
 
-    #page_1 
-    {
+    #page_1 {
         width: 100% !important;
         position: relative;
         /* overflow: hidden; */
         margin: 0px 0px 0px 0px;
     }
+
+    #filtercheck1 {
+        margin-right: 7% !important;
+    }
 }
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
 {
+    .ibox-content 
+    {
+        padding: 0px !important;
+        padding-top: 40px !important;
+    }
+
+    .page-heading 
+    {
+        padding: 0 10px 0px 0px !important;
+    }
+
+
+    #filtercheck1 {
+        margin-right: 7% !important;
+    }
+
+
     #viewpropertydetails {
         margin-top: -105px !important;
         margin-right: 5px !important;

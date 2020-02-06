@@ -2813,7 +2813,12 @@ function GetAllClaims(Type) {
                     }
                   
 
-                    var datatableVariable = $('.dtprops').DataTable({
+                    var datatableVariable = $('.dtprops').on('init.dt', function ()
+                    {
+                        console.log('Table initialisation complete: ' + new Date().getTime());
+
+                        $("#DataTables_Table_0_filter label").append(' <div id="filtercheck1" style="text-align:right;margin-right:3%;"> <input type="checkbox" value="1" id="filterval1" /> <span id="filterspan1" style="display:block;float: right;padding: 1px 0px 0px 5px;"> Show Updated Claims </span>  </div>');
+                    }).DataTable({
                         data: configdata.rows,
                         processing: true,
                         scrollY: '50vh',
@@ -2885,6 +2890,7 @@ function GetAllClaims(Type) {
 
                     });
 
+                    
                 }
             });
         }
