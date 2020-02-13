@@ -1,5 +1,5 @@
 ﻿  var $BaseApiUrl = "http://localhost:1002/";
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ //var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -4325,6 +4325,7 @@ $(document).ready(function () {
                                       
                     $('#rejectionlog').DataTable({
                         dom: 'frt',
+                        "aaSorting": [[3, "desc"]],
                         "aoColumnDefs": [
                             { 'bSortable': false, 'aTargets': [1] }
                         ]

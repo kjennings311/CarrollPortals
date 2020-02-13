@@ -3169,8 +3169,9 @@ tbl.UploadedDate descending
             {
 
                 //us
-                var propertyres = _entities.CarrollPayPeriods.ToList();
-
+                var propertyres = (from tbl in _entities.CarrollPayPeriods
+                                   where tbl.PayFrom.Value.Year == DateTime.Now.Year
+                                   select tbl).ToList();
 
 
                 if (propertyres != null)

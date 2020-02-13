@@ -419,13 +419,10 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                 <div id="divnotes" style="width:100%;">
                     <P class="p21 ft5">Notes:</P>
                     <P class="p6 ft1">
-                        <textarea type="text" style="width:95%;padding:10px;" rows="5"  id="notes1"> 
-@if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
+                        <textarea type="text" style="width:95%;padding:10px;" rows="5"  id="notes1"> @if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
 {
- @Model.Notes1
-}
-           
-                     </textarea>
+ @Model.Notes1.Trim().Replace("  ","");
+}</textarea>
                     </P>
 
                 </div>

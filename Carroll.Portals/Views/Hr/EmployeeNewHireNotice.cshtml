@@ -51,9 +51,13 @@
 
 
                         <div class="col-md-12 regionalblock" id="regionalblock" style="text-align:center;display:none;">
-                            <div class="col-md-5"> Write Rejection Reason :</div>
-                            <textarea cols="40" rows="5" class="col-md-6" id="reason">
-</textarea>
+                            <div class="col-md-5"> Rejection Reason :</div>
+                            <textarea cols="40" rows="5" class="col-md-6" id="reason"></textarea>
+                            <br />
+                            <p style="clear: both;
+    padding-top: 20px !important;
+    text-align: center;color:red;    float: right;
+    margin-right: 27%;" id="reasonerror"> </p>
                             <div class="col-md-12" style="text-align:center; margin-top:50px; ">
                                 <button class="btn btn-danger" id="regionalreject">
                                     Reject
@@ -161,18 +165,19 @@
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0"> Employee Name:    <input type="text" style="width:42%" id="empname" />        Start Date:<input type="text" class="date-mask" style="width:20%;" id="startdate" value="" />  </span>
+                                            <span class="c0 empnameerror  lblerror"> Employee Name:    <input type="text" style="width:42%" id="empname" />    <span class=" startdateerror lblerror" >      Start Date:</span> 
+                                            <input type="text" class="date-mask" style="width:20%;" id="startdate" value="" />  </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Personal Email Address: <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
+                                            <span class="c0 emailerror lblerror">Personal Email Address: <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
                                         </p>
 
                                         <p class="c1">
                                             <span class="c0">Manager: <input type="text" id="manager" style="width:78%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">
+                                            <span class="c0  chkcorporateerror lblerror">
                                                 Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                 <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
                                             </span>
@@ -183,11 +188,11 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Position: <input type="radio" style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
+                                            <span class="c0 lblerror exempterror">Position: <input type="radio" style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Status :  <input type="radio" style="margin-left:1.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
+                                            <span class="c0 lblerror exempterror">Status :  <input type="radio" style="margin-left:1.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
                                         </p>
 
                                         <p class="c1">
@@ -195,7 +200,7 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Position <select style="width:250px;margin-left:10%; " class="select select2" id="position"> </select> </span>
+                                            <span class="c0 positionerror lblerror">Position <select style="width:250px;margin-left:10%; " class="select select2" id="position"> </select> </span>
                                         </p>
 
                                         <table style="width: 80%;
@@ -551,6 +556,7 @@
 
         .has-error {
             border-color: red;
+            color:red;
         }
     </style>
 }
@@ -647,14 +653,16 @@ function AssignManager()
 
             });
 
-            $("input").change(function (e) {
+            $("input,select,textarea").change(function (e) {
                 e.preventDefault();
 
                 if ($(this).val() == "") {
-                   // $(this).addClass("has-error");
+                    $(this).addClass("has-error");
+                    $("." + $(this).attr('id') + "error").addClass("has-error");
                 }
                 else {
                     $(this).removeClass("has-error");
+                    $("." + $(this).attr('id') + "error").removeClass("has-error");
                 }
             });
 
@@ -823,9 +831,18 @@ function AssignManager()
 
             // regional rejected
             $(document).on('click', "#regionalreject ", function () {
+
+                if ($("#reason").val().replace(/\n/g, "") == "")
+                {
+                    $("#reason").addClass('has-error');
+
+                    $("#reasonerror").addClass('has-error').html('Please enter rejection reason');
+
+                    return false;
+                }
                 var insertForm = new FormData();
                 insertForm.append('status', 'reject');
-                insertForm.append('reason', $("#reason").val());
+                insertForm.append('reason', $("#reason").val().replace(/\n/g, ""));
                 insertForm.append('refid', leaseid);
                 insertForm.append('CreatedBy', $("#CreatedBy").val());
                 insertForm.append('CreatedByName', $("#CreatedByName").val());

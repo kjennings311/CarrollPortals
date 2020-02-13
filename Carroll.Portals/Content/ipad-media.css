@@ -59,7 +59,9 @@ body.mini-navbar .nav > li.active {
         margin-top: -105px !important;
         margin-right: 5px !important;
     }
-
+    .RowsContatiner {
+        background: white !important;
+    }
     .ibox-content 
     {
         padding:0px !important;
@@ -116,8 +118,10 @@ body.mini-navbar .nav > li.active {
 
 @media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
 {
-    .ibox-content 
-    {
+    .RowsContatiner {
+        background: white !important;
+    }
+    .ibox-content {
         padding: 0px !important;
         padding-top: 40px !important;
     }

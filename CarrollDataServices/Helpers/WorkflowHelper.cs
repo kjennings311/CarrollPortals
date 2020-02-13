@@ -1167,7 +1167,7 @@ namespace Carroll.Data.Services.Helpers
                 // subject and body
 
                 var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Hr/EmployeeNewHireNotice?resubmit=" + propid;
-                _message.Subject = "Employee New Hire Notice has been rejected";
+                _message.Subject = "Employee New Hire Notice has been rejected by "+NewhireDetails.FirstName +" "+NewhireDetails.LastName ;
                 _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5> <p> ";
                 _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy")+ " "+ NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
                 List<string> tos = new List<string>();
@@ -1334,14 +1334,9 @@ namespace Carroll.Data.Services.Helpers
                                           select tbl).FirstOrDefault();
                     if (NewhireDetails != null)
                     {
-                        // subject and body
-                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
-// var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
-                        _message.Subject = "Employee New Hire Notice needs your review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
                         List<string> tos = new List<string>();
 
+                        string str = "";
 
                         if (NewhireDetails.iscorporate == true)
                         {
@@ -1364,19 +1359,34 @@ namespace Carroll.Data.Services.Helpers
                             var getemail = (from tbl in _entities.SiteUsers
                                             join tblprop in _entities.Properties on tbl.UserId equals tblprop.RegionalManager
                                             where tblprop.PropertyId == pid && tbl.UserId == NewhireDetails.CreatedUser
-                                            select tbl.UserEmail).FirstOrDefault();
+                                            select tbl).FirstOrDefault();
                             if (getemail != null)
                             {
-                                if (getemail != "")
+                                if (getemail.UserEmail != "")
                                 {
-                                    tos.Add(getemail);
+                                    tos.Add(getemail.UserEmail);
                                 }
+
+                                str = getemail.FirstName + " " + getemail.LastName;
 
                             }
 
                         }
 
+                        tos.Add("sekhar.babu@forcitude.com");
+
                         _message.EmailTo = tos;
+
+
+                        // subject and body
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
+// var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
+                        _message.Subject = "Employee New Hire Notice needs your review";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " +str + " </h5> <p> ";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
+                        
+
+                     
 
                         
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))

@@ -533,9 +533,10 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
         .has-error {
             border-color: red;
+            outline: 2px solid red !important;
         }
 
-
+     
 
         #page_1 {
             position: relative;
@@ -993,6 +994,10 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             width: 720px;
             font: italic 15px 'Calibri';
         }
+
+        .has-error input[type=checkbox] {
+            outline: 2px solid red;
+        }
     </style>
 }
 
@@ -1031,6 +1036,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     margin-left:-45px !important;
 
                 }
+
+               
 }
         </style>
         }
@@ -1062,6 +1069,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 $("#divpropertychange,#divpaychange,#divlaborallocation,#divleaveabsence").hide();
 
             });
+
 
             GetAllHRFORMs('PayRollChange');
 
@@ -1303,10 +1311,15 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 if ($("#chkcorporate").is(":checked"))
                 {
                     iscorporate = true;
+
                     $("#divproperty").hide();
                     $("#manager").val($("#CreatedByName").val());
 
                     $("#chkpropertychange,#chklaborallocation").prop("disabled", true);
+                    $("#chkpropertychange,#chklaborallocation").prop("checked", false);
+
+                    $("#effectivedate,#frompropnum,#frompropname,#frommanager,#topropnum,#topropname,#tomanager").val('');
+                    $("#prop1,#prop1per,#prop3,#prop3per,#prop2,#prop2per").val('');
 
                 }
 
@@ -1315,10 +1328,23 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     iscorporate = false;
                     $("#divproperty").show();
                     $("#chkpropertychange,#chklaborallocation").prop("disabled", false);
+                    $("#chkpropertychange,#chklaborallocation").prop("checked", false);
 
                 }
 
-                console.log('corpoerate change ' + iscorporate);
+                $(".showchange").each(function ()
+                {
+                    if ($(this).is(':checked')) {
+
+                        $("#" + $(this).attr('data-div')).show();
+                    }
+                    else {
+                        $("#" + $(this).attr('data-div')).hide();
+                    }
+
+                });
+
+                
 
             });
 
@@ -1603,9 +1629,6 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         p3 = parseFloat($("#prop3per").val());
                     var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
 
-                    console.log('sum value is '+sum);
-
-
                     if (sum != 100)
                     {
 
@@ -1881,8 +1904,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     insertForm.append('leavebegin', $("#leavebegin").val());
                     insertForm.append('leaveend', $("#leaveend").val());
                     insertForm.append('ptobalance', $("#ptobalance").val());
-                    insertForm.append('notes1', $("#notes1").val());
-
+                    insertForm.append('notes1', $("#notes1").val().replace(/\n/g, ""));
+                
+                 
                     insertForm.append('esignature', $("#esignature").val());
                     insertForm.append('edate', $("#edate").val());
                     insertForm.append('mdate', $("#mdate").val());
@@ -1895,42 +1919,43 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show');
                     $("#Submit").prop('disabled', false);
-                    $.ajax({
-                        url: $BaseApiUrl + "api/data/InsertPayRollStatusChangeNotice",
-                        type: 'POST',
-                        dataType: "JSON",
-                        processData: false,
-                        contentType: false,
-                        data: insertForm,
-                        success: function (data) {
-                            // To-do code if ajax request is successful
+                 
+                        $.ajax({
+                            url: $BaseApiUrl + "api/data/InsertPayRollStatusChangeNotice",
+                            type: 'POST',
+                            dataType: "JSON",
+                            processData: false,
+                            contentType: false,
+                            data: insertForm,
+                            success: function (data) {
+                                // To-do code if ajax request is successful
 
-                            if (data['error'] == false) {
-                                leaseid = data['insertedId'];
-                                GetAllHRFORMs('PayRollChange');
+                                if (data['error'] == false) {
+                                    leaseid = data['insertedId'];
+                                    GetAllHRFORMs('PayRollChange');
 
-                                $("#status").html('');
-                                document.getElementById("submitform").reset();
+                                    $("#status").html('');
+                                    document.getElementById("submitform").reset();
 
-                                ShowToastNotification('Record Successfully Updated', 3);
+                                    ShowToastNotification('Record Successfully Updated', 3);
 
-                                setTimeout(function () {
+                                    setTimeout(function () {
 
-                                    $('#toastnotification').modal('hide');
-                                }, 3000);
+                                        $('#toastnotification').modal('hide');
+                                    }, 3000);
+                                }
+                                else {
+                                    $("#status").html(data['errorMsg']);
+
+                                }
+
+
+                            },
+                            error: function (ts) {
+                                alert('error' + ts.exceptionMessage);
                             }
-                            else {
-                                $("#status").html(data['errorMsg']);
-
-                            }
-
-
-                        },
-                        error: function (ts) {
-                            alert('error' + ts.exceptionMessage);
-                        }
-                    });
-
+                        });
+                    
                 }
 
 
