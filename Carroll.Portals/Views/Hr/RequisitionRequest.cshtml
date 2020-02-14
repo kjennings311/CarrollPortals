@@ -73,7 +73,7 @@
 
                                             <TABLE cellpadding=0 cellspacing=0 class="t0" style="margin-top:20px;">
                                                 <TR>
-                                                    <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0">Property Name: </SPAN><select style="width:60%;" id="propertyname" required> </select></P></TD>
+                                                    <TD class="tr0 td0"><P class="p0 ft1"><SPAN class="ft0 lblerror propertynameerror">Property Name: </SPAN><select style="width:60%;" id="propertyname" required> </select></P></TD>
 
                                                     <TD class="tr0 td1">
                                                         <P class="p0 ft3">
@@ -90,7 +90,7 @@
                                                     </TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0"> Requestor’s Name & Position </SPAN>: <input style="width:60%;" required type="text" id="requestorname" /></P></TD>
+                                                    <TD class="tr1 td0"><P class="p0 ft1"><SPAN class="ft0 lblerror requestornameerror"> Requestor’s Name & Position </SPAN>: <input style="width:60%;" required type="text" id="requestorname" /></P></TD>
                                                     <TD class="tr1 td1"><P class="p0 ft4">&nbsp;</P></TD>
                                                 </TR>
                                             </TABLE>
@@ -105,7 +105,7 @@
                                             <P class="p3 ft1"><input type="checkbox" class="chkposition s8" data-tr="s8" id="chkhk" value="Housekeeper" />  Housekeeper <select style="margin-left:19.4%;" class="chkposition drdchk" id="s8"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
                                             <P class="p2 ft1"><input type="checkbox" class="chkposition s9" data-tr="s9" id="chkother" value="Other" /> Other: <input type="text" style="width: 22.6%;" id="txtother" /> <select style="margin-left:2%;" class="chkposition drdchk" id="s9"><option value=""> - </option><option value="1"> 1</option> <option value="2"> 2</option><option value="3"> 3</option><option value="4">4</option><option value="5">5</option> </select> </P>
 
-                                            <P class="p1 ft1"><SPAN class="ft0">Post to: </SPAN>  <input type="checkbox" id="postindeed" />  Carroll Careers/Indeed</P>
+                                            <P class="p1 ft1"><SPAN class="ft0 lblerror postindeederror">Post to: </SPAN>  <input type="checkbox" id="postindeed" />  Carroll Careers/Indeed</P>
                                             <P class="p6 ft1"> <input type="checkbox" id="postassociation" />  Apartment Association</P>
                                             <P class="p4 ft1"> <input type="checkbox" id="chkotherpost" /> Other:   <input type="text" id="otherpost" /> </P>
                                             <P class="p7 ft1">Special Instructions (i.e. confidential posting, etc.)</P>
@@ -426,6 +426,7 @@ width: 25%;" disabled id="dateposted" />
 
             .has-error {
                 border-color: red;
+                color:red;
             }
     </style>
 }
@@ -458,9 +459,13 @@ width: 25%;" disabled id="dateposted" />
                 if (insertoredit) {
                     if ($(this).val() != "") {
                         $("." + $(this).attr('id')).prop("checked", true);
+
+                        $("." + $(this).attr('id') + "error").addClass("has-error");
                     }
                     else {
                         $("." + $(this).attr('id')).prop("checked", false);
+
+                        $("." + $(this).attr('id') + "error").removeClass("has-error");
                     }
                 }
             });
@@ -662,9 +667,13 @@ width: 25%;" disabled id="dateposted" />
 
                 if ($(this).val() == "" && $(this).hasAttr('required')) {
                     $(this).addClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").addClass("has-error");
                 }
                 else {
                     $(this).removeClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").removeClass("has-error");
                 }
 
             });
@@ -682,7 +691,7 @@ width: 25%;" disabled id="dateposted" />
 
                     if ($("#propertyname").val() == "") {
                         errormsgsummary += "<li> Please Select Property  </li>";
-                        $("#propertyname").addClass('has-error');
+                        $(".propertynameerror").addClass('has-error');
                         if (control == "")
                             control = $("#propertyname");
                     }
@@ -696,7 +705,7 @@ width: 25%;" disabled id="dateposted" />
 
                     if ($("#requestorname").val() == "") {
                         errormsgsummary += "<li> Please Enter Requestor Name </li>";
-                        $("#requestorname").addClass('has-error');
+                        $(".requestornameerror").addClass('has-error');
                         if (control == "")
                             control = $("#requestorname");
                     }
@@ -711,7 +720,7 @@ width: 25%;" disabled id="dateposted" />
 
                     if (!$("#postindeed").is(":checked") && !$("#postassociation").is(":checked")) {
                         errormsgsummary += "<li> Please Select Post Option </li>";
-                        $("#postindeed").addClass('has-error');
+                        $(".postindeederror").addClass('has-error');
                         if (control == "")
                             control = $("#postindeed");
                     }
@@ -719,7 +728,7 @@ width: 25%;" disabled id="dateposted" />
 
                     if ($("#chkreplacementposition").is(":checked") && $("#replaceperson").val() == "") {
                         errormsgsummary += "<li> Please Enter Replacement Person Name </li>";
-                        $("#replaceperson").addClass('has-error');
+                        $("#replacepereplacepersonrson").addClass('has-error');
                         if (control == "")
                             control = $("#replaceperson");
                     }

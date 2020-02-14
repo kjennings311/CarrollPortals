@@ -57,7 +57,7 @@
                             <p style="clear: both;
     padding-top: 20px !important;
     text-align: center;color:red;    float: right;
-    margin-right: 27%;" id="reasonerror"> </p>
+    margin-right: 25%;" id="reasonerror"> </p>
                             <div class="col-md-12" style="text-align:center; margin-top:50px; ">
                                 <button class="btn btn-danger" id="regionalreject">
                                     Reject
@@ -165,21 +165,21 @@
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0 empnameerror  lblerror"> Employee Name:    <input type="text" style="width:42%" id="empname" />    <span class=" startdateerror lblerror" >      Start Date:</span> 
+                                            <span class="c0 "><span class="empnameerror  lblerror">  Employee Name:  </span>   <input type="text" style="width:42%" id="empname" />    <span class=" startdateerror lblerror" >      Start Date:</span> 
                                             <input type="text" class="date-mask" style="width:20%;" id="startdate" value="" />  </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0 emailerror lblerror">Personal Email Address: <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
+                                            <span class="c0 "> <span class="emailerror lblerror" >  Personal Email Address: </span> <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
                                         </p>
 
                                         <p class="c1">
                                             <span class="c0">Manager: <input type="text" id="manager" style="width:78%;" /> </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0  chkcorporateerror lblerror">
-                                                Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                                                <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                                            <span class="c0  chkcorporateerror chkpropertyerror lblerror">
+                                                Location: <input type="radio" id="chkcorporate" name="loc" value="1" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" value="0" /> Property
                                             </span>
 
                                             <span class="c0" id="divproperty" style="display:none; padding:20px;">
@@ -188,19 +188,19 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0 lblerror exempterror">Position: <input type="radio" style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
+                                            <span class="c0"><span class=" lblerror exempterror nonexempterror">Position: </span> <input type="radio" style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0 lblerror exempterror">Status :  <input type="radio" style="margin-left:1.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
+                                            <span class="c0 "> <span class="lblerror fullstatuserror partstatuserror">Status : </span>  <input type="radio" style="margin-left:1.5%;" value="1" name="time" id="fullstatus" />  Full Time  <input type="radio" style="margin-left:5%;" name="time" id="partstatus" value="1" />  Part Time </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0">Wage (Hourly) / Salary (Annual) <input type="text" class="allow_decimal" id="salary"  style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
+                                            <span class="c0 lblerror salaryerror">Wage (Hourly) / Salary (Annual) <input type="text" class="allow_decimal" id="salary"  style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0 positionerror lblerror">Position <select style="width:250px;margin-left:10%; " class="select select2" id="position"> </select> </span>
+                                            <span class="c0"><span class=" positionerror lblerror">Position </span> <select style="width:250px;margin-left:10%; " class="select select2" id="position"> </select> </span>
                                         </p>
 
                                         <table style="width: 80%;
@@ -211,7 +211,7 @@
     margin-left: 40%;"> Labor Allocation   </h3>
                                                 </td>
                                             </tr>
-                                            <tr> <td> Property </td> <td> Percentage </td> </tr>
+                                            <tr> <td class="lblerror la_Prop2error la_Prop3error la_Prop1error"> Property </td> <td class="lblerror la_Prop2pererror la_Prop3pererror la_Prop1pererror"> Percentage </td> </tr>
                                             <tr> <td> <input type="text" id="la_Prop1" />  </td> <td> <input type="text" class="allow_decimal" id="la_Prop1per" /> </td> </tr>
                                             <tr> <td> <input type="text" id="la_Prop2" /> </td> <td> <input type="text" class="allow_decimal" id="la_Prop2per" /> </td> </tr>
                                             <tr> <td> <input type="text" id="la_Prop3" /> </td> <td> <input type="text" class="allow_decimal" id="la_Prop3per" /> </td> </tr>
@@ -228,11 +228,11 @@
                                             </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="text" style="width:21%" name="name" id="edate" value="" /></span>
+                                            <span class="c0 ">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="text" style="width:21%" name="name" id="edate" value="" /></span>
                                         </p>
-
+                                        
                                         <p class="c1">
-                                            <span class="c0">Manager&rsquo;s Authorizing Signature <input type="text" id="msignature" style="width:32%;" /> Date <input type="text" class="date-mask" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
+                                            <span class="c0 "> <span class="lblerror msignatureerror">Manager&rsquo;s Authorizing Signature </span> <input type="text" id="msignature" style="width:32%;" /> Date <input type="text" class="date-mask" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
                                         </p>
 
                                         <p class="c1" style="margin-bottom: 60px;">
@@ -667,7 +667,6 @@ function AssignManager()
             });
 
   //          document.getElementById("mdate").valueAsDate = new Date();
-
 
 
             $(document).on('click', ".resendrpmmail,.resendempmail", function () {
@@ -1160,28 +1159,28 @@ function AssignManager()
 
                 if ($("#empname").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Name </li>";
-                    $("#empname").addClass('has-error');
+                    $(".empnameerror").addClass('has-error');
                     if (control == "")
                         control = $("#empname");
                 }
 
                 if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false) {
                     errormsgsummary += "<li> Please  Select Corporate or Property for location </li>";
-                    $("#chkcorporate").addClass('has-error');
+                    $(".chkcorporateerror").addClass('has-error');
                     if (control == "")
                         control = $("#chkcorporate");
                 }
 
                 if ($("#startdate").val() == "") {
                     errormsgsummary += "<li> Please Enter Date </li>";
-                    $("#startdate").addClass('has-error');
+                    $(".startdateerror").addClass('has-error');
                     if (control == "")
                         control = $("#startdate");
                 }
 
                 if (!validateEmail($("#email").val())) {
                     errormsgsummary += "<li> Please Enter Valid Email Address </li>";
-                    $("#email").addClass('has-error');
+                    $(".emailerror").addClass('has-error');
                     if (control == "")
                         control = $("#email");
                 }
@@ -1204,7 +1203,7 @@ function AssignManager()
 
                 if ($("#position").val() == "") {
                     errormsgsummary += "<li> Please Choose Position </li>";
-                    $("#position").addClass('has-error');
+                    $(".positionerror").addClass('has-error');
                     if (control == "")
                         control = $("#position");
                 }
@@ -1215,7 +1214,7 @@ function AssignManager()
 
                 if (!$("#exempt").is(":checked") && !$("#nonexempt").is(":checked")) {
                     errormsgsummary += "<li> Please Select Position Exempt or Non Exempt </li>";
-                    $("#exempt").addClass('has-error');
+                    $(".exempterror").addClass('has-error');
                     if (control == "")
                         control = $("#exempt");
                 }
@@ -1225,7 +1224,7 @@ function AssignManager()
 
                 if (!$("#fullstatus").is(":checked") && !$("#partstatus").is(":checked")) {
                     errormsgsummary += "<li> Please Select Status Option either Full Time or Part Time </li>";
-                    $("#fullstatus").addClass('has-error');
+                    $(".fullstatuserror").addClass('has-error');
                     if (control == "")
                         control = $("#fullstatus");
                 }
@@ -1234,14 +1233,14 @@ function AssignManager()
 
                 if ($("#salary").val() == "") {
                     errormsgsummary += "<li> Please Enter Salary/Wage  </li>";
-                    $("#salary").addClass('has-error');
+                    $(".salaryerror").addClass('has-error');
                     if (control == "")
                         control = $("#salary");
                 }
 
                 if ($("#msignature").val() == "") {
                     errormsgsummary += "<li> Please Enter PM Signature  </li>";
-                    $("#msignature").addClass('has-error');
+                    $(".msignatureerror").addClass('has-error');
                     if (control == "")
                         control = $("#msignature");
                 }
@@ -1257,7 +1256,7 @@ function AssignManager()
 
                     if ($("#la_Prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
                         errormsgsummary += "<li> Please Enter Division Of Labor Percentage  </li>";
-                        $("#la_Prop1per").addClass('has-error');
+                        $(".la_Prop1pererror").addClass('has-error');
                         if (control == "")
                             control = $("#la_Prop1per");
                     }
@@ -1299,7 +1298,7 @@ function AssignManager()
                         if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                            $("#la_Prop1").addClass('has-error');
+                            $(".la_Prop1error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#la_Prop1");
@@ -1309,7 +1308,7 @@ function AssignManager()
                         if ($("#la_Prop2per").val() != "" && $("#la_Prop2").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                            $("#la_Prop2").addClass('has-error');
+                            $(".la_Prop2error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#la_Prop2");
@@ -1319,7 +1318,7 @@ function AssignManager()
                         if ($("#la_Prop3per").val() != "" && $("#la_Prop3").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                            $("#la_Prop3").addClass('has-error');
+                            $(".la_Prop3error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#la_Prop3");

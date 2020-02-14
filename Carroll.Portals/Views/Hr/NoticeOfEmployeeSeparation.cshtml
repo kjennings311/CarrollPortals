@@ -74,18 +74,18 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;margin-left:-1%;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1" style="margin-top:20px;">Effective Date of Change <input style="width:37%;" type="text" class="date-mask" id="effectivedate" /> Eligible for Rehire <input type="text" style="width:23%;" value="YES" disabled id="rehire" /></p>
+                                            <p class="p1 ft1" style="margin-top:20px;"> <span class="effectivedateerror lblerror"> Effective Date of Change  </span> <input style="width:37%;" type="text" class="date-mask" id="effectivedate" /> <span class="rehireerror lblerror">  Eligible for Rehire  </span> <input type="text" style="width:23%;" value="YES" disabled id="rehire" /></p>
                                             <p class="p1 ft1">
-                                                <span class="c0">
+                                                <span class="c0 chkcorporateerror chkpropertyerror">
                                                     Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <input style="" type="radio" id="chkproperty" name="loc" /> Property
                                                 </span>
                                                 <span class="c0" id="divproperty" style="display:none;">
-                                                    <select type="text" style="width:33%" id="location"></select> Number <input type="text" id="propertynumber" style="width:23%" />
+                                                    <select type="text" style="width:33%" id="location"></select> <span class="propertynumbererror">  Number </span> <input type="text" id="propertynumber" style="width:23%" />
                                                 </span>
 
                                             </p>
-                                            <p class="p2 ft1">Employee Name <input type="text" id="empname" style="width:30%" /> Job Title <select id="jobtitle" style="width:46%"> </select></p>
+                                            <p class="p2 ft1"><span class="empnameerror"> Employee Name  </span><input type="text" id="empname" style="width:30%" /> <span class="jobtitleerror">  Job Title </span> <select id="jobtitle" style="width:46%"> </select></p>
                                             <P class="p3 ft2">Reason Code from below (Check all that apply)</P>
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                 <TR>
@@ -169,15 +169,15 @@
                                                     <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
                                                 </TR>
                                             </TABLE>
-                                            <P class="p11 ft1" style="margin-top:15px;">**What Policy specifically was violated? </P>
+                                            <P class="p11 ft1 polictyvoilated1error" style="margin-top:15px;">**What Policy specifically was violated? </P>
                                             <P class="p12 ft1"><textarea type="text" id="polictyvoilated1" style="width:95%"></textarea> </P>
                                             <P class="p13 ft1">Additional Remarks </P>
                                             <P class="p14 ft1"><textarea type="text" id="remarks1" style="width:95%"> </textarea></P>
 
                                             <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
 
-                                            <P class="p13 ft9"><SPAN class="ft1"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" class="allow_decimal" id="vacationbalance" value="0" style="width:10%" />)</P>
-                                            <P class="p17 ft1"> Supervisor’s Signature: <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="text" class="date-mask" style="width:20%;" id="sdate" disabled /></P>
+                                            <P class="p13 ft9"><SPAN class="ft1 vacationpaiderror vacationbalanceerror"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" class="allow_decimal" id="vacationbalance" value="0" style="width:10%" />)</P>
+                                            <P class="p17 ft1"> <span class="ssignatureerror">  Supervisor’s Signature:</span> <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="text" class="date-mask" style="width:20%;" id="sdate" disabled /></P>
 
                                             <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
                                         </DIV>
@@ -632,6 +632,7 @@
 
         .has-error {
             border-color: red;
+            color:red;
         }
     </style>
 }
@@ -641,6 +642,11 @@
     <style type="text/css">
           @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
             {
+              #propertynumber
+              {
+                  width:20% !important;
+              }
+
 
                 p.c8 {
                     margin-left: 30% !important;
@@ -681,6 +687,8 @@
                 }
             }
         </style>
+
+
     }
 
 
@@ -715,17 +723,22 @@
                 }).datepicker("setDate", 'now');
             });
 
-            $("input").change(function (e) {
+           
+            $("input,select").change(function (e) {
                 e.preventDefault();
 
-                if ($(this).val() == "") {
+                if ($(this).val() == "" && $(this).hasAttr('required')) {
                     $(this).addClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").addClass("has-error");
                 }
                 else {
                     $(this).removeClass("has-error");
-                }
-            });
 
+                    $("." + $(this).attr('id') + "error").removeClass("has-error");
+                }
+
+            });
 
             $("#chkcorporate,#chkproperty").change(function (e) {
 
@@ -932,13 +945,13 @@
 
                 if ($("#effectivedate").val() == "") {
                     errormsgsummary += "<li> Please Choose Date </li>";
-                    $("#effectivedate").addClass('has-error');
+                    $(".effectivedateerror").addClass('has-error');
                     if (control == "")
                         control = $("#effectivedate");
                 }
                 if ($("#rehire").val() == "") {
                     errormsgsummary += "<li> Please Choose Eligibile For Rehire </li>";
-                    $("#rehire").addClass('has-error');
+                    $(".rehireerror").addClass('has-error');
                     if (control == "")
                         control = $("#rehire");
                 }
@@ -947,7 +960,7 @@
                 {
                     if ($("#location").val() == "") {
                         errormsgsummary += "<li> Please Choose Property  </li>";
-                        $("#location").addClass('has-error');
+                        $(".locationerror").addClass('has-error');
                         if (control == "")
                             control = $("#location");
                     }
@@ -955,7 +968,7 @@
 
                     if ($("#propertynumber").val() == "") {
                         errormsgsummary += "<li> Please Enter Property Number </li>";
-                        $("#propertynumber").addClass('has-error');
+                        $(".propertynumbererror").addClass('has-error');
                         if (control == "")
                             control = $("#propertynumber");
                     }
@@ -963,7 +976,7 @@
 
                 if ($("#empname").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Name </li>";
-                    $("#empname").addClass('has-error');
+                    $(".empnameerror").addClass('has-error');
                     if (control == "")
                         control = $("#empname");
                 }
@@ -971,14 +984,14 @@
 
                 if ($("#jobtitle").val() == "") {
                     errormsgsummary += "<li> Please Enter Job Title Of Employee</li>";
-                    $("#jobtitle").addClass('has-error');
+                    $(".jobtitleerror").addClass('has-error');
                     if (control == "")
                         control = $("#jobtitle");
                 }
 
                 if ($("#chkviolated").is(":Checked") && $("#polictyvoilated1").val() == "") {
                     errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
-                    $("#polictyvoilated1").addClass('has-error');
+                    $(".polictyvoilated1error").addClass('has-error');
                     if (control == "")
                         control = $("#polictyvoilated1");
                 }
@@ -987,13 +1000,13 @@
 
                 if ($("#vacationpaid").val() == "true" && ($("#vacationbalance").val() == "" || $("#vacationbalance").val() == "0" )) {
                     errormsgsummary += "<li> Vacation Balance Should not be Empty Or Zero  </li>";
-                    $("#vacationpaid").addClass('has-error');
+                    $(".vacationpaiderror").addClass('has-error');
                     if (control == "")
                         control = $("#vacationpaid");
                 }
                 if ($("#ssignature").val() == "") {
                     errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
-                    $("#ssignature").addClass('has-error');
+                    $(".ssignatureerror").addClass('has-error');
                     if (control == "")
                         control = $("#ssignature");
                 }

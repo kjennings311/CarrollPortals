@@ -66,11 +66,11 @@
     MARGIN-TOP: 22PX;" src="/img/payroll.png" id="p1img1">
                                             <P class="p0 ft0" style="margin-top: 15PX;
 margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
-                                            <P class="p1 ft1" style="margin-top:5px !important">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" /> </P>
+                                            <P class="p1 ft1 empnameerror lblerror" style="margin-top:5px !important">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" /> </P>
                                             <p class="p1 ft1" style="margin-top:10px;">
-                                                <span class="">
-                                                    Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                                                <span>                                                 <span class="chkcorporateerror chkpropertyerror lblerror">
+                                                    Location: </span> <input type="radio" id="chkcorporate" value="1" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input style="margin-left:12px" type="radio" id="chkproperty" value="1" name="loc" /> Property
                                                 </span>
                                                 <span class="c0" id="divproperty" style="display:none; padding:20px;">
 
@@ -78,9 +78,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                 </span>
                                             </p>
 
-                                            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
+                                            <P class="p1 ft1 empemailerror lblerror" style="margin-top:10px !important;">Employee Email: <input style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
                                             <P class="p3 ft3"> <h4> Select Type Of Change  (check all that apply) : </h4></P>
-                                            <P class="p6 ft1">
+                                            <P class="p6 ft1  ">
                                                 <input type="checkbox" class="showchange" data-div="divpropertychange" id="chkpropertychange" /> Property Change
                                                 <input type="checkbox" class="showchange" data-div="divpaychange" id="chkpaychange" /> Pay / Position Change  <input type="checkbox" class="showchange" data-div="divlaborallocation" id="chklaborallocation" /> Labor Allocation  <input type="checkbox" class="showchange" data-div="divleaveabsence" id="chkleave" /> Leave Of Absence
                                             </P>
@@ -90,12 +90,12 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                                                 <div style="width:100%;display:none;" id="divpropertychange">
                                                     <P class="p4 ft5">Property Change</P>
-                                                    <P class="p5 ft6"> Change Effective Date : <input type="text" class="date-mask" id="effectivedate" /> </P>
+                                                    <P class="p5 ft6 effectivedateerror"> Change Effective Date : <input type="text" class="date-mask" id="effectivedate" /> </P>
                                                     <P class="p5 ft6"> Property Transfer:</P>
                                                     <P class="p5 ft6"> <strong>From : </strong></P>
-                                                    <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
+                                                    <P class="p6 ft1 frompropnumerror"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
                                                     <P class="p5 ft6"><strong> To : </strong> </P>
-                                                    <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input style=" display:inline;width:35%; " disabled type="text" id="topropname" class="" /> Manager: <input style=" display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
+                                                    <P class="p6 ft1 topropnumerror"> Property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input style=" display:inline;width:35%; " disabled type="text" id="topropname" class="" /> Manager: <input style=" display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
 
@@ -116,23 +116,23 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </h4>
 
                                                         <p class="c1">
-                                                            <span class="c0">Title:  <select id="fromtitle"> </select> </span>
+                                                            <span class="c0 fromtitleerror lblerror">Title:  <select id="fromtitle"> </select> </span>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Position: <input type="radio" style="margin-left:17%;" value="1" name="exempt" id="fromexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="fromnonexempt" value="1" />  Non-exempt </span>
+                                                            <span class="c0 fromexempterror fromnonexempterror lblerror">Position: <input type="radio" style="margin-left:17%;" value="1" name="exempt" id="fromexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="fromnonexempt" value="1" />  Non-exempt </span>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Status :  <input type="radio" style="margin-left:19%;" value="1" name="time" id="fromfullstatus" />  Full Time  <input type="radio" style="margin-left:4%;" name="time" id="frompartstatus" value="1" />  Part Time </span>
+                                                            <span class="c0 fromfullstatuserror frompartstatuserror lblerror">Status :  <input type="radio" style="margin-left:19%;" value="1" name="time" id="fromfullstatus" />  Full Time  <input type="radio" style="margin-left:4%;" name="time" id="frompartstatus" value="1" />  Part Time </span>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Wage / Salary  <input type="radio" style="margin-left:9.5%;" name="wage" id="fromannualsalary" />  Annual <input type="radio" style="margin-left:7.5%;" name="wage" id="fromsalhourly" />  Hourly   </span>
+                                                            <span class="c0 fromannualsalaryerror fromsalhourlyerror lblerror">Wage / Salary  <input type="radio" style="margin-left:9.5%;" name="wage" id="fromannualsalary" />  Annual <input type="radio" style="margin-left:7.5%;" name="wage" id="fromsalhourly" />  Hourly   </span>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Rate  <input type="text" id="fromrate" class="allow_decimal" style="width:30%;margin-left:26%;" />   <span id="fromtext"> </span>  </span>
+                                                            <span class="c0 fromrateerror lblerror">Rate  <input type="text" id="fromrate" class="allow_decimal" style="width:30%;margin-left:26%;" />   <span id="fromtext"> </span>  </span>
                                                         </p>
                                                     </div>
 
@@ -143,28 +143,28 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             To
                                                         </h4>
                                                         <p class="c1">
-                                                            <span class="c0">Title:  <select id="totitle"> </select> </span>
+                                                            <span class="c0 totitleerror lblerror">Title:  <select id="totitle"> </select> </span>
                                                         </p>
-                                                        <p class="c1">
-                                                            <span class="c0">Position: <input type="radio" style="margin-left:17%;" value="1" name="texempt" id="toexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="texempt" id="tononexempt" value="1" />  Non-exempt </span>
-                                                        </p>
-
-                                                        <p class="c1">
-                                                            <span class="c0">Status :  <input type="radio" style="margin-left:19%;" value="1" name="ttime" id="tofullstatus" />  Full Time  <input type="radio" style="margin-left:4%;" name="ttime" id="topartstatus" value="1" />  Part Time </span>
+                                                        <p class="c1"> 
+                                                            <span class="c0 toexempterror tononexempterror lblerror">Position: <input type="radio" style="margin-left:17%;" value="1" name="texempt" id="toexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="texempt" id="tononexempt" value="1" />  Non-exempt </span>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
+                                                            <span class="c0 tofullstatuserror topartstatuserror lblerror">Status :  <input type="radio" style="margin-left:19%;" value="1" name="ttime" id="tofullstatus" />  Full Time  <input type="radio" style="margin-left:4%;" name="ttime" id="topartstatus" value="1" />  Part Time </span>
+                                                        </p>
+
+                                                        <p class="c1">
+                                                            <span class="c0 toannualsalaryerror tosalhourlyerror lblerror">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
                                                         </p>
                                                         <p class="c1">
-                                                            <span class="c0">Rate  <input type="text" id="torate" class="allow_decimal" style="width:30%;margin-left:26%;" />     <span id="totext"> </span>   </span>
+                                                            <span class="c0 torateerror lblerror">Rate  <input type="text" id="torate" class="allow_decimal" style="width:30%;margin-left:26%;" />     <span id="totext"> </span>   </span>
                                                         </p>
                                                     </div>
 
                                                     <TABLE cellpadding=0 cellspacing=0 class="t0">
 
                                                         <TR>
-                                                            <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN> <br /> (pay and position changes can take place at the beginning of a pay period)</P></TD>
+                                                            <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1 beginpayperioderror">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN> <br /> (pay and position changes can take place at the beginning of a pay period)</P></TD>
                                                             <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
                                                         </TR>
                                                     </TABLE>
@@ -188,8 +188,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </TR>
 
                                                         <TR>
-                                                            <TD class="tr7 td0"><P class="p14 ft1">Property</P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1">Percentage</P></TD>
+                                                            <TD class="tr7 td0"><P class="p14 ft1 prop1error prop2error prop3error lblerror">Property</P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1 prop1pererror prop2pererror prop3pererror lblerror">Percentage</P></TD>
 
                                                         </TR>
                                                         <TR>
@@ -233,11 +233,11 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </TR>
                                                         <TR>
                                                             <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
-                                                            <TD class="tr1 td10"><P class="p19 ft6">FMLA Eligible? <SPAN class="ft9"><input type="checkbox" id="chkfmlayes" name="chkfml" />  </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input name="chkfml" type="checkbox" id="chkfmlano" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
-                                                            <TD class="tr1 td11"><P class="p8 ft6">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" name="chkbenefit" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" name="chkbenefit" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
+                                                            <TD class="tr1 td10"><P class="p19 ft6 chkfmlayeserror chkfmlanoerror lblerror">FMLA Eligible? <SPAN class="ft9"><input type="checkbox" id="chkfmlayes" name="chkfml" />  </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input name="chkfml" type="checkbox" id="chkfmlano" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
+                                                            <TD class="tr1 td11"><P class="p8 ft6 chkbenefityeserror chkbenefitnoerror lblerror">Enrolled in Benefits? <SPAN class="ft9"><input type="checkbox" name="chkbenefit" id="chkbenefityes" /> </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9"><input type="checkbox" name="chkbenefit" id="chkbenefitno" />  </SPAN><SPAN class="ft1">No</SPAN></P></TD>
                                                         </TR>
                                                     </TABLE>
-                                                    <P class="p20 ft1">
+                                                    <P class="p20 ft1 purposeerror lblerror">
                                                         Purpose: <select style="width:32%; margin-right:30px;" id="purpose">
                                                             <option value="FMLA – Birth of a Child">
                                                                 FMLA – Birth of a Child
@@ -263,7 +263,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             <option value="Other">
                                                                 Other
                                                             </option>
-                                                        </select>  <span style="display:none;" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
+                                                        </select>  <span style="display:none;" class="purposeothererror lblerror" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
                                                     </P>
                                                     <P class="p20 ft1">  Begin: <input type="text" class="date-mask" style="width:20%;" id="leavebegin" /> Expected End:<input type="text" class="date-mask" class="date-mask" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
 
@@ -276,7 +276,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                     <P class="p6 ft1">  </P>
                                                 </div>
                                                 <P class="p6 ft1">Employee Signature: <input type="text" style="width:56%;" disabled id="esignature" />  Date: <input type="text" disabled id="edate" /> </P>
-                                                <P class="p6 ft1">Supervisor Signature: <input type="text" style="width:55.4%;" id="msignature" /> Date: <input disabled type="text" style="width:21%" class="date-mask" id="mdate" /></P>
+                                                <P class="p6 ft1 "> <span class="msignatureerror lblerror"> Supervisor Signature:  </span><input type="text" style="width:55.4%;" id="msignature" /> Date: <input disabled type="text" style="width:21%" class="date-mask" id="mdate" /></P>
                                             </div>
                                         </DIV>
                                         <div id="status"> </div>
@@ -533,7 +533,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
         .has-error {
             border-color: red;
-            outline: 2px solid red !important;
+            color: red !important;
         }
 
      
@@ -1071,6 +1071,23 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             });
 
 
+            $("input,select").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "" && $(this).hasAttr('required')) {
+                    $(this).addClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").removeClass("has-error");
+                }
+
+            });
+
+
             GetAllHRFORMs('PayRollChange');
 
             $("input").change(function (e) {
@@ -1362,7 +1379,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 if ($("#empname").val() == "")
                 {
                     errormsgsummary += "<li> Please Enter Employee Name </li>";
-                    $("#empname").addClass('has-error');
+                    $(".empnameerror").addClass('has-error');
                     if (control == "")
                         control = $("#empname");
                 }
@@ -1370,14 +1387,14 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false )
                 {
                     errormsgsummary += "<li> Please  Select Corporate or Property Option </li>";
-                    $("#chkcorporate").addClass('has-error');
+                    $(".chkcorporateerror").addClass('has-error');
                     if (control == "")
                         control = $("#chkcorporate");
                 }
 
                 if ($("#empemail").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Email </li>";
-                    $("#empemail").addClass('has-error');
+                    $(".empemailerror").addClass('has-error');
                     if (control == "")
                         control = $("#empemail");
                 }
@@ -1389,7 +1406,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#effectivedate").val() == "")
                     {
                         errormsgsummary += "<li> Please Enter Effective Date </li>";
-                        $("#effectivedate").addClass('has-error');
+                        $(".effectivedateerror").addClass('has-error');
                         if (control == "")
                             control = $("#effectivedate");
                     }
@@ -1397,7 +1414,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#frompropnum").val() == "")
                     {
                         errormsgsummary += "<li> Please Enter From Property Number </li>";
-                        $("#frompropnum").addClass('has-error');
+                        $(".frompropnumerror").addClass('has-error');
                         if (control == "")
                             control = $("#frompropnum");
                     }
@@ -1405,7 +1422,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     if ($("#topropnum").val() == "") {
                         errormsgsummary += "<li> Please Enter To Property Number </li>";
-                        $("#topropnum").addClass('has-error');
+                        $(".topropnumerror").addClass('has-error');
                         if (control == "")
                             control = $("#topropnum");
                     }
@@ -1417,7 +1434,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#fromtitle").val() == "")
                     {
                         errormsgsummary += "<li> Please Enter From Title </li>";
-                        $("#fromtitle").addClass('has-error');
+                        $(".fromtitleerror").addClass('has-error');
                         if (control == "")
                             control = $("#fromtitle");
                     }
@@ -1425,7 +1442,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (!$("#fromexempt").is(":checked") && !$("#fromnonexempt").is(":checked"))
                     {
                         errormsgsummary += "<li> Please Select From Position Options </li>";
-                        $("#fromexempt").addClass('has-error');
+                        $(".fromexempterror").addClass('has-error');
                         if (control == "")
                             control = $("#fromexempt");
                     }
@@ -1433,7 +1450,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (!$("#fromfullstatus").is(":checked") && !$("#frompartstatus").is(":checked"))
                     {
                         errormsgsummary += "<li> Please Select From Status Options </li>";
-                        $("#fromfullstatus").addClass('has-error');
+                        $(".fromfullstatuserror").addClass('has-error');
                         if (control == "")
                             control = $("#fromfullstatus");
                     }
@@ -1442,7 +1459,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (!$("#fromannualsalary").is(":checked") && !$("#fromsalhourly").is(":checked"))
                     {
                         errormsgsummary += "<li> Please Select From Wage/Salary Options </li>";
-                        $("#fromannualsalary").addClass('has-error');
+                        $(".fromannualsalaryerror").addClass('has-error');
                         if (control == "")
                             control = $("#fromannualsalary");
                     }
@@ -1450,28 +1467,28 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     if ($("#fromrate").val() == "") {
                         errormsgsummary += "<li> Please Enter From Rate </li>";
-                        $("#fromrate").addClass('has-error');
+                        $(".fromrateerror").addClass('has-error');
                         if (control == "")
                             control = $("#fromrate");
                     }
 
                     if ($("#totitle").val() == "") {
                         errormsgsummary += "<li> Please Enter To Title </li>";
-                        $("#totitle").addClass('has-error');
+                        $(".totitleerror").addClass('has-error');
                         if (control == "")
                             control = $("#totitle");
                     }
 
                     if (!$("#toexempt").is(":checked") && !$("#tononexempt").is(":checked")) {
                         errormsgsummary += "<li> Please Select To Position Options </li>";
-                        $("#toexempt").addClass('has-error');
+                        $(".toexempterror").addClass('has-error');
                         if (control == "")
                             control = $("#toexempt");
                     }
 
                     if (!$("#tofullstatus").is(":checked") && !$("#topartstatus").is(":checked")) {
                         errormsgsummary += "<li> Please Select To Status Options </li>";
-                        $("#tofullstatus").addClass('has-error');
+                        $(".tofullstatuserror").addClass('has-error');
                         if (control == "")
                             control = $("#tofullstatus");
                     }
@@ -1479,7 +1496,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     if (!$("#toannualsalary").is(":checked") && !$("#tosalhourly").is(":checked")) {
                         errormsgsummary += "<li> Please Select To Wage/Salary Options </li>";
-                        $("#toannualsalary").addClass('has-error');
+                        $(".toannualsalaryerror").addClass('has-error');
                         if (control == "")
                             control = $("#toannualsalary");
                     }
@@ -1488,7 +1505,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#torate").val() == "")
                     {
                         errormsgsummary += "<li> Please Enter To Rate </li>";
-                        $("#torate").addClass('has-error');
+                        $(".torateerror").addClass('has-error');
                         if (control == "")
                             control = $("#torate");
                     }
@@ -1500,7 +1517,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     if ($("#prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
                         errormsgsummary += "<li> Please Enter Division Of Labor Percentage  </li>";
-                        $("#prop1per").addClass('has-error');
+                        $(".prop1pererror").addClass('has-error');
                         if (control == "")
                             control = $("#prop1per");
                     }
@@ -1636,7 +1653,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                            $("#la_Prop1").addClass('has-error');
+                            $(".la_Prop1error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#prop1");
@@ -1647,7 +1664,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
-                            $("#prop2").addClass('has-error');
+                            $(".prop2error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#prop2");
@@ -1658,7 +1675,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
-                            $("#prop3").addClass('has-error');
+                            $(".prop3error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#prop3");
@@ -1680,7 +1697,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (!$("#chkfmlayes").is(":checked") && !$("#chkfmlano").is(":checked"))
                     {
                         errormsgsummary += "<li> Please Select FMLA Eligible </li>";
-                        $("#chkfmlayes").addClass('has-error');
+                        $(".chkfmlayeserror").addClass('has-error');
                         if (control == "")
                             control = $("#chkfmlayes");
                     }
@@ -1688,7 +1705,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (!$("#chkbenefityes").is(":checked") && !$("#chkbenefitno").is(":checked"))
                     {
                         errormsgsummary += "<li> Please Select enrolled benefits? </li>";
-                        $("#chkbenefityes").addClass('has-error');
+                        $(".chkbenefityeserror").addClass('has-error');
                         if (control == "")
                             control = $("#chkbenefityes");
                     }
@@ -1696,7 +1713,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#purpose").val() == "")
                     {
                         errormsgsummary += "<li> Please Choose Leave Purpose </li>";
-                        $("#purpose").addClass('has-error');
+                        $(".purposeerror").addClass('has-error');
                         if (control == "")
                             control = $("#purpose");
                     }
@@ -1704,7 +1721,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#purpose").val() == "Other" && $("#purposeother").val() =="")
                     {
                         errormsgsummary += "<li> Please enter Other Reason </li>";
-                        $("#purposeother").addClass('has-error');
+                        $(".purposeothererror").addClass('has-error');
                         if (control == "")
                             control = $("#purposeother");
                     }
@@ -1712,7 +1729,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#leavebegin").val() == "")
                     {
                         errormsgsummary += "<li> Please Enter Leave Begin </li>";
-                        $("#leavebegin").addClass('has-error');
+                        $(".leavebeginerror").addClass('has-error');
                         if (control == "")
                             control = $("#leavebegin");
                     }
@@ -1730,7 +1747,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if ($("#ptobalance").val() == "")
                     {
                         errormsgsummary += "<li> Please Enter PTO Balance </li>";
-                        $("#ptobalance").addClass('has-error');
+                        $(".ptobalanceerror").addClass('has-error');
                         if (control == "")
                             control = $("#ptobalance");
                     }
@@ -1748,7 +1765,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 {
                     errormsgsummary += "<li> Please Enter Supervisor's Signature  </li>";
 
-                    $("#msignature").addClass('has-error');
+                    $(".msignatureerror").addClass('has-error');
                     if (control == "")
                         control = $("#msignature");
                 }
