@@ -1131,13 +1131,13 @@ namespace Carroll.Data.Services.Helpers
             }
            
             string mgr = "";
-            var res = (from tbl in _entities.proc_getallcontactsincludinghighroles()
-                   where tbl.ContactId == rid
+            var res = (from tbl in _entities.SiteUsers
+                   where tbl.managementcontact == rid
                    select tbl).FirstOrDefault();
 
             if (res != null)
             {
-                mgr = res.FirstName+" "+res.LastName;
+                mgr =char.ToUpper(res.FirstName[0])+ res.FirstName.Substring(1).ToLower()+" "+char.ToUpper(res.LastName[0])+res.LastName.Substring(1).ToLower();
 
             }
             return mgr;
