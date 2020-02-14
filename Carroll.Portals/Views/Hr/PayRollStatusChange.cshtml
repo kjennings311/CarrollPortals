@@ -128,7 +128,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0 fromannualsalaryerror fromsalhourlyerror lblerror">Wage / Salary  <input type="radio" style="margin-left:9.5%;" name="wage" id="fromannualsalary" />  Annual <input type="radio" style="margin-left:7.5%;" name="wage" id="fromsalhourly" />  Hourly   </span>
+                                                            <span class="c0 fromannualsalaryerror1 fromsalhourlyerror1 lblerror">Wage / Salary  <input type="radio" style="margin-left:9.5%;" name="wage" id="fromannualsalary" />  Annual <input type="radio" style="margin-left:7.5%;" name="wage" id="fromsalhourly" />  Hourly   </span>
                                                         </p>
 
                                                         <p class="c1">
@@ -154,7 +154,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         </p>
 
                                                         <p class="c1">
-                                                            <span class="c0 toannualsalaryerror tosalhourlyerror lblerror">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
+                                                            <span class="c0 toannualsalaryerror1 tosalhourlyerror1 lblerror">Wage / Salary   <input type="radio" style="margin-left:9.5%;" name="twage" id="toannualsalary" value="1" />  Annual  <input type="radio" style="margin-left:7.5%;" value="1" name="twage" id="tosalhourly" />  Hourly    </span>
                                                         </p>
                                                         <p class="c1">
                                                             <span class="c0 torateerror lblerror">Rate  <input type="text" id="torate" class="allow_decimal" style="width:30%;margin-left:26%;" />     <span id="totext"> </span>   </span>
@@ -534,6 +534,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
         .has-error {
             border-color: red;
             color: red !important;
+            /*font-weight:bold !important;*/
         }
 
      
@@ -1648,8 +1649,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                     if (sum != 100)
                     {
-
-                        if ($("#prop1per").val() != "" && $("#prop1").val() == "")
+                        
+                        if ($("#prop1per").val() != "" || $("#prop1").val() == "")
                         {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
@@ -1657,6 +1658,16 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                             if (control == "")
                                 control = $("#prop1");
+                            console.log('prop1');
+
+                            if ($("#prop1").val() == "") {
+                                errormsgsummary += "<li> Please Enter Property Name  </li>";
+                                $(".prop1error").addClass('has-error');
+
+                                if (control == "")
+                                    control = $("#prop1");
+                            }
+                           
                         }
 
 
@@ -1668,6 +1679,17 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                             if (control == "")
                                 control = $("#prop2");
+
+                            if ($("#prop2").val() == "") {
+                                errormsgsummary += "<li> Please Enter Property Name 2  </li>";
+                                $(".prop2error").addClass('has-error');
+
+                                if (control == "")
+                                    control = $("#prop2");
+                            }
+
+
+
                         }
 
 
@@ -1679,6 +1701,18 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                             if (control == "")
                                 control = $("#prop3");
+
+
+                            if ($("#prop3").val() == "") {
+                                errormsgsummary += "<li> Please Enter Property Name 3  </li>";
+                                $(".prop3error").addClass('has-error');
+
+                                if (control == "")
+                                    control = $("#prop3");
+                            }
+
+
+
                         }
 
                         errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
@@ -1773,7 +1807,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 if (errormsgsummary != "")
                 {
 
-                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                  //  $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;"> Please fill out all the missing fields </ul> ');
 
                     setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);

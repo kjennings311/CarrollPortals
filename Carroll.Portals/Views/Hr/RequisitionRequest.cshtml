@@ -293,7 +293,7 @@ width: 25%;" disabled id="dateposted" />
             }
 
             .ft0 {
-                font: bold 16px 'Calibri';
+                font: normal 16px 'Calibri';
                 line-height: 19px;
             }
 
@@ -763,7 +763,7 @@ width: 25%;" disabled id="dateposted" />
                     }
                     if (errormsgsummary != "") {
 
-                        $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                        $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the missing fields </ul> ');
 
                         setTimeout(ScrollToElement(control), 3000);
                         $("#Submit").prop('disabled', false);
