@@ -50,5 +50,8 @@ namespace Carroll.Data.Entities
         public string PDFOption { get; set; }
         public string SequenceNumber { get; set; }
         public string Notes { get; set; }
+        public Nullable<bool> IsCoporate { get; set; }
+        public string location { get; set; }
+        public string Prop { get; set; }
     }
 }

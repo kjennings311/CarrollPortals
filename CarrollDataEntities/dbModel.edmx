@@ -2420,7 +2420,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="PropertyNumber" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="EmployeeName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Policty_Voilated" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Policty_Voilated" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AdditionalRemarks" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="DocumentationAvailable" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="WarningGiven_Dates" Nullable="true" MaxLength="50" />
@@ -2449,7 +2449,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="PrintOption" Nullable="true" MaxLength="179" />
           <Property Type="String" Name="PDFOption" Nullable="true" MaxLength="180" />
           <Property Type="String" Name="SequenceNumber" Nullable="true" MaxLength="12" />
-          <Property Type="String" Name="Notes" Nullable="false" MaxLength="205" />
+          <Property Type="String" Name="Notes" Nullable="false" MaxLength="248" />
+          <Property Type="Boolean" Name="IsCoporate" Nullable="true" />
+          <Property Type="String" Name="location" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Prop" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="proc_getcontactsforexcel_Result">
           <Property Type="Guid" Name="ContactId" Nullable="false" />
@@ -4071,6 +4074,9 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="PDFOption" ColumnName="PDFOption" />
                 <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IsCoporate" ColumnName="IsCoporate" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="Prop" ColumnName="Prop" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

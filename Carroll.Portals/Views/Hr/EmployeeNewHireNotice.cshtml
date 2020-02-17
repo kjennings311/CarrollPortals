@@ -1299,7 +1299,7 @@ function AssignManager()
                         if ($("#la_Prop1per").val() != "" && $("#la_Prop1").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
-                            $(".la_Prop1error").addClass('has-error');
+                            $("la_Prop1error").addClass('has-error');
 
                             if (control == "")
                                 control = $("#la_Prop1");
@@ -1326,8 +1326,8 @@ function AssignManager()
                         }
 
                         errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
-                        control = $("#la_Prop3");
-
+                        control = $("#la_Prop3"); $(".la_Prop3pererror").addClass('has-error');
+                        $(".la_Prop3error").addClass('has-error');
                     }
                 }
 

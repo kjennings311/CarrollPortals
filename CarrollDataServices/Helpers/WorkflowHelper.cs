@@ -625,17 +625,23 @@ namespace Carroll.Data.Services.Helpers
                             var getemail = (from tbl in _entities.SiteUsers
                                             join tblprop in _entities.Properties on tbl.managementcontact equals tblprop.RegionalManager 
                                             where tblprop.PropertyId == pid  
-                                            select tbl.UserEmail).FirstOrDefault();
+                                            select tbl).FirstOrDefault();
                             if (getemail != null)
                             {
-                                if (getemail != "")
+                                if (getemail.UserEmail != "")
                                 {
-                                    tos.Add(getemail);
+                                    tos.Add(getemail.UserEmail);
                                 }
+
+                                _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello "+getemail.FirstName+" "+getemail.LastName+" </h5><p> ";
+                                _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <h5> Thank you, <br> CARROLL  </h5>  </div></div>";
+
 
                             }
 
                         }
+
+                        tos.Add("carrollforms@carrollorg.com");
 
                         // else if property then regional manager of(location selected property id)
 
@@ -1357,8 +1363,8 @@ namespace Carroll.Data.Services.Helpers
                             var pid = new Guid(NewhireDetails.Location);
 
                             var getemail = (from tbl in _entities.SiteUsers
-                                            join tblprop in _entities.Properties on tbl.UserId equals tblprop.RegionalManager
-                                            where tblprop.PropertyId == pid && tbl.UserId == NewhireDetails.CreatedUser
+                                            join tblprop in _entities.Properties on tbl.managementcontact equals tblprop.RegionalManager
+                                            where tblprop.PropertyId == pid 
                                             select tbl).FirstOrDefault();
                             if (getemail != null)
                             {
@@ -1374,7 +1380,7 @@ namespace Carroll.Data.Services.Helpers
                         }
 
                         tos.Add("sekhar.babu@forcitude.com");
-
+                        tos.Add("carrollforms@carrollorg.com");
                         _message.EmailTo = tos;
 
 
@@ -1382,7 +1388,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
 // var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your review";
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " +str + " </h5> <p> ";
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello " +str + " </h5> <p> ";
                         _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
                         
 
@@ -2179,6 +2185,19 @@ namespace Carroll.Data.Services.Helpers
             }
             return true;
         }
+
+
+        public static string FirstCharToUpper(string s)
+        {
+            // Check for empty string.  
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            // Return char and concat substring.  
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
+
 
     }
 

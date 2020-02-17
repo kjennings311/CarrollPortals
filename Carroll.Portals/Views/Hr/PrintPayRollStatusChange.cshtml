@@ -74,7 +74,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 @if (Model.ShowLeaves == true)
                 {
-                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leaves Of Absence </span>
+                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leave of absence </span>
 
                 }
             </P>
@@ -312,7 +312,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                         <TABLE cellpadding=0 cellspacing=0 class="t1">
                             <TR>
                                 <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
-                                <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leaves of Absence</P></TD>
+                                <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leave of absence</P></TD>
                             </TR>
                             <TR>
                                 <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
@@ -410,8 +410,8 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                             }
                             else
                             {
-                                <input type="text" style="width:20%;"  id="leavebegin" />
-                            }
+                                <input type="text" style="width:20%;" id="leavebegin" />
+                            } PTO balance:<input type="text" class="allow_decimal" value="@Model.Pto_Balance" style="width:25%" id="ptobalance" />
                             <hr style="border-top: 2px solid black;" />
 </div>
                 }

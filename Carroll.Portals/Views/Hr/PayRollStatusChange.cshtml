@@ -193,19 +193,19 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                                                         </TR>
                                                         <TR>
-                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop1" /></P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%" id="prop1per" /></P></TD>
+                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%;height: 30px;" id="prop1" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%;height: 30px;" id="prop1per" /></P></TD>
 
                                                         </TR>
                                                         <TR>
-                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop2" /></P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%" id="prop2per" /></P></TD>
+                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%;height: 30px;" id="prop2" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%;height: 30px;" id="prop2per" /></P></TD>
 
                                                         </TR>
 
                                                         <TR>
-                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" id="prop3" /></P></TD>
-                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%" id="prop3per" /></P></TD>
+                                                            <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%;height: 30px;" id="prop3" /></P></TD>
+                                                            <TD class="tr7 td1"><P class="p10 ft1"><input type="text" class="allow_decimal" style="display:inline; width:60%;height: 30px;" id="prop3per" /></P></TD>
 
                                                         </TR>
                                                     </TABLE>
@@ -265,7 +265,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             </option>
                                                         </select>  <span style="display:none;" class="purposeothererror lblerror" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
                                                     </P>
-                                                    <P class="p20 ft1">  Begin: <input type="text" class="date-mask" style="width:20%;" id="leavebegin" /> Expected End:<input type="text" class="date-mask" class="date-mask" id="leaveend" style="width:20%;" /> PTO balance:<input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
+                                                    <P class="p20 ft1">  Begin: <input type="text" class="date-mask" style="width:20%;" id="leavebegin" /> Expected End:<input type="text" class="date-mask" class="date-mask" id="leaveend" style="width:20%;" /> <span class="ptobalanceerror lblerror" > PTO balance: </span><input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
 
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
@@ -1667,6 +1667,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 if (control == "")
                                     control = $("#prop1");
                             }
+
+
                            
                         }
 
@@ -1717,7 +1719,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                         errormsgsummary += "<li> Division Of Labor Percentage should be 100% </li>";
                         control = $("#prop3");
-
+                        $(".prop3pererror").addClass('has-error');
                     }
 
 

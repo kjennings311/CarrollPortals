@@ -30,7 +30,7 @@ namespace Carroll.Portals.Controllers
 {
     [CustomAuthorize]
     [BaseModel]
-    [AdminHRFilter]
+   // [AdminFilter]
     [ExceptionFilter]
     public class HrController : Controller
     {
@@ -90,8 +90,9 @@ namespace Carroll.Portals.Controllers
                 if (Session["user"] != null)
                 {
                     var user = (SiteUser)Session["user"];
-                    WorkflowHelper.InsertHrLog("LeaseRider", id, "Print has been Requested ", "Print has been requested for Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                    WorkflowHelper.InsertHrLog("LeaseRider", id, "Print has been Requested ", "Print has been requested for Employee Lease Rider on" + DateTime.Now,  FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
+                   
                 }
 
 
@@ -144,7 +145,7 @@ namespace Carroll.Portals.Controllers
                 if (Session["user"] != null)
                 {
                     var user = (SiteUser)Session["user"];
-                    WorkflowHelper.InsertHrLog("LeaseRider", id, "PDF has been requested", "PDF has been requestedfor Employee Lease Rider on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                    WorkflowHelper.InsertHrLog("LeaseRider", id, "PDF has been requested", "PDF has been requestedfor Employee Lease Rider on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
                 }
                
@@ -210,7 +211,7 @@ namespace Carroll.Portals.Controllers
                 {
                     var user = (SiteUser)Session["user"];
 
-                    WorkflowHelper.InsertHrLog("NewHire", id, "Print has been requested ", "Print has been requested for New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                    WorkflowHelper.InsertHrLog("NewHire", id, "Print has been requested ", "Print has been requested for New Hire Notice on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
 
                 }
@@ -269,7 +270,7 @@ namespace Carroll.Portals.Controllers
                 if (Session["user"] != null)
                 {
                     var user = (SiteUser)Session["user"];
-                    WorkflowHelper.InsertHrLog("NewHire", id, "PDF has been requested", "PDF has been requestedfor New Hire Notice on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                    WorkflowHelper.InsertHrLog("NewHire", id, "PDF has been requested", "PDF has been requestedfor New Hire Notice on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
                 }
                
@@ -1205,7 +1206,7 @@ namespace Carroll.Portals.Controllers
                     user = (SiteUser)Session["user"];
                 }
 
-                WorkflowHelper.InsertHrLog("PayRoll", id, "Print has been requested ", "Print has been requested for Payroll Status Change on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                WorkflowHelper.InsertHrLog("PayRoll", id, "Print has been requested ", "Print has been requested for Payroll Status Change on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
 
                 // o.Date=obj.
@@ -1262,8 +1263,8 @@ namespace Carroll.Portals.Controllers
                     user = (SiteUser)Session["user"];
                 }
 
-                WorkflowHelper.InsertHrLog("PayRoll", id, "PDF has been requested", "PDF has been requestedfor Payroll Status Change on" + DateTime.Now, user.FirstName+ " "+user.LastName);
-
+                WorkflowHelper.InsertHrLog("PayRoll", id, "PDF has been requested", "PDF has been requestedfor Payroll Status Change on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
+               
 
                 //returning the employee list to view  
                 return new ViewAsPdf("PrintPayRollStatusChange", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayrollStatusChange-" + obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
@@ -1325,7 +1326,7 @@ namespace Carroll.Portals.Controllers
                 {
                     var user = (SiteUser)Session["user"];
 
-                    WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "Print has been requested ", "Print has been requested for Notice Of Employee Separation on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                    WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "Print has been requested ", "Print has been requested for Notice Of Employee Separation on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
                 }
 
@@ -1384,7 +1385,7 @@ namespace Carroll.Portals.Controllers
                 if (Session["user"] != null)
                 {
                     var user = (SiteUser)Session["user"];
-                    WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "PDF has been requested", "PDF has been requestedfor Notice Of Employee Separation on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                    WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", id, "PDF has been requested", "PDF has been requestedfor Notice Of Employee Separation on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
                 }
 
@@ -1634,7 +1635,7 @@ namespace Carroll.Portals.Controllers
                     user = (SiteUser)Session["user"];
                 }
 
-                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "Print has been requested ", "Print has been requested for Requisition Request on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "Print has been requested ", "Print has been requested for Requisition Request on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
                 // o.Date=obj.
                 //returning the employee list to view  
@@ -1689,7 +1690,7 @@ namespace Carroll.Portals.Controllers
                 }
 
 
-                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "PDF has been requested", "PDF has been requestedfor Requisition Request on" + DateTime.Now, user.FirstName+ " "+user.LastName);
+                WorkflowHelper.InsertHrLog("RequisitionRequest", id, "PDF has been requested", "PDF has been requestedfor Requisition Request on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
 
                 // o.Date=obj.
@@ -1702,10 +1703,21 @@ namespace Carroll.Portals.Controllers
 
             }
 
-        }
+           
 
+        }
+        public static string FirstCharToUpper(string s)
+        {
+            // Check for empty string.  
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+            // Return char and concat substring.  
+            return char.ToUpper(s[0]) + s.Substring(1);
+        }
         #endregion
 
-        
+
     }
 }

@@ -231,7 +231,7 @@ padding-left: 6%;">
                                 if (Model.PositionCombined.Contains("Other"))
                                 {
                                     <tr>
-                                        <td> <input type="checkbox" checked /> Other &nbsp;&nbsp;&nbsp;&nbsp;  <input type="text" value="@Model.PositionOther" />   </td>
+                                        <td> <input type="checkbox" checked /> Other &nbsp; <input type="text" style="width:69%;" value="@Model.PositionOther" />   </td>
                                         <td style="text-align: left;
 padding-left: 6%;" >
                                             @Model.PositionCombined.ToString().Substring((@Model.PositionCombined.ToString().LastIndexOf("Other--")) + 7, 1)

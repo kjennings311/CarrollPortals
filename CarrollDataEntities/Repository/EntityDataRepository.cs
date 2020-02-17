@@ -2713,7 +2713,7 @@ tbl.UploadedDate descending
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
                     config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
-                    config.Columns.Add(new DtableConfigArray { name = "propertyName", label = "Property Name", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "prop", label = "Property Name", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "jobTitle", label = "Employee Position", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "reason", label = "Reason", type = 0, href = "" });
@@ -3171,7 +3171,8 @@ tbl.UploadedDate descending
                 //us
                 var propertyres = (from tbl in _entities.CarrollPayPeriods
                                    where tbl.PayFrom.Value.Year == DateTime.Now.Year
-                                   select tbl).ToList();
+                                   orderby tbl.PayFrom ascending
+                                   select tbl ).ToList();
 
 
                 if (propertyres != null)
