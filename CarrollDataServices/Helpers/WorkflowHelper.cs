@@ -514,7 +514,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                  //  _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -641,7 +641,7 @@ namespace Carroll.Data.Services.Helpers
 
                         }
 
-                        tos.Add("carrollforms@carrollorg.com");
+                       // tos.Add("carrollforms@carrollorg.com");
 
                         // else if property then regional manager of(location selected property id)
 
@@ -745,7 +745,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         List<string> tos = new List<string>();
-                      //  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                       tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.tbl.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -794,7 +794,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                  //  _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -904,7 +904,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         List<string> tos = new List<string>();
-                      //  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -950,7 +950,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                   // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -1064,7 +1064,7 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                     
-                      //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                        tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1160,7 +1160,7 @@ namespace Carroll.Data.Services.Helpers
             EmailMessage _message = new EmailMessage();
 
             _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-            _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+           // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
             // get Employee Details i.e name and email
 
@@ -1177,7 +1177,7 @@ namespace Carroll.Data.Services.Helpers
                 _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5> <p> ";
                 _message.Body += " ID : "+NewhireDetails.SequenceNumber+ "  <br> Name : " + NewhireDetails.EmployeeName + "  <br>Position : " + NewhireDetails.Position + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy")+ " "+ NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
                 List<string> tos = new List<string>();
-              //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                 tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
 
                 // get created user email
 
@@ -1265,7 +1265,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                 //   _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -1331,7 +1331,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                  // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -1379,8 +1379,8 @@ namespace Carroll.Data.Services.Helpers
 
                         }
 
-                        tos.Add("sekhar.babu@forcitude.com");
-                        tos.Add("carrollforms@carrollorg.com");
+                        //tos.Add("sekhar.babu@forcitude.com");
+                        //tos.Add("carrollforms@carrollorg.com");
                         _message.EmailTo = tos;
 
 
@@ -1454,7 +1454,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi, </h5> <p> ";
                         _message.Body += " Employee New Hire Notice  for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form.  <br> <br> <h5> Thank you, <br> CARROLL </h5>    </div></div>";
                         List<string> tos = new List<string>();
-                     //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                       tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1509,7 +1509,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                   // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -1593,7 +1593,7 @@ namespace Carroll.Data.Services.Helpers
                     EmailMessage _message = new EmailMessage();
 
                     _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                    _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                   // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                     // get Employee Details i.e name and email
 
@@ -1668,7 +1668,7 @@ namespace Carroll.Data.Services.Helpers
                         _message.Body += "Employee Lease Rider   for " + NewhireDetails.EmployeeName + " has been successfully reviewed and completed. Please find attached copy of form <br> <br> <h5> Thank you, <br> CARROLL  </h5>  </div></div>";
                         List<string> tos = new List<string>();
                     
-                     //   tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                       tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
                                      select tbl.UserEmail).FirstOrDefault();
@@ -1717,7 +1717,7 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                     
-                      //  tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+                       tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
                         _message.EmailTo = tos;
                         var email = (from tbl in _entities.SiteUsers
                                      where tbl.UserId == NewhireDetails.CreatedUser
@@ -1810,7 +1810,7 @@ namespace Carroll.Data.Services.Helpers
                         EmailMessage _message = new EmailMessage();
 
                         _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
-                        _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+                      //  _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
 
                         // get Employee Details i.e name and email
 

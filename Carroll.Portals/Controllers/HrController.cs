@@ -1699,7 +1699,7 @@ namespace Carroll.Portals.Controllers
 
 
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintRequisitionRequest", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "RequisitionRequest-"+ obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
+                return new ViewAsPdf("PrintRequisitionRequest", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "RequisitionRequest-"+ obj.SequenceNumber + "-" + obj.RequestorName + ".pdf" };
 
             }
 

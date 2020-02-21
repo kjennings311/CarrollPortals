@@ -80,7 +80,7 @@
                                                             <SPAN class="ft2"> Date: </SPAN>
                                                             @if (@Model.RoleType.ToLower() == "hr")
                                                             {
-                                                                <input type="text" required id="datechoosen" />
+                                                                <input type="text" class="date-mask" required id="datechoosen" />
                                                             }
                                                             else
                                                             {
@@ -1025,35 +1025,7 @@ width: 25%;" disabled id="dateposted" />
 
             });
 
-            $("#print").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-
-                    var printWindow = window.open("/Hr/PrintEmployeeNewHireNotice/?id=" + leaseid, 'Employeee Lease Rider', 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.print();
-                            //printWindow.close(); Notification.success({ message: "PDF Downloaded .....", delay: 3000 });
-                        }, 1000);
-                    }, true);
-                }
-            });
-
-
-            $("#pdf").click(function (e) {
-                e.preventDefault();
-                if (leaseid != "") {
-                    var printWindow = window.open("/Hr/PdfEmployeeNewHireNotice/?id=" + leaseid, "Employee Lease Rider", 'left=20, top=20, width=950, height=auto, toolbar=0, resizable=0');
-                    printWindow.addEventListener('load', function () {
-                        setTimeout(function () {
-                            printWindow.close();
-                        }, 2000);
-                    }, true);
-
-                }
-
-            });
-
+          
 
         });
 
