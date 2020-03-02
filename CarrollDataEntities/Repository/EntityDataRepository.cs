@@ -840,7 +840,7 @@ namespace Carroll.Data.Entities.Repository
                            where tbluserrole.UserId == userid
                            select tbl).FirstOrDefault();
 
-                if (res.RoleName.ToLower() == "administrator" || res.RoleName.ToLower() == "management")
+                if (res.RoleName.ToLower() == "administrator" || res.RoleName.ToLower() == "management" || res.RoleName.ToLower() == "corporate")
                 {
 
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
@@ -1539,15 +1539,31 @@ tbl.UploadedDate descending
                 _entities.FormAttachments.Add(_property);
                 // _entities.SaveChanges();
                 int i = _entities.SaveChanges();
+
+                 
                 }
+
+                int count = formAttachments.Count;
 
                 var formAttachment = formAttachments[0];
                 var AllAttachments = (from tbl in _entities.FormAttachments
                                       where tbl.RefId == formAttachment.RefId && tbl.RefFormType == formAttachment.RefFormType
                                       orderby tbl.UploadedDate descending
                                       select tbl).ToList();
+                if(count == 1)
+                {
+
                 string Comment = "A new attachment was added by " + formAttachment.UploadedByName;
                 LogActivity(Comment, formAttachment.UploadedByName, formAttachment.UploadedBy.ToString(), formAttachment.RefId.ToString(), "New Attachment");
+
+                }
+                else
+                {
+                    string Comment = count+ " attachments was added by " + formAttachment.UploadedByName;
+                    LogActivity(Comment, formAttachment.UploadedByName, formAttachment.UploadedBy.ToString(), formAttachment.RefId.ToString(), "New Attachment");
+
+                }
+
                 return new { attachments = AllAttachments, activity = GetAllActivity(formAttachment.RefId) }; ;
             }
 

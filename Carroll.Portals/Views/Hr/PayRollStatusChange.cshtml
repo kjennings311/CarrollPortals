@@ -25,17 +25,17 @@
             <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
 
                 <h1 style="color:black;text-transform:uppercase"> <b> Payroll Status Change  </b></h1>
-
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr")
+                <input type="hidden" id="pageidname" value="payroll" />
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr")
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">
 
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                            <a disabled="disabled" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>*@
+                <a disabled="disabled" class="btnDelete" href="#">
+                    <i class="fa fa-trash"></i> Delete
+                </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New

@@ -317,7 +317,7 @@ namespace Carroll.Portals.Controllers
                 if (Session["user"] != null)
                 {
                     var user = (SiteUser)Session["user"];
-                    WorkflowHelper.InsertHrLog(FormType, Id, "Activity Export has been requested", "Activity has been requested on" + DateTime.Now, user.FirstName + " " + user.LastName);
+                    WorkflowHelper.InsertHrLog(FormType, Id, "Activity Export has been requested", "Activity has been requested on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " " + FirstCharToUpper(user.LastName));
 
                 }
 

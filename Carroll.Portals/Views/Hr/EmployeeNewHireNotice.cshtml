@@ -120,8 +120,8 @@
             <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
 
                 <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Employee New Hire Notice </b></h1>
-
-                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property")
+                <input type="hidden" id="pageidname" value="newhire" />
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property")
                 {
 
                     <div class="ibox-tools" style="margin-top:-55px;">

@@ -364,14 +364,19 @@ font-weight: bold;
             $("#helpid").show();
 
             LoadUserClaims();
-            GetAllClaims("All");
+            GetAllClaims("All",false);
             
         });
 
-        $("#filterval").change(function () {
-            GetAllClaims("All");
+        $(document).on("change", "#filterval1", function (e) {
 
+            GetAllClaims("All", $(this).is(":checked"));
         });
+
+        //$("#filterval1").change(function () {
+        //    GetAllClaims("All");
+
+        //});
 
 
 

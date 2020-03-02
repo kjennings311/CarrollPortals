@@ -1,5 +1,5 @@
 ﻿ // var $BaseApiUrl = "http://localhost:1002/";
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -1073,10 +1073,12 @@ function HandleRowClickr(obj) {
         });
     }
 }
+
 function LoadFormView(data)
 {
    // location.href = "http://"+location.hostname+"/Home/viewclaim/?Claim=" + data;
     // changed by Pavan 08/19/2019 @12:21pm est
+    if ($("#UserR").val() != "Corporate")
     location.href = "/Home/viewclaim/?Claim=" + data;
 }
 
@@ -2715,7 +2717,9 @@ $(document).on("change", "#DataTables_Table_0_filter input",function () {
     }
 });
 
-function GetAllClaims(Type) {
+var intcount = 0;
+
+function GetAllClaims(Type,chk) {
 
 
     if ($.fn.DataTable.isDataTable('.dtprops')) {
@@ -2727,9 +2731,9 @@ function GetAllClaims(Type) {
             $('.dtprops tbody').empty();
         }
     }
-    var orderby = 0;
 
-    if ($("#filterval").is(":checked"))
+    var orderby = 0;
+    if (chk)
     {
         orderby = 1;
     }
@@ -2807,17 +2811,25 @@ function GetAllClaims(Type) {
                     
                     var sort = [[6, 'asc']];
 
-                    if ($("#filterval").is(":checked"))
+                    if (chk)
                     {
                         sort = [[7, 'asc']];
                     }
                   
+                  
+
 
                     var datatableVariable = $('.dtprops').on('init.dt', function ()
                     {
                         console.log('Table initialisation complete: ' + new Date().getTime());
+                        $("#filtercheck1").remove();
 
-                        $("#DataTables_Table_0_filter label").append(' <div id="filtercheck1" style="text-align:right;margin-right:3%;"> <input type="checkbox" value="1" id="filterval1" /> <span id="filterspan1" style="display:block;float: right;padding: 1px 0px 0px 5px;"> Show Updated Claims </span>  </div>');
+                        if (chk)
+                            $("#DataTables_Table_0_filter label").append(' <div id="filtercheck1" style="text-align:right;margin-right:3%;"> <input type="checkbox" value="1" checked id="filterval1" /> <span id="filterspan1" style="display:block;float: right;padding: 1px 0px 0px 5px;"> Show Updated Claims </span>  </div>');
+                        else
+                            $("#DataTables_Table_0_filter label").append(' <div id="filtercheck1" style="text-align:right;margin-right:3%;"> <input type="checkbox" value="1"  id="filterval1" /> <span id="filterspan1" style="display:block;float: right;padding: 1px 0px 0px 5px;"> Show Updated Claims </span>  </div>');
+
+
                     }).DataTable({
                         data: configdata.rows,
                         processing: true,
@@ -3285,6 +3297,9 @@ function LoadAllProperties() {
 
     var options1 = "<option value='' > Select Property </option>";
 
+    if ($("#pageidname").val() == "requisitionrequest" || $("#pageidname").val() == "LeaseRider")
+        var options1 = "<option value='' > Select Property </option> <option value='Corporate' > Corporate </option> ";
+
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data)
     {
         var defaultsel = $("#location").attr('seloption');
@@ -3365,6 +3380,9 @@ function LoadHrPositions()
 
 
     var options1 = "<option value='' > Select Property </option>";
+    if ($("#pageidname").val() == "requisitionrequest" || $("#pageidname").val() == "LeaseRider")
+        var options1 = "<option value='' > Select Property </option> <option value='Corporate' > Corporate </option> ";
+
 
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data)
     {
@@ -3403,6 +3421,7 @@ function LoadHrPositions()
         // now let's load options into select box
         $('#location').html(options1);
         if ($("#property1").length > 0) {
+
             $('#property1').html(options);
         }
     });
@@ -3423,6 +3442,9 @@ function LoadPropertiesForSelect(iskey,control)
         propertyarray.push(st);
 
     var options1 = "<option value='' > Select Property </option>";
+    if ($("#pageidname").val() == "requisitionrequest" || $("#pageidname").val() == "LeaseRider")
+        var options1 = "<option value='' > Select Property </option> <option value='Corporate' > Corporate </option> ";
+
 
     $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
         var defaultsel = $("#"+control).attr('seloption');
