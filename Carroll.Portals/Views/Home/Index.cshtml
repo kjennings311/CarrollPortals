@@ -13,28 +13,35 @@
     width: 100%;
     background-size: cover;">
 
-            <button type="button" class="btn btn-lg " data-toggle="modal" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property")
+            {
+                <button type="button" class="btn btn-lg " data-toggle="modal" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     color: white;
     position: absolute;
   font-weight: bold;background:none !important;" data-target=".claimmodal" data-backdrop="static" data-keyboard="false">
-                <i style="
+                    <i style="
     font-weight: bold;" class="fa fa-plus-circle "></i><span style="font-family:inherit;"> New </span>
-            </button>
-            <h1 class="visible-lg visible-md" style="color: white;
+                </button>
+            }
+
+
+
+                <h1 class="visible-lg visible-md" style="color: white;
     position: absolute;
   bottom: 0%;
     left: 1%;font-weight:bold;width:80%;">
-                INCIDENT DASHBOARD & REPORTING
-            </h1>
+                    INCIDENT DASHBOARD & REPORTING
+                </h1>
 
-            <h1 class="visible-xs visible-sm" style="color: white;
+                <h1 class="visible-xs visible-sm" style="color: white;
     position: absolute;
   bottom: 0%;
     left: 1%;font-weight:bold; width:80%;">
-                INCIDENT DASHBOARD
-            </h1>
-        </div>
+                    INCIDENT DASHBOARD
+                </h1>
+            </div>
 
         <!-- Large modal -->
 

@@ -23,5 +23,6 @@ namespace Carroll.Data.Entities
         public string SequenceNumber { get; set; }
         public string EmpSigned { get; set; }
         public string Notes { get; set; }
+        public string Prop { get; set; }
     }
 }

@@ -1553,13 +1553,13 @@ tbl.UploadedDate descending
                 if(count == 1)
                 {
 
-                string Comment = "A new attachment was added by " + formAttachment.UploadedByName;
+                string Comment = "1 new attachment was added by " + formAttachment.UploadedByName;
                 LogActivity(Comment, formAttachment.UploadedByName, formAttachment.UploadedBy.ToString(), formAttachment.RefId.ToString(), "New Attachment");
 
                 }
                 else
                 {
-                    string Comment = count+ " attachments was added by " + formAttachment.UploadedByName;
+                    string Comment = NumberToWords(count)+ " attachments was added by " + formAttachment.UploadedByName;
                     LogActivity(Comment, formAttachment.UploadedByName, formAttachment.UploadedBy.ToString(), formAttachment.RefId.ToString(), "New Attachment");
 
                 }
@@ -2705,6 +2705,7 @@ tbl.UploadedDate descending
                     config.PkName = FirstChartoLower(userprop.ToList().FirstOrDefault().Name);
                     config.Columns = new List<DtableConfigArray>();
                     config.Columns.Add(new DtableConfigArray { name = "sequenceNumber", label = "ID", type = 0, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "prop", label = "Property Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "employeeName", label = "Employee Name", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "changeEffectiveDate", label = "Effective Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "typeOfChange", label = "Type Of Change", type = 0, href = "" });
@@ -4822,6 +4823,58 @@ tbl.UploadedDate descending
         //        config.Columns.Add(new DtableConfigArray { data = FirstChartoLower(item.Name), name = FirstChartoLower(item.Name), autoWidth = false });
         //    }
         //}
+
+
+
+        public static string NumberToWords(int number)
+        {
+            if (number == 0)
+                return "zero";
+
+            if (number < 0)
+                return "minus " + NumberToWords(Math.Abs(number));
+
+            string words = "";
+
+            if ((number / 1000000) > 0)
+            {
+                words += NumberToWords(number / 1000000) + " million ";
+                number %= 1000000;
+            }
+
+            if ((number / 1000) > 0)
+            {
+                words += NumberToWords(number / 1000) + " thousand ";
+                number %= 1000;
+            }
+
+            if ((number / 100) > 0)
+            {
+                words += NumberToWords(number / 100) + " hundred ";
+                number %= 100;
+            }
+
+            if (number > 0)
+            {
+                if (words != "")
+                    words += "and ";
+
+                var unitsMap = new[] { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
+                var tensMap = new[] { "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+
+                if (number < 20)
+                    words += unitsMap[number];
+                else
+                {
+                    words += tensMap[number / 10];
+                    if ((number % 10) > 0)
+                        words += "-" + unitsMap[number % 10];
+                }
+            }
+
+            return words;
+        }
+
     }
 
     public class ResidentReferralResidents
@@ -4890,9 +4943,6 @@ tbl.UploadedDate descending
         public List<ResidentReferralVehicles> rvs { get; set; }
         
     }
-
-
-
 
 
 
