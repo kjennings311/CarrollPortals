@@ -118,7 +118,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 From
                             </h4>
                             <p class="c1">
-                                <span class="c0">Title:<textarea id="fromtitle" rows="2" cols="30" style="margin-left:30%"> @Model.FromTitle </textarea></span>
+                                <span class="c0"><span class="tult"> Title: </span><textarea id="fromtitle" rows="2" cols="30" style="margin-left:30%"> @Model.FromTitle </textarea></span>
                             </p>
                             <p class="c1">
                                 <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.FromPosition" />  </span>
@@ -156,7 +156,7 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                 To
                             </h4>
                             <p class="c1">
-                                <span class="c0">Title:  <textarea id="totitle" rows="2" cols="30" style="margin-left:30%"> @Model.ToTitle </textarea>  </span>
+                                <span class="c0"> <span class="tult"> Title: </span>  <textarea id="totitle" rows="2" cols="30" style="margin-left:30%"> @Model.ToTitle </textarea>  </span>
                             </p>
 
 
@@ -1196,14 +1196,18 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
       
         @@media print {
             #totitle {
-                margin-left: 20% !important;
-                margin-top: -5px;
+                margin-left: 30% !important;
+                margin-top: -15px;
                 border: none !important;
             }
             #fromtitle {
-                margin-left: 20% !important;
-                margin-top: -5px;
-                border: none !important;
+                margin-left: 30% !important;
+                margin-top: -15px;
+              
+            }
+
+            .tult{
+                display:block !important;
             }
 
         }

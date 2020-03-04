@@ -840,7 +840,7 @@ namespace Carroll.Data.Entities.Repository
                            where tbluserrole.UserId == userid
                            select tbl).FirstOrDefault();
 
-                if (res.RoleName.ToLower() == "administrator" || res.RoleName.ToLower() == "management" || res.RoleName.ToLower() == "corporate")
+                if (res.RoleName.ToLower() == "administrator" || res.RoleName.ToLower() == "management" )
                 {
 
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
@@ -855,7 +855,7 @@ namespace Carroll.Data.Entities.Repository
 
                     return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
                 }
-                else if (res.RoleName.ToLower() == "property")
+                else if (res.RoleName.ToLower() == "property" || res.RoleName.ToLower() == "corporate")
                  {
 
                     var _propcount = (from tbl in _entities.FormPropertyDamageClaims
