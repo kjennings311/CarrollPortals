@@ -367,11 +367,14 @@ font-weight: bold;
         //  $(".modal-alert").html("Record Successfully added");
         // $("#mobiletoastnotification").modal('show');
 
-        $(document).ready(function () {
+        $(document).ready(function ()
+        {
             $("#helpid").show();
-
-            LoadUserClaims();
-            GetAllClaims("All",false);
+            if ($("#UserR").val() != "Corporate") {
+                LoadUserClaims();
+                GetAllClaims("All", false);
+            }
+           
             
         });
 

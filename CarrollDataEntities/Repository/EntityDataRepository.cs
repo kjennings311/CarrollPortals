@@ -1559,7 +1559,7 @@ tbl.UploadedDate descending
                 }
                 else
                 {
-                    string Comment = NumberToWords(count)+ " attachments was added by " + formAttachment.UploadedByName;
+                    string Comment = count+ " new attachments were added by " + formAttachment.UploadedByName;
                     LogActivity(Comment, formAttachment.UploadedByName, formAttachment.UploadedBy.ToString(), formAttachment.RefId.ToString(), "New Attachment");
 
                 }
