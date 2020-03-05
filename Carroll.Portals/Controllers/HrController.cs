@@ -1206,6 +1206,9 @@ namespace Carroll.Portals.Controllers
                     user = (SiteUser)Session["user"];
                 }
 
+                ViewBag.isprint = true;
+
+
                 WorkflowHelper.InsertHrLog("PayRoll", id, "Print has been requested ", "Print has been requested for Payroll Status Change on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
 
 
@@ -1264,8 +1267,8 @@ namespace Carroll.Portals.Controllers
                 }
 
                 WorkflowHelper.InsertHrLog("PayRoll", id, "PDF has been requested", "PDF has been requestedfor Payroll Status Change on" + DateTime.Now, FirstCharToUpper(user.FirstName)+ " "+ FirstCharToUpper(user.LastName));
-               
 
+                ViewBag.isprint = false;
                 //returning the employee list to view  
                 return new ViewAsPdf("PrintPayRollStatusChange", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayrollStatusChange-" + obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
 
