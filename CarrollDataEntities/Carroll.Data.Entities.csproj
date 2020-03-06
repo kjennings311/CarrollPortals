@@ -215,6 +215,9 @@
     <Compile Include="proc_gethrformsactivity1_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetLastWeekClaimUpdatesrolewise_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetLastWeekClaimUpdates_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>

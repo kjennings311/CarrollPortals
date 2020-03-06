@@ -907,6 +907,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="proc_GetLastWeekClaimUpdates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_GetLastWeekClaimUpdatesrolewise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="isasset2" Type="bit" Mode="In" />
+        </Function>
         <Function Name="proc_GetMoldDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getnewhirerejectiondetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
@@ -1191,6 +1195,10 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="rec" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="proc_GetLastWeekClaimUpdates" ReturnType="Collection(Carroll.Data.Entities.proc_GetLastWeekClaimUpdates_Result)" />
+          <FunctionImport Name="proc_GetLastWeekClaimUpdatesrolewise" ReturnType="Collection(Carroll.Data.Entities.proc_GetLastWeekClaimUpdatesrolewise_Result)">
+            <Parameter Name="userid" Mode="In" Type="Guid" />
+            <Parameter Name="isasset2" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -2777,6 +2785,27 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="Updateddate" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="proc_GetLastWeekClaimUpdates_Result">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="PropertyId" Nullable="false" />
+          <Property Type="String" Name="ClaimType" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="PropertyName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PropertyNumber" Nullable="true" />
+          <Property Type="String" Name="PropertyManager" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="PropertyAddress" Nullable="true" MaxLength="174" />
+          <Property Type="String" Name="IncidentLocation" Nullable="true" />
+          <Property Type="String" Name="IncidentDescription" Nullable="true" />
+          <Property Type="DateTime" Name="IncidentDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DateReported" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ReportedPhone" Nullable="true" MaxLength="35" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="true" />
+          <Property Type="String" Name="ResidentName" Nullable="true" MaxLength="15" />
+          <Property Type="DateTime" Name="Updateddate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UpdateType" Nullable="true" MaxLength="22" />
+        </ComplexType>
+        <ComplexType Name="proc_GetLastWeekClaimUpdatesrolewise_Result">
           <Property Type="Guid" Name="Id" Nullable="false" />
           <Property Type="String" Name="ClaimNumber" Nullable="true" MaxLength="50" />
           <Property Type="Guid" Name="PropertyId" Nullable="false" />
@@ -4386,6 +4415,31 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <FunctionImportMapping FunctionImportName="proc_GetLastWeekClaimUpdates" FunctionName="Carroll.Data.Entities.Store.proc_GetLastWeekClaimUpdates">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_GetLastWeekClaimUpdates_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyNumber" ColumnName="PropertyNumber" />
+                <ScalarProperty Name="PropertyManager" ColumnName="PropertyManager" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="IncidentLocation" ColumnName="IncidentLocation" />
+                <ScalarProperty Name="IncidentDescription" ColumnName="IncidentDescription" />
+                <ScalarProperty Name="IncidentDateTime" ColumnName="IncidentDateTime" />
+                <ScalarProperty Name="ReportedBy" ColumnName="ReportedBy" />
+                <ScalarProperty Name="DateReported" ColumnName="DateReported" />
+                <ScalarProperty Name="ReportedPhone" ColumnName="ReportedPhone" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ResidentName" ColumnName="ResidentName" />
+                <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+                <ScalarProperty Name="UpdateType" ColumnName="UpdateType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetLastWeekClaimUpdatesrolewise" FunctionName="Carroll.Data.Entities.Store.proc_GetLastWeekClaimUpdatesrolewise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_GetLastWeekClaimUpdatesrolewise_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
                 <ScalarProperty Name="PropertyId" ColumnName="PropertyId" />

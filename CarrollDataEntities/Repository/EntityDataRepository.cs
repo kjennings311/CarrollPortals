@@ -952,15 +952,15 @@ namespace Carroll.Data.Entities.Repository
 
                         var _propcount = (from tbl in _entities.FormPropertyDamageClaims
                                           join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                          where tblpropertyusers.AssetManager1 == managementid
+                                          where tblpropertyusers.AssetManager1 == managementid  || tblpropertyusers.AssetManager2 == managementid
                                           select tbl).Count();
                         var _damagecount = (from tbl in _entities.FormMoldDamageClaims
                                             join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                            where tblpropertyusers.AssetManager1 == managementid
+                                            where tblpropertyusers.AssetManager1 == managementid || tblpropertyusers.AssetManager2 == managementid
                                             select tbl).Count();
                         var _liabilitycount = (from tbl in _entities.FormGeneralLiabilityClaims
                                                join tblpropertyusers in _entities.Properties on tbl.PropertyId equals tblpropertyusers.PropertyId
-                                               where tblpropertyusers.AssetManager1 == managementid
+                                               where tblpropertyusers.AssetManager1 == managementid || tblpropertyusers.AssetManager2 == managementid
                                                select tbl).Count();
                         return new { PropertyCount = _propcount, DamageCount = _damagecount, LiabilityCount = _liabilitycount };
                     }

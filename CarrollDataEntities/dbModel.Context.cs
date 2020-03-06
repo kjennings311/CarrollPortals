@@ -410,5 +410,18 @@ namespace Carroll.Data.Entities
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetLastWeekClaimUpdates_Result>("proc_GetLastWeekClaimUpdates");
         }
+    
+        public virtual ObjectResult<proc_GetLastWeekClaimUpdatesrolewise_Result> proc_GetLastWeekClaimUpdatesrolewise(Nullable<System.Guid> userid, Nullable<bool> isasset2)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(System.Guid));
+    
+            var isasset2Parameter = isasset2.HasValue ?
+                new ObjectParameter("isasset2", isasset2) :
+                new ObjectParameter("isasset2", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetLastWeekClaimUpdatesrolewise_Result>("proc_GetLastWeekClaimUpdatesrolewise", useridParameter, isasset2Parameter);
+        }
     }
 }

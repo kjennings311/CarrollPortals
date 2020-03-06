@@ -418,34 +418,297 @@ namespace Carroll.Data.Services.Helpers
             //_message.EmailBcc = Convert.ToString(ConfigurationManager.AppSettings["BCCEmails"]).Split(',');
 
             var _entities = new CarrollFormsEntities();
-         
 
+            string bdy = "";
             _message.Subject = "Weekly Claim Update Summary " ;
 
-            _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h2> The following claims have been updated between "+DateTime.Today.AddDays(-7).ToShortDateString()+" to "+DateTime.Now.ToShortDateString()+" </h2>" +
+            bdy = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h2> The following claims have been updated between "+DateTime.Today.AddDays(-7).ToShortDateString()+" to "+DateTime.Now.ToShortDateString()+" </h2>" +
                 "<table  border='1' cellpadding='5' cellspacing='0'>  ";
-            _message.Body += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th> <th> Type of Update </th>  <tr> </thead>";
+            bdy += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th> <th> Type of Update </th>  <tr> </thead>";
 
-            var _res = _entities.proc_GetLastWeekClaimUpdates().ToList();
-            _message.Body += "<tbody> ";
-            foreach (var item in _res)
+
+            // PM
+
+            // get all pms with 
+
+            var allpms = (from tbl in _entities.SiteUsers
+                          join ur in _entities.UserInRoles on tbl.UserId equals ur.UserId
+                          join r in _entities.Roles on ur.RoleId equals r.RoleId
+                          where tbl.IsActive == true && r.RoleName == "Property"
+                          select new { tbl.FirstName, tbl.LastName, tbl.UserEmail,tbl.UserId }).ToList();
+
+            foreach (var item1 in allpms)
             {
+                if(item1.UserEmail.ToString() == "pm.av@carrollmg.com" || item1.UserEmail.ToString() == "iampropertymanager@carrollmg.com")
+                {
+                    
+                var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(item1.UserId,false).ToList();
+                string Body = "<tbody> ";
 
-                _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString()+ "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>"+item.UpdateType+" </td>  <tr> </thead>";
+                if(re.Count > 0)
+                foreach (var item in re)
+                {
+
+                    Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                }
+                else
+                {
+                    Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                }
+
+                Body += " </tbody> </table>";
+                _message.Body = bdy+Body+ "</div></div>";
+                    //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                    // populate from db
+
+                    _message.EmailTo.Add(item1.UserEmail);
+                    // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                    EmailHelper.SendEmailUpdate(_message);
+
+                }
 
             }
 
-            _message.Body += " </tbody> </table>";
-            _message.Body += "</div></div>";
-            //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
-            // populate from db
 
-                _message.EmailTo.Add("sekhar.babu@forcitude.com");
-            _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
-            _message.EmailTo.Add("sukumar.gandhi@forcitude.com");
-            _message.EmailTo.Add("iampropertymanager@carrollmg.com");
+            // RM
 
-            EmailHelper.SendEmailUpdate(_message);
+
+            var allrms = (from tbl in _entities.SiteUsers
+                          join ur in _entities.UserInRoles on tbl.UserId equals ur.UserId
+                          join r in _entities.Roles on ur.RoleId equals r.RoleId
+                          where tbl.IsActive == true && r.RoleName == "Regional"
+                          select new { tbl.FirstName, tbl.LastName, tbl.UserEmail, tbl.UserId }).ToList();
+
+            foreach (var item1 in allrms)
+            {
+               
+                    var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(item1.UserId, false).ToList();
+                    string Body = "<tbody> ";
+
+                    if (re.Count > 0)
+                        foreach (var item in re)
+                        {
+
+                            Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                        }
+                    else
+                    {
+                        Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                    }
+
+                    Body += " </tbody> </table>";
+                    _message.Body = bdy + Body + "</div></div>";
+                //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                // populate from db
+
+                _message.EmailTo.Add(item1.UserEmail);
+                // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                EmailHelper.SendEmailUpdate(_message);
+
+                
+
+            }
+
+
+            // RVP
+            var allrvms = (from tbl in _entities.SiteUsers
+                          join ur in _entities.UserInRoles on tbl.UserId equals ur.UserId
+                          join r in _entities.Roles on ur.RoleId equals r.RoleId
+                          where tbl.IsActive == true && r.RoleName == "RVP"
+                          select new { tbl.FirstName, tbl.LastName, tbl.UserEmail, tbl.UserId }).ToList();
+
+            foreach (var item1 in allrvms)
+            {
+
+                var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(item1.UserId, false).ToList();
+                string Body = "<tbody> ";
+
+                if (re.Count > 0)
+                    foreach (var item in re)
+                    {
+
+                        Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                    }
+                else
+                {
+                    Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                }
+
+                Body += " </tbody> </table>";
+                _message.Body = bdy + Body + "</div></div>";
+                //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                // populate from db
+
+                _message.EmailTo.Add(item1.UserEmail);
+                // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                EmailHelper.SendEmailUpdate(_message);
+
+
+
+            }
+
+
+
+            // VP
+
+            var allrvpms = (from tbl in _entities.SiteUsers
+                           join ur in _entities.UserInRoles on tbl.UserId equals ur.UserId
+                           join r in _entities.Roles on ur.RoleId equals r.RoleId
+                           where tbl.IsActive == true && r.RoleName == "VP"
+                           select new { tbl.FirstName, tbl.LastName, tbl.UserEmail, tbl.UserId }).ToList();
+
+            foreach (var item1 in allrvpms)
+            {
+
+                var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(item1.UserId, false).ToList();
+                string Body = "<tbody> ";
+
+                if (re.Count > 0)
+                    foreach (var item in re)
+                    {
+
+                        Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                    }
+                else
+                {
+                    Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                }
+
+                Body += " </tbody> </table>";
+                _message.Body = bdy + Body + "</div></div>";
+                //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                // populate from db
+
+                _message.EmailTo.Add(item1.UserEmail);
+                // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                EmailHelper.SendEmailUpdate(_message);
+
+
+
+            }
+
+
+
+
+            //A1
+
+            var allrams = (from tbl in _entities.SiteUsers
+                           join ur in _entities.UserInRoles on tbl.UserId equals ur.UserId
+                           join r in _entities.Roles on ur.RoleId equals r.RoleId
+                           where tbl.IsActive == true && r.RoleName == "Asset Manager"
+                           select new { tbl.FirstName, tbl.LastName, tbl.UserEmail, tbl.UserId }).ToList();
+
+            foreach (var item1 in allrams)
+            {
+
+                var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(item1.UserId, false).ToList();
+                string Body = "<tbody> ";
+
+                if (re.Count > 0)
+                    foreach (var item in re)
+                    {
+
+                        Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                    }
+                else
+                {
+                    Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                }
+
+                Body += " </tbody> </table>";
+                _message.Body = bdy + Body + "</div></div>";
+                //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                // populate from db
+
+                _message.EmailTo.Add(item1.UserEmail);
+                // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                EmailHelper.SendEmailUpdate(_message);
+
+
+
+            }
+
+
+            // A2
+
+
+            var allramss = (from tbl in _entities.SiteUsers
+                           join ur in _entities.UserInRoles on tbl.UserId equals ur.UserId
+                           join r in _entities.Roles on ur.RoleId equals r.RoleId
+                           where tbl.IsActive == true && r.RoleName == "Asset Manager"
+                           select new { tbl.FirstName, tbl.LastName, tbl.UserEmail, tbl.UserId }).ToList();
+
+            foreach (var item1 in allramss)
+            {
+
+                var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(item1.UserId, true).ToList();
+                string Body = "<tbody> ";
+
+                if (re.Count > 0)
+                    foreach (var item in re)
+                    {
+
+                        Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                    }
+                else
+                {
+                    Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                }
+
+                Body += " </tbody> </table>";
+                _message.Body = bdy + Body + "</div></div>";
+                //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                // populate from db
+               
+                _message.EmailTo.Add(item1.UserEmail);
+                // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                EmailHelper.SendEmailUpdate(_message);
+
+            }
+
+
+
+
+
+
+            //var _res = _entities.proc_GetLastWeekClaimUpdates().ToList();
+            //_message.Body += "<tbody> ";
+            //foreach (var item in _res)
+            //{
+
+            //    _message.Body += "<tr><td> "+item.ClaimNumber+ " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString()+ "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>"+item.UpdateType+" </td>  <tr> </thead>";
+
+            //}
+
+            //_message.Body += " </tbody> </table>";
+            //_message.Body += "</div></div>";
+            ////   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+            //// populate from db
+
+            //    _message.EmailTo.Add("sekhar.babu@forcitude.com");
+            //_message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+            //_message.EmailTo.Add("sukumar.gandhi@forcitude.com");
+            //_message.EmailTo.Add("iampropertymanager@carrollmg.com");
+
+            //EmailHelper.SendEmailUpdate(_message);
 
             // sending for each property manager
             //loop through each call sp send mail 
@@ -455,6 +718,62 @@ namespace Carroll.Data.Services.Helpers
 
             return true;
         }
+
+        public static bool SendWeeklySummary(string email, Guid Userid, bool isasset2)
+        {
+
+            EmailMessage _message = new EmailMessage();
+
+            _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+            //_message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["AdditionalEmails"]).Split(',');
+            //_message.EmailBcc = Convert.ToString(ConfigurationManager.AppSettings["BCCEmails"]).Split(',');
+
+            var _entities = new CarrollFormsEntities();
+
+            string bdy = "";
+            _message.Subject = "Weekly Claim Update Summary ";
+
+            bdy = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\">  <h2> The following claims have been updated between " + DateTime.Today.AddDays(-7).ToShortDateString() + " to " + DateTime.Now.ToShortDateString() + " </h2>" +
+                "<table  border='1' cellpadding='5' cellspacing='0'>  ";
+            bdy += "<thead> <tr><th> ID </th><th> Property Name  </th><th> Type  </th><th> Incident Date </th><th> Resident Name </th> <th> Submitted Date </th><th> Updated Date </th> <th> Type of Update </th>  <tr> </thead>";
+
+
+            // PM
+
+            // get all pms with 
+
+          
+                    var re = _entities.proc_GetLastWeekClaimUpdatesrolewise(Userid, isasset2).ToList();
+                    string Body = "<tbody> ";
+
+                    if (re.Count > 0)
+                        foreach (var item in re)
+                        {
+
+                            Body += "<tr><td> " + item.ClaimNumber + " </td><td> " + item.PropertyName + "  </td><td> " + item.ClaimType + "  </td><td> " + item.IncidentDateTime.Value.ToShortDateString() + "  </td><td> " + item.ResidentName + " </td><td> " + item.CreatedDate.Value.ToShortDateString() + " </td><td> " + item.Updateddate.Value.ToShortDateString() + " </td> <td>" + item.UpdateType + " </td>  </tr>";
+
+                        }
+                    else
+                    {
+                        Body += "<tr><td colspan='8'>  No Results Found  </td>  <tr> ";
+
+                    }
+
+                    Body += " </tbody> </table>";
+                    _message.Body = bdy + Body + "</div></div>";
+                    //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
+                    // populate from db
+
+                    _message.EmailTo.Add("sekhar.babu@forcitude.com");
+                    // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+
+                    EmailHelper.SendEmailUpdate(_message);
+
+             
+
+            return true;
+        }
+
         public static dynamic UpdatePmBrowserInfo(string RecordId, string FormType, string Action, string browser, string ipaddress)
         {
 
