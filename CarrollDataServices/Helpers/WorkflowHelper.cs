@@ -1570,12 +1570,13 @@ namespace Carroll.Data.Services.Helpers
 
                     DynamicLink dl = (from tbl in _entities.DynamicLinks
                                       where tbl.ReferenceId == propid && tbl.FormType == FormType && tbl.Action == Action
+                                      orderby tbl.CreatedDate descending
                                       select tbl).FirstOrDefault();
-                    //if (dl.OpenStatus == false)
-                    //{
-                    //    return "Employee Signature is already submitted, Please refresh the page";
-                    //}
-                 //   dl.OpenStatus = true;
+                    if (dl.OpenStatus == false)
+                    {
+                        return "Employee Signature is already submitted, Please refresh the page";
+                    }
+                       dl.OpenStatus = true;
                     dl.ModifiedDate = DateTime.Now;
                     _entities.SaveChanges();
 
@@ -1635,6 +1636,7 @@ namespace Carroll.Data.Services.Helpers
 
                     DynamicLink dl = (from tbl in _entities.DynamicLinks
                                       where tbl.ReferenceId == propid && tbl.FormType == FormType && tbl.Action == Action
+                                      orderby tbl.CreatedDate descending
                                       select tbl).FirstOrDefault();
                     if (dl.OpenStatus == false)
                     {
@@ -1810,6 +1812,7 @@ namespace Carroll.Data.Services.Helpers
 
                     DynamicLink dl = (from tbl in _entities.DynamicLinks
                                       where tbl.ReferenceId == propid && tbl.FormType == FormType && tbl.Action == Action
+                                      orderby tbl.CreatedDate descending
                                       select tbl).FirstOrDefault();
 
                     if (dl.OpenStatus == false)
@@ -1896,6 +1899,7 @@ namespace Carroll.Data.Services.Helpers
 
                     DynamicLink dl = (from tbl in _entities.DynamicLinks
                                       where tbl.ReferenceId == propid && tbl.FormType == FormType && tbl.Action == Action
+                                      orderby tbl.CreatedDate descending
                                       select tbl).FirstOrDefault();
 
                     if (dl.OpenStatus == false)
@@ -1936,7 +1940,7 @@ namespace Carroll.Data.Services.Helpers
                        
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Employee Lease Rider on" + DateTime.Now, "System");
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Employee Lease Rider on" + DateTime.Now, UserId);
 
                             return true;
                         }

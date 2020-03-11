@@ -78,8 +78,8 @@
           <Property Name="ReferenceId" Type="uniqueidentifier" />
           <Property Name="Action" Type="nvarchar" MaxLength="25" />
           <Property Name="OpenStatus" Type="bit" />
-          <Property Name="CreatedDate" Type="date" />
-          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="BrowserInformation" Type="nvarchar" MaxLength="500" />
           <Property Name="IpAddress" Type="nvarchar" MaxLength="30" />
           <Property Name="Clientdatetime" Type="datetime" />
@@ -2347,8 +2347,8 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="FormType" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
           <Property Name="ReferenceId" Type="Guid" />
           <Property Name="OpenStatus" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="Action" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="BrowserInformation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="IpAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
