@@ -1571,11 +1571,11 @@ namespace Carroll.Data.Services.Helpers
                     DynamicLink dl = (from tbl in _entities.DynamicLinks
                                       where tbl.ReferenceId == propid && tbl.FormType == FormType && tbl.Action == Action
                                       select tbl).FirstOrDefault();
-                    if (dl.OpenStatus == false)
-                    {
-                        return "Employee Signature is already submitted, Please refresh the page";
-                    }
-                    dl.OpenStatus = true;
+                    //if (dl.OpenStatus == false)
+                    //{
+                    //    return "Employee Signature is already submitted, Please refresh the page";
+                    //}
+                 //   dl.OpenStatus = true;
                     dl.ModifiedDate = DateTime.Now;
                     _entities.SaveChanges();
 
