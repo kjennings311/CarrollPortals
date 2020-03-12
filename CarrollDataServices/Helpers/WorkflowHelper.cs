@@ -1855,7 +1855,7 @@ namespace Carroll.Data.Services.Helpers
                        
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
-                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Payroll Status Change Notice on" + DateTime.Now,"System");
+                            WorkflowHelper.InsertHrLog(FormType, propid.ToString(), "Employee Email Resent ", "Employee Email is resent for Payroll Status Change Notice on" + DateTime.Now,UserId);
 
                             return true;
                         }
