@@ -1,5 +1,5 @@
-﻿ //var $BaseApiUrl = "http://localhost:1002/";
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿ var $BaseApiUrl = "http://localhost:1002/";
+ // var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -653,12 +653,12 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
             }
             else
             {
-                if (propertyarray.includes(data[i]["key"]))
-           {
+           //     if (propertyarray.includes(data[i]["key"]))
+           //{
                     selected = "selected=selected";
                     options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
                     selected = "";
-                }
+                //}
                     
             }
 
@@ -684,7 +684,8 @@ function ApplyDateMask()
 }
 
 
-function LoadHrForm(formname) {
+function LoadHrForm(formname)
+{
     $("#myModal").modal({
         backdrop: 'static',
         keyboard: false
@@ -3290,6 +3291,7 @@ function LoadAllProperties() {
 
     if (st.includes("se")) {
         propertyarray = $("#UserPropertyAccess").val().split('se');
+        000002
     }
     else
         propertyarray.push(st);
@@ -3320,7 +3322,7 @@ function LoadAllProperties() {
                 if (propertyarray.includes(data[i]["key"]))
                 {                   
                     options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
-                }
+              }
             }
 
             //if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
@@ -3463,7 +3465,10 @@ function LoadPropertiesForSelect(iskey,control)
                     selected = "";
 
                 }
-                else {
+                else
+                {
+                    
+
                     if (propertyarray.includes(data[i]["key"])) {
                         options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
                     }
@@ -3491,6 +3496,9 @@ function LoadPropertiesForSelect(iskey,control)
 
                 }
                 else {
+
+                   // options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                                       
                     if (propertyarray.includes(data[i]["key"])) {
                         options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
                     }

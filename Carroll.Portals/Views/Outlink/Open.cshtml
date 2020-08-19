@@ -14,10 +14,51 @@
     <div>
         <img src="~/img/logo.png" />
         <h1 id="msg"> Please wait while the link opens in a new window </h1>
+        <p id="showerror" > If popup blocker is enabled, follow the link below for your browser    </p>
+
+        <ul style="list-style-type:disc;margin-left:5%;">
+
+            <li> <a href="https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en"> Google Chrome</a></li>
+            <li> <a href="https://support.microsoft.com/en-in/help/4026392/microsoft-edge-block-pop-ups"> Microsoft Edge </a></li>
+            <li> <a href="https://support.microsoft.com/en-us/help/17479/windows-internet-explorer-11-change-security-privacy-settings"> Internet Explorer </a></li>
+            <li> <a href="https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting">Mozilla Firefox </a></li>
+            <li> <a href="https://support.apple.com/en-us/HT203987"> Safari </a></li>
+
+        </ul>
+
         <input type="hidden" id="status" value="0" />
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
+
+        var popupBlockerChecker = {
+            check: function (popup_window) {
+                var _scope = this;
+                if (popup_window) {
+                    if (/chrome/.test(navigator.userAgent.toLowerCase())) {
+                        setTimeout(function () {
+                            _scope._is_popup_blocked(_scope, popup_window);
+                        }, 200);
+                    } else {
+                        popup_window.onload = function () {
+                            _scope._is_popup_blocked(_scope, popup_window);
+                        };
+                    }
+                } else {
+                    _scope._displayError();
+                }
+            },
+            _is_popup_blocked: function (scope, popup_window) {
+                if ((popup_window.innerHeight > 0) == false) { scope._displayError(); }
+            },
+            _displayError: function () {
+                alert("Popup Blocker is enabled! Please add this site to your exception list.");
+            }
+        };
+
+        var popup = window.open("about:blank", '_blank');
+        popupBlockerChecker.check(popup);
+
         var issuccess = false;
 
         var link = "/outlink/Verify?link=@ViewBag.link";
