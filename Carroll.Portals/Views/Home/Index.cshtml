@@ -378,6 +378,26 @@ font-weight: bold;
             
         });
 
+
+        $(document).on('keyup', 'input[type=text]', function () {
+            if ($(this).attr('data-climit') != "" && $(this).attr('data-climit') != "0" ) {            
+            var max = $(this).attr('data-climit');
+            var len = $(this).val().length;
+           
+            if (len >= max) {
+                $('#cnt' + $(this).attr('id')).html('<span style="color:red"> you have reached the limit </span>');
+                var str = $(this).val();
+                $(this).val(str.substring(1, 1000));
+
+            } else {
+                var char = max - len;
+                $('#cnt' + $(this).attr('id')).html('<span style="color:green">' + char + ' characters left</span>');
+            }
+
+        }
+
+        });
+
         $(document).on("change", "#filterval1", function (e) {
 
             GetAllClaims("All", $(this).is(":checked"));

@@ -4037,7 +4037,6 @@ tbl.UploadedDate descending
                             }
 
 
-
                             if (contact.City.ToLower().Trim() != row[17].ToString().ToLower().Trim())
                             {
                                 contact.City = row[17].ToString().Trim();

@@ -1,5 +1,5 @@
-﻿ //var $BaseApiUrl = "http://localhost:1002/";
-  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿// var $BaseApiUrl = "http://localhost:1002/";
+var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -427,14 +427,14 @@ function getForm(FormName, RecordId)
     var $formBegin = '<form  class="form-horizontal CustomForm">';
     var $formEnd = '</form>';
     var $line = '<div class="hr-line-dashed"></div>';
-    var $textbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"   type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
+    var $textbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" data-climit="{7}"  type="text" validationformat="{1}" class="form-control {2}" id="{3}" {4} value="{5}"><span id="cnt{3}" > </span></div></div>';
     var $datebox = '<div class="form-group"><label class="col-sm-12 control-label">  <a  class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100"  type="date" validationformat="{1}"  class="form-control {2}" id="{3}" {4} value="{5}"></div></div>';
-    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}"  class="form-control {2}" id="{3}" {4} >{5}</textarea> <span id="cnt{3}" > </span> </div></div>';
+    var $longtext = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><textarea validationformat="{1}" data-climit="{7}"  class="form-control {2}" id="{3}" {4} >{5}</textarea> <span id="cnt{3}" > </span> </div></div>';
     var $passbox = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input maxlength="100" type="password" validationformat="{1}" class="form-control {2}"  id="{3}" {4} value="{5}"></div></div>';
     var $filebox = '<div class="form-group"><label class="col-sm-2 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0}  </label ><div class="col-sm-10"><input maxlength="100" type="file" validationformat="{1}" onchange="encodeImageFileAsURL(this);" class="form-control {2}" id="{3}" {4} value="{5}"></div> <div id="imgTest" style="background: black;clear: both;margin-left:30%;width:300px;"><img src="{5}" style="width:80px;height:80px;"> </div></div>';
     var $hiddenField = '<input type="hidden" id="{0}" value="{1}"/>';
     var $checkbox = ' <div class="form-group"><label class="col-sm-6 col-xs-9 control-label"> <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{3}" > i </a> {0} </label><div class="col-sm-6 col-xs-3"> <div class="col-md-1 col-xs-12" > <input class="form-control" type="checkbox" style="width:18px;"  id="{1}" value="1"   {2}></div> </div></div>';
-    var $person = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" validationformat="{1}" class="form-control {2}"  id="{3}" {4}></div></div>';
+    var $person = '<div class="form-group"><label class="col-sm-12 control-label">  <a class="tooltipwala" data-container="body"  href="#" data-toggle="popover" data-trigger="hover" data-content="{6}" > i </a> {0} </label ><div class="col-sm-10"><input type="text" data-climit="{7}" validationformat="{1}" class="form-control {2}"  id="{3}" {4}><span id="cnt{3}" > </span></div></div>';
     var $savebuttons = '<div class="hr-line-dashed"></div>'
         + TXT_SUCCESS + TXT_ERROR
         + '<div class="form-group" >'
@@ -503,7 +503,7 @@ function getForm(FormName, RecordId)
 
                                 //  var datestring = d.getMonth()+"/"+d.getDate() + "/"  + d.getFullYear();
 
-                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
+                                $FormElements += format($datebox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : datestring, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"], ($fields[i]["charLimit"] == null) ? "" : $fields[i]["charLimit"]);
 
                             }
                            
@@ -511,7 +511,7 @@ function getForm(FormName, RecordId)
                         }
                         else
                         {
-                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
+                            $FormElements += format($textbox, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required" : "", $fields[i]["fieldName"], $datamask, ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"], ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"], ($fields[i]["charLimit"] == null) ? "" : $fields[i]["charLimit"]);
                         }
                        
                         break;
@@ -574,7 +574,7 @@ function getForm(FormName, RecordId)
                         var $req = $fields[i]["required"];
                         var personId = ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"];
                         var val = 'Value="' + personId + '"';
-                        $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"]);
+                        $FormElements += format($person, $fields[i]["fieldLabel"], $fields[i]["fieldValidationType"], ($req) ? "required tokenInput" : "tokenInput", $fields[i]["fieldName"], val, ($fields[i]["popOverText"] == null) ? "" : $fields[i]["popOverText"], ($fields[i]["charLimit"] == null) ? "" : $fields[i]["charLimit"]);
                         break;
                     case "Hidden":
                         $FormElements += format($hiddenField, $fields[i]["fieldName"], ($fields[i]["fieldValue"] == null) ? "" : $fields[i]["fieldValue"]);
@@ -653,12 +653,12 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
             }
             else
             {
-                if (propertyarray.includes(data[i]["key"]))
-           {
+           //     if (propertyarray.includes(data[i]["key"]))
+           //{
                     selected = "selected=selected";
                     options += "<option value=\"" + data[i]["key"] + "\"" + selected + ">" + data[i]["value"] + "</option>";
                     selected = "";
-                }
+                //}
                     
             }
 
@@ -684,7 +684,8 @@ function ApplyDateMask()
 }
 
 
-function LoadHrForm(formname) {
+function LoadHrForm(formname)
+{
     $("#myModal").modal({
         backdrop: 'static',
         keyboard: false
@@ -704,6 +705,7 @@ function LoadHrForm(formname) {
         }
 
     });
+
     setTimeout(function () { ApplyDateMask();  }, 2000);
     
    
@@ -3290,6 +3292,7 @@ function LoadAllProperties() {
 
     if (st.includes("se")) {
         propertyarray = $("#UserPropertyAccess").val().split('se');
+        000002
     }
     else
         propertyarray.push(st);
@@ -3320,7 +3323,7 @@ function LoadAllProperties() {
                 if (propertyarray.includes(data[i]["key"]))
                 {                   
                     options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
-                }
+              }
             }
 
             //if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
@@ -3463,7 +3466,10 @@ function LoadPropertiesForSelect(iskey,control)
                     selected = "";
 
                 }
-                else {
+                else
+                {
+                    
+
                     if (propertyarray.includes(data[i]["key"])) {
                         options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
                     }
@@ -3491,6 +3497,9 @@ function LoadPropertiesForSelect(iskey,control)
 
                 }
                 else {
+
+                   // options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                                       
                     if (propertyarray.includes(data[i]["key"])) {
                         options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
                     }

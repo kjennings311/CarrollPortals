@@ -87,6 +87,15 @@ namespace Carroll.Data.Services.Controllers
 
         }
 
+        [System.Web.Http.ActionName("GetPropertyDetails")]
+        [HttpGet]
+        public dynamic GetPropertyDetails(EntityType entityType, string optionalText = "")
+        {
+
+            return _service.GetRecord(entityType, optionalText);
+
+        }
+
 
         [ActionName("Index")]
         [HttpGet]

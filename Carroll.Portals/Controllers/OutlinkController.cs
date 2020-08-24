@@ -206,10 +206,13 @@ namespace Carroll.Portals.Controllers
             return View();
         }
 
+
       public  dynamic SendClaimUpdatesLastWeek()
         {
             return WorkflowHelper.SendClaimUpdatesLastweek();
         }
+
+
 
         [AllowAnonymous]
         [ActionName("UpdateWorkflowEmployeeLeaseRiderAsync")]

@@ -17,6 +17,7 @@ namespace Carroll.Data.Services.Helpers
 {
     public sealed class WorkflowHelper
     {
+      
         public static bool RunNotifyWorkflow(string RecordId, Char Type,string UserId)
         {
 
@@ -463,9 +464,9 @@ namespace Carroll.Data.Services.Helpers
                     //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                     // populate from db
 
-                    _message.EmailTo.Add(item1.UserEmail);
-                    // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
-
+                 //   _message.EmailTo.Add(item1.UserEmail);
+                     _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+                    _message.EmailTo.Add("sekhar.babu@forcitude.com");
                     EmailHelper.SendEmailUpdate(_message);
 
                 }
@@ -506,9 +507,9 @@ namespace Carroll.Data.Services.Helpers
                 //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                 // populate from db
 
-                _message.EmailTo.Add(item1.UserEmail);
-                // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
-
+              //  _message.EmailTo.Add(item1.UserEmail);
+                 _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+                _message.EmailTo.Add("sekhar.babu@forcitude.com");
                 EmailHelper.SendEmailUpdate(_message);
 
                 
@@ -547,9 +548,10 @@ namespace Carroll.Data.Services.Helpers
                 //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                 // populate from db
 
-                _message.EmailTo.Add(item1.UserEmail);
+                //   _message.EmailTo.Add(item1.UserEmail);
                 // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
-
+                _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+                _message.EmailTo.Add("sekhar.babu@forcitude.com");
                 EmailHelper.SendEmailUpdate(_message);
 
 
@@ -590,9 +592,10 @@ namespace Carroll.Data.Services.Helpers
                 //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                 // populate from db
 
-                _message.EmailTo.Add(item1.UserEmail);
+               // _message.EmailTo.Add(item1.UserEmail);
                 // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
-
+                _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+                _message.EmailTo.Add("sekhar.babu@forcitude.com");
                 EmailHelper.SendEmailUpdate(_message);
 
 
@@ -634,9 +637,10 @@ namespace Carroll.Data.Services.Helpers
                 //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                 // populate from db
 
-                _message.EmailTo.Add(item1.UserEmail);
+               // _message.EmailTo.Add(item1.UserEmail);
                 // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
-
+                _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+                _message.EmailTo.Add("sekhar.babu@forcitude.com");
                 EmailHelper.SendEmailUpdate(_message);
 
 
@@ -677,8 +681,10 @@ namespace Carroll.Data.Services.Helpers
                 //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                 // populate from db
                
-                _message.EmailTo.Add(item1.UserEmail);
+              //  _message.EmailTo.Add(item1.UserEmail);
                 // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+                _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");
+                _message.EmailTo.Add("sekhar.babu@forcitude.com");
 
                 EmailHelper.SendEmailUpdate(_message);
 
@@ -802,6 +808,9 @@ namespace Carroll.Data.Services.Helpers
         public static dynamic SendHrWorkFlowEmail(string RecordId, string FormType, string Action,string UserId)
         {
 
+            string BrowserNotes = "<p> Browser Settings </p><ul style=\"list-style-type:disc;margin-left:30px;\"><li> <a href=\"https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en\">Google Chrome </a> </li><li> <a href=\"https://support.microsoft.com/en-in/help/4026392/microsoft-edge-block-pop-ups\">Microsoft Edge </a> </li> <li> <a href=\"https://support.microsoft.com/en-us/help/17479/windows-internet-explorer-11-change-security-privacy-settings\"> Internet Explorer </a> </li> <li><a href=\"https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting\">Mozilla Firefox </a> </li><li>  <a href=\"https://support.apple.com/en-us/HT203987\"> Safari </a> </li> </ul>";
+
+
             // Check Form Type 
 
             if (FormType == "NewHire")
@@ -847,7 +856,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+ "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br><br> <h5> Thank you, <br> CARROLL </h5>  </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
                         List<string> tos = new List<string>();
                        
@@ -919,7 +928,7 @@ namespace Carroll.Data.Services.Helpers
 
                         _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <h5> Thank you, <br> CARROLL  </h5>  </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
                         List<string> tos = new List<string>();
                        // check if corporate then createduser email
 
@@ -953,7 +962,7 @@ namespace Carroll.Data.Services.Helpers
                                 }
 
                                 _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello "+getemail.FirstName+" "+getemail.LastName+" </h5><p> ";
-                                _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <h5> Thank you, <br> CARROLL  </h5>  </div></div>";
+                                _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
 
                             }
@@ -1127,7 +1136,8 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br><br> <h5> Thank you, <br> CARROLL </h5>  </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
+
                         List<string> tos = new List<string>();
                       
                         if (!string.IsNullOrEmpty(NewhireDetails.EmployeeEmail))
@@ -1283,7 +1293,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Payroll Status Change Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br>  <br> <h5> Thank you, <br> CARROLL</h5>   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
                         List<string> tos = new List<string>();
                  
                         if (!string.IsNullOrEmpty(NewhireDetails.EmployeeEmail))
@@ -1530,6 +1540,9 @@ namespace Carroll.Data.Services.Helpers
 
         public static dynamic ReSendHrWorkFlowEmail(string RecordId, string FormType, string Action,string UserId)
         {
+
+            string BrowserNotes = "<p> Browser Settings </p><ul style=\"list-style-type:disc;margin-left:30px;\"><li> <a href=\"https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en\">Google Chrome </a> </li><li> <a href=\"https://support.microsoft.com/en-in/help/4026392/microsoft-edge-block-pop-ups\">Microsoft Edge </a> </li> <li> <a href=\"https://support.microsoft.com/en-us/help/17479/windows-internet-explorer-11-change-security-privacy-settings\"> Internet Explorer </a> </li> <li><a href=\"https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting\">Mozilla Firefox </a> </li><li>  <a href=\"https://support.apple.com/en-us/HT203987\"> Safari </a> </li> </ul>";
+
             // Check Form Type 
 
             // Check if it is open 
@@ -1600,7 +1613,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br>  <h5> Thank you, <br> CARROLL </h5>   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
                         List<string> tos = new List<string>();
                       
                         if (!string.IsNullOrEmpty(NewhireDetails.EmailAddress))
@@ -1710,12 +1723,12 @@ namespace Carroll.Data.Services.Helpers
 // var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee New Hire Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello " +str + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
-                        
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
-                     
 
-                        
+
+
+
                         if (EmailHelper.SendHrFormNotificationEmail(_message, propertyid.ToString(), NewhireDetails.CreatedUser.ToString()))
                         {
                             WorkflowHelper.InsertHrLog("NewHire", propid.ToString(), "Email RESENT to Regional", "Regional Email is resent for New Hire Notice on" + DateTime.Now, UserId);
@@ -1846,7 +1859,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Payroll Status Change Notice needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br> <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
                         List<string> tos = new List<string>();
                         if(NewhireDetails.EmployeeEmail != "")
                        tos.Add(NewhireDetails.EmployeeEmail);
@@ -1930,7 +1943,7 @@ namespace Carroll.Data.Services.Helpers
                         var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                         _message.Subject = "Employee Lease Rider needs your review";
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + NewhireDetails.EmployeeName + " </h5> <p> ";
-                        _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team. </p> <br>  <br> <h5> Thank you, <br> CARROLL  </h5>  </div></div>";
+                        _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
                         List<string> tos = new List<string>();
                      
                         if (!string.IsNullOrEmpty(NewhireDetails.EmployeeEmail))
@@ -2111,6 +2124,8 @@ namespace Carroll.Data.Services.Helpers
 
         public static dynamic DailyRemainderToRPMForNewHireNotice()
         {
+            string BrowserNotes = "<p> Browser Settings </p><ul style=\"list-style-type:disc;margin-left:30px;\"><li> <a href=\"https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en\">Google Chrome </a> </li><li> <a href=\"https://support.microsoft.com/en-in/help/4026392/microsoft-edge-block-pop-ups\">Microsoft Edge </a> </li> <li> <a href=\"https://support.microsoft.com/en-us/help/17479/windows-internet-explorer-11-change-security-privacy-settings\"> Internet Explorer </a> </li> <li><a href=\"https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting\">Mozilla Firefox </a> </li><li>  <a href=\"https://support.apple.com/en-us/HT203987\"> Safari </a> </li> </ul>";
+
             using (var _entities = new CarrollFormsEntities())
             {
 
@@ -2142,13 +2157,11 @@ namespace Carroll.Data.Services.Helpers
                             var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Outlink/Open?link=" + dl.DynamicLinkId;
                             _message.Subject = "Remainder : Employee New Hire Notice needs your review";
                             _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hi " + item.EmployeeName + " </h5> <p> ";
-                            _message.Body += " You are receiving this email because there is a document pending your review and signature. Please click <a href='" + link + "'> here </a> to access and review the form for accuracy. If you have any questions, feel free to reach out to CARROLL management team.  </p> <br> <br> <h5> Thank you, <br> CARROLL </h5>  </div></div>";
+                    _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
-                           List<string> tos = new List<string>();
+                    List<string> tos = new List<string>();
                            if(!string.IsNullOrEmpty(item.EmailAddress))
-                            tos.Add(item.EmailAddress);
-
-                          
+                            tos.Add(item.EmailAddress);                          
                             _message.EmailTo = tos;
                    
                         WorkflowHelper.InsertHrLog("NewHire", dl.ReferenceId.ToString(), "Remainder Email to Employee sent ", "Remainder Employee Email is sent for Employee Lease Rider on" + DateTime.Now, "Remainder by Server");
