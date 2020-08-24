@@ -1589,10 +1589,10 @@ namespace Carroll.Portals.Controllers
 
 
 
-        public ActionResult RequisitionRequest()
-        {
-            return View(new BaseViewModel());
-        }
+        //public ActionResult RequisitionRequest()
+        //{
+        //    return View(new BaseViewModel());
+        //}
 
         public async Task<ActionResult> PrintRequisitionRequest(string id)
         {
