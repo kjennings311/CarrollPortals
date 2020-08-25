@@ -4120,13 +4120,13 @@ $(document).ready(function () {
                     if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp']) == -1)
                     {
                         alert('Invalid File Type! ' + fi.files.item(i).name + " is not supported                          (Allowed File Types are 'gif', 'png', 'jpg', 'jpeg', 'docx', 'xls', 'xlsx', 'pdf', 'zip', 'mp4', 'mkv', 'doc', 'flv', 'avi', 'mov', 'mpg', 'wmv', '3gp' )");
-               
+                        return false;
                     }
 
                     if (fi.files.item(i).size / 1000000 > 25)
                     {
-
-                        alert( fi.files.item(i).name + " Exceeds the allowed size (25MB)");
+                        alert(fi.files.item(i).name + " Exceeds the allowed size (25MB)");
+                        return false;
 
                     }
 
