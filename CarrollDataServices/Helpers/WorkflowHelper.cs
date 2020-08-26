@@ -195,6 +195,7 @@ namespace Carroll.Data.Services.Helpers
                     _message.Body += "<tr> <td><strong> Witness Address : </strong> </td><td> " + ClaimData.tbl.WitnessAddress + " </td></tr><tr><td><strong> Description Of Damage : </strong> </td><td>" + ClaimData.tbl.DescriptionOfDamage + "</td></tr>";
 
                     _message.Body += "<tr><td><strong> Reported By : </strong> </td><td> " + ClaimData.tbl.ReportedBy + " </td> </tr>";
+                    _message.Body += "<tr><td><strong> Notify Security Officer : </strong> </td><td> " + (ClaimData.tbl.NotifySecurityOfficer == true ? "Yes " : " No ") + " </td> </tr>";
                     _message.Body += "<tr><td><strong> Date Reported : </strong> </td><td> " + (ClaimData.tbl.DateReported == null ? "" : ClaimData.tbl.DateReported.Value.ToString("MM/dd/yyyy")) + "</td></tr><tr><td><strong> Created By : </strong> </td><td>" + ClaimData.tbl.CreatedByName + "</td></tr>";
 
                     _message.Body += "<tr><td><strong> Created Date : </strong> </td><td>" + ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy") + " " + ClaimData.tbl.CreatedDate.Value.ToShortTimeString() + "</td></tr></table>";
