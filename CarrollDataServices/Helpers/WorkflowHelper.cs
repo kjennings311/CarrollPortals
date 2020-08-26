@@ -318,7 +318,7 @@ namespace Carroll.Data.Services.Helpers
 
                     _message.Body += "<tr><td><strong> Additional Comments  : </strong> </td><td>" + ClaimData.tbl.AdditionalComments + "</td></tr>";
 
-                    _message.Body += "<tr><td><strong> Reported By : </strong> </td><td> " + ClaimData.tbl.ReportedBy + " </td> </tr><tr> <td><strong> Reported Phone : </strong> </td><td>" + ClaimData.tbl.ReportedPhone + "</td></tr>";
+                    _message.Body += "<tr><td><strong> Reported By : </strong> </td><td> " + ClaimData.tbl.ReportedBy + " </td> </tr><tr> <td><strong> Contact Phone Number : </strong> </td><td>" + ClaimData.tbl.ReportedPhone + "</td></tr>";
                     _message.Body += "<tr><td><strong> Date Reported : </strong> </td><td> " + (ClaimData.tbl.DateReported == null ? "" : ClaimData.tbl.DateReported.Value.ToString("MM/dd/yyyy")) + "</td></tr><tr><td><strong> Created By : </strong> </td><td>" + ClaimData.tbl.CreatedByName + "</td></tr>";
 
                     _message.Body += "<tr><td><strong> Created Date : </strong> </td><td>" + ClaimData.tbl.CreatedDate.Value.ToString("MM/dd/yyyy") + " " + ClaimData.tbl.CreatedDate.Value.ToShortTimeString() + "</td></tr></table>";
@@ -922,8 +922,8 @@ namespace Carroll.Data.Services.Helpers
                     if (NewhireDetails != null)
                     {
                         // subject and body
-
-                      var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
+                      
+                        var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
                      //  var link =  "http://forms.carrollaccess.net/Outlink/Open?link=" + dl.DynamicLinkId;
 
 
@@ -969,8 +969,6 @@ namespace Carroll.Data.Services.Helpers
                             }
 
                         }
-
-                       // tos.Add("carrollforms@carrollorg.com");
 
                         // else if property then regional manager of(location selected property id)
 
