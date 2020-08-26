@@ -922,8 +922,8 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-                    //  var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
-                       var link =  "http://forms.carrollaccess.net/Outlink/Open?link=" + dl.DynamicLinkId;
+                      var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"])+"Outlink/Open?link=" + dl.DynamicLinkId;
+                     //  var link =  "http://forms.carrollaccess.net/Outlink/Open?link=" + dl.DynamicLinkId;
 
 
                         _message.Subject = "Employee New Hire Notice needs your review";
