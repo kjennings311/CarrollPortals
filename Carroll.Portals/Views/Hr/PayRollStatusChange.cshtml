@@ -93,9 +93,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                     <P class="p5 ft6 effectivedateerror"> Change Effective Date : <input type="text" class="date-mask" id="effectivedate" /> </P>
                                                     <P class="p5 ft6"> Property Transfer:</P>
                                                     <P class="p5 ft6"> <strong>From : </strong></P>
-                                                    <P class="p6 ft1 frompropnumerror"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input disabled style=" display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input disabled style=" display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
+                                                    <P class="p6 ft1 frompropnumerror"> Property # : <input style="display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input  style="display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input  style="display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
                                                     <P class="p5 ft6"><strong> To : </strong> </P>
-                                                    <P class="p6 ft1 topropnumerror"> Property # : <input style=" display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input style=" display:inline;width:35%; " disabled type="text" id="topropname" class="" /> Manager: <input style=" display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
+                                                    <P class="p6 ft1 topropnumerror"> Property # : <input disabled style="display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input disabled style="display:inline;width:35%; "  type="text" id="topropname" class="" /> Manager: <input disabled style="display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
 
@@ -1281,14 +1281,22 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         if (data == "") {
 
                             alert("Invalid Property Code");
-                            $("#frompropname ").val('');
-                            $("#frommanager").val('');
+                            // CHANGE MADE BY PN 10/7/2020 FIXING ISSUES WITH PREPOPULATION ON FROM PROPERTY FIELD.. CHANGING PRE POPULATE TO POPULATE TO PROPERTY
+                          //  $("#frompropname ").val('');
+                          //  $("#frommanager").val('');
+                            $("#topropname ").val('');
+                            $("#tomanager").val('');
                         }
                         else {
                             var values = data.split(",");
-                            $("#frompropname ").val(values[0]);
-                            $("#frommanager").val(values[1]);
-                            $("#frompropnum").val(values[2]);
+                            // CHANGE MADE BY PN 10/7/2020 FIXING ISSUES WITH PREPOPULATION ON FROM PROPERTY FIELD.. CHANGING PRE POPULATE TO POPULATE TO PROPERTY
+                           // $("#frompropname ").val(values[0]);
+                           // $("#frommanager").val(values[1]);
+                           // $("#frompropnum").val(values[2]);
+                            $("#topropname ").val(values[0]);
+                            $("#tomanager").val(values[1]);
+                            $("#topropnum").val(values[2]);
+
                         }
                     });
                 }
@@ -1296,25 +1304,25 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             });
 
 
-            $("#topropnum").focusout(function () {
+            $("#frompropnum").focusout(function () {
 
-                if ($("#topropnum").val() == "") {
+                if ($("#frompropnum").val() == "") {
 
                     alert("Please Enter To Property Number");
 
                 }
                 else {
 
-                    $.get($BaseApiUrl + "api/Data/GetPropertyNameMananger?PropertyNumber=" + $("#topropnum").val(), function (data) {
+                    $.get($BaseApiUrl + "api/Data/GetPropertyNameMananger?PropertyNumber=" + $("#frompropnum").val(), function (data) {
                         if (data == "") {
                             alert("Invalid Property Code");
-                            $("#topropname ").val('');
-                            $("#tomanager,  ").val('');
+                            $("#frompropname ").val('');
+                            $("#frommanager,  ").val('');
                         }
                         else {
                             var values = data.split(",");
-                            $("#topropname").val(values[0]);
-                            $("#tomanager").val(values[1]);
+                            $("#frompropname").val(values[0]);
+                            $("#frommanager").val(values[1]);
                         }
                     });
                 }
