@@ -182,7 +182,7 @@
                                                 <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" value="0" /> Property
                                             </span>
 
-                                            <span class="c0" id="divproperty" style="display:none; padding:20px;">
+                                            <span class="c0 propertyerror" id="divproperty" style="display:none; padding:20px;">
                                                 Property : <select type="text" id="location"></select>
                                             </span>
                                         </p>
@@ -653,6 +653,14 @@ function AssignManager()
                 AssignManager();
 
             });
+
+            $("#location").change(function () {
+                if ($("#chkproperty").is(":checked") == true && $("#location").val() != "") {
+                    $("#location,.propertyerror").removeClass('has-error');
+
+                }
+            });
+
 
             $("input,select,textarea").change(function (e) {
                 e.preventDefault();
@@ -1170,6 +1178,14 @@ function AssignManager()
                     $(".chkcorporateerror").addClass('has-error');
                     if (control == "")
                         control = $("#chkcorporate");
+                }
+
+                if ($("#chkproperty").is(":checked") == true && $("#location").val()=="")
+                {
+                    errormsgsummary += "<li> Please  Select Property </li>";
+                    $(".propertyerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#location");
                 }
 
                 if ($("#startdate").val() == "") {

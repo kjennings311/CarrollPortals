@@ -72,7 +72,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                     Location: </span> <input type="radio" id="chkcorporate" value="1" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <input style="margin-left:12px" type="radio" id="chkproperty" value="1" name="loc" /> Property
                                                 </span>
-                                                <span class="c0" id="divproperty" style="display:none; padding:20px;">
+                                                <span class="c0 propertyerror" id="divproperty" style="display:none; padding:20px;">
 
                                                     Property : <select type="text" id="location"></select>
                                                 </span>
@@ -1273,6 +1273,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 if ($("#location").val() == "") {
 
                     alert("Please Select Property");
+                    $(".propertyerror").addClass('has-error');
 
                 }
                 else {
@@ -1374,6 +1375,13 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
             });
 
+            $("#location").change(function () {
+                if ($("#chkproperty").is(":checked") == true && $("#location").val() != "") {
+                    $("#location,.propertyerror").removeClass('has-error');
+
+                }
+            });
+
             $("#Submit").click(function (e)
             {
 
@@ -1400,6 +1408,16 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     if (control == "")
                         control = $("#chkcorporate");
                 }
+
+
+
+                if ($("#chkproperty").is(":checked") == true && $("#location").val() == "") {
+                    errormsgsummary += "<li> Please  Select Property </li>";
+                    $(".propertyerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#location");
+                }
+
 
                 if ($("#empemail").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Email </li>";
