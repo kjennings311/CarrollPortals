@@ -236,11 +236,11 @@ namespace Carroll.Data.Services.Helpers
                     //{
                     //    _message.EmailTo.Add(workflowemails.VPEmail);
                     //}
-                    //if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
-                    //{
-                    //    _message.EmailTo.Add(workflowemails.RVPEmail);
-                //}
-                if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
+                    if (!string.IsNullOrEmpty(workflowemails.RVPEmail))
+                    {
+                        _message.EmailTo.Add(workflowemails.RVPEmail);
+                    }
+                    if (!string.IsNullOrEmpty(workflowemails.AssetManager1Email))
                 {
                     _message.EmailTo.Add(workflowemails.AssetManager1Email);
                 }
