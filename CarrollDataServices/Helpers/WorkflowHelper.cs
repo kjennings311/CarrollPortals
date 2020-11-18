@@ -374,6 +374,9 @@ namespace Carroll.Data.Services.Helpers
                         _message.EmailTo.Add(workflowemails.RMEmail);
                     }
 
+                    // MOLDNotification@ARIUMLiving.com
+                    _message.EmailTo.Add("MOLDNotification@ARIUMLiving.com");
+
                     if (!string.IsNullOrEmpty(workflowemails.PropertyMgrEmail))
                 {
                     _message.EmailTo.Add(workflowemails.PropertyMgrEmail);
