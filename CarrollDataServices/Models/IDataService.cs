@@ -59,12 +59,16 @@ namespace Carroll.Data.Services.Models
         dynamic GetHrFormCount();
 
         List<CarrollPosition> GetAllCarrollPositions();
+
+        List<CarrollPosition> GetAllCarrollPositionsByType(string Type);
+
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
 
         List<proc_getcontactsforexcel_Result1> GetAllContactsForExcel();
         List<proc_getequitypartnersforexcel_Result1> GetAllEquityPartnersForExcel();
         List<proc_getpropertiesforexcelupdate_Result> GetAllPropertiesForExcel();
         dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser);
+        dynamic UpdatePayRollRejectionStatus(string status, string reason, string refid, string refuser);
         dynamic ImportContactTableFromExcel(DataTable dt);
         dynamic ImportEquityPartnerTableFromExcel(DataTable dt);
         dynamic ImportPropertiesTableFromExcel(DataTable dt);
@@ -74,6 +78,8 @@ namespace Carroll.Data.Services.Models
         string GetPropertyNumberNameManager(string PropertyNumber);
         dynamic GetHrFormLogActivity(string FormType, string RecordId);
         dynamic GetNewHireRejectionDetails(string Refid);
+        dynamic GetPayRollRejectionDetails(string Refid);
+        
         void ErrorLog(ErrorLog errorLog);
         dynamic GetDynamicLinkStatus(Guid refid);
         dynamic GetAllContactsHighRolesInclude(string search);

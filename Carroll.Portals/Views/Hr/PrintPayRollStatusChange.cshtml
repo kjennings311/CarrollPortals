@@ -18,6 +18,8 @@
 </head>
 <body class="document">
     <div class="page">
+
+      
         <div id="page_1" style="width:96%;">
             <img style="margin-left: 33%;" src="/img/payroll.png" id="p1img1">
             <P class="p0 ft0" style="    margin-top: 5PX;
@@ -489,6 +491,33 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
             </table>
         </div>
 
+        @if (Model.printActivity.rejection != null && Model.printActivity.rejection.Count > 0)
+        {
+
+            <div class="col-md-12 rejectionblock" style="text-align:center;">
+                <h2> Rejection  </h2>
+                <br />
+                <table id="rejectionlog" class="table table-striped col-md-6">
+                    <thead>
+                        <tr>
+                            <th style="width:15%"> Rejected By </th>
+                            <th style="width:60%;text-align:center">Reason </th>
+                            <th style="width:25%;text-align:center"> Date Time </th>
+                        </tr>
+                    </thead>
+                    <tbody id="rjmetadata">
+
+                        @foreach (var item in Model.printActivity.rejection)
+                        {
+                            <tr> <td> @item.name  </td> <td>  @item.rejectionDesc </td>  <td> @item.datetime</td>  </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        }
 
 
 

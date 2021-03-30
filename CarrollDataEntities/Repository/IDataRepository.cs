@@ -56,8 +56,10 @@ namespace Carroll.Data.Entities.Repository
 
         dynamic InsertResidentReferralContact(ResidentContactInformation mlh,List<ResidentContactInformation_Residents> rrs,List<ResidentContactInformation_OtherOccupants> ors,List<ResidentContactInformation_Vehicles> vhs);
         dynamic UpdateNewHireRejectionStatus(string status, string reason, string refid, string refuser);
-
+        dynamic UpdatePayRollRejectionStatus(string status, string reason, string refid, string refuser);
         dynamic GetNewHireRejectionDetails(string Refid);
+        dynamic GetPayRollRejectionDetails(string Refid);
+        
         PrintResidentContact GetResidentReferralContact(Guid riderid);
 
         void LogActivity(string ActivityDesc, string UserName, string UserGuid, string RecordId, string ActivityStatus);
@@ -68,6 +70,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic UpdateRequisitionRequest(Guid Refid, string RequisitionNumber, string notes, DateTime dateposted);
         string GetPropertyManager(Guid PropertyId);
         List<CarrollPosition> GetAllCarrollPositions();
+        List<CarrollPosition> GetAllCarrollPositionsByType(string Type);
         List<CarrollPayPeriod> GetAllCarrollPayPerilds();
 
 

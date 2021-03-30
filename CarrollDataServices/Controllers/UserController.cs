@@ -61,6 +61,22 @@ namespace Carroll.Data.Services.Controllers
             return _roles;
         }
 
+
+        [CustomActionFilter]
+        [ActionName("GetPositionTypesForSelect")]
+        public List<KeyValuePair> GetPositionTypesForSelect()
+        {
+            List<KeyValuePair> _roles = new List<KeyValuePair>();
+            //us
+                _roles.Add(new KeyValuePair("Corporate", "Corporate"));
+            _roles.Add(new KeyValuePair("Property", "Property"));
+
+            return _roles;
+        }
+
+
+
+
         [CustomActionFilter]
         [ActionName("GetUsersForSelect")]
         public List<KeyValuePair> GetUsersForSelect()

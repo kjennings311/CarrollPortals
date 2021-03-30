@@ -19,12 +19,97 @@
 
 @{ Html.RenderPartial("HrFormLogActivity"); }
 
+<div class="modal fade bs-example-modal-lg reviewmodal" id="reviewmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:40%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h1 class="modal-title" style="font-weight:bold;text-align: center;
+    color: black;" id="gridSystemModalLabel">
+                    Rejecting ?
+                </h1>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 regionalblock" id="preregionalblock" style="text-align:center;display:none;">
+                        <div class="col-md-12">  <h2 class="text-center"> Are you sure you want to reject ?  </h2></div>
+
+                        <div class="col-md-12" style="text-align:center; margin-top:30px; ">
+                            <button class="btn btn-danger" id="preregionalreject">
+                                YES
+                            </button>
+                            <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"> NO </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-12 regionalblock" id="regionalblock" style="text-align:center;display:none;">
+                        <div class="col-md-5"> Rejection Reason :</div>
+                        <textarea cols="40" rows="5" class="col-md-6" id="reason"></textarea>
+                        <br />
+                        <p style="clear: both;
+    padding-top: 20px !important;
+    text-align: center;color:red;    float: right;
+    margin-right: 25%;" id="reasonerror"></p>
+                        <div class="col-md-12" style="text-align:center; margin-top:50px; ">
+                            <button class="btn btn-danger" id="regionalreject">
+                                Reject
+                            </button>
+                            <button type="button" class=" btn btn-primary" data-dismiss="modal" aria-label="Close"> Discard </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 managerblock" id="managerblock" style="display:none; text-align:center">
+
+                        <button class="btn btn-danger" id="resubmit">
+                            Resubmit
+                        </button>
+                        <button type="button" id="hrcancel" class="btn btn-primary"> Cancel </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg rejectionmodal" id="rejectionmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" style="width:40%" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 regionalblock" id="regionalblock" style="text-align:center">
+                        <h3> Rejection Details :  </h3>
+                        <p style="text-align:left;"> Rejected By : <span id="rjby">  </span></p>
+                        <p style="text-align:left;"> Rejected Reason : <span id="rjreason">  </span></p>
+                        <p style="text-align:left;"> Rejected Date Time :<span id="rjdatetime">  </span></p>
+
+                        <div id="signaturemetadata"> </div>
+                    </div>
+
+                    <div class="col-md-12 managerblock" id="managerblock">
+
+
+                        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close"> Close </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 200px 15px 7px;">
 
-                <h1 style="color:black;text-transform:uppercase"> <b> Payroll Status Change  </b></h1>
+                <h1 style="color:white;text-transform:uppercase"> <b> Payroll Status Change  </b></h1>
                 <input type="hidden" id="pageidname" value="payroll" />
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "asset manager")
                 {
@@ -33,9 +118,9 @@
 
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                <a disabled="disabled" class="btnDelete" href="#">
-                    <i class="fa fa-trash"></i> Delete
-                </a>*@
+                            <a disabled="disabled" class="btnDelete" href="#">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>*@
 
                         <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
                             <i class="fa fa-plus-circle"></i> New
@@ -58,7 +143,7 @@
                                                                 </h1>*@
                             </div>
                             <div class="modal-body">
-                                <div class="row"   style="padding: 20px;">
+                                <div class="row" style="padding: 20px;">
                                     <form id="submitform" onsubmit="return false;">
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
@@ -68,13 +153,15 @@
 margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                             <P class="p1 ft1 empnameerror lblerror" style="margin-top:5px !important">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" /> </P>
                                             <p class="p1 ft1" style="margin-top:10px;">
-                                                <span>                                                 <span class="chkcorporateerror chkpropertyerror lblerror">
-                                                    Location: </span> <input type="radio" id="chkcorporate" value="1" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span>
+                                                    <span class="chkcorporateerror chkpropertyerror lblerror">
+                                                        Location:
+                                                    </span> <input type="radio" id="chkcorporate" value="1" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <input style="margin-left:12px" type="radio" id="chkproperty" value="1" name="loc" /> Property
                                                 </span>
                                                 <span class="c0 propertyerror" id="divproperty" style="display:none; padding:20px;">
 
-                                                    Property : <select type="text" id="location"></select>
+                                                    Property : <select type="text" seloption="" id="location"></select>
                                                 </span>
                                             </p>
 
@@ -90,12 +177,12 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                                                 <div style="width:100%;display:none;" id="divpropertychange">
                                                     <P class="p4 ft5">Property Change</P>
-                                                    <P class="p5 ft6 effectivedateerror"> Change Effective Date : <input type="text" class="date-mask" id="effectivedate" /> </P>
+                                                    <P class="p5 ft6 effectivedateerror"> Change Effective Date : <input type="date" id="effectivedate" /> </P>
                                                     <P class="p5 ft6"> Property Transfer:</P>
                                                     <P class="p5 ft6"> <strong>From : </strong></P>
-                                                    <P class="p6 ft1 frompropnumerror"> Property # : <input style="display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input  style="display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input  style="display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
+                                                    <P class="p6 ft1 frompropnumerror"> Property # : <input style="display:inline;width:10%; " type="text" id="frompropnum" class="" /> Name: <input style="display:inline; width:35%; " type="text" id="frompropname" class="" /> Manager:  <input style="display:inline;width:25%; " type="text" id="frommanager" class="" /></P>
                                                     <P class="p5 ft6"><strong> To : </strong> </P>
-                                                    <P class="p6 ft1 topropnumerror"> Property # : <input disabled style="display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input disabled style="display:inline;width:35%; "  type="text" id="topropname" class="" /> Manager: <input disabled style="display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
+                                                    <P class="p6 ft1 topropnumerror"> Property # : <input disabled style="display:inline;width:10%;  " type="text" id="topropnum" class="" /> Name: <input disabled style="display:inline;width:35%; " type="text" id="topropname" class="" /> Manager: <input disabled style="display:inline;width:25%; " disabled type="text" id="tomanager" class="" /></P>
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
 
@@ -145,7 +232,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         <p class="c1">
                                                             <span class="c0 totitleerror lblerror">Title:  <select id="totitle"> </select> </span>
                                                         </p>
-                                                        <p class="c1"> 
+                                                        <p class="c1">
                                                             <span class="c0 toexempterror tononexempterror lblerror">Position: <input type="radio" style="margin-left:17%;" value="1" name="texempt" id="toexempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="texempt" id="tononexempt" value="1" />  Non-exempt </span>
                                                         </p>
 
@@ -164,7 +251,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                     <TABLE cellpadding=0 cellspacing=0 class="t0">
 
                                                         <TR>
-                                                            <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1 beginpayperioderror">Beginning Pay Period Effective: <select id="beginpayperiod">  </select>  </SPAN> <br /> (pay and position changes can take place at the beginning of a pay period)</P></TD>
+                                                            <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1 beginpayperioderror">Beginning Pay Period Effective: <select id="beginpayperiod"> <option> Select  </option>  </select>  </SPAN> <br /> (pay and position changes can take place at the beginning of a pay period)</P></TD>
                                                             <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
                                                         </TR>
                                                     </TABLE>
@@ -265,7 +352,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             </option>
                                                         </select>  <span style="display:none;" class="purposeothererror lblerror" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
                                                     </P>
-                                                    <P class="p20 ft1">  Begin: <input type="text" class="date-mask" style="width:20%;" id="leavebegin" /> Expected End:<input type="text" class="date-mask" class="date-mask" id="leaveend" style="width:20%;" /> <span class="ptobalanceerror lblerror" > PTO balance: </span><input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
+                                                    <P class="p20 ft1">  Begin: <input type="date" style="width:20%;" id="leavebegin" /> <span class="enderror"> Expected End: </span>  <input type="date" class="date-mask" id="leaveend" style="width:20%;" /> <span class="ptobalanceerror lblerror"> PTO balance: </span><input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
 
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
@@ -537,7 +624,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             /*font-weight:bold !important;*/
         }
 
-     
+
 
         #page_1 {
             position: relative;
@@ -1004,44 +1091,35 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
 @section ipadstyles
 {
-
-
     <style type="text/css">
-          @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
-            {
-              #p1img1
-              {
-                  margin-left:28% !important;
-                  margin-top:0px !important;
-              }
-                .ft1
-                {
-                    font-size:13px !important;
-                }
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
+            #p1img1 {
+                margin-left: 28% !important;
+                margin-top: 0px !important;
+            }
 
-                #msignature
-                {
-                    width:54% !important;
-                }
+            .ft1 {
+                font-size: 13px !important;
+            }
 
-                #esignature
-                {
-                    width: 55% !important;
-                }
+            #msignature {
+                width: 54% !important;
+            }
 
-                #mdate {
-                    margin-left: 3px !important;
-                }                
-                .ft0
-                {
-                    margin-left:-45px !important;
+            #esignature {
+                width: 55% !important;
+            }
 
-                }
+            #mdate {
+                margin-left: 3px !important;
+            }
 
-               
-}
-        </style>
+            .ft0 {
+                margin-left: -45px !important;
+            }
         }
+    </style>
+}
 
 @section Scripts
 {
@@ -1065,7 +1143,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 $("#location").attr('seloption', '');
                 document.getElementById("submitform").reset();
                 $("#esignature,#edate,#mdate").attr('disabled', true);
-              //  document.getElementById("mdate").valueAsDate = new Date();
+                //  document.getElementById("mdate").valueAsDate = new Date();
 
                 $("#divpropertychange,#divpaychange,#divlaborallocation,#divleaveabsence").hide();
 
@@ -1103,8 +1181,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
             });
 
-            function UpdateRate()
-            {
+            function UpdateRate() {
                 if ($("#toannualsalary").is(':checked')) {
 
                     $("#totext").html(" / annually");
@@ -1134,7 +1211,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             });
 
 
-          //  document.getElementById("mdate").valueAsDate = new Date();
+            //  document.getElementById("mdate").valueAsDate = new Date();
 
 
             $(".showchange").change(function (e) {
@@ -1245,10 +1322,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 UpdateRate();
             });
 
-            $("#toexempt").change(function ()
-            {
-                if ($("#toexempt").is(":checked"))
-                {
+            $("#toexempt").change(function () {
+                if ($("#toexempt").is(":checked")) {
                     $("#toannualsalary").prop("checked", true);
                     $("#tosalhourly").prop("checked", false);
                 }
@@ -1257,10 +1332,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
             });
 
-            $("#tononexempt").change(function ()
-            {
-                if ($("#tononexempt").is(":checked"))
-                {
+            $("#tononexempt").change(function () {
+                if ($("#tononexempt").is(":checked")) {
                     $("#toannualsalary").prop("checked", false);
                     $("#tosalhourly").prop("checked", true);
                 }
@@ -1283,17 +1356,17 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                             alert("Invalid Property Code");
                             // CHANGE MADE BY PN 10/7/2020 FIXING ISSUES WITH PREPOPULATION ON FROM PROPERTY FIELD.. CHANGING PRE POPULATE TO POPULATE TO PROPERTY
-                          //  $("#frompropname ").val('');
-                          //  $("#frommanager").val('');
+                            //  $("#frompropname ").val('');
+                            //  $("#frommanager").val('');
                             $("#topropname ").val('');
                             $("#tomanager").val('');
                         }
                         else {
                             var values = data.split(",");
                             // CHANGE MADE BY PN 10/7/2020 FIXING ISSUES WITH PREPOPULATION ON FROM PROPERTY FIELD.. CHANGING PRE POPULATE TO POPULATE TO PROPERTY
-                           // $("#frompropname ").val(values[0]);
-                           // $("#frommanager").val(values[1]);
-                           // $("#frompropnum").val(values[2]);
+                            // $("#frompropname ").val(values[0]);
+                            // $("#frommanager").val(values[1]);
+                            // $("#frompropnum").val(values[2]);
                             $("#topropname ").val(values[0]);
                             $("#tomanager").val(values[1]);
                             $("#topropnum").val(values[2]);
@@ -1335,8 +1408,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 e.preventDefault();
 
-                if ($("#chkcorporate").is(":checked"))
-                {
+                if ($("#chkcorporate").is(":checked")) {
                     iscorporate = true;
 
                     $("#divproperty").hide();
@@ -1350,8 +1422,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 }
 
-                if ($("#chkproperty").is(":checked"))
-                {
+                if ($("#chkproperty").is(":checked")) {
                     iscorporate = false;
                     $("#divproperty").show();
                     $("#chkpropertychange,#chklaborallocation").prop("disabled", false);
@@ -1359,8 +1430,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 }
 
-                $(".showchange").each(function ()
-                {
+                $(".showchange").each(function () {
                     if ($(this).is(':checked')) {
 
                         $("#" + $(this).attr('data-div')).show();
@@ -1371,7 +1441,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 });
 
-                
+
 
             });
 
@@ -1382,8 +1452,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 }
             });
 
-            $("#Submit").click(function (e)
-            {
+            $("#Submit").click(function (e) {
 
                 e.preventDefault();
 
@@ -1393,16 +1462,14 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 $("input,select,textarea").removeClass('has-error');
                 $("#status").html('');
 
-                if ($("#empname").val() == "")
-                {
+                if ($("#empname").val() == "") {
                     errormsgsummary += "<li> Please Enter Employee Name </li>";
                     $(".empnameerror").addClass('has-error');
                     if (control == "")
                         control = $("#empname");
                 }
 
-                if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false )
-                {
+                if ($("#chkcorporate").is(":checked") == false && $("#chkproperty").is(":checked") == false) {
                     errormsgsummary += "<li> Please  Select Corporate or Property Option </li>";
                     $(".chkcorporateerror").addClass('has-error');
                     if (control == "")
@@ -1428,18 +1495,15 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
 
 
-                if ($("#chkpropertychange").is(":checked"))
-                {
-                    if ($("#effectivedate").val() == "")
-                    {
+                if ($("#chkpropertychange").is(":checked")) {
+                    if ($("#effectivedate").val() == "") {
                         errormsgsummary += "<li> Please Enter Effective Date </li>";
                         $(".effectivedateerror").addClass('has-error');
                         if (control == "")
                             control = $("#effectivedate");
                     }
 
-                    if ($("#frompropnum").val() == "")
-                    {
+                    if ($("#frompropnum").val() == "") {
                         errormsgsummary += "<li> Please Enter From Property Number </li>";
                         $(".frompropnumerror").addClass('has-error');
                         if (control == "")
@@ -1456,26 +1520,22 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 }
 
-                if ($("#chkpaychange").is(":checked"))
-                {
-                    if ($("#fromtitle").val() == "")
-                    {
+                if ($("#chkpaychange").is(":checked")) {
+                    if ($("#fromtitle").val() == "") {
                         errormsgsummary += "<li> Please Enter From Title </li>";
                         $(".fromtitleerror").addClass('has-error');
                         if (control == "")
                             control = $("#fromtitle");
                     }
 
-                    if (!$("#fromexempt").is(":checked") && !$("#fromnonexempt").is(":checked"))
-                    {
+                    if (!$("#fromexempt").is(":checked") && !$("#fromnonexempt").is(":checked")) {
                         errormsgsummary += "<li> Please Select From Position Options </li>";
                         $(".fromexempterror").addClass('has-error');
                         if (control == "")
                             control = $("#fromexempt");
                     }
 
-                    if (!$("#fromfullstatus").is(":checked") && !$("#frompartstatus").is(":checked"))
-                    {
+                    if (!$("#fromfullstatus").is(":checked") && !$("#frompartstatus").is(":checked")) {
                         errormsgsummary += "<li> Please Select From Status Options </li>";
                         $(".fromfullstatuserror").addClass('has-error');
                         if (control == "")
@@ -1483,8 +1543,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     }
 
 
-                    if (!$("#fromannualsalary").is(":checked") && !$("#fromsalhourly").is(":checked"))
-                    {
+                    if (!$("#fromannualsalary").is(":checked") && !$("#fromsalhourly").is(":checked")) {
                         errormsgsummary += "<li> Please Select From Wage/Salary Options </li>";
                         $(".fromannualsalaryerror").addClass('has-error');
                         if (control == "")
@@ -1529,8 +1588,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     }
 
 
-                    if ($("#torate").val() == "")
-                    {
+                    if ($("#torate").val() == "") {
                         errormsgsummary += "<li> Please Enter To Rate </li>";
                         $(".torateerror").addClass('has-error');
                         if (control == "")
@@ -1539,8 +1597,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                 }
 
-                if ($("#chklaborallocation").is(":checked"))
-                {
+                if ($("#chklaborallocation").is(":checked")) {
 
                     if ($("#prop1per").val() == "" /*&& $("#la_Prop2per").val() == ""*/) {
                         errormsgsummary += "<li> Please Enter Division Of Labor Percentage  </li>";
@@ -1673,11 +1730,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         p3 = parseFloat($("#prop3per").val());
                     var sum = parseFloat(p1) + parseFloat(p2) + parseFloat(p3);
 
-                    if (sum != 100)
-                    {
-                        
-                        if ($("#prop1per").val() != "" || $("#prop1").val() == "")
-                        {
+                    if (sum != 100) {
+
+                        if ($("#prop1per").val() != "" || $("#prop1").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage1 </li>";
                             $(".la_Prop1error").addClass('has-error');
@@ -1695,12 +1750,11 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             }
 
 
-                           
+
                         }
 
 
-                        if ($("#prop2per").val() != "" && $("#prop2").val() == "")
-                        {
+                        if ($("#prop2per").val() != "" && $("#prop2").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage2 </li>";
                             $(".prop2error").addClass('has-error');
@@ -1721,8 +1775,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         }
 
 
-                        if ($("#prop3per").val() != "" && $("#prop3").val() == "")
-                        {
+                        if ($("#prop3per").val() != "" && $("#prop3").val() == "") {
 
                             errormsgsummary += "<li> Please Enter Property Name for  Percentage3 </li>";
                             $(".prop3error").addClass('has-error');
@@ -1754,44 +1807,49 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
 
 
-                if ($("#chkleave").is(":checked"))
-                {
-                    if (!$("#chkfmlayes").is(":checked") && !$("#chkfmlano").is(":checked"))
-                    {
+                if ($("#chkleave").is(":checked")) {
+                    if (!$("#chkfmlayes").is(":checked") && !$("#chkfmlano").is(":checked")) {
                         errormsgsummary += "<li> Please Select FMLA Eligible </li>";
                         $(".chkfmlayeserror").addClass('has-error');
                         if (control == "")
                             control = $("#chkfmlayes");
                     }
 
-                    if (!$("#chkbenefityes").is(":checked") && !$("#chkbenefitno").is(":checked"))
-                    {
+                    if (!$("#chkbenefityes").is(":checked") && !$("#chkbenefitno").is(":checked")) {
                         errormsgsummary += "<li> Please Select enrolled benefits? </li>";
                         $(".chkbenefityeserror").addClass('has-error');
                         if (control == "")
                             control = $("#chkbenefityes");
                     }
 
-                    if ($("#purpose").val() == "")
-                    {
+                    if ($("#purpose").val() == "") {
                         errormsgsummary += "<li> Please Choose Leave Purpose </li>";
                         $(".purposeerror").addClass('has-error');
                         if (control == "")
                             control = $("#purpose");
                     }
 
-                    if ($("#purpose").val() == "Other" && $("#purposeother").val() =="")
-                    {
+                    if ($("#purpose").val() == "Other" && $("#purposeother").val() == "") {
                         errormsgsummary += "<li> Please enter Other Reason </li>";
                         $(".purposeothererror").addClass('has-error');
                         if (control == "")
                             control = $("#purposeother");
                     }
 
-                    if ($("#leavebegin").val() == "")
-                    {
+                    if ($("#leavebegin").val() == "") {
                         errormsgsummary += "<li> Please Enter Leave Begin </li>";
                         $(".leavebeginerror").addClass('has-error');
+                        if (control == "")
+                            control = $("#leavebegin");
+                    }
+
+
+                    var startDate = new Date($('#leavebegin').val());
+                    var endDate = new Date($('#leaveend').val());
+                    if (startDate > endDate) {
+                        errormsgsummary += "<li> Begin Date can not be greater than End Date </li>";
+                        alert("Begin Date cannot be after the End Date ");
+                        $(".enderror").addClass('has-error');
                         if (control == "")
                             control = $("#leavebegin");
                     }
@@ -1806,8 +1864,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     //        control = $("#leaveend");
                     //}
 
-                    if ($("#ptobalance").val() == "")
-                    {
+                    if ($("#ptobalance").val() == "") {
                         errormsgsummary += "<li> Please Enter PTO Balance </li>";
                         $(".ptobalanceerror").addClass('has-error');
                         if (control == "")
@@ -1823,8 +1880,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 //        control = $("#notes1");
                 //}
 
-                if ($("#msignature").val() == "")
-                {
+                if ($("#msignature").val() == "") {
                     errormsgsummary += "<li> Please Enter Supervisor's Signature  </li>";
 
                     $(".msignatureerror").addClass('has-error');
@@ -1832,18 +1888,16 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         control = $("#msignature");
                 }
 
-                if (errormsgsummary != "")
-                {
+                if (errormsgsummary != "") {
 
-                  //  $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
+                    //  $("#status").html('<ul style="float: left;text-align:left;color: red;"> ' + errormsgsummary + ' </ul> ');
                     $("#status").html('<ul style="float: left;text-align:left;color: red;"> Please fill out all the missing fields </ul> ');
 
-                  //  setTimeout(ScrollToElement(control), 3000);
+                    //  setTimeout(ScrollToElement(control), 3000);
                     $("#Submit").prop('disabled', false);
                     return false;
                 }
-                else
-                {
+                else {
 
                     var insertForm = new FormData();
                     insertForm.append('empname', $("#empname").val());
@@ -1855,8 +1909,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     console.log('corpoerate change insert ' + iscorporate);
                     insertForm.append('iscorporate', iscorporate);
 
-                    if ($("#chkpropertychange").is(":checked"))
-                    {
+                    if ($("#chkpropertychange").is(":checked")) {
                         insertForm.append('showproperty', 'true');
                     }
                     else {
@@ -1918,7 +1971,12 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         insertForm.append('fromstatus', 'PART');
                     }
 
-
+                    if (insertoredit == false) {
+                        insertForm.append('isedit', '1');
+                        insertForm.append('refid', leaseid);
+                    }
+                    else
+                        insertForm.append('isedit', '0');
 
                     if ($("#fromannualsalary").is(":checked")) {
                         insertForm.append('fromwage', 'Annual');
@@ -1985,8 +2043,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     insertForm.append('leaveend', $("#leaveend").val());
                     insertForm.append('ptobalance', $("#ptobalance").val());
                     insertForm.append('notes1', $("#notes1").val().replace(/\n/g, ""));
-                
-                 
+
+
                     insertForm.append('esignature', $("#esignature").val());
                     insertForm.append('edate', $("#edate").val());
                     insertForm.append('mdate', $("#mdate").val());
@@ -1999,46 +2057,534 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     $(".alert").html('Processing');
                     $('#toastnotification').modal('show');
                     $("#Submit").prop('disabled', false);
-                 
-                        $.ajax({
-                            url: $BaseApiUrl + "api/data/InsertPayRollStatusChangeNotice",
-                            type: 'POST',
-                            dataType: "JSON",
-                            processData: false,
-                            contentType: false,
-                            data: insertForm,
-                            success: function (data) {
-                                // To-do code if ajax request is successful
 
-                                if (data['error'] == false) {
-                                    leaseid = data['insertedId'];
-                                    GetAllHRFORMs('PayRollChange');
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertPayRollStatusChangeNotice",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
 
-                                    $("#status").html('');
-                                    document.getElementById("submitform").reset();
+                            if (data['error'] == false) {
+                                leaseid = data['insertedId'];
+                                GetAllHRFORMs('PayRollChange');
 
-                                    ShowToastNotification('Record Successfully Updated', 3);
+                                $("#status").html('');
+                                document.getElementById("submitform").reset();
 
-                                    setTimeout(function () {
+                                ShowToastNotification('Record Successfully Updated', 3);
 
-                                        $('#toastnotification').modal('hide');
-                                    }, 3000);
-                                }
-                                else {
-                                    $("#status").html(data['errorMsg']);
+                                setTimeout(function () {
 
-                                }
-
-
-                            },
-                            error: function (ts) {
-                                alert('error' + ts.exceptionMessage);
+                                    $('#toastnotification').modal('hide');
+                                }, 3000);
                             }
-                        });
-                    
+                            else {
+                                $("#status").html(data['errorMsg']);
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.exceptionMessage);
+                        }
+                    });
+
                 }
 
             });
+
+            //  reject clicked
+            $(document).on('click', ".reject", function () {
+                leaseid = $(this).attr('data-ref');
+                $(".reviewmodal").modal('show');
+
+
+                if ($("#UserR").val() == "hr")
+                //  if($("#UserR").val() == "Administrator")
+                {
+                    console.log($("#UserR").val() + "hr")
+                    $("#managerblock").show();
+                    $("#regionalblock").hide();
+                }
+                else {
+                    console.log($("#UserR").val() + "other")
+                    $("#managerblock").hide();
+                    $("#preregionalblock").show();
+                    $("#regionalblock").hide();
+                    $("#reason").val('');
+                }
+            });
+
+            $("#preregionalreject").click(function () {
+
+                $("#preregionalblock").hide();
+                $("#regionalblock").show();
+                $("#reason").val('');
+            });
+
+            // regional rejected
+            $(document).on('click', ".rejectednotes", function () {
+                leaseid = $(this).attr('data-ref');
+                var insertForm = new FormData();
+
+                insertForm.append('refid', leaseid);
+                insertForm.append('CreatedByName', $("#CreatedByName").val());
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").show();
+                }
+
+                $('.reviewmodal').modal('hide');
+
+                $(".alert").html('Processing');
+
+                $('#toastnotification').modal('show');
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/RejectionDetailsForPayRoll",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if ($("#divprocessingbtn").length > 0) {
+                            $("#divprocessingbtn").hide();
+                        }
+
+                        $('#toastnotification').modal('hide');
+                        $('#rejectionmodal').modal('show');
+
+                        console.log(data);
+
+                        $("#rjby").html(data.newhiredetails.firstName + data.newhiredetails.lastName);
+                        $("#rjreason").html(data.newhiredetails.rejectedReason);
+                        $("#rjdatetime").html(data.newhiredetails.rejectedDateTime);
+                        var signm = "<h3> Signature Meta Data : </h3>";
+
+                        // for emp
+                        if (data.emp != null) {
+                            signm += "<h3> Employee </h3><p> Browser : " + data.emp.browserInformation + "   </p><p> Ip Address : " + data.emp.ipAddress + "   </p><p> Date Time : " + data.emp.clientdatetime + "   </p>";
+                        }
+                        // for pm
+                        if (data.pm != null) {
+                            signm += "<h3> Property Manager </h3><p> Browser : " + data.pm.browserInformation + "   </p><p> Ip Address : " + data.pm.ipAddress + "   </p><p> Date Time : " + data.pm.clientdatetime + "   </p>";
+                        }
+                        // regional
+                        if (data.regional != null) {
+                            signm += "<h3> Regional Manager </h3><p> Browser : " + data.regional.browserInformation + "   </p><p> Ip Address : " + data.regional.ipAddress + "   </p><p> Date Time : " + data.regional.clientdatetime + "   </p>";
+                        }
+
+                        $("#rjdatetime").html(signm);
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.exceptionMessage);
+                    }
+                });
+
+            });
+
+
+
+            // regional rejected
+            $(document).on('click', "#regionalreject ", function () {
+
+                if ($("#reason").val().replace(/\n/g, "") == "") {
+                    $("#reason").addClass('has-error');
+
+                    $("#reasonerror").addClass('has-error').html('Please enter rejection reason');
+
+                    return false;
+                }
+                var insertForm = new FormData();
+                insertForm.append('status', 'reject');
+                insertForm.append('reason', $("#reason").val().replace(/\n/g, ""));
+                insertForm.append('refid', leaseid);
+                insertForm.append('CreatedBy', $("#CreatedBy").val());
+                insertForm.append('CreatedByName', $("#CreatedByName").val());
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").show();
+                }
+
+                $('.reviewmodal').modal('hide');
+
+                $(".alert").html('Processing');
+                $('#toastnotification').modal('show');
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/payrollrejection",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true) {
+                            GetAllHRFORMs('PayRollChange');
+                            $(".alert").html('Payroll Rejected Successfully');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.exceptionMessage);
+                    }
+                });
+
+            });
+
+            // Cancelled by HR
+
+            // regional rejected
+            $(document).on('click', "#hrcancel ", function () {
+                var insertForm = new FormData();
+                insertForm.append('status', 'cancell');
+                insertForm.append('reason', $("#reason").val());
+                insertForm.append('refid', leaseid);
+                insertForm.append('CreatedBy', $("#CreatedBy").val());
+                insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                if ($("#divprocessingbtn").length > 0) {
+                    $("#divprocessingbtn").show();
+                }
+
+                $('.reviewmodal').modal('hide');
+
+                $(".alert").html('Processing');
+                $('#toastnotification').modal('show');
+
+                $.ajax({
+                    url: $BaseApiUrl + "api/data/payrollrejection",
+                    type: 'POST',
+                    dataType: "JSON",
+                    processData: false,
+                    contentType: false,
+                    data: insertForm,
+                    success: function (data) {
+                        // To-do code if ajax request is successful
+
+                        if (data == true) {
+                            GetAllHRFORMs('PayRollChange');
+                            $(".alert").html('Payroll Cancelled Successfully');
+                            if ($("#divprocessingbtn").length > 0) {
+                                $("#divprocessingbtn").hide();
+                            }
+                            $('#toastnotification').modal('show');
+
+                            setTimeout(function () {
+
+                                $('#toastnotification').modal('hide');
+                            }, 3000);
+                        }
+                        else {
+                            $("#status").html(data);
+                        }
+
+
+                    },
+                    error: function (ts) {
+                        alert('error' + ts.exceptionMessage);
+                    }
+                });
+            });
+
+            // Resubmit
+            var insertoredit = true;
+            var leaseid = "";
+
+            $(document).on('click', "#resubmit,.resubmit", function () {
+
+                var eid = $(this).attr('data-ref');
+                insertoredit = false;
+
+                if (eid != "")
+                    leaseid = eid;
+
+                $(".alert").html('Processing');
+                $('#toastnotification').modal('show');
+
+                $.get($BaseApiUrl + "api/Data/GetPayRollStatusChangeNotice?riderid=" + leaseid, function (data) {
+
+
+                    if (data != "") {
+
+                        LoadPayRoles(); LoadHrPositions();
+
+
+                        $('#myModal').modal('show');
+                        $("#empname").val(data.employeeName);
+                        $("#location").val();
+                        $("#empemail").val(data.employeeEmail);
+                     
+
+
+                        if (data.isCorporate == false)
+                        {
+                            $("#chkproperty").prop("checked", true);
+                           
+                            iscorporate = false;
+                            $("#divproperty").show();
+                            $("#location").attr('seloption', data.property);
+
+                            //  LoadPropertiesForSelect(true,"location");
+                        }
+                        else
+                        {
+                            $("#chkcorporate").prop("checked", true);
+                            iscorporate = true;
+                            $("#divproperty").hide();
+                        }
+
+
+                        if (data.showAllowances == "false")
+                        {
+                            $("#chkAllowances").prop("checked", false);
+                        }
+                        else
+                        {
+                            $("#chkAllowances").prop("checked", true);
+                        }
+
+
+
+
+                        if (data.showPayChange == "false") {
+                            $("#chkpaychange").prop("checked", false);
+                            $("#divpaychange").hide();
+                        }
+                        else {
+                            $("#chkpaychange").prop("checked", true);
+                            $("#divpaychange").show();
+                        }
+
+
+
+                        if (data.showDivisionOfLabor == "false")
+                        {
+                            $("#chklaborallocation").prop("checked", false);
+                            $("#divlaborallocation").hide();
+                        }
+                        else {
+                            $("#chklaborallocation").prop("checked", true);
+                            $("#divlaborallocation").show();
+                        }
+
+
+
+
+                        if (data.showLeaves == "false") {
+                            $("#chkleave").prop("checked", false);
+                            $("#divleaveabsence").hide();
+                        }
+                        else {
+                            $("#chkleave").prop("checked", true);
+                            $("#divleaveabsence").show();
+                        }
+
+
+                        if (data.showPropertyChange == "false") {
+                            $("#chkpropertychange").prop("checked", false);
+                            $("#divpropertychange").hide();
+                        }
+                        else {
+
+                            console.log(data.changeEffectiveDate);
+
+                            var d = data.changeEffectiveDate.substring(5, 7) + "-" + data.changeEffectiveDate.substring(8, 10) + "-" + data.changeEffectiveDate.substring(0, 4);
+                            //    $("#startdate").val(d);
+
+
+                            console.log(d);
+                            $("#effectivedate").val(d);
+
+
+                            $("#divpropertychange").show();
+                            $("#chkpropertychange").prop("checked", true);
+                        }
+
+                        $("#frompropnum").val(data.fromPropNum);
+                        $("#frompropname").val(data.fromPropName);
+                        $("#frommanager").val(data.fromManager);
+                        $("#topropnum").val(data.toPropNum);
+                        $("#topropname").val(data.toPropName);
+                        $("#tomanager").val(data.toManager);
+
+
+                        $("#paychangeto").val(data.payChangeTo);
+                        $("#paychangefrom").val(data.payChangeFrom);
+                        setTimeout(function () {
+
+                            $("#fromtitle").val(data.fromTitle);
+                            $("#totitle").val(data.toTitle);
+
+
+                        }, 3000);
+
+
+
+                        if (data.fromPosition == "NonExempt") {
+                            $("#fromnonexempt").prop('checked', true);
+                        }
+                        else {
+                            $("#fromexempt").prop('checked', true);
+                        }
+
+
+                        if (data.fromStatus == "PART") {
+                            $("#frompartstatus").prop('checked', true);
+                        }
+                        else {
+                            $("#fromfullstatus").prop('checked', true);
+                        }
+
+                        if (data.fromWageSalary == "Hourly") {
+                            $("#fromsalhourly").prop('checked', true);
+                        }
+                        else {
+                            $("#fromannualsalary").prop('checked', true);
+                        }
+
+                        $("#fromrate").val(data.fromRate);
+
+
+                        if (data.toPosition == "NonExempt") {
+                            $("#tononexempt").prop('checked', true);
+                        }
+                        else {
+                            $("#toexempt").prop('checked', true);
+                        }
+
+
+                        if (data.toStatus == "PART") {
+                            $("#topartstatus").prop('checked', true);
+                        }
+                        else {
+                            $("#tofullstatus").prop('checked', true);
+                        }
+
+                        if (data.toWageSalary == "Hourly") {
+                            $("#tosalhourly").prop('checked', true);
+                        }
+                        else {
+                            $("#toannualsalary").prop('checked', true);
+                        }
+
+                        $("#torate").val(data.fromRate);
+
+                        $("#beginpayperiod").val(data.beginPayPeriod+"");
+                        $("#prop1").val(data.la_Property1);
+                        $("#prop2").val(data.la_Property2);
+                        $("#prop3").val(data.la_Property3);
+                        $("#prop1per").val(data.la_Property1_Per);
+                        $("#prop2per").val(data.la_Property2_Per);
+                        $("#prop3per").val(data.la_Property3_Per);
+
+                        
+                        if (data.fmlaYes == true) {
+                            $("#chkfmlayes").prop('checked', true);
+                        }
+                        else {
+                            $("#chkfmlano").prop('checked', true);
+                        }
+
+
+
+                        if (data.enrolledBenefitsYes == true)
+                        {
+                            $("#chkbenefityes").prop('checked', true);
+                        }
+
+                        if (data.enrolledBenefitNo == true)
+                        {
+                            $("#chkbenefitno").prop('checked', true);
+                        }
+
+                        $("#purpose").val(data.leave_Purpose);
+
+                        if (data.leave_Purpose == "Other")
+                        {
+                            $("#spanpurposeother").show();
+                            $("#purposeother").val(data.leave_Purpose_Other);
+                        }
+                      
+
+                        var d1 = data.leave_Begin.substring(5, 7) + "-" + data.leave_Begin.substring(8, 10) + "-" + data.leave_Begin.substring(0, 4);
+                        console.log(d1);
+
+                        $("#leavebegin").val(d1+"");
+                        var d2 = data.leave_End.substring(5, 7) + "-" + data.leave_End.substring(8, 10) + "-" + data.leave_End.substring(0, 4);
+
+                        console.log(d2);
+                        $("#leaveend").val(d2+"");
+                        $("#ptobalance").val(data.pto_Balance);
+                        $("#notes1").val(data.notes1);
+
+                        //$("#chkphoneamount").is(":checked")
+                    
+                    //    $("#esignature").val(data.eSignature);
+                        $("#edate").val();
+                        $("#mdate").val();
+                        $("#msignature").val(data.mSignature);
+                        $('#mdate').datepicker({
+                            format: "mm/dd/yyyy"
+                        }).datepicker("setDate", 'now');
+
+
+                         
+                        ////document.getElementById("mdate").valueAsDate = new Date();
+                        ////document.getElementById("startdate").valueAsDate = new Date();
+                        //$("#mdate,#startdate").datepicker({
+                        //    format: "mm/dd/yyyy"
+                        //}).datepicker("setDate", 'now');
+
+
+                        //// $("#datechoosen").datepicker("setDate", new Date(data.date));
+                        ////if (data.mdate != null) {
+
+                        ////    var d1 = data.mdate.substring(0, 4) + "-" + data.mdate.substring(5, 7) + "-" + data.mdate.substring(8, 10);
+                        ////    $("#mdate").val(d1);
+
+                        ////}
+
+                        ////   $("#dateposted").val(data.datePosted);
+
+                        //$("#notes1").val(data.notes);
+
+
+                        //$('.reviewmodal').modal('hide');
+                        //if ($("#divprocessingbtn").length > 0) {
+                        //    $("#divprocessingbtn").hide();
+                        //}
+
+                        $('#toastnotification').modal('hide');
+                        $("#esignature,#edate,#rpmsignature,#rpmdate").attr('disabled', true);
+                    }
+                });
+
+            });
+
 
         });
 

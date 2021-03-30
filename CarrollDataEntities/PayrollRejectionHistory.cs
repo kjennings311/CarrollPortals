@@ -12,14 +12,13 @@ namespace Carroll.Data.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class CarrollPosition
+    public partial class PayrollRejectionHistory
     {
-        public System.Guid PositionId { get; set; }
-        public string Position { get; set; }
-        public Nullable<System.Guid> CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<System.Guid> ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDat { get; set; }
-        public string Type { get; set; }
+        public System.Guid HistoryID { get; set; }
+        public Nullable<System.Guid> PayRollId { get; set; }
+        public string Name { get; set; }
+        public string RejectionDesc { get; set; }
+        public Nullable<System.DateTime> ClientDateTime { get; set; }
+        public Nullable<System.Guid> RejectedUser { get; set; }
     }
 }

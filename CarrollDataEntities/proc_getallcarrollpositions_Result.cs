@@ -20,5 +20,6 @@ namespace Carroll.Data.Entities
         public Nullable<System.Guid> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDat { get; set; }
         public string UserName { get; set; }
+        public string Type { get; set; }
     }
 }

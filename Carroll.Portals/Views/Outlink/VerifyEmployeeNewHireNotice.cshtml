@@ -329,9 +329,7 @@
                 <span class="c0">Personal Email Address: <input type="email" id="email" value="@Model.EmailAddress" style="width:56%;" /> (do not leave blank) </span>
             </p>
 
-            <p class="c1">
-                <span class="c0">Manager:<input type="text" id="manager" style="width:89%;" value="@Model.Manager" /> </span>
-            </p>
+
             <p class="c1">
 
 
@@ -353,6 +351,9 @@
 
                 }
 
+            </p>
+            <p class="c1">
+                <span class="c0">Manager:<input type="text" id="manager" style="width:89%;" value="@Model.Manager" /> </span>
             </p>
             <p class="c1">
                 <span class="c0">
@@ -454,7 +455,7 @@
                 }
             </table>
 
-            <p class="c1" style="margin-top: 60px;">
+            <p class="c1" style="margin-top: 60px;display:none">
                 <span class="c0">
                     New Hire Kit Ordered :  <span style="margin-left:10%;">  @Model.kitordered </span>
                 </span>
@@ -482,7 +483,7 @@ margin: 10px; min-height:50px;" id="padd">@Model.AdditionalText</p>
                 <p class="c1">
                     <span class="c0">Manager&rsquo;s Authorizing Signature <input disabled type="text" class="italic" id="msignature" value="@Model.msignature" style="width:37%;" /> Date <input disabled type="text" style="width:21%;" name="name" id="mdate" value="@Model.mdate.Value.ToString("MM/dd/yyyy")" /> </span>
                 </p>
-               
+
             }
             else if (ViewBag.Action == "Regional Email")
             {

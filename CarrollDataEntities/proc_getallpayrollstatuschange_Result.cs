@@ -24,5 +24,6 @@ namespace Carroll.Data.Entities
         public string EmpSigned { get; set; }
         public string Notes { get; set; }
         public string Prop { get; set; }
+        public string RejectionStatus { get; set; }
     }
 }

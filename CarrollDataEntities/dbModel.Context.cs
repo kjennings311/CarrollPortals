@@ -62,6 +62,7 @@ namespace Carroll.Data.Entities
         public virtual DbSet<ActivityLogHrForm> ActivityLogHrForms { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<NewHireRejectionHistory> NewHireRejectionHistories { get; set; }
+        public virtual DbSet<PayrollRejectionHistory> PayrollRejectionHistories { get; set; }
     
         public virtual ObjectResult<sp_GetUserProperties_Result> sp_GetUserProperties()
         {
@@ -422,6 +423,24 @@ namespace Carroll.Data.Entities
                 new ObjectParameter("isasset2", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetLastWeekClaimUpdatesrolewise_Result>("proc_GetLastWeekClaimUpdatesrolewise", useridParameter, isasset2Parameter);
+        }
+    
+        public virtual ObjectResult<proc_getpayrollrejectiondetails_Result> proc_getpayrollrejectiondetails(Nullable<System.Guid> refid)
+        {
+            var refidParameter = refid.HasValue ?
+                new ObjectParameter("refid", refid) :
+                new ObjectParameter("refid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpayrollrejectiondetails_Result>("proc_getpayrollrejectiondetails", refidParameter);
+        }
+    
+        public virtual ObjectResult<proc_getpayrollrejectionhistory_Result> proc_getpayrollrejectionhistory(Nullable<System.Guid> newhireid)
+        {
+            var newhireidParameter = newhireid.HasValue ?
+                new ObjectParameter("newhireid", newhireid) :
+                new ObjectParameter("newhireid", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_getpayrollrejectionhistory_Result>("proc_getpayrollrejectionhistory", newhireidParameter);
         }
     }
 }

@@ -119,7 +119,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
 
-                <h1 style="padding-top:5px;color:black;text-transform:uppercase;"> <b>  Employee New Hire Notice </b></h1>
+                <h1 style="padding-top:5px;color:white;text-transform:uppercase;"> <b>  Employee New Hire Notice </b></h1>
                 <input type="hidden" id="pageidname" value="newhire" />
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager")
                 {
@@ -165,17 +165,16 @@
                                             <span class="c7"> NEW HIRE NOTICE </span>
                                         </p>
                                         <p class="c1">
-                                            <span class="c0 "><span class="empnameerror  lblerror">  Employee Name:  </span>   <input type="text" style="width:42%" id="empname" />    <span class=" startdateerror lblerror" >      Start Date:</span> 
-                                            <input type="text" class="date-mask" style="width:20%;" id="startdate" value="" />  </span>
+                                            <span class="c0 ">
+                                                <span class="empnameerror  lblerror">  Employee Name:  </span>   <input type="text" style="width:42%" id="empname" />    <span class=" startdateerror lblerror">      Start Date:</span>
+                                                <input type="date" class="date-mask1" style="width:20%;" id="startdate" value="" />
+                                            </span>
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0 "> <span class="emailerror lblerror" >  Personal Email Address: </span> <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
+                                            <span class="c0 "> <span class="emailerror lblerror">  Personal Email Address: </span> <input type="email" id="email" style="width:50%;" /> (do not leave blank) </span>
                                         </p>
-
-                                        <p class="c1">
-                                            <span class="c0">Manager: <input type="text" id="manager" style="width:78%;" /> </span>
-                                        </p>
+ 
                                         <p class="c1">
                                             <span class="c0  chkcorporateerror chkpropertyerror lblerror">
                                                 Location: <input type="radio" id="chkcorporate" name="loc" value="1" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
@@ -187,6 +186,10 @@
                                             </span>
                                         </p>
 
+
+                                        <p class="c1">
+                                            <span class="c0">Manager: <input type="text" id="manager" style="width:78%;" /> </span>
+                                        </p>
                                         <p class="c1">
                                             <span class="c0"><span class=" lblerror exempterror nonexempterror">Position: </span> <input type="radio" style="margin-left:0.5%;" value="1" name="exempt" id="exempt" />  Exempt  <input type="radio" style="margin-left:6%;" name="exempt" id="nonexempt" value="1" />  Non-exempt </span>
                                         </p>
@@ -196,7 +199,7 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0 lblerror salaryerror">Wage (Hourly) / Salary (Annual) <input type="text" class="allow_decimal" id="salary"  style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
+                                            <span class="c0 lblerror salaryerror">Wage (Hourly) / Salary (Annual) <input type="text" class="allow_decimal" id="salary" style="width:15%;margin-left:2%;" />  <input type="radio" style="margin-left:5%;" value="1" name="wage" id="salhourly" />  Hourly  <input type="radio" style="margin-left:5%;" name="wage" id="annualsalary" value="1" />  Annual  </span>
                                         </p>
 
                                         <p class="c1">
@@ -208,7 +211,9 @@
                                             <tr>
                                                 <td colspan="1">
                                                     <h3 style="text-align: center;
-    margin-left: 40%;"> Labor Allocation   </h3>
+    margin-left: 40%;">
+                                                        Labor Allocation
+                                                    </h3>
                                                 </td>
                                             </tr>
                                             <tr> <td class="lblerror la_Prop2error la_Prop3error la_Prop1error"> Property </td> <td class="lblerror la_Prop2pererror la_Prop3pererror la_Prop1pererror"> Percentage </td> </tr>
@@ -217,7 +222,7 @@
                                             <tr> <td> <input type="text" id="la_Prop3" /> </td> <td> <input type="text" class="allow_decimal" id="la_Prop3per" /> </td> </tr>
                                         </table>
 
-                                        <p class="c1" style="margin-bottom: 30px;margin-top:30px;">
+                                        <p class="c1" style="margin-bottom: 30px;margin-top:30px;display:none">
                                             <span class="c0">
                                                 New Hire Kit Ordered : <input type="radio" name="kitordered" id="kitorderdate" /> Yes  <input type="radio" name="kitordered" checked id="kitorderdate1" /> No
                                             </span>
@@ -230,7 +235,7 @@
                                         <p class="c1">
                                             <span class="c0 ">Employee Signature <input disabled type="text" id="esignature" style="width:42.5%;" />    Date <input disabled type="text" style="width:21%" name="name" id="edate" value="" /></span>
                                         </p>
-                                        
+
                                         <p class="c1">
                                             <span class="c0 "> <span class="lblerror msignatureerror">Manager&rsquo;s Authorizing Signature </span> <input type="text" id="msignature" style="width:32%;" /> Date <input type="text" class="date-mask" style="width:21%;" disabled name="name" id="mdate" value="" /> </span>
                                         </p>
@@ -1110,10 +1115,12 @@ function AssignManager()
                     $("#divproperty").hide();
                     $("#manager").val($("#CreatedByName").val());
                     $("#la_Prop1,#la_Prop1per,#la_Prop2,#la_Prop2per,#la_Prop3,#la_Prop3per").val('');
+                    LoadHrPositionsByType('Corporate');
                 }
                 if ($("#chkproperty").is(":checked")) {
                     iscorporate = false;
                     $("#divproperty").show();
+                    LoadHrPositionsByType('Property');
                 }
 
                 AssignManager();

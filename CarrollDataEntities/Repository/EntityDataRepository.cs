@@ -1171,8 +1171,8 @@ namespace Carroll.Data.Entities.Repository
                         config.PkName = FirstChartoLower(userprop11.ToList().FirstOrDefault().Name);
                         config.Columns = new List<DtableConfigArray>();
 
-                        config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = 0, href = "" });
-                        //   config.Columns.Add(new DtableConfigArray { name = "payTo", label = "Pay To", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "type", label = "Type", type = 0, href = "" });
+                        config.Columns.Add(new DtableConfigArray { name = "position", label = "Position", type = 0, href = "" });                        
                         config.Columns.Add(new DtableConfigArray { name = "userName", label = "Created By", type = 0, href = "" });
                         config.Columns.Add(new DtableConfigArray { name = "createdDate", label = "Created Date", type = DFieldType.IsDate, href = "" });
 
@@ -2023,7 +2023,44 @@ tbl.UploadedDate descending
             }
         }
 
+        public dynamic GetPayRollRejectionDetails(string Refid)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                try
+                {
+                    var riderid = new Guid(Refid);
 
+                    var res = (from tbl in _entities.PayrollStatusChangeNotices
+                               join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
+                               where tbl.PayrollStatusChangeNoticeId == riderid
+                               select new { tbl.RejectedReason, tbluser.FirstName, tbluser.LastName, tbl.RejectedDateTime }).FirstOrDefault();
+
+                    // get meta data of pm
+
+                    var dl1 = (from tbl in _entities.DynamicLinks
+                               where tbl.FormType == "PayRoll" && tbl.Action == "PM Email" && tbl.ReferenceId == riderid
+                               select tbl).FirstOrDefault();
+
+                    // get meta data of emp
+
+                    var dl2 = (from tbl in _entities.DynamicLinks
+                               where tbl.FormType == "PayRoll" && tbl.Action == "Employee Email" && tbl.ReferenceId == riderid
+                               select tbl).FirstOrDefault();
+                    // get meta data of regional email
+
+                    var dl3 = (from tbl in _entities.DynamicLinks
+                               where tbl.FormType == "PayRoll" && tbl.Action == "Regional Email" && tbl.ReferenceId == riderid
+                               select tbl).FirstOrDefault();
+
+                    return new { newhiredetails = res, pm = dl1, emp = dl2, regional = dl3 };
+                }
+                catch (Exception ex)
+                {
+                    return new { Error = true, ErrorMsg = ex.Message, InsertedId = "" };
+                }
+            }
+        }
         public dynamic GetEmployeeNewHireNotice(Guid riderid)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
@@ -2712,6 +2749,7 @@ tbl.UploadedDate descending
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Manager Signed", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "empSigned", label = "Employee Signed", type = DFieldType.IsText, href = "" });
+                    config.Columns.Add(new DtableConfigArray { name = "rejectionStatus", label = "Rejection", type = DFieldType.IsText, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
 
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
@@ -3184,10 +3222,11 @@ tbl.UploadedDate descending
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
+                //where tbl.PayFrom.Value.Year == DateTime.Now.Year
 
                 //us
                 var propertyres = (from tbl in _entities.CarrollPayPeriods
-                                   where tbl.PayFrom.Value.Year == DateTime.Now.Year
+                                   
                                    orderby tbl.PayFrom ascending
                                    select tbl ).ToList();
 
@@ -4701,17 +4740,33 @@ tbl.UploadedDate descending
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
-                var propertyres =  _entities.CarrollPositions.ToList();
+                var propertyres =  _entities.CarrollPositions.ToList().OrderBy(x=>x.Position);
+                 
 
                 if (propertyres != null)
-                    return propertyres;
+                    return propertyres.ToList();
                 else
                     return null;
 
             }
         }
 
-     public dynamic GetHrFormLogActivity(string FormType, string RecordId)
+        public List<CarrollPosition> GetAllCarrollPositionsByType(string Type)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+                var propertyres = _entities.CarrollPositions.Where(x=>x.Type == Type).ToList().OrderBy(x => x.Position);
+
+
+                if (propertyres != null)
+                    return propertyres.ToList();
+                else
+                    return null;
+
+            }
+        }
+
+        public dynamic GetHrFormLogActivity(string FormType, string RecordId)
         {
             using (CarrollFormsEntities _entities = DBEntity)
             {
@@ -4736,7 +4791,19 @@ tbl.UploadedDate descending
                     //           select new { tbl.RejectedReason, tbluser.FirstName, tbluser.LastName, RejectedDateTime= tbl.RejectedDateTime.Value.ToString("MM/dd/yyyy") + " " + tbl.RejectedDateTime.Value.ToShortTimeString() }).ToList();
                     return new { log = res, metadata = dldetails,rejection=res1 };
                 }
-               else
+                else if (FormType == "PayRoll")
+                {
+                    //  var res1 = _entities.proc_getnewhirerejectiondetails(rid).ToList();
+
+                    var res1 = _entities.proc_getpayrollrejectionhistory(rid).ToList();
+
+                    //var res1 = (from tbl in _entities.EmployeeNewHireNotices
+                    //           join tbluser in _entities.SiteUsers on tbl.RejectedBy equals tbluser.UserId
+                    //           where tbl.EmployeeHireNoticeId == rid
+                    //           select new { tbl.RejectedReason, tbluser.FirstName, tbluser.LastName, RejectedDateTime= tbl.RejectedDateTime.Value.ToString("MM/dd/yyyy") + " " + tbl.RejectedDateTime.Value.ToShortTimeString() }).ToList();
+                    return new { log = res, metadata = dldetails, rejection = res1 };
+                }
+                else
                     return new { log = res, metadata = dldetails,rejection= "" };
 
             }
@@ -4808,6 +4875,66 @@ tbl.UploadedDate descending
 
             }
         }
+
+
+        public dynamic UpdatePayRollRejectionStatus(string status, string reason, string refid, string refuser)
+        {
+            using (CarrollFormsEntities _entities = DBEntity)
+            {
+
+                var id = new Guid(refid);
+
+                var propertyres = (from tbl in _entities.PayrollStatusChangeNotices
+                                   where tbl.PayrollStatusChangeNoticeId == id
+                                   select tbl).FirstOrDefault();
+
+                PayrollRejectionHistory rh = new PayrollRejectionHistory();
+
+
+                if (propertyres != null)
+                {
+                    if (status == "reject")
+                    {
+                        propertyres.IsRejected = true;
+                        propertyres.RejectedBy = new Guid(refuser);
+                        propertyres.RejectedDateTime = DateTime.Now;
+                        propertyres.RejectedReason = reason;
+                        propertyres.PmSignedDateTime = null;
+                        propertyres.EmployeeSignedDateTime = null;
+                        //propertyres.RegionalManagerSignedDateTime = null;
+                        rh.ClientDateTime = DateTime.Now;
+                        rh.HistoryID = Guid.NewGuid();
+                        rh.PayRollId = new Guid(refid);
+                        rh.RejectedUser = new Guid(refuser);
+                        rh.RejectionDesc = reason;
+                        _entities.PayrollRejectionHistories.Add(rh);
+                        _entities.SaveChanges();
+                    }
+                    else if (status == "cancel")
+                    {
+                        propertyres.IsRejected = true;
+                        propertyres.RejectedBy = new Guid(refuser);
+                        propertyres.RejectedDateTime = DateTime.Now;
+                        propertyres.RejectedReason = "cancel";
+                        propertyres.PmSignedDateTime = null;
+                        propertyres.EmployeeSignedDateTime = null;
+                     //   propertyres.RegionalManagerSignedDateTime = null;
+                        rh.ClientDateTime = DateTime.Now;
+                        rh.HistoryID = Guid.NewGuid();
+                        rh.PayRollId = new Guid(refid);
+                        rh.RejectedUser = new Guid(refuser);
+                        rh.RejectionDesc = "cancel";
+                        _entities.PayrollRejectionHistories.Add(rh);
+                        _entities.SaveChanges();
+                    }
+                    _entities.proc_closealllinks(id);
+                }
+
+                return true;
+
+            }
+        }
+
 
         //public Config GetDatatableConfig(EntityType entityType,)
         //{

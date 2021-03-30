@@ -137,6 +137,9 @@
     <Compile Include="NoticeOfEmployeeSeperation.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PayrollRejectionHistory.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PayrollStatusChangeNotice.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -228,6 +231,12 @@
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getnewhirerejectionhistory_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getpayrollrejectiondetails_Result.cs">
+      <DependentUpon>dbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_getpayrollrejectionhistory_Result.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_getpropertiesforexcelupdate_Result.cs">

@@ -52,6 +52,7 @@
           <Property Name="CreatedDate" Type="date" />
           <Property Name="ModifiedBy" Type="uniqueidentifier" />
           <Property Name="ModifiedDat" Type="date" />
+          <Property Name="Type" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="Contacts">
           <Key>
@@ -461,6 +462,18 @@
           <Property Name="SequenceNumber" Type="nvarchar" MaxLength="12" />
           <Property Name="IsCoporate" Type="bit" />
           <Property Name="location" Type="nvarchar" MaxLength="150" />
+          <Property Name="Live_at_carroll" Type="bit" />
+        </EntityType>
+        <EntityType Name="PayrollRejectionHistory">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PayRollId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="RejectionDesc" Type="text" />
+          <Property Name="ClientDateTime" Type="datetime" />
+          <Property Name="RejectedUser" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="PayrollStatusChangeNotice">
           <Key>
@@ -534,6 +547,14 @@
           <Property Name="PmSignedDateTime" Type="datetime" />
           <Property Name="EmployeeSignedDateTime" Type="datetime" />
           <Property Name="IsCorporate" Type="bit" />
+          <Property Name="IsResubmitted" Type="bit" />
+          <Property Name="ResubmittedBy" Type="uniqueidentifier" />
+          <Property Name="ResubmittedDateTime" Type="datetime" />
+          <Property Name="IsRejected" Type="bit" />
+          <Property Name="RejectedBy" Type="uniqueidentifier" />
+          <Property Name="RejectedDateTime" Type="datetime" />
+          <Property Name="AdditionalText" Type="nvarchar" MaxLength="550" />
+          <Property Name="RejectedReason" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="Properties">
           <Key>
@@ -919,6 +940,12 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Parameter Name="newhireid" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="proc_getpayperiodsforcurrentyear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_getpayrollrejectiondetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="refid" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="proc_getpayrollrejectionhistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="newhireid" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="proc_getpropertiesforexcel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_getpropertiesforexcelupdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetPropertyDamageClaims" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -972,6 +999,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySet Name="MileageLogHeader" EntityType="Self.MileageLogHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewHireRejectionHistory" EntityType="Self.NewHireRejectionHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NoticeOfEmployeeSeperation" EntityType="Self.NoticeOfEmployeeSeperation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayrollRejectionHistory" EntityType="Self.PayrollRejectionHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PayrollStatusChangeNotice" EntityType="Self.PayrollStatusChangeNotice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequisitionRequest" EntityType="Self.RequisitionRequest" Schema="dbo" store:Type="Tables" />
@@ -1199,6 +1227,13 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
             <Parameter Name="userid" Mode="In" Type="Guid" />
             <Parameter Name="isasset2" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="proc_getpayrollrejectiondetails" ReturnType="Collection(Carroll.Data.Entities.proc_getpayrollrejectiondetails_Result)">
+          <Parameter Name="refid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="proc_getpayrollrejectionhistory" ReturnType="Collection(Carroll.Data.Entities.proc_getpayrollrejectionhistory_Result)">
+          <Parameter Name="newhireid" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="PayrollRejectionHistories" EntityType="Carroll.Data.Entities.PayrollRejectionHistory" />
         </EntityContainer>
         <EntityType Name="Contact">
           <Key>
@@ -1746,6 +1781,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="String" Name="EmpSigned" Nullable="true" MaxLength="193" />
           <Property Type="String" Name="Notes" Nullable="false" MaxLength="229" />
           <Property Type="String" Name="Prop" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RejectionStatus" Nullable="false" MaxLength="168" />
         </ComplexType>
         <EntityType Name="RequisitionRequest">
           <Key>
@@ -1960,6 +1996,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="CreatedDate" Type="DateTime" Precision="0" />
           <Property Name="ModifiedBy" Type="Guid" />
           <Property Name="ModifiedDat" Type="DateTime" Precision="0" />
+          <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="proc_getallcarrollpayperiods_Result">
           <Property Type="Guid" Name="PeriodId" Nullable="false" />
@@ -1979,6 +2016,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="Guid" Name="ModifiedBy" Nullable="true" />
           <Property Type="DateTime" Name="ModifiedDat" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="15" />
         </ComplexType>
         <EntityType Name="PayrollStatusChangeNotice">
           <Key>
@@ -2052,6 +2090,14 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="PmSignedDateTime" Type="DateTime" Precision="3" />
           <Property Name="EmployeeSignedDateTime" Type="DateTime" Precision="3" />
           <Property Name="IsCorporate" Type="Boolean" />
+          <Property Name="IsResubmitted" Type="Boolean" />
+          <Property Name="ResubmittedBy" Type="Guid" />
+          <Property Name="ResubmittedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsRejected" Type="Boolean" />
+          <Property Name="RejectedBy" Type="Guid" />
+          <Property Name="RejectedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AdditionalText" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="RejectedReason" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmployeeNewHireNotice">
           <Key>
@@ -2142,6 +2188,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="SequenceNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
           <Property Name="IsCoporate" Type="Boolean" />
           <Property Name="location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Live_at_carroll" Type="Boolean" />
         </EntityType>
         <ComplexType Name="proc_getallresidentreferalsheets_Result">
           <Property Type="Guid" Name="ResidentReferalId" Nullable="true" />
@@ -2826,6 +2873,28 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Type="DateTime" Name="Updateddate" Nullable="true" Precision="23" />
           <Property Type="String" Name="UpdateType" Nullable="true" MaxLength="22" />
         </ComplexType>
+        <ComplexType Name="proc_getpayrollrejectiondetails_Result">
+          <Property Type="String" Name="RejectedReason" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RejectedDateTime" Nullable="false" MaxLength="61" />
+        </ComplexType>
+        <ComplexType Name="proc_getpayrollrejectionhistory_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="RejectionDesc" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="datetime" Nullable="false" MaxLength="61" />
+        </ComplexType>
+        <EntityType Name="PayrollRejectionHistory">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="Guid" Nullable="false" />
+          <Property Name="PayRollId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RejectionDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClientDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RejectedUser" Type="Guid" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3379,6 +3448,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="EmpSigned" ColumnName="EmpSigned" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Prop" ColumnName="Prop" />
+                <ScalarProperty Name="RejectionStatus" ColumnName="RejectionStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3608,6 +3678,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="CarrollPositions">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.CarrollPosition">
               <MappingFragment StoreEntitySet="CarrollPositions">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="ModifiedDat" ColumnName="ModifiedDat" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -3641,12 +3712,21 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDat" ColumnName="ModifiedDat" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="PayrollStatusChangeNotices">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.PayrollStatusChangeNotice">
               <MappingFragment StoreEntitySet="PayrollStatusChangeNotice">
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="AdditionalText" ColumnName="AdditionalText" />
+                <ScalarProperty Name="RejectedDateTime" ColumnName="RejectedDateTime" />
+                <ScalarProperty Name="RejectedBy" ColumnName="RejectedBy" />
+                <ScalarProperty Name="IsRejected" ColumnName="IsRejected" />
+                <ScalarProperty Name="ResubmittedDateTime" ColumnName="ResubmittedDateTime" />
+                <ScalarProperty Name="ResubmittedBy" ColumnName="ResubmittedBy" />
+                <ScalarProperty Name="IsResubmitted" ColumnName="IsResubmitted" />
                 <ScalarProperty Name="IsCorporate" ColumnName="IsCorporate" />
                 <ScalarProperty Name="EmployeeSignedDateTime" ColumnName="EmployeeSignedDateTime" />
                 <ScalarProperty Name="PmSignedDateTime" ColumnName="PmSignedDateTime" />
@@ -3773,6 +3853,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="NoticeOfEmployeeSeperations">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.NoticeOfEmployeeSeperation">
               <MappingFragment StoreEntitySet="NoticeOfEmployeeSeperation">
+                <ScalarProperty Name="Live_at_carroll" ColumnName="Live_at_carroll" />
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="IsCoporate" ColumnName="IsCoporate" />
                 <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
@@ -4462,6 +4543,37 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getpayrollrejectiondetails" FunctionName="Carroll.Data.Entities.Store.proc_getpayrollrejectiondetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getpayrollrejectiondetails_Result">
+                <ScalarProperty Name="RejectedReason" ColumnName="RejectedReason" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="RejectedDateTime" ColumnName="RejectedDateTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_getpayrollrejectionhistory" FunctionName="Carroll.Data.Entities.Store.proc_getpayrollrejectionhistory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Carroll.Data.Entities.proc_getpayrollrejectionhistory_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RejectionDesc" ColumnName="RejectionDesc" />
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="PayrollRejectionHistories">
+            <EntityTypeMapping TypeName="Carroll.Data.Entities.PayrollRejectionHistory">
+              <MappingFragment StoreEntitySet="PayrollRejectionHistory">
+                <ScalarProperty Name="RejectedUser" ColumnName="RejectedUser" />
+                <ScalarProperty Name="ClientDateTime" ColumnName="ClientDateTime" />
+                <ScalarProperty Name="RejectionDesc" ColumnName="RejectionDesc" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PayRollId" ColumnName="PayRollId" />
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

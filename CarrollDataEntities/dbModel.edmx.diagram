@@ -46,6 +46,7 @@
         <EntityTypeShape EntityType="Carroll.Data.Entities.ActivityLogHrForm" Width="1.5" PointX="20.375" PointY="0.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.ErrorLog" Width="1.5" PointX="20.375" PointY="4.75" />
         <EntityTypeShape EntityType="Carroll.Data.Entities.NewHireRejectionHistory" Width="1.5" PointX="20.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Carroll.Data.Entities.PayrollRejectionHistory" Width="1.5" PointX="20.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

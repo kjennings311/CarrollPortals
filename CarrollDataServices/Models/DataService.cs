@@ -52,6 +52,11 @@ namespace Carroll.Data.Services.Models
             return _repository.GetNewHireRejectionDetails(Refid);
         }
 
+        public dynamic GetPayRollRejectionDetails(string Refid)
+        {
+            return _repository.GetPayRollRejectionDetails(Refid);
+        }
+
         public dynamic GetHrFormLogActivity(string FormType, string RecordId)
         {
             return _repository.GetHrFormLogActivity(FormType, RecordId);
@@ -289,6 +294,12 @@ namespace Carroll.Data.Services.Models
         }
 
 
+        public dynamic UpdatePayRollRejectionStatus(string status, string reason, string refid, string refuser)
+        {
+            return _repository.UpdatePayRollRejectionStatus(status, reason, refid, refuser);
+        }
+
+
         public dynamic GetHrFormCount()
         {
             return _repository.GetHrFormCount();
@@ -299,6 +310,10 @@ namespace Carroll.Data.Services.Models
         public List<CarrollPosition> GetAllCarrollPositions()
         {
             return _repository.GetAllCarrollPositions();
+        }
+        public List<CarrollPosition> GetAllCarrollPositionsByType(string Type)
+        {
+            return _repository.GetAllCarrollPositionsByType(Type);
         }
 
         public List<CarrollPayPeriod> GetAllCarrollPayPerilds( )

@@ -1540,6 +1540,67 @@ namespace Carroll.Data.Services.Helpers
             }
         }
 
+
+        public static dynamic SendPayrollRejectionEmail(string RecordId, string User)
+        {
+            var propid = new Guid(RecordId);
+            var _entities = new CarrollFormsEntities();
+
+
+            // Send Mail to Employee Email with Subject and Link to dyamic Page
+
+            EmailMessage _message = new EmailMessage();
+
+            _message.EmailFrom = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]);
+            // _message.EmailCc = Convert.ToString(ConfigurationManager.AppSettings["EmailFrom"]).Split(',');
+
+            // get Employee Details i.e name and email
+
+            var NewhireDetails = (from tbl in _entities.PayrollStatusChangeNotices
+                                  join tjoin in _entities.SiteUsers on tbl.RejectedBy equals tjoin.UserId
+                                  where tbl.PayrollStatusChangeNoticeId == propid
+                                  select new { tbl.EmployeeName, tbl.PayrollStatusChangeNoticeId, tbl.SequenceNumber,   tbl.RejectedReason, tjoin.FirstName, tjoin.LastName, tbl.CreatedUser, tbl.RejectedDateTime }).FirstOrDefault();
+            if (NewhireDetails != null)
+            {
+                // subject and body
+
+                var link = Convert.ToString(ConfigurationManager.AppSettings["TestUrl"]) + "Hr/Payrollstatuschangenotice?resubmit=" + propid;
+                _message.Subject = "PayRoll Status Change has been rejected by " + NewhireDetails.FirstName + " " + NewhireDetails.LastName;
+                _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5> <p> ";
+                _message.Body += " ID : " + NewhireDetails.SequenceNumber + "  <br> Name : " + NewhireDetails.EmployeeName + "  <br>Rejection notes : " + NewhireDetails.RejectedReason + "  <br>Rejection Date Time : " + NewhireDetails.RejectedDateTime.Value.ToString("MM/dd/yyyy") + " " + NewhireDetails.RejectedDateTime.Value.ToShortTimeString() + "  <br>  </p>  <br> <br> <h5> Thank you, <br> CARROLL </h5>   </div></div>";
+                List<string> tos = new List<string>();
+                tos.Add(ConfigurationManager.AppSettings["HrEmail"]);
+
+                // get created user email
+
+                var email = (from tbl in _entities.SiteUsers
+                             where tbl.UserId == NewhireDetails.CreatedUser
+                             select tbl.UserEmail).FirstOrDefault();
+                if (!string.IsNullOrEmpty(email))
+                   // tos.Add(email);
+
+                _message.EmailTo = tos;
+
+
+
+                if (EmailHelper.SendHrFormNotificationEmail(_message, propid.ToString(), NewhireDetails.CreatedUser.ToString()))
+                {
+                    WorkflowHelper.InsertHrLog("PayRoll", propid.ToString(), "PayRoll Status Change has been rejected by \" " + User + " \"", "PayRoll Status Change has been Rejected on" + DateTime.Now, User);
+                    var list = _entities.Database.ExecuteSqlCommand("update DynamicLinks set OpenStatus=0 where DynamicLinkId='" + propid.ToString() + "'");
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static dynamic ReSendHrWorkFlowEmail(string RecordId, string FormType, string Action,string UserId)
         {
 

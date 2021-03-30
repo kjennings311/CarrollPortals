@@ -1,4 +1,4 @@
-﻿ //var $BaseApiUrl = "http://localhost:1002/";
+﻿// var $BaseApiUrl = "http://localhost:1002/";
 var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -636,7 +636,7 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
     var options = "";
     var selected = "";
 
-    var propertyarray=value.split('se')
+    var propertyarray = value.split('se');
 
     $.get($BaseApiUrl + DataLoadUrl, function (data) {
 
@@ -672,11 +672,12 @@ function LoadOptionsProp(fieldId, DataLoadUrl, value) {
 
 function ApplyDateMask()
 {
+    console.log('calling date mask');
    
-    $('input[type="date"]').datepicker({
-        format: "mm/dd/yyyy",
-        "setDate": new Date()
-    });
+    //$('input[type="date"]').datepicker({
+    //    format: "mm/dd/yyyy",
+    //    "setDate": new Date()
+    //});
 
     $('.date-mask').datepicker({
         format: "mm/dd/yyyy"
@@ -3348,6 +3349,30 @@ function LoadAllProperties() {
 
 
 }
+
+
+function LoadHrPositionsByType(t)
+{
+    var options = "";
+
+    $.get($BaseApiUrl + "api/Data/GetAllCarrollPositionsByType?Type=" + t, function (data) {
+        
+        options = "<option value='' > Select  </option>";
+        for (var i = 0; i < data.length; i++) {
+            
+            options += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+        }
+        
+        $('#position').html(options);
+    });
+    
+        // now let's load options into select box
+     
+
+    }
+
+
 function LoadHrPositions()
 {
     var options = "";
@@ -3566,7 +3591,7 @@ function LoadPositions() {
 
 function LoadPayRoles() {
 
-    var options = "";
+    var options = "<option> SELECT </option>";
 
     $.get($BaseApiUrl + "api/Data/GetAllCarrollPayPerilds", function (data) {
 
@@ -4340,7 +4365,7 @@ $(document).ready(function () {
                     ]
                 });
               
-                if (formtype == "NewHire" && data.rejection !="" && data.rejection != null)
+                if ((formtype == "NewHire" || formtype == "PayRoll") && data.rejection !="" && data.rejection != null)
                 {
                     $(".rejectionblock").show();
                     $("#rjmetadata").html('');

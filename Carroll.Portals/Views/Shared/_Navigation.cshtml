@@ -6,7 +6,7 @@
                     <a data-toggle="dropdown" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <img src="~/img/corpLogo.png"  style="width:100%;"/>
+                                <img src="~/img/corpLogo.png" style="width:100%;" />
                             </span>
                             <p>&nbsp;</p>
                             <strong class="font-bold ">You are logged in as </strong>
@@ -51,7 +51,7 @@
             }
 
             @{
-                if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager" || @Model.RoleType.ToLower() == "hr" ||  @Model.RoleType.ToLower() == "corporate")
+                if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "corporate")
                 {
 
                     @*<li>
@@ -68,39 +68,39 @@
                     </ul>
                 </li>*@
 
-                        if (@Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager")
-                        {
-                            
+                    if (@Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager")
+                    {
 
-                                        <li id="hrforms">
-                                            <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
 
-                                            <ul class="nav nav-second-level collapse">
-                                                <li id="empleaserider">
-                                                    <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
+                        <li id="hrforms">
+                            <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
 
-                                                </li>
-                                                <li id="newhire">
-                                                    <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
-                                                </li>
-                                                <li id="payroll">
-                                                    <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
-                                                </li>
-                                                <li id="empseparation">
-                                                    <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
-                                                </li>
-                                                @*<li id="requisitionrequest">
-                                                    <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
-                                                </li>*@
+                            <ul class="nav nav-second-level collapse">
+                                <li id="empleaserider">
+                                    <a href="~/Hr/EmployeeLeaseRider/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Employee Lease Rider  </span></a>
 
-                                            </ul>
-                                        </li>
-                    
+                                </li>
+                                <li id="newhire">
+                                    <a href="~/Hr/EmployeeNewHireNotice/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> New Hire Notice  </span></a>
+                                </li>
+                                <li id="payroll">
+                                    <a href="~/Hr/PayRollStatusChange/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Payroll Status Change  </span></a>
+                                </li>
+                                <li id="empseparation">
+                                    <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
+                                </li>
+                                @*<li id="requisitionrequest">
+                                <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
+                            </li>*@
+
+                            </ul>
+                        </li>
+
+                    }
                 }
-            }
 
-            if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "corporate" ||  @Model.RoleType.ToLower() == "management")
-            {
+                if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management")
+                {
 
                     <li id="hrforms">
                         <a href="javascript:void(0)"><i class="fa fa-book"></i> <span class="nav-label"> HR Forms </span></a>
@@ -120,8 +120,8 @@
                                 <a href="~/Hr/NoticeOfEmployeeSeparation/"><i class="fa fa-angle-double-right"></i> <span class="nav-label">Employee Separation  </span></a>
                             </li>
                             @*<li id="requisitionrequest">
-                                <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
-                            </li>*@
+                            <a href="~/Hr/RequisitionRequest/"><i class="fa fa-angle-double-right"></i> <span class="nav-label"> Requisition Request  </span></a>
+                        </li>*@
 
                         </ul>
                     </li>
@@ -178,8 +178,23 @@
                 </ul>
             </li>*@
 
-            if (@Model.RoleType.ToLower() == "administrator" )
-            {
+                if (@Model.RoleType.ToLower() == "administrator")
+                {
+                    <li id="admin">
+                        <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> HR Admin </span></a>
+
+                        <ul class="nav nav-second-level collapse">                            
+                            <li id="carrollpositions">
+                                <a href="~/User/CarrollPositions">  <i class="fa fa-angle-double-right"></i>   Carroll Positions </a>
+                            </li>
+                            <li id="payperiod">
+                                <a href="~/User/PayPeriods">  <i class="fa fa-angle-double-right"></i>   Pay Periods </a>
+                            </li>
+                         
+                        </ul>
+                    </li>
+
+
                     <li id="admin">
                         <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> Admin </span></a>
 
@@ -192,12 +207,6 @@
                             </li>
                             <li id="usertoproperty">
                                 <a href="~/User/UserProperties">  <i class="fa fa-angle-double-right"></i>  Add User To Property </a>
-                            </li>
-                            <li id="carrollpositions">
-                                <a href="~/User/CarrollPositions">  <i class="fa fa-angle-double-right"></i>   Carroll Positions </a>
-                            </li>
-                            <li id="payperiod">
-                                <a href="~/User/PayPeriods">  <i class="fa fa-angle-double-right"></i>   Pay Periods </a>
                             </li>
                             <li id="errorlog">
                                 <a href="~/User/ErrorLog">  <i class="fa fa-angle-double-right"></i>   Error Log </a>

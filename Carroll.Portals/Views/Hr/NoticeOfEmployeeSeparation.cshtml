@@ -26,7 +26,7 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
 
-                <h1 style="color:black;text-transform:uppercase"> <b> Notice of Employee Separation </b></h1>
+                <h1 style="color:white;text-transform:uppercase"> <b> Notice of Employee Separation </b></h1>
                 <input type="hidden" id="pageidname" value="noticeofseparation" />
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "asset manager")
                 {
@@ -74,7 +74,7 @@
                                         <DIV id="page_1">
                                             <DIV class="dclr"></DIV>
                                             <p class="p0 ft0" style="font-weight: bolder;margin-left:-1%;">Notice of Employee Separation</p>
-                                            <p class="p1 ft1" style="margin-top:20px;"> <span class="effectivedateerror lblerror"> Effective Date of Change  </span> <input style="width:37%;" type="text" class="date-mask" id="effectivedate" /> <span class="rehireerror lblerror">  Eligible for Rehire  </span> <input type="text" style="width:23%;" value="YES" disabled id="rehire" /></p>
+                                            <p class="p1 ft1" style="margin-top:20px;"> <span class="effectivedateerror lblerror"> Effective Date of Change  </span> <input style="width:37%;" type="date" id="effectivedate" /> <span class="rehireerror lblerror">  Eligible for Rehire  </span> <input type="text" style="width:23%;" value="YES" disabled id="rehire" /></p>
                                             <p class="p1 ft1">
                                                 <span class="c0 chkcorporateerror chkpropertyerror">
                                                     Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,6 +86,8 @@
 
                                             </p>
                                             <p class="p2 ft1"><span class="empnameerror"> Employee Name  </span><input type="text" id="empname" style="width:30%" /> <span class="jobtitleerror">  Job Title </span> <select id="jobtitle" style="width:46%"> </select></p>
+                                            <p class="p2 ft1"><span class="empnameerror"> Do they live at Carroll Property </span><select  id="carrolllive" style="width:15%" > <option>SELECT </option> <option value="YES"> YES </option><option value="NO"> NO </option> </select> </p>
+
                                             <P class="p3 ft2">Reason Code from below </P>
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
                                                 <TR>
@@ -722,6 +724,29 @@
                 $('.date-mask').datepicker({
                     format: "mm/dd/yyyy"
                 }).datepicker("setDate", 'now');
+            });
+
+
+            $("#2weekscom").change(function () {
+
+
+                if ($(this).val() == 'false') {
+
+                    $("#vacationpaid,#vacationbalance").attr('disabled', true);
+                    $("#vacationbalance").val('0');
+                    $("#vacationpaid").val('false');
+
+                }
+                else {
+
+
+                    $("#vacationpaid,#vacationbalance").attr('disabled', false);
+                    $("#vacationbalance").val('0');
+                    $("#vacationpaid").val('true');
+
+                }
+
+
             });
 
            

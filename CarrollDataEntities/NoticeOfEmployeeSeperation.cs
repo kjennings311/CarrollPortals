@@ -48,5 +48,6 @@ namespace Carroll.Data.Entities
         public string SequenceNumber { get; set; }
         public Nullable<bool> IsCoporate { get; set; }
         public string location { get; set; }
+        public Nullable<bool> Live_at_carroll { get; set; }
     }
 }

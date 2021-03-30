@@ -51,8 +51,8 @@ h5 {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
-  background-color: #293846;
-  color: white;
+    background-color: #012f4c;
+    color: white;
 }
 .nav .open > a,
 .nav .open > a:hover,
@@ -71,7 +71,7 @@ h5 {
 }
 .navbar-default {
   background-color: transparent;
-  border-color: #2f4050;
+  border-color: #012f4c;
 }
 .navbar-top-links li {
   display: inline-block;
@@ -83,8 +83,8 @@ h5 {
   margin-right: 0;
 }
 .navbar-top-links li a {
-  padding: 20px 10px;
-  min-height: 50px;
+    padding: 10px 10px;
+    min-height: 40px;
 }
 .dropdown-menu {
   border: medium none;
@@ -169,18 +169,18 @@ h5 {
 }
 .nav-header {
   padding: 33px 25px;
-  background-color: #2f4050;
-  background-image: url("patterns/header-profile.png");
+  background-color: #012f4c;
+  /*background-image: url("patterns/header-profile.png");*/
 }
 .pace-done .nav-header {
   transition: all 0.4s;
 }
 ul.nav-second-level {
-  background: #293846;
+    background: #012f4c;
 }
 .nav > li.active {
-  border-left: 4px solid #19aa8d;
-  background: #293846;
+    border-left: 4px solid #19aa8d;
+    background: #012f4c;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -332,7 +332,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 }
 .navbar-fixed-top,
 .navbar-static-top {
-  background: #f3f3f4;
+    /*background: #012f4c;*/
 }
 .fixed-nav #wrapper {
   margin-top: 0;
@@ -3477,11 +3477,11 @@ body.tour-open .animated {
   border-bottom: 1px solid #e7eaec;
 }
 body {
-  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #2f4050;
-  font-size: 13px;
-  color: #676a6c;
-  overflow-x: hidden;
+    font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #012f4c;
+    font-size: 13px;
+    color: #676a6c;
+    overflow-x: hidden;
 }
 html,
 body {
@@ -3677,7 +3677,7 @@ ol.unstyled {
 }
 /* FOOTER */
 .footer {
-  background: none repeat scroll 0 0 white;
+  /*background: none repeat scroll 0 0 white;*/
   border-top: 1px solid #e7eaec;
   bottom: 0;
   left: 0;
@@ -8848,7 +8848,7 @@ z-index:99999999 !important;
         height: auto !important;
         background-position: center !important;
         width: 100%;
-        min-height: 900px !important;
+        min-height: 620px !important;
         background-size: cover !important;
     }
         /*.ipbackground h1 {

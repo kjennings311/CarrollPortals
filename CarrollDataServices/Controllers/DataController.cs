@@ -947,7 +947,75 @@ namespace Carroll.Data.Services.Controllers
 
             return ret;
         }
-        
+
+
+
+        [ActionName("payrollrejection")]
+        [HttpPost]
+        public dynamic payrollrejection()
+        {
+            var status = HttpContext.Current.Request.Params["status"];
+            var refid = HttpContext.Current.Request.Params["refid"];
+            var reason = HttpContext.Current.Request.Params["reason"];
+            var CreatedBy = HttpContext.Current.Request.Params["CreatedBy"];
+            var CreatedByName = HttpContext.Current.Request.Params["CreatedByName"];
+            var ret = _service.UpdatePayRollRejectionStatus(status, reason, refid, CreatedBy);
+
+            if (status == "reject")
+            {
+                string VisitorsIPAddress = string.Empty;
+                try
+                {
+                    if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+                    {
+                        VisitorsIPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                    }
+                    else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+                    {
+                        VisitorsIPAddress = HttpContext.Current.Request.UserHostAddress;
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    //Handle Exceptions  
+                }
+                // browser information 
+                string browserDetails = string.Empty;
+                System.Web.HttpBrowserCapabilities browser = HttpContext.Current.Request.Browser;
+                browserDetails =
+                "Name = " + browser.Browser + "," +
+                "Type = " + browser.Type + ","
+                + "Version = " + browser.Version + ","
+                + "Major Version = " + browser.MajorVersion + ","
+                + "Minor Version = " + browser.MinorVersion + ","
+                + "Platform = " + browser.Platform + ","
+                + "Is Beta = " + browser.Beta + ","
+                + "Is Crawler = " + browser.Crawler + ","
+                + "Is AOL = " + browser.AOL + ","
+                + "Is Win16 = " + browser.Win16 + ","
+                + "Is Win32 = " + browser.Win32 + ","
+                + "Supports Frames = " + browser.Frames + ","
+                + "Supports Tables = " + browser.Tables + ","
+                + "Supports Cookies = " + browser.Cookies + ","
+                + "Supports VBScript = " + browser.VBScript + ","
+                + "Supports JavaScript = " + "," +
+                browser.EcmaScriptVersion.ToString() + ","
+                + "Supports Java Applets = " + browser.JavaApplets + ","
+                + "Supports ActiveX Controls = " + browser.ActiveXControls
+                + ","
+                + "Supports JavaScript Version = " +
+                browser["JavaScriptVersion"];
+
+                WorkflowHelper.UpdatePmBrowserInfo(refid, "Payroll", "Rejection Email", browserDetails, VisitorsIPAddress);
+                WorkflowHelper.SendPayrollRejectionEmail(refid, CreatedByName);
+                WorkflowHelper.InsertHrLog("PayRoll", refid, "Rejection email has been sent to property manager", " Payroll Status Change has been rejected on" + DateTime.Now.ToString(), "System");
+
+            }
+
+            return ret;
+        }
+
 
         [ActionName("GetPropertyManager")]
         [HttpGet]
@@ -1158,6 +1226,17 @@ namespace Carroll.Data.Services.Controllers
         {
              string Refid= HttpContext.Current.Request.Params["refid"];
             return _service.GetNewHireRejectionDetails(Refid);
+        }
+
+
+
+
+        [ActionName("RejectionDetailsForPayRoll")]
+        [HttpPost]
+        public dynamic RejectionDetailsForPayRoll()
+        {
+            string Refid = HttpContext.Current.Request.Params["refid"];
+            return _service.GetPayRollRejectionDetails(Refid);
         }
 
 
@@ -1799,6 +1878,25 @@ namespace Carroll.Data.Services.Controllers
             }
             return _users;
         }
+
+
+
+        [ActionName("GetAllCarrollPositionsByType")]
+        [HttpGet]
+        [AllowAnonymous]
+        public List<KeyValuePair> GetAllCarrollPositionsByType(string Type)
+        {
+            List<KeyValuePair> _users = new List<KeyValuePair>();
+            //us
+
+            foreach (var item in _service.GetAllCarrollPositionsByType(Type))
+            {
+                _users.Add(new KeyValuePair(item.PositionId.ToString(), item.Position));
+            }
+            return _users;
+        }
+
+
 
 
         #endregion
