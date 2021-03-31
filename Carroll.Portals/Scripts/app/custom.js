@@ -1,5 +1,5 @@
-﻿// var $BaseApiUrl = "http://localhost:1002/";
-var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+﻿ // var $BaseApiUrl = "http://localhost:1002/";
+ var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
