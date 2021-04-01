@@ -1143,7 +1143,9 @@ namespace Carroll.Data.Services.Controllers
             fa.TypeOfChange = TypeofChange;
             var type = "Insert";
 
-            if (HttpContext.Current.Request.Params["isedit"].ToString() == "1")
+            string isedit = HttpContext.Current.Request.Params["isedit"].ToString().Trim();
+
+            if (isedit == "1")
             {
                 type = "Update";
                 fa.PayrollStatusChangeNoticeId = new Guid(HttpContext.Current.Request.Params["refid"].ToString().ToUpper());
@@ -1161,6 +1163,7 @@ namespace Carroll.Data.Services.Controllers
                 fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
                 fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
                 fa.CreatedDateTime = DateTime.Now;
+                fa.IsRejected = false;
 
                 WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "Payroll Status Change has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 

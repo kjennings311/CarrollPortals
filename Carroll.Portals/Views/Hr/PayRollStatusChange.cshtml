@@ -352,7 +352,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                             </option>
                                                         </select>  <span style="display:none;" class="purposeothererror lblerror" id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" style="display:none; margin-left:15px; width:35%;" /></span>
                                                     </P>
-                                                    <P class="p20 ft1">  Begin: <input type="date" style="width:20%;" id="leavebegin" /> <span class="enderror"> Expected End: </span>  <input type="date" class="date-mask" id="leaveend" style="width:20%;" /> <span class="ptobalanceerror lblerror"> PTO balance: </span><input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
+                                                    <P class="p20 ft1">  Begin: <input type="date" style="width:20%;" id="leavebegin" /> <span class="enderror"> Expected End: </span>  <input type="date" class="date-mask1" id="leaveend" style="width:20%;" /> <span class="ptobalanceerror lblerror"> PTO balance: </span><input type="text" class="allow_decimal" style="width:25%" id="ptobalance" /> </P>
 
                                                     <hr style="border-top: 2px solid black;" />
                                                 </div>
@@ -1910,7 +1910,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     //   insertForm.append('typeofchange', $("#typeofchange").val());
                 }
 
-                if (insertoredit == false) {
+                if (insertoredit == false)
+                {
                     insertForm.append('isedit', '1');
                     insertForm.append('refid', leaseid);
                 }
@@ -1918,8 +1919,6 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     insertForm.append('isedit', '0');
 
 
-                    console.log('corpoerate change insert ' + iscorporate);
-                    insertForm.append('iscorporate', iscorporate);
 
                     if ($("#chkpropertychange").is(":checked")) {
                         insertForm.append('showproperty', 'true');
@@ -2061,7 +2060,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     insertForm.append('edate', $("#edate").val());
                     insertForm.append('mdate', $("#mdate").val());
                     insertForm.append('msignature', $("#msignature").val());
-
+                insertForm.append('iscorporate', iscorporate);
                     insertForm.append('CreatedBy', $("#CreatedBy").val());
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
@@ -2106,7 +2105,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         }
                     });
 
-                }
+                
 
             });
 
@@ -2353,7 +2352,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         if (data.isCorporate == false)
                         {
                             $("#chkproperty").prop("checked", true);
-                           
+
+
                             iscorporate = false;
                             $("#divproperty").show();
                             $("#location").attr('seloption', data.property);
