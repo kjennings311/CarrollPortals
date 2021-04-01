@@ -178,7 +178,7 @@
                 </ul>
             </li>*@
 
-                if (@Model.RoleType.ToLower() == "administrator")
+                if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr")
                 {
                     <li id="admin">
                         <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> HR Admin </span></a>

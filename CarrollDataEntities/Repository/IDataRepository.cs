@@ -35,7 +35,7 @@ namespace Carroll.Data.Entities.Repository
         dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment,string Type);
         dynamic GetEmployeeNewHireNotice(Guid riderid);
 
-        dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment);
+        dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment,string Type);
         dynamic GetPayRollStatusChangeNotice(Guid riderid);
         dynamic InsertRequistionRequest(RequisitionRequest requisitionRequest);
         dynamic GetRequisitionRequest(Guid riderid);

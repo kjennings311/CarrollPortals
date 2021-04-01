@@ -199,9 +199,9 @@ namespace Carroll.Data.Services.Models
             return _repository.GetExpenseReimbursement(obj);
         }
 
-        public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice obj)
+        public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice obj,string Type)
         {
-            return _repository.InsertPayRollStatusChangeNotice(obj);
+            return _repository.InsertPayRollStatusChangeNotice(obj,Type);
         }
 
         public dynamic GetPayRollStatusChangeNotice(Guid obj)

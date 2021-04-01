@@ -1131,7 +1131,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
         $(document).ready(function ()
         {
+            var insertoredit = true;
             var leaseid = "";
+
 
             $('input[type="checkbox"]').on('change', function () {
                 $('input[name="' + this.name + '"]').not(this).prop('checked', false);
@@ -1144,7 +1146,8 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 document.getElementById("submitform").reset();
                 $("#esignature,#edate,#mdate").attr('disabled', true);
                 //  document.getElementById("mdate").valueAsDate = new Date();
-
+                insertoredit = true;
+                leaseid = "";
                 $("#divpropertychange,#divpaychange,#divlaborallocation,#divleaveabsence").hide();
 
             });
@@ -1905,6 +1908,15 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                     insertForm.append('empemail', $("#empemail").val());
                     insertForm.append('effectivedate', $("#effectivedate").val());
                     //   insertForm.append('typeofchange', $("#typeofchange").val());
+                }
+
+                if (insertoredit == false) {
+                    insertForm.append('isedit', '1');
+                    insertForm.append('refid', leaseid);
+                }
+                else
+                    insertForm.append('isedit', '0');
+
 
                     console.log('corpoerate change insert ' + iscorporate);
                     insertForm.append('iscorporate', iscorporate);
@@ -2311,9 +2323,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
             });
 
             // Resubmit
-            var insertoredit = true;
-            var leaseid = "";
-
+       
             $(document).on('click', "#resubmit,.resubmit", function () {
 
                 var eid = $(this).attr('data-ref');
@@ -2412,7 +2422,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                             console.log(data.changeEffectiveDate);
 
-                            var d = data.changeEffectiveDate.substring(5, 7) + "-" + data.changeEffectiveDate.substring(8, 10) + "-" + data.changeEffectiveDate.substring(0, 4);
+                            var d = data.changeEffectiveDate.substring(0, 4) + "-" + data.changeEffectiveDate.substring(5, 7) + "-" + data.changeEffectiveDate.substring(8, 10);
                             //    $("#startdate").val(d);
 
 
@@ -2438,9 +2448,9 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                             $("#fromtitle").val(data.fromTitle);
                             $("#totitle").val(data.toTitle);
+                            $("#beginpayperiod").val(data.beginPayPeriod);
 
-
-                        }, 3000);
+                        }, 1500);
 
 
 
@@ -2493,7 +2503,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                         $("#torate").val(data.fromRate);
 
-                        $("#beginpayperiod").val(data.beginPayPeriod+"");
+                      
                         $("#prop1").val(data.la_Property1);
                         $("#prop2").val(data.la_Property2);
                         $("#prop3").val(data.la_Property3);
@@ -2525,16 +2535,16 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
 
                         if (data.leave_Purpose == "Other")
                         {
-                            $("#spanpurposeother").show();
+                            $("#spanpurposeother,#purposeother").show();
                             $("#purposeother").val(data.leave_Purpose_Other);
                         }
                       
 
-                        var d1 = data.leave_Begin.substring(5, 7) + "-" + data.leave_Begin.substring(8, 10) + "-" + data.leave_Begin.substring(0, 4);
+                        var d1 = data.leave_Begin.substring(0, 4) + "-" + data.leave_Begin.substring(5, 7) + "-" + data.leave_Begin.substring(8, 10);
                         console.log(d1);
 
-                        $("#leavebegin").val(d1+"");
-                        var d2 = data.leave_End.substring(5, 7) + "-" + data.leave_End.substring(8, 10) + "-" + data.leave_End.substring(0, 4);
+                        $("#leavebegin").val(d1);
+                        var d2 = data.leave_End.substring(0, 4) + "-" + data.leave_End.substring(5, 7) + "-" + data.leave_End.substring(8, 10);
 
                         console.log(d2);
                         $("#leaveend").val(d2 + "");

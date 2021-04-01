@@ -2091,7 +2091,7 @@ tbl.UploadedDate descending
 
 
 
-        public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment)
+        public dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment,string Type)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
             {
@@ -2100,8 +2100,23 @@ tbl.UploadedDate descending
                 {
                     PayrollStatusChangeNotice _property = formAttachment;
 
-                    // No record exists create a new property record here
-                    _entities.PayrollStatusChangeNotices.Add(_property);
+                    if (Type == "Insert")
+                    {
+                        // No record exists create a new property record here
+                        _entities.PayrollStatusChangeNotices.Add(_property);
+                    }
+                    else
+                    {
+
+                        var entity = (from tbl in _entities.PayrollStatusChangeNotices
+                                      where tbl.PayrollStatusChangeNoticeId == _property.PayrollStatusChangeNoticeId
+                                      select tbl).FirstOrDefault();
+
+                        if(entity!= null)
+                        {
+                            _entities.Entry(entity).CurrentValues.SetValues(_property);
+                        }
+                    }
                     // _entities.SaveChanges();
                     int i = _entities.SaveChanges();
 

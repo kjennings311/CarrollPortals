@@ -91,7 +91,7 @@
                         }
                         <a disabled="disabled" class="btnEdit" style="color:white;" href="#" onclick="ToggleEdit('property');"><i class="fa fa-edit"></i> Edit</a>
 
-                        if (@Model.RoleType.ToLower() != "office staff" &&  @Model.RoleType.ToLower() != "hr")
+                        if (@Model.RoleType.ToLower() != "office staff" && @Model.RoleType.ToLower() != "hr")
                         {
                             <a disabled="disabled" style="color:white;" class="btnDelete" href="#">
                                 <i class="fa fa-trash"></i> Delete
@@ -116,90 +116,90 @@
 
 
 
+            <div class="ibox-content">
+                @*<table class="table  dtData table-condensed">
+                        <thead></thead>
+                    </table>*@
+                @*<div class="spiner-example">
+                        <div class="sk-spinner sk-spinner-wave">
+                            <div class="sk-rect1"></div>
+                            <div class="sk-rect2"></div>
+                            <div class="sk-rect3"></div>
+                            <div class="sk-rect4"></div>
+                            <div class="sk-rect5"></div>
+                        </div>
+                    </div>*@
+                <table class="table  dtprops table-condensed">
+                    <thead>
+                        <tr>
+
+                            <th>Property #</th>
+                            <th>Property Name</th>
+                            <th>Legal Name</th>
+                            <th>Units</th>
+                            <th>Owned?</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Phone</th>
+                            <th>PM Email</th>
+                            <th>Partner Site Code</th>
+                            <th>Equity Partner</th>
+                            <th>Equity Partner Contact</th>
+                            <th>Vice President</th>
+                            <th>Regional Vice President</th>
+                            <th>Regional Manager</th>
+                            <th>Property Manager</th>
+                            <th>Construction Manager</th>
+                            <th>Asset Manager1</th>
+                            <th>Asset Manager2</th>
+                            <th>Insurance Contact</th>
+                            <th>Takeover Date</th>
+                            <th>Disposition Date</th>
+                            <th> Active? </th>
+                            <th>Record Date</th>
+                            <th>Created By</th>
+
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr>
+
+                            <th>Property #</th>
+                            <th>Property Name</th>
+                            <th>Legal Name</th>
+                            <th>Units</th>
+                            <th>Owned?</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Phone</th>
+                            <th>PM Email</th>
+                            <th>Partner Site Code</th>
+                            <th>Equity Partner</th>
+                            <th>Equity Partner Contact</th>
+                            <th>Vice President</th>
+                            <th>Regional Vice President</th>
+                            <th>Regional Manager</th>
+                            <th>Property Manager</th>
+                            <th>Construction Manager</th>
+                            <th>Asset Manager1</th>
+                            <th>Asset Manager2</th>
+                            <th>Insurance Contact</th>
+                            <th>Takeover Date</th>
+                            <th>Disposition Date</th>
+                            <th> Active? </th>
+                            <th>Record Date</th>
+                            <th>Created By</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
-    </div>
-    <div class="ibox-content">
-        @*<table class="table  dtData table-condensed">
-                <thead></thead>
-            </table>*@
-        @*<div class="spiner-example">
-                <div class="sk-spinner sk-spinner-wave">
-                    <div class="sk-rect1"></div>
-                    <div class="sk-rect2"></div>
-                    <div class="sk-rect3"></div>
-                    <div class="sk-rect4"></div>
-                    <div class="sk-rect5"></div>
-                </div>
-            </div>*@
-        <table class="table  dtprops table-condensed">
-            <thead>
-                <tr>
-
-                    <th>Property #</th>
-                    <th>Property Name</th>
-                    <th>Legal Name</th>
-                    <th>Units</th>
-                    <th>Owned?</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th>Phone</th>
-                    <th>PM Email</th>
-                    <th>Partner Site Code</th>
-                    <th>Equity Partner</th>
-                    <th>Equity Partner Contact</th>
-                    <th>Vice President</th>
-                    <th>Regional Vice President</th>
-                    <th>Regional Manager</th>
-                    <th>Property Manager</th>
-                    <th>Construction Manager</th>
-                    <th>Asset Manager1</th>
-                    <th>Asset Manager2</th>
-                    <th>Insurance Contact</th>
-                    <th>Takeover Date</th>
-                    <th>Disposition Date</th>
-                    <th> Active? </th>
-                    <th>Record Date</th>
-                    <th>Created By</th>
-
-                </tr>
-            </thead>
-
-            <tfoot>
-                <tr>
-
-                    <th>Property #</th>
-                    <th>Property Name</th>
-                    <th>Legal Name</th>
-                    <th>Units</th>
-                    <th>Owned?</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip</th>
-                    <th>Phone</th>
-                    <th>PM Email</th>
-                    <th>Partner Site Code</th>
-                    <th>Equity Partner</th>
-                    <th>Equity Partner Contact</th>
-                    <th>Vice President</th>
-                    <th>Regional Vice President</th>
-                    <th>Regional Manager</th>
-                    <th>Property Manager</th>
-                    <th>Construction Manager</th>
-                    <th>Asset Manager1</th>
-                    <th>Asset Manager2</th>
-                    <th>Insurance Contact</th>
-                    <th>Takeover Date</th>
-                    <th>Disposition Date</th>
-                    <th> Active? </th>
-                    <th>Record Date</th>
-                    <th>Created By</th>
-
-                </tr>
-            </tfoot>
-        </table>
     </div>
 </div>
 
@@ -274,20 +274,15 @@
     <style type="text/css">
 
 
-@@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
-{
-        .RowsContatiner .ibox-title
-        {
-            padding-top: 200px !important;
+        @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait) {
+            .RowsContatiner .ibox-title {
+                padding-top: 200px !important;
+            }
         }
-
-        }
-
-
     </style>
-    
-    
-    }
+
+
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/scripts/plugins/dataTablesjs")

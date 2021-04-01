@@ -8848,8 +8848,9 @@ z-index:99999999 !important;
         height: auto !important;
         background-position: center !important;
         width: 100%;
-        min-height: 620px !important;
+        
         background-size: cover !important;
+        padding-bottom:47%;
     }
         /*.ipbackground h1 {
             margin-top: 235px !important;

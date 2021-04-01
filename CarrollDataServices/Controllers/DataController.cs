@@ -1070,6 +1070,8 @@ namespace Carroll.Data.Services.Controllers
             }
 
 
+
+
             if (fa.ShowPayChange == true)
             {
                 if (TypeofChange != "")
@@ -1139,9 +1141,31 @@ namespace Carroll.Data.Services.Controllers
             }
 
             fa.TypeOfChange = TypeofChange;
-         
+            var type = "Insert";
 
-            fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
+            if (HttpContext.Current.Request.Params["isedit"].ToString() == "1")
+            {
+                type = "Update";
+                fa.PayrollStatusChangeNoticeId = new Guid(HttpContext.Current.Request.Params["refid"].ToString().ToUpper());
+                fa.IsResubmitted = true;
+                fa.ResubmittedBy = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+                fa.ResubmittedDateTime = DateTime.Now;
+                fa.EmployeeSignedDateTime = null;
+            //    fa.RegionalManagerSignedDateTime = null;
+                fa.PmSignedDateTime = DateTime.Now;
+                WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been Resubmitted", "Payroll Status Change has been Resubmitted  on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+
+            }
+            else
+            {
+                fa.PayrollStatusChangeNoticeId = System.Guid.NewGuid();
+                fa.CreatedUser = new Guid(HttpContext.Current.Request.Params["CreatedBy"]);
+                fa.CreatedDateTime = DateTime.Now;
+
+                WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "Payroll Status Change has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+
+            }
+           
           
 
          
@@ -1163,7 +1187,7 @@ namespace Carroll.Data.Services.Controllers
             fa.CreatedDateTime = DateTime.Now;
             fa.PmSignedDateTime = DateTime.Now;
 
-            var re= _service.InsertPayRollStatusChangeNotice(fa);
+            var re= _service.InsertPayRollStatusChangeNotice(fa,type);
             WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), "Payroll Status Change has been submitted", "New Payroll Status Change has been submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
             WorkflowHelper.InsertHrLog("PayRoll", fa.PayrollStatusChangeNoticeId.ToString(), " PM Signature has been Completed", "Employee Lease Rider has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
