@@ -596,6 +596,14 @@ namespace Carroll.Portals.Models
         public Nullable<System.DateTime> EmployeeSignedDateTime { get; set; }
         public PrintActivity printActivity { get; set; }
         public Nullable<bool> IsCorporate { get; set; }
+        public Nullable<bool> IsResubmitted { get; set; }
+        public Nullable<System.Guid> ResubmittedBy { get; set; }
+        public Nullable<System.DateTime> ResubmittedDateTime { get; set; }
+        public Nullable<bool> IsRejected { get; set; }
+        public Nullable<System.Guid> RejectedBy { get; set; }
+        public Nullable<System.DateTime> RejectedDateTime { get; set; }
+        public string AdditionalText { get; set; }
+        public string RejectedReason { get; set; }
     }
 
     public class PrintNoticeOfEmployeeSeparation

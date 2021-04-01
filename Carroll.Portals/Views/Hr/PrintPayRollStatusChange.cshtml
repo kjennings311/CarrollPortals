@@ -19,367 +19,394 @@
 <body class="document">
     <div class="page">
 
-      
-        <div id="page_1" style="width:96%;">
-            <img style="margin-left: 33%;" src="/img/payroll.png" id="p1img1">
-            <P class="p0 ft0" style="    margin-top: 5PX;
+
+        @if (Model.IsRejected == true)
+        {
+
+            <p style="
+    color: #ff0000;
+    font-size: 135pt;
+    opacity: 2 !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1;
+    left: 0px;
+    opacity: 0.4 !important;
+    top: 0px;
+    display: block;
+    text-transform: uppercase;transform: rotateZ(
+-50deg
+);
+">Rejected</p>
+
+        }        <div id="page_1" style="width:96%;">
+                <img style="margin-left: 33%;" src="/img/payroll.png" id="p1img1">
+                <P class="p0 ft0" style="    margin-top: 5PX;
     margin-bottom: 10px;margin-top: 5PX;
 margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
-            <P class="p1 ft1" style="margin-top:-10px">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" value="@Model.EmployeeName" /> </P>
-            <p class="p1 ft1" style="margin-top:10px;">
+                <P class="p1 ft1" style="margin-top:-10px">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" value="@Model.EmployeeName" /> </P>
+                <p class="p1 ft1" style="margin-top:10px;">
 
-                @if (Model.IsCorporate.ToString().ToLower() == "true")
-                {
+                    @if (Model.IsCorporate.ToString().ToLower() == "true")
+                    {
 
-                    <span class="c0">
-                        Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
-                    </span>
-                }
-                else
-                {
-                    <span class="c0">
-                        Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input style="margin-left:12px" checked type="radio" id="chkproperty" name="loc" /> Property  <input type="text" id="location" style="width:35%;" value="@Model.Notes2" />
-                    </span>
-                }
-
-
-            </p>
-            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input value="@Model.EmployeeEmail" style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
-            <P class="p3 ft3" style="padding-top:0px"> <h4 style="padding:0px !important"> Select Type Of Change  (check all that apply) : </h4></P>
-            <P class="p6 ft1" style="margin:15px !important;padding:0px !important; margin-top:0px !important">
-
-                @if (Model.ShowPropertyChange == true)
-                {
-                    <input type="checkbox" class="showchange" checked data-div="divpropertychange" id="chkpropertychange" /><span> Property Change </span>
-
-                }
-
-                @if (Model.ShowPayChange == true)
-                {
-                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Pay Change </span>
-
-                }
-
-                @if (Model.ShowDivisionOfLabor == true)
-                {
-                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Labor Allocation </span>
-
-                }
-
-                @if (Model.ShowAllowances == true)
-                {
-                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Allowances </span>
-
-                }
-
-                @if (Model.ShowLeaves == true)
-                {
-                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leave of absence </span>
-
-                }
-            </P>
-
-            <div class="" style="border: 2px solid black; width:100%;padding-bottom:10px;">
-
-                @if (Model.ShowPropertyChange == true)
-                {
-
-                    <div style="width:100%;" id="divpropertychange">
-
-                        <P class="p4 ft5" style="margin-top:0px !important">Property Change</P>
-                        <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> </P>
-                        <P class="p5 ft6"> Property Transfer:</P>
-                        <P class="p5 ft6"> <strong>From : </strong></P>
-                        <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:35% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:25%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
-                        <P class="p5 ft6"> <strong>To : </strong></P>
-                        <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" />  Name: <input style=" display:inline; width:35%" type="text" value="@Model.ToPropName" id="topropname" class="" />Manager: <input style=" display:inline;width:25% " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
-                        <hr style="border-top: 2px solid black;" />
-                    </div>
+                        <span class="c0">
+                            Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="c0">
+                            Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input style="margin-left:12px" checked type="radio" id="chkproperty" name="loc" /> Property  <input type="text" id="location" style="width:35%;" value="@Model.Notes2" />
+                        </span>
+                    }
 
 
-                }
+                </p>
+                <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input value="@Model.EmployeeEmail" style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
+                <P class="p3 ft3" style="padding-top:0px"> <h4 style="padding:0px !important"> Select Type Of Change  (check all that apply) : </h4></P>
+                <P class="p6 ft1" style="margin:15px !important;padding:0px !important; margin-top:0px !important">
 
-                @if (Model.ShowPayChange == true)
-                {
+                    @if (Model.ShowPropertyChange == true)
+                    {
+                        <input type="checkbox" class="showchange" checked data-div="divpropertychange" id="chkpropertychange" /><span> Property Change </span>
 
-                    <div style="width:99%;" id="divpaychange">
-                        <TABLE cellpadding=0 cellspacing=0 class="t0">
-                            <TR>
-                                <TD class="tr0 td0"><P class="p7 ft7">Pay Change</P></TD>
-                                <TD class="tr0 td1"><P class="p8 ft8">&nbsp;</P></TD>
-                                <TD class="tr0 td2"><P class="p8 ft8">&nbsp;</P></TD>
-                                <TD class="tr0 td3"><P class="p8 ft8">&nbsp;</P></TD>
-                            </TR>
-                        </TABLE>
-                        <div style="width:50%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;">
-                            <h4 style="text-align: center;
+                    }
+
+                    @if (Model.ShowPayChange == true)
+                    {
+                        <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Pay Change </span>
+
+                    }
+
+                    @if (Model.ShowDivisionOfLabor == true)
+                    {
+                        <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Labor Allocation </span>
+
+                    }
+
+                    @if (Model.ShowAllowances == true)
+                    {
+                        <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Allowances </span>
+
+                    }
+
+                    @if (Model.ShowLeaves == true)
+                    {
+                        <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leave of absence </span>
+
+                    }
+                </P>
+
+                <div class="" style="border: 2px solid black; width:100%;padding-bottom:10px;">
+
+                    @if (Model.ShowPropertyChange == true)
+                    {
+
+                        <div style="width:100%;" id="divpropertychange">
+
+                            <P class="p4 ft5" style="margin-top:0px !important">Property Change</P>
+                            <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> </P>
+                            <P class="p5 ft6"> Property Transfer:</P>
+                            <P class="p5 ft6"> <strong>From : </strong></P>
+                            <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:35% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:25%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
+                            <P class="p5 ft6"> <strong>To : </strong></P>
+                            <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" />  Name: <input style=" display:inline; width:35%" type="text" value="@Model.ToPropName" id="topropname" class="" />Manager: <input style=" display:inline;width:25% " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
+                            <hr style="border-top: 2px solid black;" />
+                        </div>
+
+
+                    }
+
+                    @if (Model.ShowPayChange == true)
+                    {
+
+                        <div style="width:99%;" id="divpaychange">
+                            <TABLE cellpadding=0 cellspacing=0 class="t0">
+                                <TR>
+                                    <TD class="tr0 td0"><P class="p7 ft7">Pay Change</P></TD>
+                                    <TD class="tr0 td1"><P class="p8 ft8">&nbsp;</P></TD>
+                                    <TD class="tr0 td2"><P class="p8 ft8">&nbsp;</P></TD>
+                                    <TD class="tr0 td3"><P class="p8 ft8">&nbsp;</P></TD>
+                                </TR>
+                            </TABLE>
+                            <div style="width:50%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;">
+                                <h4 style="text-align: center;
     font-weight: bold;
     font-size: 15px;margin-top:-8px">
-                                From
-                            </h4>
-                            <p class="c1">
-                                <span class="c0"><span class="tult"> Title: </span><textarea id="fromtitle" rows="2" cols="30" style="margin-left:30%"> @Model.FromTitle </textarea></span>
-                            </p>
-                            <p class="c1">
-                                <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.FromPosition" />  </span>
-                            </p>
+                                    From
+                                </h4>
+                                <p class="c1">
+                                    <span class="c0"><span class="tult"> Title: </span><textarea id="fromtitle" rows="2" cols="30" style="margin-left:30%"> @Model.FromTitle </textarea></span>
+                                </p>
+                                <p class="c1">
+                                    <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.FromPosition" />  </span>
+                                </p>
 
-                            <p class="c1">
-                                <span class="c0">Status : <input type="text" style="margin-left: 16.5%;" value="@Model.FromStatus" />    </span>
-                            </p>
+                                <p class="c1">
+                                    <span class="c0">Status : <input type="text" style="margin-left: 16.5%;" value="@Model.FromStatus" />    </span>
+                                </p>
 
-                            <p class="c1">
-                                <span class="c0">Wage / Salary : <input type="text" style="margin-left: 5%;" value="@Model.FromWageSalary" />   </span>
-                            </p>
+                                <p class="c1">
+                                    <span class="c0">Wage / Salary : <input type="text" style="margin-left: 5%;" value="@Model.FromWageSalary" />   </span>
+                                </p>
 
-                            <p class="c1">
-                                <span class="c0">
-                                    Rate  <input type="text" id="fromrate" value="@Model.FromRate" style="width:30%;margin-left:21%;" />
+                                <p class="c1">
+                                    <span class="c0">
+                                        Rate  <input type="text" id="fromrate" value="@Model.FromRate" style="width:30%;margin-left:21%;" />
 
-                                    @if (Model.FromWageSalary == "Hourly")
-                                    {
-                                        <span> per hour </span>
-                                    }
-                                    else if (Model.FromWageSalary == "Annual")
-                                    {
-                                        <span> Annually </span>
-                                    }
+                                        @if (Model.FromWageSalary == "Hourly")
+                                        {
+                                            <span> per hour </span>
+                                        }
+                                        else if (Model.FromWageSalary == "Annual")
+                                        {
+                                            <span> Annually </span>
+                                        }
 
-                                </span>
-                            </p>
-                        </div>
+                                    </span>
+                                </p>
+                            </div>
 
-                        <div style="width:49%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;   margin-left: -3px !important;">
-                            <h4 style="text-align: center;
+                            <div style="width:49%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;   margin-left: -3px !important;">
+                                <h4 style="text-align: center;
     font-weight: bold;
     font-size: 15px;margin-top:-8px; ">
-                                To
-                            </h4>
-                            <p class="c1">
-                                <span class="c0"> <span class="tult"> Title: </span>  <textarea id="totitle" rows="2" cols="30" style="margin-left:30%"> @Model.ToTitle </textarea>  </span>
-                            </p>
+                                    To
+                                </h4>
+                                <p class="c1">
+                                    <span class="c0"> <span class="tult"> Title: </span>  <textarea id="totitle" rows="2" cols="30" style="margin-left:30%"> @Model.ToTitle </textarea>  </span>
+                                </p>
 
 
-                            <p class="c1">
-                                <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.ToPosition" />  </span>
-                            </p>
+                                <p class="c1">
+                                    <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.ToPosition" />  </span>
+                                </p>
 
-                            <p class="c1">
-                                <span class="c0">Status : <input type="text" style="margin-left: 16.5%;" value="@Model.ToStatus" />    </span>
-                            </p>
+                                <p class="c1">
+                                    <span class="c0">Status : <input type="text" style="margin-left: 16.5%;" value="@Model.ToStatus" />    </span>
+                                </p>
 
-                            <p class="c1">
-                                <span class="c0">Wage / Salary : <input type="text" style="margin-left: 5%;" value="@Model.ToWageSalary" />   </span>
-                            </p>
+                                <p class="c1">
+                                    <span class="c0">Wage / Salary : <input type="text" style="margin-left: 5%;" value="@Model.ToWageSalary" />   </span>
+                                </p>
 
 
-                            <p class="c1">
-                                <span class="c0">
-                                    Rate  <input type="text" id="Torate" value="@Model.ToRate" style="width:30%;margin-left:21%;" />    @if (Model.ToWageSalary == "Hourly")
-                                    {
-                                        <span> per hour </span>
-                                    }
-                                    else if (Model.ToWageSalary == "Annual")
-                                    {
-                                        <span> Annually </span>
-                                    }
-                                </span>
-                            </p>
+                                <p class="c1">
+                                    <span class="c0">
+                                        Rate  <input type="text" id="Torate" value="@Model.ToRate" style="width:30%;margin-left:21%;" />    @if (Model.ToWageSalary == "Hourly")
+                                        {
+                                            <span> per hour </span>
+                                        }
+                                        else if (Model.ToWageSalary == "Annual")
+                                        {
+                                            <span> Annually </span>
+                                        }
+                                    </span>
+                                </p>
+                            </div>
+
+                            <TABLE cellpadding=0 cellspacing=0 class="t0">
+
+                                <TR>
+                                    <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective:  @Model.BeginPayPeriod  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
+                                    <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
+                                </TR>
+                            </TABLE>
+
+                            <hr style="border-top: 2px solid black;" />
+                        </div>
+                    }
+
+                    @if (Model.ShowDivisionOfLabor == true)
+                    {
+
+                        <div style="width:100%;" id="divlaborallocation">
+                            <TABLE id="divlaborallocation" cellpadding=0 cellspacing=0 class="t0">
+                                <TR>
+                                    <TD class="tr5 td0"><P class="p7 ft7"> Labor Allocation </P></TD>
+                                    <TD class="tr5 td1"><P class="p8 ft13">&nbsp;</P></TD>
+                                    <TD class="tr5 td2"><P class="p8 ft13">&nbsp;</P></TD>
+                                    <TD class="tr5 td3"><P class="p8 ft13">&nbsp;</P></TD>
+                                </TR>
+                                <TR>
+                                    <TD class="tr6 td0"><P class="p7 ft12">(Total MUST equal 100%)</P></TD>
+                                    <TD class="tr6 td1"><P class="p8 ft14">&nbsp;</P></TD>
+                                    <TD class="tr6 td2"><P class="p8 ft14">&nbsp;</P></TD>
+                                    <TD class="tr6 td3"><P class="p8 ft14">&nbsp;</P></TD>
+                                </TR>
+
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1">Property</P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1">Percentage</P></TD>
+
+                                </TR>
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property1" id="prop1" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property1_Per" id="prop1per" /></P></TD>
+
+                                </TR>
+                                @if (!string.IsNullOrEmpty(Model.La_Property2))
+
+                                {
+                                    <TR>
+                                        <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                        <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                    </TR>
+                                }
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property3" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property3_Per" id="prop2per" /></P></TD>
+                                </TR>
+                                @if (string.IsNullOrEmpty(Model.La_Property2))
+
+                                {
+                                    <TR>
+                                        <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                        <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                    </TR>
+                                }
+
+                            </TABLE>
+                            <hr style="border-top: 2px solid black;" />
                         </div>
 
-                        <TABLE cellpadding=0 cellspacing=0 class="t0">
 
-                            <TR>
-                                <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective:  @Model.BeginPayPeriod  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
-                                <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
-                            </TR>
-                        </TABLE>
+                    }
 
-                        <hr style="border-top: 2px solid black;" />
-                    </div>
-                }
-
-                @if (Model.ShowDivisionOfLabor == true)
-                {
-
-                    <div style="width:100%;" id="divlaborallocation">
-                        <TABLE id="divlaborallocation" cellpadding=0 cellspacing=0 class="t0">
-                            <TR>
-                                <TD class="tr5 td0"><P class="p7 ft7"> Labor Allocation </P></TD>
-                                <TD class="tr5 td1"><P class="p8 ft13">&nbsp;</P></TD>
-                                <TD class="tr5 td2"><P class="p8 ft13">&nbsp;</P></TD>
-                                <TD class="tr5 td3"><P class="p8 ft13">&nbsp;</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr6 td0"><P class="p7 ft12">(Total MUST equal 100%)</P></TD>
-                                <TD class="tr6 td1"><P class="p8 ft14">&nbsp;</P></TD>
-                                <TD class="tr6 td2"><P class="p8 ft14">&nbsp;</P></TD>
-                                <TD class="tr6 td3"><P class="p8 ft14">&nbsp;</P></TD>
-                            </TR>
-
-                            <TR>
-                                <TD class="tr7 td0"><P class="p14 ft1">Property</P></TD>
-                                <TD class="tr7 td1"><P class="p10 ft1">Percentage</P></TD>
-
-                            </TR>
-                            <TR>
-                                <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property1" id="prop1" /></P></TD>
-                                <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property1_Per" id="prop1per" /></P></TD>
-
-                            </TR>
-                            @if (!string.IsNullOrEmpty(Model.La_Property2))
-
-                            {
+                    @if (Model.ShowAllowances == true)
+                    {
+                        <div id="divallowance" style="width:100%;;">
+                            <P class="p15 ft5">Allowances</P>
+                            <P class="p16 ft15">(Corporate Only)</P>
+                            <TABLE cellpadding=0 cellspacing=0 class="t1">
                                 <TR>
-                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
-                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
-
-                                </TR>
-                            }
-                            <TR>
-                                <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property3" id="prop2" /></P></TD>
-                                <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property3_Per" id="prop2per" /></P></TD>
-                            </TR>
-                            @if (string.IsNullOrEmpty(Model.La_Property2))
-
-                            {
-                                <TR>
-                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
-                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
-
-                                </TR>
-                            }
-
-                        </TABLE>
-                        <hr style="border-top: 2px solid black;" />
-                    </div>
-
-
-                }
-
-                @if (Model.ShowAllowances == true)
-                {
-                    <div id="divallowance" style="width:100%;;">
-                        <P class="p15 ft5">Allowances</P>
-                        <P class="p16 ft15">(Corporate Only)</P>
-                        <TABLE cellpadding=0 cellspacing=0 class="t1">
-                            <TR>
-                                <TD class="tr7 td9"><P class="p9 ft6">Select Type:</P></TD>
-                                <TD class="tr7 td10">
-                                    <P class="p8 ft1">
-                                        <SPAN class="ft9">
-                                            @{ if (Model.Chk_CarAmount == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkcaramount" />
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkcaramount" />
-                                                }
-
-                                            }
-                                        </SPAN>Car Amount: $ <input type="text" style="width:30%" id="txtcaramount" value="@Model.CarAmountPerMonth" /> / month
-                                    </P>
-                                </TD>
-                                <TD class="tr7 td11">
-                                    <P class="p17 ft1">
-                                        <SPAN class="ft9">
-                                            @{ if (Model.Chk_PhoneAmount == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkphoneamount" /> }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkphoneamount" />
-
-                                                }}
-                                        </SPAN>Phone Amount: $ <input type="text" style="width:30%" id="txtphoneamount" value="@Model.PhoneAmountPerMonth" /> / month
-                                    </P>
-                                </TD>
-                            </TR>
-                        </TABLE>
-
-                        <hr style="border-top: 2px solid black;" />
-                    </div>
-
-                }
-
-                @if (Model.ShowLeaves == true)
-                {
-
-
-
-                    <div style="width:100%;" id="divleaveabsence">
-                        <TABLE cellpadding=0 cellspacing=0 class="t1">
-                            <TR>
-                                <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
-                                <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leave of absence</P></TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
-                                <TD class="tr1 td10">
-                                    <P class="p19 ft6">
-                                        FMLA Eligible? <SPAN class="ft9">
-                                            @{
-                                                if (Model.FmlaYes == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkfmlayes" />
-
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkfmlayes" />
-
-                                                }
-                                            }
-                                        </SPAN> <SPAN class="ft1">Yes </SPAN> <SPAN class="ft9">
-
-                                            @{ if (Model.FmlaNo == true)
-                                                {
-                                                    <input type="checkbox" checked id="chkfmlano" />
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" id="chkfmlano" />
-                                                }
-                                            }
-                                        </SPAN><SPAN class="ft1">No</SPAN>
-                                    </P>
-                                </TD>
-                                <TD class="tr1 td11">
-                                    <P class="p8 ft6">
-                                        Enrolled in Benefits? <SPAN class="ft9">
-                                            @{
-                                                if (Model.EnrolledBenefitsYes != null)
-                                                {
-
-
-                                                    if (Model.EnrolledBenefitsYes == true)
+                                    <TD class="tr7 td9"><P class="p9 ft6">Select Type:</P></TD>
+                                    <TD class="tr7 td10">
+                                        <P class="p8 ft1">
+                                            <SPAN class="ft9">
+                                                @{ if (Model.Chk_CarAmount == true)
                                                     {
-                                                        <span>  <input type="checkbox" checked id="chkbenefityes" /> </span>
+                                                        <input type="checkbox" checked id="chkcaramount" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="checkbox" id="chkcaramount" />
+                                                    }
+
+                                                }
+                                            </SPAN>Car Amount: $ <input type="text" style="width:30%" id="txtcaramount" value="@Model.CarAmountPerMonth" /> / month
+                                        </P>
+                                    </TD>
+                                    <TD class="tr7 td11">
+                                        <P class="p17 ft1">
+                                            <SPAN class="ft9">
+                                                @{ if (Model.Chk_PhoneAmount == true)
+                                                    {
+                                                        <input type="checkbox" checked id="chkphoneamount" /> }
+                                                    else
+                                                    {
+                                                        <input type="checkbox" id="chkphoneamount" />
+
+                                                    }}
+                                            </SPAN>Phone Amount: $ <input type="text" style="width:30%" id="txtphoneamount" value="@Model.PhoneAmountPerMonth" /> / month
+                                        </P>
+                                    </TD>
+                                </TR>
+                            </TABLE>
+
+                            <hr style="border-top: 2px solid black;" />
+                        </div>
+
+                    }
+
+                    @if (Model.ShowLeaves == true)
+                    {
+
+
+
+                        <div style="width:100%;" id="divleaveabsence">
+                            <TABLE cellpadding=0 cellspacing=0 class="t1">
+                                <TR>
+                                    <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
+                                    <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leave of absence</P></TD>
+                                </TR>
+                                <TR>
+                                    <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
+                                    <TD class="tr1 td10">
+                                        <P class="p19 ft6">
+                                            FMLA Eligible? <SPAN class="ft9">
+                                                @{
+                                                    if (Model.FmlaYes == true)
+                                                    {
+                                                        <input type="checkbox" checked id="chkfmlayes" />
 
                                                     }
                                                     else
                                                     {
-                                                        <span>
-                                                            <input type="checkbox" id="chkbenefityes" />
-                                                        </span>
+                                                        <input type="checkbox" id="chkfmlayes" />
 
                                                     }
                                                 }
-                                            }
+                                            </SPAN> <SPAN class="ft1">Yes </SPAN> <SPAN class="ft9">
 
-
-                                        </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
-                                            @{
-
-                                                if (Model.EnrolledBenefitNo != null)
-                                                {
-                                                    if (Model.EnrolledBenefitNo == true)
+                                                @{ if (Model.FmlaNo == true)
                                                     {
-                                                        <input type="checkbox" checked id="chkbenefitno" />
+                                                        <input type="checkbox" checked id="chkfmlano" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="checkbox" id="chkfmlano" />
+                                                    }
+                                                }
+                                            </SPAN><SPAN class="ft1">No</SPAN>
+                                        </P>
+                                    </TD>
+                                    <TD class="tr1 td11">
+                                        <P class="p8 ft6">
+                                            Enrolled in Benefits? <SPAN class="ft9">
+                                                @{
+                                                    if (Model.EnrolledBenefitsYes != null)
+                                                    {
 
+
+                                                        if (Model.EnrolledBenefitsYes == true)
+                                                        {
+                                                            <span>  <input type="checkbox" checked id="chkbenefityes" /> </span>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>
+                                                                <input type="checkbox" id="chkbenefityes" />
+                                                            </span>
+
+                                                        }
+                                                    }
+                                                }
+
+
+                                            </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
+                                                @{
+
+                                                    if (Model.EnrolledBenefitNo != null)
+                                                    {
+                                                        if (Model.EnrolledBenefitNo == true)
+                                                        {
+                                                            <input type="checkbox" checked id="chkbenefitno" />
+
+                                                        }
+                                                        else
+                                                        {
+
+                                                            <input type="checkbox" id="chkbenefitno" />
+                                                        }
                                                     }
                                                     else
                                                     {
@@ -387,55 +414,49 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                                                         <input type="checkbox" id="chkbenefitno" />
                                                     }
                                                 }
-                                                else
-                                                {
-
-                                                    <input type="checkbox" id="chkbenefitno" />
-                                                }
-                                            }
 
 
 
-                                        </SPAN><SPAN class="ft1">No</SPAN>
-                                    </P>
-                                </TD>
-                            </TR>
-                        </TABLE>
-                        <P class="p20 ft1">
-                            Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" />
-                            @if (Model.Leave_Purpose == "Other")
-                            {<span id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span>}
-                        </P>
-                        <P class="p20 ft1">
-                            Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:
-                            @if (Model.Leave_End != null)
-                            {
-                                <input type="text" style="width:20%;" value="@Model.Leave_End.Value.ToString("MM/dd/yyyy")" id="leavebegin" />
-                            }
-                            else
-                            {
-                                <input type="text" style="width:20%;" id="leavebegin" />
-                            } PTO balance:<input type="text" class="allow_decimal" value="@Model.Pto_Balance" style="width:25%" id="ptobalance" />
-                            <hr style="border-top: 2px solid black;" />
-                    </div>
-                }
+                                            </SPAN><SPAN class="ft1">No</SPAN>
+                                        </P>
+                                    </TD>
+                                </TR>
+                            </TABLE>
+                            <P class="p20 ft1">
+                                Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" />
+                                @if (Model.Leave_Purpose == "Other")
+                                {<span id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span>}
+                            </P>
+                            <P class="p20 ft1">
+                                Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:
+                                @if (Model.Leave_End != null)
+                                {
+                                    <input type="text" style="width:20%;" value="@Model.Leave_End.Value.ToString("MM/dd/yyyy")" id="leavebegin" />
+                                }
+                                else
+                                {
+                                    <input type="text" style="width:20%;" id="leavebegin" />
+                                } PTO balance:<input type="text" class="allow_decimal" value="@Model.Pto_Balance" style="width:25%" id="ptobalance" />
+                                <hr style="border-top: 2px solid black;" />
+                        </div>
+                    }
 
-                <div id="divnotes" style="width:100%;">
-                    <P class="p21 ft5">Notes:</P>
-                    <P class="p6 ft1">
-                        <textarea type="text" style="width:95%;padding:10px;" rows="5" id="notes1"> @if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
+                    <div id="divnotes" style="width:100%;">
+                        <P class="p21 ft5">Notes:</P>
+                        <P class="p6 ft1">
+                            <textarea type="text" style="width:95%;padding:10px;" rows="5" id="notes1"> @if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
 {
  @Model.Notes1.Trim().Replace("  ","");
 }</textarea>
-                    </P>
+                        </P>
 
+                    </div>
+                    <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@if (Model.ESignature != null) {  @Model.ESignature; } " />  Date: <input type="text" name="name" value="@if (Model.EDate != null) { @Model.EDate.Value.ToString("MM/dd/yyyy"); } " /> </P>
+                    <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name"name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
                 </div>
-                <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@if (Model.ESignature != null) {  @Model.ESignature; } " />  Date: <input type="text" name="name" value="@if (Model.EDate != null) { @Model.EDate.Value.ToString("MM/dd/yyyy"); } " /> </P>
-                <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name"name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
-            </div>
 
+            </div>
         </div>
-    </div>
 
     <div class="page">
 
