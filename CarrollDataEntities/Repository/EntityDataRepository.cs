@@ -2114,6 +2114,9 @@ tbl.UploadedDate descending
 
                         if(entity!= null)
                         {
+
+                            _property.SequenceNumber = entity.SequenceNumber;
+                            _property.IsRejected = false;
                             _entities.Entry(entity).CurrentValues.SetValues(_property);
                         }
                     }

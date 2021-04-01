@@ -1982,12 +1982,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                         insertForm.append('fromstatus', 'PART');
                     }
 
-                    if (insertoredit == false) {
-                        insertForm.append('isedit', '1');
-                        insertForm.append('refid', leaseid);
-                    }
-                    else
-                        insertForm.append('isedit', '0');
+                  
 
                     if ($("#fromannualsalary").is(":checked")) {
                         insertForm.append('fromwage', 'Annual');
@@ -2396,7 +2391,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             $("#chklaborallocation").prop("checked", false);
                             $("#divlaborallocation").hide();
                         }
-                        else {
+                        else if (data.showDivisionOfLabor == "true") {
                             $("#chklaborallocation").prop("checked", true);
                             $("#divlaborallocation").show();
                         }
@@ -2408,7 +2403,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             $("#chkleave").prop("checked", false);
                             $("#divleaveabsence").hide();
                         }
-                        else {
+                        else  {
                             $("#chkleave").prop("checked", true);
                             $("#divleaveabsence").show();
                         }
@@ -2418,22 +2413,23 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             $("#chkpropertychange").prop("checked", false);
                             $("#divpropertychange").hide();
                         }
-                        else {
+                        else  {
 
-                            console.log(data.changeEffectiveDate);
-
-                            var d = data.changeEffectiveDate.substring(0, 4) + "-" + data.changeEffectiveDate.substring(5, 7) + "-" + data.changeEffectiveDate.substring(8, 10);
-                            //    $("#startdate").val(d);
-
-
-                            console.log(d);
-                            $("#effectivedate").val(d);
 
 
                             $("#divpropertychange").show();
                             $("#chkpropertychange").prop("checked", true);
                         }
 
+                        if (data.showPropertyChange == true)
+                        {
+
+                            var d = data.changeEffectiveDate.substring(0, 4) + "-" + data.changeEffectiveDate.substring(5, 7) + "-" + data.changeEffectiveDate.substring(8, 10);
+                            //    $("#startdate").val(d);
+
+                            $("#effectivedate").val(d);
+
+                        }
                         $("#frompropnum").val(data.fromPropNum);
                         $("#frompropname").val(data.fromPropName);
                         $("#frommanager").val(data.fromManager);
