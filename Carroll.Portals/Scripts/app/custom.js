@@ -3373,6 +3373,28 @@ function LoadHrPositionsByType(t)
     }
 
 
+
+function LoadHrPositionsByTypeForJobTitle(t) {
+    var options = "";
+
+    $.get($BaseApiUrl + "api/Data/GetAllCarrollPositionsByType?Type=" + t, function (data) {
+
+        options = "<option value='' > Select  </option>";
+        for (var i = 0; i < data.length; i++) {
+
+            options += "<option value=\"" + data[i]["value"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+        }
+
+        $('#jobtitle').html(options);
+    });
+
+    // now let's load options into select box
+
+
+}
+
+
 function LoadHrPositions()
 {
     var options = "";
@@ -3385,7 +3407,7 @@ function LoadHrPositions()
             selected = "";
         }
         // now let's load options into select box
-        $('#position').append(options);
+      //  $('#position').append(options);
 
         if ($("#totitle").length > 0)
         {

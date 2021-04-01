@@ -4,7 +4,7 @@
 
 <input type="hidden" id="pageid" value="empleaserider" />
 
-<div class="row wrapper border-bottom white-bg page-heading">
+@*<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <ol class="breadcrumb" style="padding: 8px 15px;">
             <li>
@@ -19,7 +19,7 @@
     <div class="col-lg-2">
 
     </div>
-</div>
+</div>*@
 
 <div class="RowsContatiner animated fadeInRight">
     <div class="col-lg-12">
@@ -33,15 +33,15 @@
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager" ||  @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "corporate")
                 {
 
-                    <div class="ibox-tools" style="margin-top:-55px;">
+                    <div class="ibox-tools" style="margin-top:-40px;">
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
                             <a disabled="disabled" class="btnDelete" href="#">
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" class="addnew" href="#" onclick="LoadHrForm('EmployeeLeaseRider'); LoadAllProperties();">
-                            <i class="fa fa-plus-circle"></i> New
+                        <a style="color:white;font-size: 20px;" class="addnew" href="#" onclick="LoadHrForm('EmployeeLeaseRider'); LoadAllProperties();">
+                            <i class="fa fa-plus-circle"></i> NEW
                         </a>
                     </div>
                 }

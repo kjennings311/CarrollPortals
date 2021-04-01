@@ -4,7 +4,7 @@
 
 <input type="hidden" id="pageid" value="payroll" />
 
-<div class="row wrapper border-bottom white-bg page-heading">
+@*<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <ol class="breadcrumb" style="padding: 8px 15px;">
             <li>
@@ -15,7 +15,7 @@
             </li>
         </ol>
     </div>
-</div>
+</div>*@
 
 @{ Html.RenderPartial("HrFormLogActivity"); }
 
@@ -114,7 +114,7 @@
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "asset manager")
                 {
 
-                    <div class="ibox-tools" style="margin-top:-55px;">
+                    <div class="ibox-tools" style="margin-top:-40px;">
 
                         @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
@@ -122,8 +122,8 @@
                                 <i class="fa fa-trash"></i> Delete
                             </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
-                            <i class="fa fa-plus-circle"></i> New
+                        <a style="color:white;font-size: 20px;" href="#" class="addnew" onclick="LoadHrForm('PayRollChange'); LoadPayRoles(); LoadHrPositions();">
+                            <i class="fa fa-plus-circle"></i> NEW
                         </a>
                     </div>
                 }

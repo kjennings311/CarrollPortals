@@ -4014,6 +4014,7 @@ table.table-mail tr td {
   cursor: pointer;
   margin-left: 5px;
   color: #c4c4c4;
+  font-size:15px;
 }
 .ibox-tools a.btn-primary {
   color: #fff;

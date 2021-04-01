@@ -4,7 +4,7 @@
 
 <input type="hidden" id="pageid" value="newhire" />
 
-<div class="row wrapper border-bottom white-bg page-heading">
+@*<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
 
         <ol class="breadcrumb" style="padding: 8px 15px;">
@@ -20,7 +20,7 @@
     <div class="col-lg-2">
 
     </div>
-</div>
+</div>*@
 
 <div class="RowsContatiner animated fadeInRight">
 
@@ -124,17 +124,18 @@
                 @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager")
                 {
 
-                    <div class="ibox-tools" style="margin-top:-55px;">
-                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+                <div class="ibox-tools" style="margin-top:-40px;">
+                    @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
 
-                            <a disabled="disabled" class="btnDelete" href="#">
-                                <i class="fa fa-trash"></i> Delete
-                            </a>*@
+        <a disabled="disabled" class="btnDelete" href="#">
+            <i class="fa fa-trash"></i> Delete
+        </a>*@
 
-                        <a style="color:white;font-size: 30px;font-weight:bold" href="#" class="addnew" onclick="LoadHrForm('EmployeeLeaseRider'); LoadHrPositions();">
-                            <i class="fa fa-plus-circle"></i> New
-                        </a>
-                    </div>
+
+                    <a style="color:white;font-size: 20px;" href="#" class="addnew" onclick="LoadHrForm('EmployeeLeaseRider'); LoadHrPositions(); ">
+                        <i class="fa fa-plus-circle"></i> NEW
+                    </a>
+                </div>
                 }
             </div>
             <div class="ibox-content" style="padding:80px; padding-top:40px;">
@@ -203,7 +204,7 @@
                                         </p>
 
                                         <p class="c1">
-                                            <span class="c0"><span class=" positionerror lblerror">Position </span> <select style="width:250px;margin-left:10%; " class="select select2" id="position"> </select> </span>
+                                            <span class="c0"><span class=" positionerror lblerror">Position </span> <select style="width:250px;margin-left:10%; " class="select select2" id="position"><option> Select Location </option> </select> </span>
                                         </p>
 
                                         <table style="width: 80%;
