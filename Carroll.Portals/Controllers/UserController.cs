@@ -10,7 +10,7 @@ namespace Carroll.Portals.Controllers
 {
     [CustomAuthorize]
     [BaseModel]
-    [AdminFilter]
+    [AdminHRFilter]
 
 
     public class UserController : Controller
