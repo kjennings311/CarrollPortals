@@ -1,0 +1,1178 @@
+﻿@{
+    ViewBag.Title = "Notice of Employee Separation";
+}
+
+<input type="hidden" id="pageid" value="empseparation" />
+@*<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <ol class="breadcrumb" style="padding: 8px 15px;">
+            <li>
+                <a href="~/Home/Index">Home</a>
+            </li>
+            <li class="active">
+                <strong> Notice Of Employee Separation </strong>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-2">
+
+    </div>
+</div>*@
+
+<div class="RowsContatiner animated fadeInRight">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="background:url('/img/hrbg-min.jpg');background-size: cover;padding: 240px 15px 7px;">
+
+                <h1 style="color:white;text-transform:uppercase"> <b> Notice of Employee Separation </b></h1>
+                <input type="hidden" id="pageidname" value="noticeofseparation" />
+                @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "corporate" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "asset manager")
+                {
+
+                    <div class="ibox-tools" style="margin-top:-40px;">
+                        @*<a disabled="disabled" class="btnEdit" href="#" onclick="ToggleEdit('PropertyCard');"><i class="fa fa-edit"></i> Edit</a>
+
+                <a disabled="disabled" class="btnDelete" href="#">
+                    <i class="fa fa-trash"></i> Delete
+                </a>*@
+
+                        <a style="color:white;font-size: 20px; " class="addnew" href="#" onclick="LoadHrForm('EmployeeSeparation')">
+                            <i class="fa fa-plus-circle"></i> NEW
+                        </a>
+                    </div>
+                }
+            </div>
+
+
+            @{ Html.RenderPartial("HrFormLogActivity"); }
+
+
+
+
+            <div class="ibox-content" style="margin-left:0%; padding-top:0px;">
+                <div class="modal fade bs-example-modal-lg claimmodal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg" style="width:70%" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @*<h1 class="modal-title" style="font-weight:bold;text-align: center;
+                                    color: black;" id="gridSystemModalLabel">
+                                                                    Payroll Status Change
+                                                                </h1>*@
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" style="padding: 20px;
+    border: 2px solid black;">
+                                    <form id="submitform" style="margin-left:10%;" onsubmit="return false;">
+                                        <p class="c1 c8" style="margin-left:27%;">
+                                            <span class="c7">
+                                                <img src="~/img/newhirenotice.png">
+                                            </span>
+                                        </p>
+                                        <DIV id="page_1">
+                                            <DIV class="dclr"></DIV>
+                                            <p class="p0 ft0" style="font-weight: bolder;margin-left:-1%;">Notice of Employee Separation</p>
+                                            <p class="p1 ft1" style="margin-top:20px;"> <span class="effectivedateerror lblerror"> Effective Date of Change  </span> <input style="width:37%;" type="date" id="effectivedate" /> <span class="rehireerror lblerror">  Eligible for Rehire  </span> <input type="text" style="width:23%;" value="YES" disabled id="rehire" /></p>
+                                            <p class="p1 ft1">
+                                                <span class="c0 chkcorporateerror chkpropertyerror">
+                                                    Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input style="" type="radio" id="chkproperty" name="loc" /> Property
+                                                </span>
+                                                <span class="c0" id="divproperty" style="display:none;">
+                                                    <select  style="width:33%" id="location"> </select> <span class="propertynumbererror">  Number </span> <input type="text" id="propertynumber" style="width:23%" />
+                                                </span>
+
+                                            </p>
+                                            <p class="p2 ft1"><span class="empnameerror"> Employee Name  </span><input type="text" id="empname" style="width:30%" /> <span class="jobtitleerror">  Job Title </span> <select id="jobtitle" style="width:46%"> <option> Select Location </option> </select></p>
+                                            <p class="p2 ft1"><span class="empnameerror"> Do they live at a CARROLL property </span><select  id="carrolllive" style="width:15%" > <option>Select </option> <option value="YES"> Yes </option><option value="NO"> No </option> </select> </p>
+
+                                            <P class="p3 ft2">Reason Code from below </P>
+                                            <TABLE cellpadding=0 cellspacing=0 class="t0">
+                                                <TR>
+                                                    <TD class="tr0 td0"><P class="p4 ft3">Discharged</P></TD>
+                                                    <TD class="tr0 td1"><P class="p5 ft3">Quit</P></TD>
+                                                    <TD class="tr0 td2"><P class="p6 ft3">Lack of Work</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr1 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Refused Instructions" />Refused Instructions </P></TD>
+                                                    <TD class="tr1 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Domestic Obligations" />Domestic Obligations</P></TD>
+                                                    <TD class="tr1 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="No Light Duty Available" />No Light Duty Available</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Falsified Applications" />Falsified Applications</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="For Other Work" />For Other Work</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="Location Closed" />Location Closed</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="radio" name="col1" class="dis" value="Neglect of Duty" />Neglect of Duty</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Without Notice" />Without Notice</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="Job Eliminated" />Job Eliminated</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Misconduct" />Misconduct</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Job Dissatisfaction" />Job Dissatisfaction</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="End of Temporary Assignment" />End of Temporary Assignment</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="radio" name="col1" id="chkviolated" class="dis" value="Violated Company Policy**" />Violated Company Policy**</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Personal Reasons" />Personal Reasons</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="End of Seasonal Work" />End of Seasonal Work</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="radio" name="col1" class="dis" value="Unexcused Absenteeism" />Unexcused Absenteeism</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Moved" />Moved</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft4"><input type="radio" name="col1" class="wor" value="Lack of Work" />Lack of Work</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="radio" name="col1" class="dis" value="Unexcused Tardiness" />Unexcused Tardiness</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Other Voluntarily Quit" />Other Voluntarily Quit</P></TD>
+                                                    <TD class="tr2 td5"><P class="p9 ft3"> <input type="radio" name="col1" class="wor" value="Property Sold / Loss Mgt" />Property Sold / Loss Mgt</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr0 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Insubordination" />Insubordination</P></TD>
+                                                    <TD class="tr0 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Refused Recall" />Refused Recall</P></TD>
+                                                    <TD class="tr0 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr3 td3"><P class="p10 ft6">&nbsp;</P></TD>
+                                                    <TD class="tr3 td4"><P class="p8 ft7"><input type="radio" name="col1" class="qui" value="Reduced Work" />Reduced Work</P></TD>
+                                                    <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr4 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value=" Work Quality / Quantity" />Work Quality / Quantity</P></TD>
+                                                    <TD class="tr4 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Schedule" />Schedule</P></TD>
+                                                    <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Shortages / Theft" />Shortages / Theft</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Voluntary Retirement" />Voluntary Retirement</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Dishonesty" />Dishonesty</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Not Able / Available" />Not Able / Available</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Refused Work" />Refused Work</P></TD>
+                                                    <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Refused Instructions" />Deceased</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Violation of Drug / Alcohol Policy" />Violation of Drug / Alcohol Policy</P></TD>
+                                                    <TD class="tr2 td4"><P class="p10 ft5">&nbsp;</P></TD>
+                                                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                                <TR>
+                                                    <TD class="tr2 td6"><P class="p7 ft3"> <input type="radio" name="col1" class="dis" value="Failed E-Verify" />Failed E-Verify </NOBR></P></TD>
+                                                    <TD class="tr2 td7"><P class="p10 ft5">&nbsp;</P></TD>
+                                                    <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
+                                                </TR>
+                                            </TABLE>
+                                            <P class="p11 ft1 polictyvoilated1error" style="margin-top:15px;">**What Policy specifically was violated? </P>
+                                            <P class="p12 ft1"><textarea type="text" id="polictyvoilated1" style="width:95%"></textarea> </P>
+                                            <P class="p13 ft1">Additional Remarks </P>
+                                            <P class="p14 ft1"><textarea type="text" id="remarks1" style="width:95%"> </textarea></P>
+
+                                            <P class="p18 ft1">Equipment/Keys Returned? <select id="keysreturned"><option value="true"> Yes </option><option value="false"> No </option> </select><SPAN style="padding-left:15px;">2 weeks’ notice given? <select id="noticegiven"><option value="1"> Yes </option><option value="0"> No </option> </select></SPAN> <SPAN style="padding-left:15px;">2 weeks’ Completed? <select id="2weekscom"><option value="true"> Yes </option><option value="false"> No </option> </select></SPAN></P>
+
+                                            <P class="p13 ft9"><SPAN class="ft1 vacationpaiderror vacationbalanceerror"> Should vacation be paid out? <select id="vacationpaid"><option value="true"> Yes </option><option value="false"> No </option> </select> </SPAN>(If yes, please indicate vacation balance:<input type="text" class="allow_decimal" id="vacationbalance" value="0" style="width:10%" />)</P>
+                                            <P class="p17 ft1"> <span class="ssignatureerror">  Supervisor’s Signature:</span> <input type="text" id="ssignature" style="width:53%;" />  Date: <input type="text" class="date-mask" style="width:20%;" id="sdate" disabled /></P>
+
+                                            <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
+                                        </DIV>
+
+                                        <br /> <br />
+
+                                        <div id="status"> </div>
+                                        <div class="col-md-12" style="text-align:center;margin-bottom:20px;">
+
+                                            <input type="button" style="margin-left:-20%;" id="Submit" value="Submit" class="btn btn-primary" />  @*<button class="btn btn-success" disabled id="print"> <i class="fa-print fa"> </i> Print </button> <button disabled class="btn btn-success" id="pdf"> <i class="fa-file-pdf-o fa"> </i> Pdf </button>*@
+
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <table class="table  dtprops" width="100%"></table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in to see your to do list. Click @Html.ActionLink("here", "Index", "Form", new { reauth = true }, null) to sign-in.</p>
+
+}
+@if (ViewBag.ErrorMessage == "UnexpectedError")
+{
+    <p>An unexpected error occurred while retrieving your to do list.  Please try again.  You may need to sign-in.</p>
+}
+@section Styles
+ {
+    @Styles.Render("~/content/plugins/dataTables/dataTablesStylescss")
+    @Styles.Render("~/content/plugins/token-inputcss")
+
+    <style type="text/css">
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        /*body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 13px;
+        }*/
+        input[type="checkbox"], input[type="radio"] {
+            margin: 4px 0 0;
+            margin-right: 0px;
+            margin-top: 1px\9;
+            line-height: normal;
+            margin-right: 5px !important;
+        }
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        #page_1 {
+            position: relative;
+            overflow: hidden;
+            /*margin: 50px 0px 48px 52px;*/
+            padding: 0px;
+            border: none;
+            width: 764px;
+        }
+
+            #page_1 #p1dimg1 {
+                position: absolute;
+                top: 0px;
+                left: 8px;
+                z-index: -1;
+                width: 708px;
+                height: 563px;
+            }
+
+                #page_1 #p1dimg1 #p1img1 {
+                    width: 708px;
+                    height: 563px;
+                }
+
+        .dclr {
+            clear: both;
+            float: none;
+            height: 1px;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .ft0 {
+            font: 19px 'Arial';
+            line-height: 22px;
+        }
+
+        .ft1 {
+            font: 15px 'Arial';
+            line-height: 17px;
+            margin-bottom: 10px !important;
+        }
+
+        .ft2 {
+            font: bold 13px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft3 {
+            font: 13px 'Arial';
+            line-height: 15px;
+        }
+
+        .ft4 {
+            font: 12px 'Arial';
+            line-height: 14px;
+        }
+
+        .ft5 {
+            font: 1px 'Arial';
+            line-height: 1px;
+        }
+
+        .ft6 {
+            font: 1px 'Arial';
+            line-height: 13px;
+        }
+
+        .ft7 {
+            font: 12px 'Arial';
+            line-height: 13px;
+        }
+
+        .ft8 {
+            font: 15px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft9 {
+            font: italic 15px 'Arial';
+            line-height: 17px;
+        }
+
+        .ft10 {
+            font: 13px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft11 {
+            font: bold 15px 'Arial';
+            line-height: 18px;
+        }
+
+        .ft12 {
+            font: 9px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft13 {
+            font: 10px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft14 {
+            font: 12px 'Times New Roman';
+            line-height: 13px;
+        }
+
+        .p0 {
+            text-align: left;
+            padding-left: 233px;
+            /*margin-top: 96px;*/
+            margin-bottom: 10px;
+        }
+
+        .p1 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p2 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p3 {
+            text-align: left;
+            padding-left: 215px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .p4 {
+            text-align: left;
+            padding-left: 128px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p5 {
+            text-align: left;
+            padding-left: 63px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p6 {
+            text-align: left;
+            padding-left: 77px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p7 {
+            text-align: left;
+            padding-left: 51px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p8 {
+            text-align: left;
+            padding-left: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p9 {
+            text-align: left;
+            padding-left: 25px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p10 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p11 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p12 {
+            text-align: left;
+            padding-left: 3px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p13 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p14 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p15 {
+            text-align: left;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p16 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p17 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 8px;
+            margin-bottom: 0px;
+        }
+
+        .p18 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p19 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p20 {
+            text-align: left;
+            padding-left: 160px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p21 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .td0 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td1 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td2 {
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .td3 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td4 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 180px;
+            vertical-align: bottom;
+        }
+
+        .td5 {
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .td6 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td7 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td8 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .tr0 {
+            height: 16px;
+        }
+
+        .tr1 {
+            height: 33px;
+        }
+
+        .tr2 {
+            height: 17px;
+        }
+
+        .tr3 {
+            height: 13px;
+        }
+
+        .tr4 {
+            height: 14px;
+        }
+
+        .t0 {
+            width: 708px;
+            margin-left: 8px;
+            margin-top: 15px;
+            font: 12px 'Arial';
+        }
+
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+            color: red;
+            /*font-weight: bold !important;*/
+        }
+    </style>
+}
+@section ipadstyles
+{
+
+    <style type="text/css">
+          @@media only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)
+            {
+              #propertynumber
+              {
+                  width:20% !important;
+              }
+
+
+                p.c8 {
+                    margin-left: 30% !important;
+                }
+                p.ft0 {
+                    margin-left: -7% !important;
+                }
+
+                .ft1 
+                {
+                    font: 13px 'Arial' !important;
+                    font-size:13px !important;
+                }
+
+                #jobtitle
+                {
+                    width:45% !important;
+                }
+
+                .t0
+                {
+                    width:100% !important;
+                }
+
+                #ssignature
+                {
+                    width:43% !important;
+                }
+
+                #Submit
+                {
+                    margin-left: -10% !important;
+                }
+
+                #submitform
+                {
+                    margin-left:0px !important;
+                }
+            }
+        </style>
+
+
+    }
+
+
+
+@section Scripts
+{
+    @Scripts.Render("~/scripts/plugins/dataTablesjs")
+    @Scripts.Render("~/scripts/plugins/input-maskjs")
+    @Scripts.Render("~/scripts/plugins/token-inputjs")
+
+    <script>
+
+        $(document).ready(function ()
+        {
+            var leaseid = "";
+
+            GetAllHRFORMs('EmployeeSeparation');
+
+            $(".addnew").click(function ()
+            {
+                document.getElementById("submitform").reset();
+                //document.getElementById("effectivedate").valueAsDate = new Date();
+                //document.getElementById("sdate").valueAsDate = new Date();
+
+                $("input,select,textarea,#propertyname,#propertynumber").prop("disabled", false);
+                $("#sdate,#rehire").prop("disabled", true);
+                $("#rehire").val('YES');
+
+                //$("#requisitionnumber,#dateposted,#notes1,#Submit").prop("disabled", false);
+                $('.date-mask').datepicker({
+                    format: "mm/dd/yyyy"
+                }).datepicker("setDate", 'now');
+            });
+
+
+            $("#2weekscom").change(function () {
+
+
+                if ($(this).val() == 'false') {
+
+                    $("#vacationpaid,#vacationbalance").attr('disabled', true);
+                    $("#vacationbalance").val('0');
+                    $("#vacationpaid").val('false');
+
+                }
+                else {
+
+
+                    $("#vacationpaid,#vacationbalance").attr('disabled', false);
+                    $("#vacationbalance").val('0');
+                    $("#vacationpaid").val('true');
+
+                }
+
+
+            });
+
+           
+            $("input,select").change(function (e) {
+                e.preventDefault();
+
+                if ($(this).val() == "" && $(this).hasAttr('required')) {
+                    $(this).addClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").addClass("has-error");
+                }
+                else {
+                    $(this).removeClass("has-error");
+
+                    $("." + $(this).attr('id') + "error").removeClass("has-error");
+                }
+
+            });
+
+            $("#chkcorporate,#chkproperty").change(function (e) {
+
+                e.preventDefault();
+
+                if ($("#chkcorporate").is(":checked")) {
+                    iscorporate = true;
+                    $("#divproperty").hide();
+                    $("#manager").val($("#CreatedByName").val());
+                    LoadHrPositionsByTypeForJobTitle('Corporate');
+                }
+                if ($("#chkproperty").is(":checked")) {
+                    iscorporate = false;
+                    $("#divproperty").show();
+                    LoadHrPositionsByTypeForJobTitle('Property');
+                }
+
+
+            });
+
+            $("#location").change(function () {
+
+                if ($("#location").val() == "") {
+
+                    alert("Please Select Property");
+
+                }
+                else {
+
+                    $.get($BaseApiUrl + "api/Data/GetPropertyNumberNameMananger?PropertyNumber=" + $("#location").val(), function (data) {
+                        if (data == "") {
+
+                            alert("Invalid Property Code");
+                            $("#propertyname ").val('');
+                            $("#propertynumber").val('');
+                        }
+                        else {
+                            var values = data.split(",");
+                            $("#propertyname ").val(values[0]);
+
+                            $("#propertynumber").val(values[2]);
+                        }
+                    });
+                }
+
+            });
+
+
+
+            $("#rehire").val("Yes");
+
+            if ($("#2weekscom").val() == "true") {
+                $("#rehire").val("Yes");
+            }
+            else {
+                $("#rehire").val("No");
+            }
+
+
+            $("#2weekscom").change(function (e) {
+                e.preventDefault();
+                console.log($("#2weekscom").val());
+                if ($("#2weekscom").val() == "true") {
+                    $("#rehire").val("Yes");
+                }
+                else {
+                    $("#rehire").val("No");
+                }
+
+            });
+
+
+
+
+            // on focus out get the PropertyName for Property Number
+
+
+            //$("#propertynumber").focusout(function () {
+
+            //    if ($("#propertynumber").val() == "") {
+
+            //        //$('#toastnotification').modal('show');
+
+            //        //$(".alert").html('<h6 style="color:red;"> Please Enter Property Number </h6> ');
+
+            //        //setTimeout(function () {
+            //        //    $('#toastnotification').modal('hide');
+
+            //        //    $(".alert").html(' ');
+            //        //}, 3000);
+
+            //        alert("Please Enter Property Number");
+
+            //        //   $("#propertynumber").focus();
+            //    }
+            //    else {
+
+            //        $.get($BaseApiUrl + "api/Data/GetPropertyName?PropertyNumber=" + $("#propertynumber").val(), function (data) {
+            //            if (data == "") {
+
+            //                alert("Invalid Property Code");
+
+            //                //   $("#propertynumber").focus();
+            //                $("#propertyname").val('');
+            //                //$('#toastnotification').modal('show');
+
+            //                //$(".alert").html('<h6 style="color:red;"> Invalid Property Code </h6> ');
+
+            //                //setTimeout(function ()
+            //                //{
+            //                //    $('#toastnotification').modal('hide');
+
+            //                //    $(".alert").html(' ');
+            //                //}, 3000);
+            //            }
+            //            else {
+
+            //                $("#propertyname").val(data);
+            //            }
+            //        });
+            //    }
+
+            //});
+
+            $("#vacationpaid").change(function ()
+            {
+                if ($("#vacationpaid").val() != "true")
+                {
+                    $("#vacationbalance").prop('disabled', true);
+                }
+                else
+                {
+                    $("#vacationbalance").prop('disabled', false);
+                }
+            });
+
+
+            $("#Submit").click(function (e)
+            {
+                e.preventDefault();
+
+                var errormsgsummary = "";
+                var control = "";
+                $("#status").html('');
+                $("input,select,textarea").removeClass('has-error');
+                var cnt = 0;
+                var reason = "";
+
+                var dischargetext = "";
+
+                $('.dis').each(function (index, obj) {
+                    if (this.checked === true) {
+                        dischargetext += $(this).val() + ",";
+                        cnt++;
+                    }
+                });
+
+                dischargetext = dischargetext.replace(/(^,)|(,$)/g, "");
+
+                if (cnt == 1)
+                    reason = dischargetext;
+                else
+                    reason = "Multiple";
+
+                cnt = 0;
+
+                var quittext = "";
+
+                $('.qui').each(function (index, obj) {
+                    if (this.checked === true) {
+                        quittext += $(this).val() + ",";
+                        cnt++;
+
+                    }
+                });
+
+                quittext = quittext.replace(/(^,)|(,$)/g, "");
+                if (cnt != 0)
+                {
+                    if (cnt == 1 && dischargetext == "")
+                        reason = quittext;
+                    else
+                        reason = "Multiple";
+                }
+
+
+                cnt = 0;
+                var worktext = "";
+
+                $('.wor').each(function (index, obj) {
+                    if (this.checked === true) {
+                        worktext += $(this).val() + ",";
+                        cnt++;
+                    }
+                });
+
+                worktext = worktext.replace(/(^,)|(,$)/g, "");
+
+                if (cnt != 0)
+                {
+                    if (cnt == 1 && quittext == "" && dischargetext == "")
+                        reason = worktext;
+                    else
+                        reason = "Multiple";
+                }
+
+                if ($("#effectivedate").val() == "") {
+                    errormsgsummary += "<li> Please Choose Date </li>";
+                    $(".effectivedateerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#effectivedate");
+                }
+                if ($("#rehire").val() == "") {
+                    errormsgsummary += "<li> Please Choose Eligibile For Rehire </li>";
+                    $(".rehireerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#rehire");
+                }
+
+                if ($("#chkproperty").is(":checked"))
+                {
+                    if ($("#location").val() == "") {
+                        errormsgsummary += "<li> Please Choose Property  </li>";
+                        $(".locationerror").addClass('has-error');
+                        if (control == "")
+                            control = $("#location");
+                    }
+
+
+                    if ($("#propertynumber").val() == "") {
+                        errormsgsummary += "<li> Please Enter Property Number </li>";
+                        $(".propertynumbererror").addClass('has-error');
+                        if (control == "")
+                            control = $("#propertynumber");
+                    }
+                }
+
+                if ($("#empname").val() == "") {
+                    errormsgsummary += "<li> Please Enter Employee Name </li>";
+                    $(".empnameerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#empname");
+                }
+
+
+                if ($("#jobtitle").val() == "") {
+                    errormsgsummary += "<li> Please Enter Job Title Of Employee</li>";
+                    $(".jobtitleerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#jobtitle");
+                }
+
+                if ($("#chkviolated").is(":Checked") && $("#polictyvoilated1").val() == "") {
+                    errormsgsummary += "<li> Please Enter Policy Voilated  </li>";
+                    $(".polictyvoilated1error").addClass('has-error');
+                    if (control == "")
+                        control = $("#polictyvoilated1");
+                }
+
+
+
+                if ($("#vacationpaid").val() == "true" && ($("#vacationbalance").val() == "" || $("#vacationbalance").val() == "0" )) {
+                    errormsgsummary += "<li> Vacation Balance Should not be Empty Or Zero  </li>";
+                    $(".vacationpaiderror").addClass('has-error');
+                    if (control == "")
+                        control = $("#vacationpaid");
+                }
+                if ($("#ssignature").val() == "") {
+                    errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
+                    $(".ssignatureerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#ssignature");
+                }
+                if (errormsgsummary != "") {
+                    $("#status").html('<ul style="float: left;text-align:left;color: red;">  Please fill out all the missing fields </ul> ');
+
+                    setTimeout(ScrollToElement(control), 3000);
+                    $("#Submit").prop('disabled', false);
+                    return false;
+                }
+                else
+                {
+                    $('#myModal').modal('hide');
+
+                    //$("#status1").html("<p style='color:green;font-weight:bold;'> Processing ........ </p>");
+                    $(".alert").html('Processing');
+                    $('#toastnotification').modal('show');
+
+
+                    var insertForm = new FormData();
+                    insertForm.append('empname', $("#empname").val());
+
+                    if ($("#chkcorporate").is(":checked"))
+                    {
+                        insertForm.append('iscorporate', 'true');
+                        insertForm.append('propertyname', "");
+                    }
+                    else if ($("#chkproperty").is(":checked"))
+                    {
+                        insertForm.append('iscorporate', 'false');
+                        insertForm.append('location', $("#location").val());
+                        insertForm.append('propertyname', $("#location option:selected").text());
+                    }
+
+                    insertForm.append('datechange', $("#effectivedate").val());
+
+                    insertForm.append('rehire', $("#rehire").val());
+                    insertForm.append('propertynumber', $("#propertynumber").val());
+                    insertForm.append('jobtitile', $("#jobtitle").val());
+                    insertForm.append('policty', $("#polictyvoilated1").val());
+                    insertForm.append('remarks', $("#remarks1").val());
+
+                    insertForm.append('keysreturned', $("#keysreturned").val());
+
+                    if ($("#noticegiven").val() == "1")
+                        insertForm.append('noticegives', true);
+                    else
+                        insertForm.append('noticegives', false);
+
+                    insertForm.append('vacationpaidout', $("#vacationpaid").val());
+                    insertForm.append('balance', $("#vacationbalance").val());
+                    insertForm.append('weekscom', $("#2weekscom").val());
+                    insertForm.append('CreatedBy', $("#CreatedBy").val());
+                    insertForm.append('discharge', dischargetext);
+                    insertForm.append('quit', quittext);
+                    insertForm.append('work', worktext);
+                    insertForm.append('reason', reason);
+                    insertForm.append('ssignature', $("#ssignature").val());
+                    insertForm.append('sdate', $("#sdate").val());
+
+                    insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                    $("#status").html("<p style='color:green'> Processing </p>");
+
+                    $.ajax({
+                        url: $BaseApiUrl + "api/data/InsertNoticeOfEmployeeSeperation",
+                        type: 'POST',
+                        dataType: "JSON",
+                        processData: false,
+                        contentType: false,
+                        data: insertForm,
+                        success: function (data) {
+                            // To-do code if ajax request is successful
+
+                            if (data['error'] == false)
+                            {
+                                leaseid = data['insertedId'];
+
+                                var insertForm = new FormData();
+                                insertForm.append('refid', leaseid);
+                                insertForm.append('form', "NoticeOfEmployeeSeparation");
+                                insertForm.append('CreatedByName', $("#CreatedByName").val());
+
+                                $.ajax({
+                                    url: "/Hr/SendHrFormCompletionNotification/",
+                                    type: 'POST',
+                                    dataType: "JSON",
+                                    processData: false,
+                                    contentType: false,
+                                    data: insertForm,
+                                    success: function (data)
+                                    {
+                                        // To-do code if ajax request is successful
+
+                                    },
+                                    error: function (ts) {
+                                        //  alert('error' + ts.exceptionMessage);
+                                    }
+                                });
+
+                                GetAllHRFORMs('EmployeeSeparation');
+                                $("#status").html('');
+
+                                $("#submitform").trigger('reset');
+                                document.getElementById("submitform").reset();
+                                $("#Submit").prop('disabled', false);
+                                ShowToastNotification('Record Successfully Updated', 3);
+
+                                setTimeout(function () {
+
+                                    $("#print").attr('disabled', false);
+                                    $("#pdf").attr('disabled', false);
+                                    $("#Submit").attr('disabled', false);
+                                    $('#toastnotification').modal('hide');
+                                }, 3000);
+                            }
+                            else {
+                                $("#status").html(data['errorMsg']);
+
+                            }
+
+
+                        },
+                        error: function (ts) {
+                            alert('error' + ts.exceptionMessage);
+                        }
+                    });
+
+                }
+
+
+            });
+
+
+
+
+        });
+
+    </script>
+
+}

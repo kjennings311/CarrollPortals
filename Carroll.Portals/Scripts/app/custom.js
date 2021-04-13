@@ -1,4 +1,4 @@
-﻿  //var $BaseApiUrl = "http://localhost:1002/";
+﻿ // var $BaseApiUrl = "http://localhost:1002/";
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -603,10 +603,10 @@ function getForm(FormName, RecordId)
                 $("#PoliceReportNumber").closest('.form-group').hide();
             }
 
-             $('input[type="date"]').datepicker({
-        format: "mm/dd/yyyy",
-       "setDate": new Date()
-    });
+    //         $('input[type="date"]').datepicker({
+    //    format: "mm/dd/yyyy",
+    //   "setDate": new Date()
+    //});
 
         }
 
@@ -2412,7 +2412,7 @@ function ApplyInputMask(container) {
                     //http://trentrichardson.com/examples/timepicker/
                     //https://github.com/uxsolutions/bootstrap-datepicker
                   //  $this.datetimepicker();
-                    $this.datepicker({});
+                   // $this.datepicker({});
                     var elem = $this.wrap("<div class=\"input-group\"></div>")
                     $this.parent().append("<div class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></div>");
                     break;
@@ -3395,7 +3395,64 @@ function LoadHrPositionsByTypeForJobTitle(t) {
         $('#jobtitle').html(options);
     });
 
-    // now let's load options into select box
+
+
+    var st = $("#UserPropertyAccess").val();
+    var propertyarray = Array();
+
+    if (st.includes("se")) {
+        propertyarray = $("#UserPropertyAccess").val().split('se');
+    }
+    else
+        propertyarray.push(st);
+
+
+    var options1 = "<option value='' > Select Property </option>";
+    if ($("#pageidname").val() == "requisitionrequest" || $("#pageidname").val() == "LeaseRider")
+        var options1 = "<option value='' > Select Property </option> <option value='Corporate' > Corporate </option> ";
+
+
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+        var defaultsel = $("#location").attr('seloption');
+
+        console.log(defaultsel);
+
+        for (var i = 0; i < data.length; i++) {
+            if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
+
+                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+                    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                else
+                    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+                selected = "";
+
+            }
+            else {
+                if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"]) {
+                    options1 += "<option selected value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                }
+                else
+                    if (propertyarray.includes(data[i]["key"])) {
+                        options1 += "<option value=\"" + data[i]["key"] + "\" >" + data[i]["value"] + "</option>";
+                    }
+            }
+
+            //if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
+            //    options1 += "<option selected value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            //else
+            //    options1 += "<option value=\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+            selected = "";
+
+        }
+        // now let's load options into select box
+        $('#location').html(options1);
+        if ($("#property1").length > 0) {
+
+            $('#property1').html(options);
+        }
+        // now let's load options into select box
+
+    });
 
 
 }

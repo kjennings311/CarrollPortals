@@ -946,6 +946,7 @@
     <Content Include="Views\Outlink\VerifyEmployeeLeaseRider - Copy.cshtml" />
     <Content Include="Views\Outlink\VerifyEmployeeNewHireNotice - Copy.cshtml" />
     <Content Include="Views\Outlink\VerifyPayRollStatusChange - Copy.cshtml" />
+    <Content Include="Views\Hr\NoticeOfEmployeeSeparation - Copy.cshtml" />
     <None Include="Views\Shared\Error.cshtml.1" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
