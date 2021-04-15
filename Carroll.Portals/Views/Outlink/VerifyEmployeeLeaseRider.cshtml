@@ -314,6 +314,13 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
                         data: insertForm,
                         success: function (data)
                         {
+
+                            if (data == "Submitted") {
+                                closeMe();
+                                window.close();
+                            }
+                            else {
+
                             // To-do code if ajax request is successfull
                             alert("Successfully Submitted");
 
@@ -323,7 +330,9 @@ line-height: 115%;margin-left:7px;" id="pmdatespan">Date :</span>
                             {
                                  closeMe();
                                 window.close();
-                            },2000);
+                                }, 2000);
+
+                            }
                         },
                         error: function (ts)
                         {

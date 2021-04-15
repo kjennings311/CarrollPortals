@@ -1668,6 +1668,47 @@ tbl.UploadedDate descending
             }
         }
 
+        public bool checknewhirebeforesubmission(string RefId,string Action)
+        {
+
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                bool st = false;
+
+                    var dlink = new Guid(RefId);
+                    var drow = (from tbl in _entities.DynamicLinks
+                                where tbl.DynamicLinkId == dlink
+                                select tbl).FirstOrDefault();
+
+                if(drow.OpenStatus == false)
+                {
+
+                    st = true;
+                    var newhirerow = (from tbl in _entities.EmployeeNewHireNotices
+                                      where tbl.EmployeeHireNoticeId == drow.ReferenceId
+                                      select tbl).FirstOrDefault();
+                    if (Action == "Employee Email")
+                    {
+                        if (newhirerow.EmployeeSignedDateTime != null)
+                            st = true;
+                       
+                        
+                    }
+                    else
+                    {
+                        if (newhirerow.RegionalManagerSignedDateTime != null)
+                            st = true;
+
+                    }
+                }
+
+
+                return st;
+
+                }
+                }
+
         public dynamic UpdateWorkflowEmployeeNewHireNotice(string Action, string RefId, string Sign, DateTime? edate, string browser, string ipaddress)
         {
             using (CarrollFormsEntities _entities = new CarrollFormsEntities())
@@ -1714,6 +1755,38 @@ tbl.UploadedDate descending
         }
 
 
+        public  bool CheckEmployeeLeaseRiderBeforeSubmit(string RefId)
+        {
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+                bool st = false;
+
+                var dlink = new Guid(RefId);
+                var drow = (from tbl in _entities.DynamicLinks
+                            where tbl.DynamicLinkId == dlink
+                            select tbl).FirstOrDefault();
+               
+                if (drow != null)
+                {
+                    if (drow.OpenStatus== false)
+                    {
+                        st = true;
+
+                        var newhirerow = (from tbl in _entities.EmployeeLeaseRaiders
+                                          where tbl.EmployeeLeaseRiderId == drow.ReferenceId
+                                          select tbl).FirstOrDefault();
+                        if (newhirerow.EmployeeSignedDateTime != null)
+                            st = true;
+
+                    }
+                }
+
+                return st;
+               
+
+            }
+         }
+
 
         public dynamic UpdateWorkflowEmployeeLeaseRider(string Action, string RefId, string Sign, DateTime? edate,string browser,string ipaddress)
         {
@@ -1753,6 +1826,39 @@ tbl.UploadedDate descending
             }
         }
 
+
+        public bool checkseperationbeforesubmission(string RefId )
+        {
+
+            using (CarrollFormsEntities _entities = new CarrollFormsEntities())
+            {
+
+                bool st = false;
+
+                var dlink = new Guid(RefId);
+                var drow = (from tbl in _entities.DynamicLinks
+                            where tbl.DynamicLinkId == dlink
+                            select tbl).FirstOrDefault();
+
+                if (drow.OpenStatus == false)
+                {
+
+                    st = true;
+                    var newhirerow = (from tbl in _entities.PayrollStatusChangeNotices
+                                      where tbl.PayrollStatusChangeNoticeId == drow.ReferenceId
+                                      select tbl).FirstOrDefault();
+
+
+                    if (newhirerow.EmployeeSignedDateTime != null)
+                            st = true;
+ 
+                }
+
+
+                return st;
+
+            }
+        }
 
 
         public dynamic UpdateWorkflowPayRollStatusChangeNotice(string Action, string RefId, string Sign, DateTime? edate, string browser, string ipaddress)

@@ -34,7 +34,9 @@ namespace Carroll.Data.Entities.Repository
         dynamic GetEmployeeLeaseRider(Guid riderid);
         dynamic InsertEmployeeNewHireNotice(EmployeeNewHireNotice formAttachment,string Type);
         dynamic GetEmployeeNewHireNotice(Guid riderid);
-
+        bool CheckEmployeeLeaseRiderBeforeSubmit(string RefId);
+        bool checknewhirebeforesubmission(string RefId, string Action);
+         bool checkseperationbeforesubmission(string RefId);
         dynamic InsertPayRollStatusChangeNotice(PayrollStatusChangeNotice formAttachment,string Type);
         dynamic GetPayRollStatusChangeNotice(Guid riderid);
         dynamic InsertRequistionRequest(RequisitionRequest requisitionRequest);

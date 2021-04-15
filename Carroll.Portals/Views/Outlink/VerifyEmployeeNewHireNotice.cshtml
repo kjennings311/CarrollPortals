@@ -659,6 +659,13 @@ margin: 10px; min-height:50px;" id="padd">@Model.AdditionalText</p>
                         data: insertForm,
                         success: function (data)
                         {
+
+                            if (data == "Submitted") {
+                                closeMe();
+                                window.close();
+                            }
+                            else {
+
                             // To-do code if ajax request is successfull
                             alert("Successfully Submitted");
                             
@@ -667,7 +674,9 @@ margin: 10px; min-height:50px;" id="padd">@Model.AdditionalText</p>
                             setTimeout(function () {
                                 closeMe();
                                 window.close();
-                            }, 2000);
+                                }, 2000);
+
+                            }
 
                            // setTimeout(function () { closeMe(); }, 5000);
                             //}

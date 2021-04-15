@@ -1212,6 +1212,13 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                         data: insertForm,
                         success: function (data)
                         {
+                            if (data == "Submitted")
+                            {
+                                closeMe();
+                                window.close();
+                            }
+                            else {
+
                             // To-do code if ajax request is successfull
                             alert("Successfully Submitted");
 
@@ -1221,7 +1228,10 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                             {
                                 window.close();
                                 closeMe();
-                            }, 2000);
+                                }, 2000);
+
+
+                            }
 
                         },
                         error: function (ts)

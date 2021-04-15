@@ -273,6 +273,14 @@ namespace Carroll.Portals.Controllers
             browser["JavaScriptVersion"];
 
             var _service = new EntityDataRepository();
+
+            if (_service.CheckEmployeeLeaseRiderBeforeSubmit(refid))
+            {
+                return Json("Submitted");
+            }
+            else
+            {
+
             var retu = _service.UpdateWorkflowEmployeeLeaseRider(action, refid, signature, date, browserDetails, VisitorsIPAddress);
 
             WorkflowHelper.InsertHrLog("LeaseRider", retu, "Employee Signature has been completed", "Employee Signature has been Submitted for Employee Lease Rider on" + DateTime.Now, empname);
@@ -389,11 +397,13 @@ namespace Carroll.Portals.Controllers
 
             }
 
+                return Json(retu);
+
+            }
 
 
 
-
-            return  Json(retu);
+           
         }
 
 
@@ -493,6 +503,14 @@ namespace Carroll.Portals.Controllers
 
 
             var _service = new EntityDataRepository();
+
+            if(_service.checkseperationbeforesubmission(refid))
+            {
+                return Json("Submitted");
+            }
+            else
+            {
+
             var retu = _service.UpdateWorkflowPayRollStatusChangeNotice(action, refid, signature, date, browserDetails, VisitorsIPAddress);
 
             if (Session["user"] != null)
@@ -622,11 +640,12 @@ namespace Carroll.Portals.Controllers
 
             }
 
+                return Json(retu);
+
+            }
 
 
-
-
-            return Json(retu);
+           
         }
 
         [AllowAnonymous]
@@ -697,6 +716,13 @@ namespace Carroll.Portals.Controllers
 
 
             var _service = new EntityDataRepository();
+            if(_service.checknewhirebeforesubmission(refid,action))
+            {
+                return Json("Submitted");
+            }
+            else
+            {
+
 
             var retu = _service.UpdateWorkflowEmployeeNewHireNotice(action, refid, signature, edate, browserDetails, VisitorsIPAddress);
 
@@ -958,11 +984,12 @@ namespace Carroll.Portals.Controllers
 
                 }
 
-
-
+                   
+                }
+                return Json(retu);
             }
 
-            return Json(retu);
+           
         }
         
     }
