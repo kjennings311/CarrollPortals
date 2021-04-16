@@ -1,4 +1,4 @@
-﻿//  var $BaseApiUrl = "http://localhost:1002/";
+﻿ //var $BaseApiUrl = "http://localhost:1002/";
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -499,8 +499,19 @@ function getForm(FormName, RecordId)
                                 var bits = s.split(/\D/);
                                 //  console.log(bits);
 
-                                var datestring = bits[1] + "/" + bits[0] + "/" + bits[2];
-                                // console.log(datestring);
+                               
+
+                               // var datestring = bits[1] + "/" + bits[0] + "/" + bits[2];
+
+                                
+                                if ( bits[1].length == 1)
+                                    bits[1] = "0" + bits[1];
+                                if (bits[0].length == 1)
+                                    bits[0] = "0" + bits[0];
+
+                                var datestring = bits[2] + "-" + bits[0] + "-" + bits[1];
+
+                              //  console.log(datestring);
 
                                 //  var datestring = d.getMonth()+"/"+d.getDate() + "/"  + d.getFullYear();
 

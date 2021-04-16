@@ -1,0 +1,1065 @@
+﻿@model Carroll.Portals.Models.PrintNoticeOfEmployeeSeparation
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Print Notice Of Employee Separation  </title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+    <style type="text/css">
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        /*body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #555555;
+            font-size: 13px;
+        }*/
+        .sign {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        input[type="checkbox"], input[type="radio"] {
+            margin: 4px 0 0;
+            margin-right: 0px;
+            margin-top: 1px\9;
+            line-height: normal;
+            margin-right: 5px !important;
+        }
+
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        #page_1 {
+            position: relative;
+            overflow: hidden;
+            /*margin: 50px 0px 48px 52px;*/
+            padding: 0px;
+            border: none;
+            width: 764px;
+        }
+
+            #page_1 #p1dimg1 {
+                position: absolute;
+                top: 0px;
+                left: 8px;
+                z-index: -1;
+                width: 708px;
+                height: 563px;
+            }
+
+                #page_1 #p1dimg1 #p1img1 {
+                    width: 708px;
+                    height: 563px;
+                }
+
+        .dclr {
+            clear: both;
+            float: none;
+            height: 1px;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+
+        .ft0 {
+            font: 19px 'Arial';
+            line-height: 22px;
+        }
+
+        .ft1 {
+            font: 15px 'Arial';
+            line-height: 17px;
+            margin-bottom: 10px !important;
+        }
+
+        .ft2 {
+            font: bold 13px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft3 {
+            font: 13px 'Arial';
+            line-height: 15px;
+        }
+
+        .ft4 {
+            font: 12px 'Arial';
+            line-height: 14px;
+        }
+
+        .ft5 {
+            font: 1px 'Arial';
+            line-height: 1px;
+        }
+
+        .ft6 {
+            font: 1px 'Arial';
+            line-height: 13px;
+        }
+
+        .ft7 {
+            font: 12px 'Arial';
+            line-height: 13px;
+        }
+
+        .ft8 {
+            font: 15px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft9 {
+            font: italic 15px 'Arial';
+            line-height: 17px;
+        }
+
+        .ft10 {
+            font: 13px 'Arial';
+            line-height: 16px;
+        }
+
+        .ft11 {
+            font: bold 15px 'Arial';
+            line-height: 18px;
+        }
+
+        .ft12 {
+            font: 9px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft13 {
+            font: 10px 'Times New Roman';
+            line-height: 12px;
+        }
+
+        .ft14 {
+            font: 12px 'Times New Roman';
+            line-height: 13px;
+        }
+
+        .p0 {
+            text-align: left;
+            padding-left: 233px;
+            /*margin-top: 96px;*/
+            margin-bottom: 10px;
+        }
+
+        .p1 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p2 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p3 {
+            text-align: left;
+            padding-left: 215px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .p4 {
+            text-align: left;
+            padding-left: 128px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p5 {
+            text-align: left;
+            padding-left: 63px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p6 {
+            text-align: left;
+            padding-left: 77px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p7 {
+            text-align: left;
+            padding-left: 51px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p8 {
+            text-align: left;
+            padding-left: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p9 {
+            text-align: left;
+            padding-left: 25px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p10 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p11 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p12 {
+            text-align: left;
+            padding-left: 3px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p13 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p14 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p15 {
+            text-align: left;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p16 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p17 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+
+        .p18 {
+            text-align: left;
+            padding-left: 4px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p19 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+
+        .p20 {
+            text-align: left;
+            padding-left: 160px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p21 {
+            text-align: left;
+            padding-left: 2px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .td0 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td1 {
+            border-right: #000000 1px solid;
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td2 {
+            border-top: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .td3 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td4 {
+            border-right: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 180px;
+            vertical-align: bottom;
+        }
+
+        .td5 {
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .td6 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 323px;
+            vertical-align: bottom;
+        }
+
+        .td7 {
+            border-right: #000000 1px solid;
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 150px;
+            vertical-align: bottom;
+        }
+
+        .td8 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 233px;
+            vertical-align: bottom;
+        }
+
+        .tr0 {
+            height: 16px;
+        }
+
+        .tr1 {
+            height: 33px;
+        }
+
+        .tr2 {
+            height: 17px;
+        }
+
+        .tr3 {
+            height: 13px;
+        }
+
+        .tr4 {
+            height: 14px;
+        }
+
+        .t0 {
+            width: 708px;
+            margin-left: 8px;
+            margin-top: 15px;
+            font: 12px 'Arial';
+        }
+
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+    </style>
+
+    <link href="/Content/a4css.css" rel="stylesheet" />
+
+</head>
+<body class="document">
+    <div class="page">
+        <p class="c1 c8" style="margin-left:30%;">
+            <span class="c7">
+                <img src="~/img/newhirenotice.png" style="margin-bottom:20px;">
+            </span>
+        </p>
+        <DIV id="page_1">
+            <DIV class="dclr"></DIV>
+            <p class="p0 ft0" style="font-weight: bolder;margin-left:-2%;margin-top:0px;"> Notice of Employee Separation </p>
+            <p class="p1 ft1">
+                Effective Date of Change <input style="width:39%;" type="text" value="@Model.EffectiveDateOfChange.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> Eligible for Rehire  <input type="text" style="width:20%;" value="@Model.EligibleForReHire" readonly />
+            </p>
+
+            <p class="p1 ft1">
+                @if (Model.IsCoporate.ToString().ToLower() == "true")
+                {
+
+                    <span class="c0">
+                        Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input style="" type="radio" id="chkproperty" name="loc" /> Property
+                    </span>
+                }
+                else
+                {
+                    <span class="c0">
+                        Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;  <input style="" type="radio" checked id="chkproperty" name="loc" /> Property  <input type="text" style="width:48%" id="location" value="@Model.PropertyName" /> Number <input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:10%" />
+                    </span>
+                }
+
+            <p class="p1 ft1" style="display:none">Property Name <input type="text" id="propertyname" value="@Model.PropertyName" style="width:30%" /> Property Number<input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:40%" /></p>
+            <p class="p2 ft1">Employee Name <input type="text" id="empname" value="@Model.EmployeeName" style="width:30%" /> Job Title <input type="text" id="jobtitle" value="@Model.JobTitle" style="width:46%" /></p>
+            <p class="p2 ft1"><span class="empnameerror"> Do they live at a CARROLL property </span><select id="carrolllive" style="width:10%"> <option value="YES"> Yes </option><option value="NO"> No </option> </select> </p>
+
+
+            <P class="p3 ft2">Reason Code from below </P>
+
+            <TABLE cellpadding=0 cellspacing=0 class="t0">
+                <TR>
+                    <TD class="tr0 td0"><P class="p4 ft3">Discharged</P></TD>
+                    <TD class="tr0 td1"><P class="p5 ft3">Quit</P></TD>
+                    <TD class="tr0 td2"><P class="p6 ft3">Lack of Work</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr1 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Refused Instructions"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            } Refused Instructions
+                        </P>
+                    </TD>
+                    <TD class="tr1 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Domestic Obligations"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Domestic Obligations
+                        </P>
+                    </TD>
+                    <TD class="tr1 td5">
+                        <P class="p9 ft4">
+                            @{ if (Model.LackOfWork.Contains("No Light Duty Available"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }No Light Duty Available
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Falsified Applications"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            } Falsified Applications
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("For Other Work"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            } For Other Work
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5">
+                        <P class="p9 ft4">
+                            @{ if (Model.LackOfWork.Contains("Location Closed"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            } Location Closed
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Neglect of Duty"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Neglect of Duty
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Without Notice"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Without Notice
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5">
+                        <P class="p9 ft4">
+                            @{ if (Model.LackOfWork.Contains("Job Eliminated"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Job Eliminated
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Misconduct"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Misconduct
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Job Dissatisfaction"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Job Dissatisfaction
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5">
+                        <P class="p9 ft4">
+                            @{ if (Model.LackOfWork.Contains("End of Temporary Assignment"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }End of Temporary Assignment
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Violated Company Policy**"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Violated Company Policy**
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Personal Reasons"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Personal Reasons
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5">
+                        <P class="p9 ft4">
+                            @{ if (Model.LackOfWork.Contains("End of Seasonal Work"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }End of Seasonal Work
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Unexcused Absenteeism"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Unexcused Absenteeism
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Moved"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Moved
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5">
+                        <P class="p9 ft4">
+                            @{ if (Model.LackOfWork.Contains("Lack of Work"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Lack of Work
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Unexcused Tardiness"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Unexcused Tardiness
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Other Voluntarily Quit"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Other Voluntarily Quit
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5">
+                        <P class="p9 ft3">
+                            @{ if (Model.LackOfWork.Contains("Property Sold / Loss Mgt"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Property Sold / Loss Mgt
+                        </P>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD class="tr0 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Insubordination"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Insubordination
+                        </P>
+                    </TD>
+                    <TD class="tr0 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Refused Recall"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Refused Recall
+                        </P>
+                    </TD>
+                    <TD class="tr0 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr3 td3"><P class="p10 ft6">&nbsp;</P></TD>
+                    <TD class="tr3 td4">
+                        <P class="p8 ft7">
+                            @{ if (Model.QuitText.Contains("Reduced Work"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Reduced Work
+                        </P>
+                    </TD>
+                    <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr4 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Work Quality / Quantity"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Work Quality / Quantity
+                        </P>
+                    </TD>
+                    <TD class="tr4 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Schedule"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Schedule
+                        </P>
+                    </TD>
+                    <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Shortages / Theft"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Shortages / Theft
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Voluntary Retirement"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Voluntary Retirement
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Dishonesty"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Dishonesty
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Not Able / Available"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Not Able / Available
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Refused Work"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Refused Work
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4">
+                        <P class="p8 ft4">
+                            @{ if (Model.QuitText.Contains("Deceased"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Deceased
+                        </P>
+                    </TD>
+                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td3">
+                        <P class="p7 ft4">
+                            @{ if (Model.DischargedText.Contains("Violation of Drug / Alcohol Policy"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Violation of Drug / Alcohol Policy
+                        </P>
+                    </TD>
+                    <TD class="tr2 td4"><P class="p10 ft5">&nbsp;</P></TD>
+                    <TD class="tr2 td5"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+                <TR>
+                    <TD class="tr2 td6">
+                        <P class="p7 ft3">
+                            @{ if (Model.DischargedText.Contains("Failed E-Verify"))
+                                { <input type="radio" checked /> }
+                                else
+                                {
+                                    <input type="radio" />
+                                }
+                            }Failed <NOBR>E-Verify</NOBR>
+                        </P>
+                    </TD>
+                    <TD class="tr2 td7"><P class="p10 ft5">&nbsp;</P></TD>
+                    <TD class="tr2 td8"><P class="p10 ft5">&nbsp;</P></TD>
+                </TR>
+            </TABLE>
+            <P class="p11 ft1" style="margin-top: 17px;">**What Policy specifically was violated?  </P>
+            <P class="p12 ft1" style="border: 1px solid;
+
+padding: 10px;
+
+margin: 10px;">@Model.Policty_Voilated</P>
+        <P class="p13 ft1" style="margin-top: 17px;">Additional Remarks  </P>
+        <P class="p14 ft1" style="border: 1px solid;
+
+padding: 10px;
+
+margin: 10px;min-height:50px;">@Model.AdditionalRemarks</P>
+
+        <P class="p18 ft1">
+            Equipment/Keys Returned? <select id="keysreturned">
+                @{
+
+                    if (Model.EquipmentKeysReturned == true)
+                    {
+
+                        <option selected value="true"> Yes </option>
+                        <option value="false"> No </option>
+                    }
+                    else
+                    {
+                        <option value="true"> Yes </option>
+                        <option selected value="false"> No </option>
+                    }
+                }
+            </select><SPAN style="padding-left:10px;">
+                2 weeks’ notice given? <select id="noticegiven">
+                    @{
+
+                        if (Model.C2WeeeksNoticeGiven == true)
+                        {
+                            <option selected value="true"> Yes </option>
+                            <option value="false"> No </option>
+                        }
+                        else
+                        {
+                            <option value="true"> Yes </option>
+                            <option selected value="false"> No </option>
+                        }
+                    }
+                </select>
+            </SPAN> <SPAN style="padding-left:15px;">
+                2 weeks’ Completed? <select id="2weekscom">
+
+                    @{
+
+                        if (Model.C2WeeksCompleted == true)
+                        {
+                            <option selected value="true"> Yes </option>
+                            <option value="false"> No </option>
+                        }
+                        else
+                        {
+                            <option value="true"> Yes </option>
+                            <option selected value="false"> No </option>
+                        }
+                    }
+
+                </select>
+            </SPAN>
+        </P>
+        <P class="p13 ft9">
+            <SPAN class="ft1">
+                Should vacation be paid out? <select id="vacationpaid">
+                    @{
+
+                        if (Model.VacationPaidOut == true)
+                        {
+                            <option selected value="true"> Yes </option>
+                            <option value="false"> No </option>
+                        }
+                        else
+                        {
+                            <option value="true"> Yes </option>
+                            <option selected value="false"> No </option>
+                        }
+                    }
+                </select>
+            </SPAN>(If yes, please indicate vacation balance:<input type="text" value="@Model.VacationBalance" id="vacationbalance" style="width:10%" />)
+        </P>
+        <P class="p17 ft1">Supervisor’s Signature: <input type="text" style="width:45%" class="sign" name="name" value="@Model.SSignature" /> Date:<input type="text" name="name" value="@Model.SDate.Value.ToString("MM/dd/yyyy")" /></P>
+
+
+        <P class="p21 ft14">R<SPAN class="ft12">EV</SPAN><SPAN class="ft13">. </SPAN>8/29/2017</P>
+        </DIV>
+    </div>
+
+    <div class="page">
+
+        <div id="page_1">
+            <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
+                <img src="/img/requistionrequestheader.jpg" />
+                <h1 style="font-weight:bold;text-align:center">  Activity - @Model.SequenceNumber </h1>
+            </DIV>
+
+
+            <table id="viewlog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Description</th>
+                        <th style="width:30%;">Date</th>
+                        <th style="width:20%"> Created By </th>
+                    </tr>
+                </thead>
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.log)
+                    {
+                        <tr> <td> @item.ActivitySubject </td> <td> @item.ActivityDate.ToString().Substring(0, 19) </td> <td> @item.ActivityByName </td> </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <h2> Signature Meta Data </h2>
+            <br />
+            <table id="signaturelog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:15%"> Type </th>
+                        <th style="width:10%">Ip Address</th>
+                        <th style="width:50%;text-align:center">Browser </th>
+                        <th style="width:25%;text-align:center"> Date Time </th>
+                    </tr>
+                </thead>
+                <tbody id="hrsignmetadata">
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.metadata)
+                    {
+                        <tr> <td> @item.Action.Replace("Email", "Signature") </td> <td> @item.ip </td> <td> @item.browserinfo </td> <td> @item.datetime.ToString().Substring(0, 19)</td> </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <script>
+
+        var inputs = document.getElementsByTagName('input');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+        var inputs = document.getElementsByTagName('select');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+        var inputs = document.getElementsByTagName('textarea');
+        for (i = 0; i < inputs.length; i++) {
+            inputs[i].disabled = true;
+        }
+
+
+    </script>
+</body>
+</html>
+
+

@@ -193,10 +193,10 @@
                          
                         </ul>
                     </li>
-
-
-                    <li id="admin">
-                        <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> Admin </span></a>
+                if (@Model.RoleType.ToLower() == "administrator")
+                {
+                       <li id="admin">
+                                <a href="javascript:void(0)"><i class="fa fa-user-plus"></i> <span class="nav-label"> Admin </span></a>
 
                         <ul class="nav nav-second-level collapse">
                             <li id="users">
@@ -214,6 +214,8 @@
                         </ul>
                     </li>
                 }
+
+            }
                 @*<li>
                 <a href="javascript:void(0)"><i class="fa fa-cogs"></i> <span class="nav-label"> Administration </span></a>
                 <ul class="nav nav-second-level collapse">
