@@ -116,7 +116,7 @@
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="Lack of Work" />Lack of Work</P></TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="radio" name="col1" id="chkviolated" class="dis" value="Insubordination" />Insubordination</P></TD>
+                                                    <TD class="tr2 td3"><P class="p7 ft4"> <input type="radio" name="col1"  class="dis" value="Insubordination" />Insubordination</P></TD>
                                                     <TD class="tr2 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Not Able / Available" />Not Able / Available</P></TD>
                                                     <TD class="tr2 td5"><P class="p9 ft4"> <input type="radio" name="col1" class="wor" value="Lay Off" />Lay Off</P></TD>
                                                 </TR>
@@ -141,7 +141,7 @@
                                                     <TD class="tr3 td5"><P class="p10 ft6">&nbsp;</P></TD>
                                                 </TR>
                                                 <TR>
-                                                    <TD class="tr4 td3"><P class="p7 ft4"><input type="radio" name="col1" class="dis" value="Violated Company Policy" />Violated Company Policy</P></TD>
+                                                    <TD class="tr4 td3"><P class="p7 ft4"><input type="radio" id="chkviolated" name="col1" class="dis" value="Violated Company Policy" />Violated Company Policy</P></TD>
                                                     <TD class="tr4 td4"><P class="p8 ft4"><input type="radio" name="col1" class="qui" value="Without Notice" />Without Notice</P></TD>
                                                     <TD class="tr4 td5"><P class="p10 ft5">&nbsp;</P></TD>
                                                 </TR>
@@ -1004,6 +1004,9 @@
                     if (control == "")
                         control = $("#polictyvoilated1");
                 }
+                else {
+                    $(".polictyvoilated1error").removeClass('has-error');
+                }
 
 
 
@@ -1013,6 +1016,7 @@
                     if (control == "")
                         control = $("#vacationpaid");
                 }
+
                 if ($("#ssignature").val() == "") {
                     errormsgsummary += "<li> Please Enter Supervisor Signature  </li>";
                     $(".ssignatureerror").addClass('has-error');
