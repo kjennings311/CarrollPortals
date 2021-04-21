@@ -1,4 +1,4 @@
-﻿ //var $BaseApiUrl = "http://localhost:1002/";
+﻿//var $BaseApiUrl = "http://localhost:1002/";
  var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
@@ -809,7 +809,7 @@ function LoadForm(formaname)
         else if (formaname == "FormGeneralLiabilityClaim")
             $(".form-heading").html("General Liability Claim");
         else if (formaname == "FormMoldDamageClaim")
-            $(".form-heading").html("Mold Damage Claim");
+            $(".form-heading").html("AMG (Assumed Microbial Growth) Claim");
         else
             $(".form-heading").html("");
 
@@ -3802,7 +3802,7 @@ function LoadClaim()
 
                             }
                             else if (Type == "m") {
-                                $("#heading").html("Mold Damage Claim  - " + ClaimData.claim.tbl.claimNumber);
+                                $("#heading").html("AMG (Assumed Microbial Growth)" + ClaimData.claim.tbl.claimNumber);
                                 $("#property").html(ClaimData.claim.propertyName);
 
                             
