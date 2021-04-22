@@ -3802,7 +3802,7 @@ function LoadClaim()
 
                             }
                             else if (Type == "m") {
-                                $("#heading").html("AMG (Assumed Microbial Growth)" + ClaimData.claim.tbl.claimNumber);
+                                $("#heading").html("AMG (Assumed Microbial Growth) " + ClaimData.claim.tbl.claimNumber);
                                 $("#property").html(ClaimData.claim.propertyName);
 
                             
