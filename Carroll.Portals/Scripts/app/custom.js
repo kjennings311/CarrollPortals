@@ -754,7 +754,7 @@ function ToggleAdd(formaname) {
                         else if (formaname == "FormGeneralLiabilityClaim")
                             $(".form-heading").html("General Liability Claim");
                         else if (formaname == "FormMoldDamageClaim")
-                            $(".form-heading").html("Mold Damage Claim");
+                            $(".form-heading").html("AMG (ASSUMED MICROBIAL GROWTH)");
                         else
                             $(".form-heading").html("");
 
@@ -767,7 +767,7 @@ function ToggleAdd(formaname) {
                     else if (formaname == "FormGeneralLiabilityClaim")
                         $(".form-heading").html("General Liability Claim");
                     else if (formaname == "FormMoldDamageClaim")
-                        $(".form-heading").html("Mold Damage Claim");
+                        $(".form-heading").html("AMG (ASSUMED MICROBIAL GROWTH)");
                     else
                         $(".form-heading").html("");
                     }

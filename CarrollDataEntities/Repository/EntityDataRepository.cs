@@ -558,8 +558,8 @@ namespace Carroll.Data.Entities.Repository
                                 _entities.FormMoldDamageClaims.Add(_mdc);
                                 _entities.SaveChanges();
                                 int i = _entities.SaveChanges();
-                                string Comment = "Mold Damage Claim Record was added on " + Convert.ToDateTime(_mdc.CreatedDate).ToString("MM/dd/yyyy");
-                                LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New MD Claim");
+                                string Comment = "AMG (ASSUMED MICROBIAL GROWTH) Claim Record was added on " + Convert.ToDateTime(_mdc.CreatedDate).ToString("MM/dd/yyyy");
+                                LogActivity(Comment, _mdc.CreatedByName, _mdc.CreatedBy.ToString(), _mdc.MDLId.ToString(), "New AMG Claim");
                                 // return (i == 1) ? true : false;
                                 // return true;
                                 _result.RecordId = _mdc.MDLId.ToString();
