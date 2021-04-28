@@ -2849,7 +2849,6 @@ tbl.UploadedDate descending
                     //config.Columns.Add(new DtableConfigArray { name = "requisitionRequestId", label = "Id", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "createdDateTime", label = "Created Date", type = DFieldType.IsDate, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "notes", label = "Activity", type = DFieldType.IsText, href = "" });
-
                     config.Columns.Add(new DtableConfigArray { name = "printOption", label = "Print", type = 0, href = "" });
                     config.Columns.Add(new DtableConfigArray { name = "pdfOption", label = "Save", type = DFieldType.IsText, href = "" });
 
@@ -5025,6 +5024,8 @@ tbl.UploadedDate descending
                         propertyres.RejectedReason = reason;
                         propertyres.PmSignedDateTime = null;
                         propertyres.EmployeeSignedDateTime = null;
+                        propertyres.CreatedDateTime = null;
+                        
                         //propertyres.RegionalManagerSignedDateTime = null;
                         rh.ClientDateTime = DateTime.Now;
                         rh.HistoryID = Guid.NewGuid();
@@ -5042,6 +5043,7 @@ tbl.UploadedDate descending
                         propertyres.RejectedReason = "cancel";
                         propertyres.PmSignedDateTime = null;
                         propertyres.EmployeeSignedDateTime = null;
+
                      //   propertyres.RegionalManagerSignedDateTime = null;
                         rh.ClientDateTime = DateTime.Now;
                         rh.HistoryID = Guid.NewGuid();
