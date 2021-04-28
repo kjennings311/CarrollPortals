@@ -2867,7 +2867,7 @@ function GetAllClaims(Type,chk) {
                             console.log(rowdata.claimType.trim());
                             if (rowdata.claimType.toLowerCase().trim() == "general")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id +"g');");
-                            else if (rowdata.claimType.toLowerCase().trim() == "mold")
+                            else if (rowdata.claimType.toLowerCase().trim() == "amg")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id + "m');");
                             else if (rowdata.claimType.toLowerCase().trim() == "property")
                                 $(row).attr('onClick', "LoadFormView('" + rowdata.id + "p');");                          

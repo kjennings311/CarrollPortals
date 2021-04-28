@@ -3350,7 +3350,7 @@ tbl.UploadedDate descending
 
                 //us
                 var propertyres = (from tbl in _entities.CarrollPayPeriods
-                                   where tbl.PayFrom.Value.Year == DateTime.Now.Year && tbl.PayFrom.Value.Year == DateTime.Now.Year-1
+                                   where tbl.PayFrom.Value.Year == DateTime.Now.Year || tbl.PayFrom.Value.Year == DateTime.Now.Year-1
                                    orderby tbl.PayFrom ascending
                                    select tbl ).ToList();
 
