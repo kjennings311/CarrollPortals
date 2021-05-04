@@ -1,9 +1,10 @@
 ﻿@{
     ViewBag.Title = "CARROLL";
-
 }
 
 <input type="hidden" id="pageid" value="incidentdashboard" />
+
+
 
 <div class="wrapper wrapper-content">
     <div class="row hidewhenformopen">
@@ -12,7 +13,6 @@
     background-position: center;
     width: 100%;
     background-size: cover;">
-
 
             @if (@Model.RoleType.ToLower() == "administrator" || @Model.RoleType.ToLower() == "management" || @Model.RoleType.ToLower() == "hr" || @Model.RoleType.ToLower() == "vp" || @Model.RoleType.ToLower() == "rvp" || @Model.RoleType.ToLower() == "regional" || @Model.RoleType.ToLower() == "property" || @Model.RoleType.ToLower() == "asset manager")
             {
@@ -207,7 +207,7 @@ font-weight: bold;
     </div>
 
     <div class="row hidewhenformopen visible-md visible-lg" style="margin-top:20px;margin-bottom:20px;" id="homecontainer">
-        <div class="col-lg-4 db" onclick="FilterClaims('Property')" style="border-right: 1px solid #797979;">
+        <div class="col-lg-4 db" onclick="FilterClaims('Property')"  >
             <div class="widget style1 navy-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -222,7 +222,7 @@ font-weight: bold;
             </div>
 
         </div>
-        <div class="col-lg-4 db" onclick="FilterClaims('General')" style="border-right: 1px solid #797979;">
+        <div class="col-lg-4 db" onclick="FilterClaims('General')"  >
             <div class="widget style1 lazur-bg" style="background:none !important">
                 <div class="row">
                     <div class="col-xs-12 text-center">
@@ -452,9 +452,9 @@ font-weight: bold;
             white-space: nowrap;
         }
 
-    .hclaimcount:hover, .hclaimcount.active {
+    /*.hclaimcount:hover, .hclaimcount.active {
         background: #2f4050 !important;
-    }
+    }*/
 
  
 
@@ -495,7 +495,13 @@ font-weight: bold;
                 cursor: pointer;
                 border-right: none !important;
                 display: inline-block !important;
+                background:white;
             }
+
+                .db:hover {
+                    background: #012f4c !important;
+                    color:white !important;
+                }
 
             .hidewhenformopen {
                 margin-top: -100px !important;
@@ -523,11 +529,14 @@ font-weight: bold;
                 text-align: center !important;
                 display: inline-block;
                 border-radius: 70px !important;
-                background: #797979;
+                color: #797979;
                 padding-top: 0px !important;
                 padding-bottom: 0px;
                 height: 70px !important;
+                background:white;
             }
+
+
 
                 .hclaimcount h1 {
                     font-size: 15px !important;
@@ -616,7 +625,16 @@ font-weight: bold;
                 cursor: pointer;
                 /*border-right: 1px solid #797979*/
                 display: inline-block;
+                background:white;
+
             }
+
+                .db:hover {
+                    background: #012f4c !important;
+                    color: white !important;
+                }
+
+
 
                 .db h3 {
                     font-size: 17px;
@@ -631,10 +649,15 @@ font-weight: bold;
                 text-align: center;
                 display: inline-block;
                 border-radius: 100px;
-                background: #797979;
+                background: transparent;
                 padding-top: 1px;
                 padding-bottom: 0px;
                 height: 100px;
+                color: #797979;
+            }
+
+            .db:hover .hclaimcount, .db:hover h3 {
+                color: white;
             }
 
                 .hclaimcount h1 {

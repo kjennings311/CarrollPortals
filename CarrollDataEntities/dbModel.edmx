@@ -463,6 +463,7 @@
           <Property Name="IsCoporate" Type="bit" />
           <Property Name="location" Type="nvarchar" MaxLength="150" />
           <Property Name="Live_at_carroll" Type="bit" />
+          <Property Name="Live_at_Property" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="PayrollRejectionHistory">
           <Key>
@@ -2189,6 +2190,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <Property Name="IsCoporate" Type="Boolean" />
           <Property Name="location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Live_at_carroll" Type="Boolean" />
+          <Property Name="Live_at_Property" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="proc_getallresidentreferalsheets_Result">
           <Property Type="Guid" Name="ResidentReferalId" Nullable="true" />
@@ -3853,6 +3855,7 @@ warning 6002: The table/view 'CarrollForms.dbo.view_getallclaims' does not have 
           <EntitySetMapping Name="NoticeOfEmployeeSeperations">
             <EntityTypeMapping TypeName="Carroll.Data.Entities.NoticeOfEmployeeSeperation">
               <MappingFragment StoreEntitySet="NoticeOfEmployeeSeperation">
+                <ScalarProperty Name="Live_at_Property" ColumnName="Live_at_Property" />
                 <ScalarProperty Name="Live_at_carroll" ColumnName="Live_at_carroll" />
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="IsCoporate" ColumnName="IsCoporate" />

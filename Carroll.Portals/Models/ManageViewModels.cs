@@ -643,6 +643,8 @@ namespace Carroll.Portals.Models
         public PrintActivity printActivity { get; set; }
         public Nullable<bool> IsCoporate { get; set; }
         public string location { get; set; }
+        public Nullable<bool> Live_at_carroll { get; set; }
+        public string Live_at_Property { get; set; }
     }
 
     public class PrintMileageLogHeader

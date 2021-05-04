@@ -450,13 +450,15 @@
             </p>
 
             <p class="p1 ft1">
+
+
                 @if (Model.IsCoporate.ToString().ToLower() == "true")
                 {
 
                     <span class="c0">
                         Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
                         <input style="" type="radio" id="chkproperty" name="loc" /> Property
-                    </span>
+                    </span>  
                 }
                 else
                 {
@@ -467,7 +469,28 @@
 
             <p class="p1 ft1" style="display:none">Property Name <input type="text" id="propertyname" value="@Model.PropertyName" style="width:30%" /> Property Number<input type="text" value="@Model.PropertyNumber" id="propertynumber" style="width:40%" /></p>
             <p class="p2 ft1">Employee Name <input type="text" id="empname" value="@Model.EmployeeName" style="width:30%" /> Job Title <input type="text" id="jobtitle" value="@Model.JobTitle" style="width:46%" /></p>
-            <p class="p2 ft1"><span class="empnameerror"> Do they live at a CARROLL property </span><select id="carrolllive" style="width:10%"> <option value="YES"> Yes </option><option value="NO"> No </option> </select> </p>
+            <p class="p2 ft1">
+                <span class="empnameerror"> Do they live at a CARROLL property </span>
+
+                <select id="carrolllive" style="width:10%">
+                    @if (Model.Live_at_carroll.ToString().ToLower() == "true")
+                    {
+
+                        <option selected value="YES"> Yes </option>
+                        <option value="NO"> No </option>
+                    }
+                    else
+                    {
+                        <option value="YES"> Yes </option>
+                        <option selected value="NO"> No </option>
+                    }
+
+                </select>
+                <span class="c0" id="liveatdivproperty" >
+                    <span class="liveatlocationerror">  Live at Property :  @Model.Live_at_Property  </span>    
+                </span>
+
+            </p>
 
 
             <P class="p3 ft2">Reason Code from below </P>

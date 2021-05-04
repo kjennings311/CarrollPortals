@@ -3423,12 +3423,17 @@ function LoadHrPositionsByTypeForJobTitle(t) {
         var options1 = "<option value='' > Select Property </option> <option value='Corporate' > Corporate </option> ";
 
 
-    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data) {
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data)
+    {
+       
         var defaultsel = $("#location").attr('seloption');
 
         console.log(defaultsel);
 
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++)
+        {
+
+          
             if ($("#UserR").val() == "Administrator" || $("#UserR").val() == "Management" || $("#UserR").val() == "HR") {
 
                 if (defaultsel == data[i]["key"] || defaultsel == data[i]["value"])
@@ -3457,15 +3462,38 @@ function LoadHrPositionsByTypeForJobTitle(t) {
         }
         // now let's load options into select box
         $('#location').html(options1);
+
         if ($("#property1").length > 0) {
 
             $('#property1').html(options);
         }
+ 
         // now let's load options into select box
 
     });
 
 
+}
+
+
+function LoadPropertiesForLiveAt() {
+    
+    
+    $.get($BaseApiUrl + "api/user/GetPropertiesForSelect", function (data)
+    {
+
+        var liveat = "<option value='' > Select Property </option>";
+        for (var i = 0; i < data.length; i++) {
+
+            liveat += "<option value =\"" + data[i]["key"] + "\">" + data[i]["value"] + "</option>";
+        }
+       
+
+        if ($("#liveatlocation").length > 0) {
+            $('#liveatlocation').html(liveat);
+        }
+        
+    });
 }
 
 

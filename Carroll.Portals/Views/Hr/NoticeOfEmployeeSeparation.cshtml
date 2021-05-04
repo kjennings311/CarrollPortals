@@ -86,7 +86,19 @@
 
                                             </p>
                                             <p class="p2 ft1"><span class="empnameerror"> Employee Name  </span><input type="text" id="empname" style="width:30%" /> <span class="jobtitleerror">  Job Title </span> <select id="jobtitle" style="width:46%"> <option> Select Location </option> </select></p>
-                                            <p class="p2 ft1"><span class="empnameerror"> Do they live at a CARROLL property </span><select  id="carrolllive" style="width:15%" > <option>Select </option> <option value="YES"> Yes </option><option value="NO"> No </option> </select> </p>
+                                            <p class="p2 ft1">
+                                                <span class="empnameerror"> Do they live at a CARROLL property </span>
+                                                <select id="carrolllive" style="width:15%">
+                                                    <option>Select </option>
+                                                    <option value="YES"> Yes </option>
+                                                    <option value="NO"> No </option>
+                                                </select>
+
+                                                <span class="c0" id="liveatdivproperty" style="display:none;">
+                                                    <span class="liveatlocationerror">  Live at Property  </span>    <select style="width:33%" id="liveatlocation"> </select>
+                                                </span>
+
+                                            </p>
 
                                             <P class="p3 ft2">Reason Code from below </P>
                                             <TABLE cellpadding=0 cellspacing=0 class="t0">
@@ -765,6 +777,23 @@
 
 
             });
+            var loadedliveprop = false;
+
+            $("#carrolllive").change(function () {
+
+                if ($(this).val() == "YES") {
+                    $("#liveatdivproperty").show();
+                    if (loadedliveprop == false) {
+                        LoadPropertiesForLiveAt();
+                        loadedliveprop = true;
+                    }
+                    
+                }
+                else {
+                    $("#liveatdivproperty").hide();
+                }
+
+            });
 
             $("#location").change(function () {
 
@@ -990,6 +1019,14 @@
                         control = $("#empname");
                 }
 
+                if ($("#carrolllive").val() == "YES" && $("#liveatlocation").val()=="") 
+                {
+                    errormsgsummary += "<li> Please Select Property you live </li>";
+                    $(".liveatlocationerror").addClass('has-error');
+                    if (control == "")
+                        control = $("#liveatlocation");
+
+                }
 
                 if ($("#jobtitle").val() == "") {
                     errormsgsummary += "<li> Please Enter Job Title Of Employee</li>";
@@ -1069,6 +1106,14 @@
                     else
                         insertForm.append('noticegives', false);
 
+                    if ($("#carrolllive").val() == "YES") {
+
+                        insertForm.append('live_at_carroll', true);
+                        insertForm.append('live_at_propname', $("#liveatlocation option:selected").text());
+                    }
+                    else
+                        insertForm.append('live_at_carroll', false);
+
                     insertForm.append('vacationpaidout', $("#vacationpaid").val());
                     insertForm.append('balance', $("#vacationbalance").val());
                     insertForm.append('weekscom', $("#2weekscom").val());
@@ -1079,7 +1124,6 @@
                     insertForm.append('reason', reason);
                     insertForm.append('ssignature', $("#ssignature").val());
                     insertForm.append('sdate', $("#sdate").val());
-
                     insertForm.append('CreatedByName', $("#CreatedByName").val());
 
                     $("#status").html("<p style='color:green'> Processing </p>");

@@ -1412,6 +1412,15 @@ namespace Carroll.Data.Services.Controllers
                 if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["location"].ToString()))
                     fa.location = HttpContext.Current.Request.Params["location"].ToString();
             }
+
+            fa.Live_at_carroll = Convert.ToBoolean(HttpContext.Current.Request.Params["live_at_carroll"].ToString());
+            if (fa.Live_at_carroll == true)
+            {
+                if (!string.IsNullOrEmpty(HttpContext.Current.Request.Params["live_at_propname"].ToString()))
+                    fa.Live_at_Property = HttpContext.Current.Request.Params["live_at_propname"].ToString();
+            }
+
+
             fa.PropertyName = HttpContext.Current.Request.Params["propertyname"].ToString();
             fa.PropertyNumber = HttpContext.Current.Request.Params["propertynumber"].ToString();
             fa.JobTitle = HttpContext.Current.Request.Params["jobtitile"].ToString();
