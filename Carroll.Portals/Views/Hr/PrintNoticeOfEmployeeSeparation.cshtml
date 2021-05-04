@@ -486,11 +486,14 @@
                     }
 
                 </select>
-                <span class="c0" id="liveatdivproperty" >
-                    <span class="liveatlocationerror">  Live at Property :  @Model.Live_at_Property  </span>    
-                </span>
+                @if (Model.Live_at_carroll.ToString().ToLower() == "true")
+                {
+                    <span class="c0" id="liveatdivproperty">
+                        <span class="liveatlocationerror">    Property Name :  @Model.Live_at_Property  </span>
+                    </span>
+                }
 
-            </p>
+                </p>
 
 
             <P class="p3 ft2">Reason Code from below </P>
