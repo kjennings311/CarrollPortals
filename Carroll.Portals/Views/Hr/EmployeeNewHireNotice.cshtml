@@ -1058,10 +1058,9 @@ function AssignManager()
 
 
                         setTimeout(function () {
-                            console.log(data.position);
-                            $('#position option[value="' + data.position + '"]').attr("selected", "selected");
-                            $("#position").val("" + data.position);
-                        }, 4000);
+                           
+                            $("#position").val(data.position);
+                        }, 2000);
 
 
                         $("#la_Prop1").val(data.la_Property1);

@@ -1,5 +1,5 @@
 ﻿//var $BaseApiUrl = "http://localhost:1002/";
- var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
+var $BaseApiUrl = "http://aspnet.carrollaccess.net:1002/";
 
 
 //49786/";
@@ -3509,7 +3509,8 @@ function LoadHrPositions()
             selected = "";
         }
         // now let's load options into select box
-      //  $('#position').append(options);
+        if ($("#position").length > 0)
+        $('#position').html(options);
 
         if ($("#totitle").length > 0)
         {
