@@ -1524,79 +1524,93 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                 }
 
                 if ($("#chkpaychange").is(":checked")) {
-                    if ($("#fromtitle").val() == "") {
-                        errormsgsummary += "<li> Please Enter From Title </li>";
-                        $(".fromtitleerror").addClass('has-error');
-                        if (control == "")
-                            control = $("#fromtitle");
+
+                        if ($("#fromtitle").val() == "") {
+                            errormsgsummary += "<li> Please Enter From Title </li>";
+                            $(".fromtitleerror").addClass('has-error');
+                            if (control == "")
+                                control = $("#fromtitle");
+                        }
+
+                        if (!$("#fromexempt").is(":checked") && !$("#fromnonexempt").is(":checked")) {
+                            errormsgsummary += "<li> Please Select From Position Options </li>";
+                            $(".fromexempterror").addClass('has-error');
+                            if (control == "")
+                                control = $("#fromexempt");
+                        }
+
+                        if (!$("#fromfullstatus").is(":checked") && !$("#frompartstatus").is(":checked")) {
+                            errormsgsummary += "<li> Please Select From Status Options </li>";
+                            $(".fromfullstatuserror").addClass('has-error');
+                            if (control == "")
+                                control = $("#fromfullstatus");
+                        }
+
+
+                        if (!$("#fromannualsalary").is(":checked") && !$("#fromsalhourly").is(":checked")) {
+                            errormsgsummary += "<li> Please Select From Wage/Salary Options </li>";
+                            $(".fromannualsalaryerror").addClass('has-error');
+                            if (control == "")
+                                control = $("#fromannualsalary");
+                        }
+
+
+                        if ($("#fromrate").val() == "") {
+                            errormsgsummary += "<li> Please Enter From Rate </li>";
+                            $(".fromrateerror").addClass('has-error');
+                            if (control == "")
+                                control = $("#fromrate");
+                        }
+
+                        if ($("#totitle").val() == "") {
+                            errormsgsummary += "<li> Please Enter To Title </li>";
+                            $(".totitleerror").addClass('has-error');
+                            if (control == "")
+                                control = $("#totitle");
+                        }
+
+                        if (!$("#toexempt").is(":checked") && !$("#tononexempt").is(":checked")) {
+                            errormsgsummary += "<li> Please Select To Position Options </li>";
+                            $(".toexempterror").addClass('has-error');
+                            if (control == "")
+                                control = $("#toexempt");
+                        }
+
+                        if (!$("#tofullstatus").is(":checked") && !$("#topartstatus").is(":checked")) {
+                            errormsgsummary += "<li> Please Select To Status Options </li>";
+                            $(".tofullstatuserror").addClass('has-error');
+                            if (control == "")
+                                control = $("#tofullstatus");
+                        }
+
+
+                        if (!$("#toannualsalary").is(":checked") && !$("#tosalhourly").is(":checked")) {
+                            errormsgsummary += "<li> Please Select To Wage/Salary Options </li>";
+                            $(".toannualsalaryerror").addClass('has-error');
+                            if (control == "")
+                                control = $("#toannualsalary");
+                        }
+
+
+                        if ($("#torate").val() == "") {
+                            errormsgsummary += "<li> Please Enter To Rate </li>";
+                            $(".torateerror").addClass('has-error');
+                            if (control == "")
+                                control = $("#torate");
                     }
 
-                    if (!$("#fromexempt").is(":checked") && !$("#fromnonexempt").is(":checked")) {
-                        errormsgsummary += "<li> Please Select From Position Options </li>";
-                        $(".fromexempterror").addClass('has-error');
-                        if (control == "")
-                            control = $("#fromexempt");
+                    console.log('pay period change ' + $("#beginpayperiod").val());
+
+                    if ($("#beginpayperiod").val() == "" || $("#beginpayperiod").val() == "SELECT")
+                    {
+                            errormsgsummary += "<li> Please Select Pay Period </li>";
+                            console.log('pay period change mandatory');
+                            $(".beginpayperioderror").addClass('has-error');
+                            if (control == "")
+                                control = $("#beginpayperiod");
                     }
 
-                    if (!$("#fromfullstatus").is(":checked") && !$("#frompartstatus").is(":checked")) {
-                        errormsgsummary += "<li> Please Select From Status Options </li>";
-                        $(".fromfullstatuserror").addClass('has-error');
-                        if (control == "")
-                            control = $("#fromfullstatus");
-                    }
-
-
-                    if (!$("#fromannualsalary").is(":checked") && !$("#fromsalhourly").is(":checked")) {
-                        errormsgsummary += "<li> Please Select From Wage/Salary Options </li>";
-                        $(".fromannualsalaryerror").addClass('has-error');
-                        if (control == "")
-                            control = $("#fromannualsalary");
-                    }
-
-
-                    if ($("#fromrate").val() == "") {
-                        errormsgsummary += "<li> Please Enter From Rate </li>";
-                        $(".fromrateerror").addClass('has-error');
-                        if (control == "")
-                            control = $("#fromrate");
-                    }
-
-                    if ($("#totitle").val() == "") {
-                        errormsgsummary += "<li> Please Enter To Title </li>";
-                        $(".totitleerror").addClass('has-error');
-                        if (control == "")
-                            control = $("#totitle");
-                    }
-
-                    if (!$("#toexempt").is(":checked") && !$("#tononexempt").is(":checked")) {
-                        errormsgsummary += "<li> Please Select To Position Options </li>";
-                        $(".toexempterror").addClass('has-error');
-                        if (control == "")
-                            control = $("#toexempt");
-                    }
-
-                    if (!$("#tofullstatus").is(":checked") && !$("#topartstatus").is(":checked")) {
-                        errormsgsummary += "<li> Please Select To Status Options </li>";
-                        $(".tofullstatuserror").addClass('has-error');
-                        if (control == "")
-                            control = $("#tofullstatus");
-                    }
-
-
-                    if (!$("#toannualsalary").is(":checked") && !$("#tosalhourly").is(":checked")) {
-                        errormsgsummary += "<li> Please Select To Wage/Salary Options </li>";
-                        $(".toannualsalaryerror").addClass('has-error');
-                        if (control == "")
-                            control = $("#toannualsalary");
-                    }
-
-
-                    if ($("#torate").val() == "") {
-                        errormsgsummary += "<li> Please Enter To Rate </li>";
-                        $(".torateerror").addClass('has-error');
-                        if (control == "")
-                            control = $("#torate");
-                    }
+                    
 
                 }
 
