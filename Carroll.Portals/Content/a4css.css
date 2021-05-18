@@ -10,7 +10,8 @@
     padding-top: 0.5cm;
     padding-right: 0.5cm;
     padding-bottom: 0.5cm;
-    page-break-after: always;
+    page-break-after: always;  
+    overflow: hidden;
 }
 
 
@@ -24,24 +25,25 @@
     margin-left: 0.5cm;
     margin-top: 0.5cm;
     margin-right: 0.5cm;
-    margin-bottom: 0.5cm;
+    margin-bottom: 1cm;
 }
 @media print {
     .page {
         page-break-after: always;
+              overflow: hidden;
     }
 
-   
 
-button[disabled], html input[disabled] {
-    cursor: default;
-    background: white;
-    color: black;
-    font-weight: bold;
-   font-size:11px;
-}
 
-.italic,.sign
-{
-    font-size:22px !important;
+    button[disabled], html input[disabled] {
+        cursor: default;
+        background: white;
+        color: black;
+        font-weight: bold;
+        font-size: 11px;
+    }
+
+    .italic, .sign {
+        font-size: 22px !important;
+    }
 }

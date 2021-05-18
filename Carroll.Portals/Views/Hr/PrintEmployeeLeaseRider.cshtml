@@ -83,19 +83,17 @@
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">If the Carroll Organization should agree to allow me to continue to lease the apartment as a resident, a new lease will be signed that shall be at the current market rate and subject to all normal lease provisions.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">Upon vacating the apartment occupied by me, for any reason, I will leave the apartment clean and in good condition.</span></li>
                     <li style="text-align: justify; "><span style="font-size: 9pt; line-height: 150%;">I hereby authorize the Carroll Organization to deduct from my payroll check amounts due for unpaid rent, other amounts due to the Carroll Organization and any expenses incurred by the Carroll Organization to clean or repair the apartment in the event that I fail to leave it clean and in good condition.</span></li>
-                </ol>
-
-
-                <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" class="italic" style="width:25%;" disabled value="@Model.SignatureOfPropertyManager" id="signatureproperymanager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.PMDate.Value.ToString("MM/dd/yyyy")" disabled id="pmdate" /> 
+                </ol>                
+                <p style="text-align: justify;margin-top:30px;"> <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Property Manager</span> <span style="font-size: 10.0pt; line-height: 115%;"> <input type="text" class="italic" style="width:25%;" disabled value="@Model.SignatureOfPropertyManager" id="signatureproperymanager" /> </span>  <input type="text" style="float:right;margin-right:15%;" value="@Model.CreatedDatetime.Value.ToString("MM/dd/yyyy")" disabled id="pmdate" /> 
                 <span style="margin-top:10px;font-size: 10.0pt;
 line-height: 115%;margin-left:4%;" id="pmdatespan"> Date : </span> </p>
 
                 <p style="text-align: justify;">
                     <span style="font-size: 10.0pt; line-height: 115%;"> Signature of Employee  : </span>  
                     <span style="font-size: 10.0pt; line-height: 115%;">
-                    <input type="text" class="italic" style="margin-left:45px;width:25%;" value="@Model.SignatureOfEmployee" id="signature" disabled /> </span>  @if (Model.PositionDate != null)
+                    <input type="text" class="italic" style="margin-left:45px;width:25%;" value="@Model.SignatureOfEmployee" id="signature" disabled /> </span>  @if (Model.EmployeeSignedDateTime != null)
                     {
-                        <span>  <input type="text" id="leasedate" style="float:right; margin-right:15%;" value="@Model.PositionDate.Value.ToString("MM/dd/yyyy")" /></span>
+                        <span>  <input type="text" id="leasedate" style="float:right; margin-right:15%;" value="@Model.EmployeeSignedDateTime.Value.ToString("MM/dd/yyyy")" /></span>
                     }
                     else
                     {    <span> <input disabled style="float:right; margin-right:15%;" type="text" id="positiondate" /> </span>
