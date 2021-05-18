@@ -276,7 +276,12 @@ width: 15%;" disabled id="pmdate" /> <span style="margin-right:20px;float:right;
         function hidepopupleaserider() {
             $('.reviewmodal').modal('hide');
             // $('#myModal').modal('show');
-            LoadHrForm('EmployeeLeaseRider');
+          //  LoadHrForm('EmployeeLeaseRider');
+            $("#myModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            }, 'show');
+
         }
 
         function showleaserider() {

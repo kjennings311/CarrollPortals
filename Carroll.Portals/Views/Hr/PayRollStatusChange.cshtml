@@ -2398,15 +2398,15 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             $("#divpaychange").show();
                         }
 
-
-
+                        console.log('labor '+data.showDivisionOfLabor);
                         if (data.showDivisionOfLabor == "false")
                         {
                             $("#chklaborallocation").prop("checked", false);
                             $("#divlaborallocation").hide();
                         }
-                        else if (data.showDivisionOfLabor == "true") {
+                        else if (data.showDivisionOfLabor == true) {
                             $("#chklaborallocation").prop("checked", true);
+
                             $("#divlaborallocation").show();
                         }
 
@@ -2511,7 +2511,7 @@ margin-left: 35px;">PAYROLL STATUS CHANGE NOTICE</P>
                             $("#toannualsalary").prop('checked', true);
                         }
 
-                        $("#torate").val(data.fromRate);
+                        $("#torate").val(data.toRate);
 
                       
                         $("#prop1").val(data.la_Property1);
