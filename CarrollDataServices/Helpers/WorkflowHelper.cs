@@ -774,8 +774,8 @@ namespace Carroll.Data.Services.Helpers
                     //   _message.Body += Convert.ToString(ConfigurationManager.AppSettings["EmailSignature"]) + "<div style=\"width:100%; \"> <img src=\"https://drive.google.com/uc?id=1PqI8SyVh9XZh_5Zzo1pr-l-KF1OIh5OQ\" style=\"height:100px;width:90%;padding:10px; \"> </div></div></div>";
                     // populate from db
 
-                    _message.EmailTo.Add("sekhar.babu@forcitude.com");
-                    // _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
+                   // _message.EmailTo.Add("sekhar.babu@forcitude.com");
+                     _message.EmailTo.Add("Shashank.Trivedi@carrollorg.com");               
 
                     EmailHelper.SendEmailUpdate(_message);
 
