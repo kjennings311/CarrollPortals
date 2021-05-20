@@ -41,7 +41,7 @@ namespace Carroll.Portals.Controllers
         {
             Baseurl = ConfigurationManager.AppSettings["ServiceURL"];
             //remove before live
-          //  Baseurl = "http://localhost:1002/";
+           Baseurl = "http://localhost:1002/";
         }
 
         public ActionResult Index()
@@ -1272,7 +1272,7 @@ namespace Carroll.Portals.Controllers
 
                 ViewBag.isprint = false;
                 //returning the employee list to view  
-                return new ViewAsPdf("PrintPayRollStatusChange", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayrollStatusChange-" + obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
+                return new ViewAsPdf("PrintPayRollStatusChange2", obj) { PageSize = Size.A4, CustomSwitches = "--disable-smart-shrinking", FileName = "PayrollStatusChange-" + obj.SequenceNumber + "-" + obj.EmployeeName + ".pdf" };
 
             }
 
