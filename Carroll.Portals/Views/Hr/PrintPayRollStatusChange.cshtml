@@ -20,7 +20,7 @@
     <div class="page">
 
 
-        @if (Model.IsRejected == true)
+        @*@if (Model.IsRejected == true)
         {
 
             <p style="
@@ -41,7 +41,7 @@
 );
 ">Rejected</p>
 
-        }        <div id="page_1" style="width:96%;">
+        }*@        <div id="page_1" style="width:96%;">
                 <img style="margin-left: 33%;" src="/img/payroll.png" id="p1img1">
                 <P class="p0 ft0" style="    margin-top: 0PX;
     margin-bottom: 10px;margin-top: 5PX;
@@ -444,10 +444,14 @@ margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
                     <div id="divnotes" style="width:100%;">
                         <P class="p21 ft5">Notes:</P>
                         <P class="p6 ft1">
-<textarea type="text" style="width:95%;padding:10px;" rows="3" id="notes1"> @if(Model.Notes1 != null && !string.IsNullOrEmpty(Model.Notes1))
-{
- @Model.Notes1.Trim().Replace("  ","");
-}</textarea>
+<textarea type="text" style="width:95%;padding:10px;" rows="3" id="notes1"> 
+
+            @if(!string.IsNullOrEmpty(Model.Notes1))
+            {
+             @Model.Notes1
+            }
+
+</textarea>
                         </P>
 
                     </div>
