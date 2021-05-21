@@ -41,7 +41,7 @@ namespace Carroll.Portals.Controllers
         {
             Baseurl = ConfigurationManager.AppSettings["ServiceURL"];
             //remove before live
-           Baseurl = "http://localhost:1002/";
+         //  Baseurl = "http://localhost:1002/";
         }
 
         public ActionResult Index()
@@ -1216,7 +1216,7 @@ namespace Carroll.Portals.Controllers
 
                 // o.Date=obj.
                 //returning the employee list to view  
-                return View("PrintPayRollStatusChange", obj);
+                return View("PrintPayRollStatusChange2", obj);
             }
 
         }
