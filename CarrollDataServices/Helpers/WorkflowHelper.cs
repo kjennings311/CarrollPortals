@@ -1060,7 +1060,7 @@ namespace Carroll.Data.Services.Helpers
 
 
                         _message.Body += " <table style='border:1px solid; '  border='1' cellpadding='5' cellspacing='0'  ><tbody><tr><td> <b> Employee Name : </b> </td><td> " + NewhireDetails.tbl.EmployeeName + "</td> </tr><tr><td> <b> Start Date :  </b> </td> <td> " + NewhireDetails.tbl.StartDate.Value.ToShortDateString() + " </td> </tr>" +
-                            "<tr><td><b> Location  : </b>  </td><td> " + corp + "</td></tr><tr>< td> <b> Position : </b> </td> <td> " + NewhireDetails.tbl.Position + " </td> </tr>";
+                            "<tr><td><b> Location  : </b>  </td><td> " + corp + "</td></tr><tr><td> <b> Position : </b> </td> <td> " + NewhireDetails.tbl.Position + " </td> </tr>";
 
                         if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property1))
                         {
