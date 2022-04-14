@@ -1059,8 +1059,8 @@ namespace Carroll.Data.Services.Helpers
                         //  _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
 
-                        _message.Body += " <table style='border:1px solid; ' ><tbody><tr><td> <b> Employee Name : </b> </td><td> " + NewhireDetails.tbl.EmployeeName + "</td><td> <b> Start Date :  </b> </td> <td> " + NewhireDetails.tbl.StartDate.Value.ToShortDateString() + " </td> </tr>" +
-                            "<tr><td><b> Location  : </b>  </td><td> " + corp + "</td><td> <b> Position : </b> </td> <td> " + NewhireDetails.tbl.Position + " </td> </tr>";
+                        _message.Body += " <table style='border:1px solid; '  border='1' cellpadding='5' cellspacing='0'  ><tbody><tr><td> <b> Employee Name : </b> </td><td> " + NewhireDetails.tbl.EmployeeName + "</td> </tr><tr><td> <b> Start Date :  </b> </td> <td> " + NewhireDetails.tbl.StartDate.Value.ToShortDateString() + " </td> </tr>" +
+                            "<tr><td><b> Location  : </b>  </td><td> " + corp + "</td></tr><tr>< td> <b> Position : </b> </td> <td> " + NewhireDetails.tbl.Position + " </td> </tr>";
 
                         if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property1))
                         {
@@ -1495,20 +1495,20 @@ namespace Carroll.Data.Services.Helpers
                         //  _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
 
-                        _message.Body += " <table style='border:1px solid;' ><tbody><tr><td> <b> Employee Name : </b>  </td><td> " + NewhireDetails.tbl.EmployeeName + "</td><td> <b> Employee Email : </b> </td> <td> " + NewhireDetails.tbl.EmployeeEmail + " </td> </tr>" +
-                            "<tr><td> Location  :  </td><td> " + corp + "</td>  </tr>";
+                        _message.Body += " <table style='border:1px solid;' border='1' cellpadding='5' cellspacing='0' ><tbody><tr><td> <b> Employee Name : </b>  </td><td> " + NewhireDetails.tbl.EmployeeName + "</td></tr><tr><td> <b> Employee Email : </b> </td> <td> " + NewhireDetails.tbl.EmployeeEmail + " </td> </tr>" +
+                            "<tr><td> <b> Location  : </b>  </td><td> " + corp + "</td>  </tr>";
 
                         if (NewhireDetails.tbl.ShowPropertyChange == true)
                         {
                             _message.Body += "<tr><td>  <b> Change Effective Date  : </b> </td><td> " + NewhireDetails.tbl.ChangeEffectiveDate.Value.ToShortDateString() + "</td> </tr>";
-                            _message.Body += "<tr><td> <b> From Property#   : </b> </td><td> " + NewhireDetails.tbl.FromPropNum + "</td> <td> <b> Name   : </b> </td><td> " + NewhireDetails.tbl.FromPropName + "</td> <td> <b> Manager   :</b>  </td><td> " + NewhireDetails.tbl.FromManager + "</td> </tr>";
-                            _message.Body += "<tr><td>  <b>To Property#   : </b> </td><td> " + NewhireDetails.tbl.ToPropNum + "</td> <td> <b> Name   : </b> </td><td> " + NewhireDetails.tbl.ToPropName + "</td> <td> <b> Manager   :</b>  </td><td> " + NewhireDetails.tbl.ToManager + "</td> </tr>";
+                            _message.Body += "<tr><td> <b> From Property#   : </b> </td><td> " + NewhireDetails.tbl.FromPropNum + "</td></tr><tr> <td> <b> Name   : </b> </td><td> " + NewhireDetails.tbl.FromPropName + "</td></tr><tr> <td> <b> Manager   :</b>  </td><td> " + NewhireDetails.tbl.FromManager + "</td> </tr>";
+                            _message.Body += "<tr><td>  <b>To Property#   : </b> </td><td> " + NewhireDetails.tbl.ToPropNum + "</td></tr><tr> <td> <b> Name   : </b> </td><td> " + NewhireDetails.tbl.ToPropName + "</td> </tr><tr><td> <b> Manager   :</b>  </td><td> " + NewhireDetails.tbl.ToManager + "</td> </tr>";
                         }
 
                         if (NewhireDetails.tbl.ShowPayChange == true)
                         {
 
-                            _message.Body += "<tr><td> <b> From Title    : </b> </td><td> " + NewhireDetails.tbl.FromTitle + "</td> <td>  <b> To Title    :</b>  </td><td> " + NewhireDetails.tbl.ToTitle + "</td>  </tr>";
+                            _message.Body += "<tr><td> <b> From Title    : </b> </td><td> " + NewhireDetails.tbl.FromTitle + "</td></tr><tr> <td>  <b> To Title    :</b>  </td><td> " + NewhireDetails.tbl.ToTitle + "</td>  </tr>";
                             _message.Body += "<tr><td> <b> Begin Pay Period   :</b> </td><td> " + NewhireDetails.tbl.BeginPayPeriod + "</td> </tr>";
                         }
                         if (NewhireDetails.tbl.ShowDivisionOfLabor == true)
@@ -1534,7 +1534,7 @@ namespace Carroll.Data.Services.Helpers
                         {
 
 
-                            _message.Body += "<tr><td> <b> Leave Begin Date   :  </b> </td><td> " + NewhireDetails.tbl.Leave_Begin.Value.ToShortDateString() + "</td> <td> <b> Leave End     :</b>  </td><td> " + NewhireDetails.tbl.Leave_End.Value.ToShortDateString() + "</td> </tr>";
+                            _message.Body += "<tr><td> <b> Leave Begin Date   :  </b> </td><td> " + NewhireDetails.tbl.Leave_Begin.Value.ToShortDateString() + "</td></tr><tr> <td> <b> Leave End     :</b>  </td><td> " + NewhireDetails.tbl.Leave_End.Value.ToShortDateString() + "</td> </tr>";
                         }
 
 
@@ -1714,14 +1714,14 @@ namespace Carroll.Data.Services.Helpers
                         //  _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
 
-                        _message.Body += " <table ><tbody><tr><td> Employee Name :  </td><td> " + NewhireDetails.tbl.EmployeeName + "</td><td> Effective Date of Change :  </td> <td> " + NewhireDetails.tbl.EffectiveDateOfChange.Value.ToShortDateString() + " </td> </tr>" +
-                            "<tr><td> Location  :  </td><td> " + corp + "</td>  </tr>";
+                        _message.Body += " <table border='1' cellpadding='5' cellspacing='0' ><tbody><tr><td> <b> Employee Name :  </b> </td><td> " + NewhireDetails.tbl.EmployeeName + "</td></tr><tr><td> <b> Effective Date of Change : </b> </td> <td> " + NewhireDetails.tbl.EffectiveDateOfChange.Value.ToShortDateString() + " </td> </tr>" +
+                            "<tr><td> <b> Location  :  </b> </td><td> " + corp + "</td>  </tr>";
 
 
 
 
 
-                        _message.Body += "<tr><td> Job Title   :  </td><td> " + NewhireDetails.tbl.JobTitle + "</td> </tr>";
+                        _message.Body += "<tr><td> <b> Job Title   : </b>  </td><td> " + NewhireDetails.tbl.JobTitle + "</td> </tr>";
 
 
                         _message.Body += " </tbody></table>  <br>  <p> Thank you, <br> CARROLL </p>  </div></div>";
