@@ -640,6 +640,64 @@ namespace Carroll.Portals.Controllers
 
             }
 
+
+
+                // send service desk email 
+
+                var Message2 = WorkflowHelper.SendHrWorkFlowEmail(retu, "PayRoll", "Service Email", "System");
+
+                // write your email function here..
+                MailMessage mailservicedesk = new MailMessage();
+
+
+                AlternateView av2 = AlternateView.CreateAlternateViewFromString(Message2.Body,
+                        null, MediaTypeNames.Text.Html);
+
+                SmtpClient smtp1 = EmailHelper.SetMailServerSettings();
+                Regex regex1 = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                foreach (var item in Message2.EmailTo)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        Match match = regex.Match(item);
+                        if (match.Success)
+                        {
+                            mailservicedesk.To.Add(item);
+                        }
+                    }
+                }
+
+                mailservicedesk.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
+
+
+                //foreach (var item in Message.EmailCc)
+                //{
+                //    mail.CC.Add(new MailAddress(item));
+                //}
+
+                mailservicedesk.AlternateViews.Add(av2);
+
+                mailservicedesk.IsBodyHtml = true;
+
+
+
+
+
+                mailservicedesk.Subject = Message2.Subject;
+                mailservicedesk.Body = Message2.Body;
+                //   mail.To.Clear();
+
+                mailservicedesk.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                mailservicedesk.Priority = MailPriority.High;
+                try
+                {
+                    smtp.Send(mailservicedesk);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
                 return Json(retu);
 
             }
@@ -860,10 +918,68 @@ namespace Carroll.Portals.Controllers
                 {
 
                 }
-                
-            }
 
-             else
+
+                    // send service desk email 
+
+                    var Message2 = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Service Email", "System");
+
+                    // write your email function here..
+                    MailMessage mailservicedesk = new MailMessage();
+
+
+                    AlternateView av2 = AlternateView.CreateAlternateViewFromString(Message2.Body,
+                            null, MediaTypeNames.Text.Html);
+
+                    SmtpClient smtp1 = EmailHelper.SetMailServerSettings();
+                    Regex regex1 = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                    foreach (var item in Message2.EmailTo)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            Match match = regex.Match(item);
+                            if (match.Success)
+                            {
+                                mailservicedesk.To.Add(item);
+                            }
+                        }
+                    }
+
+                    mailservicedesk.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
+
+
+                    //foreach (var item in Message.EmailCc)
+                    //{
+                    //    mail.CC.Add(new MailAddress(item));
+                    //}
+
+                    mailservicedesk.AlternateViews.Add(av2);
+
+                    mailservicedesk.IsBodyHtml = true;
+
+
+
+
+
+                    mailservicedesk.Subject = Message2.Subject;
+                    mailservicedesk.Body = Message2.Body;
+                    //   mail.To.Clear();
+
+                    mailservicedesk.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                    mailservicedesk.Priority = MailPriority.High;
+                    try
+                    {
+                        smtp.Send(mailservicedesk);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+
+                }
+
+                else
             {
                 var mgr = WorkflowHelper.GetMgrNamefromnewhire(retu);
                 WorkflowHelper.InsertHrLog("NewHire", retu, "Regional Signature has been completed ", "Employee Signature Submitted for New Hire Notice on" + DateTime.Now, mgr);
@@ -984,7 +1100,63 @@ namespace Carroll.Portals.Controllers
 
                 }
 
+                    // send service desk email 
+
+                    var Message2 = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Service Email", "System");
+
+                    // write your email function here..
+                    MailMessage mailservicedesk = new MailMessage();
+
+
+                    AlternateView av2 = AlternateView.CreateAlternateViewFromString(Message2.Body,
+                            null, MediaTypeNames.Text.Html);
+
+                    SmtpClient smtp1 = EmailHelper.SetMailServerSettings();
+                    Regex regex1 = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                    foreach (var item in Message2.EmailTo)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            Match match = regex.Match(item);
+                            if (match.Success)
+                            {
+                                mailservicedesk.To.Add(item);
+                            }
+                        }
+                    }
+
+                    mailservicedesk.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
+
+
+                    //foreach (var item in Message.EmailCc)
+                    //{
+                    //    mail.CC.Add(new MailAddress(item));
+                    //}
+
+                    mailservicedesk.AlternateViews.Add(av2);
+
+                    mailservicedesk.IsBodyHtml = true;
+
                    
+
+                  
+
+                    mailservicedesk.Subject = Message2.Subject;
+                    mailservicedesk.Body = Message2.Body;
+                    //   mail.To.Clear();
+
+                    mailservicedesk.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                    mailservicedesk.Priority = MailPriority.High;
+                    try
+                    {
+                        smtp.Send(mailservicedesk);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+
                 }
                 return Json(retu);
             }

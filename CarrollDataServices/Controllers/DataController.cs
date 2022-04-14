@@ -26,6 +26,10 @@ using System.Data;
 using System.Reflection;
 using ClosedXML.Excel;
 using ClosedXML.Extensions;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
+using System.Net.Mime;
+using System.Configuration;
 
 namespace Carroll.Data.Services.Controllers
 {
@@ -1251,6 +1255,7 @@ namespace Carroll.Data.Services.Controllers
             WorkflowHelper.UpdatePmBrowserInfo(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "PM Email", browserDetails, VisitorsIPAddress);
 
             WorkflowHelper.SendHrWorkFlowEmail(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "Employee Email", HttpContext.Current.Request.Params["CreatedByName"].ToString());
+          //  WorkflowHelper.SendHrWorkFlowEmail(fa.PayrollStatusChangeNoticeId.ToString(), "PayRoll", "Service Email", HttpContext.Current.Request.Params["CreatedByName"].ToString());
             return re;
         }
 
@@ -1493,7 +1498,62 @@ namespace Carroll.Data.Services.Controllers
             WorkflowHelper.UpdatePmBrowserInfo(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "PM Email", browserDetails, VisitorsIPAddress);
 
             WorkflowHelper.InsertHrLog("NoticeOfEmployeeSeparation", fa.EmployeeSeperationId.ToString(), " PM Signature has been Completed", "Notice Of Employee Separation has been Submitted on" + DateTime.Now.ToString(), HttpContext.Current.Request.Params["CreatedByName"].ToString());
+         //   WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeSeperationId.ToString(), "Seperation", "Service Email", HttpContext.Current.Request.Params["CreatedByName"].ToString());
 
+
+            var Message2 = WorkflowHelper.SendHrWorkFlowEmail(fa.EmployeeSeperationId.ToString(), "Seperation", "Service Email", "System");
+
+            // write your email function here..
+            MailMessage mailservicedesk = new MailMessage();
+
+
+            AlternateView av2 = AlternateView.CreateAlternateViewFromString(Message2.Body,
+                    null, MediaTypeNames.Text.Html);
+
+            SmtpClient smtp = EmailHelper.SetMailServerSettings();
+            Regex regex1 = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            foreach (var item in Message2.EmailTo)
+            {
+                if (!string.IsNullOrEmpty(item))
+                {
+                    Match match = regex1.Match(item);
+                    if (match.Success)
+                    {
+                        mailservicedesk.To.Add(item);
+                    }
+                }
+            }
+
+            mailservicedesk.From = new MailAddress(ConfigurationManager.AppSettings["EmailFrom"], "Carroll Organization");
+
+
+            //foreach (var item in Message.EmailCc)
+            //{
+            //    mail.CC.Add(new MailAddress(item));
+            //}
+
+            mailservicedesk.AlternateViews.Add(av2);
+
+            mailservicedesk.IsBodyHtml = true;
+
+
+
+
+
+            mailservicedesk.Subject = Message2.Subject;
+            mailservicedesk.Body = Message2.Body;
+            //   mail.To.Clear();
+
+            mailservicedesk.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            mailservicedesk.Priority = MailPriority.High;
+            try
+            {
+                smtp.Send(mailservicedesk);
+            }
+            catch (Exception ex)
+            {
+
+            }
             //   WorkflowHelper.ReSendHrWorkFlowEmail(fa.EmployeeSeperationId.ToString(), "NoticeOfEmployeeSeparation", "HR Email");
             return re;
 
