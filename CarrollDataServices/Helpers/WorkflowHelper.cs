@@ -1030,8 +1030,8 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                         // check if corporate then createduser email
-                        tos.Add("sekhar.babu@forcitude.com");
-                          tos.Add("Shashank.Trivedi@carrollorg.com");
+                      //  tos.Add("sekhar.babu@forcitude.com");
+                      //    tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
 
                         //  var pid = new Guid(NewhireDetails.tbl.Location);
@@ -1466,8 +1466,8 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                         // check if corporate then createduser email
-                        tos.Add("sekhar.babu@forcitude.com");
-                          tos.Add("Shashank.Trivedi@carrollorg.com");
+                     //   tos.Add("sekhar.babu@forcitude.com");
+                        //  tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
 
                         //  var pid = new Guid(NewhireDetails.tbl.Location);
@@ -1688,8 +1688,8 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                         // check if corporate then createduser email
-                        tos.Add("sekhar.babu@forcitude.com");
-                           tos.Add("Shashank.Trivedi@carrollorg.com");
+                      //  tos.Add("sekhar.babu@forcitude.com");
+                        //   tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
 
                         //  var pid = new Guid(NewhireDetails.tbl.Location);
