@@ -1102,7 +1102,7 @@ namespace Carroll.Portals.Controllers
 
                     // send service desk email 
 
-                    var Message2 = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Service Email", "System");
+                     var Message2 = WorkflowHelper.SendHrWorkFlowEmail(retu, "NewHire", "Service Email", "System");
 
                     // write your email function here..
                     MailMessage mailservicedesk = new MailMessage();
