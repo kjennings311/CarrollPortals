@@ -1022,21 +1022,7 @@ namespace Carroll.Data.Services.Helpers
                     if (NewhireDetails != null)
                     {
                         // subject and body
-
-
-
-                        _message.Subject = "Employee New Hire Notice Succcessfully Submitted - " + NewhireDetails.tbl.SequenceNumber;
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
-
-                        List<string> tos = new List<string>();
-                        // check if corporate then createduser email
-                      //  tos.Add("sekhar.babu@forcitude.com");
-                      //    tos.Add("Shashank.Trivedi@carrollorg.com");
-                        tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
-
-                        //  var pid = new Guid(NewhireDetails.tbl.Location);
-
-                        string corp = "Corporate";
+                        string corp = "CARROLL Corporate";
 
                         if (NewhireDetails.tbl.iscorporate == false)
                         {
@@ -1055,14 +1041,31 @@ namespace Carroll.Data.Services.Helpers
                         }
 
 
+
+                        _message.Subject = "Employee New Hire Notice for "+corp+" Succcessfully Submitted - " + NewhireDetails.tbl.SequenceNumber;
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
+
+                        List<string> tos = new List<string>();
+                        // check if corporate then createduser email
+                     //  tos.Add("sekhar.babu@forcitude.com");
+                       //  tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
+
+                        //  var pid = new Guid(NewhireDetails.tbl.Location);
+
+                     
+
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1>  Employee New Hire Notice  - " + NewhireDetails.tbl.SequenceNumber + " </h1> <p> ";
                         //  _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
 
                         _message.Body += " <table style='border:1px solid; '  border='1' cellpadding='5' cellspacing='0'  ><tbody><tr><td> <b> Employee Name : </b> </td><td> " + NewhireDetails.tbl.EmployeeName + "</td> </tr><tr><td> <b> Start Date :  </b> </td> <td> " + NewhireDetails.tbl.StartDate.Value.ToShortDateString() + " </td> </tr>" +
-                            "<tr><td><b> Location  : </b>  </td><td> " + corp + "</td></tr><tr><td> <b> Position : </b> </td> <td> " + NewhireDetails.tbl.Position + " </td> </tr>";
+                            "<tr><td><b> Location  : </b>  </td><td> " + corp + "</td></tr><tr><td><b> Manager  : </b>  </td><td> " + NewhireDetails.tbl.Manager + "</td></tr><tr><td> <b> Position : </b> </td> <td> " + NewhireDetails.tbl.Position + " </td> </tr>";
 
-                        if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property1))
+                        
+
+
+                            if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property1))
                         {
                             string other = "";
 
@@ -1458,21 +1461,7 @@ namespace Carroll.Data.Services.Helpers
                     if (NewhireDetails != null)
                     {
                         // subject and body
-
-
-
-                        _message.Subject = "Payroll Status Change Notice Succcessfully Submitted - " + NewhireDetails.tbl.SequenceNumber;
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
-
-                        List<string> tos = new List<string>();
-                        // check if corporate then createduser email
-                     //   tos.Add("sekhar.babu@forcitude.com");
-                        //  tos.Add("Shashank.Trivedi@carrollorg.com");
-                        tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
-
-                        //  var pid = new Guid(NewhireDetails.tbl.Location);
-
-                        string corp = "Corporate";
+                        string corp = "CARROLL Corporate";
 
                         if (NewhireDetails.tbl.IsCorporate == false)
                         {
@@ -1489,6 +1478,20 @@ namespace Carroll.Data.Services.Helpers
                                 }
                             }
                         }
+
+
+                        _message.Subject = "Payroll Status Change Notice for "+corp+" Succcessfully Submitted - " + NewhireDetails.tbl.SequenceNumber;
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
+
+                        List<string> tos = new List<string>();
+                        // check if corporate then createduser email
+                    //   tos.Add("sekhar.babu@forcitude.com");
+                     //    tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
+
+                        //  var pid = new Guid(NewhireDetails.tbl.Location);
+
+                     
 
 
                         _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1>  Payroll Status Change Notice - " + NewhireDetails.tbl.SequenceNumber + " </h1> <p> ";
@@ -1681,20 +1684,7 @@ namespace Carroll.Data.Services.Helpers
                     {
                         // subject and body
 
-
-
-                        _message.Subject = "Notice of Employee Seperation Succcessfully Submitted - " + NewhireDetails.tbl.SequenceNumber;
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
-
-                        List<string> tos = new List<string>();
-                        // check if corporate then createduser email
-                      //  tos.Add("sekhar.babu@forcitude.com");
-                        //   tos.Add("Shashank.Trivedi@carrollorg.com");
-                        tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
-
-                        //  var pid = new Guid(NewhireDetails.tbl.Location);
-
-                        string corp = "Corporate";
+                        string corp = "CARROLL Corporate";
 
                         if (NewhireDetails.tbl.IsCoporate == false)
                         {
@@ -1713,18 +1703,37 @@ namespace Carroll.Data.Services.Helpers
                         }
 
 
-                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1>  Notice of Employee Seperation  - " + NewhireDetails.tbl.SequenceNumber + " </h1> <p> ";
+                        _message.Subject = "Notice of Employee Separation for "+corp+" Succcessfully Submitted - " + NewhireDetails.tbl.SequenceNumber;
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h5> Hello </h5><p> ";
+
+                        List<string> tos = new List<string>();
+                        // check if corporate then createduser email
+                     //  tos.Add("sekhar.babu@forcitude.com");
+                        //  tos.Add("Shashank.Trivedi@carrollorg.com");
+                        tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
+
+                        //  var pid = new Guid(NewhireDetails.tbl.Location);
+
+                    
+
+
+                        _message.Body = "<div style=\" padding: 30px; background:#b9b7b7;\"> <div style=\"background-color:white; padding:30px;\"> <h1>  Notice of Employee Separation  - " + NewhireDetails.tbl.SequenceNumber + " </h1> <p> ";
                         //  _message.Body += " You are receiving this email because there is a document pending your review and signature. <br><br>  Please click <a href='" + link + "'> HERE </a> to access and review the form for accuracy. Please note that the document will open in a new pop-up window so check your browser’s pop-up settings (some helpful links below) <br><br> If you have any questions, feel free to reach out to CARROLL team. </p> <br>  <p> Thank you, <br> CARROLL </p> <br> <br>  " + BrowserNotes + " </div></div>";
 
 
                         _message.Body += " <table border='1' cellpadding='5' cellspacing='0' ><tbody><tr><td> <b> Employee Name :  </b> </td><td> " + NewhireDetails.tbl.EmployeeName + "</td></tr><tr><td> <b> Effective Date of Change : </b> </td> <td> " + NewhireDetails.tbl.EffectiveDateOfChange.Value.ToShortDateString() + " </td> </tr>" +
                             "<tr><td> <b> Location  :  </b> </td><td> " + corp + "</td>  </tr>";
 
+                        if (NewhireDetails.tbl.IsCoporate == false)
+                        {
+                            _message.Body += "<tr><td> <b> Property Number  :  </b> </td><td> " + NewhireDetails.tbl.PropertyNumber + "</td>  </tr>";
+                            
+
+                        }
 
 
 
-
-                        _message.Body += "<tr><td> <b> Job Title   : </b>  </td><td> " + NewhireDetails.tbl.JobTitle + "</td> </tr>";
+                            _message.Body += "<tr><td> <b> Job Title   : </b>  </td><td> " + NewhireDetails.tbl.JobTitle + "</td> </tr>";
 
 
                         _message.Body += " </tbody></table>  <br>  <p> Thank you, <br> CARROLL </p>  </div></div>";
