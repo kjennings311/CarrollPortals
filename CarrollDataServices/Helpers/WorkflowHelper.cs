@@ -1072,12 +1072,12 @@ namespace Carroll.Data.Services.Helpers
 
                             if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property2))
                             {
-                                other += "<br>" + NewhireDetails.tbl.La_Property1 + "(" + NewhireDetails.tbl.La_Property2_Per + ")";
+                                other += "<br>" + NewhireDetails.tbl.La_Property2 + "(" + NewhireDetails.tbl.La_Property2_Per + ")";
                             }
 
                             if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property3))
                             {
-                                other += "<br>" + NewhireDetails.tbl.La_Property1 + "(" + NewhireDetails.tbl.La_Property3_Per + ")";
+                                other += "<br>" + NewhireDetails.tbl.La_Property3 + "(" + NewhireDetails.tbl.La_Property3_Per + ")";
                             }
 
                             _message.Body += "<tr><td> <b> Labor Allocation    </b>  </td><td> " + NewhireDetails.tbl.La_Property1 + "(" + NewhireDetails.tbl.La_Property1_Per + ")" + other + "</td></tr>";
@@ -1481,7 +1481,7 @@ namespace Carroll.Data.Services.Helpers
 
                         List<string> tos = new List<string>();
                         // check if corporate then createduser email
-                    //   tos.Add("sekhar.babu@forcitude.com");
+                    //  tos.Add("sekhar.babu@forcitude.com");
                      //    tos.Add("Shashank.Trivedi@carrollorg.com");
                         tos.Add(Convert.ToString(ConfigurationManager.AppSettings["ServiceDeskEmail"]));
 
@@ -1521,12 +1521,12 @@ namespace Carroll.Data.Services.Helpers
 
                                 if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property2))
                                 {
-                                    other += "<br>" + NewhireDetails.tbl.La_Property1 + "(" + NewhireDetails.tbl.La_Property2_Per + ")";
+                                    other += "<br>" + NewhireDetails.tbl.La_Property2 + "(" + NewhireDetails.tbl.La_Property2_Per + ")";
                                 }
 
                                 if (!string.IsNullOrEmpty(NewhireDetails.tbl.La_Property3))
                                 {
-                                    other += "<br>" + NewhireDetails.tbl.La_Property1 + "(" + NewhireDetails.tbl.La_Property3_Per + ")";
+                                    other += "<br>" + NewhireDetails.tbl.La_Property3 + "(" + NewhireDetails.tbl.La_Property3_Per + ")";
                                 }
                                 _message.Body += "<tr><td colspan='2' style='text-align:center;font-weight:bold;background: #012f4c;color: white;' > Labor Allocation  </td> </tr> ";
                                 _message.Body += "<tr><td> <b> Labor Allocation   </b> </td><td> " + NewhireDetails.tbl.La_Property1 + "(" + NewhireDetails.tbl.La_Property1_Per + ")" + other + "</td> </tr>";
