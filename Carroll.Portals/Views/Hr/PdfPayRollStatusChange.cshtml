@@ -1,17 +1,1340 @@
-﻿
+﻿@model Carroll.Portals.Models.PrintPayRollStatusChange
+
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>PdfPayRollStatusChange</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PDF PayRoll Status Change </title>
+
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff&display=swap" rel="stylesheet">
+    <link href="/Content/a4css.css" rel="stylesheet" />
 </head>
-<body>
-    <div> 
+<body class="document">
+    <div class="page">
+
+
+        @if (Model.IsRejected == true)
+        {
+            <p style="-webkit-transform: rotate(30deg);-webkit-backface-visibility: hidden;
+    color: #ff0000;
+    font-size: 115pt;
+    opacity: 2 !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 99999999999;
+    left: -900px;
+    opacity: 0.4 !important;
+    top: 5%;
+    display: block;
+    text-transform: uppercase;">rejected</p>
+
+            @*<p style="-webkit-transform: rotate(20deg);-webkit-backface-visibility: hidden;
+    color: #ff0000;
+    font-size: 95pt;
+   
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 99999999999;
+    left:-200px;
+    opacity: 0.4 !important;
+    top: 0px;
+    display: block;
+    text-transform: uppercase; ">sekhar </p>
+
+            <p style="
+    color: #ff0000;
+    font-size: 135pt;
+    opacity: 2 !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 99999999999;
+    left: 0px;
+    opacity: 0.4 !important;
+    top: 0px;
+    display: block;
+    text-transform: uppercase;
+     transform: rotate(-50deg);
+
+    -webkit-backface-visibility:visible;
+    -webkit-transform: rotateZ(
+-50deg
+);
+">Rejected</p>*@
+
+
+        } <div id="page_1" style="width:96%;">
+            <img style="margin-left: 33%;" src="/img/payroll.png" id="p1img1">
+            <P class="p0 ft0" style="    margin-top: 0PX;
+    margin-bottom: 10px;margin-top: 5PX;
+margin-left: 10px;">PAYROLL STATUS CHANGE NOTICE</P>
+            <P class="p1 ft1" style="margin-top:-10px">Employee Name: <input style=" display:inline;width:29%; " type="text" id="empname" class="" value="@Model.EmployeeName" /> </P>
+            <p class="p1 ft1" style="margin-top:10px;">
+
+                @if (Model.IsCorporate.ToString().ToLower() == "true")
+                {
+
+                    <span class="c0">
+                        Location: <input type="radio" checked id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input style="margin-left:12px" type="radio" id="chkproperty" name="loc" /> Property
+                    </span>
+                }
+                else
+                {
+                    <span class="c0">
+                        Location: <input type="radio" id="chkcorporate" name="loc" /> Corporate &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input style="margin-left:12px" checked type="radio" id="chkproperty" name="loc" /> Property  <input type="text" id="location" style="width:35%;" value="@Model.Notes2" />
+                    </span>
+                }
+
+
+            </p>
+            <P class="p1 ft1" style="margin-top:10px !important;">Employee Email: <input value="@Model.EmployeeEmail" style=" display:inline; width:29%;" type="text" step="" id="empemail" class="" /> </P>
+            <P class="p3 ft3" style="padding-top:0px"> <h4 style="padding:0px !important"> Select Type Of Change  (check all that apply) : </h4></P>
+            <P class="p6 ft1" style="margin:15px !important;padding:0px !important; margin-top:0px !important">
+
+                @if (Model.ShowPropertyChange == true)
+                {
+                    <input type="checkbox" class="showchange" checked data-div="divpropertychange" id="chkpropertychange" /><span> Property Change </span>
+
+                }
+
+                @if (Model.ShowPayChange == true)
+                {
+                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Pay Change </span>
+
+                }
+
+                @if (Model.ShowDivisionOfLabor == true)
+                {
+                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Labor Allocation </span>
+
+                }
+
+                @if (Model.ShowAllowances == true)
+                {
+                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Allowances </span>
+
+                }
+
+                @if (Model.ShowLeaves == true)
+                {
+                    <input type="checkbox" class="showchange" checked data-div="divpaychange" id="chkpaychange" /> <span> Leave of absence </span>
+
+                }
+            </P>
+
+            <div class="" style="border: 2px solid black; width:100%;padding-bottom:10px;">
+
+                @if (Model.ShowPropertyChange == true)
+                {
+
+                    <div style="width:100%;" id="divpropertychange">
+
+                        <P class="p4 ft5" style="margin-top:0px !important">Property Change</P>
+                        <P class="p5 ft6"> Change Effective Date : <input type="text" value="@Model.ChangeEffectiveDate.Value.ToString("MM/dd/yyyy")" id="effectivedate" /> </P>
+                        <P class="p5 ft6"> Property Transfer:</P>
+                        <P class="p5 ft6"> <strong>From : </strong></P>
+                        <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%; " type="text" id="frompropnum" value="@Model.FromPropNum" class="" /> Name: <input style=" display:inline;width:35% " value="@Model.FromPropName" type="text" id="frompropname" class="" />Manager:  <input style=" display:inline; width:25%" value="@Model.FromManager" type="text" id="frommanager" class="" /></P>
+                        <P class="p5 ft6"> <strong>To : </strong></P>
+                        <P class="p6 ft1"> Property # : <input style=" display:inline;width:10%;  " value="@Model.ToPropNum" type="text" id="topropnum" class="" />  Name: <input style=" display:inline; width:35%" type="text" value="@Model.ToPropName" id="topropname" class="" />Manager: <input style=" display:inline;width:25% " type="text" id="tomanager" value="@Model.ToManager" class="" /></P>
+                        <hr style="border-top: 2px solid black;" />
+                    </div>
+
+
+                }
+
+                @if (Model.ShowPayChange == true)
+                {
+
+                    <div style="width:99%;" id="divpaychange">
+                        <TABLE cellpadding=0 cellspacing=0 class="t0">
+                            <TR>
+                                <TD class="tr0 td0"><P class="p7 ft7">Pay Change</P></TD>
+                                <TD class="tr0 td1"><P class="p8 ft8">&nbsp;</P></TD>
+                                <TD class="tr0 td2"><P class="p8 ft8">&nbsp;</P></TD>
+                                <TD class="tr0 td3"><P class="p8 ft8">&nbsp;</P></TD>
+                            </TR>
+                        </TABLE>
+                        <div style="width:50%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;">
+                            <h4 style="text-align: center;
+    font-weight: bold;
+    font-size: 15px;margin-top:-8px">
+                                From
+                            </h4>
+                            <p class="c1">
+                                <span class="c0"><span class="tult"> Title: </span><textarea id="fromtitle" rows="2" cols="30" style="margin-left:30%"> @Model.FromTitle </textarea></span>
+                            </p>
+                            <p class="c1">
+                                <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.FromPosition" />  </span>
+                            </p>
+
+                            <p class="c1">
+                                <span class="c0">Status : <input type="text" style="margin-left: 16.5%;" value="@Model.FromStatus" />    </span>
+                            </p>
+
+                            <p class="c1">
+                                <span class="c0">Wage / Salary : <input type="text" style="margin-left: 5%;" value="@Model.FromWageSalary" />   </span>
+                            </p>
+
+                            <p class="c1">
+                                <span class="c0">
+                                    Rate  <input type="text" id="fromrate" value="@Model.FromRate" style="width:30%;margin-left:21%;" />
+
+                                    @if (Model.FromWageSalary == "Hourly")
+                                    {
+                                        <span> per hour </span>
+                                    }
+                                    else if (Model.FromWageSalary == "Annual")
+                                    {
+                                        <span> Annually </span>
+                                    }
+
+                                </span>
+                            </p>
+                        </div>
+
+                        <div style="width:49%; padding:10px; padding-top:0px; border:1px solid black;display:inline-block;   margin-left: -3px !important;">
+                            <h4 style="text-align: center;
+    font-weight: bold;
+    font-size: 15px;margin-top:-8px; ">
+                                To
+                            </h4>
+                            <p class="c1">
+                                <span class="c0"> <span class="tult"> Title: </span>  <textarea id="totitle" rows="2" cols="30" style="margin-left:30%"> @Model.ToTitle </textarea>  </span>
+                            </p>
+
+
+                            <p class="c1">
+                                <span class="c0">Position: <input type="text" style="margin-left: 15%;" value="@Model.ToPosition" />  </span>
+                            </p>
+
+                            <p class="c1">
+                                <span class="c0">Status : <input type="text" style="margin-left: 16.5%;" value="@Model.ToStatus" />    </span>
+                            </p>
+
+                            <p class="c1">
+                                <span class="c0">Wage / Salary : <input type="text" style="margin-left: 5%;" value="@Model.ToWageSalary" />   </span>
+                            </p>
+
+
+                            <p class="c1">
+                                <span class="c0">
+                                    Rate  <input type="text" id="Torate" value="@Model.ToRate" style="width:30%;margin-left:21%;" />    @if (Model.ToWageSalary == "Hourly")
+                                    {
+                                        <span> per hour </span>
+                                    }
+                                    else if (Model.ToWageSalary == "Annual")
+                                    {
+                                        <span> Annually </span>
+                                    }
+                                </span>
+                            </p>
+                        </div>
+
+                        <TABLE cellpadding=0 cellspacing=0 class="t0">
+
+                            <TR>
+                                <TD colspan=3 class="tr3 td4"><P class="p13 ft12"><SPAN class="ft1">Beginning Pay Period Effective:  @Model.BeginPayPeriod  </SPAN>(pay changes can only take place at the beginning of a pay period)</P></TD>
+                                <TD class="tr3 td3"><P class="p8 ft8">&nbsp;</P></TD>
+                            </TR>
+                        </TABLE>
+
+                        <hr style="border-top: 2px solid black;" />
+                    </div>
+                }
+
+                @if (Model.ShowDivisionOfLabor == true)
+                {
+
+                    <div style="width:100%;" id="divlaborallocation">
+                        <TABLE id="divlaborallocation" cellpadding=0 cellspacing=0 class="t0">
+                            <TR>
+                                <TD class="tr5 td0"><P class="p7 ft7"> Labor Allocation </P></TD>
+                                <TD class="tr5 td1"><P class="p8 ft13">&nbsp;</P></TD>
+                                <TD class="tr5 td2"><P class="p8 ft13">&nbsp;</P></TD>
+                                <TD class="tr5 td3"><P class="p8 ft13">&nbsp;</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr6 td0"><P class="p7 ft12">(Total MUST equal 100%)</P></TD>
+                                <TD class="tr6 td1"><P class="p8 ft14">&nbsp;</P></TD>
+                                <TD class="tr6 td2"><P class="p8 ft14">&nbsp;</P></TD>
+                                <TD class="tr6 td3"><P class="p8 ft14">&nbsp;</P></TD>
+                            </TR>
+
+                            <TR>
+                                <TD class="tr7 td0"><P class="p14 ft1">Property</P></TD>
+                                <TD class="tr7 td1"><P class="p10 ft1">Percentage</P></TD>
+
+                            </TR>
+                            <TR>
+                                <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property1" id="prop1" /></P></TD>
+                                <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property1_Per" id="prop1per" /></P></TD>
+
+                            </TR>
+                            @if (!string.IsNullOrEmpty(Model.La_Property2))
+
+                            {
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                </TR>
+                            }
+                            <TR>
+                                <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property3" id="prop2" /></P></TD>
+                                <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property3_Per" id="prop2per" /></P></TD>
+                            </TR>
+                            @if (string.IsNullOrEmpty(Model.La_Property2))
+
+                            {
+                                <TR>
+                                    <TD class="tr7 td0"><P class="p14 ft1"> <input type="text" style="display:inline; width:70%" value="@Model.La_Property2" id="prop2" /></P></TD>
+                                    <TD class="tr7 td1"><P class="p10 ft1"><input type="text" style="display:inline; width:60%" value="@Model.La_Property2_Per" id="prop2per" /></P></TD>
+
+                                </TR>
+                            }
+
+                        </TABLE>
+                        <hr style="border-top: 2px solid black;" />
+                    </div>
+
+
+                }
+
+                @if (Model.ShowAllowances == true)
+                {
+                    <div id="divallowance" style="width:100%;;">
+                        <P class="p15 ft5">Allowances</P>
+                        <P class="p16 ft15">(Corporate Only)</P>
+                        <TABLE cellpadding=0 cellspacing=0 class="t1">
+                            <TR>
+                                <TD class="tr7 td9"><P class="p9 ft6">Select Type:</P></TD>
+                                <TD class="tr7 td10">
+                                    <P class="p8 ft1">
+                                        <SPAN class="ft9">
+                                            @{ if (Model.Chk_CarAmount == true)
+                                                {
+                                                    <input type="checkbox" checked id="chkcaramount" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" id="chkcaramount" />
+                                                }
+
+                                            }
+                                        </SPAN>Car Amount: $ <input type="text" style="width:30%" id="txtcaramount" value="@Model.CarAmountPerMonth" /> / month
+                                    </P>
+                                </TD>
+                                <TD class="tr7 td11">
+                                    <P class="p17 ft1">
+                                        <SPAN class="ft9">
+                                            @{ if (Model.Chk_PhoneAmount == true)
+                                                {
+                                                    <input type="checkbox" checked id="chkphoneamount" /> }
+                                                else
+                                                {
+                                                    <input type="checkbox" id="chkphoneamount" />
+
+                                                }}
+                                        </SPAN>Phone Amount: $ <input type="text" style="width:30%" id="txtphoneamount" value="@Model.PhoneAmountPerMonth" /> / month
+                                    </P>
+                                </TD>
+                            </TR>
+                        </TABLE>
+
+                        <hr style="border-top: 2px solid black;" />
+                    </div>
+
+                }
+
+                @if (Model.ShowLeaves == true)
+                {
+
+
+
+                    <div style="width:100%;" id="divleaveabsence">
+                        <TABLE cellpadding=0 cellspacing=0 class="t1">
+                            <TR>
+                                <TD class="tr5 td9"><P class="p8 ft13">&nbsp;</P></TD>
+                                <TD colspan=2 class="tr5 td14"><P class="p18 ft16">Leave of absence</P></TD>
+                            </TR>
+                            <TR>
+                                <TD class="tr1 td9"><P class="p8 ft8">&nbsp;</P></TD>
+                                <TD class="tr1 td10">
+                                    <P class="p19 ft6">
+                                        FMLA Eligible? <SPAN class="ft9">
+                                            @{
+                                                if (Model.FmlaYes == true)
+                                                {
+                                                    <input type="checkbox" checked id="chkfmlayes" />
+
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" id="chkfmlayes" />
+
+                                                }
+                                            }
+                                        </SPAN> <SPAN class="ft1">Yes </SPAN> <SPAN class="ft9">
+
+                                            @{ if (Model.FmlaNo == true)
+                                                {
+                                                    <input type="checkbox" checked id="chkfmlano" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" id="chkfmlano" />
+                                                }
+                                            }
+                                        </SPAN><SPAN class="ft1">No</SPAN>
+                                    </P>
+                                </TD>
+                                <TD class="tr1 td11">
+                                    <P class="p8 ft6">
+                                        Enrolled in Benefits? <SPAN class="ft9">
+                                            @{
+                                                if (Model.EnrolledBenefitsYes != null)
+                                                {
+
+
+                                                    if (Model.EnrolledBenefitsYes == true)
+                                                    {
+                                                        <span>  <input type="checkbox" checked id="chkbenefityes" /> </span>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>
+                                                            <input type="checkbox" id="chkbenefityes" />
+                                                        </span>
+
+                                                    }
+                                                }
+                                            }
+
+
+                                        </SPAN><SPAN class="ft1">Yes </SPAN><SPAN class="ft9">
+                                            @{
+
+                                                if (Model.EnrolledBenefitNo != null)
+                                                {
+                                                    if (Model.EnrolledBenefitNo == true)
+                                                    {
+                                                        <input type="checkbox" checked id="chkbenefitno" />
+
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <input type="checkbox" id="chkbenefitno" />
+                                                    }
+                                                }
+                                                else
+                                                {
+
+                                                    <input type="checkbox" id="chkbenefitno" />
+                                                }
+                                            }
+
+
+
+                                        </SPAN><SPAN class="ft1">No</SPAN>
+                                    </P>
+                                </TD>
+                            </TR>
+                        </TABLE>
+                        <P class="p20 ft1">
+                            Purpose: <input type="text" style="width:32%" value="@Model.Leave_Purpose" id="purpose" />
+                            @if (Model.Leave_Purpose == "Other")
+                            {<span id="spanpurposeother">  Other Reason:  <input type="text" id="purposeother" value="@Model.Leave_Purpose_Other" style="margin-left:15px; width:35%;" /></span>}
+                        </P>
+                        <P class="p20 ft1">
+                            Begin: <input type="text" style="width:20%;" value="@Model.Leave_Begin.Value.ToString("MM/dd/yyyy")" id="leavebegin" /> Expected End:
+                            @if (Model.Leave_End != null)
+                            {
+                                <input type="text" style="width:20%;" value="@Model.Leave_End.Value.ToString("MM/dd/yyyy")" id="leavebegin" />
+                            }
+                            else
+                            {
+                                <input type="text" style="width:20%;" id="leavebegin" />
+                            } PTO balance:<input type="text" class="allow_decimal" value="@Model.Pto_Balance" style="width:25%" id="ptobalance" />
+                            <hr style="border-top: 2px solid black;" />
+                    </div>
+                }
+
+                <div id="divnotes" style="width:100%;">
+                    <P class="p21 ft5">Notes:</P>
+                    <P class="p6 ft1">
+<textarea type="text" style="width:95%;padding:10px;" rows="3" id="notes1"> 
+
+            @if(!string.IsNullOrEmpty(Model.Notes1))
+            {
+             @Model.Notes1
+            }
+
+</textarea>
+                    </P>
+
+                </div>
+                <P class="p6 ft1">Employee Signature:<input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@if (Model.ESignature != null) {  @Model.ESignature; } " />  Date: <input type="text" name="name" value="@if (Model.EDate != null) { @Model.EDate.Value.ToString("MM/dd/yyyy"); } " /> </P>
+                <P class="p6 ft1">Manager Signature: <input type="text" class="italic" style="width:53%;height:30px; padding-left:3%;" value="@Model.MSignature" /> Date:<input type="text" name"name" value="@Model.MDate.Value.ToString("MM/dd/yyyy")" /> </P>
+            </div>
+
+        </div>
     </div>
+
+    <div class="page">
+
+        <div id="page_1">
+            <DIV id="p1dimg 1" style="text-align:center;margin-left:-10%;">
+                <img src="/img/requistionrequestheader.jpg" />
+                <h1 style="font-weight:bold;text-align:center">  Activity - @Model.SequenceNumber </h1>
+            </DIV>
+
+
+            <table id="viewlog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:40%">Description</th>
+                        <th style="width:30%;">Date</th>
+                        <th style="width:20%"> Created By </th>
+                    </tr>
+                </thead>
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.log)
+                    {
+                        <tr> <td> @item.ActivitySubject </td> <td> @item.ActivityDate.ToString().Substring(0, 19) </td> <td> @item.ActivityByName </td> </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12" style="text-align:center">
+            <h2> Signature Meta Data </h2>
+            <br />
+            <table id="signaturelog" class="table table-striped col-md-6">
+                <thead>
+                    <tr>
+                        <th style="width:15%"> Type </th>
+                        <th style="width:10%">Ip Address</th>
+                        <th style="width:50%;text-align:center">Browser </th>
+                        <th style="width:25%;text-align:center"> Date Time </th>
+                    </tr>
+                </thead>
+                <tbody id="hrsignmetadata">
+                <tbody id="hractivitybody">
+
+                    @foreach (var item in Model.printActivity.metadata)
+                    {
+                        <tr> <td> @item.Action.Replace("Email", "Signature") </td> <td> @item.ip </td> <td> @item.browserinfo </td> <td> @item.datetime.ToString().Substring(0, 19)</td> </tr>
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+        @if (Model.printActivity.rejection != null && Model.printActivity.rejection.Count > 0)
+        {
+
+            <div class="col-md-12 rejectionblock" style="text-align:center;">
+                <h2> Rejection  </h2>
+                <br />
+                <table id="rejectionlog" class="table table-striped col-md-6">
+                    <thead>
+                        <tr>
+                            <th style="width:15%"> Rejected By </th>
+                            <th style="width:60%;text-align:center">Reason </th>
+                            <th style="width:25%;text-align:center"> Date Time </th>
+                        </tr>
+                    </thead>
+                    <tbody id="rjmetadata">
+
+                        @foreach (var item in Model.printActivity.rejection)
+                        {
+                            <tr> <td> @item.name  </td> <td>  @item.rejectionDesc </td>  <td> @item.datetime</td>  </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        }
+
+
+
+    </div>
+
+    <style type="text/css">
+
+        @@import url('https://themes.googleusercontent.com/fonts/css?kit=7ebMze0MJP7bZu91CQ7uEDTuLqYM6x6ICRZT_kL-IXY');
+
+        /*.page {
+
+            margin-left:1% !important;
+        }*/
+
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        table td, table th {
+            padding: 0
+        }
+
+        hr {
+            margin-top: 10px !important;
+            margin-bottom: 0px !important;
+        }
+
+        .c3 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 12pt;
+            font-family: inherit;
+            font-style: normal
+        }
+
+        .c1 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 9pt;
+            font-family: inherit;
+            font-style: normal
+        }
+
+        .c4 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: inherit;
+            font-style: italic
+        }
+
+        .c0 {
+            padding-top: 0pt;
+            padding-bottom: 5pt;
+            line-height: 1.15;
+            text-align: left
+        }
+
+        .c7 {
+            color: #000000;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-style: normal
+        }
+
+        .c6 {
+            background-color: #ffffff;
+            max-width: 468pt;
+            padding: 72pt 72pt 72pt 72pt
+        }
+
+        .c2 {
+            font-size: 14pt;
+            font-family: inherit;
+            font-weight: 700
+        }
+
+        .c8 {
+            font-weight: 700;
+            font-size: 11pt;
+            font-family: inherit;
+        }
+
+        .c5 {
+            height: 11pt
+        }
+
+        .title {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 36pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 18pt;
+            color: #666666;
+            font-size: 24pt;
+            padding-bottom: 4pt;
+            font-family: "Georgia";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        /*li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }*/
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        h1 {
+            padding-top: 24pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 24pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 18pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 14pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 12pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 12pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 11pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 11pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 10pt;
+            color: #000000;
+            font-weight: 700;
+            font-size: 10pt;
+            padding-bottom: 2pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        input {
+            border: none;
+            border-bottom: 1px solid #0c0606;
+            padding: 5px;
+        }
+
+        button {
+            margin-left: 4%;
+        }
+
+        .has-error {
+            border-color: red;
+        }
+
+
+
+        #page_1 {
+            position: relative;
+            overflow: hidden;
+            /*margin: -80px 0px 9px 30px;*/
+            padding: 0px;
+            border: none;
+            /*width: 768px;*/
+        }
+
+            #page_1 #p1dimg1 {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                z-index: -1;
+                width: 720px;
+                height: 872px;
+            }
+
+                #page_1 #p1dimg1 #p1img1 {
+                    width: 720px;
+                    height: 872px;
+                }
+
+
+
+
+        .dclr {
+            clear: both;
+            float: none;
+            height: 1px;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+
+        .ft0 {
+            font: bold 19px 'Calibri';
+            line-height: 23px;
+        }
+
+        .ft1 {
+            font: 13px 'Calibri';
+            line-height: 10px;
+        }
+
+        .ft2 {
+            font: italic 13px 'Calibri';
+            text-decoration: underline;
+            line-height: 15px;
+        }
+
+        .ft3 {
+            font: italic 13px 'Calibri';
+            line-height: 15px;
+        }
+
+        .ft4 {
+            font: italic 13px 'Calibri';
+            text-decoration: underline;
+            color: #0563c1;
+            line-height: 15px;
+        }
+
+        .ft5 {
+            font: bold 15px 'Calibri';
+            text-decoration: underline;
+            line-height: 18px;
+        }
+
+        .ft6 {
+            font: italic 15px 'Calibri';
+            line-height: 18px;
+        }
+
+        .ft7 {
+            font: bold 14px 'Calibri';
+            text-decoration: underline;
+            line-height: 17px;
+        }
+
+        .ft8 {
+            font: 1px 'Calibri';
+            line-height: 1px;
+        }
+
+        .ft9 {
+            font: 19px 'Times New Roman';
+            line-height: 21px;
+        }
+
+        .ft10 {
+            font: 16px 'Calibri';
+            line-height: 19px;
+        }
+
+        .ft11 {
+            font: 15px 'Calibri';
+            color: #ffffff;
+            line-height: 18px;
+        }
+
+        .ft12 {
+            font: italic bold 13px 'Calibri';
+            line-height: 15px;
+        }
+
+        .ft13 {
+            font: 1px 'Calibri';
+            line-height: 17px;
+        }
+
+        .ft14 {
+            font: 1px 'Calibri';
+            line-height: 16px;
+        }
+
+        .ft15 {
+            font: italic bold 13px 'Calibri';
+            line-height: 14px;
+        }
+
+        .ft16 {
+            font: bold 15px 'Calibri';
+            text-decoration: underline;
+            line-height: 17px;
+        }
+
+        .p0 {
+            text-align: left;
+            padding-left: 227px;
+            margin-top: 62px;
+            margin-bottom: 0px;
+        }
+
+        .p1 {
+            text-align: left;
+            padding-left: 22px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p2 {
+            text-align: left;
+            padding-left: 0px;
+            margin-top: 11px;
+            margin-bottom: 0px;
+        }
+
+        .p3 {
+            text-align: left;
+            padding-left: 0px;
+            margin-top: 3px;
+            margin-bottom: 5px;
+        }
+
+        .p4 {
+            text-align: left;
+            padding-left: 309px;
+            margin-top: 15px;
+            margin-bottom: 0px;
+        }
+
+        .p5 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p6 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 1px;
+            margin-bottom: 0px;
+        }
+
+        .p7 {
+            text-align: center;
+            padding-left: 246px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p8 {
+            text-align: left;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p9 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p10 {
+            text-align: left;
+            padding-left: 1px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p11 {
+            text-align: left;
+            padding-left: 44px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p12 {
+            text-align: right;
+            padding-right: 8px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p13 {
+            text-align: center;
+            padding-left: 16px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p14 {
+            text-align: left;
+            padding-left: 144px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p15 {
+            text-align: left;
+            padding-left: 325px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+        }
+
+        .p16 {
+            text-align: left;
+            padding-left: 314px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p17 {
+            text-align: left;
+            padding-left: 39px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p18 {
+            text-align: left;
+            padding-left: 179px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p19 {
+            text-align: left;
+            padding-left: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        .p20 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p21 {
+            text-align: left;
+            padding-left: 8px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .p22 {
+            text-align: left;
+            margin-top: 110px;
+            margin-bottom: 0px;
+        }
+
+        .p23 {
+            text-align: left;
+            margin-top: 12px;
+            margin-bottom: 0px;
+        }
+
+        .td0 {
+            padding: 0px;
+            margin: 0px;
+            width: 474px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td1 {
+            padding: 0px;
+            margin: 0px;
+            width: 147px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td2 {
+            padding: 0px;
+            margin: 0px;
+            width: 83px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td3 {
+            padding: 0px;
+            margin: 0px;
+            width: 16px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td4 {
+            padding: 0px;
+            margin: 0px;
+            width: 704px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td5 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 474px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td6 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 147px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td7 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 83px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td8 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 16px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td9 {
+            padding: 0px;
+            margin: 0px;
+            width: 125px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td10 {
+            padding: 0px;
+            margin: 0px;
+            width: 241px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td11 {
+            padding: 0px;
+            margin: 0px;
+            width: 354px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td12 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 125px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td13 {
+            border-bottom: #000000 1px solid;
+            padding: 0px;
+            margin: 0px;
+            width: 595px;
+            /*vertical-align: bottom;*/
+        }
+
+        .td14 {
+            padding: 0px;
+            margin: 0px;
+            width: 595px;
+            /*vertical-align: bottom;*/
+        }
+
+        .tr0 {
+            height: 19px;
+        }
+
+        .tr1 {
+            height: 22px;
+        }
+
+        .tr2 {
+            height: 23px;
+        }
+
+        .tr3 {
+            height: 15px;
+        }
+
+        .tr4 {
+            height: 18px;
+        }
+
+        .tr5 {
+            height: 17px;
+        }
+
+        .tr6 {
+            height: 16px;
+        }
+
+        .tr7 {
+            height: 22px;
+        }
+
+        .t0 {
+            width: 720px;
+            margin-top: 6px;
+            font: italic 15px 'Calibri';
+        }
+
+        .t1 {
+            width: 720px;
+            font: italic 15px 'Calibri';
+        }
+
+        .sign {
+            font-family: 'Herr Von Muellerhoff', cursive;
+        }
+
+        .italic {
+            font-family: 'Herr Von Muellerhoff', cursive;
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+
+
+
+        #totitle, #fromtitle {
+            margin-top: -15px;
+            border: none !important;
+        }
+
+
+
+        @@media print {
+            #totitle {
+                margin-left: 30% !important;
+                margin-top: -15px;
+                border: none !important;
+            }
+
+            #fromtitle {
+                margin-left: 30% !important;
+                margin-top: -15px;
+            }
+
+            .tult {
+                display: block !important;
+            }
+        }
+    </style>
+
+
+
+    @if (ViewBag.isprint != true)
+    {
+
+        <style type="text/css">
+
+            #totitle, #fromtitle {
+                margin-top: -15px !important;
+                border: none !important;
+                margin-left: 30% !important;
+                min-width: 210px !important;
+                line-height: 1 !important;
+            }
+
+            .tult {
+                display: block !important;
+            }
+
+            .tu {
+                display: inline;
+            }
+        </style>
+
+
+    }
+ 
 </body>
 </html>
+
+
